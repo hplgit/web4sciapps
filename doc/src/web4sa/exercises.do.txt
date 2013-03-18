@@ -1,0 +1,84 @@
+===== Exercise: Add two numbers in a Flask app =====
+label{wf:exer:flask:add2}
+file=add2_flask.tar.gz
+
+Make a Flask application that reads two numbers from a web page,
+adds the numbers, and prints the sum in a new web page.
+Package the Flask application directory in a tar file for easy testing
+by others.
+
+
+===== Exercise: Add two numbers in a Django app =====
+label{wf:exer:django:add2}
+file=add2_django.tar.gz
+
+Make a Django application that reads two numbers from a web page,
+adds the numbers, and prints the sum in a new web page.
+
+Package
+the application and a corresponding project in a tar file such
+that anyone with Django installed can easily test the project.
+
+
+===== Exercise: Auto-generate code from function signature =====
+file=generate_flask.py
+
+Given a `compute_function` with a set of positional and keyword
+arguments, we want to *automatically* generate the necessary
+Flask code to built a web-based interface to calling this function
+and presenting its result. In general, only this is known about
+the function:
+!bc pycod
+def compute_function(*args, **kwargs)
+    ...
+    return result
+!ec
+Fortunately, Python has a module `inspect` that allows us to extract
+the name of all function arguments and the default values of the keyword
+arguments:
+
+!bc pycod
+import inspect
+arg_names = inspect.getargspec(compute_function).args
+defaults  = inspect.getargspec(compute_function).defaults
+!ec
+Here, `arg_names` is a list with the names of all arguments in
+`compute_function`, while `defaults` is a list of the
+values of all the keyword arguments. For example,
+
+!bc pycod
+def mycompute(A, m=0, s=1, w=1, xrange=[-3,3]):
+!ec
+leads to
+
+!bc pycod
+arg_names = ['A', 'm', 's', 'w', 'xrange']
+defaults = (0, 1, 1, [-3, 3])
+!ec
+We can hence use `inspect` to generate a web page where the user
+can fill out values for all the argument names. Default values
+can be inserted wherever we have them. Moreover, we can check
+the type of the default values and use a corresponding field type:
+for `int` and `float` we apply the corresponding `IntegerField`
+and `FloatField`, for `str` we apply a `TextField`, `bool`
+is represented by a `BooleanField`, for `list`, `tuple`, and
+`numpy.ndarray` we can apply a `TextField` and then run `eval`
+on the result, and a list of strings can be represented by `RadioField`.
+
+Extracting the form values and calling `compute_function` can
+be done with code like
+
+!bc pycod
+form_values = [getattr(form, name).data for name in arg_names
+               if hasattr(form, name)]
+result = compute_function(*form_values)
+!ec
+Making a template with a table for all the input fields is straightforward,
+but HTML rendering of the result is not. One generic solution is to
+combine the table of input forms with a user-given template for how
+`result` is presented on the web page. The combination of the two
+templates constitutes the template to be used by the view.
+
+Use these ideas to automatically generate the necessary code
+for making a web interface to an arbitrary `compute_function`.
+

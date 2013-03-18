@@ -1,0 +1,300 @@
+<html>
+<head>
+<!--
+This style is adopted from the (now old) vagrant 1.0 web
+pages. The style builds on the Twitter Bootstrap style.
+Modifications by Hans Petter Langtangen, hpl@simula.no.
+
+This style file should be copied and the following
+elements edited:
+
+Logo heading:
+
+ LogoWord
+ withSubWord
+
+Navigation links at the top:
+
+ GO TO 1
+ GO TO 2
+
+Footer at the end:
+
+ Here goes a footer, if desired, maybe with a Copyright &copy;
+
+-->
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Doconce: http://code.google.com/p/doconce/" />
+
+<link rel="stylesheet" href="html_templates/css/twitter_bootstrap.css">
+<link rel="stylesheet" href="html_templates/css/vagrant.css">
+<!-- Define color of headings here (last definition counts) -->
+<style type="text/css">
+h1, h2, h3, h4, h5, h6 {
+  color: #000;     /* black */
+  color: #999;     /* gray */
+  color: #005580;  /* dark blue */
+  color: #08c;     /* characteristic blue */
+</style>
+</head>
+<body>
+
+<title> Exercise 3: Auto-generate code from function signature </title>
+
+<!-- ------------------- main content ------------------------>
+
+<div class="container">
+ <div class="row Header with-border">
+  <div class="span3 Module logo">
+   <h1><a href="/">Django<span class="subtitle">4scientists</span></a></h1>
+  </div>
+  <div class="span9">
+   <div class="Module navigation">
+   <!-- Navigation at the top of the page -->
+    <ul>
+     <li> <a href="https://www.djangoproject.com/">Django</a></li>
+    </ul>
+   </div>
+  </div>
+ </div>
+</div>
+
+
+<!-- Here goes the table of contents in the sidebar
+     <li class="active"> means dark blue background for current section
+-->
+<div class="row">
+ <div class="span3 Module sidebar">
+  <div class="well" style="padding: 8px 0px;">
+   <ul class="nav nav-list">
+     <!-- Syntax:
+     <li> <a href="...">Section 1</a></li>
+     <li> <a href="...">Section 2</a></li>
+     <li> &nbsp;&nbsp;&nbsp; <a href="...">Section 2a</a></li>
+     <li> &nbsp;&nbsp;&nbsp; <a href="...">Section 2b</a></li>
+     -->
+     <!-- Doconce automatically fills in the table of contents -->
+          <!-- vagrant nav toc: " Web frameworks " --> <li>  <a href="._part0000_web4sa_django.html#___sec0"> Web frameworks </a>
+     <!-- vagrant nav toc: " The MVC pattern " --> <li> &nbsp;  <a href="._part0001_web4sa_django.html#___sec1"> The MVC pattern </a>
+     <!-- vagrant nav toc: " A very simple application " --> <li> &nbsp;  <a href="._part0002_web4sa_django.html#___sec2"> A very simple application </a>
+     <!-- vagrant nav toc: " Application of the MVC pattern " --> <li> &nbsp;  <a href="._part0003_web4sa_django.html#wf:hw:mvc"> Application of the MVC pattern </a>
+     <!-- vagrant nav toc: " Making a Django application " --> <li>  <a href="._part0004_web4sa_django.html#___sec4"> Making a Django application </a>
+     <!-- vagrant nav toc: " Installing Django " --> <li> &nbsp;  <a href="._part0004_web4sa_django.html#___sec5"> Installing Django </a>
+     <!-- vagrant nav toc: " Setting up a Django project " --> <li> &nbsp;  <a href="._part0005_web4sa_django.html#___sec6"> Setting up a Django project </a>
+     <!-- vagrant nav toc: " Setting up a Django application " --> <li> &nbsp;  <a href="._part0006_web4sa_django.html#___sec7"> Setting up a Django application </a>
+     <!-- vagrant nav toc: " Programming the Django application " --> <li> &nbsp;  <a href="._part0007_web4sa_django.html#___sec8"> Programming the Django application </a>
+     <!-- vagrant nav toc: " Equipping the input page with output results " --> <li> &nbsp;  <a href="._part0008_web4sa_django.html#___sec9"> Equipping the input page with output results </a>
+     <!-- vagrant nav toc: " Handling multiple input variables in Django " --> <li>  <a href="._part0008_web4sa_django.html#wf:vib:django"> Handling multiple input variables in Django </a>
+     <!-- vagrant nav toc: " Programming the Django application " --> <li> &nbsp;  <a href="._part0008_web4sa_django.html#___sec11"> Programming the Django application </a>
+     <!-- vagrant nav toc: " User-provided validation " --> <li> &nbsp;  <a href="._part0009_web4sa_django.html#___sec12"> User-provided validation </a>
+     <!-- vagrant nav toc: " Exercise 1: Add two numbers in a Flask app " --> <li> &nbsp;  <a href="._part0009_web4sa_django.html#wf:exer:flask:add2"> Exercise 1: Add two numbers in a Flask app </a>
+     <!-- vagrant nav toc: " Exercise 2: Add two numbers in a Django app " --> <li> &nbsp;  <a href="._part0009_web4sa_django.html#wf:exer:django:add2"> Exercise 2: Add two numbers in a Django app </a>
+     <!-- vagrant nav toc: " Exercise 3: Auto-generate code from function signature " --> <li> &nbsp;  <a href="._part0009_web4sa_django.html#___sec15"> Exercise 3: Auto-generate code from function signature </a>
+
+    </ul>
+   </div>
+  </div>
+
+  <div class="span9">
+
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Web frameworks ', 1, None, '___sec0'),
+              (' The MVC pattern ', 2, None, '___sec1'),
+              (' A very simple application ', 2, None, '___sec2'),
+              (' Application of the MVC pattern ',
+               2,
+               'wf:hw:mvc',
+               'wf:hw:mvc'),
+              (' Making a Django application ', 1, None, '___sec4'),
+              (' Installing Django ', 2, None, '___sec5'),
+              (' Setting up a Django project ', 2, None, '___sec6'),
+              (' Setting up a Django application ', 2, None, '___sec7'),
+              (' Programming the Django application ', 2, None, '___sec8'),
+              (' Equipping the input page with output results ',
+               2,
+               None,
+               '___sec9'),
+              (' Handling multiple input variables in Django ',
+               1,
+               'wf:vib:django',
+               'wf:vib:django'),
+              (' Programming the Django application ', 2, None, '___sec11'),
+              (' User-provided validation ', 2, None, '___sec12'),
+              (' Exercise 1: Add two numbers in a Flask app ',
+               2,
+               'wf:exer:flask:add2',
+               'wf:exer:flask:add2'),
+              (' Exercise 2: Add two numbers in a Django app ',
+               2,
+               'wf:exer:django:add2',
+               'wf:exer:django:add2'),
+              (' Exercise 3: Auto-generate code from function signature ',
+               2,
+               None,
+               '___sec15')]}
+end of tocinfo -->
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "AMS"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- Fix slow MathJax rendering in IE8 -->
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+
+
+
+
+<a name="part0005"></a>
+<!-- !split -->
+
+<h3>Setting up a Django project  <a name="___sec6"></a></h3>
+
+<p>
+A Django project for managing a set of Django apps is
+created by the command
+
+<p>
+
+
+<!-- code typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; django-admin.py startproject django_project
+</pre></div>
+<p>
+The result is a directory <code>django_project</code> whose content can be explored
+by some <code>ls</code> and <code>cd</code> commands:
+
+<p>
+
+
+<!-- code typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; ls django_project
+manage.py django_project
+Terminal&gt; <span style="color: #008000">cd </span>django_project/django_project
+Terminal&gt; ls
+__init__.py settings.py urls.py wsgi.py
+</pre></div>
+<p>
+The meaning of the generated files are briefly listed below.
+
+<p>
+
+<ol>
+  <li> The outer <code>django_project/</code> directory is just a container for your project. Its name does not matter to Django.</li>
+  <li> <code>manage.py</code> is a command-line utility that lets you interact with this Django project in various ways. You will typically run <code>manage.py</code> to launch a Django application.</li>
+  <li> The inner <code>django_project/</code> directory is a Python package for the Django project. Its name is used in import statements in Python code (e.g., <code>import django_project.settings</code>).</li>
+  <li> <code>django_project/__init__.py</code> is an empty file that just tells Python that this directory should be considered a Python package.</li>
+  <li> <code>django_project/settings.py</code> contains the settings and configurations for this Django project.</li>
+  <li> <code>django_project/urls.py</code> maps URLs to specific functions and thereby defines that actions that various URLs imply.</li>
+  <li> <code>django_project/wsgi.py</code> is not needed in our examples.</li>
+</ol>
+
+Django comes with a web server for developing and debugging applications.
+The server is started by running
+
+<p>
+
+
+<!-- code typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; python manage.py runserver
+</pre></div>
+<p>
+You will see that the server runs on the URL "http://127.0.0.1:8000/".
+Load this URL into your browser to see a welcome message from Django,
+meaning that the server is working.
+
+<p>
+Despite the fact that our web applications do not need a database, you
+have to register a database with a Django project. To this end,
+open the <code>django_project/settings.py</code> file in a text editor,
+locate the <code>DATABASES</code> dictionary and make sure the following
+code is there:
+
+<p>
+
+
+<!-- code typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">os</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">relative2absolute_path</span>(relative_path):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Return the absolute path correspodning to relative_path.&quot;&quot;&quot;</span>
+    dir_of_this_file <span style="color: #666666">=</span> os<span style="color: #666666">.</span>path<span style="color: #666666">.</span>dirname(os<span style="color: #666666">.</span>path<span style="color: #666666">.</span>abspath(__file__))
+    <span style="color: #008000; font-weight: bold">return</span> os<span style="color: #666666">.</span>path<span style="color: #666666">.</span>join(dir_of_this_file, relative_path)
+
+DATABASES <span style="color: #666666">=</span> {
+   <span style="color: #BA2121">&#39;default&#39;</span> : {
+      <span style="color: #BA2121">&#39;ENGINE&#39;</span>: <span style="color: #BA2121">&#39;django.db.backends.sqlite3&#39;</span>,
+      <span style="color: #BA2121">&#39;NAME&#39;</span>: relative2absolute_path(<span style="color: #BA2121">&#39;../database.db&#39;</span>)
+   }
+}
+</pre></div>
+<p>
+The <code>settings.py</code> file needs absolute paths to files, while it is
+more convenient for us to specify relative paths. Therefore,
+we made a function that figures out the absolute path to the <code>settings.py</code>
+file and then combines this absolute path with the relative path.
+The location and name of the database file can be chosen as desired.
+Note that one should not use <code>os.path.join</code> to create paths as Django
+applies the forward slash between directories also on Windows.
+
+<p>
+
+<p>
+<!-- ------------------- end of main content --------------- -->
+
+
+<!--
+Preliminary examples/discussion on vagrant style syntax
+
+<div class='alert alert-block alert-notice'>
+  <h3>What about PHP? Python? Java?</h3>
+<p>
+bla-bla.
+</div>
+
+<p>
+While the <div class="deep-blue">rest of the</div> getting started
+-->
+
+<!-- Do not edit anything in the navigation code below -
+     doconce split_html requires the text as it stands -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._part0004_web4sa_django.html">&larr; Prev</a>
+  </li>
+
+  <li class="next">
+    <a href="._part0006_web4sa_django.html">Next &rarr;</a>
+  </li>
+
+</ul>
+
+ </div>
+
+<!-- ------------------- end of main content --------------- -->
+
+ <div class="row Footer">
+  <div class="span12">
+  Copyright &copy 2013; Hans Petter Langtangen and Anders E. Johansen.
+  Last update: .
+  </div>
+ </div>
+</div>
+</body>
+</html>
+
+
+

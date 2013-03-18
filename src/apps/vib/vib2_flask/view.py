@@ -4,7 +4,7 @@ from compute import compute
 
 app = Flask(__name__)
 
-@app.route('/vib', methods=['GET', 'POST'])
+@app.route('/vib2', methods=['GET', 'POST'])
 def index():
     form = InputForm(request.form)
     if request.method == 'POST' and form.validate():
@@ -15,5 +15,4 @@ def index():
     else:
         result = None
 
-    return render_template('view.html',
-                           form=form, result=result)
+    return render_template('view.html', form=form, result=result)

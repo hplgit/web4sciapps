@@ -2,7 +2,10 @@
 <table>
   {% for field in form %}
     <tr>
+    <td>{{ field.name }}</td>
     <td>{{ field }}</td>
+    <td>{{ field.label }}</td>
+    <td>{{ field.errors }}</td>
     <td></td>
     </tr>
   {% endfor %}
@@ -11,6 +14,7 @@
 
 <p>
 {% if result != None %}
-<img src="{{ result }}" width=500>
+{% load static %}
+<img src="{% get_static_prefix %}{{ result }}" width=500>
 {% endif %}
 </p>

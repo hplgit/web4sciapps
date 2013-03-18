@@ -1,0 +1,306 @@
+
+======= Handling multiple input variables in Flask =======
+label{wf:vib:flask}
+
+The scientific hello world example shows how to work with one input
+variable and one output variable. We can easily derive a solution for
+a collection of input variables and some corresponding HTML code
+as result. Multiple input variables are listed in the `InputForm`
+class using different types for different forms (text field,
+float field, integer field, check box field for boolean values, etc.).
+The value of these variables will be available in a `form` object
+for computation. It is then a matter of taking the output from the
+computation and format the corresponding HTML code for presenting
+the result.
+
+We address the task of plotting the function $u(t)=Ae^{-bt}\sin (wt)$ for
+$t\in [0,T]$. The web application must have fields for the numbers $A$,
+$b$, $w$, and $T$, and a *Compute* button, as shown in Figure
+ref{wf:vib1:flask:fig:input}. Filling in values, say $0.1$ for $b$ and
+$20$ for $T$, results in what we see in Figure ref{wf:vib1:flask:fig:result},
+i.e., a plot of $u(t)$ is added after the input fields and the *Compute*
+button.
+
+FIGURE: [fig-web4sa/vib1_flask_input, width=500] The input page. label{wf:vib1:flask:fig:input}
+
+FIGURE: [fig-web4sa/vib1_flask_output, width=500] The result page. label{wf:vib1:flask:fig:result}
+
+!split
+===== Programming the Flask application =====
+
+## Define Mako variable for path to source code
+<%
+app_path = src_path + 'vib/vib1_flask'
+%>
+
+The forthcoming text explains the necessary steps to realize a
+Flask app that behaves as depicted in Figures ref{wf:vib1:flask:fig:input}
+and ref{wf:vib1:flask:fig:result}. We start with the
+`compute.py` module since it contains only the computation of $u(t)$
+and the making of the plot, without any interaction with Flask.
+
+More specifically, inside `compute.py`, we have a function for
+evaluating $u(t)$ and a `compute` function for making the plot. The
+return value is the name of the plot file, which should get a unique
+name every time the `compute` function is called such that the browser
+cannot reuse an already cached image. Flask applications must have all
+extra files (CSS, images, etc.) in a subdirectory `static`.
+
+@@@CODE ${app_path}/compute.py
+
+We organize the model, view, and controller as three separate
+files, as illustrated in
+Section ref{wf:hw3:flask}. This more complicated app involves
+more code and especially the model will soon be handy to isolate in its own
+file. Our first version of `model.py` reads
+
+@@@CODE ${app_path}/model.py
+
+As seen, the field classes can take a `label` argument for a longer
+description, here also including the units in which the variable is
+measured. It is also possible to add a `description` argument with
+some help message. Furthermore, we include a `default` value, which
+will appear in the text field such that the user does not need to
+fill in all values.
+
+The view will of course make use of templates, and we shall experiment
+with different templates. Therefore, we allow a command-line argument
+to this Flask app for choosing which template we want. The rest of
+the `view.py` file follows much the same set up as for the scientific
+hello world app:
+
+@@@CODE ${app_path}/view.py
+
+The details governing how the web page really looks like lie in the
+template file. Since we have several fields and want them nicely
+align in a tabular fashion, we place the field name, text areas,
+and labels inside an HTML table in our first attempt to write a
+template, `view0.html`:
+
+@@@CODE ${app_path}/templates/view0.html
+Observe how easy it is to iterate over the `form` object and grab data
+for each field: `field.name` is the name of the variable in the
+`InputForm` class, `field.label` is the full name with units as given
+through the `label` keyword when constructing the field object, and
+writing the field object itself generates the text area for
+input (i.e., the HTML input form). The control statements we can
+use in the template are part of the "Jinja2": "http://jinja.pocoo.org/docs/"
+*templating language*. For now, the if-test, for-loop and
+output of values (`{{ object }}`) are enough to generate the HTML
+code we want.
+
+Recall that the objects we need in the template, like `result` and `form`
+in the present case, are transferred to the template via keyword
+arguments to the `render_template` function. We can easily pass on
+any object in our application to the template.
+
+To get a runnable Flask application it remains to
+run the `app` object from `controller.py`:
+
+@@@CODE ${app_path}/controller.py
+
+You are encouraged to run `python controller.py` and load `http://127.0.0.1:5000/vib1` into your web browser for testing.
+
+!split
+===== Implementing error checking in the template =====
+
+What happens if the user gives wrong input, for instance the letters `asd`
+instead of a number? Actually nothing! The `FloatField` object
+checks that the input is compatible with a real number in the
+`form.validate()` call, but returns just `False` if this is not
+the case. Looking at the code in `view.py`,
+
+!bc pycod
+def index():
+    form = InputForm(request.form)
+    if request.method == 'POST' and form.validate():
+        result = compute(form.A.data, form.b.data,
+                         form.w.data, form.T.data)
+    else:
+        result = None
+!ec
+we realize that wrong input implies `result = None` and no computations
+and plot. Fortunately, each field object gets an attribute `error`
+with information on errors that occur on input. We can write out
+this information on the web page, as exemplified in the template
+`view1.html`:
+
+@@@CODE ${app_path}/templates/view1.html
+Two things are worth noticing here:
+
+ o We can control the width of the text field where the
+   user writes the numbers, here set to 12 characters.
+ o We can make an extra column in the HTML table with a list
+   of possible errors for each field object.
+
+Let us test the `A` field by writing `asd` instead of a number. This
+triggers an error, which is written in red to the right of the label,
+see Figure ref{wf:vib2:flask:fig:error1}.
+
+FIGURE: [fig-web4sa/vib1_flask_error1, width=500] Error message because of wrong input. label{wf:vib1:flask:fig:error1}
+
+!split
+===== Using style sheets =====
+
+Web developers make heavy use of CSS style sheets to control the look
+and feel of web pages. Templates can utilize style sheets as any other
+standard HTML code. Here is a very simple example where we introduce
+a class `name` for the column with the field name and set the
+foreground color of the text in this column to blue.
+The style sheet is called `basic.css` and *must* reside in the
+`static` subdirectory of the Flask application directory:
+
+@@@CODE ${app_path}/static/basic.css
+The `view2.html` file using this style sheet features a `link` tag
+to the style sheet in the HTML header, and the column containing
+the field name has
+the HTML tag `<td class="name">` to trigger the specification in
+the style sheet:
+
+@@@CODE ${app_path}/templates/view2.html fromto: @\{% if field\.errors
+Just run `python controller.py view2` to see that the names
+of the variables to set in the web page are blue.
+
+!split
+===== Using LaTeX mathematics =====
+
+Scientific applications frequently have many input data that are
+defined through mathematics and where the typesetting on the
+web page should be as close as possible to the typesetting where
+the mathematics is explained. In the present example we would like
+to typeset $A$, $b$, $w$, and $T$ with italic font as done
+in LaTeX. Fortunately, native LaTeX typesetting is available in
+HTML through the tool "MathJax": "http://www.mathjax.org/".
+Our template `view3.html` enables MathJax. Formulas are written
+with standard LaTeX inside `\(` and `\)`, while equations are surrounded
+by `$$`. Here we use formulas exclusively:
+
+@@@CODE ${app_path}/templates/view3.html fromto: @\{% if field\.errors
+Figure ref{wf:vib1:flask:fig:latex} displays how the
+LaTeX rendering looks like in the browser.
+
+FIGURE: [fig-web4sa/vib1_flask_latex, width=500] LaTeX typesetting of mathematical symbols. label{wf:vib1:flask:fig:latex}
+
+!split
+===== User-provided validation =====
+
+## Define Mako variable for path to source code
+<%
+app_path = src_path + 'vib/vib2_flask'
+%>
+
+
+The `FloatField` objects can check that the input is compatible with
+a number, but what if we want to control that $A>0$, $b>0$, and
+$T$ is not greater than 30 periods (otherwise the plot gets cluttered)?
+We can write functions for checking appropriate conditions and
+supply the function to the list of validator functions in the call to
+the `FloatField` constructor or other field constructors. The extra
+code is a part of the `model.py` and the presented extensions appear
+in the directory `vib2_flask`.
+
+The simplest approach to validation is to use existing functionality
+in the web framework. Checking that $A>0$ can be done by
+the `NumberRange` validator which checks that the value is inside
+a prescribed interval:
+
+!bc pycod
+from wtforms import Form, FloatField, validators
+
+class InputForm(Form):
+    A = FloatField(
+        label='amplitude (m)', default=1.0,
+        validators=[validators.NumberRange(0, 1E+20)])
+!ec
+
+We can also easily provide our own more tailored validators.
+As an example, let us explain how we can check that $T$ is less than 30 periods.
+One period is $2\pi /w$ so we need to check if $T> 30\cdot 2\pi/w$
+and raise an exception in that case.
+A validation function takes two arguments: the whole `form` and the
+specific `field` to test:
+
+@@@CODE ${app_path}/model.py fromto: def check_T@def check_interval
+The appropriate exception is of type `validators.ValidationError`.
+Observe that through `form` we have in fact access to all the input
+data so we can easily use the value of $w$ when checking the validity
+of the value of $T$. The `check_T` function is easy to
+add to the list of validator functions in the call to the `FloatField`
+constructor for `T`:
+
+!bc pycod
+class InputForm(Form):
+    ...
+    T = FloatField(
+        label='time interval', default=6*pi,
+        validators=[validators.InputRequired(), check_T])
+!ec
+The validator
+objects are tested one by one as the appear in the list, and if
+one fails, the others are not invoked.
+We therefore add `check_T` after the check of input such that we know we
+have a value for all data when we run the computations and test
+in `check_T`.
+
+Although there is already a `NumberRange` validator for checking
+whether a value is inside an interval, we can write our own
+version with some improved functionality for open intervals where
+the maximum or minimum value can be infinite.
+The infinite value can on input be represented by `None`.
+A general such function may take the form
+
+@@@CODE ${app_path}/model.py fromto: def check_interval@def interval
+
+The problem is that `check_interval` takes four arguments, not only
+the `form` and `field` arguments that a validator function can accept.
+The way out of this difficulty is to use a Python tool `functools.partial`
+which allows us to call a function with some of the arguments set.
+Here, we want to create a new function that calls `check_interval`
+with some prescribed values of `min_value` and `max_value`.
+This function looks like it does not have these arguments, only
+`form` and `field`. The following function produces this function:
+
+!bc pycod
+import functools
+
+def interval(min_value=None, max_value=None):
+    return functools.partial(
+        check_interval, min_value=min_value, max_value=max_value)
+!ec
+We can in any field constructor just add
+`interval(a, b)` as a validator function checking if the field value is
+in the interval between `a` and `b`:
+
+!bc pycod
+class InputForm(Form):
+    ...
+    b = FloatField(
+        label='damping factor (kg/s)', default=0,
+        validators=[validators.InputRequired(), interval(0,None)])
+!ec
+
+Let us test our tailored error checking. Run `python controller.py`
+in the `vib2_flask` directory and fill in $-1.0$ in the $b$ field.
+Pressing *Compute* invokes our `interval(0,None)` function, which
+is nothing but a call `check_interval(field, form, 0, None)`,
+and the test `if field.data < min_value` becomes true, `failure`
+is set and the exception is raised. The message in the exception
+is available in the `field.errors` attribute so our template
+will write it out in red, see Figure ref{wf:vib2:flask:fig:error1}.
+The template used in `vib_flask` is basically the same as `view3.html`
+in `vib1_flask`, i.e., it feaures LaTeX mathematics and checking of
+`field.errors`.
+
+FIGURE: [fig-web4sa/vib2_flask_error1, width=500] Triggering of a user-defined error check. label{wf:vib2:flask:fig:error1}
+
+Finally, we mention a detail in the `view.py` file in the `vib2_flask`
+app: instead of sending `form.var.data` to the `compute` function we
+may automatically generate a set of local variables such that the
+work with data from the web page looks nicer:
+
+@@@CODE ${app_path}/view.py fromto: def index@
+The idea is just to run `exec` on a declaration of a local variable
+with name `field.name` for each field in the form. This trick is often
+neat if data are buried in objects and you want variables in your
+code to look like they do in mathematical writing.
+

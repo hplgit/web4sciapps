@@ -1,5 +1,3 @@
-<h4>Give input:</h4>
-
 <form method=post action="">
 <table>
   {% for field in form %}
@@ -16,10 +14,9 @@
   {% endfor %}
 </table>
 <p><input type=submit value=Compute></form></p>
-
 <p>
 {% if result != None %}
 <h4>Plot:</h4>
-<img src="{{ result }}">
+<img src="{{ result }}" width=500>
 {% endif %}
 </p>

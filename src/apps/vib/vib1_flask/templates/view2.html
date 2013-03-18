@@ -4,8 +4,6 @@
 </head>
 <body>
 
-<h4>Give input:</h4>
-
 <form method=post action="">
 <table>
   {% for field in form %}
@@ -26,8 +24,7 @@
 
 <p>
 {% if result != None %}
-<h4>Plot:</h4>
-<img src="{{ result }}">
+<img src="{{ result }}" width=500>
 {% endif %}
 </p>
 </body>

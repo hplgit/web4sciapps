@@ -12,5 +12,5 @@ class InputForm(Form):
         label='frequency (1/s)', default=2*pi,
         validators=[validators.InputRequired()])
     T = FloatField(
-        label='time interval', default=6*pi,
+        label='time interval (s)', default=18,
         validators=[validators.InputRequired()])

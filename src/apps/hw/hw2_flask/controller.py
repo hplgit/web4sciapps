@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 # Model
 class InputForm(Form):
-    r = FloatField(validators=[validators.required()])
+    r = FloatField(validators=[validators.InputRequired()])
 
 # View
 @app.route('/hw2', methods=['GET', 'POST'])
