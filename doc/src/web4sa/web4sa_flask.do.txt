@@ -1,0 +1,10 @@
+#TITLE: Using Flask to Create Scientific Web Applications
+DATE: today
+
+TOC: off
+
+# #include "intro.do.txt"
+# #include "flask_hw.do.txt"
+# #include "flask_vib.do.txt"
+# #include "exercises.do.txt"
+

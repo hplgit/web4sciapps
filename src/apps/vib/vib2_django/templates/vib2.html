@@ -1,0 +1,20 @@
+<form method=post action="">{% csrf_token %}
+<table>
+  {% for field in form %}
+    <tr>
+    <td>{{ field.name }}</td>
+    <td>{{ field }}</td>
+    <td>{{ field.label }}</td>
+    <td>{{ field.errors }}</td>
+    <td></td>
+    </tr>
+  {% endfor %}
+</table>
+<p><input type=submit value=Compute></form></p>
+
+<p>
+{% if result != None %}
+{% load static %}
+<img src="{% get_static_prefix %}{{ result }}" width=500>
+{% endif %}
+</p>

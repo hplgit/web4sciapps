@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Automatically generated HTML file from Doconce source
+(http://code.google.com/p/doconce/)
+-->
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Doconce: http://code.google.com/p/doconce/" />
+<meta name="description" content="Using Web Frameworks to Ease the Development of Web Applications for Computational Science">
+<meta name="keywords" content="web frameworks,MVC pattern,Flask installation,Flask input forms,Flask HTML templates,Flask MVC pattern,Flask troubleshooting,Django installation,Django making a project,Django making an application,Django input forms,Django HTML templates,Flask input forms,Flask error checking,Flask CSS style sheets,Flask LaTeX mathematics,Flask input validation,Django input forms,Django input validation">
+
+
+
+<style type="text/css">
+    body {
+      font-family: Helvetica, Verdana, Arial, Sans-serif;
+      color: #404040;
+      background: #ffffff;
+    }
+    h1 { font-size: 1.8em;  color: #8A0808; }
+    h2 { font-size: 1.5em;  color: #8A0808; }
+    h3, h4 { color: #8A0808; }
+    a { color: #8A0808; text-decoration:none; }
+    tt { font-family: "Courier New", Courier; }
+    pre { background: #ededed; color: #000; padding: 15px;}
+    p { text-indent: 0px; }
+    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
+    p.caption { width: 80%; font-style: normal; text-align: left; }
+    hr.figure { border: 0; width: 80%; border-bottom: 1px solid #aaa}
+
+</style>
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Web frameworks ', 1, None, '___sec0'),
+              (' The MVC pattern ', 2, None, '___sec1'),
+              (' A very simple application ', 2, None, '___sec2'),
+              (' Application of the MVC pattern ',
+               2,
+               'wf:hw:mvc',
+               'wf:hw:mvc'),
+              (' Making a Flask application ', 1, None, '___sec4'),
+              (' Programming the Flask application ', 2, None, '___sec5'),
+              (' Equipping the input page with output results ',
+               2,
+               None,
+               '___sec6'),
+              (' Splitting the app into model, view, and controller files ',
+               2,
+               'wf:hw3:flask',
+               'wf:hw3:flask'),
+              (' Troubleshooting ', 2, None, '___sec8'),
+              (' Making a Django application ', 1, None, '___sec9'),
+              (' Installing Django ', 2, None, '___sec10'),
+              (' Setting up a Django project ', 2, None, '___sec11'),
+              (' Setting up a Django application ', 2, None, '___sec12'),
+              (' Programming the Django application ', 2, None, '___sec13'),
+              (' Equipping the input page with output results ',
+               2,
+               None,
+               '___sec14'),
+              (' Handling multiple input variables in Flask ',
+               1,
+               'wf:vib:flask',
+               'wf:vib:flask'),
+              (' Programming the Flask application ', 2, None, '___sec16'),
+              (' Implementing error checking in the template ',
+               2,
+               None,
+               '___sec17'),
+              (' Using style sheets ', 2, None, '___sec18'),
+              (' Using LaTeX mathematics ', 2, None, '___sec19'),
+              (' Rearringing the elements in the HTML template ',
+               2,
+               None,
+               '___sec20'),
+              (' User-provided validation ', 2, None, '___sec21'),
+              (' Autogenerating the code ',
+               2,
+               'wf:vib3:flask:autogen',
+               'wf:vib3:flask:autogen'),
+              (' Handling multiple input variables in Django ',
+               1,
+               'wf:vib:django',
+               'wf:vib:django'),
+              (' Programming the Django application ', 2, None, '___sec24'),
+              (' User-provided validation ', 2, None, '___sec25'),
+              (' Exercise 1: Add two numbers ',
+               2,
+               'wf:exer:add2',
+               'wf:exer:add2'),
+              (' Remaining ', 1, None, '___sec27')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "AMS"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- Fix slow MathJax rendering in IE8 -->
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+
+
+
+
+    
+<a name="part0017"></a>
+
+    <a href="._part0016_web4sa_plain.html"><img src="https://doconce.googlecode.com/hg/bundled/html_images/prev1.png" border=0 alt="previous"></a>
+    <p>
+<!-- !split -->
+
+<h3>User-provided validation  <a name="___sec25"></a></h3>
+
+<p>
+
+Django has a series of methods available for user-provided validation
+of form data. These are exemplified in the app <code>vib2_django</code>, which
+is an extension of the <code>vib1_django</code> app (with additional code, and
+of course, registrations in <code>settings.py</code> and <code>urls.py</code>).
+
+<p>
+
+Checking that \( A>0 \) is easiest done with a built-in Django
+validator:
+
+<p>
+
+
+<!-- code typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Input</span>(models<span style="color: #666666">.</span>Model):
+    A <span style="color: #666666">=</span> models<span style="color: #666666">.</span>FloatField(
+        verbose_name<span style="color: #666666">=</span><span style="color: #BA2121">&#39; amplitude (m)&#39;</span>, default<span style="color: #666666">=1.0</span>,
+        validators<span style="color: #666666">=</span>[MinValueValidator(<span style="color: #666666">0</span>)])
+</pre></div>
+<p>
+
+We can write our own validators, which are functions taking one parameter
+as argument, a value, and raising a <code>ValidationError</code> if the value
+is wrong. Checking that a value is inside an interval can first be
+implemented by
+
+<p>
+
+
+<!-- code typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">check_interval</span>(value, min_value<span style="color: #666666">=</span><span style="color: #008000">None</span>, max_value<span style="color: #666666">=</span><span style="color: #008000">None</span>):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Validate that a value is inside an interval.&quot;&quot;&quot;</span>
+    failure <span style="color: #666666">=</span> <span style="color: #008000">False</span>
+    <span style="color: #008000; font-weight: bold">if</span> min_value <span style="color: #AA22FF; font-weight: bold">is</span> <span style="color: #AA22FF; font-weight: bold">not</span> <span style="color: #008000">None</span>:
+        <span style="color: #008000; font-weight: bold">if</span> value <span style="color: #666666">&lt;</span> min_value:
+            failure <span style="color: #666666">=</span> <span style="color: #008000">True</span>
+    <span style="color: #008000; font-weight: bold">if</span> max_value <span style="color: #AA22FF; font-weight: bold">is</span> <span style="color: #AA22FF; font-weight: bold">not</span> <span style="color: #008000">None</span>:
+        <span style="color: #008000; font-weight: bold">if</span> value <span style="color: #666666">&gt;</span> max_value:
+            failure <span style="color: #666666">=</span> <span style="color: #008000">True</span>
+    min_value <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;-infty&#39;</span> <span style="color: #008000; font-weight: bold">if</span> min_value <span style="color: #AA22FF; font-weight: bold">is</span> <span style="color: #008000">None</span> <span style="color: #008000; font-weight: bold">else</span> <span style="color: #008000">str</span>(min_value)
+    max_value <span style="color: #666666">=</span>  <span style="color: #BA2121">&#39;infty&#39;</span> <span style="color: #008000; font-weight: bold">if</span> max_value <span style="color: #AA22FF; font-weight: bold">is</span> <span style="color: #008000">None</span> <span style="color: #008000; font-weight: bold">else</span> <span style="color: #008000">str</span>(max_value)
+    <span style="color: #008000; font-weight: bold">if</span> failure:
+        <span style="color: #008000; font-weight: bold">raise</span> ValidationError(
+            <span style="color: #BA2121">&#39;value=</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> not in [</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">, </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">]&#39;</span> <span style="color: #666666">%</span>
+            (value, min_value, max_value))
+</pre></div>
+<p>
+However, this function takes more than the value as argument. We therefore
+need to wrap it by a function with <code>value</code> as the only argument:
+
+<p>
+
+
+<!-- code typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">functools</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">interval</span>(min_value<span style="color: #666666">=</span><span style="color: #008000">None</span>, max_value<span style="color: #666666">=</span><span style="color: #008000">None</span>):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Django-compatible interface to check_interval.&quot;&quot;&quot;</span>
+    <span style="color: #008000; font-weight: bold">return</span> functools<span style="color: #666666">.</span>partial(
+        check_interval, min_value<span style="color: #666666">=</span>min_value, max_value<span style="color: #666666">=</span>max_value)
+</pre></div>
+<p>
+Now, <code>interval(0, 1)</code> returns a function that takes <code>value</code> as its
+only argument and checks if it is inside \( [0,1] \).
+Such a function can be inserted in the <code>validators</code> list in
+the field constructor, here to tell that \( b \) must be in \( [0,\infty) \):
+
+<p>
+
+
+<!-- code typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Input</span>(models<span style="color: #666666">.</span>Model):
+    <span style="color: #666666">...</span>
+    b <span style="color: #666666">=</span> models<span style="color: #666666">.</span>FloatField(
+        verbose_name<span style="color: #666666">=</span><span style="color: #BA2121">&#39; damping coefficient (kg/s)&#39;</span>, default<span style="color: #666666">=0.0</span>,
+        validators<span style="color: #666666">=</span>[interval(<span style="color: #666666">0</span>,<span style="color: #008000">None</span>)])
+</pre></div>
+<p>
+
+A final example on custom validation is to avoid plotting more
+than 30 periods of the oscillating function \( u \). This translates
+to checking of \( T \) is geater
+than 30 periods, i.e., \( T>30\cdot 2\pi/w \). The task is done in
+the <code>InputForm</code> class, where any method <code>clean_T</code> can do
+validation and adjustment of the field name <code>T</code>. The code goes
+as follows:
+
+<p>
+
+
+<!-- code typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">InputForm</span>(ModelForm):
+    <span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Meta</span>:
+        model <span style="color: #666666">=</span> Input
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">clean_T</span>(<span style="color: #008000">self</span>):
+        T <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>cleaned_data[<span style="color: #BA2121">&#39;T&#39;</span>]
+        w <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>cleaned_data[<span style="color: #BA2121">&#39;w&#39;</span>]
+        period <span style="color: #666666">=</span> <span style="color: #666666">2*</span>pi<span style="color: #666666">/</span>w
+        <span style="color: #008000; font-weight: bold">if</span> T <span style="color: #666666">&gt;</span> <span style="color: #666666">30*</span>period:
+            num_periods <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #008000">round</span>(T<span style="color: #666666">/</span>period))
+            <span style="color: #008000; font-weight: bold">raise</span> ValidationError(
+                <span style="color: #BA2121">&#39;Cannot plot as much as </span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121"> periods! T &lt; </span><span style="color: #BB6688; font-weight: bold">%.2f</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span>
+                (num_periods, <span style="color: #666666">30*</span>period))
+        <span style="color: #008000; font-weight: bold">return</span> T
+</pre></div>
+<p>
+We refer to the vast Django documentation for many other ways of
+validating forms.
+
+<p>
+
+<!-- --- begin exercise --- -->
+
+<p>
+
+<h3>Exercise 1: Add two numbers <a name="wf:exer:add2"></a></h3>
+
+<p>
+Make a web application that reads two numbers from a web page,
+adds the numbers, and prints the sum in a new web page.
+Package the necessary files that constitute the application
+in a tar file.
+Filename: <code>add2.tar.gz</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+
+
+<h2>Remaining  <a name="___sec27"></a></h2>
+
+<p>
+
+<ul>
+ <li> apply (generated apps) to simviz (make py simviz too and describe that)</li>
+ <li> store data in database</li>
+ <li> discuss list values read as text and use of eval, perhaps exercise</li>
+ <li> avoid Flask or Django in exercises, just do not specify and have
+   common exercises at the very end</li>
+ <li> app: username, TextAreaField, store in database and retrieve for admin</li>
+</ul>
+
+
+<p>
+
+                <a href="._part0016_web4sa_plain.html"><img src="https://doconce.googlecode.com/hg/bundled/html_images/prev1.png" border=0 alt="previous"></a>
+                <!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

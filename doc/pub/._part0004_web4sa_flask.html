@@ -1,0 +1,560 @@
+<html>
+<head>
+<!--
+This style is adopted from the (now old) vagrant 1.0 web
+pages. The style builds on the Twitter Bootstrap style.
+Modifications by Hans Petter Langtangen, hpl@simula.no.
+
+This style file should be copied and the following
+elements edited:
+
+Logo heading:
+
+ LogoWord
+ withSubWord
+
+Navigation links at the top:
+
+ GO TO 1
+ GO TO 2
+
+Footer at the end:
+
+ Here goes a footer, if desired, maybe with a Copyright &copy;
+
+-->
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Doconce: http://code.google.com/p/doconce/" />
+
+<link rel="stylesheet" href="html_templates/css/twitter_bootstrap.css">
+<link rel="stylesheet" href="html_templates/css/vagrant.css">
+<!-- Define color of headings here (last definition counts) -->
+<style type="text/css">
+h1, h2, h3, h4, h5, h6 {
+  color: #000;     /* black */
+  color: #999;     /* gray */
+  color: #005580;  /* dark blue */
+  color: #08c;     /* characteristic blue */
+</style>
+</head>
+<body>
+
+<title> Exercise 1: Add two numbers </title>
+
+<!-- ------------------- main content ------------------------>
+
+<div class="container">
+ <div class="row Header with-border">
+  <div class="span3 Module logo">
+   <h1><a href="/">Flask<span class="subtitle">4scientists</span></a></h1>
+  </div>
+  <div class="span9">
+   <div class="Module navigation">
+   <!-- Navigation at the top of the page -->
+    <ul>
+     <li> <a href="http://flask.pocoo.org/">Flask</a></li>
+    </ul>
+   </div>
+  </div>
+ </div>
+</div>
+
+
+<!-- Here goes the table of contents in the sidebar
+     <li class="active"> means dark blue background for current section
+-->
+<div class="row">
+ <div class="span3 Module sidebar">
+  <div class="well" style="padding: 8px 0px;">
+   <ul class="nav nav-list">
+     <!-- Syntax:
+     <li> <a href="...">Section 1</a></li>
+     <li> <a href="...">Section 2</a></li>
+     <li> &nbsp;&nbsp;&nbsp; <a href="...">Section 2a</a></li>
+     <li> &nbsp;&nbsp;&nbsp; <a href="...">Section 2b</a></li>
+     -->
+     <!-- Doconce automatically fills in the table of contents -->
+          <!-- vagrant nav toc: " Web frameworks " --> <li>  <a href="._part0000_web4sa_flask.html#___sec0"> Web frameworks </a>
+     <!-- vagrant nav toc: " The MVC pattern " --> <li> &nbsp;  <a href="._part0001_web4sa_flask.html#___sec1"> The MVC pattern </a>
+     <!-- vagrant nav toc: " A very simple application " --> <li> &nbsp;  <a href="._part0002_web4sa_flask.html#___sec2"> A very simple application </a>
+     <!-- vagrant nav toc: " Application of the MVC pattern " --> <li> &nbsp;  <a href="._part0003_web4sa_flask.html#wf:hw:mvc"> Application of the MVC pattern </a>
+     <!-- vagrant nav toc: " Making a Flask application " --> <li class="active">  <a href="._part0004_web4sa_flask.html#___sec4"> Making a Flask application </a>
+     <!-- vagrant nav toc: " Programming the Flask application " --> <li> &nbsp;  <a href="._part0004_web4sa_flask.html#___sec5"> Programming the Flask application </a>
+     <!-- vagrant nav toc: " Equipping the input page with output results " --> <li> &nbsp;  <a href="._part0004_web4sa_flask.html#___sec6"> Equipping the input page with output results </a>
+     <!-- vagrant nav toc: " Splitting the app into model, view, and controller files " --> <li> &nbsp;  <a href="._part0004_web4sa_flask.html#wf:hw3:flask"> Splitting the app into model, view, and controller files </a>
+     <!-- vagrant nav toc: " Troubleshooting " --> <li> &nbsp;  <a href="._part0005_web4sa_flask.html#___sec8"> Troubleshooting </a>
+     <!-- vagrant nav toc: " Handling multiple input variables in Flask " --> <li>  <a href="._part0006_web4sa_flask.html#wf:vib:flask"> Handling multiple input variables in Flask </a>
+     <!-- vagrant nav toc: " Programming the Flask application " --> <li> &nbsp;  <a href="._part0006_web4sa_flask.html#___sec10"> Programming the Flask application </a>
+     <!-- vagrant nav toc: " Implementing error checking in the template " --> <li> &nbsp;  <a href="._part0007_web4sa_flask.html#___sec11"> Implementing error checking in the template </a>
+     <!-- vagrant nav toc: " Using style sheets " --> <li> &nbsp;  <a href="._part0008_web4sa_flask.html#___sec12"> Using style sheets </a>
+     <!-- vagrant nav toc: " Using LaTeX mathematics " --> <li> &nbsp;  <a href="._part0008_web4sa_flask.html#___sec13"> Using LaTeX mathematics </a>
+     <!-- vagrant nav toc: " Rearringing the elements in the HTML template " --> <li> &nbsp;  <a href="._part0008_web4sa_flask.html#___sec14"> Rearringing the elements in the HTML template </a>
+     <!-- vagrant nav toc: " User-provided validation " --> <li> &nbsp;  <a href="._part0009_web4sa_flask.html#___sec15"> User-provided validation </a>
+     <!-- vagrant nav toc: " Autogenerating the code " --> <li> &nbsp;  <a href="._part0010_web4sa_flask.html#wf:vib3:flask:autogen"> Autogenerating the code </a>
+     <!-- vagrant nav toc: " Exercises " --> <li>  <a href="._part0011_web4sa_flask.html#___sec17"> Exercises </a>
+     <!-- vagrant nav toc: " Exercise 1: Add two numbers " --> <li> &nbsp;  <a href="._part0011_web4sa_flask.html#wf:exer:add2"> Exercise 1: Add two numbers </a>
+
+    </ul>
+   </div>
+  </div>
+
+  <div class="span9">
+
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Web frameworks ', 1, None, '___sec0'),
+              (' The MVC pattern ', 2, None, '___sec1'),
+              (' A very simple application ', 2, None, '___sec2'),
+              (' Application of the MVC pattern ',
+               2,
+               'wf:hw:mvc',
+               'wf:hw:mvc'),
+              (' Making a Flask application ', 1, None, '___sec4'),
+              (' Programming the Flask application ', 2, None, '___sec5'),
+              (' Equipping the input page with output results ',
+               2,
+               None,
+               '___sec6'),
+              (' Splitting the app into model, view, and controller files ',
+               2,
+               'wf:hw3:flask',
+               'wf:hw3:flask'),
+              (' Troubleshooting ', 2, None, '___sec8'),
+              (' Handling multiple input variables in Flask ',
+               1,
+               'wf:vib:flask',
+               'wf:vib:flask'),
+              (' Programming the Flask application ', 2, None, '___sec10'),
+              (' Implementing error checking in the template ',
+               2,
+               None,
+               '___sec11'),
+              (' Using style sheets ', 2, None, '___sec12'),
+              (' Using LaTeX mathematics ', 2, None, '___sec13'),
+              (' Rearringing the elements in the HTML template ',
+               2,
+               None,
+               '___sec14'),
+              (' User-provided validation ', 2, None, '___sec15'),
+              (' Autogenerating the code ',
+               2,
+               'wf:vib3:flask:autogen',
+               'wf:vib3:flask:autogen'),
+              (' Exercises ', 1, None, '___sec17'),
+              (' Exercise 1: Add two numbers ',
+               2,
+               'wf:exer:add2',
+               'wf:exer:add2')]}
+end of tocinfo -->
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "AMS"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- Fix slow MathJax rendering in IE8 -->
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+
+
+
+
+<a name="part0004"></a>
+<!-- !split -->
+
+<h2>Making a Flask application  <a name="___sec4"></a></h2>
+
+<p>
+
+Not much code or configuration is needed to make a Flask application.
+Actually one short file is enough. For this file to work you need to
+install Flask and some corresponding packages. This is easiest
+performed by
+
+<p>
+
+
+<!-- code typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; sudo pip install Flask
+Terminal&gt; sudo pip install WTForms
+</pre></div>
+<p>
+You can add <code>--upgrade</code> to upgrade a previous installation.
+
+<p>
+
+<h3>Programming the Flask application  <a name="___sec5"></a></h3>
+
+<p>
+We want our input page to feature in text field where the user can
+write the value of <code>r</code>, see Figure <a href="#wf:hw1:flask:fig:input">1</a>.
+By clicking <em>equals</em>
+we compute the corresponding <code>s</code> and write out the result page
+seen in Figure <a href="#wf:hw1:flask:fig:result">2</a>.
+
+<p>
+
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 1:  The input page. <a name="wf:hw1:flask:fig:input"></a> </p></center>
+<p><img src="fig-web4sa/hw1_flask_input.png" align="bottom" width=600></p>
+</center>
+
+<p>
+
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 2:  The output page. <a name="wf:hw1:flask:fig:result"></a> </p></center>
+<p><img src="fig-web4sa/hw1_flask_output.png" align="bottom" width=600></p>
+</center>
+
+<p>
+
+
+Flask does not require us to use the MVC pattern so there is actually
+no need to split the original program into <code>model.py</code>, <code>view.py</code>,
+<code>controller.py</code>, and <code>compute.py</code> as already explained.  First we make
+a <code>controller.py</code> file where the view, the model, and the controller
+parts are within the same part. Later, we split the view, model, and
+controller into three files for illustration. The <code>compute</code> component
+is always in a separate files as we like to encapsulate the
+computations completely from user interfaces.
+
+<p>
+
+The view that the user sees is determined by
+HTML templates in a subdirectory <code>templates</code>, and consequently
+we name the template files <code>view*.html</code>.
+The model and other parts of the view concept are just parts of
+the <code>controller.py</code> file:
+
+<p>
+
+
+<!-- code typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">flask</span> <span style="color: #008000; font-weight: bold">import</span> Flask, render_template, request
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">wtforms</span> <span style="color: #008000; font-weight: bold">import</span> Form, FloatField, validators
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">compute</span> <span style="color: #008000; font-weight: bold">import</span> compute
+
+app <span style="color: #666666">=</span> Flask(__name__)
+
+<span style="color: #408080; font-style: italic"># Model</span>
+<span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">InputForm</span>(Form):
+    r <span style="color: #666666">=</span> FloatField(validators<span style="color: #666666">=</span>[validators<span style="color: #666666">.</span>InputRequired()])
+
+<span style="color: #408080; font-style: italic"># View</span>
+<span style="color: #AA22FF">@app.route</span>(<span style="color: #BA2121">&#39;/hw1&#39;</span>, methods<span style="color: #666666">=</span>[<span style="color: #BA2121">&#39;GET&#39;</span>, <span style="color: #BA2121">&#39;POST&#39;</span>])
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">index</span>():
+    form <span style="color: #666666">=</span> InputForm(request<span style="color: #666666">.</span>form)
+    <span style="color: #008000; font-weight: bold">if</span> request<span style="color: #666666">.</span>method <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;POST&#39;</span> <span style="color: #AA22FF; font-weight: bold">and</span> form<span style="color: #666666">.</span>validate():
+        r <span style="color: #666666">=</span> form<span style="color: #666666">.</span>r<span style="color: #666666">.</span>data
+        s <span style="color: #666666">=</span> compute(r)
+        <span style="color: #008000; font-weight: bold">return</span> render_template(<span style="color: #BA2121">&quot;view_output.html&quot;</span>, form<span style="color: #666666">=</span>form, s<span style="color: #666666">=</span>s)
+    <span style="color: #008000; font-weight: bold">else</span>:
+        <span style="color: #008000; font-weight: bold">return</span> render_template(<span style="color: #BA2121">&quot;view_input.html&quot;</span>, form<span style="color: #666666">=</span>form)
+
+<span style="color: #008000; font-weight: bold">if</span> __name__ <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;__main__&#39;</span>:
+    app<span style="color: #666666">.</span>run(debug<span style="color: #666666">=</span><span style="color: #008000">True</span>)
+</pre></div>
+<p>
+We collect the files associated with a Flask app in a directory,
+here called <code>hw1_flask</code>.
+
+<p>
+The web application is the <code>app</code> object of class <code>Flask</code> initialized
+as shown. The model is a special Flask class derived from <code>Form</code>
+where the data are listed as static class attributes and initialized
+by various form field objects from the <code>wtforms</code> package.
+These form fields correspond to HTML forms in the input page.
+For the <code>r</code> variable we apply <code>FloatField</code> since it is a floating-point
+variable. A default validator, here checking that the user supplies
+a real number, is easily included.
+
+<p>
+The view, controlling how the user interacts with the data, consists
+an URL and corresponding function to call when this is invoked URL.
+The function name is here <code>index</code> (corresponding to the standard
+<code>index.html</code> page that is the main page of a URL) and the
+decorator <code>@app.route('/hw1', ...)</code> maps the URL
+<code>http://127.0.0.1:5000/hw1</code> to a call to <code>index</code>.
+The <code>methods</code> argument must be as shown to allow the user to communicate
+with the web page.
+
+<p>
+
+The <code>index</code> function first makes a form object based on the data in
+the model, here class <code>InputForm</code>. Then there are two possibilities:
+either the user has provided data in the HTML form or the user is
+to be offered an input form. In the former case, <code>request.method</code>
+equals <code>'POST'</code> and we can extract the numerical value of <code>r</code>
+from the <code>form</code> object, <code>form.r.data</code>, call up our mathematical
+computations, and make a web page with the result.
+In the latter case, we make an input page as displayed in
+Figure <a href="#wf:hw1:flask:fig:input">1</a>.
+
+<p>
+
+Making a web page with Flask is conveniently done through an HTML
+template. Since the output page is simplest we display the
+<code>view_output.html</code> template first:
+
+<p>
+
+
+<!-- code typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Hello, World! sin({{form.r.data}})={{s}}.
+</pre></div>
+<p>
+
+Keyword arguments sent to <code>render_template</code> are available in the
+HTML template. With the <code>form</code> object we extract the value of
+<code>r</code> in the HTML code by <code>{{form.r.data}}</code>. Similarly, the value of <code>s</code>
+is simply <code>{{s}}</code>.
+
+<p>
+The HTML template for the input page is slightly more complicated
+as we need to use an HTML form:
+
+<p>
+
+
+<!-- code typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">&lt;form</span> <span style="color: #7D9029">method=</span><span style="color: #BA2121">post</span> <span style="color: #7D9029">action=</span><span style="color: #BA2121">&quot;&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+  Hello, World! The sine of {{form.r}}
+  <span style="color: #008000; font-weight: bold">&lt;input</span> <span style="color: #7D9029">type=</span><span style="color: #BA2121">submit</span> <span style="color: #7D9029">value=</span><span style="color: #BA2121">equals</span><span style="color: #008000; font-weight: bold">&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/form&gt;</span>
+</pre></div>
+<p>
+
+All you have to do in order to run this web application is
+
+<p>
+
+
+<!-- code typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; python controller.py
+</pre></div>
+<p>
+
+
+<h3>Equipping the input page with output results  <a name="___sec6"></a></h3>
+
+<p>
+
+Our application made two distinct pages for grabbing input from the
+user and presenting the result. It is often more natural to add
+the result to the input page. This is particularly the case in the present
+web application, which is a kind of calculator. Figure <a href="#wf:hw2:flask:fig:result">3</a> shows what the user sees after clicking the <em>equals</em> button.
+
+<p>
+
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 3:  The modified result page. <a name="wf:hw2:flask:fig:result"></a> </p></center>
+<p><img src="fig-web4sa/hw2_flask_output.png" align="bottom" width=600></p>
+</center>
+
+<p>
+
+To let the user stay within the same page, we create a new directory <code>hw2_flask</code>
+for this modified Flask app and copy the files from the previous
+<code>hw1_flask</code> directory.  The idea now is to make use of just one
+template, in <code>templates/view.html</code>:
+
+<p>
+
+
+<!-- code typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">&lt;form</span> <span style="color: #7D9029">method=</span><span style="color: #BA2121">post</span> <span style="color: #7D9029">action=</span><span style="color: #BA2121">&quot;&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+  Hello, World! The sine of
+  {{(form.r)}}
+  <span style="color: #008000; font-weight: bold">&lt;input</span> <span style="color: #7D9029">type=</span><span style="color: #BA2121">submit</span> <span style="color: #7D9029">value=</span><span style="color: #BA2121">equals</span><span style="color: #008000; font-weight: bold">&gt;</span>
+{% if s != None %}
+{{s}}
+{% endif %}
+<span style="color: #008000; font-weight: bold">&lt;/form&gt;</span>
+</pre></div>
+<p>
+
+The form is identical to what we used in <code>view_input.html</code>, and the only
+new thing is the value of <code>s</code>. We supply <code>s</code> as an object to the
+<code>render_template</code> function and this object is available for
+some programming in the HTML template. We can test on the value of <code>s</code>:
+if it is <code>None</code>, we know that the computations are not performed and
+<code>s</code> should not appear on the page, otherwise <code>s</code> holds the sine
+value and we can write it out. The generated HTML code reads
+
+<p>
+
+
+<!-- code typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">&lt;form</span> <span style="color: #7D9029">method=</span><span style="color: #BA2121">post</span> <span style="color: #7D9029">action=</span><span style="color: #BA2121">&quot;&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+  Hello, World! The sine of
+  <span style="color: #008000; font-weight: bold">&lt;input</span> <span style="color: #7D9029">id=</span><span style="color: #BA2121">&quot;r&quot;</span> <span style="color: #7D9029">name=</span><span style="color: #BA2121">&quot;r&quot;</span> <span style="color: #7D9029">type=</span><span style="color: #BA2121">&quot;text&quot;</span> <span style="color: #7D9029">value=</span><span style="color: #BA2121">&quot;1.2&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+  <span style="color: #008000; font-weight: bold">&lt;input</span> <span style="color: #7D9029">type=</span><span style="color: #BA2121">submit</span> <span style="color: #7D9029">value=</span><span style="color: #BA2121">equals</span><span style="color: #008000; font-weight: bold">&gt;</span>
+
+0.932039085967
+
+<span style="color: #008000; font-weight: bold">&lt;/form&gt;</span>
+</pre></div>
+<p>
+
+The <code>index</code> function needs adjustments since we use the same
+template for the input and the output page:
+
+<p>
+
+
+<!-- code typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># View</span>
+<span style="color: #AA22FF">@app.route</span>(<span style="color: #BA2121">&#39;/hw2&#39;</span>, methods<span style="color: #666666">=</span>[<span style="color: #BA2121">&#39;GET&#39;</span>, <span style="color: #BA2121">&#39;POST&#39;</span>])
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">index</span>():
+    form <span style="color: #666666">=</span> InputForm(request<span style="color: #666666">.</span>form)
+    <span style="color: #008000; font-weight: bold">if</span> request<span style="color: #666666">.</span>method <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;POST&#39;</span> <span style="color: #AA22FF; font-weight: bold">and</span> form<span style="color: #666666">.</span>validate():
+        r <span style="color: #666666">=</span> form<span style="color: #666666">.</span>r<span style="color: #666666">.</span>data
+        s <span style="color: #666666">=</span> compute(r)
+    <span style="color: #008000; font-weight: bold">else</span>:
+        s <span style="color: #666666">=</span> <span style="color: #008000">None</span>
+
+    <span style="color: #008000; font-weight: bold">return</span> render_template(<span style="color: #BA2121">&quot;view.html&quot;</span>, form<span style="color: #666666">=</span>form, s<span style="color: #666666">=</span>s)
+</pre></div>
+<p>
+It is seen that if the user has given data, <code>s</code> is a <code>float</code>, otherwise
+<code>s</code> is <code>None</code>. You are encouraged to test the app by running
+
+<p>
+
+
+<!-- code typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; python controller.py
+</pre></div>
+<p>
+and loading <code>http://127.0.0.1:5000/hw2</code> into your browser.
+A nice little exercise is to control the formatting of the result <code>s</code>.
+To this end, you transform <code>s</code> to a string: <code>s = '%.5f' % s</code> before
+sending it to <code>render_template</code>.
+
+<p>
+
+<h3>Splitting the app into model, view, and controller files <a name="wf:hw3:flask"></a></h3>
+
+<p>
+
+
+In our previous to Flask apps we have had the model, view, and
+controller parts in one file <code>controller.py</code>. For illustration we
+may split the previous <code>controller.py</code> into three files:
+<code>model.py</code>, <code>view.py</code>, and <code>controller.py</code>, located in a
+directory <code>hw3_flask</code>. The contents
+in these files reflects the splitting introduced in the original
+scienticic hello world program in the section <a href="._part0003_web4sa_flask.html#wf:hw:mvc">Application of the MVC pattern</a>.
+In the Flask context we have <code>model.py</code> as
+
+<p>
+
+
+<!-- code typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">wtforms</span> <span style="color: #008000; font-weight: bold">import</span> Form, FloatField, validators
+
+<span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">InputForm</span>(Form):
+    r <span style="color: #666666">=</span> FloatField(validators<span style="color: #666666">=</span>[validators<span style="color: #666666">.</span>InputRequired()])
+</pre></div>
+<p>
+
+The view in 'view.py' consists of
+
+<p>
+
+
+<!-- code typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">flask</span> <span style="color: #008000; font-weight: bold">import</span> Flask, render_template, request
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">compute</span> <span style="color: #008000; font-weight: bold">import</span> compute
+
+app <span style="color: #666666">=</span> Flask(__name__)
+
+<span style="color: #AA22FF">@app.route</span>(<span style="color: #BA2121">&#39;/hw3&#39;</span>, methods<span style="color: #666666">=</span>[<span style="color: #BA2121">&#39;GET&#39;</span>, <span style="color: #BA2121">&#39;POST&#39;</span>])
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">index</span>():
+    form <span style="color: #666666">=</span> InputForm(request<span style="color: #666666">.</span>form)
+    <span style="color: #008000; font-weight: bold">if</span> request<span style="color: #666666">.</span>method <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;POST&#39;</span> <span style="color: #AA22FF; font-weight: bold">and</span> form<span style="color: #666666">.</span>validate():
+        r <span style="color: #666666">=</span> form<span style="color: #666666">.</span>r<span style="color: #666666">.</span>data
+        s <span style="color: #666666">=</span> compute(r)
+    <span style="color: #008000; font-weight: bold">else</span>:
+        s <span style="color: #666666">=</span> <span style="color: #008000">None</span>
+
+    <span style="color: #008000; font-weight: bold">return</span> render_template(<span style="color: #BA2121">&quot;view.html&quot;</span>, form<span style="color: #666666">=</span>form, s<span style="color: #666666">=</span>s)
+</pre></div>
+<p>
+
+The <code>controller.py</code> file finally runs the view's <code>app</code>:
+
+<p>
+
+
+<!-- code typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">view</span> <span style="color: #008000; font-weight: bold">import</span> app
+
+<span style="color: #008000; font-weight: bold">if</span> __name__ <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;__main__&#39;</span>:
+    app<span style="color: #666666">.</span>run(debug<span style="color: #666666">=</span><span style="color: #008000">True</span>)
+</pre></div>
+<p>
+
+The statements are indentical to those in the <code>hw2_flask</code> app, only
+the organization of the statement in files differ.
+
+<p>
+
+<p>
+<!-- ------------------- end of main content --------------- -->
+
+
+<!--
+Preliminary examples/discussion on vagrant style syntax
+
+<div class='alert alert-block alert-notice'>
+  <h3>What about PHP? Python? Java?</h3>
+<p>
+bla-bla.
+</div>
+
+<p>
+While the <div class="deep-blue">rest of the</div> getting started
+-->
+
+<ul class="pager">
+  <li class="previous">
+    <a href="._part0003_web4sa_flask.html">&larr; Prev</a>
+  </li>
+
+  <li class="next">
+    <a href="._part0005_web4sa_flask.html">Next &rarr;</a>
+  </li>
+
+</ul>
+
+ </div>
+
+<!-- ------------------- end of main content --------------- -->
+
+ <div class="row Footer">
+  <div class="span12">
+  Copyright &copy 2013; Hans Petter Langtangen and Anders E. Johansen.
+  Last update: Mar 22, 2013.
+  </div>
+ </div>
+</div>
+</body>
+</html>
+
+
+

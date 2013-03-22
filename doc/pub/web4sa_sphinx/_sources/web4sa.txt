@@ -1,0 +1,2555 @@
+.. Automatically generated reST file from Doconce source
+   (http://code.google.com/p/doconce/)
+
+Using Web Frameworks to Ease the Development of Web Applications for Computational Science
+==========================================================================================
+
+:Author: Hans Petter Langtangen, Anders Johansen
+:Date: Mar 22, 2013
+
+Web frameworks
+==============
+
+
+.. index:: web frameworks
+
+
+Computational scientists may want to offer their applications through
+a web interface, thereby making a *web application*.
+Basically, this means that users can set input data
+to the application on a web page, then click on some *Compute* button,
+and back comes a new web page with the results of the computations.
+The web interface can either be used as a GUI locally on the
+scientist's computer, or the interface can be depolyed to
+a server and made available to the whole world.
+
+Web applications of the mentioned type can be created from scratch
+using CGI scripts in (e.g.) Python, but the code quickly gets longer
+and more involved as the complexity of the web interface
+grows. Nowadays, most web applications are created with the aid of
+*web frameworks*, which are software packages that simplify the
+programming tasks of offering services through the Internet. The
+downside of web frameworks is that there is a significant amount of
+steps and details to learn before your first simple demo application
+works.  The upside is that advanced applications are within reach,
+without an overwhelming amount of programming, as soon as you have
+understood the basic demos.
+
+We shall explore two web frameworks: the very popular `Django framework <https://www.djangoproject.com/>`_ and the more high-level and easy-to-use framework
+`Flask <http://flask.pocoo.org/>`_. In addition, our examples are also
+implemented in the `web2py <http://www.web2py.com/>`_ framework.
+.. Its slogan says "Django makes it easier to build better Web apps more quickly and with less code".
+
+The primary advantage of Django
+over other web frameworks is the rich set of documentation and
+examples. Googling for "Django tutorials" gives lots of hits including
+a  list of `web tutorials <https://code.djangoproject.com/wiki/Tutorials>`_
+and a list of `YouTube videos <http://www.youtube.com/playlist?list=PL385A53B00B8B158E>`_. There is also an electronic `Django book <http://www.djangobook.com/en/2.0/>`_. At the time of this writing, Flask is not
+much documented beyond the `official web site <http://flask.pocoo.org/>`_ and the `WTForms Documentation <http://wtforms.simplecodes.com/docs/0.6/index.html>`_. There is, unfortunately, hardly any examples on how Django or Flask can be used to enable typical scientific applications for the web, and that is why we have developed some targeted examples on this topic.
+
+
+The problem for a computational scientist who wants to enable
+mathematical calculations through the web is that most of
+the introductory examples on utilizing a particular
+web framework address web applications
+of very different nature, e.g., blogs and polls. Therefore, we have made an
+alternative introduction which explains, in the simplest possible way,
+how web frameworks can be used to
+
+1. generate a web page with input data to your application,
+
+2. run the application to perform mathematical computations, and
+
+3. generate a web page with the results of the computations.
+
+To work with Django, you need to know about Python packages and modules
+as well as Python classes. With Flask it is enough to be familiar with
+functions and modules, though knowledge of classes and a bit of
+decorators might be an advantage.
+
+.. !split
+
+The MVC pattern
+---------------
+
+
+.. index:: MVC pattern
+
+
+The MVC pattern stands for Model-View-Controller and is a way of
+separating the user's interaction with an application from the inner
+workings of the application. In a scientific application this
+usually means separaring mathematical computations from the
+user interface and visualization of results.
+The `Wikipedia definition of the MVC pattern <http://en.wikipedia.org/wiki/MVC_Pattern>`_ gives a very high-level
+explanation of what the model, view, and controller do and mentions
+the fact that different web frameworks interpret the three components
+differently. Any web application works with a set of data and needs
+a user interface for the communication of data between the user and
+some data processing software. The classical
+MVC pattern introduces
+
+ * the model to hold the data
+
+ * the view to display data
+
+ * the controller to move data by gluing the model and the view.
+
+For applications performing mathematical computations we find it
+convenient to explicitly introduce a fourth component that we call
+*compute* where the mathematical computations are encapsulated.  With
+the MVC pattern and the compute component we have a clear separation
+between data (model), the way data is presented (view), the
+computations (compute), and the way these components communicate
+(controller). In a small program such a separation may look as
+overkill, but it pays off in more complicated applications. More
+importantly, the concepts of the MVC pattern saturates the modules and
+files of web frameworks so one really needs to adapt to the MVC way of
+thinking.
+
+Web frameworks often have their own way of interpreting the
+model, view, and controller parts of the MVC pattern.
+In particular, most frameworks often divide the view into two parts:
+one software component and one HTML template. The latter takes care
+of the look and feel of the web page while the former often takes
+the role of being the controller too.
+For our scientific applications
+we shall employ an interpretation of the MVC pattern
+which is compatible with what we need later on:
+
+ * the model contains the data (often only the input data) of the application,
+
+ * the view controls the user interface that handles input and output data,
+   and also calls to functionality that computes the output given the input.
+
+The model will be a Python class with static attributes holding the data.
+The view consists of Python code processing the model's data and HTML
+templates for the design of the web pages.
+
+Flask does not force any MVC pattern on the programmer, but
+the code needed to build web applications can easily be split into
+model, view, controller, and compute components, as will be shown later.
+Django, on the other hand, automatically generates application files with names
+``views.py`` and ``models.py`` so it is
+necessary to have some idea what Django means with these terms.
+The controller functionality in Django lies both in the ``views.py`` file and
+in the configuration
+files (``settings.py`` and ``urls.py``). The view component of the application
+consists both of the ``views.py`` file and template files used to create
+the HTML code in the web pages.
+
+Forthcoming examples will illustrate how a scientific application is
+split to meet the requirements of the MVC software design pattern.
+
+.. !split
+
+A very simple application
+-------------------------
+
+
+
+We shall start with the simplest possible application,
+a "scientific hello world program", where the
+task is to read a number of write out "Hello, World!" followed by
+the sine of the number. This application has one input variable and
+a line of text as output.
+
+Our first implementation reads the input from the command
+line and writes the results to the terminal window:
+
+
+.. code-block:: python
+
+        #!/usr/bin/env python
+        import sys, math
+        r = float(sys.argv[1])
+        s = math.sin(r)
+        print "Hello, World! sin(%g)=%g' % (r, s)
+
+
+The task of the web version of this program is to read ``r``
+variable from a web page, compute the sine,
+and write out a new web page with the resulting text.
+
+.. !split
+
+.. _wf:hw:mvc:
+
+Application of the MVC pattern
+------------------------------
+
+
+
+Before thinking of a web application, we first *refactor* our program
+such that it fits with the classical MVC pattern and a compute component.
+The refactoring does not change the functionality of the code, it
+just distributes the original statements in functions and modules.
+Here we create four modules: ``model``, ``view``,
+``compute``, and ``controller``.
+
+ * The ``compute`` module contains a function ``compute(r)`` that performs
+   the mathematics and returns the value of ``s``.
+
+ * The ``model`` module holds the input data, here ``r``.
+
+ * The ``view`` module has two functions, one for reading input data,
+   ``get_input``,
+   and one for presenting the output, ``present_output``.
+   The later takes the input, calls ``compute`` functionalty, and
+   generates the output.
+
+ * The ``controller`` module initializes model's data from the view
+   and calls the view to present the output.
+
+The ``model.py`` file contains the ``r`` variable, which must
+be declared with a default value in order to create the data object:
+
+
+.. code-block:: python
+
+        r = 0.0    # input
+        s = None   # output
+
+
+The ``view.py`` file is restricted to the communication with the user and reads
+
+
+.. code-block:: python
+
+        import sys
+        import compute
+        
+        # Input: float r
+        # Output: "Hello, World! sin(r)=..."
+        
+        def get_input():
+            """Get input data from the command line."""
+            r = float(sys.argv[1])
+            return r
+        
+        def present_output(r):
+            """Write results to terminal window."""
+            s = compute.compute(r)
+            print 'Hello, World! sin(%g)=%g' % (r, s)
+
+
+The mathematics is encapsulated in ``compute.py``:
+
+
+.. code-block:: python
+
+        import math
+        
+        def compute(r):
+            return math.sin(r)
+
+
+Finally, ``controller.py`` glues the model and the view:
+
+
+.. code-block:: python
+
+        import model, view
+        
+        model.r = view.get_input()
+        view.present_output(model.r)
+
+
+Let us try our refactored code:
+
+
+.. code-block:: console
+
+        Terminal> python controller.py 1.2
+        Hello, World! sin(1.2)=0.932039
+
+
+Our goal is to create a web interface to our scientific hello world
+program such that we can fill in the number ``r`` in a text field, click a
+*Compute* button and get back a new web page with the output text
+shown above: "Hello, World! sin(r)=s".
+
+Making a Flask application
+==========================
+
+
+.. index::
+   single: Flask; installation
+
+
+Not much code or configuration is needed to make a Flask application.
+Actually one short file is enough. For this file to work you need to
+install Flask and some corresponding packages. This is easiest
+performed by
+
+
+.. code-block:: console
+
+        Terminal> sudo pip install Flask
+        Terminal> sudo pip install WTForms
+
+You can add ``--upgrade`` to upgrade a previous installation.
+
+Programming the Flask application  (1)
+--------------------------------------
+
+We want our input page to feature in text field where the user can
+write the value of ``r``, see Figure :ref:`wf:hw1:flask:fig:input`.
+By clicking *equals*
+we compute the corresponding ``s`` and write out the result page
+seen in Figure :ref:`wf:hw1:flask:fig:result`.
+
+
+.. _wf:hw1:flask:fig:input:
+
+.. figure:: fig-web4sa/hw1_flask_input.png
+   :width: 600
+
+   *The input page*
+
+
+
+.. _wf:hw1:flask:fig:result:
+
+.. figure:: fig-web4sa/hw1_flask_output.png
+   :width: 600
+
+   *The output page*
+
+
+
+
+Flask does not require us to use the MVC pattern so there is actually
+no need to split the original program into ``model.py``, ``view.py``,
+``controller.py``, and ``compute.py`` as already explained.  First we make
+a ``controller.py`` file where the view, the model, and the controller
+parts are within the same part. Later, we split the view, model, and
+controller into three files for illustration. The ``compute`` component
+is always in a separate files as we like to encapsulate the
+computations completely from user interfaces.
+
+
+.. index::
+   single: Flask; input forms
+
+
+The view that the user sees is determined by
+HTML templates in a subdirectory ``templates``, and consequently
+we name the template files ``view*.html``.
+The model and other parts of the view concept are just parts of
+the ``controller.py`` file:
+
+
+.. code-block:: python
+
+        from flask import Flask, render_template, request
+        from wtforms import Form, FloatField, validators
+        from compute import compute
+        
+        app = Flask(__name__)
+        
+        # Model
+        class InputForm(Form):
+            r = FloatField(validators=[validators.InputRequired()])
+        
+        # View
+        @app.route('/hw1', methods=['GET', 'POST'])
+        def index():
+            form = InputForm(request.form)
+            if request.method == 'POST' and form.validate():
+                r = form.r.data
+                s = compute(r)
+                return render_template("view_output.html", form=form, s=s)
+            else:
+                return render_template("view_input.html", form=form)
+        
+        if __name__ == '__main__':
+            app.run(debug=True)
+
+We collect the files associated with a Flask app in a directory,
+here called ``hw1_flask``.
+
+The web application is the ``app`` object of class ``Flask`` initialized
+as shown. The model is a special Flask class derived from ``Form``
+where the data are listed as static class attributes and initialized
+by various form field objects from the ``wtforms`` package.
+These form fields correspond to HTML forms in the input page.
+For the ``r`` variable we apply ``FloatField`` since it is a floating-point
+variable. A default validator, here checking that the user supplies
+a real number, is easily included.
+
+The view, controlling how the user interacts with the data, consists
+an URL and corresponding function to call when this is invoked URL.
+The function name is here ``index`` (corresponding to the standard
+``index.html`` page that is the main page of a URL) and the
+decorator ``@app.route('/hw1', ...)`` maps the URL
+``http://127.0.0.1:5000/hw1`` to a call to ``index``.
+The ``methods`` argument must be as shown to allow the user to communicate
+with the web page.
+
+
+.. index::
+   single: Flask; index function
+
+
+The ``index`` function first makes a form object based on the data in
+the model, here class ``InputForm``. Then there are two possibilities:
+either the user has provided data in the HTML form or the user is
+to be offered an input form. In the former case, ``request.method``
+equals ``'POST'`` and we can extract the numerical value of ``r``
+from the ``form`` object, ``form.r.data``, call up our mathematical
+computations, and make a web page with the result.
+In the latter case, we make an input page as displayed in
+Figure :ref:`wf:hw1:flask:fig:input`.
+
+
+.. index::
+   single: Flask; HTML templates
+
+
+Making a web page with Flask is conveniently done through an HTML
+template. Since the output page is simplest we display the
+``view_output.html`` template first:
+
+
+.. code-block:: text
+
+
+        Hello, World! sin({{form.r.data}})={{s}}.
+
+
+Keyword arguments sent to ``render_template`` are available in the
+HTML template. With the ``form`` object we extract the value of
+``r`` in the HTML code by ``{{form.r.data}}``. Similarly, the value of ``s``
+is simply ``{{s}}``.
+
+The HTML template for the input page is slightly more complicated
+as we need to use an HTML form:
+
+
+.. code-block:: text
+
+
+        <form method=post action="">
+          Hello, World! The sine of {{form.r}}
+          <input type=submit value=equals>
+        </form>
+
+
+All you have to do in order to run this web application is
+
+
+.. code-block:: console
+
+        Terminal> python controller.py
+
+
+.. !split
+
+Equipping the input page with output results  (1)
+-------------------------------------------------
+
+
+
+Our application made two distinct pages for grabbing input from the
+user and presenting the result. It is often more natural to add
+the result to the input page. This is particularly the case in the present
+web application, which is a kind of calculator. Figure :ref:`wf:hw2:flask:fig:result` shows what the user sees after clicking the *equals* button.
+
+
+.. _wf:hw2:flask:fig:result:
+
+.. figure:: fig-web4sa/hw2_flask_output.png
+   :width: 600
+
+   *The modified result page*
+
+
+To let the user stay within the same page, we create a new directory ``hw2_flask``
+for this modified Flask app and copy the files from the previous
+``hw1_flask`` directory.  The idea now is to make use of just one
+template, in ``templates/view.html``:
+
+
+.. code-block:: text
+
+
+        <form method=post action="">
+          Hello, World! The sine of
+          {{(form.r)}}
+          <input type=submit value=equals>
+        {% if s != None %}
+        {{s}}
+        {% endif %}
+        </form>
+
+
+The form is identical to what we used in ``view_input.html``, and the only
+new thing is the value of ``s``. We supply ``s`` as an object to the
+``render_template`` function and this object is available for
+some programming in the HTML template. We can test on the value of ``s``:
+if it is ``None``, we know that the computations are not performed and
+``s`` should not appear on the page, otherwise ``s`` holds the sine
+value and we can write it out. The generated HTML code reads
+
+
+.. code-block:: html
+
+        <form method=post action="">
+          Hello, World! The sine of
+          <input id="r" name="r" type="text" value="1.2">
+          <input type=submit value=equals>
+        
+        0.932039085967
+        
+        </form>
+
+
+The ``index`` function needs adjustments since we use the same
+template for the input and the output page:
+
+
+.. code-block:: python
+
+        # View
+        @app.route('/hw2', methods=['GET', 'POST'])
+        def index():
+            form = InputForm(request.form)
+            if request.method == 'POST' and form.validate():
+                r = form.r.data
+                s = compute(r)
+            else:
+                s = None
+        
+            return render_template("view.html", form=form, s=s)
+
+It is seen that if the user has given data, ``s`` is a ``float``, otherwise
+``s`` is ``None``. You are encouraged to test the app by running
+
+
+.. code-block:: console
+
+        Terminal> python controller.py
+
+and loading ``http://127.0.0.1:5000/hw2`` into your browser.
+A nice little exercise is to control the formatting of the result ``s``.
+To this end, you transform ``s`` to a string: ``s = '%.5f' % s`` before
+sending it to ``render_template``.
+
+.. !split
+
+.. _wf:hw3:flask:
+
+Splitting the app into model, view, and controller files
+--------------------------------------------------------
+
+
+
+
+.. index::
+   single: Flask; MVC pattern
+
+
+In our previous to Flask apps we have had the model, view, and
+controller parts in one file ``controller.py``. For illustration we
+may split the previous ``controller.py`` into three files:
+``model.py``, ``view.py``, and ``controller.py``, located in a
+directory ``hw3_flask``. The contents
+in these files reflects the splitting introduced in the original
+scienticic hello world program in the section :ref:`wf:hw:mvc`.
+In the Flask context we have ``model.py`` as
+
+
+.. code-block:: python
+
+        from wtforms import Form, FloatField, validators
+        
+        class InputForm(Form):
+            r = FloatField(validators=[validators.InputRequired()])
+
+
+The view in 'view.py' consists of
+
+
+.. code-block:: python
+
+        from flask import Flask, render_template, request
+        from compute import compute
+        
+        app = Flask(__name__)
+        
+        @app.route('/hw3', methods=['GET', 'POST'])
+        def index():
+            form = InputForm(request.form)
+            if request.method == 'POST' and form.validate():
+                r = form.r.data
+                s = compute(r)
+            else:
+                s = None
+        
+            return render_template("view.html", form=form, s=s)
+
+
+The ``controller.py`` file finally runs the view's ``app``:
+
+
+.. code-block:: python
+
+        from view import app
+        
+        if __name__ == '__main__':
+            app.run(debug=True)
+
+
+The statements are indentical to those in the ``hw2_flask`` app, only
+the organization of the statement in files differ.
+
+
+Troubleshooting
+---------------
+
+
+.. index::
+   single: Flask; troubleshooting
+
+
+*Address already in use.* You can easily kill the Flask application and restart it, but sometimes
+you will get an error that the address is already in use.
+To recover from this problem, run the ``lsof`` program to see which program
+that applies the 5000 port (Flask runs its server on ``http://127.0.0.1:5000``):
+
+
+.. code-block:: console
+
+        Terminal> lsof -i :5000
+        COMMAND   PID USER   FD   TYPE  DEVICE SIZE/OFF NODE NAME
+        python  48824  hpl    3u  IPv4 1128848      0t0  TCP ...
+        Terminal> kill -9 48824
+
+The last command killed the ``python`` job that ran the test server and
+you are ready to relaunch the Flask application.
+
+Making a Django application
+===========================
+
+Django applies two concepts, *project* and *application*. The application,
+or app for short,
+is the program we want to run through a web interface. The project is
+a Python package containing common settings and configurations for
+a collection of apps. This means that before we can make a Django app,
+we must to establish a Django project.
+
+Installing Django
+-----------------
+
+
+.. index::
+   single: Django; installation
+
+
+We recommend to
+download and istall the latest official version from
+`<http://www.djangoproject.com/download/>`_. Pack out the tarfile, go
+to the directory, and run ``setup.py``:
+
+
+.. code-block:: console
+
+        Terminal> tar xvzf Django-1.5-tar.gz
+        Terminal> cd Django-1.5
+        Terminal> sudo python setup.py install
+
+The version in this example, 1.5, may be different at the time you
+follow these instructions.
+
+
+.. !split
+
+Setting up a Django project
+---------------------------
+
+
+.. index::
+   single: Django; making a project
+
+
+A Django project for managing a set of Django apps is
+created by the command
+
+
+.. code-block:: console
+
+        Terminal> django-admin.py startproject django_project
+
+The result is a directory ``django_project`` whose content can be explored
+by some ``ls`` and ``cd`` commands:
+
+
+.. code-block:: console
+
+        Terminal> ls django_project
+        manage.py django_project
+        Terminal> cd django_project/django_project
+        Terminal> ls
+        __init__.py settings.py urls.py wsgi.py
+
+The meaning of the generated files are briefly listed below.
+
+  1. The outer ``django_project/`` directory is just a container for your project. Its name does not matter to Django.
+
+  2. ``manage.py`` is a command-line utility that lets you interact with this Django project in various ways. You will typically run ``manage.py`` to launch a Django application.
+
+  3. The inner ``django_project/`` directory is a Python package for the Django project. Its name is used in import statements in Python code (e.g., ``import django_project.settings``).
+
+  4. ``django_project/__init__.py`` is an empty file that just tells Python that this directory should be considered a Python package.
+
+  5. ``django_project/settings.py`` contains the settings and configurations for this Django project.
+
+  6. ``django_project/urls.py`` maps URLs to specific functions and thereby defines that actions that various URLs imply.
+
+  7. ``django_project/wsgi.py`` is not needed in our examples.
+
+Django comes with a web server for developing and debugging applications.
+The server is started by running
+
+
+.. code-block:: console
+
+        Terminal> python manage.py runserver
+
+You will see that the server runs on the URL "http://127.0.0.1:8000/".
+Load this URL into your browser to see a welcome message from Django,
+meaning that the server is working.
+
+Despite the fact that our web applications do not need a database, you
+have to register a database with a Django project. To this end,
+open the ``django_project/settings.py`` file in a text editor,
+locate the ``DATABASES`` dictionary and make sure the following
+code is there:
+
+
+.. code-block:: python
+
+        import os
+        
+        def relative2absolute_path(relative_path):
+            """Return the absolute path correspodning to relative_path."""
+            dir_of_this_file = os.path.dirname(os.path.abspath(__file__))
+            return os.path.join(dir_of_this_file, relative_path)
+        
+        DATABASES = {
+           'default' : {
+              'ENGINE': 'django.db.backends.sqlite3',
+              'NAME': relative2absolute_path('../database.db')
+           }
+        }
+
+The ``settings.py`` file needs absolute paths to files, while it is
+more convenient for us to specify relative paths. Therefore,
+we made a function that figures out the absolute path to the ``settings.py``
+file and then combines this absolute path with the relative path.
+The location and name of the database file can be chosen as desired.
+Note that one should not use ``os.path.join`` to create paths as Django
+applies the forward slash between directories also on Windows.
+
+
+.. !split
+
+Setting up a Django application
+-------------------------------
+
+
+.. index::
+   single: Django; making an application
+
+
+The next step is to create a Django app for our scientific hello
+world program. We can place the app in any directory, but here we
+utilize the following organization.
+As neighbor to ``django_project`` we have
+a directory ``apps`` containing our various scientific applications.
+Under ``apps`` we create a directory ``hw``
+for the various versions of the scientific hello world applications:
+``orig`` for the original ``hw.py`` program, ``mvc`` for a split of this
+program according to the original MVC pattern, ``mvc_django`` for
+the MVC split according to the way Django requires,
+and ``hw1_django`` for a first version of
+the program with a Django-based web interface.
+
+
+.. code-block:: console
+
+        Terminal> cd ..
+        Terminal> mkdir apps
+        Terminal> cd apps
+        Terminal> mkdir hw
+        Terminal> cd hw
+        Terminal> mkdir orig mvc
+
+The file ``hw.py`` is moved to ``orig`` while ``mvc`` contains
+the MVC refactored version with the files ``model.py``, ``view.py``, ``compute.py``,
+and ``controller.py``.
+
+The ``hw1_django`` directory, containing the Django application, must be
+made with
+
+.. code-block:: console
+
+        Terminal> python ../../django_project/manage.py startapp hw1_django
+
+The command creates a directory ``hw1_django`` with the content
+
+
+.. code-block:: console
+
+        Terminal> cd hw1_django
+        Terminal> ls
+        __init__.py models.py tests.py views.py
+
+The ``__init__.py`` file is empty and needed to ensure that the
+Django application is a Python package. The other files are also
+empty, but ``models.py`` and ``views.py`` will soon be filled with content.
+
+At this point,
+we need to register some information about our application in the
+``django_project/settings.py`` and ``django_project/urls.py`` files.
+
+*Step 1: Add the app.* Locate the ``INSTALLED_APPS``
+tuple in ``settings.py`` and add your Django application as a Python package:
+directory ``django``:
+
+
+.. code-block:: python
+
+        INSTALLED_APPS = (
+            'django.contrib.auth',
+            'django.contrib.contenttypes',
+            ...
+            'hw1_django',
+        )
+
+However, Django will not be able to find the package ``hw1_django``
+unless we register the parent directory in ``sys.path``:
+
+
+.. code-block:: python
+
+        import sys
+        sys.path.insert(0, relative2absolute_path('../../apps/hw'))
+
+Note here that the relative path is given with respect to the
+location of the ``settings.py`` script.
+
+*Step 2: Adding a template directory.* Make a subdirectory ``templates`` under ``hw1_django``,
+
+
+.. code-block:: console
+
+        mkdir templates
+
+and add the absolute path of this directory to the ``TEMPLATE_DIRS`` tuple:
+
+
+.. code-block:: python
+
+        TEMPLATE_DIRS = (
+            relative2absolute_path('../../apps/hw/hw1_django/templates'),
+        )
+
+The ``templates`` directory will hold templates for the HTML code applied
+in the web interfaces. The trailing comma is important (as this is
+a tuple with only one element).
+
+*Step 3: Defining the URL.* We need to connect the Django app with
+an URL, i.e., the address we write into the web browser to launch the
+app. Our app will be associated with a Python function ``index``
+in the ``views`` module within the ``hw1_django`` package.
+Say we want the corresponding URL to
+be named ``hw``. This is registered in the ``django_project/urls.py`` file
+by
+
+
+.. code-block:: python
+
+        urlpatterns = patterns('',
+            url(r'^hw1/', 'hw1_django.views.index'),
+
+The first argument to the ``url`` function is a regular expression for
+the URL and the second argument is the name of the function to call.
+The name ``index`` resembles the ``index.html`` main page associated
+with an URL, but any other name than ``index`` can be used.
+
+.. !split
+
+Programming the Django application  (1)
+---------------------------------------
+
+
+
+The Django application is about filling the files ``views.py`` and ``models.py``
+with content. The mathematical computations are performed in ``compute.py``
+so we copy this file from the ``mvc`` directory to the ``hw1_django`` directory
+for convenience (we could alternatively add ``../mvc`` to ``sys.path`` such that
+``import compute`` would work from the ``hw1_django`` directory).
+
+
+.. index::
+   single: Django; input forms
+
+
+.. index::
+   single: Django; models.py
+
+
+*The model.* The ``models.py`` file contains the model which consists
+of the data we need in the application, stored in Django's data types.
+Our data consists of one number, called ``r``, and ``models.py`` then
+look like
+
+
+.. code-block:: python
+
+        from django.db import models
+        from django.forms import ModelForm
+        
+        class Input(models.Model):
+            r = models.FloatField()
+        
+        class InputForm(ModelForm):
+            class Meta:
+                model = Input
+
+The ``Input`` class lists variables representing data as static class
+attributes. The ``django.db.models`` module contains various classes
+for different types of data, here we use ``FloatField`` to represent
+a floating-point number (corresponding to a Python ``float``).
+The ``InputForm`` class has a the shown generic form across applications
+if we by convention apply the name ``Input`` for the class holding the data.
+
+
+.. index::
+   single: Django; index function
+
+
+.. index::
+   single: Django; views.py
+
+
+*The view.* The ``views.py`` file contains a function ``index`` which performs
+the actions we want to perform when invoking
+the URL ( here ``http://127.0.0.1:8000/hw/``).
+In addition, ``views.py`` has the ``present_output`` function from
+the ``view.py`` file in the ``mvc_django`` directory.
+
+
+.. code-block:: python
+
+        from django.shortcuts import render_to_response
+        from django.template import RequestContext
+        from django.http import HttpResponse
+        from models import InputForm
+        from compute import compute
+        
+        def index(request):
+            if request.method == 'POST':
+                form = InputForm(request.POST)
+                if form.is_valid():
+                    form = form.save(commit=False)
+                    return present_output(form)
+            else:
+                form = InputForm()
+        
+            return render_to_response('hw1.html',
+                    {'form': form}, context_instance=RequestContext(request))
+        
+        def present_output(form):
+            r = form.r
+            s = compute(r)
+            return HttpResponse('Hello, World! sin(%s)=%s' % (r, s))
+
+
+The ``index`` function deserves some explanation. It must take one
+argument, usually called ``request``. There are two modes in the function. Either
+the user has provided input on the web page, which means that
+``request.method`` equals ``'POST'``, or we show a new web page
+with which the user is supposed to interact.
+
+
+.. index::
+   single: Django; HTML templates
+
+
+*Making the input page.* The input consists of a web form with
+one field where we can fill in our ``r`` variable. This page
+is realized by the two central statements
+
+
+.. code-block:: python
+
+        # Make info needed in the web form
+        form = InputForm()
+        # Make HTML code
+        render_to_response('hw1.html',
+            {'form': form}, context_instance=RequestContext(request))
+
+The ``hw1.html`` file resides in the ``templates`` subdirectory and contains
+a template for the HTML code:
+
+
+.. code-block:: text
+
+
+        <form method="post" action="">{% csrf_token %}
+            Hello, World! The sine of {{ form.r }}
+            <input type="submit" value="equals" />
+        </form>
+
+This is a *template file* because it contains instructions like
+``{% csrf_token %}`` and variables like ``{{ form.r }}``. Django will
+replace the former by some appropriate HTML statements, while the
+latter simply extracts the numerical value of the variable ``r`` in
+our form (specified in the ``Input`` class in ``models.py``).
+Typically, this ``hw1.html`` file
+results in the HTML code
+
+
+.. code-block:: html
+
+        <form method="post" action="">
+        <div style='display:none'>
+        <input type='hidden' name='csrfmiddlewaretoken'
+        value='oPWMuuy1gLlXm9GvUZINv49eVUYnux5Q' /></div>
+            Hello, World! The sine of <input type="text" name="r" id="id_r" />
+            <input type="submit" value="equals" />
+        </form>
+
+Figure :ref:`wf:hw1:django:fig:input` shows how the input page looks like in the
+web browser.
+
+
+.. _wf:hw1:django:fig:input:
+
+.. figure:: fig-web4sa/hw1_django_input.png
+   :width: 600
+
+   *The input page*
+
+
+*Making the results page.* When then user has filled in a value in the text field on the input
+page, the ``index`` function is called again and ``request.method`` equals
+``'POST'``. A new form object is made, this time with user info (``request.POST``).
+We can check that the form is valid and if so, proceed with
+computations followed by presenting the results in a
+new web page (see Figure :ref:`wf:hw1:django:fig:result`):
+
+
+.. code-block:: python
+
+        def index(request):
+            if request.method == 'POST':
+                form = InputForm(request.POST)
+                if form.is_valid():
+                    form = form.save(commit=False)
+                    return present_output(form)
+        
+        def present_output(form):
+            r = form.r
+            s = compute(r)
+            return HttpResponse('Hello, World! sin(%s)=%s' % (r, s))
+
+The numerical value of ``r`` as given by the user is available as ``form.r``.
+Instead of using a template for the output page, which is natural to
+do in more advanced cases, we here illustrate the possibility to
+send raw HTML to the output page by returning an ``HttpResponse``
+object initialized by a string containing the desired HTML code.
+
+
+.. _wf:hw1:django:fig:result:
+
+.. figure:: fig-web4sa/hw1_django_output.png
+   :width: 600
+
+   *The result page*
+
+
+Launch this application by filling in the address ``http://127.0.0.1:8000/hw/``
+in your web browser (make sure the Django development server is running,
+and if not, restart it by ``python manage.py runserver``). Try to fill
+in some number on the input page and view the output.
+To show how easy it is to change the application, invoke the ``views.py``
+file in an editor and add some color to the output HTML code from
+the ``present_output`` function:
+
+
+.. code-block:: python
+
+            return HttpResponse("""
+        <font color='blue'>Hello</font>, World!
+        sin(%s)=%s
+        """% (r, s))
+
+Go back to the input page, provide a new number, and observe how
+the "Hello" word now has a blue color.
+
+.. !split
+
+Equipping the input page with output results  (2)
+-------------------------------------------------
+
+
+
+Instead of making a separate output page with the result, we can
+simply add the sine value to the input page. This makes the user
+feel that she interacts with the same page, as when operating a calculator.
+The output page should then look as shown in Figure :ref:`wf:hw2:django:fig:result`.
+
+
+.. _wf:hw2:django:fig:result:
+
+.. figure:: fig-web4sa/hw2_django_output.png
+   :width: 600
+
+   *The modified result page*
+
+
+We need to make a new Django application, now called ``hw2_django``.
+Instead of running
+``manage.py startapp hw2_django`` we can simply copy the ``hw1_django``
+directory. We need, of course, to add information about this
+new application in ``settings.py`` and ``urls.py``.
+In the former file we must have
+
+
+.. code-block:: python
+
+        TEMPLATE_DIRS = (
+            relative2absolute_path('../../apps/hw1_django/templates'),
+            relative2absolute_path('../../apps/hw2_django/templates'),
+        )
+        
+        INSTALLED_APPS = (
+            'django.contrib.auth',
+            'django.contrib.contenttypes',
+            'django.contrib.sessions',
+            'django.contrib.sites',
+            'django.contrib.messages',
+            'django.contrib.staticfiles',
+            # Uncomment the next line to enable the admin:
+            # 'django.contrib.admin',
+            # Uncomment the next line to enable admin documentation:
+            # 'django.contrib.admindocs',
+            'hw1_django',
+            'hw2_django',
+        )
+
+In ``urls.py`` we add the URL ``hw2`` which is to call our ``index`` function
+in the ``views.py`` file of the ``hw2_django`` app:
+
+
+.. code-block:: python
+
+        urlpatterns = patterns('',
+            url(r'^hw1/', 'hw1_django.views.index'),
+            url(r'^hw2/', 'hw2_django.views.index'),
+
+
+The ``views.py`` file changes a bit since we shall generate almost the same
+web page on input and output. This makes the ``present_output`` function
+unnatural, and everything is done within the ``index`` function:
+
+
+.. code-block:: python
+
+        def index(request):
+            s = None  # initial value of result
+            if request.method == 'POST':
+                form = InputForm(request.POST)
+                if form.is_valid():
+                    form = form.save(commit=False)
+                    r = form.r
+                    s = compute(r)
+            else:
+                form = InputForm()
+        
+            return render_to_response('hw2.html',
+                    {'form': form,
+                     's': '%.5f' % s if isinstance(s, float) else ''
+                     }, context_instance=RequestContext(request))
+
+
+Note that the output variable ``s`` is computed within the ``index``
+function and defaults to ``None``. The template file ``hw2.html``
+looks like
+
+
+.. code-block:: text
+
+
+        <form method="post" action="">{% csrf_token %}
+            Hello, World! The sine of {{ form.r }}
+            <input type="submit" value="equals" />
+        {% if s != '' %}
+        {{ s }}
+        {% endif %}
+        </form>
+
+The difference from ``hw1.html`` is that we right after the *equals*
+button write out the value of ``s``. However, we make a test that
+the value is only written if it is computed, here recognized by
+being a non-empty string. The ``s`` in the template file
+is substituted by value corresponding to the key ``'s'`` in the
+dictionary we pass to the ``render_to_response``. As seen,
+we pass a string where ``s`` is formatted with five digits if ``s``
+is a float, i.e., if ``s`` is computed. Otherwise, ``s`` has the
+default value ``None`` and we send an empty string to the template.
+
+
+.. _wf:vib:flask:
+
+Handling multiple input variables in Flask
+==========================================
+
+The scientific hello world example shows how to work with one input
+variable and one output variable. We can easily derive a solution for
+a collection of input variables and some corresponding HTML code
+as result. Multiple input variables are listed in the ``InputForm``
+class using different types for different forms (text field,
+float field, integer field, check box field for boolean values, etc.).
+The value of these variables will be available in a ``form`` object
+for computation. It is then a matter of taking the output from the
+computation and format the corresponding HTML code for presenting
+the result.
+
+We address the task of plotting the function :math:`u(t)=Ae^{-bt}\sin (wt)` for
+:math:`t\in [0,T]`. The web application must have fields for the numbers :math:`A`,
+:math:`b`, :math:`w`, and :math:`T`, and a *Compute* button, as shown in Figure
+:ref:`wf:vib1:flask:fig:input`. Filling in values, say :math:`0.1` for :math:`b` and
+:math:`20` for :math:`T`, results in what we see in Figure :ref:`wf:vib1:flask:fig:result`,
+i.e., a plot of :math:`u(t)` is added after the input fields and the *Compute*
+button.
+
+
+.. _wf:vib1:flask:fig:input:
+
+.. figure:: fig-web4sa/vib1_flask_input.png
+   :width: 500
+
+   *The input page*
+
+
+
+.. _wf:vib1:flask:fig:result:
+
+.. figure:: fig-web4sa/vib1_flask_output.png
+   :width: 500
+
+   *The result page*
+
+
+.. !split
+
+Programming the Flask application  (2)
+--------------------------------------
+
+
+
+The forthcoming text explains the necessary steps to realize a
+Flask app that behaves as depicted in Figures :ref:`wf:vib1:flask:fig:input`
+and :ref:`wf:vib1:flask:fig:result`. We start with the
+``compute.py`` module since it contains only the computation of :math:`u(t)`
+and the making of the plot, without any interaction with Flask.
+
+More specifically, inside ``compute.py``, we have a function for
+evaluating :math:`u(t)` and a ``compute`` function for making the plot. The
+return value is the name of the plot file, which should get a unique
+name every time the ``compute`` function is called such that the browser
+cannot reuse an already cached image. Flask applications must have all
+extra files (CSS, images, etc.) in a subdirectory ``static``.
+
+
+.. code-block:: python
+
+        from numpy import exp, cos, linspace
+        import matplotlib.pyplot as plt
+        import os, time, glob
+        
+        def damped_vibrations(t, A, b, w):
+            return A*exp(-b*t)*cos(w*t)
+        
+        def compute(A, b, w, T, resolution=500):
+            """Return filename of plot of the damped_vibration function."""
+            t = linspace(0, T, resolution+1)
+            y = damped_vibrations(t, A, b, w)
+            plt.figure()  # needed to avoid adding curves in plot
+            plt.plot(t, y)
+            plt.title('A=%g, b=%g, w=%g' % (A, b, w))
+            if not os.path.isdir('static'):
+                os.mkdir('static')
+            else:
+                # Remove old plot files
+                for filename in glob.glob(os.path.join('static', '*.png')):
+                    os.remove(filename)
+            # Use time since Jan 1, 1970 in filename in order make
+            # a unique filename that the browser has not chached
+            plotfile = os.path.join('static', str(time.time()) + '.png')
+            plt.savefig(plotfile)
+            return plotfile
+        
+        if __name__ == '__main__':
+            print compute(1, 0.1, 1, 20)
+
+
+
+.. index::
+   single: Flask; input forms
+
+
+We organize the model, view, and controller as three separate
+files, as illustrated in
+the section :ref:`wf:hw3:flask`. This more complicated app involves
+more code and especially the model will soon be handy to isolate in its own
+file. Our first version of ``model.py`` reads
+
+
+.. code-block:: python
+
+        from wtforms import Form, FloatField, validators
+        from math import pi
+        
+        class InputForm(Form):
+            A = FloatField(
+                label='amplitude (m)', default=1.0,
+                validators=[validators.InputRequired()])
+            b = FloatField(
+                label='damping factor (kg/s)', default=0,
+                validators=[validators.InputRequired()])
+            w = FloatField(
+                label='frequency (1/s)', default=2*pi,
+                validators=[validators.InputRequired()])
+            T = FloatField(
+                label='time interval (s)', default=18,
+                validators=[validators.InputRequired()])
+
+
+As seen, the field classes can take a ``label`` argument for a longer
+description, here also including the units in which the variable is
+measured. It is also possible to add a ``description`` argument with
+some help message. Furthermore, we include a ``default`` value, which
+will appear in the text field such that the user does not need to
+fill in all values.
+
+
+.. index::
+   single: Flask; index function
+
+
+The view will of course make use of templates, and we shall experiment
+with different templates. Therefore, we allow a command-line argument
+to this Flask app for choosing which template we want. The rest of
+the ``view.py`` file follows much the same set up as for the scientific
+hello world app:
+
+
+.. code-block:: python
+
+        from model import InputForm
+        from flask import Flask, render_template, request
+        from compute import compute
+        import sys
+        
+        try:
+            template_name = sys.argv[1]
+        except IndexError:
+            template_name = 'view0'
+        
+        app = Flask(__name__)
+        
+        @app.route('/vib1', methods=['GET', 'POST'])
+        def index():
+            form = InputForm(request.form)
+            if request.method == 'POST' and form.validate():
+                result = compute(form.A.data, form.b.data,
+                                 form.w.data, form.T.data)
+            else:
+                result = None
+        
+            return render_template(template_name + '.html',
+                                   form=form, result=result)
+
+
+The details governing how the web page really looks like lie in the
+template file. Since we have several fields and want them nicely
+align in a tabular fashion, we place the field name, text areas,
+and labels inside an HTML table in our first attempt to write a
+template, ``view0.html``:
+
+
+.. code-block:: text
+
+
+        <form method=post action="">
+        <table>
+          {% for field in form %}
+            <tr>
+            <td>{{ field.name }}</td><td>{{ field }}</td>
+            <td>{{ field.label }}</td>
+            </tr>
+          {% endfor %}
+        </table>
+        <p><input type=submit value=Compute></form></p>
+        
+        <p>
+        {% if result != None %}
+        <img src="{{ result }}" width=500>
+        {% endif %}
+        </p>
+
+Observe how easy it is to iterate over the ``form`` object and grab data
+for each field: ``field.name`` is the name of the variable in the
+``InputForm`` class, ``field.label`` is the full name with units as given
+through the ``label`` keyword when constructing the field object, and
+writing the field object itself generates the text area for
+input (i.e., the HTML input form). The control statements we can
+use in the template are part of the `Jinja2 <http://jinja.pocoo.org/docs/>`_
+*templating language*. For now, the if-test, for-loop and
+output of values (``{{ object }}``) are enough to generate the HTML
+code we want.
+
+Recall that the objects we need in the template, like ``result`` and ``form``
+in the present case, are transferred to the template via keyword
+arguments to the ``render_template`` function. We can easily pass on
+any object in our application to the template.
+
+To get a runnable Flask application it remains to
+run the ``app`` object from ``controller.py``:
+
+
+.. code-block:: python
+
+        from view import app
+        
+        if __name__ == '__main__':
+            app.run(debug=True)
+
+
+You are encouraged to run ``python controller.py`` and load ``http://127.0.0.1:5000/vib1`` into your web browser for testing.
+
+.. !split
+
+Implementing error checking in the template
+-------------------------------------------
+
+
+.. index::
+   single: Flask; error checking
+
+
+What happens if the user gives wrong input, for instance the letters ``asd``
+instead of a number? Actually nothing! The ``FloatField`` object
+checks that the input is compatible with a real number in the
+``form.validate()`` call, but returns just ``False`` if this is not
+the case. Looking at the code in ``view.py``,
+
+
+.. code-block:: python
+
+        def index():
+            form = InputForm(request.form)
+            if request.method == 'POST' and form.validate():
+                result = compute(form.A.data, form.b.data,
+                                 form.w.data, form.T.data)
+            else:
+                result = None
+
+we realize that wrong input implies ``result = None`` and no computations
+and plot. Fortunately, each field object gets an attribute ``error``
+with information on errors that occur on input. We can write out
+this information on the web page, as exemplified in the template
+``view1.html``:
+
+
+.. code-block:: text
+
+
+        <form method=post action="">
+        <table>
+          {% for field in form %}
+            <tr>
+            <td>{{ field.name }}</td><td>{{ field(size=12) }}</td>
+            <td>{{ field.label }}</td>
+            {% if field.errors %}
+              <td><ul class=errors>
+              {% for error in field.errors %}
+                <li><font color="red">{{ error }}</font></li>
+              {% endfor %}</ul></td>
+            {% endif %}
+            </tr>
+          {% endfor %}
+        </table>
+        <p><input type=submit value=Compute></form></p>
+        <p>
+        {% if result != None %}
+        <h4>Plot:</h4>
+        <img src="{{ result }}" width=500>
+        {% endif %}
+        </p>
+
+Two things are worth noticing here:
+
+1. We can control the width of the text field where the
+   user writes the numbers, here set to 12 characters.
+
+2. We can make an extra column in the HTML table with a list
+   of possible errors for each field object.
+
+Let us test the ``A`` field by writing ``asd`` instead of a number. This
+triggers an error, which is written in red to the right of the label,
+see Figure :ref:`wf:vib2:flask:fig:error1`.
+
+
+.. _wf:vib1:flask:fig:error1:
+
+.. figure:: fig-web4sa/vib1_flask_error1.png
+   :width: 500
+
+   *Error message because of wrong input*
+
+
+.. !split
+
+Using style sheets
+------------------
+
+
+.. index::
+   single: Flask; CSS style sheets
+
+
+Web developers make heavy use of CSS style sheets to control the look
+and feel of web pages. Templates can utilize style sheets as any other
+standard HTML code. Here is a very simple example where we introduce
+a class ``name`` for the column with the field name and set the
+foreground color of the text in this column to blue.
+The style sheet is called ``basic.css`` and *must* reside in the
+``static`` subdirectory of the Flask application directory:
+
+
+.. code-block:: python
+
+        td.name { color: blue; }
+
+The ``view2.html`` file using this style sheet features a ``link`` tag
+to the style sheet in the HTML header, and the column containing
+the field name has
+the HTML tag ``<td class="name">`` to trigger the specification in
+the style sheet:
+
+
+.. code-block:: text
+
+
+        <html>
+        <head>
+        <link rel="stylesheet" href="static/basic.css" type="text/css">
+        </head>
+        <body>
+        
+        <form method=post action="">
+        <table>
+          {% for field in form %}
+            <tr>
+            <td class="name">{{ field.name }}</td>
+            <td>{{ field(size=12) }}</td>
+            <td>{{ field.label }}</td>
+
+Just run ``python controller.py view2`` to see that the names
+of the variables to set in the web page are blue.
+
+.. !split
+
+Using LaTeX mathematics
+-----------------------
+
+
+.. index::
+   single: Flask; LaTeX mathematics
+
+
+Scientific applications frequently have many input data that are
+defined through mathematics and where the typesetting on the
+web page should be as close as possible to the typesetting where
+the mathematics is explained. In the present example we would like
+to typeset :math:`A`, :math:`b`, :math:`w`, and :math:`T` with italic font as done
+in LaTeX. Fortunately, native LaTeX typesetting is available in
+HTML through the tool `MathJax <http://www.mathjax.org/>`_.
+Our template ``view3.html`` enables MathJax. Formulas are written
+with standard LaTeX inside ``\(`` and ``\)``, while equations are surrounded
+by ``$$``. Here we use formulas exclusively:
+
+
+.. code-block:: text
+
+
+        <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          TeX: {
+             equationNumbers: {  autoNumber: "AMS"  },
+             extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js"]
+          }
+        });
+        </script>
+        <script type="text/javascript"
+         src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+        
+        This web page visualizes the function \(
+        u(t) = Ae^{-bt}\sin (w t), \hbox{ for } t\in [0,T]
+        \).
+        
+        <form method=post action="">
+        <table>
+          {% for field in form %}
+            <tr>
+            <td>\( {{ field.name }} \)</td><td>{{ field(size=12) }}</td>
+            <td>{{ field.label }}</td>
+
+Figure :ref:`wf:vib1:flask:fig:latex` displays how the
+LaTeX rendering looks like in the browser.
+
+
+.. _wf:vib1:flask:fig:latex:
+
+.. figure:: fig-web4sa/vib1_flask_latex.png
+   :width: 500
+
+   *LaTeX typesetting of mathematical symbols*
+
+
+.. !split
+
+Rearringing the elements in the HTML template
+---------------------------------------------
+
+Now we want to place the plot to the right of the input forms in
+the web page, see Figure :ref:`wf:vib1:flask:fig:sidebyside`. This can
+be accomplished by having an outer table with two rows. The first
+row contains the table with the input forms in the first column and
+the plot in the second column, while the second row features the
+*Compute* button in the first column.
+
+
+.. _wf:vib1:flask:fig:sidebyside:
+
+.. figure:: fig-web4sa/vib1_flask_table2.png
+   :width: 700
+
+   *New design with input and output side by side*
+
+
+A relevant template file is `view4.html':
+
+
+.. code-block:: text
+
+
+        <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          TeX: {
+             equationNumbers: {  autoNumber: "AMS"  },
+             extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js"]
+          }
+        });
+        </script>
+        <script type="text/javascript"
+         src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+        
+        This web page visualizes the function \(
+        u(t) = Ae^{-bt}\sin (w t), \hbox{ for } t\in [0,T]
+        \).
+        
+        <form method=post action="">
+        <table> <!-- table with forms to the left and plot to the right -->
+        <tr><td>
+        <table>
+          {% for field in form %}
+            <tr>
+            <td>\( {{ field.name }} \)</td><td>{{ field(size=12) }}</td>
+            <td>{{ field.label }}</td>
+            {% if field.errors %}
+              <td><ul class=errors>
+              {% for error in field.errors %}
+                <li><font color="red">{{ error }}</font></li>
+              {% endfor %}</ul></td>
+            {% endif %}
+            </tr>
+          {% endfor %}
+        </table>
+        </td>
+        <td>
+        <p>
+        {% if result != None %}
+        <img src="{{ result }}" width=500>
+        {% endif %}
+        </p>
+        </td></tr>
+        <tr>
+        <td><p><input type=submit value=Compute></form></p></td>
+        </tr>
+        </table>
+
+
+
+.. !split
+
+User-provided validation  (1)
+-----------------------------
+
+
+
+
+.. index::
+   single: Flask; input validation
+
+
+
+The ``FloatField`` objects can check that the input is compatible with
+a number, but what if we want to control that :math:`A>0`, :math:`b>0`, and
+:math:`T` is not greater than 30 periods (otherwise the plot gets cluttered)?
+We can write functions for checking appropriate conditions and
+supply the function to the list of validator functions in the call to
+the ``FloatField`` constructor or other field constructors. The extra
+code is a part of the ``model.py`` and the presented extensions appear
+in the directory ``vib2_flask``.
+
+The simplest approach to validation is to use existing functionality
+in the web framework. Checking that :math:`A>0` can be done by
+the ``NumberRange`` validator which checks that the value is inside
+a prescribed interval:
+
+
+.. code-block:: python
+
+        from wtforms import Form, FloatField, validators
+        
+        class InputForm(Form):
+            A = FloatField(
+                label='amplitude (m)', default=1.0,
+                validators=[validators.NumberRange(0, 1E+20)])
+
+
+We can also easily provide our own more tailored validators.
+As an example, let us explain how we can check that :math:`T` is less than 30 periods.
+One period is :math:`2\pi /w` so we need to check if :math:`T> 30\cdot 2\pi/w`
+and raise an exception in that case.
+A validation function takes two arguments: the whole ``form`` and the
+specific ``field`` to test:
+
+
+.. code-block:: python
+
+        def check_T(form, field):
+            """Form validation: failure if T > 30 periods."""
+            w = form.w.data
+            T = field.data
+            period = 2*pi/w
+            if T > 30*period:
+                num_periods = int(round(T/period))
+                raise validators.ValidationError(
+                    'Cannot plot as much as %d periods! T<%.2f' %
+                    (num_periods, 30*period))
+
+The appropriate exception is of type ``validators.ValidationError``.
+Observe that through ``form`` we have in fact access to all the input
+data so we can easily use the value of :math:`w` when checking the validity
+of the value of :math:`T`. The ``check_T`` function is easy to
+add to the list of validator functions in the call to the ``FloatField``
+constructor for ``T``:
+
+
+.. code-block:: python
+
+        class InputForm(Form):
+            ...
+            T = FloatField(
+                label='time interval', default=6*pi,
+                validators=[validators.InputRequired(), check_T])
+
+The validator
+objects are tested one by one as the appear in the list, and if
+one fails, the others are not invoked.
+We therefore add ``check_T`` after the check of input such that we know we
+have a value for all data when we run the computations and test
+in ``check_T``.
+
+Although there is already a ``NumberRange`` validator for checking
+whether a value is inside an interval, we can write our own
+version with some improved functionality for open intervals where
+the maximum or minimum value can be infinite.
+The infinite value can on input be represented by ``None``.
+A general such function may take the form
+
+
+.. code-block:: python
+
+        def check_interval(form, field, min_value=None, max_value=None):
+            """For validation: failure if value is outside an interval."""
+            failure = False
+            if min_value is not None:
+                if field.data < min_value:
+                    failure = True
+            if max_value is not None:
+                if field.data > max_value:
+                    failure = True
+            min_value = '-infty' if min_value is None else str(min_value)
+            max_value =  'infty' if max_value is None else str(max_value)
+            if failure:
+                raise validators.ValidationError(
+                    '%s=%s not in [%s, %s]' % (field.name, field.data,
+                                               min_value, max_value))
+
+
+
+.. index:: functools
+
+
+The problem is that ``check_interval`` takes four arguments, not only
+the ``form`` and ``field`` arguments that a validator function can accept.
+The way out of this difficulty is to use a Python tool ``functools.partial``
+which allows us to call a function with some of the arguments set.
+Here, we want to create a new function that calls ``check_interval``
+with some prescribed values of ``min_value`` and ``max_value``.
+This function looks like it does not have these arguments, only
+``form`` and ``field``. The following function produces this function:
+
+
+.. code-block:: python
+
+        import functools
+        
+        def interval(min_value=None, max_value=None):
+            return functools.partial(
+                check_interval, min_value=min_value, max_value=max_value)
+
+We can in any field constructor just add
+``interval(a, b)`` as a validator function checking if the field value is
+in the interval between ``a`` and ``b``:
+
+
+.. code-block:: python
+
+        class InputForm(Form):
+            ...
+            b = FloatField(
+                label='damping factor (kg/s)', default=0,
+                validators=[validators.InputRequired(), interval(0,None)])
+
+
+Let us test our tailored error checking. Run ``python controller.py``
+in the ``vib2_flask`` directory and fill in :math:`-1.0` in the :math:`b` field.
+Pressing *Compute* invokes our ``interval(0,None)`` function, which
+is nothing but a call ``check_interval(field, form, 0, None)``,
+and the test ``if field.data < min_value`` becomes true, ``failure``
+is set and the exception is raised. The message in the exception
+is available in the ``field.errors`` attribute so our template
+will write it out in red, see Figure :ref:`wf:vib2:flask:fig:error1`.
+The template used in ``vib_flask`` is basically the same as ``view3.html``
+in ``vib1_flask``, i.e., it feaures LaTeX mathematics and checking of
+``field.errors``.
+
+
+.. _wf:vib2:flask:fig:error1:
+
+.. figure:: fig-web4sa/vib2_flask_error1.png
+   :width: 500
+
+   *Triggering of a user-defined error check*
+
+
+Finally, we mention a detail in the ``view.py`` file in the ``vib2_flask``
+app: instead of sending ``form.var.data`` to the ``compute`` function we
+may automatically generate a set of local variables such that the
+work with data from the web page looks nicer:
+
+
+.. code-block:: python
+
+        def index():
+            form = InputForm(request.form)
+            if request.method == 'POST' and form.validate():
+                for field in form:
+                    # Make local variable (name field.name)
+                    exec('%s = %s' % (field.name, field.data))
+                result = compute(A, b, w, T)
+            else:
+                result = None
+        
+            return render_template('view.html', form=form, result=result)
+
+The idea is just to run ``exec`` on a declaration of a local variable
+with name ``field.name`` for each field in the form. This trick is often
+neat if data are buried in objects and you want variables in your
+code to look like they do in mathematical writing.
+
+.. !split
+
+.. _wf:vib3:flask:autogen:
+
+Autogenerating the code
+-----------------------
+
+
+
+
+.. index:: getattr
+
+.. index:: setattr
+
+.. index:: hasattr
+
+
+We shall now present generic ``model.py``, ``view.py``, and ``controller.py``
+files that work with *any* ``compute`` function (!). This example will
+demonstrate some advanced, powerful features of Python.
+
+The basic idea is that the Python module ``inspect`` can be used to
+retrieve the names of the arguments, and the default values of
+keyword arguments of any given ``compute`` function. Say we have some
+
+
+.. code-block:: python
+
+        def mycompute(A, m=0, s=1, w=1, x_range=[-3,3]):
+            ...
+            return result
+
+Running
+
+
+.. code-block:: python
+
+        import inspect
+        arg_names = inspect.getargspec(mycompute).args
+        defaults  = inspect.getargspec(mycompute).defaults
+
+leads to
+
+
+.. code-block:: python
+
+        arg_names = ['A', 'm', 's', 'w', 'x_range']
+        defaults = (0, 1, 1, [-3, 3])
+
+
+Knowing the names ``name`` of some argument in the ``compute``
+function, we can make the corresponding class attribute
+in the ``InputForm`` class by
+
+
+.. code-block:: python
+
+        setattr(InputForm, name, FloatForm())
+
+For name equal to ``'A'`` this is the same as hardcoding
+
+
+.. code-block:: python
+
+        class InputForm:
+            A = FloatForm()
+
+Assuming that all arguments in ``compute`` are floats, we could
+do
+
+
+.. code-block:: text
+
+
+        class InputForm:
+            pass  # Empty class
+        
+        arg_names = inspect.getargspec(mycompute).args
+        for name in arg_names:
+            setattr(InputForm, name, FloatForm())
+
+However, we can do better than this: default values can be set for
+keyword arguments, and the type of default value can be used to
+select the appropriate form class. The complete ``model.py`` file
+then goes as follows:
+
+
+.. code-block:: python
+
+        """
+        Example on generic model.py file which inspects the arguments
+        of the compute function and automatically generates a relevant
+        InputForm class.
+        """
+        
+        import wtforms
+        from math import pi
+        
+        from compute import compute_gamma as compute
+        import inspect
+        arg_names = inspect.getargspec(compute).args
+        defaults  = inspect.getargspec(compute).defaults
+        
+        class InputForm(wtforms.Form):
+            pass
+        
+        # Augment defaults with None elements for the positional
+        # arguments
+        defaults = [None]*(len(arg_names)-len(defaults)) + list(defaults)
+        # Map type of default to right form field
+        type2form = {type(1.0): wtforms.FloatField,
+                     type(1):   wtforms.IntegerField,
+                     type(''):  wtforms.TextField,
+                     }
+        
+        for name, value in zip(arg_names, defaults):
+            if value is None:
+                setattr(InputForm, name, wtforms.FloatField(
+                    validators=[wtforms.validators.InputRequired()]))
+            else:
+                if type(value) in type2form:
+                    setattr(InputForm, name, type2form[type(value)](
+                        default=value,
+                        validators=[wtforms.validators.InputRequired()]))
+                else:
+                    raise TypeError('argument %s %s not supported' %
+                                    name, type(value))
+        
+        if __name__ == '__main__':
+            for item in dir(InputForm):
+                if item in arg_names:
+                    print item, getattr(InputForm, item)
+
+(The ``compute_gamma`` function imported from ``compute`` will be treated later.)
+
+The call to ``compute`` in the ``view.py`` file must also be expressed
+in a general way such that it handle any type and number of
+parameters. This is achieved by collecting all parameters in
+a list or tuple, called ``args``, and then calling ``compute(*args)``
+(which is equivalent to ``compute(args[0], args[1], ..., args[l])``
+if ``l`` is ``len(args)-1``). The value of the form variable with
+name ``name`` (string) is extracted by ``getattr(form, name).data``,
+which is the same as ``form.A.data`` if ``name`` equals ``'A'``.
+Collecting all arguments and calling ``compute`` are done with
+
+
+.. code-block:: python
+
+        arg_names = inspect.getargspec(compute).args
+        args = [getattr(form, name).data for name in arg_names]
+        result = compute(*args)
+
+Our ``InputForm`` class guarantees that all arguments in ``compute``
+are present in the form, but to be absolutely safe we can
+test if ``name`` is present in the ``form`` object:
+
+
+.. code-block:: python
+
+        args = [getattr(form, name).data for name in arg_names
+                if hasattr(form, name)]
+
+We could also use keyword arguments in the call in case
+the ``args`` list should have the parameters in the wrong order:
+
+
+.. code-block:: python
+
+        kwargs = {name: getattr(form, name).data for name in arg_names
+                  if hasattr(form, name)}
+        result = compute(**kwargs)
+
+The ``compute(**kwargs)`` becomes ``compute(A=1, b=3, w=0.5)``
+in case ``kwargs = {'w'=0.5, 'A':1, 'b':3}`` (recall that the order of
+the keys in a Python dictionary is undetermined).
+
+It remains to generate the right HTML template. The HTML code depends
+what the returned ``result`` object from ``compute`` contains. Only the
+writer of the ``compute`` function knows the details of the returned
+result. Therefore, we leave it to this writer to provide the part
+of the HTML template that renders the result. The file ``templates/view_results.html`` contains this user-provided code, while ``templates/view_forms.html``
+is the generic template for the forms:
+
+
+.. code-block:: text
+
+
+        <form method=post action="">
+        <table>
+          {% for field in form %}
+            <tr><td>{{ field.name }}</td> <td>{{ field }}</td>
+            <td>{% if field.errors %}
+              <ul class=errors>
+              {% for error in field.errors %}
+                <li>{{ error }}</li>
+              {% endfor %}</ul>
+            {% endif %}</td></tr>
+          {% endfor %}
+        </table>
+        <p><input type=submit value=Compute></form></p>
+
+
+By default, in ``templates/view_results_default.html``, we can
+create a code that checks if ``results`` is a string ending in ``'.png'``
+or other typical file extensions for HTML images, and then write out
+the code for an image, and otherwise a string version of the ``results``
+object is dumped to the web page:
+
+
+.. code-block:: python
+
+        <p>
+        {% if result != None %}
+          {% if type(result) == type("") and
+                result[:-4] == '.png' or  result[:-4] == '.gif' or
+                result[:-4] == '.jpg' %}
+        <img src="{{ result }}">
+          {% else %}
+        {{ str(result) }}
+          {% endif %}
+        {% endif %}
+        </p>
+
+The complete, generic ``index`` function now becomes
+
+
+.. code-block:: python
+
+        def index():
+            form = InputForm(request.form)
+            if request.method == 'POST' and form.validate():
+                arg_names = inspect.getargspec(compute).args
+                kwargs = {name: getattr(form, name).data
+                          for name in arg_names if hasattr(form, name)}
+                result = compute(**kwargs)
+            else:
+                result = None
+            # Concatenate view_forms.html and view_results.html
+            forms_html   = os.path.join('templates', 'view_forms.html')
+            results_html = os.path.join('templates', 'view_results.html')
+            view_html    = os.path.join('templates', 'view.html')
+            f_forms = open(forms_html, 'r')
+            f_res   = open(results_html, 'r')
+            f_view  = open(view_html, 'w')
+            f_view.write(f_forms.read() + f_res.read())
+            f_forms.close();  f_res.close();  f_view.close()
+            return render_template(os.path.basename(view_html),
+                                   form=form, result=result)
+
+
+*Application.* Let us apply the files above to plot the *gamma probability density*
+
+
+.. math::
+         g(x; a, h, A) = \frac{|h|}{\Gamma(a)A}\left(\frac{x}{A}\right)^{ah-1}
+        e^{-\left(\frac{x}{A}\right)^h},
+        
+
+and its cumulative density
+
+
+.. math::
+         G(x; a, h, A) = \int_0^x g(\tau; a, h, A)d\tau,
+
+computed by numerically the Trapezoidal rule, for instance.
+We also want to compute and display
+the mean value :math:`A\Gamma(a + 1/h)/\Gamma(a)` and
+standard deviation
+
+
+.. math::
+         \sigma = \frac{A}{\Gamma(a)}\sqrt{\Gamma(a + 2/h)\Gamma(a) - Gamma(a+1/h)^2}.
+
+Here, :math:`\Gamma(a)` is the gamma function, which can be computed
+by ``math.gamma(a)`` using Python's ``math`` module.
+Below are relevant implementations of :math:`g(x;a,h,A)` (``gamma_density``),
+:math:`G(x; a, h, A)` (``gamma_cumulative``), and a function for
+making a plot of :math:`g` og :math:`G` for :math:`x\in [0,7\sigma]`.
+
+
+.. code-block:: python
+
+        def gamma_density(x, a, h, A):
+            # http://en.wikipedia.org/wiki/Gamma_distribution
+            xA = x/float(A)
+            return abs(h)/(math.gamma(a)*A)*(xA)**(a*h-1)*exp(-xA**h)
+        
+        def gamma_cumulative(x, a, h, A):
+            # Integrate gamma_density using the Trapezoidal rule.
+            # Assume x is array.
+            g = gamma_density(x, a, h, A)
+            r = zeros_like(x)
+            for i in range(len(r)-1):
+                r[i+1] = r[i] + 0.5*(g[i] + g[i+1])*(x[i+1] - x[i])
+            return r
+        
+        def compute_gamma(a=0.5, h=2, A=math.sqrt(2), resolution=500):
+            """Return plot and mean/st.dev. value of the gamma density."""
+            gah = math.gamma(a + 1./h)
+            mean = A*gah/math.gamma(a)
+            stdev = A/math.gamma(a)*math.sqrt(
+                math.gamma(a + 2./h)*math.gamma(a) - gah**2)
+            x = linspace(0, 7*stdev, resolution+1)
+            y = gamma_density(x, a, h, A)
+            plt.figure()  # needed to avoid adding curves in plot
+            plt.plot(x, y)
+            plt.title('a=%g, h=%g, A=%g' % (a, h, A))
+            if not os.path.isdir('static'):
+                os.mkdir('static')
+            else:
+                # Remove old plot files
+                for filename in glob.glob(os.path.join('static', '*.png')):
+                    os.remove(filename)
+            # Use time since Jan 1, 1970 in filename in order make
+            # a unique filename that the browser has not chached
+            t = str(time.time())
+            plotfile1 = os.path.join('static', 'density_%s.png' % t)
+            plotfile2 = os.path.join('static', 'cumulative_%s.png' % t)
+            plt.savefig(plotfile1)
+            y = gamma_cumulative(x, a, h, A)
+            plt.figure()
+            plt.plot(x, y)
+            plt.grid(True)
+            plt.savefig(plotfile2)
+            return plotfile1, plotfile2, mean, stdev
+
+The ``compute_gamma`` function returns a tuple of four values.
+We want output as displayed in Figure :ref:`wf:vib3:flask:fig:gamma`.
+
+
+.. _wf:vib3:flask:fig:gamma:
+
+.. figure:: fig-web4sa/vib3_flask_gamma.png
+   :width: 700
+
+   *Design of a web page illustrating the gamma probability functions*
+
+
+The design is realized in the file ``view_results.html`` shown below.
+
+
+.. code-block:: text
+
+
+        {% if result != None %}
+        <p>
+        <table>
+        <tr>
+        <td><img src="{{ result[0] }}" width="400"></td>
+        <td><img src="{{ result[1] }}" width="400"></td>
+        </tr>
+        <tr><td>
+        Mean value: {{ result[2] }} <br>
+        Standard deviation value: {{ result[3] }}
+        </td></tr>
+        </table>
+        </p>
+        {% endif %}
+
+
+
+
+.. _wf:vib:django:
+
+Handling multiple input variables in Django
+===========================================
+
+We shall briefly demonstrate how to make the multi-variable input
+application from the section :ref:`wf:vib:flask` in Django.
+There are four float input variables: :math:`A`, :math:`b`, :math:`w`, and :math:`T`.
+A function ``compute`` in the file ``compute.py`` makes
+a plot of a function depending on these four parameters and returns
+the name of the plot file. Our task is to define four input fields,
+execute the ``compute`` function and show the input fields together with
+the resulting plot, cf. Figures :ref:`wf:vib1:flask:fig:input`
+and :ref:`wf:vib1:flask:fig:result`.
+
+Programming the Django application  (2)
+---------------------------------------
+
+
+
+
+Any Django app needs a project, but here we reuse the project
+we set up for the scientific hello world examples. We go to
+``apps/vib`` and create the Django app
+
+
+.. code-block:: console
+
+        Terminal> python ../../django_project/manage.py startapp vib1_django
+
+Then we
+
+1. add ``sys.path.insert(0, relative2absolute_path('../../apps/vib'))``
+   in ``settings.py``,
+
+2. add ``relative2absolute_path('../../apps/vib/vib1_django/templates'),``
+   to the ``TEMPLATE_DIRS`` tuple in ``settings.py``, and
+
+3. add ``url(r'^vib1/', 'vib1_django.views.index')`` to the ``patterns``
+   call in ``urls.py``.
+
+.. index::
+   single: Django; input forms
+
+
+We can now invoke ``models.py`` to add form fields for the four
+input variables:
+
+
+.. code-block:: python
+
+        from django.db import models
+        from django.forms import ModelForm
+        from math import pi
+        
+        class Input(models.Model):
+            A = models.FloatField(
+                verbose_name=' amplitude (m)', default=1.0)
+            b = models.FloatField(
+                verbose_name=' damping coefficient (kg/s)', default=0.0)
+            w = models.FloatField(
+                verbose_name=' frequency (1/s)', default=2*pi)
+            T = models.FloatField(
+                verbose_name=' time interval (s)', default=18)
+        
+        class InputForm(ModelForm):
+            class Meta:
+                model = Input
+
+Note here that we can provide a more explanatory name than just
+the variable name, e.g., ``' amplitude (m)'`` for ``A``. However,
+Django will always capitalize these descriptions, so if one really
+needs lower case names (e.g., to be compatible with mathematics),
+one must start the text with a space. We also provide a default
+value such that all fields have a value when the user sees
+the page.
+
+
+.. index::
+   single: Django; index function
+
+
+The ``views.py`` file looks as follows:
+
+
+.. code-block:: python
+
+        from django.shortcuts import render_to_response
+        from django.template import RequestContext
+        from django.http import HttpResponse
+        from models import InputForm
+        from compute import compute
+        import os
+        
+        def index(request):
+            os.chdir(os.path.dirname(__file__))
+            result = None
+            if request.method == 'POST':
+                form = InputForm(request.POST)
+                if form.is_valid():
+                    form2 = form.save(commit=False)
+                    result = compute(form2.A, form2.b, form2.w, form2.T)
+                    result = result.replace('static/', '')
+            else:
+                form = InputForm()
+        
+            return render_to_response('vib1.html',
+                    {'form': form,
+                     'result': result,
+                     }, context_instance=RequestContext(request))
+
+Some remarks are necessary:
+
+1. Doing an ``os.chdir`` to the current working directory is necessary
+   as Django may be back in another working directory if you have
+   tested other apps.
+
+2. The ``form2`` object from ``form.save`` is the object we extract
+   data from and send to ``compute``, but the original ``form``
+   object is needed when making the HTML page through the template.
+
+3. Images, media files, style sheets, javascript files, etc. must
+   reside in a subdirectory ``static``. The specifications of the
+   URL applies tools to find this ``static`` directory and then
+   the ``static`` prefix in the ``result`` filename must be removed.
+
+The template for rendering the page is listed next.
+
+
+.. code-block:: text
+
+
+        <form method=post action="">{% csrf_token %}
+        <table>
+          {% for field in form %}
+            <tr>
+            <td>{{ field.name }}</td>
+            <td>{{ field }}</td>
+            <td>{{ field.label }}</td>
+            <td>{{ field.errors }}</td>
+            <td></td>
+            </tr>
+          {% endfor %}
+        </table>
+        <p><input type=submit value=Compute></form></p>
+        
+        <p>
+        {% if result != None %}
+        {% load static %}
+        <img src="{% get_static_prefix %}{{ result }}" width=500>
+        {% endif %}
+        </p>
+
+The tricky part is the syntax for displaying *static content*, such as
+the plot file made in the ``compute`` function.
+
+.. !split
+
+User-provided validation  (2)
+-----------------------------
+
+
+
+Django has a series of methods available for user-provided validation
+of form data. These are exemplified in the app ``vib2_django``, which
+is an extension of the ``vib1_django`` app (with additional code, and
+of course, registrations in ``settings.py`` and ``urls.py``).
+
+
+.. index::
+   single: Django; input validation
+
+
+Checking that :math:`A>0` is easiest done with a built-in Django
+validator:
+
+
+.. code-block:: python
+
+        class Input(models.Model):
+            A = models.FloatField(
+                verbose_name=' amplitude (m)', default=1.0,
+                validators=[MinValueValidator(0)])
+
+
+We can write our own validators, which are functions taking one parameter
+as argument, a value, and raising a ``ValidationError`` if the value
+is wrong. Checking that a value is inside an interval can first be
+implemented by
+
+
+.. code-block:: python
+
+        def check_interval(value, min_value=None, max_value=None):
+            """Validate that a value is inside an interval."""
+            failure = False
+            if min_value is not None:
+                if value < min_value:
+                    failure = True
+            if max_value is not None:
+                if value > max_value:
+                    failure = True
+            min_value = '-infty' if min_value is None else str(min_value)
+            max_value =  'infty' if max_value is None else str(max_value)
+            if failure:
+                raise ValidationError(
+                    'value=%s not in [%s, %s]' %
+                    (value, min_value, max_value))
+
+However, this function takes more than the value as argument. We therefore
+need to wrap it by a function with ``value`` as the only argument:
+
+
+.. code-block:: python
+
+        import functools
+        
+        def interval(min_value=None, max_value=None):
+            """Django-compatible interface to check_interval."""
+            return functools.partial(
+                check_interval, min_value=min_value, max_value=max_value)
+
+Now, ``interval(0, 1)`` returns a function that takes ``value`` as its
+only argument and checks if it is inside :math:`[0,1]`.
+Such a function can be inserted in the ``validators`` list in
+the field constructor, here to tell that :math:`b` must be in :math:`[0,\infty)`:
+
+
+.. code-block:: python
+
+        class Input(models.Model):
+            ...
+            b = models.FloatField(
+                verbose_name=' damping coefficient (kg/s)', default=0.0,
+                validators=[interval(0,None)])
+
+
+A final example on custom validation is to avoid plotting more
+than 30 periods of the oscillating function :math:`u`. This translates
+to checking of :math:`T` is geater
+than 30 periods, i.e., :math:`T>30\cdot 2\pi/w`. The task is done in
+the ``InputForm`` class, where any method ``clean_T`` can do
+validation and adjustment of the field name ``T``. The code goes
+as follows:
+
+
+.. code-block:: python
+
+        class InputForm(ModelForm):
+            class Meta:
+                model = Input
+        
+            def clean_T(self):
+                T = self.cleaned_data['T']
+                w = self.cleaned_data['w']
+                period = 2*pi/w
+                if T > 30*period:
+                    num_periods = int(round(T/period))
+                    raise ValidationError(
+                        'Cannot plot as much as %d periods! T < %.2f' %
+                        (num_periods, 30*period))
+                return T
+
+We refer to the vast Django documentation for many other ways of
+validating forms.
+
+
+
+.. --- begin exercise ---
+
+
+.. _wf:exer:add2:
+
+Exercise 1: Add two numbers
+---------------------------
+
+Make a web application that reads two numbers from a web page,
+adds the numbers, and prints the sum in a new web page.
+Package the necessary files that constitute the application
+in a tar file.
+Filename: ``add2.tar.gz``.
+
+.. --- end exercise ---
+
+
+
+Remaining
+=========
+
+ * apply (generated apps) to simviz (make py simviz too and describe that)
+
+ * store data in database
+
+ * discuss list values read as text and use of eval, perhaps exercise
+
+ * avoid Flask or Django in exercises, just do not specify and have
+   common exercises at the very end
+
+ * app: username, TextAreaField, store in database and retrieve for admin
+

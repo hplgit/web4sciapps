@@ -1,0 +1,277 @@
+<html>
+<head>
+<!--
+This style is adopted from the (now old) vagrant 1.0 web
+pages. The style builds on the Twitter Bootstrap style.
+Modifications by Hans Petter Langtangen, hpl@simula.no.
+
+This style file should be copied and the following
+elements edited:
+
+Logo heading:
+
+ LogoWord
+ withSubWord
+
+Navigation links at the top:
+
+ GO TO 1
+ GO TO 2
+
+Footer at the end:
+
+ Here goes a footer, if desired, maybe with a Copyright &copy;
+
+-->
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Doconce: http://code.google.com/p/doconce/" />
+
+<link rel="stylesheet" href="html_templates/css/twitter_bootstrap.css">
+<link rel="stylesheet" href="html_templates/css/vagrant.css">
+<!-- Define color of headings here (last definition counts) -->
+<style type="text/css">
+h1, h2, h3, h4, h5, h6 {
+  color: #000;     /* black */
+  color: #999;     /* gray */
+  color: #005580;  /* dark blue */
+  color: #08c;     /* characteristic blue */
+</style>
+</head>
+<body>
+
+<title> Exercise 1: Add two numbers </title>
+
+<!-- ------------------- main content ------------------------>
+
+<div class="container">
+ <div class="row Header with-border">
+  <div class="span3 Module logo">
+   <h1><a href="/">Flask<span class="subtitle">4scientists</span></a></h1>
+  </div>
+  <div class="span9">
+   <div class="Module navigation">
+   <!-- Navigation at the top of the page -->
+    <ul>
+     <li> <a href="http://flask.pocoo.org/">Flask</a></li>
+    </ul>
+   </div>
+  </div>
+ </div>
+</div>
+
+
+<!-- Here goes the table of contents in the sidebar
+     <li class="active"> means dark blue background for current section
+-->
+<div class="row">
+ <div class="span3 Module sidebar">
+  <div class="well" style="padding: 8px 0px;">
+   <ul class="nav nav-list">
+     <!-- Syntax:
+     <li> <a href="...">Section 1</a></li>
+     <li> <a href="...">Section 2</a></li>
+     <li> &nbsp;&nbsp;&nbsp; <a href="...">Section 2a</a></li>
+     <li> &nbsp;&nbsp;&nbsp; <a href="...">Section 2b</a></li>
+     -->
+     <!-- Doconce automatically fills in the table of contents -->
+          <!-- vagrant nav toc: " Web frameworks " --> <li class="active">  <a href="._part0000_web4sa_flask.html#___sec0"> Web frameworks </a>
+     <!-- vagrant nav toc: " The MVC pattern " --> <li> &nbsp;  <a href="._part0001_web4sa_flask.html#___sec1"> The MVC pattern </a>
+     <!-- vagrant nav toc: " A very simple application " --> <li> &nbsp;  <a href="._part0002_web4sa_flask.html#___sec2"> A very simple application </a>
+     <!-- vagrant nav toc: " Application of the MVC pattern " --> <li> &nbsp;  <a href="._part0003_web4sa_flask.html#wf:hw:mvc"> Application of the MVC pattern </a>
+     <!-- vagrant nav toc: " Making a Flask application " --> <li>  <a href="._part0004_web4sa_flask.html#___sec4"> Making a Flask application </a>
+     <!-- vagrant nav toc: " Programming the Flask application " --> <li> &nbsp;  <a href="._part0004_web4sa_flask.html#___sec5"> Programming the Flask application </a>
+     <!-- vagrant nav toc: " Equipping the input page with output results " --> <li> &nbsp;  <a href="._part0004_web4sa_flask.html#___sec6"> Equipping the input page with output results </a>
+     <!-- vagrant nav toc: " Splitting the app into model, view, and controller files " --> <li> &nbsp;  <a href="._part0004_web4sa_flask.html#wf:hw3:flask"> Splitting the app into model, view, and controller files </a>
+     <!-- vagrant nav toc: " Troubleshooting " --> <li> &nbsp;  <a href="._part0005_web4sa_flask.html#___sec8"> Troubleshooting </a>
+     <!-- vagrant nav toc: " Handling multiple input variables in Flask " --> <li>  <a href="._part0006_web4sa_flask.html#wf:vib:flask"> Handling multiple input variables in Flask </a>
+     <!-- vagrant nav toc: " Programming the Flask application " --> <li> &nbsp;  <a href="._part0006_web4sa_flask.html#___sec10"> Programming the Flask application </a>
+     <!-- vagrant nav toc: " Implementing error checking in the template " --> <li> &nbsp;  <a href="._part0007_web4sa_flask.html#___sec11"> Implementing error checking in the template </a>
+     <!-- vagrant nav toc: " Using style sheets " --> <li> &nbsp;  <a href="._part0008_web4sa_flask.html#___sec12"> Using style sheets </a>
+     <!-- vagrant nav toc: " Using LaTeX mathematics " --> <li> &nbsp;  <a href="._part0008_web4sa_flask.html#___sec13"> Using LaTeX mathematics </a>
+     <!-- vagrant nav toc: " Rearringing the elements in the HTML template " --> <li> &nbsp;  <a href="._part0008_web4sa_flask.html#___sec14"> Rearringing the elements in the HTML template </a>
+     <!-- vagrant nav toc: " User-provided validation " --> <li> &nbsp;  <a href="._part0009_web4sa_flask.html#___sec15"> User-provided validation </a>
+     <!-- vagrant nav toc: " Autogenerating the code " --> <li> &nbsp;  <a href="._part0010_web4sa_flask.html#wf:vib3:flask:autogen"> Autogenerating the code </a>
+     <!-- vagrant nav toc: " Exercises " --> <li>  <a href="._part0011_web4sa_flask.html#___sec17"> Exercises </a>
+     <!-- vagrant nav toc: " Exercise 1: Add two numbers " --> <li> &nbsp;  <a href="._part0011_web4sa_flask.html#wf:exer:add2"> Exercise 1: Add two numbers </a>
+
+    </ul>
+   </div>
+  </div>
+
+  <div class="span9">
+
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Web frameworks ', 1, None, '___sec0'),
+              (' The MVC pattern ', 2, None, '___sec1'),
+              (' A very simple application ', 2, None, '___sec2'),
+              (' Application of the MVC pattern ',
+               2,
+               'wf:hw:mvc',
+               'wf:hw:mvc'),
+              (' Making a Flask application ', 1, None, '___sec4'),
+              (' Programming the Flask application ', 2, None, '___sec5'),
+              (' Equipping the input page with output results ',
+               2,
+               None,
+               '___sec6'),
+              (' Splitting the app into model, view, and controller files ',
+               2,
+               'wf:hw3:flask',
+               'wf:hw3:flask'),
+              (' Troubleshooting ', 2, None, '___sec8'),
+              (' Handling multiple input variables in Flask ',
+               1,
+               'wf:vib:flask',
+               'wf:vib:flask'),
+              (' Programming the Flask application ', 2, None, '___sec10'),
+              (' Implementing error checking in the template ',
+               2,
+               None,
+               '___sec11'),
+              (' Using style sheets ', 2, None, '___sec12'),
+              (' Using LaTeX mathematics ', 2, None, '___sec13'),
+              (' Rearringing the elements in the HTML template ',
+               2,
+               None,
+               '___sec14'),
+              (' User-provided validation ', 2, None, '___sec15'),
+              (' Autogenerating the code ',
+               2,
+               'wf:vib3:flask:autogen',
+               'wf:vib3:flask:autogen'),
+              (' Exercises ', 1, None, '___sec17'),
+              (' Exercise 1: Add two numbers ',
+               2,
+               'wf:exer:add2',
+               'wf:exer:add2')]}
+end of tocinfo -->
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "AMS"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- Fix slow MathJax rendering in IE8 -->
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+
+
+
+
+<a name="part0000"></a>
+<!-- ------------------- main content ---------------------- -->
+
+
+<h1>Using Flask to Create Scientific Web Applications</h1>
+
+<p>
+
+<p>
+
+
+<h2>Web frameworks  <a name="___sec0"></a></h2>
+
+<p>
+
+Computational scientists may want to offer their applications through
+a web interface, thereby making a <em>web application</em>.
+Basically, this means that users can set input data
+to the application on a web page, then click on some <em>Compute</em> button,
+and back comes a new web page with the results of the computations.
+The web interface can either be used as a GUI locally on the
+scientist's computer, or the interface can be depolyed to
+a server and made available to the whole world.
+
+<p>
+Web applications of the mentioned type can be created from scratch
+using CGI scripts in (e.g.) Python, but the code quickly gets longer
+and more involved as the complexity of the web interface
+grows. Nowadays, most web applications are created with the aid of
+<em>web frameworks</em>, which are software packages that simplify the
+programming tasks of offering services through the Internet. The
+downside of web frameworks is that there is a significant amount of
+steps and details to learn before your first simple demo application
+works.  The upside is that advanced applications are within reach,
+without an overwhelming amount of programming, as soon as you have
+understood the basic demos.
+
+<p>
+We shall in the forthcoming text explore the very easy-to-use <a href="http://flask.pocoo.org/">Flask framework</a>.  At the time of this writing, Flask is not
+much documented beyond the <a href="http://flask.pocoo.org/">official web site</a> and the <a href="http://wtforms.simplecodes.com/docs/0.6/index.html">WTForms Documentation</a>. That is why we have made specific examples for the application of Flask in computational science.
+
+<p>
+
+The problem for a computational scientist who wants to enable
+mathematical calculations through the web is that most of
+the introductory examples on utilizing a particular
+web framework address web applications
+of very different nature, e.g., blogs and polls. Therefore, we have made an
+alternative introduction which explains, in the simplest possible way,
+how web frameworks can be used to
+
+<p>
+
+<ol>
+<li> generate a web page with input data to your application,</li>
+<li> run the application to perform mathematical computations, and</li>
+<li> generate a web page with the results of the computations.</li>
+</ol>
+
+Flask is very easy to work with and extensive Python knowledge is
+not necessary. It is in fact enough to know about functions and
+modules. Beyond that, some knowledge of classes might be an advantage.
+
+<p>
+<p>
+<!-- ------------------- end of main content --------------- -->
+
+
+<!--
+Preliminary examples/discussion on vagrant style syntax
+
+<div class='alert alert-block alert-notice'>
+  <h3>What about PHP? Python? Java?</h3>
+<p>
+bla-bla.
+</div>
+
+<p>
+While the <div class="deep-blue">rest of the</div> getting started
+-->
+
+<ul class="pager">
+
+  <li class="next">
+    <a href="._part0001_web4sa_flask.html">Next &rarr;</a>
+  </li>
+
+</ul>
+
+ </div>
+
+<!-- ------------------- end of main content --------------- -->
+
+ <div class="row Footer">
+  <div class="span12">
+  Copyright &copy 2013; Hans Petter Langtangen and Anders E. Johansen.
+  Last update: Mar 22, 2013.
+  </div>
+ </div>
+</div>
+</body>
+</html>
+
+
+

@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Automatically generated HTML file from Doconce source
+(http://code.google.com/p/doconce/)
+-->
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Doconce: http://code.google.com/p/doconce/" />
+<meta name="description" content="Using Web Frameworks for Scientific Web Applications">
+<meta name="keywords" content="web frameworks,MVC pattern,Flask installation,Flask input forms,Flask HTML templates,Flask MVC pattern,Flask troubleshooting,Django installation,Django making a project,Django making an application,Django input forms,Django HTML templates,Flask input forms,Flask error checking,Flask CSS style sheets,Flask LaTeX mathematics,Flask input validation,Django input forms,Django input validation">
+
+
+
+<style type="text/css">
+    body {
+      font-family: Helvetica, Verdana, Arial, Sans-serif;
+      color: #404040;
+      background: #ffffff;
+    }
+    h1 { font-size: 1.8em;  color: #8A0808; }
+    h2 { font-size: 1.5em;  color: #8A0808; }
+    h3, h4 { color: #8A0808; }
+    a { color: #8A0808; text-decoration:none; }
+    tt { font-family: "Courier New", Courier; }
+    pre { background: #ededed; color: #000; padding: 15px;}
+    p { text-indent: 0px; }
+    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
+    p.caption { width: 80%; font-style: normal; text-align: left; }
+    hr.figure { border: 0; width: 80%; border-bottom: 1px solid #aaa}
+
+</style>
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Web frameworks ', 1, None, '___sec0'),
+              (' The MVC pattern ', 2, None, '___sec1'),
+              (' A very simple application ', 2, None, '___sec2'),
+              (' Application of the MVC pattern ',
+               2,
+               'wf:hw:mvc',
+               'wf:hw:mvc'),
+              (' Making a Flask application ', 1, None, '___sec4'),
+              (' Programming the Flask application ', 2, None, '___sec5'),
+              (' Equipping the input page with output results ',
+               2,
+               None,
+               '___sec6'),
+              (' Splitting the app into model, view, and controller files ',
+               2,
+               'wf:hw3:flask',
+               'wf:hw3:flask'),
+              (' Troubleshooting ', 2, None, '___sec8'),
+              (' Making a Django application ', 1, None, '___sec9'),
+              (' Installing Django ', 2, None, '___sec10'),
+              (' Setting up a Django project ', 2, None, '___sec11'),
+              (' Setting up a Django application ', 2, None, '___sec12'),
+              (' Programming the Django application ', 2, None, '___sec13'),
+              (' Equipping the input page with output results ',
+               2,
+               None,
+               '___sec14'),
+              (' Handling multiple input variables in Flask ',
+               1,
+               'wf:vib:flask',
+               'wf:vib:flask'),
+              (' Programming the Flask application ', 2, None, '___sec16'),
+              (' Implementing error checking in the template ',
+               2,
+               None,
+               '___sec17'),
+              (' Using style sheets ', 2, None, '___sec18'),
+              (' Using LaTeX mathematics ', 2, None, '___sec19'),
+              (' Rearringing the elements in the HTML template ',
+               2,
+               None,
+               '___sec20'),
+              (' User-provided validation ', 2, None, '___sec21'),
+              (' Autogenerating the code ',
+               2,
+               'wf:vib3:flask:autogen',
+               'wf:vib3:flask:autogen'),
+              (' Handling multiple input variables in Django ',
+               1,
+               'wf:vib:django',
+               'wf:vib:django'),
+              (' Programming the Django application ', 2, None, '___sec24'),
+              (' User-provided validation ', 2, None, '___sec25'),
+              (' Exercises ', 1, None, '___sec26'),
+              (' Exercise 1: Add two numbers ',
+               2,
+               'wf:exer:add2',
+               'wf:exer:add2'),
+              (' Remaining ', 1, None, '___sec28')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "AMS"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- Fix slow MathJax rendering in IE8 -->
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+
+
+
+
+    
+<a name="part0009"></a>
+
+    <a href="._part0008_web4sa_plain.html"><img src="https://doconce.googlecode.com/hg/bundled/html_images/prev1.png" border=0 alt="previous"></a>
+    
+    <a href="._part0010_web4sa_plain.html"><img src="https://doconce.googlecode.com/hg/bundled/html_images/next1.png" border=0 alt="next"></a>
+    <p>
+<!-- !split -->
+
+<h3>Implementing error checking in the template  <a name="___sec17"></a></h3>
+
+<p>
+
+What happens if the user gives wrong input, for instance the letters <code>asd</code>
+instead of a number? Actually nothing! The <code>FloatField</code> object
+checks that the input is compatible with a real number in the
+<code>form.validate()</code> call, but returns just <code>False</code> if this is not
+the case. Looking at the code in <code>view.py</code>,
+
+<p>
+
+
+<!-- code typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">index</span>():
+    form <span style="color: #666666">=</span> InputForm(request<span style="color: #666666">.</span>form)
+    <span style="color: #008000; font-weight: bold">if</span> request<span style="color: #666666">.</span>method <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;POST&#39;</span> <span style="color: #AA22FF; font-weight: bold">and</span> form<span style="color: #666666">.</span>validate():
+        result <span style="color: #666666">=</span> compute(form<span style="color: #666666">.</span>A<span style="color: #666666">.</span>data, form<span style="color: #666666">.</span>b<span style="color: #666666">.</span>data,
+                         form<span style="color: #666666">.</span>w<span style="color: #666666">.</span>data, form<span style="color: #666666">.</span>T<span style="color: #666666">.</span>data)
+    <span style="color: #008000; font-weight: bold">else</span>:
+        result <span style="color: #666666">=</span> <span style="color: #008000">None</span>
+</pre></div>
+<p>
+we realize that wrong input implies <code>result = None</code> and no computations
+and plot. Fortunately, each field object gets an attribute <code>error</code>
+with information on errors that occur on input. We can write out
+this information on the web page, as exemplified in the template
+<code>view1.html</code>:
+
+<p>
+
+
+<!-- code typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">&lt;form</span> <span style="color: #7D9029">method=</span><span style="color: #BA2121">post</span> <span style="color: #7D9029">action=</span><span style="color: #BA2121">&quot;&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;table&gt;</span>
+  {% for field in form %}
+    <span style="color: #008000; font-weight: bold">&lt;tr&gt;</span>
+    <span style="color: #008000; font-weight: bold">&lt;td&gt;</span>{{ field.name }}<span style="color: #008000; font-weight: bold">&lt;/td&gt;&lt;td&gt;</span>{{ field(size=12) }}<span style="color: #008000; font-weight: bold">&lt;/td&gt;</span>
+    <span style="color: #008000; font-weight: bold">&lt;td&gt;</span>{{ field.label }}<span style="color: #008000; font-weight: bold">&lt;/td&gt;</span>
+    {% if field.errors %}
+      <span style="color: #008000; font-weight: bold">&lt;td&gt;&lt;ul</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">errors</span><span style="color: #008000; font-weight: bold">&gt;</span>
+      {% for error in field.errors %}
+        <span style="color: #008000; font-weight: bold">&lt;li&gt;&lt;font</span> <span style="color: #7D9029">color=</span><span style="color: #BA2121">&quot;red&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>{{ error }}<span style="color: #008000; font-weight: bold">&lt;/font&gt;&lt;/li&gt;</span>
+      {% endfor %}<span style="color: #008000; font-weight: bold">&lt;/ul&gt;&lt;/td&gt;</span>
+    {% endif %}
+    <span style="color: #008000; font-weight: bold">&lt;/tr&gt;</span>
+  {% endfor %}
+<span style="color: #008000; font-weight: bold">&lt;/table&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;p&gt;&lt;input</span> <span style="color: #7D9029">type=</span><span style="color: #BA2121">submit</span> <span style="color: #7D9029">value=</span><span style="color: #BA2121">Compute</span><span style="color: #008000; font-weight: bold">&gt;&lt;/form&gt;&lt;/p&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;p&gt;</span>
+{% if result != None %}
+<span style="color: #008000; font-weight: bold">&lt;h4&gt;</span>Plot:<span style="color: #008000; font-weight: bold">&lt;/h4&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;img</span> <span style="color: #7D9029">src=</span><span style="color: #BA2121">&quot;{{ result }}&quot;</span> <span style="color: #7D9029">width=</span><span style="color: #BA2121">500</span><span style="color: #008000; font-weight: bold">&gt;</span>
+{% endif %}
+<span style="color: #008000; font-weight: bold">&lt;/p&gt;</span>
+</pre></div>
+<p>
+Two things are worth noticing here:
+
+<p>
+
+<ol>
+<li> We can control the width of the text field where the
+   user writes the numbers, here set to 12 characters.</li>
+<li> We can make an extra column in the HTML table with a list
+   of possible errors for each field object.</li>
+</ol>
+
+Let us test the <code>A</code> field by writing <code>asd</code> instead of a number. This
+triggers an error, which is written in red to the right of the label,
+see Figure <a href="._part0011_web4sa_plain.html#wf:vib2:flask:fig:error1">12</a>.
+
+<p>
+
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 9:  Error message because of wrong input. <a name="wf:vib1:flask:fig:error1"></a> </p></center>
+<p><img src="fig-web4sa/vib1_flask_error1.png" align="bottom" width=500></p>
+</center>
+
+<p>
+
+<p>
+
+                <a href="._part0008_web4sa_plain.html"><img src="https://doconce.googlecode.com/hg/bundled/html_images/prev1.png" border=0 alt="previous"></a>
+                
+                <a href="._part0010_web4sa_plain.html"><img src="https://doconce.googlecode.com/hg/bundled/html_images/next1.png" border=0 alt="next"></a>
+                <!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

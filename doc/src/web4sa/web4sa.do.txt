@@ -1,0 +1,34 @@
+TITLE: Using Web Frameworks for Scientific Web Applications
+AUTHOR: Hans Petter Langtangen at Center for Biomedical Computing, Simula Research Laboratory and Department of Informatics, University of Oslo
+AUTHOR: Anders Johansen at Center for Biomedical Computing, Simula Research Laboratory
+DATE: today
+
+TOC: on
+
+# #ifdef EXTRA
+Web2py links:
+
+ * "5-part tutorial": "https://github.com/mjhea0/web2py"
+ * URL: "http://www.youtube.com/watch?v=BXzqmHx6edY"
+ * URL: "http://www.web2py.com/"
+ * URL: "http://web2py.com/book"
+# #endif
+
+# #include "intro.do.txt"
+# #include "flask_hw.do.txt"
+# #include "django_hw.do.txt"
+# #include "flask_vib.do.txt"
+# #include "django_vib.do.txt"
+# #include "exercises.do.txt"
+
+
+======= Remaining =======
+
+ * apply (generated apps) to simviz (make py simviz too and describe that)
+ * store data in database
+ * discuss list values read as text and use of eval, perhaps exercise
+ * avoid Flask or Django in exercises, just do not specify and have
+   common exercises at the very end
+ * app: username, TextAreaField, store in database and retrieve for admin
+
+

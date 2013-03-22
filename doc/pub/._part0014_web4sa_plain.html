@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Automatically generated HTML file from Doconce source
+(http://code.google.com/p/doconce/)
+-->
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Doconce: http://code.google.com/p/doconce/" />
+<meta name="description" content="Using Web Frameworks for Scientific Web Applications">
+<meta name="keywords" content="web frameworks,MVC pattern,Flask installation,Flask input forms,Flask HTML templates,Flask MVC pattern,Flask troubleshooting,Django installation,Django making a project,Django making an application,Django input forms,Django HTML templates,Flask input forms,Flask error checking,Flask CSS style sheets,Flask LaTeX mathematics,Flask input validation,Django input forms,Django input validation">
+
+
+
+<style type="text/css">
+    body {
+      font-family: Helvetica, Verdana, Arial, Sans-serif;
+      color: #404040;
+      background: #ffffff;
+    }
+    h1 { font-size: 1.8em;  color: #8A0808; }
+    h2 { font-size: 1.5em;  color: #8A0808; }
+    h3, h4 { color: #8A0808; }
+    a { color: #8A0808; text-decoration:none; }
+    tt { font-family: "Courier New", Courier; }
+    pre { background: #ededed; color: #000; padding: 15px;}
+    p { text-indent: 0px; }
+    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
+    p.caption { width: 80%; font-style: normal; text-align: left; }
+    hr.figure { border: 0; width: 80%; border-bottom: 1px solid #aaa}
+
+</style>
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Web frameworks ', 1, None, '___sec0'),
+              (' The MVC pattern ', 2, None, '___sec1'),
+              (' A very simple application ', 2, None, '___sec2'),
+              (' Application of the MVC pattern ',
+               2,
+               'wf:hw:mvc',
+               'wf:hw:mvc'),
+              (' Making a Flask application ', 1, None, '___sec4'),
+              (' Programming the Flask application ', 2, None, '___sec5'),
+              (' Equipping the input page with output results ',
+               2,
+               None,
+               '___sec6'),
+              (' Splitting the app into model, view, and controller files ',
+               2,
+               'wf:hw3:flask',
+               'wf:hw3:flask'),
+              (' Troubleshooting ', 2, None, '___sec8'),
+              (' Making a Django application ', 1, None, '___sec9'),
+              (' Installing Django ', 2, None, '___sec10'),
+              (' Setting up a Django project ', 2, None, '___sec11'),
+              (' Setting up a Django application ', 2, None, '___sec12'),
+              (' Programming the Django application ', 2, None, '___sec13'),
+              (' Equipping the input page with output results ',
+               2,
+               None,
+               '___sec14'),
+              (' Handling multiple input variables in Flask ',
+               1,
+               'wf:vib:flask',
+               'wf:vib:flask'),
+              (' Programming the Flask application ', 2, None, '___sec16'),
+              (' Implementing error checking in the template ',
+               2,
+               None,
+               '___sec17'),
+              (' Using style sheets ', 2, None, '___sec18'),
+              (' Using LaTeX mathematics ', 2, None, '___sec19'),
+              (' Rearringing the elements in the HTML template ',
+               2,
+               None,
+               '___sec20'),
+              (' User-provided validation ', 2, None, '___sec21'),
+              (' Autogenerating the code ',
+               2,
+               'wf:vib3:flask:autogen',
+               'wf:vib3:flask:autogen'),
+              (' Handling multiple input variables in Django ',
+               1,
+               'wf:vib:django',
+               'wf:vib:django'),
+              (' Programming the Django application ', 2, None, '___sec24'),
+              (' User-provided validation ', 2, None, '___sec25'),
+              (' Exercises ', 1, None, '___sec26'),
+              (' Exercise 1: Add two numbers ',
+               2,
+               'wf:exer:add2',
+               'wf:exer:add2'),
+              (' Remaining ', 1, None, '___sec28')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "AMS"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- Fix slow MathJax rendering in IE8 -->
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+
+
+
+
+    
+<a name="part0014"></a>
+
+    <a href="._part0013_web4sa_plain.html"><img src="https://doconce.googlecode.com/hg/bundled/html_images/prev1.png" border=0 alt="previous"></a>
+    <p>
+<!-- !split -->
+
+<h2>Exercises  <a name="___sec26"></a></h2>
+
+<p>
+
+<!-- --- begin exercise --- -->
+
+<p>
+
+<h3>Exercise 1: Add two numbers <a name="wf:exer:add2"></a></h3>
+
+<p>
+Make a web application that reads two numbers from a web page,
+adds the numbers, and prints the sum in a new web page.
+Package the necessary files that constitute the application
+in a tar file.
+Filename: <code>add2.tar.gz</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+
+
+<h2>Remaining  <a name="___sec28"></a></h2>
+
+<p>
+
+<ul>
+ <li> apply (generated apps) to simviz (make py simviz too and describe that)</li>
+ <li> store data in database</li>
+ <li> discuss list values read as text and use of eval, perhaps exercise</li>
+ <li> avoid Flask or Django in exercises, just do not specify and have
+   common exercises at the very end</li>
+ <li> app: username, TextAreaField, store in database and retrieve for admin</li>
+</ul>
+
+
+<p>
+
+                <a href="._part0013_web4sa_plain.html"><img src="https://doconce.googlecode.com/hg/bundled/html_images/prev1.png" border=0 alt="previous"></a>
+                <!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

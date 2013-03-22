@@ -1,0 +1,22 @@
+
+# Information about all exercises in the file web4sa_flask.do.txt.
+# The information can be loaded into a Python list of dicts by
+#
+# f = open('.web4sa_flask.exerinfo', 'r')
+# exer = eval(f.read())
+#
+[{'answer': '',
+  'closing_remarks': '',
+  'file': ['add2.tar.gz'],
+  'heading': '=====',
+  'hints': [],
+  'keywords': None,
+  'label': 'wf:exer:add2',
+  'no': 1,
+  'solution': '',
+  'solution_file': None,
+  'subex': [],
+  'text': 'Make a web application that reads two numbers from a web page,\nadds the numbers, and prints the sum in a new web page.\nPackage the necessary files that constitute the application\nin a tar file.',
+  'title': 'Add two numbers',
+  'type': 'Exercise',
+  'type_visible': True}]

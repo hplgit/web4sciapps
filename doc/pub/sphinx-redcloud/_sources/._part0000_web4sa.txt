@@ -1,0 +1,69 @@
+.. Automatically generated reST file from Doconce source
+   (http://code.google.com/p/doconce/)
+
+Using Web Frameworks for Scientific Web Applications
+====================================================
+
+:Author: Hans Petter Langtangen, Anders Johansen
+:Date: Mar 22, 2013
+
+Web frameworks
+==============
+
+
+.. index:: web frameworks
+
+
+Computational scientists may want to offer their applications through
+a web interface, thereby making a *web application*.
+Basically, this means that users can set input data
+to the application on a web page, then click on some *Compute* button,
+and back comes a new web page with the results of the computations.
+The web interface can either be used as a GUI locally on the
+scientist's computer, or the interface can be depolyed to
+a server and made available to the whole world.
+
+Web applications of the mentioned type can be created from scratch
+using CGI scripts in (e.g.) Python, but the code quickly gets longer
+and more involved as the complexity of the web interface
+grows. Nowadays, most web applications are created with the aid of
+*web frameworks*, which are software packages that simplify the
+programming tasks of offering services through the Internet. The
+downside of web frameworks is that there is a significant amount of
+steps and details to learn before your first simple demo application
+works.  The upside is that advanced applications are within reach,
+without an overwhelming amount of programming, as soon as you have
+understood the basic demos.
+
+We shall explore two web frameworks: the very popular `Django framework <https://www.djangoproject.com/>`_ and the more high-level and easy-to-use framework
+`Flask <http://flask.pocoo.org/>`_. In addition, our examples are also
+implemented in the `web2py <http://www.web2py.com/>`_ framework.
+.. Its slogan says "Django makes it easier to build better Web apps more quickly and with less code".
+
+The primary advantage of Django
+over other web frameworks is the rich set of documentation and
+examples. Googling for "Django tutorials" gives lots of hits including
+a  list of `web tutorials <https://code.djangoproject.com/wiki/Tutorials>`_
+and a list of `YouTube videos <http://www.youtube.com/playlist?list=PL385A53B00B8B158E>`_. There is also an electronic `Django book <http://www.djangobook.com/en/2.0/>`_. At the time of this writing, Flask is not
+much documented beyond the `official web site <http://flask.pocoo.org/>`_ and the `WTForms Documentation <http://wtforms.simplecodes.com/docs/0.6/index.html>`_. There is, unfortunately, hardly any examples on how Django or Flask can be used to enable typical scientific applications for the web, and that is why we have developed some targeted examples on this topic.
+
+
+The problem for a computational scientist who wants to enable
+mathematical calculations through the web is that most of
+the introductory examples on utilizing a particular
+web framework address web applications
+of very different nature, e.g., blogs and polls. Therefore, we have made an
+alternative introduction which explains, in the simplest possible way,
+how web frameworks can be used to
+
+1. generate a web page with input data to your application,
+
+2. run the application to perform mathematical computations, and
+
+3. generate a web page with the results of the computations.
+
+To work with Django, you need to know about Python packages and modules
+as well as Python classes. With Flask it is enough to be familiar with
+functions and modules, though knowledge of classes and a bit of
+decorators might be an advantage.
+

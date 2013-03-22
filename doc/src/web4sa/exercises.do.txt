@@ -1,0 +1,33 @@
+!split
+======= Exercises =======
+
+===== Exercise: Add two numbers =====
+label{wf:exer:add2}
+file=add2.tar.gz
+
+Make a web application that reads two numbers from a web page,
+adds the numbers, and prints the sum in a new web page.
+Package the necessary files that constitute the application
+in a tar file.
+
+
+
+# #ifdef Flask+Django or Flask
+===== Exercise: Auto-generate code from function signature =====
+file=generate_flask.py
+
+Given a `compute` with a set of positional and keyword
+arguments, the purpose of this exercise is to *automatically* generate the
+Flask files `model.py` and `view.py`. Use the Python `inspect`
+module, see Section ref{wf:vib3:flask:autogen}, to extract
+the positional and keyword arguments in `compute`, and use this
+information to construct the relevant Python code. Assume as
+in Section ref{wf:vib3:flask:autogen} that the user provides
+a file `view_results.html` for defining how the returned object
+from the `compute` function is to be rendered.
+
+Test the code generator on the `compute` function in the `vib1_flask`
+application to check that the generated
+`model.py` and `view.py` files are correct.
+# #endif
+

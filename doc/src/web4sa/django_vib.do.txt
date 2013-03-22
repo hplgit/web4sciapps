@@ -1,0 +1,157 @@
+!split
+======= Handling multiple input variables in Django =======
+label{wf:vib:django}
+
+We shall briefly demonstrate how to make the multi-variable input
+application from Section ref{wf:vib:flask} in Django.
+There are four float input variables: $A$, $b$, $w$, and $T$.
+A function `compute` in the file `compute.py` makes
+a plot of a function depending on these four parameters and returns
+the name of the plot file. Our task is to define four input fields,
+execute the `compute` function and show the input fields together with
+the resulting plot, cf. Figures ref{wf:vib1:flask:fig:input}
+and ref{wf:vib1:flask:fig:result}.
+
+===== Programming the Django application =====
+
+## Define Mako variable for path to source code
+<%
+app_path = src_path + 'vib/vib1_django'
+%>
+
+
+Any Django app needs a project, but here we reuse the project
+we set up for the scientific hello world examples. We go to
+`apps/vib` and create the Django app
+
+!bc sys
+Terminal> python ../../django_project/manage.py startapp vib1_django
+!ec
+Then we
+
+ o add `sys.path.insert(0, relative2absolute_path('../../apps/vib'))`
+   in `settings.py`,
+ o add `relative2absolute_path('../../apps/vib/vib1_django/templates'),`
+   to the `TEMPLATE_DIRS` tuple in `settings.py`, and
+ o add `url(r'^vib1/', 'vib1_django.views.index')` to the `patterns`
+   call in `urls.py`.
+
+idx{Django!input forms}
+
+We can now invoke `models.py` to add form fields for the four
+input variables:
+
+@@@CODE ${app_path}/models.py
+Note here that we can provide a more explanatory name than just
+the variable name, e.g., `' amplitude (m)'` for `A`. However,
+Django will always capitalize these descriptions, so if one really
+needs lower case names (e.g., to be compatible with mathematics),
+one must start the text with a space. We also provide a default
+value such that all fields have a value when the user sees
+the page.
+
+idx{Django!`index` function}
+
+The `views.py` file looks as follows:
+
+@@@CODE ${app_path}/views.py
+Some remarks are necessary:
+
+ o Doing an `os.chdir` to the current working directory is necessary
+   as Django may be back in another working directory if you have
+   tested other apps.
+ o The `form2` object from `form.save` is the object we extract
+   data from and send to `compute`, but the original `form`
+   object is needed when making the HTML page through the template.
+ o Images, media files, style sheets, javascript files, etc. must
+   reside in a subdirectory `static`. The specifications of the
+   URL applies tools to find this `static` directory and then
+   the `static` prefix in the `result` filename must be removed.
+
+The template for rendering the page is listed next.
+
+@@@CODE ${app_path}/templates/vib1.html
+The tricky part is the syntax for displaying *static content*, such as
+the plot file made in the `compute` function.
+
+===== User-provided validation =====
+
+## Define Mako variable for path to source code
+<%
+app_path = src_path + 'vib/vib2_django'
+%>
+
+Django has a series of methods available for user-provided validation
+of form data. These are exemplified in the app `vib2_django`, which
+is an extension of the `vib1_django` app (with additional code, and
+of course, registrations in `settings.py` and `urls.py`).
+
+idx{Django!input validation}
+
+Checking that $A>0$ is easiest done with a built-in Django
+validator:
+
+!bc pycod
+class Input(models.Model):
+    A = models.FloatField(
+        verbose_name=' amplitude (m)', default=1.0,
+        validators=[MinValueValidator(0)])
+!ec
+
+We can write our own validators, which are functions taking one parameter
+as argument, a value, and raising a `ValidationError` if the value
+is wrong. Checking that a value is inside an interval can first be
+implemented by
+
+@@@CODE ${app_path}/models.py fromto: def check_interval@def interval
+However, this function takes more than the value as argument. We therefore
+need to wrap it by a function with `value` as the only argument:
+
+!bc pycod
+import functools
+
+def interval(min_value=None, max_value=None):
+    """Django-compatible interface to check_interval."""
+    return functools.partial(
+        check_interval, min_value=min_value, max_value=max_value)
+!ec
+Now, `interval(0, 1)` returns a function that takes `value` as its
+only argument and checks if it is inside $[0,1]$.
+Such a function can be inserted in the `validators` list in
+the field constructor, here to tell that $b$ must be in $[0,\infty)$:
+
+!bc pycod
+class Input(models.Model):
+    ...
+    b = models.FloatField(
+        verbose_name=' damping coefficient (kg/s)', default=0.0,
+        validators=[interval(0,None)])
+!ec
+
+A final example on custom validation is to avoid plotting more
+than 30 periods of the oscillating function $u$. This translates
+to checking of $T$ is geater
+than 30 periods, i.e., $T>30\cdot 2\pi/w$. The task is done in
+the `InputForm` class, where any method `clean_T` can do
+validation and adjustment of the field name `T`. The code goes
+as follows:
+
+!bc pycod
+class InputForm(ModelForm):
+    class Meta:
+        model = Input
+
+    def clean_T(self):
+        T = self.cleaned_data['T']
+        w = self.cleaned_data['w']
+        period = 2*pi/w
+        if T > 30*period:
+            num_periods = int(round(T/period))
+            raise ValidationError(
+                'Cannot plot as much as %d periods! T < %.2f' %
+                (num_periods, 30*period))
+        return T
+!ec
+We refer to the vast Django documentation for many other ways of
+validating forms.
+
