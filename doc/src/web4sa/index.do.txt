@@ -7,9 +7,9 @@ DATE: today
 name = 'web4sa'
 
 import glob
-sphinx_styles = ', '.join(['"%s style": "%s/index.html"' % (name[7:], name)
-                           for name in glob.glob('sphinx-*')
-                           if name != 'sphinx-rootdir'])
+sphinx_styles = ', '.join(['"%s style": "%s/index.html"' % (n[7:], n)
+                           for n in glob.glob('sphinx-*')
+                           if n != 'sphinx-rootdir'])
 %>
 
 ======= Tutorials on web frameworks for scientific applications =======
