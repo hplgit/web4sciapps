@@ -1,0 +1,437 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Autogenerating the code &mdash; Using Web Frameworks for Scientific Web Applications</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-2.3.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-2.3.0/css/bootstrap-responsive.min.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-2.3.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="Using Web Frameworks for Scientific Web Applications" href="index.html" />
+    <link rel="next" title="Handling multiple input variables in Django" href="._part0013_web4sa.html" />
+    <link rel="prev" title="User-provided validation (1)" href="._part0011_web4sa.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+<div class="container">
+  
+  <div id="navbar" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+      <button class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <a class="brand" href="index.html">Using Web Frameworks for Scientific Web Applications</a>
+      <span class="navbar-text pull-left"><b>1.0</b></span>
+
+      <div class="nav-collapse">
+        <ul class="nav">
+          <li class="divider-vertical"></li>
+          
+            <li class="dropdown globaltoc-container">
+  <a href="index.html"
+     class="dropdown-toggle"
+     data-toggle="dropdown">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+    ><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="._part0000_web4sa.html">Using Web Frameworks for Scientific Web Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._part0000_web4sa.html#web-frameworks">Web frameworks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._part0001_web4sa.html">The MVC pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._part0002_web4sa.html">A very simple application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._part0003_web4sa.html">Application of the MVC pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._part0004_web4sa.html">Making a Flask application</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="._part0004_web4sa.html#programming-the-flask-application-1">Programming the Flask application  (1)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._part0004_web4sa.html#equipping-the-input-page-with-output-results-1">Equipping the input page with output results  (1)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._part0004_web4sa.html#splitting-the-app-into-model-view-and-controller-files">Splitting the app into model, view, and controller files</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="._part0005_web4sa.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._part0006_web4sa.html">Making a Django application</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="._part0006_web4sa.html#installing-django">Installing Django</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._part0006_web4sa.html#setting-up-a-django-project">Setting up a Django project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._part0006_web4sa.html#setting-up-a-django-application">Setting up a Django application</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="._part0007_web4sa.html">Programming the Django application  (1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._part0007_web4sa.html#equipping-the-input-page-with-output-results-2">Equipping the input page with output results  (2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._part0008_web4sa.html">Handling multiple input variables in Flask</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="._part0008_web4sa.html#programming-the-flask-application-2">Programming the Flask application  (2)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="._part0009_web4sa.html">Implementing error checking in the template</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._part0010_web4sa.html">Using style sheets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._part0010_web4sa.html#using-latex-mathematics">Using LaTeX mathematics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._part0010_web4sa.html#rearringing-the-elements-in-the-html-template">Rearringing the elements in the HTML template</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._part0011_web4sa.html">User-provided validation  (1)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Autogenerating the code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._part0013_web4sa.html">Handling multiple input variables in Django</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="._part0013_web4sa.html#programming-the-django-application-2">Programming the Django application  (2)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._part0013_web4sa.html#user-provided-validation-2">User-provided validation  (2)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="._part0014_web4sa.html">Exercises</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="._part0014_web4sa.html#exercise-1-add-two-numbers">Exercise 1: Add two numbers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="._part0014_web4sa.html#remaining">Remaining</a></li>
+</ul>
+</ul>
+</li>
+            <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"><ul>
+<li><a class="reference internal" href="#">Autogenerating the code</a></li>
+</ul>
+</ul>
+</li>
+          
+          
+            
+  <li><a href="._part0011_web4sa.html"
+         title="previous chapter">&laquo; User-provided validation  (1)</a></li>
+  <li><a href="._part0013_web4sa.html"
+         title="next chapter">Handling multiple input variables in Django &raquo;</a></li>
+          
+          
+            <li>
+  <a href="_sources/._part0012_web4sa.txt"
+     rel="nofollow">Source</a></li>
+          
+        </ul>
+
+        
+          
+<form class="navbar-search pull-right" style="margin-bottom:-3px;" action="search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="section" id="autogenerating-the-code">
+<span id="wf-vib3-flask-autogen"></span><h1>Autogenerating the code<a class="headerlink" href="#autogenerating-the-code" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="index-0"></span><span class="target" id="index-1"></span><p id="index-2">We shall now present generic <tt class="docutils literal"><span class="pre">model.py</span></tt>, <tt class="docutils literal"><span class="pre">view.py</span></tt>, and <tt class="docutils literal"><span class="pre">controller.py</span></tt>
+files that work with <em>any</em> <tt class="docutils literal"><span class="pre">compute</span></tt> function (!). This example will
+demonstrate some advanced, powerful features of Python.</p>
+<p>The basic idea is that the Python module <tt class="docutils literal"><span class="pre">inspect</span></tt> can be used to
+retrieve the names of the arguments, and the default values of
+keyword arguments of any given <tt class="docutils literal"><span class="pre">compute</span></tt> function. Say we have some</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">mycompute</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">x_range</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">]):</span>
+    <span class="o">...</span>
+    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+<p>Running</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">inspect</span>
+<span class="n">arg_names</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getargspec</span><span class="p">(</span><span class="n">mycompute</span><span class="p">)</span><span class="o">.</span><span class="n">args</span>
+<span class="n">defaults</span>  <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getargspec</span><span class="p">(</span><span class="n">mycompute</span><span class="p">)</span><span class="o">.</span><span class="n">defaults</span>
+</pre></div>
+</div>
+<p>leads to</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">arg_names</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;A&#39;</span><span class="p">,</span> <span class="s">&#39;m&#39;</span><span class="p">,</span> <span class="s">&#39;s&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">,</span> <span class="s">&#39;x_range&#39;</span><span class="p">]</span>
+<span class="n">defaults</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Knowing the names <tt class="docutils literal"><span class="pre">name</span></tt> of some argument in the <tt class="docutils literal"><span class="pre">compute</span></tt>
+function, we can make the corresponding class attribute
+in the <tt class="docutils literal"><span class="pre">InputForm</span></tt> class by</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="nb">setattr</span><span class="p">(</span><span class="n">InputForm</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">FloatForm</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>For name equal to <tt class="docutils literal"><span class="pre">'A'</span></tt> this is the same as hardcoding</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">InputForm</span><span class="p">:</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">FloatForm</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Assuming that all arguments in <tt class="docutils literal"><span class="pre">compute</span></tt> are floats, we could
+do</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">InputForm</span><span class="p">:</span>
+    <span class="k">pass</span>  <span class="c"># Empty class</span>
+
+<span class="n">arg_names</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getargspec</span><span class="p">(</span><span class="n">mycompute</span><span class="p">)</span><span class="o">.</span><span class="n">args</span>
+<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">arg_names</span><span class="p">:</span>
+    <span class="nb">setattr</span><span class="p">(</span><span class="n">InputForm</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">FloatForm</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>However, we can do better than this: default values can be set for
+keyword arguments, and the type of default value can be used to
+select the appropriate form class. The complete <tt class="docutils literal"><span class="pre">model.py</span></tt> file
+then goes as follows:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Example on generic model.py file which inspects the arguments</span>
+<span class="sd">of the compute function and automatically generates a relevant</span>
+<span class="sd">InputForm class.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">wtforms</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">pi</span>
+
+<span class="kn">from</span> <span class="nn">compute</span> <span class="kn">import</span> <span class="n">compute_gamma</span> <span class="k">as</span> <span class="n">compute</span>
+<span class="kn">import</span> <span class="nn">inspect</span>
+<span class="n">arg_names</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getargspec</span><span class="p">(</span><span class="n">compute</span><span class="p">)</span><span class="o">.</span><span class="n">args</span>
+<span class="n">defaults</span>  <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getargspec</span><span class="p">(</span><span class="n">compute</span><span class="p">)</span><span class="o">.</span><span class="n">defaults</span>
+
+<span class="k">class</span> <span class="nc">InputForm</span><span class="p">(</span><span class="n">wtforms</span><span class="o">.</span><span class="n">Form</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="c"># Augment defaults with None elements for the positional</span>
+<span class="c"># arguments</span>
+<span class="n">defaults</span> <span class="o">=</span> <span class="p">[</span><span class="bp">None</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">arg_names</span><span class="p">)</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">defaults</span><span class="p">))</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">defaults</span><span class="p">)</span>
+<span class="c"># Map type of default to right form field</span>
+<span class="n">type2form</span> <span class="o">=</span> <span class="p">{</span><span class="nb">type</span><span class="p">(</span><span class="mf">1.0</span><span class="p">):</span> <span class="n">wtforms</span><span class="o">.</span><span class="n">FloatField</span><span class="p">,</span>
+             <span class="nb">type</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span>   <span class="n">wtforms</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">,</span>
+             <span class="nb">type</span><span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">):</span>  <span class="n">wtforms</span><span class="o">.</span><span class="n">TextField</span><span class="p">,</span>
+             <span class="p">}</span>
+
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">arg_names</span><span class="p">,</span> <span class="n">defaults</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="n">InputForm</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">wtforms</span><span class="o">.</span><span class="n">FloatField</span><span class="p">(</span>
+            <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">wtforms</span><span class="o">.</span><span class="n">validators</span><span class="o">.</span><span class="n">InputRequired</span><span class="p">()]))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="ow">in</span> <span class="n">type2form</span><span class="p">:</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="n">InputForm</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">type2form</span><span class="p">[</span><span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)](</span>
+                <span class="n">default</span><span class="o">=</span><span class="n">value</span><span class="p">,</span>
+                <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">wtforms</span><span class="o">.</span><span class="n">validators</span><span class="o">.</span><span class="n">InputRequired</span><span class="p">()]))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&#39;argument </span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s"> not supported&#39;</span> <span class="o">%</span>
+                            <span class="n">name</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">InputForm</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">arg_names</span><span class="p">:</span>
+            <span class="k">print</span> <span class="n">item</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">InputForm</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>(The <tt class="docutils literal"><span class="pre">compute_gamma</span></tt> function imported from <tt class="docutils literal"><span class="pre">compute</span></tt> will be treated later.)</p>
+<p>The call to <tt class="docutils literal"><span class="pre">compute</span></tt> in the <tt class="docutils literal"><span class="pre">view.py</span></tt> file must also be expressed
+in a general way such that it handle any type and number of
+parameters. This is achieved by collecting all parameters in
+a list or tuple, called <tt class="docutils literal"><span class="pre">args</span></tt>, and then calling <tt class="docutils literal"><span class="pre">compute(*args)</span></tt>
+(which is equivalent to <tt class="docutils literal"><span class="pre">compute(args[0],</span> <span class="pre">args[1],</span> <span class="pre">...,</span> <span class="pre">args[l])</span></tt>
+if <tt class="docutils literal"><span class="pre">l</span></tt> is <tt class="docutils literal"><span class="pre">len(args)-1</span></tt>). The value of the form variable with
+name <tt class="docutils literal"><span class="pre">name</span></tt> (string) is extracted by <tt class="docutils literal"><span class="pre">getattr(form,</span> <span class="pre">name).data</span></tt>,
+which is the same as <tt class="docutils literal"><span class="pre">form.A.data</span></tt> if <tt class="docutils literal"><span class="pre">name</span></tt> equals <tt class="docutils literal"><span class="pre">'A'</span></tt>.
+Collecting all arguments and calling <tt class="docutils literal"><span class="pre">compute</span></tt> are done with</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">arg_names</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getargspec</span><span class="p">(</span><span class="n">compute</span><span class="p">)</span><span class="o">.</span><span class="n">args</span>
+<span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="nb">getattr</span><span class="p">(</span><span class="n">form</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">data</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">arg_names</span><span class="p">]</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">compute</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Our <tt class="docutils literal"><span class="pre">InputForm</span></tt> class guarantees that all arguments in <tt class="docutils literal"><span class="pre">compute</span></tt>
+are present in the form, but to be absolutely safe we can
+test if <tt class="docutils literal"><span class="pre">name</span></tt> is present in the <tt class="docutils literal"><span class="pre">form</span></tt> object:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="nb">getattr</span><span class="p">(</span><span class="n">form</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">data</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">arg_names</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">form</span><span class="p">,</span> <span class="n">name</span><span class="p">)]</span>
+</pre></div>
+</div>
+<p>We could also use keyword arguments in the call in case
+the <tt class="docutils literal"><span class="pre">args</span></tt> list should have the parameters in the wrong order:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">form</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">data</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">arg_names</span>
+          <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">form</span><span class="p">,</span> <span class="n">name</span><span class="p">)}</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">compute</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">compute(**kwargs)</span></tt> becomes <tt class="docutils literal"><span class="pre">compute(A=1,</span> <span class="pre">b=3,</span> <span class="pre">w=0.5)</span></tt>
+in case <tt class="docutils literal"><span class="pre">kwargs</span> <span class="pre">=</span> <span class="pre">{'w'=0.5,</span> <span class="pre">'A':1,</span> <span class="pre">'b':3}</span></tt> (recall that the order of
+the keys in a Python dictionary is undetermined).</p>
+<p>It remains to generate the right HTML template. The HTML code depends
+what the returned <tt class="docutils literal"><span class="pre">result</span></tt> object from <tt class="docutils literal"><span class="pre">compute</span></tt> contains. Only the
+writer of the <tt class="docutils literal"><span class="pre">compute</span></tt> function knows the details of the returned
+result. Therefore, we leave it to this writer to provide the part
+of the HTML template that renders the result. The file <tt class="docutils literal"><span class="pre">templates/view_results.html</span></tt> contains this user-provided code, while <tt class="docutils literal"><span class="pre">templates/view_forms.html</span></tt>
+is the generic template for the forms:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;form</span> <span class="na">method=</span><span class="s">post</span> <span class="na">action=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;table&gt;</span>
+  {% for field in form %}
+    <span class="nt">&lt;tr&gt;&lt;td&gt;</span>{{ field.name }}<span class="nt">&lt;/td&gt;</span> <span class="nt">&lt;td&gt;</span>{{ field }}<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>{% if field.errors %}
+      <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">errors</span><span class="nt">&gt;</span>
+      {% for error in field.errors %}
+        <span class="nt">&lt;li&gt;</span>{{ error }}<span class="nt">&lt;/li&gt;</span>
+      {% endfor %}<span class="nt">&lt;/ul&gt;</span>
+    {% endif %}<span class="nt">&lt;/td&gt;&lt;/tr&gt;</span>
+  {% endfor %}
+<span class="nt">&lt;/table&gt;</span>
+<span class="nt">&lt;p&gt;&lt;input</span> <span class="na">type=</span><span class="s">submit</span> <span class="na">value=</span><span class="s">Compute</span><span class="nt">&gt;&lt;/form&gt;&lt;/p&gt;</span>
+</pre></div>
+</div>
+<p>By default, in <tt class="docutils literal"><span class="pre">templates/view_results_default.html</span></tt>, we can
+create a code that checks if <tt class="docutils literal"><span class="pre">results</span></tt> is a string ending in <tt class="docutils literal"><span class="pre">'.png'</span></tt>
+or other typical file extensions for HTML images, and then write out
+the code for an image, and otherwise a string version of the <tt class="docutils literal"><span class="pre">results</span></tt>
+object is dumped to the web page:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+<span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">result</span> <span class="o">!=</span> <span class="bp">None</span> <span class="o">%</span><span class="p">}</span>
+  <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">==</span> <span class="nb">type</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">)</span> <span class="ow">and</span>
+        <span class="n">result</span><span class="p">[:</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;.png&#39;</span> <span class="ow">or</span>  <span class="n">result</span><span class="p">[:</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;.gif&#39;</span> <span class="ow">or</span>
+        <span class="n">result</span><span class="p">[:</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;.jpg&#39;</span> <span class="o">%</span><span class="p">}</span>
+<span class="o">&lt;</span><span class="n">img</span> <span class="n">src</span><span class="o">=</span><span class="s">&quot;{{ result }}&quot;</span><span class="o">&gt;</span>
+  <span class="p">{</span><span class="o">%</span> <span class="k">else</span> <span class="o">%</span><span class="p">}</span>
+<span class="p">{{</span> <span class="nb">str</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="p">}}</span>
+  <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+<span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+<span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>The complete, generic <tt class="docutils literal"><span class="pre">index</span></tt> function now becomes</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+    <span class="n">form</span> <span class="o">=</span> <span class="n">InputForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">&#39;POST&#39;</span> <span class="ow">and</span> <span class="n">form</span><span class="o">.</span><span class="n">validate</span><span class="p">():</span>
+        <span class="n">arg_names</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getargspec</span><span class="p">(</span><span class="n">compute</span><span class="p">)</span><span class="o">.</span><span class="n">args</span>
+        <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">form</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
+                  <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">arg_names</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">form</span><span class="p">,</span> <span class="n">name</span><span class="p">)}</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">compute</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="c"># Concatenate view_forms.html and view_results.html</span>
+    <span class="n">forms_html</span>   <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s">&#39;templates&#39;</span><span class="p">,</span> <span class="s">&#39;view_forms.html&#39;</span><span class="p">)</span>
+    <span class="n">results_html</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s">&#39;templates&#39;</span><span class="p">,</span> <span class="s">&#39;view_results.html&#39;</span><span class="p">)</span>
+    <span class="n">view_html</span>    <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s">&#39;templates&#39;</span><span class="p">,</span> <span class="s">&#39;view.html&#39;</span><span class="p">)</span>
+    <span class="n">f_forms</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">forms_html</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
+    <span class="n">f_res</span>   <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">results_html</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
+    <span class="n">f_view</span>  <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">view_html</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
+    <span class="n">f_view</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">f_forms</span><span class="o">.</span><span class="n">read</span><span class="p">()</span> <span class="o">+</span> <span class="n">f_res</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+    <span class="n">f_forms</span><span class="o">.</span><span class="n">close</span><span class="p">();</span>  <span class="n">f_res</span><span class="o">.</span><span class="n">close</span><span class="p">();</span>  <span class="n">f_view</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">view_html</span><span class="p">),</span>
+                           <span class="n">form</span><span class="o">=</span><span class="n">form</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><em>Application.</em> Let us apply the files above to plot the <em>gamma probability density</em></p>
+<div class="math">
+\[g(x; a, h, A) = \frac{|h|}{\Gamma(a)A}\left(\frac{x}{A}\right)^{ah-1}
+e^{-\left(\frac{x}{A}\right)^h},\]</div>
+<p>and its cumulative density</p>
+<div class="math">
+\[G(x; a, h, A) = \int_0^x g(\tau; a, h, A)d\tau,\]</div>
+<p>computed by numerically the Trapezoidal rule, for instance.
+We also want to compute and display
+the mean value <span class="math">\(A\Gamma(a + 1/h)/\Gamma(a)\)</span> and
+standard deviation</p>
+<div class="math">
+\[\sigma = \frac{A}{\Gamma(a)}\sqrt{\Gamma(a + 2/h)\Gamma(a) - Gamma(a+1/h)^2}.\]</div>
+<p>Here, <span class="math">\(\Gamma(a)\)</span> is the gamma function, which can be computed
+by <tt class="docutils literal"><span class="pre">math.gamma(a)</span></tt> using Python&#8217;s <tt class="docutils literal"><span class="pre">math</span></tt> module.
+Below are relevant implementations of <span class="math">\(g(x;a,h,A)\)</span> (<tt class="docutils literal"><span class="pre">gamma_density</span></tt>),
+<span class="math">\(G(x; a, h, A)\)</span> (<tt class="docutils literal"><span class="pre">gamma_cumulative</span></tt>), and a function for
+making a plot of <span class="math">\(g\)</span> og <span class="math">\(G\)</span> for <span class="math">\(x\in [0,7\sigma]\)</span>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">gamma_density</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">A</span><span class="p">):</span>
+    <span class="c"># http://en.wikipedia.org/wiki/Gamma_distribution</span>
+    <span class="n">xA</span> <span class="o">=</span> <span class="n">x</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="n">h</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">gamma</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="n">A</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">xA</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">h</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">xA</span><span class="o">**</span><span class="n">h</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">gamma_cumulative</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">A</span><span class="p">):</span>
+    <span class="c"># Integrate gamma_density using the Trapezoidal rule.</span>
+    <span class="c"># Assume x is array.</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">gamma_density</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">zeros_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">r</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">g</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">r</span>
+
+<span class="k">def</span> <span class="nf">compute_gamma</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">A</span><span class="o">=</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">resolution</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return plot and mean/st.dev. value of the gamma density.&quot;&quot;&quot;</span>
+    <span class="n">gah</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">gamma</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="mf">1.</span><span class="o">/</span><span class="n">h</span><span class="p">)</span>
+    <span class="n">mean</span> <span class="o">=</span> <span class="n">A</span><span class="o">*</span><span class="n">gah</span><span class="o">/</span><span class="n">math</span><span class="o">.</span><span class="n">gamma</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">stdev</span> <span class="o">=</span> <span class="n">A</span><span class="o">/</span><span class="n">math</span><span class="o">.</span><span class="n">gamma</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span>
+        <span class="n">math</span><span class="o">.</span><span class="n">gamma</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="mf">2.</span><span class="o">/</span><span class="n">h</span><span class="p">)</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">gamma</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">-</span> <span class="n">gah</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="o">*</span><span class="n">stdev</span><span class="p">,</span> <span class="n">resolution</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">gamma_density</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>  <span class="c"># needed to avoid adding curves in plot</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">&#39;a=</span><span class="si">%g</span><span class="s">, h=</span><span class="si">%g</span><span class="s">, A=</span><span class="si">%g</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">A</span><span class="p">))</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="s">&#39;static&#39;</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s">&#39;static&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c"># Remove old plot files</span>
+        <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s">&#39;static&#39;</span><span class="p">,</span> <span class="s">&#39;*.png&#39;</span><span class="p">)):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="c"># Use time since Jan 1, 1970 in filename in order make</span>
+    <span class="c"># a unique filename that the browser has not chached</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span>
+    <span class="n">plotfile1</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s">&#39;static&#39;</span><span class="p">,</span> <span class="s">&#39;density_</span><span class="si">%s</span><span class="s">.png&#39;</span> <span class="o">%</span> <span class="n">t</span><span class="p">)</span>
+    <span class="n">plotfile2</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s">&#39;static&#39;</span><span class="p">,</span> <span class="s">&#39;cumulative_</span><span class="si">%s</span><span class="s">.png&#39;</span> <span class="o">%</span> <span class="n">t</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">plotfile1</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">gamma_cumulative</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">plotfile2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">plotfile1</span><span class="p">,</span> <span class="n">plotfile2</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">stdev</span>
+</pre></div>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">compute_gamma</span></tt> function returns a tuple of four values.
+We want output as displayed in Figure <a class="reference internal" href="#wf-vib3-flask-fig-gamma"><em>Design of a web page illustrating the gamma probability functions</em></a>.</p>
+<div class="figure" id="wf-vib3-flask-fig-gamma">
+<img alt="_images/vib3_flask_gamma.png" src="_images/vib3_flask_gamma.png" style="width: 700px;" />
+<p class="caption"><em>Design of a web page illustrating the gamma probability functions</em></p>
+</div>
+<p>The design is realized in the file <tt class="docutils literal"><span class="pre">view_results.html</span></tt> shown below.</p>
+<div class="highlight-html"><div class="highlight"><pre>{% if result != None %}
+<span class="nt">&lt;p&gt;</span>
+<span class="nt">&lt;table&gt;</span>
+<span class="nt">&lt;tr&gt;</span>
+<span class="nt">&lt;td&gt;&lt;img</span> <span class="na">src=</span><span class="s">&quot;{{ result[0] }}&quot;</span> <span class="na">width=</span><span class="s">&quot;400&quot;</span><span class="nt">&gt;&lt;/td&gt;</span>
+<span class="nt">&lt;td&gt;&lt;img</span> <span class="na">src=</span><span class="s">&quot;{{ result[1] }}&quot;</span> <span class="na">width=</span><span class="s">&quot;400&quot;</span><span class="nt">&gt;&lt;/td&gt;</span>
+<span class="nt">&lt;/tr&gt;</span>
+<span class="nt">&lt;tr&gt;&lt;td&gt;</span>
+Mean value: {{ result[2] }} <span class="nt">&lt;br&gt;</span>
+Standard deviation value: {{ result[3] }}
+<span class="nt">&lt;/td&gt;&lt;/tr&gt;</span>
+<span class="nt">&lt;/table&gt;</span>
+<span class="nt">&lt;/p&gt;</span>
+{% endif %}
+</pre></div>
+</div>
+</div>
+
+
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2013, H. P. Langtangen and A. E. Johansen.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

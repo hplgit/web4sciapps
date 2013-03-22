@@ -1,0 +1,74 @@
+.. !split
+
+The MVC pattern
+---------------
+
+
+.. index:: MVC pattern
+
+
+The MVC pattern stands for Model-View-Controller and is a way of
+separating the user's interaction with an application from the inner
+workings of the application. In a scientific application this
+usually means separaring mathematical computations from the
+user interface and visualization of results.
+The `Wikipedia definition of the MVC pattern <http://en.wikipedia.org/wiki/MVC_Pattern>`_ gives a very high-level
+explanation of what the model, view, and controller do and mentions
+the fact that different web frameworks interpret the three components
+differently. Any web application works with a set of data and needs
+a user interface for the communication of data between the user and
+some data processing software. The classical
+MVC pattern introduces
+
+ * the model to hold the data
+
+ * the view to display data
+
+ * the controller to move data by gluing the model and the view.
+
+For applications performing mathematical computations we find it
+convenient to explicitly introduce a fourth component that we call
+*compute* where the mathematical computations are encapsulated.  With
+the MVC pattern and the compute component we have a clear separation
+between data (model), the way data is presented (view), the
+computations (compute), and the way these components communicate
+(controller). In a small program such a separation may look as
+overkill, but it pays off in more complicated applications. More
+importantly, the concepts of the MVC pattern saturates the modules and
+files of web frameworks so one really needs to adapt to the MVC way of
+thinking.
+
+Web frameworks often have their own way of interpreting the
+model, view, and controller parts of the MVC pattern.
+In particular, most frameworks often divide the view into two parts:
+one software component and one HTML template. The latter takes care
+of the look and feel of the web page while the former often takes
+the role of being the controller too.
+For our scientific applications
+we shall employ an interpretation of the MVC pattern
+which is compatible with what we need later on:
+
+ * the model contains the data (often only the input data) of the application,
+
+ * the view controls the user interface that handles input and output data,
+   and also calls to functionality that computes the output given the input.
+
+The model will be a Python class with static attributes holding the data.
+The view consists of Python code processing the model's data and HTML
+templates for the design of the web pages.
+
+Flask does not force any MVC pattern on the programmer, but
+the code needed to build web applications can easily be split into
+model, view, controller, and compute components, as will be shown later.
+Django, on the other hand, automatically generates application files with names
+``views.py`` and ``models.py`` so it is
+necessary to have some idea what Django means with these terms.
+The controller functionality in Django lies both in the ``views.py`` file and
+in the configuration
+files (``settings.py`` and ``urls.py``). The view component of the application
+consists both of the ``views.py`` file and template files used to create
+the HTML code in the web pages.
+
+Forthcoming examples will illustrate how a scientific application is
+split to meet the requirements of the MVC software design pattern.
+

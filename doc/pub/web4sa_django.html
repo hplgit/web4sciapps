@@ -40,7 +40,7 @@ h1, h2, h3, h4, h5, h6 {
 </head>
 <body>
 
-<title> Exercise 3: Auto-generate code from function signature </title>
+<title> Exercise 1: Add two numbers </title>
 
 <!-- ------------------- main content ------------------------>
 
@@ -79,18 +79,17 @@ h1, h2, h3, h4, h5, h6 {
      <!-- vagrant nav toc: " The MVC pattern " --> <li> &nbsp;  <a href="._part0001_web4sa_django.html#___sec1"> The MVC pattern </a>
      <!-- vagrant nav toc: " A very simple application " --> <li> &nbsp;  <a href="._part0002_web4sa_django.html#___sec2"> A very simple application </a>
      <!-- vagrant nav toc: " Application of the MVC pattern " --> <li> &nbsp;  <a href="._part0003_web4sa_django.html#wf:hw:mvc"> Application of the MVC pattern </a>
-     <!-- vagrant nav toc: " Making a Django application " --> <li>  <a href="._part0004_web4sa_django.html#___sec4"> Making a Django application </a>
-     <!-- vagrant nav toc: " Installing Django " --> <li> &nbsp;  <a href="._part0004_web4sa_django.html#___sec5"> Installing Django </a>
+     <!-- vagrant nav toc: " Making a Django application " --> <li>  <a href="._part0005_web4sa_django.html#___sec4"> Making a Django application </a>
+     <!-- vagrant nav toc: " Installing Django " --> <li> &nbsp;  <a href="._part0005_web4sa_django.html#___sec5"> Installing Django </a>
      <!-- vagrant nav toc: " Setting up a Django project " --> <li> &nbsp;  <a href="._part0005_web4sa_django.html#___sec6"> Setting up a Django project </a>
-     <!-- vagrant nav toc: " Setting up a Django application " --> <li> &nbsp;  <a href="._part0006_web4sa_django.html#___sec7"> Setting up a Django application </a>
-     <!-- vagrant nav toc: " Programming the Django application " --> <li> &nbsp;  <a href="._part0007_web4sa_django.html#___sec8"> Programming the Django application </a>
-     <!-- vagrant nav toc: " Equipping the input page with output results " --> <li> &nbsp;  <a href="._part0008_web4sa_django.html#___sec9"> Equipping the input page with output results </a>
-     <!-- vagrant nav toc: " Handling multiple input variables in Django " --> <li>  <a href="._part0008_web4sa_django.html#wf:vib:django"> Handling multiple input variables in Django </a>
-     <!-- vagrant nav toc: " Programming the Django application " --> <li> &nbsp;  <a href="._part0008_web4sa_django.html#___sec11"> Programming the Django application </a>
-     <!-- vagrant nav toc: " User-provided validation " --> <li> &nbsp;  <a href="._part0009_web4sa_django.html#___sec12"> User-provided validation </a>
-     <!-- vagrant nav toc: " Exercise 1: Add two numbers in a Flask app " --> <li> &nbsp;  <a href="._part0009_web4sa_django.html#wf:exer:flask:add2"> Exercise 1: Add two numbers in a Flask app </a>
-     <!-- vagrant nav toc: " Exercise 2: Add two numbers in a Django app " --> <li> &nbsp;  <a href="._part0009_web4sa_django.html#wf:exer:django:add2"> Exercise 2: Add two numbers in a Django app </a>
-     <!-- vagrant nav toc: " Exercise 3: Auto-generate code from function signature " --> <li> &nbsp;  <a href="._part0009_web4sa_django.html#___sec15"> Exercise 3: Auto-generate code from function signature </a>
+     <!-- vagrant nav toc: " Setting up a Django application " --> <li> &nbsp;  <a href="._part0005_web4sa_django.html#___sec7"> Setting up a Django application </a>
+     <!-- vagrant nav toc: " Programming the Django application " --> <li> &nbsp;  <a href="._part0006_web4sa_django.html#___sec8"> Programming the Django application </a>
+     <!-- vagrant nav toc: " Equipping the input page with output results " --> <li> &nbsp;  <a href="._part0006_web4sa_django.html#___sec9"> Equipping the input page with output results </a>
+     <!-- vagrant nav toc: " Handling multiple input variables in Django " --> <li>  <a href="._part0007_web4sa_django.html#wf:vib:django"> Handling multiple input variables in Django </a>
+     <!-- vagrant nav toc: " Programming the Django application " --> <li> &nbsp;  <a href="._part0007_web4sa_django.html#___sec11"> Programming the Django application </a>
+     <!-- vagrant nav toc: " User-provided validation " --> <li> &nbsp;  <a href="._part0007_web4sa_django.html#___sec12"> User-provided validation </a>
+     <!-- vagrant nav toc: " Exercises " --> <li>  <a href="._part0008_web4sa_django.html#___sec13"> Exercises </a>
+     <!-- vagrant nav toc: " Exercise 1: Add two numbers " --> <li> &nbsp;  <a href="._part0008_web4sa_django.html#wf:exer:add2"> Exercise 1: Add two numbers </a>
 
     </ul>
    </div>
@@ -123,18 +122,11 @@ h1, h2, h3, h4, h5, h6 {
                'wf:vib:django'),
               (' Programming the Django application ', 2, None, '___sec11'),
               (' User-provided validation ', 2, None, '___sec12'),
-              (' Exercise 1: Add two numbers in a Flask app ',
+              (' Exercises ', 1, None, '___sec13'),
+              (' Exercise 1: Add two numbers ',
                2,
-               'wf:exer:flask:add2',
-               'wf:exer:flask:add2'),
-              (' Exercise 2: Add two numbers in a Django app ',
-               2,
-               'wf:exer:django:add2',
-               'wf:exer:django:add2'),
-              (' Exercise 3: Auto-generate code from function signature ',
-               2,
-               None,
-               '___sec15')]}
+               'wf:exer:add2',
+               'wf:exer:add2')]}
 end of tocinfo -->
 
 
@@ -171,19 +163,28 @@ MathJax.Hub.Config({
 <h2>Web frameworks  <a name="___sec0"></a></h2>
 
 <p>
+
 Computational scientists may want to offer their applications through
-a web interface. Basically, this means that users can set input data
-to the application on a web page, then click <em>Compute</em>, and back
-comes a new web page with the results of the computations.
-Such web applications can be made from scratch using CGI scripts
-in (e.g.) Python, but the code quickly gets longer and more involved as
-the complexity of the web interface grows. Nowadays, most web applications
-are created with the aid of <em>web frameworks</em>, which are software
-packages that simplify the programming task. The downside of
-web frameworks is that there is a significant amount of steps and
-details to learn before your first simple demo application works.
-The upside is that much more advanced applications are within reach
-without much extra work.
+a web interface, thereby making a <em>web application</em>.
+Basically, this means that users can set input data
+to the application on a web page, then click on some <em>Compute</em> button,
+and back comes a new web page with the results of the computations.
+The web interface can either be used as a GUI locally on the
+scientist's computer, or the interface can be depolyed to
+a server and made available to the whole world.
+
+<p>
+Web applications of the mentioned type can be created from scratch
+using CGI scripts in (e.g.) Python, but the code quickly gets longer
+and more involved as the complexity of the web interface
+grows. Nowadays, most web applications are created with the aid of
+<em>web frameworks</em>, which are software packages that simplify the
+programming tasks of offering services through the Internet. The
+downside of web frameworks is that there is a significant amount of
+steps and details to learn before your first simple demo application
+works.  The upside is that advanced applications are within reach,
+without an overwhelming amount of programming, as soon as you have
+understood the basic demos.
 
 <p>
 We shall explore the very popular <a href="https://www.djangoproject.com/">Django framework</a> in the following.
@@ -191,28 +192,28 @@ The primary advantage of Django
 over other web frameworks is the rich set of documentation and
 examples. Googling for "Django tutorials" gives lots of hits including
 a  list of <a href="https://code.djangoproject.com/wiki/Tutorials">web tutorials</a>
-and a list of <a href="http://www.youtube.com/playlist?list=PL385A53B00B8B158E">YouTube videos</a>. There is also an electronic <a href="http://www.djangobook.com/en/2.0/">Django book</a>.
+and a list of <a href="http://www.youtube.com/playlist?list=PL385A53B00B8B158E">YouTube videos</a>. There is also an electronic <a href="http://www.djangobook.com/en/2.0/">Django book</a>. However, there is hardly any example on using Django for scientific applications. The forthcoming text provides specific examples on how to webify some typical scienticic applications.
 
 <p>
 
-The problem for a computational scientist, who wants to enable
-mathematical calculations through the web, is that most of
+The problem for a computational scientist who wants to enable
+mathematical calculations through the web is that most of
 the introductory examples on utilizing a particular
 web framework address web applications
-of very different nature, e.g., blogs. Therefore, we have made an
+of very different nature, e.g., blogs and polls. Therefore, we have made an
 alternative introduction which explains, in the simplest possible way,
 how web frameworks can be used to
 
 <p>
 
 <ol>
-<li> set up a web page with input data to your application,</li>
-<li> run the application, and</li>
-<li> set up a web page with the results of the computations.</li>
+<li> generate a web page with input data to your application,</li>
+<li> run the application to perform mathematical computations, and</li>
+<li> generate a web page with the results of the computations.</li>
 </ol>
 
-To work with Django, you need to know about Python packages and modules
-as well as Python classes.
+To work with Django, you need to know about Python packages, modules,
+and classes.
 
 <p>
 <p>

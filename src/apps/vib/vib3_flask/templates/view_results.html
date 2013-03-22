@@ -1,8 +1,14 @@
-<p>
 {% if result != None %}
-<img src="{{ result[0] }}">
-<br>
-Mean value: {{ result[1] }} <br>
-Standard deviation value: {{ result[2] }}
-{% endif %}
+<p>
+<table>
+<tr>
+<td><img src="{{ result[0] }}" width="400"></td>
+<td><img src="{{ result[1] }}" width="400"></td>
+</tr>
+<tr><td>
+Mean value: {{ result[2] }} <br>
+Standard deviation value: {{ result[3] }}
+</td></tr>
+</table>
 </p>
+{% endif %}

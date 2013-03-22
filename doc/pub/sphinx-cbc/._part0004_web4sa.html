@@ -1,0 +1,350 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Making a Flask application &mdash; Using Web Frameworks for Scientific Web Applications</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Using Web Frameworks for Scientific Web Applications" href="index.html" />
+    <link rel="next" title="Troubleshooting" href="._part0005_web4sa.html" />
+    <link rel="prev" title="Application of the MVC pattern" href="._part0003_web4sa.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="._part0005_web4sa.html" title="Troubleshooting"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="._part0003_web4sa.html" title="Application of the MVC pattern"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Using Web Frameworks for Scientific Web Applications</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="making-a-flask-application">
+<h1>Making a Flask application<a class="headerlink" href="#making-a-flask-application" title="Permalink to this headline">¶</a></h1>
+<p id="index-0">Not much code or configuration is needed to make a Flask application.
+Actually one short file is enough. For this file to work you need to
+install Flask and some corresponding packages. This is easiest
+performed by</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">Terminal&gt; sudo pip install Flask</span>
+<span class="go">Terminal&gt; sudo pip install WTForms</span>
+</pre></div>
+</div>
+<p>You can add <tt class="docutils literal"><span class="pre">--upgrade</span></tt> to upgrade a previous installation.</p>
+<div class="section" id="programming-the-flask-application-1">
+<h2>Programming the Flask application  (1)<a class="headerlink" href="#programming-the-flask-application-1" title="Permalink to this headline">¶</a></h2>
+<p>We want our input page to feature in text field where the user can
+write the value of <tt class="docutils literal"><span class="pre">r</span></tt>, see Figure <a class="reference internal" href="#wf-hw1-flask-fig-input"><em>The input page</em></a>.
+By clicking <em>equals</em>
+we compute the corresponding <tt class="docutils literal"><span class="pre">s</span></tt> and write out the result page
+seen in Figure <a class="reference internal" href="#wf-hw1-flask-fig-result"><em>The output page</em></a>.</p>
+<div class="figure" id="wf-hw1-flask-fig-input">
+<img alt="_images/hw1_flask_input.png" src="_images/hw1_flask_input.png" style="width: 600px;" />
+<p class="caption"><em>The input page</em></p>
+</div>
+<div class="figure" id="wf-hw1-flask-fig-result">
+<img alt="_images/hw1_flask_output.png" src="_images/hw1_flask_output.png" style="width: 600px;" />
+<p class="caption"><em>The output page</em></p>
+</div>
+<p>Flask does not require us to use the MVC pattern so there is actually
+no need to split the original program into <tt class="docutils literal"><span class="pre">model.py</span></tt>, <tt class="docutils literal"><span class="pre">view.py</span></tt>,
+<tt class="docutils literal"><span class="pre">controller.py</span></tt>, and <tt class="docutils literal"><span class="pre">compute.py</span></tt> as already explained.  First we make
+a <tt class="docutils literal"><span class="pre">controller.py</span></tt> file where the view, the model, and the controller
+parts are within the same part. Later, we split the view, model, and
+controller into three files for illustration. The <tt class="docutils literal"><span class="pre">compute</span></tt> component
+is always in a separate files as we like to encapsulate the
+computations completely from user interfaces.</p>
+<p id="index-1">The view that the user sees is determined by
+HTML templates in a subdirectory <tt class="docutils literal"><span class="pre">templates</span></tt>, and consequently
+we name the template files <tt class="docutils literal"><span class="pre">view*.html</span></tt>.
+The model and other parts of the view concept are just parts of
+the <tt class="docutils literal"><span class="pre">controller.py</span></tt> file:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">request</span>
+<span class="kn">from</span> <span class="nn">wtforms</span> <span class="kn">import</span> <span class="n">Form</span><span class="p">,</span> <span class="n">FloatField</span><span class="p">,</span> <span class="n">validators</span>
+<span class="kn">from</span> <span class="nn">compute</span> <span class="kn">import</span> <span class="n">compute</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+
+<span class="c"># Model</span>
+<span class="k">class</span> <span class="nc">InputForm</span><span class="p">(</span><span class="n">Form</span><span class="p">):</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">FloatField</span><span class="p">(</span><span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">validators</span><span class="o">.</span><span class="n">InputRequired</span><span class="p">()])</span>
+
+<span class="c"># View</span>
+<span class="nd">@app.route</span><span class="p">(</span><span class="s">&#39;/hw1&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;GET&#39;</span><span class="p">,</span> <span class="s">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+    <span class="n">form</span> <span class="o">=</span> <span class="n">InputForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">&#39;POST&#39;</span> <span class="ow">and</span> <span class="n">form</span><span class="o">.</span><span class="n">validate</span><span class="p">():</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">r</span><span class="o">.</span><span class="n">data</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">compute</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s">&quot;view_output.html&quot;</span><span class="p">,</span> <span class="n">form</span><span class="o">=</span><span class="n">form</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">s</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s">&quot;view_input.html&quot;</span><span class="p">,</span> <span class="n">form</span><span class="o">=</span><span class="n">form</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We collect the files associated with a Flask app in a directory,
+here called <tt class="docutils literal"><span class="pre">hw1_flask</span></tt>.</p>
+<p>The web application is the <tt class="docutils literal"><span class="pre">app</span></tt> object of class <tt class="docutils literal"><span class="pre">Flask</span></tt> initialized
+as shown. The model is a special Flask class derived from <tt class="docutils literal"><span class="pre">Form</span></tt>
+where the data are listed as static class attributes and initialized
+by various form field objects from the <tt class="docutils literal"><span class="pre">wtforms</span></tt> package.
+These form fields correspond to HTML forms in the input page.
+For the <tt class="docutils literal"><span class="pre">r</span></tt> variable we apply <tt class="docutils literal"><span class="pre">FloatField</span></tt> since it is a floating-point
+variable. A default validator, here checking that the user supplies
+a real number, is easily included.</p>
+<p>The view, controlling how the user interacts with the data, consists
+an URL and corresponding function to call when this is invoked URL.
+The function name is here <tt class="docutils literal"><span class="pre">index</span></tt> (corresponding to the standard
+<tt class="docutils literal"><span class="pre">index.html</span></tt> page that is the main page of a URL) and the
+decorator <tt class="docutils literal"><span class="pre">&#64;app.route('/hw1',</span> <span class="pre">...)</span></tt> maps the URL
+<tt class="docutils literal"><span class="pre">http://127.0.0.1:5000/hw1</span></tt> to a call to <tt class="docutils literal"><span class="pre">index</span></tt>.
+The <tt class="docutils literal"><span class="pre">methods</span></tt> argument must be as shown to allow the user to communicate
+with the web page.</p>
+<p id="index-2">The <tt class="docutils literal"><span class="pre">index</span></tt> function first makes a form object based on the data in
+the model, here class <tt class="docutils literal"><span class="pre">InputForm</span></tt>. Then there are two possibilities:
+either the user has provided data in the HTML form or the user is
+to be offered an input form. In the former case, <tt class="docutils literal"><span class="pre">request.method</span></tt>
+equals <tt class="docutils literal"><span class="pre">'POST'</span></tt> and we can extract the numerical value of <tt class="docutils literal"><span class="pre">r</span></tt>
+from the <tt class="docutils literal"><span class="pre">form</span></tt> object, <tt class="docutils literal"><span class="pre">form.r.data</span></tt>, call up our mathematical
+computations, and make a web page with the result.
+In the latter case, we make an input page as displayed in
+Figure <a class="reference internal" href="#wf-hw1-flask-fig-input"><em>The input page</em></a>.</p>
+<p id="index-3">Making a web page with Flask is conveniently done through an HTML
+template. Since the output page is simplest we display the
+<tt class="docutils literal"><span class="pre">view_output.html</span></tt> template first:</p>
+<div class="highlight-html"><div class="highlight"><pre>Hello, World! sin({{form.r.data}})={{s}}.
+</pre></div>
+</div>
+<p>Keyword arguments sent to <tt class="docutils literal"><span class="pre">render_template</span></tt> are available in the
+HTML template. With the <tt class="docutils literal"><span class="pre">form</span></tt> object we extract the value of
+<tt class="docutils literal"><span class="pre">r</span></tt> in the HTML code by <tt class="docutils literal"><span class="pre">{{form.r.data}}</span></tt>. Similarly, the value of <tt class="docutils literal"><span class="pre">s</span></tt>
+is simply <tt class="docutils literal"><span class="pre">{{s}}</span></tt>.</p>
+<p>The HTML template for the input page is slightly more complicated
+as we need to use an HTML form:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;form</span> <span class="na">method=</span><span class="s">post</span> <span class="na">action=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span>
+  Hello, World! The sine of {{form.r}}
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">submit</span> <span class="na">value=</span><span class="s">equals</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+</pre></div>
+</div>
+<p>All you have to do in order to run this web application is</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">Terminal&gt; python controller.py</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="equipping-the-input-page-with-output-results-1">
+<h2>Equipping the input page with output results  (1)<a class="headerlink" href="#equipping-the-input-page-with-output-results-1" title="Permalink to this headline">¶</a></h2>
+<p>Our application made two distinct pages for grabbing input from the
+user and presenting the result. It is often more natural to add
+the result to the input page. This is particularly the case in the present
+web application, which is a kind of calculator. Figure <a class="reference internal" href="#wf-hw2-flask-fig-result"><em>The modified result page</em></a> shows what the user sees after clicking the <em>equals</em> button.</p>
+<div class="figure" id="wf-hw2-flask-fig-result">
+<img alt="_images/hw2_flask_output.png" src="_images/hw2_flask_output.png" style="width: 600px;" />
+<p class="caption"><em>The modified result page</em></p>
+</div>
+<p>To let the user stay within the same page, we create a new directory <tt class="docutils literal"><span class="pre">hw2_flask</span></tt>
+for this modified Flask app and copy the files from the previous
+<tt class="docutils literal"><span class="pre">hw1_flask</span></tt> directory.  The idea now is to make use of just one
+template, in <tt class="docutils literal"><span class="pre">templates/view.html</span></tt>:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;form</span> <span class="na">method=</span><span class="s">post</span> <span class="na">action=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span>
+  Hello, World! The sine of
+  {{(form.r)}}
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">submit</span> <span class="na">value=</span><span class="s">equals</span><span class="nt">&gt;</span>
+{% if s != None %}
+{{s}}
+{% endif %}
+<span class="nt">&lt;/form&gt;</span>
+</pre></div>
+</div>
+<p>The form is identical to what we used in <tt class="docutils literal"><span class="pre">view_input.html</span></tt>, and the only
+new thing is the value of <tt class="docutils literal"><span class="pre">s</span></tt>. We supply <tt class="docutils literal"><span class="pre">s</span></tt> as an object to the
+<tt class="docutils literal"><span class="pre">render_template</span></tt> function and this object is available for
+some programming in the HTML template. We can test on the value of <tt class="docutils literal"><span class="pre">s</span></tt>:
+if it is <tt class="docutils literal"><span class="pre">None</span></tt>, we know that the computations are not performed and
+<tt class="docutils literal"><span class="pre">s</span></tt> should not appear on the page, otherwise <tt class="docutils literal"><span class="pre">s</span></tt> holds the sine
+value and we can write it out. The generated HTML code reads</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;form</span> <span class="na">method=</span><span class="s">post</span> <span class="na">action=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span>
+  Hello, World! The sine of
+  <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;r&quot;</span> <span class="na">name=</span><span class="s">&quot;r&quot;</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">value=</span><span class="s">&quot;1.2&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">submit</span> <span class="na">value=</span><span class="s">equals</span><span class="nt">&gt;</span>
+
+0.932039085967
+
+<span class="nt">&lt;/form&gt;</span>
+</pre></div>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">index</span></tt> function needs adjustments since we use the same
+template for the input and the output page:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># View</span>
+<span class="nd">@app.route</span><span class="p">(</span><span class="s">&#39;/hw2&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;GET&#39;</span><span class="p">,</span> <span class="s">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+    <span class="n">form</span> <span class="o">=</span> <span class="n">InputForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">&#39;POST&#39;</span> <span class="ow">and</span> <span class="n">form</span><span class="o">.</span><span class="n">validate</span><span class="p">():</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">r</span><span class="o">.</span><span class="n">data</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">compute</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s">&quot;view.html&quot;</span><span class="p">,</span> <span class="n">form</span><span class="o">=</span><span class="n">form</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It is seen that if the user has given data, <tt class="docutils literal"><span class="pre">s</span></tt> is a <tt class="docutils literal"><span class="pre">float</span></tt>, otherwise
+<tt class="docutils literal"><span class="pre">s</span></tt> is <tt class="docutils literal"><span class="pre">None</span></tt>. You are encouraged to test the app by running</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">Terminal&gt; python controller.py</span>
+</pre></div>
+</div>
+<p>and loading <tt class="docutils literal"><span class="pre">http://127.0.0.1:5000/hw2</span></tt> into your browser.
+A nice little exercise is to control the formatting of the result <tt class="docutils literal"><span class="pre">s</span></tt>.
+To this end, you transform <tt class="docutils literal"><span class="pre">s</span></tt> to a string: <tt class="docutils literal"><span class="pre">s</span> <span class="pre">=</span> <span class="pre">'%.5f'</span> <span class="pre">%</span> <span class="pre">s</span></tt> before
+sending it to <tt class="docutils literal"><span class="pre">render_template</span></tt>.</p>
+</div>
+<div class="section" id="splitting-the-app-into-model-view-and-controller-files">
+<span id="wf-hw3-flask"></span><h2>Splitting the app into model, view, and controller files<a class="headerlink" href="#splitting-the-app-into-model-view-and-controller-files" title="Permalink to this headline">¶</a></h2>
+<p id="index-4">In our previous to Flask apps we have had the model, view, and
+controller parts in one file <tt class="docutils literal"><span class="pre">controller.py</span></tt>. For illustration we
+may split the previous <tt class="docutils literal"><span class="pre">controller.py</span></tt> into three files:
+<tt class="docutils literal"><span class="pre">model.py</span></tt>, <tt class="docutils literal"><span class="pre">view.py</span></tt>, and <tt class="docutils literal"><span class="pre">controller.py</span></tt>, located in a
+directory <tt class="docutils literal"><span class="pre">hw3_flask</span></tt>. The contents
+in these files reflects the splitting introduced in the original
+scienticic hello world program in the section <a class="reference internal" href="._part0003_web4sa.html#wf-hw-mvc"><em>Application of the MVC pattern</em></a>.
+In the Flask context we have <tt class="docutils literal"><span class="pre">model.py</span></tt> as</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">wtforms</span> <span class="kn">import</span> <span class="n">Form</span><span class="p">,</span> <span class="n">FloatField</span><span class="p">,</span> <span class="n">validators</span>
+
+<span class="k">class</span> <span class="nc">InputForm</span><span class="p">(</span><span class="n">Form</span><span class="p">):</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">FloatField</span><span class="p">(</span><span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">validators</span><span class="o">.</span><span class="n">InputRequired</span><span class="p">()])</span>
+</pre></div>
+</div>
+<p>The view in &#8216;view.py&#8217; consists of</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">request</span>
+<span class="kn">from</span> <span class="nn">compute</span> <span class="kn">import</span> <span class="n">compute</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s">&#39;/hw3&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;GET&#39;</span><span class="p">,</span> <span class="s">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+    <span class="n">form</span> <span class="o">=</span> <span class="n">InputForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">&#39;POST&#39;</span> <span class="ow">and</span> <span class="n">form</span><span class="o">.</span><span class="n">validate</span><span class="p">():</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">r</span><span class="o">.</span><span class="n">data</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">compute</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s">&quot;view.html&quot;</span><span class="p">,</span> <span class="n">form</span><span class="o">=</span><span class="n">form</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">controller.py</span></tt> file finally runs the view&#8217;s <tt class="docutils literal"><span class="pre">app</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">view</span> <span class="kn">import</span> <span class="n">app</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The statements are indentical to those in the <tt class="docutils literal"><span class="pre">hw2_flask</span></tt> app, only
+the organization of the statement in files differ.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/cbc_logo.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Making a Flask application</a><ul>
+<li><a class="reference internal" href="#programming-the-flask-application-1">Programming the Flask application  (1)</a></li>
+<li><a class="reference internal" href="#equipping-the-input-page-with-output-results-1">Equipping the input page with output results  (1)</a></li>
+<li><a class="reference internal" href="#splitting-the-app-into-model-view-and-controller-files">Splitting the app into model, view, and controller files</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="._part0003_web4sa.html"
+                        title="previous chapter">Application of the MVC pattern</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="._part0005_web4sa.html"
+                        title="next chapter">Troubleshooting</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/._part0004_web4sa.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="._part0005_web4sa.html" title="Troubleshooting"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="._part0003_web4sa.html" title="Application of the MVC pattern"
+             >previous</a> |</li>
+        <li><a href="index.html">Using Web Frameworks for Scientific Web Applications</a> &raquo;</li> 
+      </ul>
+    </div>
+<div class="wrapper">
+  <div class="footer">
+  <a href="http://cbc.simula.no"><img src="_static/cbc_banner.png" width="100%"><a>
+  </div>
+</div>
+
+  </body>
+</html>

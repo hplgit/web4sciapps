@@ -1,5 +1,8 @@
 
+!split
 ======= Making a Flask application =======
+
+idx{Flask!installation}
 
 Not much code or configuration is needed to make a Flask application.
 Actually one short file is enough. For this file to work you need to
@@ -38,6 +41,8 @@ controller into three files for illustration. The `compute` component
 is always in a separate files as we like to encapsulate the
 computations completely from user interfaces.
 
+idx{Flask!input forms}
+
 The view that the user sees is determined by
 HTML templates in a subdirectory `templates`, and consequently
 we name the template files `view*.html`.
@@ -66,6 +71,8 @@ decorator `@app.route('/hw1', ...)` maps the URL
 The `methods` argument must be as shown to allow the user to communicate
 with the web page.
 
+idx{Flask!`index` function}
+
 The `index` function first makes a form object based on the data in
 the model, here class `InputForm`. Then there are two possibilities:
 either the user has provided data in the HTML form or the user is
@@ -75,6 +82,8 @@ from the `form` object, `form.r.data`, call up our mathematical
 computations, and make a web page with the result.
 In the latter case, we make an input page as displayed in
 Figure ref{wf:hw1:flask:fig:input}.
+
+idx{Flask!HTML templates}
 
 Making a web page with Flask is conveniently done through an HTML
 template. Since the output page is simplest we display the
@@ -98,7 +107,6 @@ All you have to do in order to run this web application is
 Terminal> python controller.py
 !ec
 
-!split
 ===== Equipping the input page with output results =====
 
 ## Define Mako variable for path to source code
@@ -154,7 +162,6 @@ A nice little exercise is to control the formatting of the result `s`.
 To this end, you transform `s` to a string: `s = '%.5f' % s` before
 sending it to `render_template`.
 
-!split
 ===== Splitting the app into model, view, and controller files =====
 label{wf:hw3:flask}
 
@@ -162,6 +169,8 @@ label{wf:hw3:flask}
 <%
 app_path = src_path + 'hw/hw3_flask'
 %>
+
+idx{Flask!MVC pattern}
 
 In our previous to Flask apps we have had the model, view, and
 controller parts in one file `controller.py`. For illustration we
@@ -186,7 +195,10 @@ The statements are indentical to those in the `hw2_flask` app, only
 the organization of the statement in files differ.
 
 
+!split
 ===== Troubleshooting =====
+
+idx{Flask!troubleshooting}
 
 __Address already in use.__
 You can easily kill the Flask application and restart it, but sometimes

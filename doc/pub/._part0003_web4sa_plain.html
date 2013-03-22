@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Automatically generated HTML file from Doconce source
+(http://code.google.com/p/doconce/)
+-->
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Doconce: http://code.google.com/p/doconce/" />
+<meta name="description" content="Using Web Frameworks for Scientific Web Applications">
+<meta name="keywords" content="web frameworks,MVC pattern,Flask installation,Flask input forms,Flask HTML templates,Flask MVC pattern,Flask troubleshooting,Django installation,Django making a project,Django making an application,Django input forms,Django HTML templates,Flask input forms,Flask error checking,Flask CSS style sheets,Flask LaTeX mathematics,Flask input validation,Django input forms,Django input validation">
+
+
+
+<style type="text/css">
+    body {
+      font-family: Helvetica, Verdana, Arial, Sans-serif;
+      color: #404040;
+      background: #ffffff;
+    }
+    h1 { font-size: 1.8em;  color: #8A0808; }
+    h2 { font-size: 1.5em;  color: #8A0808; }
+    h3, h4 { color: #8A0808; }
+    a { color: #8A0808; text-decoration:none; }
+    tt { font-family: "Courier New", Courier; }
+    pre { background: #ededed; color: #000; padding: 15px;}
+    p { text-indent: 0px; }
+    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
+    p.caption { width: 80%; font-style: normal; text-align: left; }
+    hr.figure { border: 0; width: 80%; border-bottom: 1px solid #aaa}
+
+</style>
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Web frameworks ', 1, None, '___sec0'),
+              (' The MVC pattern ', 2, None, '___sec1'),
+              (' A very simple application ', 2, None, '___sec2'),
+              (' Application of the MVC pattern ',
+               2,
+               'wf:hw:mvc',
+               'wf:hw:mvc'),
+              (' Making a Flask application ', 1, None, '___sec4'),
+              (' Programming the Flask application ', 2, None, '___sec5'),
+              (' Equipping the input page with output results ',
+               2,
+               None,
+               '___sec6'),
+              (' Splitting the app into model, view, and controller files ',
+               2,
+               'wf:hw3:flask',
+               'wf:hw3:flask'),
+              (' Troubleshooting ', 2, None, '___sec8'),
+              (' Making a Django application ', 1, None, '___sec9'),
+              (' Installing Django ', 2, None, '___sec10'),
+              (' Setting up a Django project ', 2, None, '___sec11'),
+              (' Setting up a Django application ', 2, None, '___sec12'),
+              (' Programming the Django application ', 2, None, '___sec13'),
+              (' Equipping the input page with output results ',
+               2,
+               None,
+               '___sec14'),
+              (' Handling multiple input variables in Flask ',
+               1,
+               'wf:vib:flask',
+               'wf:vib:flask'),
+              (' Programming the Flask application ', 2, None, '___sec16'),
+              (' Implementing error checking in the template ',
+               2,
+               None,
+               '___sec17'),
+              (' Using style sheets ', 2, None, '___sec18'),
+              (' Using LaTeX mathematics ', 2, None, '___sec19'),
+              (' Rearringing the elements in the HTML template ',
+               2,
+               None,
+               '___sec20'),
+              (' User-provided validation ', 2, None, '___sec21'),
+              (' Autogenerating the code ',
+               2,
+               'wf:vib3:flask:autogen',
+               'wf:vib3:flask:autogen'),
+              (' Handling multiple input variables in Django ',
+               1,
+               'wf:vib:django',
+               'wf:vib:django'),
+              (' Programming the Django application ', 2, None, '___sec24'),
+              (' User-provided validation ', 2, None, '___sec25'),
+              (' Exercises ', 1, None, '___sec26'),
+              (' Exercise 1: Add two numbers ',
+               2,
+               'wf:exer:add2',
+               'wf:exer:add2'),
+              (' Remaining ', 1, None, '___sec28')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "AMS"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- Fix slow MathJax rendering in IE8 -->
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+
+
+
+
+    
+<a name="part0003"></a>
+
+    <a href="._part0002_web4sa_plain.html"><img src="https://doconce.googlecode.com/hg/bundled/html_images/prev1.png" border=0 alt="previous"></a>
+    
+    <a href="._part0004_web4sa_plain.html"><img src="https://doconce.googlecode.com/hg/bundled/html_images/next1.png" border=0 alt="next"></a>
+    <p>
+<!-- !split -->
+
+<h3>Application of the MVC pattern <a name="wf:hw:mvc"></a></h3>
+
+<p>
+
+Before thinking of a web application, we first <em>refactor</em> our program
+such that it fits with the classical MVC pattern and a compute component.
+The refactoring does not change the functionality of the code, it
+just distributes the original statements in functions and modules.
+Here we create four modules: <code>model</code>, <code>view</code>,
+<code>compute</code>, and <code>controller</code>.
+
+<p>
+
+<ul>
+ <li> The <code>compute</code> module contains a function <code>compute(r)</code> that performs
+   the mathematics and returns the value of <code>s</code>.</li>
+ <li> The <code>model</code> module holds the input data, here <code>r</code>.</li>
+ <li> The <code>view</code> module has two functions, one for reading input data,
+   <code>get_input</code>,
+   and one for presenting the output, <code>present_output</code>.
+   The later takes the input, calls <code>compute</code> functionalty, and
+   generates the output.</li>
+ <li> The <code>controller</code> module initializes model's data from the view
+   and calls the view to present the output.</li>
+</ul>
+
+The <code>model.py</code> file contains the <code>r</code> variable, which must
+be declared with a default value in order to create the data object:
+
+<p>
+
+
+<!-- code typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">r <span style="color: #666666">=</span> <span style="color: #666666">0.0</span>    <span style="color: #408080; font-style: italic"># input</span>
+s <span style="color: #666666">=</span> <span style="color: #008000">None</span>   <span style="color: #408080; font-style: italic"># output</span>
+</pre></div>
+<p>
+
+The <code>view.py</code> file is restricted to the communication with the user and reads
+
+<p>
+
+
+<!-- code typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sys</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">compute</span>
+
+<span style="color: #408080; font-style: italic"># Input: float r</span>
+<span style="color: #408080; font-style: italic"># Output: &quot;Hello, World! sin(r)=...&quot;</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">get_input</span>():
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Get input data from the command line.&quot;&quot;&quot;</span>
+    r <span style="color: #666666">=</span> <span style="color: #008000">float</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>])
+    <span style="color: #008000; font-weight: bold">return</span> r
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">present_output</span>(r):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Write results to terminal window.&quot;&quot;&quot;</span>
+    s <span style="color: #666666">=</span> compute<span style="color: #666666">.</span>compute(r)
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Hello, World! sin(</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">)=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (r, s)
+</pre></div>
+<p>
+
+The mathematics is encapsulated in <code>compute.py</code>:
+
+<p>
+
+
+<!-- code typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">math</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">compute</span>(r):
+    <span style="color: #008000; font-weight: bold">return</span> math<span style="color: #666666">.</span>sin(r)
+</pre></div>
+<p>
+
+Finally, <code>controller.py</code> glues the model and the view:
+
+<p>
+
+
+<!-- code typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">model</span><span style="color: #666666">,</span> <span style="color: #0000FF; font-weight: bold">view</span>
+
+model<span style="color: #666666">.</span>r <span style="color: #666666">=</span> view<span style="color: #666666">.</span>get_input()
+view<span style="color: #666666">.</span>present_output(model<span style="color: #666666">.</span>r)
+</pre></div>
+<p>
+
+Let us try our refactored code:
+
+<p>
+
+
+<!-- code typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; python controller.py 1.2
+Hello, World! sin<span style="color: #666666">(</span>1.2<span style="color: #666666">)=</span>0.932039
+</pre></div>
+<p>
+
+Our goal is to create a web interface to our scientific hello world
+program such that we can fill in the number <code>r</code> in a text field, click a
+<em>Compute</em> button and get back a new web page with the output text
+shown above: "Hello, World! sin(r)=s".
+
+<p>
+<p>
+
+                <a href="._part0002_web4sa_plain.html"><img src="https://doconce.googlecode.com/hg/bundled/html_images/prev1.png" border=0 alt="previous"></a>
+                
+                <a href="._part0004_web4sa_plain.html"><img src="https://doconce.googlecode.com/hg/bundled/html_images/next1.png" border=0 alt="next"></a>
+                <!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

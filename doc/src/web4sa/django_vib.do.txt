@@ -1,3 +1,4 @@
+!split
 ======= Handling multiple input variables in Django =======
 label{wf:vib:django}
 
@@ -35,6 +36,8 @@ Then we
  o add `url(r'^vib1/', 'vib1_django.views.index')` to the `patterns`
    call in `urls.py`.
 
+idx{Django!input forms}
+
 We can now invoke `models.py` to add form fields for the four
 input variables:
 
@@ -46,6 +49,8 @@ needs lower case names (e.g., to be compatible with mathematics),
 one must start the text with a space. We also provide a default
 value such that all fields have a value when the user sees
 the page.
+
+idx{Django!`index` function}
 
 The `views.py` file looks as follows:
 
@@ -69,7 +74,6 @@ The template for rendering the page is listed next.
 The tricky part is the syntax for displaying *static content*, such as
 the plot file made in the `compute` function.
 
-!split
 ===== User-provided validation =====
 
 ## Define Mako variable for path to source code
@@ -81,6 +85,8 @@ Django has a series of methods available for user-provided validation
 of form data. These are exemplified in the app `vib2_django`, which
 is an extension of the `vib1_django` app (with additional code, and
 of course, registrations in `settings.py` and `urls.py`).
+
+idx{Django!input validation}
 
 Checking that $A>0$ is easiest done with a built-in Django
 validator:

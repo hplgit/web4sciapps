@@ -40,7 +40,7 @@ h1, h2, h3, h4, h5, h6 {
 </head>
 <body>
 
-<title> Exercise 3: Auto-generate code from function signature </title>
+<title> Exercise 1: Add two numbers </title>
 
 <!-- ------------------- main content ------------------------>
 
@@ -88,9 +88,7 @@ h1, h2, h3, h4, h5, h6 {
      <!-- vagrant nav toc: " Handling multiple input variables in Django " --> <li>  <a href="._part0008_web4sa_django.html#wf:vib:django"> Handling multiple input variables in Django </a>
      <!-- vagrant nav toc: " Programming the Django application " --> <li> &nbsp;  <a href="._part0008_web4sa_django.html#___sec11"> Programming the Django application </a>
      <!-- vagrant nav toc: " User-provided validation " --> <li class="active"> &nbsp;  <a href="._part0009_web4sa_django.html#___sec12"> User-provided validation </a>
-     <!-- vagrant nav toc: " Exercise 1: Add two numbers in a Flask app " --> <li> &nbsp;  <a href="._part0009_web4sa_django.html#wf:exer:flask:add2"> Exercise 1: Add two numbers in a Flask app </a>
-     <!-- vagrant nav toc: " Exercise 2: Add two numbers in a Django app " --> <li> &nbsp;  <a href="._part0009_web4sa_django.html#wf:exer:django:add2"> Exercise 2: Add two numbers in a Django app </a>
-     <!-- vagrant nav toc: " Exercise 3: Auto-generate code from function signature " --> <li> &nbsp;  <a href="._part0009_web4sa_django.html#___sec15"> Exercise 3: Auto-generate code from function signature </a>
+     <!-- vagrant nav toc: " Exercise 1: Add two numbers " --> <li> &nbsp;  <a href="._part0009_web4sa_django.html#wf:exer:add2"> Exercise 1: Add two numbers </a>
 
     </ul>
    </div>
@@ -123,18 +121,10 @@ h1, h2, h3, h4, h5, h6 {
                'wf:vib:django'),
               (' Programming the Django application ', 2, None, '___sec11'),
               (' User-provided validation ', 2, None, '___sec12'),
-              (' Exercise 1: Add two numbers in a Flask app ',
+              (' Exercise 1: Add two numbers ',
                2,
-               'wf:exer:flask:add2',
-               'wf:exer:flask:add2'),
-              (' Exercise 2: Add two numbers in a Django app ',
-               2,
-               'wf:exer:django:add2',
-               'wf:exer:django:add2'),
-              (' Exercise 3: Auto-generate code from function signature ',
-               2,
-               None,
-               '___sec15')]}
+               'wf:exer:add2',
+               'wf:exer:add2')]}
 end of tocinfo -->
 
 
@@ -171,6 +161,7 @@ is an extension of the <code>vib1_django</code> app (with additional code, and
 of course, registrations in <code>settings.py</code> and <code>urls.py</code>).
 
 <p>
+
 Checking that \( A>0 \) is easiest done with a built-in Django
 validator:
 
@@ -280,130 +271,14 @@ validating forms.
 
 <p>
 
-<h3>Exercise 1: Add two numbers in a Flask app <a name="wf:exer:flask:add2"></a></h3>
+<h3>Exercise 1: Add two numbers <a name="wf:exer:add2"></a></h3>
 
 <p>
-Make a Flask application that reads two numbers from a web page,
+Make a web application that reads two numbers from a web page,
 adds the numbers, and prints the sum in a new web page.
-Package the Flask application directory in a tar file for easy testing
-by others.
-Filename: <code>add2_flask.tar.gz</code>.
-
-<p>
-<!-- --- end exercise --- -->
-
-<p>
-
-
-<!-- --- begin exercise --- -->
-
-<p>
-
-<h3>Exercise 2: Add two numbers in a Django app <a name="wf:exer:django:add2"></a></h3>
-
-<p>
-Make a Django application that reads two numbers from a web page,
-adds the numbers, and prints the sum in a new web page.
-
-<p>
-Package
-the application and a corresponding project in a tar file such
-that anyone with Django installed can easily test the project.
-Filename: <code>add2_django.tar.gz</code>.
-
-<p>
-<!-- --- end exercise --- -->
-
-<p>
-
-
-<!-- --- begin exercise --- -->
-
-<p>
-
-<h3>Exercise 3: Auto-generate code from function signature  <a name="___sec15"></a></h3>
-
-<p>
-Given a <code>compute_function</code> with a set of positional and keyword
-arguments, we want to <em>automatically</em> generate the necessary
-Flask code to built a web-based interface to calling this function
-and presenting its result. In general, only this is known about
-the function:
-<p>
-
-<!-- code typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">compute_function</span>(<span style="color: #666666">*</span>args, <span style="color: #666666">**</span>kwargs)
-    <span style="color: #666666">...</span>
-    <span style="color: #008000; font-weight: bold">return</span> result
-</pre></div>
-<p>
-Fortunately, Python has a module <code>inspect</code> that allows us to extract
-the name of all function arguments and the default values of the keyword
-arguments:
-
-<p>
-
-
-<!-- code typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">inspect</span>
-arg_names <span style="color: #666666">=</span> inspect<span style="color: #666666">.</span>getargspec(compute_function)<span style="color: #666666">.</span>args
-defaults  <span style="color: #666666">=</span> inspect<span style="color: #666666">.</span>getargspec(compute_function)<span style="color: #666666">.</span>defaults
-</pre></div>
-<p>
-Here, <code>arg_names</code> is a list with the names of all arguments in
-<code>compute_function</code>, while <code>defaults</code> is a list of the
-values of all the keyword arguments. For example,
-
-<p>
-
-
-<!-- code typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">mycompute</span>(A, m<span style="color: #666666">=0</span>, s<span style="color: #666666">=1</span>, w<span style="color: #666666">=1</span>, <span style="color: #008000">xrange</span><span style="color: #666666">=</span>[<span style="color: #666666">-3</span>,<span style="color: #666666">3</span>]):
-</pre></div>
-<p>
-leads to
-
-<p>
-
-
-<!-- code typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">arg_names <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;A&#39;</span>, <span style="color: #BA2121">&#39;m&#39;</span>, <span style="color: #BA2121">&#39;s&#39;</span>, <span style="color: #BA2121">&#39;w&#39;</span>, <span style="color: #BA2121">&#39;xrange&#39;</span>]
-defaults <span style="color: #666666">=</span> (<span style="color: #666666">0</span>, <span style="color: #666666">1</span>, <span style="color: #666666">1</span>, [<span style="color: #666666">-3</span>, <span style="color: #666666">3</span>])
-</pre></div>
-<p>
-We can hence use <code>inspect</code> to generate a web page where the user
-can fill out values for all the argument names. Default values
-can be inserted wherever we have them. Moreover, we can check
-the type of the default values and use a corresponding field type:
-for <code>int</code> and <code>float</code> we apply the corresponding <code>IntegerField</code>
-and <code>FloatField</code>, for <code>str</code> we apply a <code>TextField</code>, <code>bool</code>
-is represented by a <code>BooleanField</code>, for <code>list</code>, <code>tuple</code>, and
-<code>numpy.ndarray</code> we can apply a <code>TextField</code> and then run <code>eval</code>
-on the result, and a list of strings can be represented by <code>RadioField</code>.
-
-<p>
-Extracting the form values and calling <code>compute_function</code> can
-be done with code like
-
-<p>
-
-
-<!-- code typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">form_values <span style="color: #666666">=</span> [<span style="color: #008000">getattr</span>(form, name)<span style="color: #666666">.</span>data <span style="color: #008000; font-weight: bold">for</span> name <span style="color: #AA22FF; font-weight: bold">in</span> arg_names
-               <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">hasattr</span>(form, name)]
-result <span style="color: #666666">=</span> compute_function(<span style="color: #666666">*</span>form_values)
-</pre></div>
-<p>
-Making a template with a table for all the input fields is straightforward,
-but HTML rendering of the result is not. One generic solution is to
-combine the table of input forms with a user-given template for how
-<code>result</code> is presented on the web page. The combination of the two
-templates constitutes the template to be used by the view.
-
-<p>
-Use these ideas to automatically generate the necessary code
-for making a web interface to an arbitrary <code>compute_function</code>.
-Filename: <code>generate_flask.py</code>.
+Package the necessary files that constitute the application
+in a tar file.
+Filename: <code>add2.tar.gz</code>.
 
 <p>
 <!-- --- end exercise --- -->

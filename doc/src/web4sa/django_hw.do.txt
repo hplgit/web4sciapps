@@ -1,3 +1,4 @@
+!split
 ======= Making a Django application =======
 
 Django applies two concepts, *project* and *application*. The application,
@@ -8,6 +9,8 @@ a collection of apps. This means that before we can make a Django app,
 we must to establish a Django project.
 
 ===== Installing Django =====
+
+idx{Django!installation}
 
 We recommend to
 download and istall the latest official version from
@@ -23,8 +26,9 @@ The version in this example, 1.5, may be different at the time you
 follow these instructions.
 
 
-!split
 ===== Setting up a Django project =====
+
+idx{Django!making a project}
 
 A Django project for managing a set of Django apps is
 created by the command
@@ -98,8 +102,9 @@ Note that one should not use `os.path.join` to create paths as Django
 applies the forward slash between directories also on Windows.
 
 
-!split
 ===== Setting up a Django application =====
+
+idx{Django!making an application}
 
 The next step is to create a Django app for our scientific hello
 world program. We can place the app in any directory, but here we
@@ -216,6 +221,9 @@ so we copy this file from the `mvc` directory to the `hw1_django` directory
 for convenience (we could alternatively add `../mvc` to `sys.path` such that
 `import compute` would work from the `hw1_django` directory).
 
+idx{Django!input forms}
+idx{Django!`models.py`}
+
 __The model.__ The `models.py` file contains the model which consists
 of the data we need in the application, stored in Django's data types.
 Our data consists of one number, called `r`, and `models.py` then
@@ -228,6 +236,9 @@ for different types of data, here we use `FloatField` to represent
 a floating-point number (corresponding to a Python `float`).
 The `InputForm` class has a the shown generic form across applications
 if we by convention apply the name `Input` for the class holding the data.
+
+idx{Django!`index` function}
+idx{Django!`views.py`}
 
 __The view.__ The `views.py` file contains a function `index` which performs
 the actions we want to perform when invoking
@@ -242,6 +253,8 @@ argument, usually called `request`. There are two modes in the function. Either
 the user has provided input on the web page, which means that
 `request.method` equals `'POST'`, or we show a new web page
 with which the user is supposed to interact.
+
+idx{Django!HTML templates}
 
 __Making the input page.__ The input consists of a web form with
 one field where we can fill in our `r` variable. This page
@@ -326,7 +339,7 @@ sin(%s)=%s
 Go back to the input page, provide a new number, and observe how
 the "Hello" word now has a blue color.
 
-!split
+
 ===== Equipping the input page with output results =====
 
 ## Define Mako variable for path to source code

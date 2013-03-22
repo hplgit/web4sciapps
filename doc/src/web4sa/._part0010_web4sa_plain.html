@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Automatically generated HTML file from Doconce source
+(http://code.google.com/p/doconce/)
+-->
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Doconce: http://code.google.com/p/doconce/" />
+<meta name="description" content="Using Web Frameworks for Scientific Web Applications">
+<meta name="keywords" content="web frameworks,MVC pattern,Flask installation,Flask input forms,Flask HTML templates,Flask MVC pattern,Flask troubleshooting,Django installation,Django making a project,Django making an application,Django input forms,Django HTML templates,Flask input forms,Flask error checking,Flask CSS style sheets,Flask LaTeX mathematics,Flask input validation,Django input forms,Django input validation">
+
+
+
+<style type="text/css">
+    body {
+      font-family: Helvetica, Verdana, Arial, Sans-serif;
+      color: #404040;
+      background: #ffffff;
+    }
+    h1 { font-size: 1.8em;  color: #8A0808; }
+    h2 { font-size: 1.5em;  color: #8A0808; }
+    h3, h4 { color: #8A0808; }
+    a { color: #8A0808; text-decoration:none; }
+    tt { font-family: "Courier New", Courier; }
+    pre { background: #ededed; color: #000; padding: 15px;}
+    p { text-indent: 0px; }
+    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
+    p.caption { width: 80%; font-style: normal; text-align: left; }
+    hr.figure { border: 0; width: 80%; border-bottom: 1px solid #aaa}
+
+</style>
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Web frameworks ', 1, None, '___sec0'),
+              (' The MVC pattern ', 2, None, '___sec1'),
+              (' A very simple application ', 2, None, '___sec2'),
+              (' Application of the MVC pattern ',
+               2,
+               'wf:hw:mvc',
+               'wf:hw:mvc'),
+              (' Making a Flask application ', 1, None, '___sec4'),
+              (' Programming the Flask application ', 2, None, '___sec5'),
+              (' Equipping the input page with output results ',
+               2,
+               None,
+               '___sec6'),
+              (' Splitting the app into model, view, and controller files ',
+               2,
+               'wf:hw3:flask',
+               'wf:hw3:flask'),
+              (' Troubleshooting ', 2, None, '___sec8'),
+              (' Making a Django application ', 1, None, '___sec9'),
+              (' Installing Django ', 2, None, '___sec10'),
+              (' Setting up a Django project ', 2, None, '___sec11'),
+              (' Setting up a Django application ', 2, None, '___sec12'),
+              (' Programming the Django application ', 2, None, '___sec13'),
+              (' Equipping the input page with output results ',
+               2,
+               None,
+               '___sec14'),
+              (' Handling multiple input variables in Flask ',
+               1,
+               'wf:vib:flask',
+               'wf:vib:flask'),
+              (' Programming the Flask application ', 2, None, '___sec16'),
+              (' Implementing error checking in the template ',
+               2,
+               None,
+               '___sec17'),
+              (' Using style sheets ', 2, None, '___sec18'),
+              (' Using LaTeX mathematics ', 2, None, '___sec19'),
+              (' Rearringing the elements in the HTML template ',
+               2,
+               None,
+               '___sec20'),
+              (' User-provided validation ', 2, None, '___sec21'),
+              (' Autogenerating the code ',
+               2,
+               'wf:vib3:flask:autogen',
+               'wf:vib3:flask:autogen'),
+              (' Handling multiple input variables in Django ',
+               1,
+               'wf:vib:django',
+               'wf:vib:django'),
+              (' Programming the Django application ', 2, None, '___sec24'),
+              (' User-provided validation ', 2, None, '___sec25'),
+              (' Exercises ', 1, None, '___sec26'),
+              (' Exercise 1: Add two numbers ',
+               2,
+               'wf:exer:add2',
+               'wf:exer:add2'),
+              (' Remaining ', 1, None, '___sec28')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "AMS"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- Fix slow MathJax rendering in IE8 -->
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+
+
+
+
+    
+<a name="part0010"></a>
+
+    <a href="._part0009_web4sa_plain.html"><img src="https://doconce.googlecode.com/hg/bundled/html_images/prev1.png" border=0 alt="previous"></a>
+    
+    <a href="._part0011_web4sa_plain.html"><img src="https://doconce.googlecode.com/hg/bundled/html_images/next1.png" border=0 alt="next"></a>
+    <p>
+<!-- !split -->
+
+<h3>Using style sheets  <a name="___sec18"></a></h3>
+
+<p>
+
+Web developers make heavy use of CSS style sheets to control the look
+and feel of web pages. Templates can utilize style sheets as any other
+standard HTML code. Here is a very simple example where we introduce
+a class <code>name</code> for the column with the field name and set the
+foreground color of the text in this column to blue.
+The style sheet is called <code>basic.css</code> and <em>must</em> reside in the
+<code>static</code> subdirectory of the Flask application directory:
+
+<p>
+
+
+<!-- code typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">td.name { color: blue; }
+</pre></div>
+<p>
+The <code>view2.html</code> file using this style sheet features a <code>link</code> tag
+to the style sheet in the HTML header, and the column containing
+the field name has
+the HTML tag <code><td class="name"></code> to trigger the specification in
+the style sheet:
+
+<p>
+
+
+<!-- code typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">&lt;html&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;head&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;link</span> <span style="color: #7D9029">rel=</span><span style="color: #BA2121">&quot;stylesheet&quot;</span> <span style="color: #7D9029">href=</span><span style="color: #BA2121">&quot;static/basic.css&quot;</span> <span style="color: #7D9029">type=</span><span style="color: #BA2121">&quot;text/css&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/head&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;body&gt;</span>
+
+<span style="color: #008000; font-weight: bold">&lt;form</span> <span style="color: #7D9029">method=</span><span style="color: #BA2121">post</span> <span style="color: #7D9029">action=</span><span style="color: #BA2121">&quot;&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;table&gt;</span>
+  {% for field in form %}
+    <span style="color: #008000; font-weight: bold">&lt;tr&gt;</span>
+    <span style="color: #008000; font-weight: bold">&lt;td</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;name&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>{{ field.name }}<span style="color: #008000; font-weight: bold">&lt;/td&gt;</span>
+    <span style="color: #008000; font-weight: bold">&lt;td&gt;</span>{{ field(size=12) }}<span style="color: #008000; font-weight: bold">&lt;/td&gt;</span>
+    <span style="color: #008000; font-weight: bold">&lt;td&gt;</span>{{ field.label }}<span style="color: #008000; font-weight: bold">&lt;/td&gt;</span>
+</pre></div>
+<p>
+Just run <code>python controller.py view2</code> to see that the names
+of the variables to set in the web page are blue.
+
+<p>
+
+<h3>Using LaTeX mathematics  <a name="___sec19"></a></h3>
+
+<p>
+
+Scientific applications frequently have many input data that are
+defined through mathematics and where the typesetting on the
+web page should be as close as possible to the typesetting where
+the mathematics is explained. In the present example we would like
+to typeset \( A \), \( b \), \( w \), and \( T \) with italic font as done
+in LaTeX. Fortunately, native LaTeX typesetting is available in
+HTML through the tool <a href="http://www.mathjax.org/">MathJax</a>.
+Our template <code>view3.html</code> enables MathJax. Formulas are written
+with standard LaTeX inside <code>\(</code> and <code>\)</code>, while equations are surrounded
+by <code>$$</code>. Here we use formulas exclusively:
+
+<p>
+
+
+<!-- code typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">&lt;script </span><span style="color: #7D9029">type=</span><span style="color: #BA2121">&quot;text/x-mathjax-config&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+MathJax.Hub.Config({
+  TeX<span style="color: #666666">:</span> {
+     equationNumbers<span style="color: #666666">:</span> {  autoNumber<span style="color: #666666">:</span> <span style="color: #BA2121">&quot;AMS&quot;</span>  },
+     extensions<span style="color: #666666">:</span> [<span style="color: #BA2121">&quot;AMSmath.js&quot;</span>, <span style="color: #BA2121">&quot;AMSsymbols.js&quot;</span>, <span style="color: #BA2121">&quot;autobold.js&quot;</span>]
+  }
+});
+<span style="color: #008000; font-weight: bold">&lt;/script&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;script </span><span style="color: #7D9029">type=</span><span style="color: #BA2121">&quot;text/javascript&quot;</span>
+ <span style="color: #7D9029">src=</span><span style="color: #BA2121">&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/script&gt;</span>
+
+This web page visualizes the function \(
+u(t) = Ae^{-bt}\sin (w t), \hbox{ for } t\in [0,T]
+\).
+
+<span style="color: #008000; font-weight: bold">&lt;form</span> <span style="color: #7D9029">method=</span><span style="color: #BA2121">post</span> <span style="color: #7D9029">action=</span><span style="color: #BA2121">&quot;&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;table&gt;</span>
+  {% for field in form %}
+    <span style="color: #008000; font-weight: bold">&lt;tr&gt;</span>
+    <span style="color: #008000; font-weight: bold">&lt;td&gt;</span>\( {{ field.name }} \)<span style="color: #008000; font-weight: bold">&lt;/td&gt;&lt;td&gt;</span>{{ field(size=12) }}<span style="color: #008000; font-weight: bold">&lt;/td&gt;</span>
+    <span style="color: #008000; font-weight: bold">&lt;td&gt;</span>{{ field.label }}<span style="color: #008000; font-weight: bold">&lt;/td&gt;</span>
+</pre></div>
+<p>
+Figure <a href="#wf:vib1:flask:fig:latex">10</a> displays how the
+LaTeX rendering looks like in the browser.
+
+<p>
+
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 10:  LaTeX typesetting of mathematical symbols. <a name="wf:vib1:flask:fig:latex"></a> </p></center>
+<p><img src="fig-web4sa/vib1_flask_latex.png" align="bottom" width=500></p>
+</center>
+
+<p>
+
+
+<h3>Rearringing the elements in the HTML template  <a name="___sec20"></a></h3>
+
+<p>
+Now we want to place the plot to the right of the input forms in
+the web page, see Figure <a href="#wf:vib1:flask:fig:sidebyside">11</a>. This can
+be accomplished by having an outer table with two rows. The first
+row contains the table with the input forms in the first column and
+the plot in the second column, while the second row features the
+<em>Compute</em> button in the first column.
+
+<p>
+
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 11:  New design with input and output side by side. <a name="wf:vib1:flask:fig:sidebyside"></a> </p></center>
+<p><img src="fig-web4sa/vib1_flask_table2.png" align="bottom" width=700></p>
+</center>
+
+<p>
+
+A relevant template file is <code>view4.html</code>:
+
+<p>
+
+
+<!-- code typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">&lt;script </span><span style="color: #7D9029">type=</span><span style="color: #BA2121">&quot;text/x-mathjax-config&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+MathJax.Hub.Config({
+  TeX<span style="color: #666666">:</span> {
+     equationNumbers<span style="color: #666666">:</span> {  autoNumber<span style="color: #666666">:</span> <span style="color: #BA2121">&quot;AMS&quot;</span>  },
+     extensions<span style="color: #666666">:</span> [<span style="color: #BA2121">&quot;AMSmath.js&quot;</span>, <span style="color: #BA2121">&quot;AMSsymbols.js&quot;</span>, <span style="color: #BA2121">&quot;autobold.js&quot;</span>]
+  }
+});
+<span style="color: #008000; font-weight: bold">&lt;/script&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;script </span><span style="color: #7D9029">type=</span><span style="color: #BA2121">&quot;text/javascript&quot;</span>
+ <span style="color: #7D9029">src=</span><span style="color: #BA2121">&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/script&gt;</span>
+
+This web page visualizes the function \(
+u(t) = Ae^{-bt}\sin (w t), \hbox{ for } t\in [0,T]
+\).
+
+<span style="color: #008000; font-weight: bold">&lt;form</span> <span style="color: #7D9029">method=</span><span style="color: #BA2121">post</span> <span style="color: #7D9029">action=</span><span style="color: #BA2121">&quot;&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;table&gt;</span> <span style="color: #408080; font-style: italic">&lt;!-- table with forms to the left and plot to the right --&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;tr&gt;&lt;td&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;table&gt;</span>
+  {% for field in form %}
+    <span style="color: #008000; font-weight: bold">&lt;tr&gt;</span>
+    <span style="color: #008000; font-weight: bold">&lt;td&gt;</span>\( {{ field.name }} \)<span style="color: #008000; font-weight: bold">&lt;/td&gt;&lt;td&gt;</span>{{ field(size=12) }}<span style="color: #008000; font-weight: bold">&lt;/td&gt;</span>
+    <span style="color: #008000; font-weight: bold">&lt;td&gt;</span>{{ field.label }}<span style="color: #008000; font-weight: bold">&lt;/td&gt;</span>
+    {% if field.errors %}
+      <span style="color: #008000; font-weight: bold">&lt;td&gt;&lt;ul</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">errors</span><span style="color: #008000; font-weight: bold">&gt;</span>
+      {% for error in field.errors %}
+        <span style="color: #008000; font-weight: bold">&lt;li&gt;&lt;font</span> <span style="color: #7D9029">color=</span><span style="color: #BA2121">&quot;red&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>{{ error }}<span style="color: #008000; font-weight: bold">&lt;/font&gt;&lt;/li&gt;</span>
+      {% endfor %}<span style="color: #008000; font-weight: bold">&lt;/ul&gt;&lt;/td&gt;</span>
+    {% endif %}
+    <span style="color: #008000; font-weight: bold">&lt;/tr&gt;</span>
+  {% endfor %}
+<span style="color: #008000; font-weight: bold">&lt;/table&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/td&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;td&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;p&gt;</span>
+{% if result != None %}
+<span style="color: #008000; font-weight: bold">&lt;img</span> <span style="color: #7D9029">src=</span><span style="color: #BA2121">&quot;{{ result }}&quot;</span> <span style="color: #7D9029">width=</span><span style="color: #BA2121">500</span><span style="color: #008000; font-weight: bold">&gt;</span>
+{% endif %}
+<span style="color: #008000; font-weight: bold">&lt;/p&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/td&gt;&lt;/tr&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;tr&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;td&gt;&lt;p&gt;&lt;input</span> <span style="color: #7D9029">type=</span><span style="color: #BA2121">submit</span> <span style="color: #7D9029">value=</span><span style="color: #BA2121">Compute</span><span style="color: #008000; font-weight: bold">&gt;&lt;/form&gt;&lt;/p&gt;&lt;/td&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/tr&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/table&gt;</span>
+</pre></div>
+<p>
+
+<p>
+
+                <a href="._part0009_web4sa_plain.html"><img src="https://doconce.googlecode.com/hg/bundled/html_images/prev1.png" border=0 alt="previous"></a>
+                
+                <a href="._part0011_web4sa_plain.html"><img src="https://doconce.googlecode.com/hg/bundled/html_images/next1.png" border=0 alt="next"></a>
+                <!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

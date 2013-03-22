@@ -1,4 +1,5 @@
 
+!split
 ======= Handling multiple input variables in Flask =======
 label{wf:vib:flask}
 
@@ -25,7 +26,6 @@ FIGURE: [fig-web4sa/vib1_flask_input, width=500] The input page. label{wf:vib1:f
 
 FIGURE: [fig-web4sa/vib1_flask_output, width=500] The result page. label{wf:vib1:flask:fig:result}
 
-!split
 ===== Programming the Flask application =====
 
 ## Define Mako variable for path to source code
@@ -48,6 +48,8 @@ extra files (CSS, images, etc.) in a subdirectory `static`.
 
 @@@CODE ${app_path}/compute.py
 
+idx{Flask!input forms}
+
 We organize the model, view, and controller as three separate
 files, as illustrated in
 Section ref{wf:hw3:flask}. This more complicated app involves
@@ -62,6 +64,8 @@ measured. It is also possible to add a `description` argument with
 some help message. Furthermore, we include a `default` value, which
 will appear in the text field such that the user does not need to
 fill in all values.
+
+idx{Flask!`index` function}
 
 The view will of course make use of templates, and we shall experiment
 with different templates. Therefore, we allow a command-line argument
@@ -104,6 +108,8 @@ You are encouraged to run `python controller.py` and load `http://127.0.0.1:5000
 !split
 ===== Implementing error checking in the template =====
 
+idx{Flask!error checking}
+
 What happens if the user gives wrong input, for instance the letters `asd`
 instead of a number? Actually nothing! The `FloatField` object
 checks that the input is compatible with a real number in the
@@ -142,6 +148,8 @@ FIGURE: [fig-web4sa/vib1_flask_error1, width=500] Error message because of wrong
 !split
 ===== Using style sheets =====
 
+idx{Flask!CSS style sheets}
+
 Web developers make heavy use of CSS style sheets to control the look
 and feel of web pages. Templates can utilize style sheets as any other
 standard HTML code. Here is a very simple example where we introduce
@@ -161,8 +169,9 @@ the style sheet:
 Just run `python controller.py view2` to see that the names
 of the variables to set in the web page are blue.
 
-!split
 ===== Using LaTeX mathematics =====
+
+idx{Flask!LaTeX mathematics}
 
 Scientific applications frequently have many input data that are
 defined through mathematics and where the typesetting on the
@@ -181,13 +190,21 @@ LaTeX rendering looks like in the browser.
 
 FIGURE: [fig-web4sa/vib1_flask_latex, width=500] LaTeX typesetting of mathematical symbols. label{wf:vib1:flask:fig:latex}
 
-!split
+
 ===== Rearringing the elements in the HTML template =====
 
 Now we want to place the plot to the right of the input forms in
-the web page, see Figure ref{wf:vib1:flask:fig:sidebyside}.
+the web page, see Figure ref{wf:vib1:flask:fig:sidebyside}. This can
+be accomplished by having an outer table with two rows. The first
+row contains the table with the input forms in the first column and
+the plot in the second column, while the second row features the
+*Compute* button in the first column.
 
-FIGURE: [fig-web4sa/vib1_flask_tabletable, width=700] New design with input and output side by side. label{wf:vib1:flask:fig:sidebyside}
+FIGURE: [fig-web4sa/vib1_flask_table2, width=700] New design with input and output side by side. label{wf:vib1:flask:fig:sidebyside}
+
+A relevant template file is `view4.html`:
+
+@@@CODE ${app_path}/templates/view4.html
 
 
 !split
@@ -197,6 +214,8 @@ FIGURE: [fig-web4sa/vib1_flask_tabletable, width=700] New design with input and 
 <%
 app_path = src_path + 'vib/vib2_flask'
 %>
+
+idx{Flask!input validation}
 
 
 The `FloatField` objects can check that the input is compatible with
@@ -260,6 +279,8 @@ A general such function may take the form
 
 @@@CODE ${app_path}/model.py fromto: def check_interval@def interval
 
+idx{`functools`}
+
 The problem is that `check_interval` takes four arguments, not only
 the `form` and `field` arguments that a validator function can accept.
 The way out of this difficulty is to use a Python tool `functools.partial`
@@ -317,6 +338,13 @@ code to look like they do in mathematical writing.
 ===== Autogenerating the code =====
 label{wf:vib3:flask:autogen}
 
+## Define Mako variable for path to source code
+<%
+app_path = src_path + 'vib/vib3_flask'
+%>
+
+idx{`getattr`} idx{`setattr`} idx{`hasattr`}
+
 We shall now present generic `model.py`, `view.py`, and `controller.py`
 files that work with *any* `compute` function (!). This example will
 demonstrate some advanced, powerful features of Python.
@@ -360,7 +388,7 @@ class InputForm:
 Assuming that all arguments in `compute` are floats, we could
 do
 
-!bc pydoc
+!bc pycod
 class InputForm:
     pass  # Empty class
 
@@ -418,7 +446,7 @@ result. Therefore, we leave it to this writer to provide the part
 of the HTML template that renders the result. The file `templates/view_results.html` contains this user-provided code, while `templates/view_forms.html`
 is the generic template for the forms:
 
-@@@CODE ${app_path}/templates/view_forms.py
+@@@CODE ${app_path}/templates/view_forms.html
 
 By default, in `templates/view_results_default.html`, we can
 create a code that checks if `results` is a string ending in `'.png'`
@@ -439,7 +467,14 @@ Let us apply the files above to plot the *gamma probability density*
 e^{-\left(\frac{x}{A}\right)^h},
 \]
 !et
-and compute its mean value $A\Gamma(a + 1/h)/\Gamma(a)$ and
+and its cumulative density
+
+!bt
+\[ G(x; a, h, A) = \int_0^x g(\tau; a, h, A)d\tau,\]
+!et
+computed by numerically the Trapezoidal rule, for instance.
+We also want to compute and display
+the mean value $A\Gamma(a + 1/h)/\Gamma(a)$ and
 standard deviation
 
 !bt
@@ -447,14 +482,19 @@ standard deviation
 !et
 Here, $\Gamma(a)$ is the gamma function, which can be computed
 by `math.gamma(a)` using Python's `math` module.
-A relevant implementation of $g(x;a,h,A)$ and a function for
-making a plot of $g$ for $x\in [0,5\sigma]$ is
+Below are relevant implementations of $g(x;a,h,A)$ (`gamma_density`),
+$G(x; a, h, A)$ (`gamma_cumulative`), and a function for
+making a plot of $g$ og $G$ for $x\in [0,7\sigma]$.
 
-@@@CODE ${app_path}/compute.py fromto: def gamma_pdf@if __name
-The `compute_gamma` function returns a tuple of three values.
-A suitable corresponding `view_results.html` file for showing
-the plot and writing out the mean and stadard deviation values
-is
+@@@CODE ${app_path}/compute.py fromto: def gamma_density@if __name
+The `compute_gamma` function returns a tuple of four values.
+We want output as displayed in Figure ref{wf:vib3:flask:fig:gamma}.
 
-@@@CODE ${app_path}/templates/view_results.py
+FIGURE: [fig-web4sa/vib3_flask_gamma, width=700] Design of a web page illustrating the gamma probability functions. label{wf:vib3:flask:fig:gamma}
+
+The design is realized in the file `view_results.html` shown below.
+
+@@@CODE ${app_path}/templates/view_results.html
+
+
 

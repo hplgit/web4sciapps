@@ -1,0 +1,98 @@
+.. !split
+
+.. _wf:hw:mvc:
+
+Application of the MVC pattern
+------------------------------
+
+
+
+Before thinking of a web application, we first *refactor* our program
+such that it fits with the classical MVC pattern and a compute component.
+The refactoring does not change the functionality of the code, it
+just distributes the original statements in functions and modules.
+Here we create four modules: ``model``, ``view``,
+``compute``, and ``controller``.
+
+ * The ``compute`` module contains a function ``compute(r)`` that performs
+   the mathematics and returns the value of ``s``.
+
+ * The ``model`` module holds the input data, here ``r``.
+
+ * The ``view`` module has two functions, one for reading input data,
+   ``get_input``,
+   and one for presenting the output, ``present_output``.
+   The later takes the input, calls ``compute`` functionalty, and
+   generates the output.
+
+ * The ``controller`` module initializes model's data from the view
+   and calls the view to present the output.
+
+The ``model.py`` file contains the ``r`` variable, which must
+be declared with a default value in order to create the data object:
+
+
+.. code-block:: python
+
+        r = 0.0    # input
+        s = None   # output
+
+
+The ``view.py`` file is restricted to the communication with the user and reads
+
+
+.. code-block:: python
+
+        import sys
+        import compute
+        
+        # Input: float r
+        # Output: "Hello, World! sin(r)=..."
+        
+        def get_input():
+            """Get input data from the command line."""
+            r = float(sys.argv[1])
+            return r
+        
+        def present_output(r):
+            """Write results to terminal window."""
+            s = compute.compute(r)
+            print 'Hello, World! sin(%g)=%g' % (r, s)
+
+
+The mathematics is encapsulated in ``compute.py``:
+
+
+.. code-block:: python
+
+        import math
+        
+        def compute(r):
+            return math.sin(r)
+
+
+Finally, ``controller.py`` glues the model and the view:
+
+
+.. code-block:: python
+
+        import model, view
+        
+        model.r = view.get_input()
+        view.present_output(model.r)
+
+
+Let us try our refactored code:
+
+
+.. code-block:: console
+
+        Terminal> python controller.py 1.2
+        Hello, World! sin(1.2)=0.932039
+
+
+Our goal is to create a web interface to our scientific hello world
+program such that we can fill in the number ``r`` in a text field, click a
+*Compute* button and get back a new web page with the output text
+shown above: "Hello, World! sin(r)=s".
+

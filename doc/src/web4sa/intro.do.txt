@@ -1,5 +1,7 @@
 ======= Web frameworks =======
 
+idx{web frameworks}
+
 Computational scientists may want to offer their applications through
 a web interface, thereby making a *web application*.
 Basically, this means that users can set input data
@@ -74,6 +76,8 @@ and classes.
 
 !split
 ===== The MVC pattern =====
+
+idx{MVC pattern}
 
 The MVC pattern stands for Model-View-Controller and is a way of
 separating the user's interaction with an application from the inner

@@ -1,3 +1,6 @@
+!split
+======= Exercises =======
+
 ===== Exercise: Add two numbers =====
 label{wf:exer:add2}
 file=add2.tar.gz
