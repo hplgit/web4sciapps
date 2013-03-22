@@ -1,18 +1,25 @@
 ======= Web frameworks =======
 
 Computational scientists may want to offer their applications through
-a web interface. Basically, this means that users can set input data
-to the application on a web page, then click *Compute*, and back
-comes a new web page with the results of the computations.
-Such web applications can be made from scratch using CGI scripts
-in (e.g.) Python, but the code quickly gets longer and more involved as
-the complexity of the web interface grows. Nowadays, most web applications
-are created with the aid of *web frameworks*, which are software
-packages that simplify the programming task. The downside of
-web frameworks is that there is a significant amount of steps and
-details to learn before your first simple demo application works.
-The upside is that much more advanced applications are within reach
-without much extra work.
+a web interface, thereby making a *web application*.
+Basically, this means that users can set input data
+to the application on a web page, then click on some *Compute* button,
+and back comes a new web page with the results of the computations.
+The web interface can either be used as a GUI locally on the
+scientist's computer, or the interface can be depolyed to
+a server and made available to the whole world.
+
+Web applications of the mentioned type can be created from scratch
+using CGI scripts in (e.g.) Python, but the code quickly gets longer
+and more involved as the complexity of the web interface
+grows. Nowadays, most web applications are created with the aid of
+*web frameworks*, which are software packages that simplify the
+programming tasks of offering services through the Internet. The
+downside of web frameworks is that there is a significant amount of
+steps and details to learn before your first simple demo application
+works.  The upside is that advanced applications are within reach,
+without an overwhelming amount of programming, as soon as you have
+understood the basic demos.
 
 # #if TOPIC == 'Flask+Django'
 We shall explore two web frameworks: the very popular "Django framework": "https://www.djangoproject.com/" and the more high-level and easy-to-use framework
@@ -24,32 +31,32 @@ over other web frameworks is the rich set of documentation and
 examples. Googling for "Django tutorials" gives lots of hits including
 a  list of "web tutorials": "https://code.djangoproject.com/wiki/Tutorials"
 and a list of "YouTube videos": "http://www.youtube.com/playlist?list=PL385A53B00B8B158E". There is also an electronic "Django book": "http://www.djangobook.com/en/2.0/". At the time of this writing, Flask is not
-much documented beyond the "official web site": "http://flask.pocoo.org/" and the "WTForms Documentation": "http://wtforms.simplecodes.com/docs/0.6/index.html".
+much documented beyond the "official web site": "http://flask.pocoo.org/" and the "WTForms Documentation": "http://wtforms.simplecodes.com/docs/0.6/index.html". There is, unfortunately, hardly any examples on how Django or Flask can be used to enable typical scientific applications for the web, and that is why we have developed some targeted examples on this topic.
 # #elif TOPIC == 'Flask'
 We shall in the forthcoming text explore the very easy-to-use "Flask framework":
 "http://flask.pocoo.org/".  At the time of this writing, Flask is not
-much documented beyond the "official web site": "http://flask.pocoo.org/" and the "WTForms Documentation": "http://wtforms.simplecodes.com/docs/0.6/index.html".
+much documented beyond the "official web site": "http://flask.pocoo.org/" and the "WTForms Documentation": "http://wtforms.simplecodes.com/docs/0.6/index.html". That is why we have made specific examples for the application of Flask in computational science.
 # #elif TOPIC == 'Django'
 We shall explore the very popular "Django framework": "https://www.djangoproject.com/" in the following.
 The primary advantage of Django
 over other web frameworks is the rich set of documentation and
 examples. Googling for "Django tutorials" gives lots of hits including
 a  list of "web tutorials": "https://code.djangoproject.com/wiki/Tutorials"
-and a list of "YouTube videos": "http://www.youtube.com/playlist?list=PL385A53B00B8B158E". There is also an electronic "Django book": "http://www.djangobook.com/en/2.0/".
+and a list of "YouTube videos": "http://www.youtube.com/playlist?list=PL385A53B00B8B158E". There is also an electronic "Django book": "http://www.djangobook.com/en/2.0/". However, there is hardly any example on using Django for scientific applications. The forthcoming text provides specific examples on how to webify some typical scienticic applications.
 # #endif
 
 
-The problem for a computational scientist, who wants to enable
-mathematical calculations through the web, is that most of
+The problem for a computational scientist who wants to enable
+mathematical calculations through the web is that most of
 the introductory examples on utilizing a particular
 web framework address web applications
-of very different nature, e.g., blogs. Therefore, we have made an
+of very different nature, e.g., blogs and polls. Therefore, we have made an
 alternative introduction which explains, in the simplest possible way,
 how web frameworks can be used to
 
- o set up a web page with input data to your application,
- o run the application, and
- o set up a web page with the results of the computations.
+ o generate a web page with input data to your application,
+ o run the application to perform mathematical computations, and
+ o generate a web page with the results of the computations.
 
 # #if TOPIC == 'Flask+Django'
 To work with Django, you need to know about Python packages and modules
@@ -59,11 +66,10 @@ decorators might be an advantage.
 # #elif TOPIC == 'Flask'
 Flask is very easy to work with and extensive Python knowledge is
 not necessary. It is in fact enough to know about functions and
-modules. Some knowledge of classes and a bit of decorators is
-an advantage.
+modules. Beyond that, some knowledge of classes might be an advantage.
 # #elif TOPIC == 'Django'
-To work with Django, you need to know about Python packages and modules
-as well as Python classes.
+To work with Django, you need to know about Python packages, modules,
+and classes.
 # #endif
 
 !split
@@ -71,11 +77,15 @@ as well as Python classes.
 
 The MVC pattern stands for Model-View-Controller and is a way of
 separating the user's interaction with an application from the inner
-workings of the application. The "Wikipedia definition of the MVC pattern": "http://en.wikipedia.org/wiki/MVC_Pattern" gives a very high-level
-explanation of what the model, view, and controller do and acknowledges
+workings of the application. In a scientific application this
+usually means separaring mathematical computations from the
+user interface and visualization of results.
+The "Wikipedia definition of the MVC pattern": "http://en.wikipedia.org/wiki/MVC_Pattern" gives a very high-level
+explanation of what the model, view, and controller do and mentions
 the fact that different web frameworks interpret the three components
 differently. Any web application works with a set of data and needs
-a user interface for communicating the data with the user. The classical
+a user interface for the communication of data between the user and
+some data processing software. The classical
 MVC pattern introduces
 
  * the model to hold the data
@@ -96,31 +106,38 @@ thinking.
 
 Web frameworks often have their own way of interpreting the
 model, view, and controller parts of the MVC pattern.
-Here we shall employ an interpretation which is compatible with
-what we need later on:
+In particular, most frameworks often divide the view into two parts:
+one software component and one HTML template. The latter takes care
+of the look and feel of the web page while the former often takes
+the role of being the controller too.
+For our scientific applications
+we shall employ an interpretation of the MVC pattern
+which is compatible with what we need later on:
 
  * the model contains the data (often only the input data) of the application,
  * the view controls the user interface that handles input and output data,
    and also calls to functionality that computes the output given the input.
 
+The model will be a Python class with static attributes holding the data.
+The view consists of Python code processing the model's data and HTML
+templates for the design of the web pages.
+
 # #if TOPIC == 'Django'
-Django generates files with names `views.py` and `models.py` so it is
-necessary to have some idea what Django means with these terms.
+Django generates files with names `models.py` and `views.py` so the
+model and view concepts are very explicit.
 The controller functionality in Django lies both in the `views.py` file and
 in configuration
-files (`settings.py` and `urls.py`). The view component of the application
-consists both of the `views.py` file and template files used to create
-the HTML code in the web pages.
+files (`settings.py` and `urls.py`). The view component consists of
+the `views.py` file and HTML templates.
 # #elif TOPIC == 'Flask'
 Flask does not force any MVC pattern on the programmer, but
 the code needed to build web applications can easily be split into
-model, view, and controller components, as will be shown later.
-The view is also intimitely connected to
-a *template* file specifying the HTML in the generated web pages.
+model, view, and controller components, and a compute
+component, as will be demonstrated later.
 # #elif TOPIC == 'Flask+Django'
 Flask does not force any MVC pattern on the programmer, but
 the code needed to build web applications can easily be split into
-model, view, and controller components, as will be shown later.
+model, view, controller, and compute components, as will be shown later.
 Django, on the other hand, automatically generates application files with names
 `views.py` and `models.py` so it is
 necessary to have some idea what Django means with these terms.
