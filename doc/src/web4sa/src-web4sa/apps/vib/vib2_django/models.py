@@ -14,12 +14,12 @@ def check_interval(value, min_value=None, max_value=None):
     if max_value is not None:
         if value > max_value:
             failure = True
-    min_value = '-infty' if min_value is None else str(min_value)
-    max_value =  'infty' if max_value is None else str(max_value)
     if failure:
         raise ValidationError(
             'value=%s not in [%s, %s]' %
-            (value, min_value, max_value))
+            (value,
+             '-infty' if min_value is None else str(min_value),
+             'infty' if max_value is None else str(max_value)))
 
 def interval(min_value=None, max_value=None):
     """Django-compatible interface to check_interval."""

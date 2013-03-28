@@ -2,15 +2,24 @@
 ======= Handling multiple input variables in Django =======
 label{wf:vib:django}
 
-We shall briefly demonstrate how to make the multi-variable input
-application from Section ref{wf:vib:flask} in Django.
+We shall briefly how to work with multi-variable input in Django.
+# #if TOPIC == 'Flask+Django'
+The text is the Django counterpart to Section ref{wf:vib:flask}.
+# #endif
 There are four float input variables: $A$, $b$, $w$, and $T$.
 A function `compute` in the file `compute.py` makes
-a plot of a function depending on these four parameters and returns
+a plot of the function $u(t)=Ae^{-bt}\sin (wt)$
+depending on these four parameters and returns
 the name of the plot file. Our task is to define four input fields,
 execute the `compute` function and show the input fields together with
-the resulting plot, cf. Figures ref{wf:vib1:flask:fig:input}
+the resulting plot,
+cf. Figures ref{wf:vib1:flask:fig:input}
 and ref{wf:vib1:flask:fig:result}.
+# #if TOPIC == 'Django'
+FIGURE: [fig-web4sa/vib1_flask_input, width=500] The input page. label{wf:vib1:flask:fig:input}
+
+FIGURE: [fig-web4sa/vib1_flask_output, width=700] The result page. label{wf:vib1:flask:fig:result}
+# #endif
 
 ===== Programming the Django application =====
 
@@ -22,7 +31,7 @@ app_path = src_path + 'vib/vib1_django'
 
 Any Django app needs a project, but here we reuse the project
 we set up for the scientific hello world examples. We go to
-`apps/vib` and create the Django app
+the directory `apps/vib` and create the Django app `vib1_django`:
 
 !bc sys
 Terminal> python ../../django_project/manage.py startapp vib1_django
@@ -36,17 +45,31 @@ Then we
  o add `url(r'^vib1/', 'vib1_django.views.index')` to the `patterns`
    call in `urls.py`.
 
+These steps ensure that Django can find our application as a module/package,
+that Django can find our templates associated with this application,
+and that the URL address applies the name `vib1` to reach the application.
+
+The computations in our application are put in a file `compute.py`
+# #if TOPIC == 'Django'
+
+@@@CODE ${app_path}/compute.py
+# #else
+and explained in detail in Section ref{wf:vib1:flask:app}.
+# #endif
+
 idx{Django!input forms}
 
-We can now invoke `models.py` to add form fields for the four
-input variables:
+We can now write `models.py` and the `Input` class that defines
+the form fields for the four input variables:
 
 @@@CODE ${app_path}/models.py
 Note here that we can provide a more explanatory name than just
 the variable name, e.g., `' amplitude (m)'` for `A`. However,
 Django will always capitalize these descriptions, so if one really
-needs lower case names (e.g., to be compatible with mathematics),
-one must start the text with a space. We also provide a default
+needs lower case names (e.g., to be compatible with a mathematical notation
+or when just listing the unit),
+one must start the text with a space, as we have demonstrated above.
+We also provide a default
 value such that all fields have a value when the user sees
 the page.
 
@@ -58,7 +81,7 @@ The `views.py` file looks as follows:
 Some remarks are necessary:
 
  o Doing an `os.chdir` to the current working directory is necessary
-   as Django may be back in another working directory if you have
+   as Django may be left back in another working directory if you have
    tested other apps.
  o The `form2` object from `form.save` is the object we extract
    data from and send to `compute`, but the original `form`
@@ -83,13 +106,14 @@ app_path = src_path + 'vib/vib2_django'
 
 Django has a series of methods available for user-provided validation
 of form data. These are exemplified in the app `vib2_django`, which
-is an extension of the `vib1_django` app (with additional code, and
-of course, registrations in `settings.py` and `urls.py`).
+is an extension of the `vib1_django` app with additional code. (This other
+app needs of course registrations in `settings.py` and `urls.py`, similar
+to what we did for the `vib`_django` app.)
 
 idx{Django!input validation}
 
-Checking that $A>0$ is easiest done with a built-in Django
-validator:
+Making sure that $A>0$ is easiest done with a built-in Django
+validator for minimum value checking:
 
 !bc pycod
 class Input(models.Model):
@@ -98,14 +122,21 @@ class Input(models.Model):
         validators=[MinValueValidator(0)])
 !ec
 
-We can write our own validators, which are functions taking one parameter
-as argument, a value, and raising a `ValidationError` if the value
-is wrong. Checking that a value is inside an interval can first be
-implemented by
+We can write our own validators, which are functions taking the value
+is the only argument and raising a `ValidationError` exception if the
+value is wrong. Checking that a value is inside an interval can first
+be implemented by
 
 @@@CODE ${app_path}/models.py fromto: def check_interval@def interval
 However, this function takes more than the value as argument. We therefore
-need to wrap it by a function with `value` as the only argument:
+need to wrap it by a function with `value` as the only argument. The following
+utility returns such a
+# #if TOPIC == 'Flask+Django'
+function (see Section ref{wf:vib1:flask:validation} for more
+explanation):
+# #else
+function:
+# #endif
 
 !bc pycod
 import functools
@@ -130,11 +161,11 @@ class Input(models.Model):
 
 A final example on custom validation is to avoid plotting more
 than 30 periods of the oscillating function $u$. This translates
-to checking of $T$ is geater
+to checking that $T$ is geater
 than 30 periods, i.e., $T>30\cdot 2\pi/w$. The task is done in
-the `InputForm` class, where any method `clean_T` can do
-validation and adjustment of the field name `T`. The code goes
-as follows:
+the `InputForm` class, where any method `clean_name` can do
+validation and adjustment of the field name `name`. The code for
+a `clean_T` method goes as follows:
 
 !bc pycod
 class InputForm(ModelForm):
@@ -153,5 +184,7 @@ class InputForm(ModelForm):
         return T
 !ec
 We refer to the vast Django documentation for many other ways of
-validating forms.
+validating forms. The reader is encouraged to run the `vib2_django`
+application and test out the validations we have implemented.
+
 

@@ -12,7 +12,19 @@ in a tar file.
 
 
 
-# #ifdef Flask+Django or Flask
+# #if TOPIC in ('Flask+Django', 'Flask')
+===== Exercise: Extend the `vib3_flask` application =====
+label{wf:exer:vib3:ext}
+file=vib3_ext.tar.gz
+
+Use the `label` argument in the form field objects to add an
+information of the type of data that is to be supplied in the
+text field. Extend the `model.py` file to also handle
+lists, tuples, and Numerical Python arrays. For these three
+new data types, use a `TextField` object and run `eval`
+on the text in the `view.py` file.
+
+
 ===== Exercise: Auto-generate code from function signature =====
 file=generate_flask.py
 

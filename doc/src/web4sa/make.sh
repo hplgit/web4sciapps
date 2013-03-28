@@ -36,7 +36,7 @@ mv sphinx-rootdir/sphinx-* .
 
 doconce format pdflatex $name -DTOPIC=Flask+Django
 if [ $? -ne 0 ]; then exit; fi
-doconce ptex2tex $name envirs=minted
+doconce ptex2tex $name envir=minted
 pdflatex -shell-escape $name
 makeindex $name
 pdflatex -shell-escape $name

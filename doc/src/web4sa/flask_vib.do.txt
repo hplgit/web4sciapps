@@ -4,17 +4,18 @@
 label{wf:vib:flask}
 
 The scientific hello world example shows how to work with one input
-variable and one output variable. We can easily derive a solution for
-a collection of input variables and some corresponding HTML code
-as result. Multiple input variables are listed in the `InputForm`
-class using different types for different forms (text field,
-float field, integer field, check box field for boolean values, etc.).
-The value of these variables will be available in a `form` object
-for computation. It is then a matter of taking the output from the
-computation and format the corresponding HTML code for presenting
-the result.
+variable and one output variable. We can easily derive an extensible
+recipe for apps with a collection of input variables and some
+corresponding HTML code as result. Multiple input variables are listed
+in the `InputForm` class using different types for different forms
+(text field, float field, integer field, check box field for boolean
+values, etc.).  The value of these variables will be available in a
+`form` object for computation. It is then a matter of setting
+up a template code where the various variables if the `form` object
+are formatted in HTML code as desired.
 
-We address the task of plotting the function $u(t)=Ae^{-bt}\sin (wt)$ for
+Our sample web application
+addresses the task of plotting the function $u(t)=Ae^{-bt}\sin (wt)$ for
 $t\in [0,T]$. The web application must have fields for the numbers $A$,
 $b$, $w$, and $T$, and a *Compute* button, as shown in Figure
 ref{wf:vib1:flask:fig:input}. Filling in values, say $0.1$ for $b$ and
@@ -24,9 +25,10 @@ button.
 
 FIGURE: [fig-web4sa/vib1_flask_input, width=500] The input page. label{wf:vib1:flask:fig:input}
 
-FIGURE: [fig-web4sa/vib1_flask_output, width=500] The result page. label{wf:vib1:flask:fig:result}
+FIGURE: [fig-web4sa/vib1_flask_output, width=700] The result page. label{wf:vib1:flask:fig:result}
 
 ===== Programming the Flask application =====
+label{wf:vib1:flask:app}
 
 ## Define Mako variable for path to source code
 <%
@@ -39,12 +41,14 @@ and ref{wf:vib1:flask:fig:result}. We start with the
 `compute.py` module since it contains only the computation of $u(t)$
 and the making of the plot, without any interaction with Flask.
 
+__The compute part.__
 More specifically, inside `compute.py`, we have a function for
 evaluating $u(t)$ and a `compute` function for making the plot. The
-return value is the name of the plot file, which should get a unique
-name every time the `compute` function is called such that the browser
-cannot reuse an already cached image. Flask applications must have all
-extra files (CSS, images, etc.) in a subdirectory `static`.
+return value of the latter is the name of the plot file, which should
+get a unique name every time the `compute` function is called such
+that the browser cannot reuse an already cached image. Flask
+applications must have all extra files (CSS, images, etc.) in a
+subdirectory `static`.
 
 @@@CODE ${app_path}/compute.py
 
@@ -54,7 +58,9 @@ We organize the model, view, and controller as three separate
 files, as illustrated in
 Section ref{wf:hw3:flask}. This more complicated app involves
 more code and especially the model will soon be handy to isolate in its own
-file. Our first version of `model.py` reads
+file.
+
+__The model.__ Our first version of `model.py` reads
 
 @@@CODE ${app_path}/model.py
 
@@ -67,7 +73,9 @@ fill in all values.
 
 idx{Flask!`index` function}
 
-The view will of course make use of templates, and we shall experiment
+
+__The view.__
+The view component will of course make use of templates, and we shall experiment
 with different templates. Therefore, we allow a command-line argument
 to this Flask app for choosing which template we want. The rest of
 the `view.py` file follows much the same set up as for the scientific
@@ -89,14 +97,15 @@ through the `label` keyword when constructing the field object, and
 writing the field object itself generates the text area for
 input (i.e., the HTML input form). The control statements we can
 use in the template are part of the "Jinja2": "http://jinja.pocoo.org/docs/"
-*templating language*. For now, the if-test, for-loop and
+templating language. For now, the if-test, for-loop and
 output of values (`{{ object }}`) are enough to generate the HTML
 code we want.
 
 Recall that the objects we need in the template, like `result` and `form`
 in the present case, are transferred to the template via keyword
 arguments to the `render_template` function. We can easily pass on
-any object in our application to the template.
+any object in our application to the template. Debugging of the template
+is done by viewing the HTML source of the web page in the browser.
 
 To get a runnable Flask application it remains to
 run the `app` object from `controller.py`:
@@ -126,7 +135,7 @@ def index():
         result = None
 !ec
 we realize that wrong input implies `result = None` and no computations
-and plot. Fortunately, each field object gets an attribute `error`
+and no plot! Fortunately, each field object gets an attribute `error`
 with information on errors that occur on input. We can write out
 this information on the web page, as exemplified in the template
 `view1.html`:
@@ -139,9 +148,10 @@ Two things are worth noticing here:
  o We can make an extra column in the HTML table with a list
    of possible errors for each field object.
 
-Let us test the `A` field by writing `asd` instead of a number. This
-triggers an error, which is written in red to the right of the label,
-see Figure ref{wf:vib2:flask:fig:error1}.
+Let us test the error handling of the `A` field by
+writing `asd` instead of a number. This input
+triggers an error, whose message is written in red to the right of the label,
+see Figure ref{wf:vib1:flask:fig:error1}.
 
 FIGURE: [fig-web4sa/vib1_flask_error1, width=500] Error message because of wrong input. label{wf:vib1:flask:fig:error1}
 
@@ -153,7 +163,7 @@ idx{Flask!CSS style sheets}
 Web developers make heavy use of CSS style sheets to control the look
 and feel of web pages. Templates can utilize style sheets as any other
 standard HTML code. Here is a very simple example where we introduce
-a class `name` for the column with the field name and set the
+a class `name` for the HTML table's column with the field name and set the
 foreground color of the text in this column to blue.
 The style sheet is called `basic.css` and *must* reside in the
 `static` subdirectory of the Flask application directory:
@@ -176,19 +186,19 @@ idx{Flask!LaTeX mathematics}
 Scientific applications frequently have many input data that are
 defined through mathematics and where the typesetting on the
 web page should be as close as possible to the typesetting where
-the mathematics is explained. In the present example we would like
+the mathematics is documented. In the present example we would like
 to typeset $A$, $b$, $w$, and $T$ with italic font as done
 in LaTeX. Fortunately, native LaTeX typesetting is available in
 HTML through the tool "MathJax": "http://www.mathjax.org/".
 Our template `view3.html` enables MathJax. Formulas are written
 with standard LaTeX inside `\(` and `\)`, while equations are surrounded
-by `$$`. Here we use formulas exclusively:
+by `$$`. Here we use formulas only:
 
 @@@CODE ${app_path}/templates/view3.html fromto: @\{% if field\.errors
 Figure ref{wf:vib1:flask:fig:latex} displays how the
 LaTeX rendering looks like in the browser.
 
-FIGURE: [fig-web4sa/vib1_flask_latex, width=500] LaTeX typesetting of mathematical symbols. label{wf:vib1:flask:fig:latex}
+FIGURE: [fig-web4sa/vib1_flask_latex, width=650] LaTeX typesetting of mathematical symbols. label{wf:vib1:flask:fig:latex}
 
 
 ===== Rearringing the elements in the HTML template =====
@@ -202,13 +212,14 @@ the plot in the second column, while the second row features the
 
 FIGURE: [fig-web4sa/vib1_flask_table2, width=700] New design with input and output side by side. label{wf:vib1:flask:fig:sidebyside}
 
-A relevant template file is `view4.html`:
+The enabling template file is `view4.html`:
 
 @@@CODE ${app_path}/templates/view4.html
 
 
 !split
 ===== User-provided validation =====
+label{wf:vib1:flask:validation}
 
 ## Define Mako variable for path to source code
 <%
@@ -225,7 +236,7 @@ We can write functions for checking appropriate conditions and
 supply the function to the list of validator functions in the call to
 the `FloatField` constructor or other field constructors. The extra
 code is a part of the `model.py` and the presented extensions appear
-in the directory `vib2_flask`.
+in the directory "`vib2_flask`": "${github_path}/${app_path}".
 
 The simplest approach to validation is to use existing functionality
 in the web framework. Checking that $A>0$ can be done by
@@ -264,7 +275,7 @@ class InputForm(Form):
         validators=[validators.InputRequired(), check_T])
 !ec
 The validator
-objects are tested one by one as the appear in the list, and if
+objects are tested one by one as they appear in the list, and if
 one fails, the others are not invoked.
 We therefore add `check_T` after the check of input such that we know we
 have a value for all data when we run the computations and test
@@ -282,13 +293,15 @@ A general such function may take the form
 idx{`functools`}
 
 The problem is that `check_interval` takes four arguments, not only
-the `form` and `field` arguments that a validator function can accept.
+the `form` and `field` arguments that a validator function in the
+Flask framework can accept.
 The way out of this difficulty is to use a Python tool `functools.partial`
-which allows us to call a function with some of the arguments set.
+which allows us to call a function with some of the arguments set beforehand.
 Here, we want to create a new function that calls `check_interval`
 with some prescribed values of `min_value` and `max_value`.
 This function looks like it does not have these arguments, only
-`form` and `field`. The following function produces this function:
+`form` and `field`. The following function produces this function, which we
+can use as a valid Flask validator function:
 
 !bc pycod
 import functools
@@ -297,9 +310,8 @@ def interval(min_value=None, max_value=None):
     return functools.partial(
         check_interval, min_value=min_value, max_value=max_value)
 !ec
-We can in any field constructor just add
-`interval(a, b)` as a validator function checking if the field value is
-in the interval between `a` and `b`:
+We can now in any field constructor just add
+`interval(a, b)` as a validator function, here checking that $b\in [0,\infty)$:
 
 !bc pycod
 class InputForm(Form):
@@ -312,12 +324,13 @@ class InputForm(Form):
 Let us test our tailored error checking. Run `python controller.py`
 in the `vib2_flask` directory and fill in $-1.0$ in the $b$ field.
 Pressing *Compute* invokes our `interval(0,None)` function, which
-is nothing but a call `check_interval(field, form, 0, None)`,
-and the test `if field.data < min_value` becomes true, `failure`
-is set and the exception is raised. The message in the exception
+is nothing but a call `check_interval(field, form, 0, None)`.
+Inside this function,
+the test `if field.data < min_value` becomes true, `failure`
+is set, and the exception is raised. The message in the exception
 is available in the `field.errors` attribute so our template
 will write it out in red, see Figure ref{wf:vib2:flask:fig:error1}.
-The template used in `vib_flask` is basically the same as `view3.html`
+The template used in `vib2_flask` is basically the same as `view3.html`
 in `vib1_flask`, i.e., it feaures LaTeX mathematics and checking of
 `field.errors`.
 
@@ -326,13 +339,14 @@ FIGURE: [fig-web4sa/vib2_flask_error1, width=500] Triggering of a user-defined e
 Finally, we mention a detail in the `view.py` file in the `vib2_flask`
 app: instead of sending `form.var.data` to the `compute` function we
 may automatically generate a set of local variables such that the
-work with data from the web page looks nicer:
+application of data from the web page, here in the `compute` call, looks nicer:
 
 @@@CODE ${app_path}/view.py fromto: def index@
 The idea is just to run `exec` on a declaration of a local variable
 with name `field.name` for each field in the form. This trick is often
-neat if data are buried in objects and you want variables in your
-code to look like they do in mathematical writing.
+neat if web variables are buried in objects (`form.T.data`) and you want these
+variables in your
+code to look like they do in mathematical writing (`T` for $T$).
 
 !split
 ===== Autogenerating the code =====
@@ -349,9 +363,10 @@ We shall now present generic `model.py`, `view.py`, and `controller.py`
 files that work with *any* `compute` function (!). This example will
 demonstrate some advanced, powerful features of Python.
 
+__Inspecting function signatures.__
 The basic idea is that the Python module `inspect` can be used to
-retrieve the names of the arguments, and the default values of
-keyword arguments of any given `compute` function. Say we have some
+retrieve the names of the arguments and the default values of
+keyword arguments of *any* given `compute` function. Say we have some
 
 !bc pycod
 def mycompute(A, m=0, s=1, w=1, x_range=[-3,3]):
@@ -371,8 +386,12 @@ leads to
 arg_names = ['A', 'm', 's', 'w', 'x_range']
 defaults = (0, 1, 1, [-3, 3])
 !ec
+We have all the argument names in `arg_names` and
+`defaults[i]` is the default value of keyword argument
+`arg_names[j]`, where `j = len(arg_names) - len(defaults) + i`.
 
-Knowing the names `name` of some argument in the `compute`
+__Generating the model.__
+Knowing the name `name` of some argument in the `compute`
 function, we can make the corresponding class attribute
 in the `InputForm` class by
 
@@ -396,23 +415,35 @@ arg_names = inspect.getargspec(mycompute).args
 for name in arg_names:
     setattr(InputForm, name, FloatForm())
 !ec
-However, we can do better than this: default values can be set for
-keyword arguments, and the type of default value can be used to
+However, we can do better than this: for
+keyword arguments the type of the default value can be used to
 select the appropriate form class. The complete `model.py` file
 then goes as follows:
 
 @@@CODE ${app_path}/model.py
-(The `compute_gamma` function imported from `compute` will be treated later.)
+(The `compute_gamma` function imported from `compute` is the
+only application-specific statement in this code and will be explained later.)
 
+__Generating the view.__
 The call to `compute` in the `view.py` file must also be expressed
-in a general way such that it handle any type and number of
-parameters. This is achieved by collecting all parameters in
+in a general way such that the call handles any type and number of
+parameters. This can be done in two ways, using either positional
+or keyword arguments.
+
+The technique with positional arguments
+is explained first. It consists of collecting all parameters in
 a list or tuple, called `args`, and then calling `compute(*args)`
-(which is equivalent to `compute(args[0], args[1], ..., args[l])`
-if `l` is `len(args)-1`). The value of the form variable with
-name `name` (string) is extracted by `getattr(form, name).data`,
-which is the same as `form.A.data` if `name` equals `'A'`.
-Collecting all arguments and calling `compute` are done with
+(which is equivalent to `compute(args[0], args[1], ..., args[n])`
+if `n` is `len(args)-1`). The elements of `args` are the values of the
+form variables. We know the name of a form variable as a string
+`name` (from `arg_names`), and if `form` is the form object,
+the construction `getattr(form, name).data` extracts the value
+that the user provided (`getattr(obj, attr)` gets the attribute, with name
+available as a string in `attr`, in the object `obj`).
+For exampe, if `name` is `'A'`, `getattr(form, name).data` is the same as
+`form.A.data`.
+Collecting all form variables, placing them in a list,
+and calling `compute` are done with
 
 !bc pycod
 arg_names = inspect.getargspec(compute).args
@@ -427,40 +458,50 @@ test if `name` is present in the `form` object:
 args = [getattr(form, name).data for name in arg_names
         if hasattr(form, name)]
 !ec
-We could also use keyword arguments in the call in case
-the `args` list should have the parameters in the wrong order:
+
+A potential problem with the `args` list is that the values might
+be in wrong order. It appears, fortunately, that the order we
+assign attributes to the form class is preserved when iterating over
+the form. Nevertheless, using keyword arguments instead of positional
+arguments provides a completely safe solution to calling `compute`
+with the correct arguments. Keyword arguments are placed in a
+dictionary `kwargs` and `compute` is called as `compute(**kwargs)`.
+The generic solution is
 
 !bc pycod
 kwargs = {name: getattr(form, name).data for name in arg_names
           if hasattr(form, name)}
 result = compute(**kwargs)
 !ec
-The `compute(**kwargs)` becomes `compute(A=1, b=3, w=0.5)`
+The `compute(**kwargs)` call is equivalent to `compute(A=1, b=3, w=0.5)`
 in case `kwargs = {'w'=0.5, 'A':1, 'b':3}` (recall that the order of
 the keys in a Python dictionary is undetermined).
 
+__Generating the template.__
 It remains to generate the right HTML template. The HTML code depends
-what the returned `result` object from `compute` contains. Only the
-writer of the `compute` function knows the details of the returned
-result. Therefore, we leave it to this writer to provide the part
-of the HTML template that renders the result. The file `templates/view_results.html` contains this user-provided code, while `templates/view_forms.html`
-is the generic template for the forms:
+on what the returned `result` object from `compute` contains. Only a
+human who has the read `compute` code knows the details of the returned
+result. Therefore, we leave it to a human to provide the part
+of the HTML template that renders the result. The file `templates/view_results.html` contains this human-provided code, while `templates/view_forms.html`
+is a completely generic template for the forms:
 
 @@@CODE ${app_path}/templates/view_forms.html
 
-By default, in `templates/view_results_default.html`, we can
-create a code that checks if `results` is a string ending in `'.png'`
-or other typical file extensions for HTML images, and then write out
+A somewhat generic solution for rendering the results can be
+provided by default. In the file `templates/view_results_default.html` we
+offer a code that checks if `results` is a string ending in `'.png'`
+or other typical file extensions for HTML images, and then writes out
 the code for an image, and otherwise a string version of the `results`
 object is dumped to the web page:
 
 @@@CODE ${app_path}/templates/view_results_default.py
-The complete, generic `index` function now becomes
+The `index` function must combine the two pieces of templates.
+The complete, generic form of this function is then
 
 @@@CODE ${app_path}/view.py fromto: def index@
 
 __Application.__
-Let us apply the files above to plot the *gamma probability density*
+Let us apply the files above to plot the gamma probability density function
 
 !bt
 \[ g(x; a, h, A) = \frac{|h|}{\Gamma(a)A}\left(\frac{x}{A}\right)^{ah-1}
@@ -478,12 +519,13 @@ the mean value $A\Gamma(a + 1/h)/\Gamma(a)$ and
 standard deviation
 
 !bt
-\[ \sigma = \frac{A}{\Gamma(a)}\sqrt{\Gamma(a + 2/h)\Gamma(a) - Gamma(a+1/h)^2}.\]
+\[ \sigma = \frac{A}{\Gamma(a)}\sqrt{\Gamma(a + 2/h)\Gamma(a) - \Gamma(a+1/h)^2}.\]
 !et
 Here, $\Gamma(a)$ is the gamma function, which can be computed
-by `math.gamma(a)` using Python's `math` module.
-Below are relevant implementations of $g(x;a,h,A)$ (`gamma_density`),
-$G(x; a, h, A)$ (`gamma_cumulative`), and a function for
+by `math.gamma(a)` in Python.
+Below is a `compute.py` file with the
+relevant implementations of $g(x;a,h,A)$ (`gamma_density`),
+$G(x; a, h, A)$ (`gamma_cumulative`), and a function `compute_gamma` for
 making a plot of $g$ og $G$ for $x\in [0,7\sigma]$.
 
 @@@CODE ${app_path}/compute.py fromto: def gamma_density@if __name
@@ -495,6 +537,19 @@ FIGURE: [fig-web4sa/vib3_flask_gamma, width=700] Design of a web page illustrati
 The design is realized in the file `view_results.html` shown below.
 
 @@@CODE ${app_path}/templates/view_results.html
+
+To create the web application, we just copy the generic `controller.py`,
+`model.py`,
+`view.py`,and `templates/view_forms.html` files, add the
+application-specific
+`compute.py` and `templates/view_results.html` files given above,
+and *write one line* in
+`model.py`:
+
+!bc pycod
+from compute import compute_gamma as compute
+!ec
+That's it! Running `controller.py` file starts the app.
 
 
 

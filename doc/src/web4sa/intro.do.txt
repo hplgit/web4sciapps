@@ -93,8 +93,8 @@ some data processing software. The classical
 MVC pattern introduces
 
  * the model to hold the data
- * the view to display data
- * the controller to move data by gluing the model and the view.
+ * the view to display the data
+ * the controller to move the data by gluing the model and the view.
 
 For applications performing mathematical computations we find it
 convenient to explicitly introduce a fourth component that we call
@@ -104,8 +104,8 @@ between data (model), the way data is presented (view), the
 computations (compute), and the way these components communicate
 (controller). In a small program such a separation may look as
 overkill, but it pays off in more complicated applications. More
-importantly, the concepts of the MVC pattern saturates the modules and
-files of web frameworks so one really needs to adapt to the MVC way of
+importantly, the concepts of the MVC pattern are widely used in
+web frameworks so one should really adapt to the MVC way of
 thinking.
 
 Web frameworks often have their own way of interpreting the
@@ -144,7 +144,7 @@ the code needed to build web applications can easily be split into
 model, view, controller, and compute components, as will be shown later.
 Django, on the other hand, automatically generates application files with names
 `views.py` and `models.py` so it is
-necessary to have some idea what Django means with these terms.
+necessary to have some idea what Django means by these terms.
 The controller functionality in Django lies both in the `views.py` file and
 in the configuration
 files (`settings.py` and `urls.py`). The view component of the application
@@ -160,13 +160,15 @@ split to meet the requirements of the MVC software design pattern.
 
 ## Define Mako variable for path to source code
 <%
-src_path = '../../../src/apps/'
+#src_path = '../../../src/apps/'
+src_path = 'src-web4sa/apps/'
 app_path = src_path + 'hw/orig'
+guthub_path = 'https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa'
 %>
 
 We shall start with the simplest possible application,
 a "scientific hello world program", where the
-task is to read a number of write out "Hello, World!" followed by
+task is to read a number and write out "Hello, World!" followed by
 the sine of the number. This application has one input variable and
 a line of text as output.
 
@@ -174,8 +176,13 @@ Our first implementation reads the input from the command
 line and writes the results to the terminal window:
 
 @@@CODE ${app_path}/hw.py
+In the terminal we can exemplify the program
 
-The task of the web version of this program is to read `r`
+!bc sys
+Terminal> python hw.py 1.2
+Hello, World! sin(1.2)=0.932039
+!ec
+The task of the web version of this program is to read the `r`
 variable from a web page, compute the sine,
 and write out a new web page with the resulting text.
 
@@ -196,15 +203,16 @@ Here we create four modules: `model`, `view`,
 `compute`, and `controller`.
 
  * The `compute` module contains a function `compute(r)` that performs
-   the mathematics and returns the value of `s`.
+   the mathematics and returns the value `s`, which equals `sin(r)`.
  * The `model` module holds the input data, here `r`.
  * The `view` module has two functions, one for reading input data,
    `get_input`,
    and one for presenting the output, `present_output`.
-   The later takes the input, calls `compute` functionalty, and
+   The latter takes the input, calls `compute` functionalty, and
    generates the output.
- * The `controller` module initializes model's data from the view
-   and calls the view to present the output.
+ * The `controller` module calls the view to initialize
+   the model's data from the command line. Thereafter, the
+   view is called to present the output.
 
 The `model.py` file contains the `r` variable, which must
 be declared with a default value in order to create the data object:
@@ -230,7 +238,7 @@ Terminal> python controller.py 1.2
 Hello, World! sin(1.2)=0.932039
 !ec
 
-Our goal is to create a web interface to our scientific hello world
+The next step is to create a web interface to our scientific hello world
 program such that we can fill in the number `r` in a text field, click a
 *Compute* button and get back a new web page with the output text
 shown above: "Hello, World! sin(r)=s".

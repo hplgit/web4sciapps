@@ -22,12 +22,12 @@ def check_interval(form, field, min_value=None, max_value=None):
     if max_value is not None:
         if field.data > max_value:
             failure = True
-    min_value = '-infty' if min_value is None else str(min_value)
-    max_value =  'infty' if max_value is None else str(max_value)
     if failure:
         raise validators.ValidationError(
-            '%s=%s not in [%s, %s]' % (field.name, field.data,
-                                       min_value, max_value))
+            '%s=%s not in [%s, %s]' %
+            (field.name, field.data,
+             '-infty' if min_value is None else str(min_value),
+             'infty'  if max_value is None else str(max_value)))
 
 def interval(min_value=None, max_value=None):
     """Flask-compatible interface to check_interval."""

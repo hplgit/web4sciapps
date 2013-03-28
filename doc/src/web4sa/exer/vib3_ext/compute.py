@@ -38,13 +38,15 @@ def gamma_cumulative(x, a, h, A):
         r[i+1] = r[i] + 0.5*(g[i] + g[i+1])*(x[i+1] - x[i])
     return r
 
-def compute_gamma(a=0.5, h=2, A=math.sqrt(2), resolution=500):
+def compute_gamma(a=0.5, h=2.0, A=math.sqrt(2), resolution=500,
+                  range=[0,7]):
     """Return plot and mean/st.dev. value of the gamma density."""
+    print 'range:', type(range), range
     gah = math.gamma(a + 1./h)
     mean = A*gah/math.gamma(a)
     stdev = A/math.gamma(a)*math.sqrt(
         math.gamma(a + 2./h)*math.gamma(a) - gah**2)
-    x = linspace(0, 7*stdev, resolution+1)
+    x = linspace(0, range[1]*stdev, resolution+1)
     y = gamma_density(x, a, h, A)
     plt.figure()  # needed to avoid adding curves in plot
     plt.plot(x, y)
