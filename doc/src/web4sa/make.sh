@@ -44,3 +44,7 @@ pdflatex -shell-escape $name
 
 doconce format html index --html-style=bloodish
 
+# Publish
+dest=../../pub
+cp -r *.html .*.html fig-$name sphinx-* $dest
+rm -rf $dest/sphinx-rootdir

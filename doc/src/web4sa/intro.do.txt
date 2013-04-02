@@ -163,7 +163,7 @@ split to meet the requirements of the MVC software design pattern.
 #src_path = '../../../src/apps/'
 src_path = 'src-web4sa/apps/'
 app_path = src_path + 'hw/orig'
-guthub_path = 'https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa'
+github_path = 'https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa'
 %>
 
 We shall start with the simplest possible application,

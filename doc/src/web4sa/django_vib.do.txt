@@ -108,7 +108,7 @@ Django has a series of methods available for user-provided validation
 of form data. These are exemplified in the app `vib2_django`, which
 is an extension of the `vib1_django` app with additional code. (This other
 app needs of course registrations in `settings.py` and `urls.py`, similar
-to what we did for the `vib`_django` app.)
+to what we did for the `vib1_django` app.)
 
 idx{Django!input validation}
 
