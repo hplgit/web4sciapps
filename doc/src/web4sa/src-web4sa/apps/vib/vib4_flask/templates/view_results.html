@@ -1,0 +1,20 @@
+{% if result != None %}
+<p>
+<table>
+<tr>
+<td>
+<img src="data:image/png;base64,{{ result[0] }}" width="400">
+</td><td>
+<img src="data:image/png;base64,{{ result[1] }}" width="400">
+</td></tr>
+<tr>
+<td>{{ result[2]|safe }}</td>
+<td>{{ result[3]|safe }}</td>
+</tr>
+<tr><td>
+Mean value: {{ result[4] }} <br>
+Standard deviation value: {{ result[5] }}
+</td></tr>
+</table>
+</p>
+{% endif %}

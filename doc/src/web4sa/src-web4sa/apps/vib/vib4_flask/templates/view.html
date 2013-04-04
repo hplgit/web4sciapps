@@ -1,0 +1,34 @@
+<form method=post action="">
+<table>
+  {% for field in form %}
+    <tr><td>{{ field.name }}</td> <td>{{ field }}</td>
+    <td>{% if field.errors %}
+      <ul class=errors>
+      {% for error in field.errors %}
+        <li>{{ error }}</li>
+      {% endfor %}</ul>
+    {% endif %}</td></tr>
+  {% endfor %}
+</table>
+<p><input type=submit value=Compute></form></p>
+
+{% if result != None %}
+<p>
+<table>
+<tr>
+<td>
+<img src="data:image/png;base64,{{ result[0] }}" width="400">
+</td><td>
+<img src="data:image/png;base64,{{ result[1] }}" width="400">
+</td></tr>
+<tr>
+<td>{{ result[2]|safe }}</td>
+<td>{{ result[3]|safe }}</td>
+</tr>
+<tr><td>
+Mean value: {{ result[4] }} <br>
+Standard deviation value: {{ result[5] }}
+</td></tr>
+</table>
+</p>
+{% endif %}
