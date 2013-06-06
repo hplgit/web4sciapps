@@ -78,10 +78,10 @@ __The view.__
 The view component will of course make use of templates, and we shall experiment
 with different templates. Therefore, we allow a command-line argument
 to this Flask app for choosing which template we want. The rest of
-the `view.py` file follows much the same set up as for the scientific
+the `controller.py` file follows much the same set up as for the scientific
 hello world app:
 
-@@@CODE ${app_path}/view.py
+@@@CODE ${app_path}/controller.py
 
 The details governing how the web page really looks like lie in the
 template file. Since we have several fields and want them nicely
@@ -107,11 +107,6 @@ arguments to the `render_template` function. We can easily pass on
 any object in our application to the template. Debugging of the template
 is done by viewing the HTML source of the web page in the browser.
 
-To get a runnable Flask application it remains to
-run the `app` object from `controller.py`:
-
-@@@CODE ${app_path}/controller.py
-
 You are encouraged to run `python controller.py` and load `http://127.0.0.1:5000/vib1` into your web browser for testing.
 
 !split
@@ -123,7 +118,7 @@ What happens if the user gives wrong input, for instance the letters `asd`
 instead of a number? Actually nothing! The `FloatField` object
 checks that the input is compatible with a real number in the
 `form.validate()` call, but returns just `False` if this is not
-the case. Looking at the code in `view.py`,
+the case. Looking at the code in `controller.py`,
 
 !bc pycod
 def index():
@@ -336,12 +331,12 @@ in `vib1`, i.e., it feaures LaTeX mathematics and checking of
 
 FIGURE: [fig-web4sa/vib2_flask_error1, width=500] Triggering of a user-defined error check. label{wf:vib2:flask:fig:error1}
 
-Finally, we mention a detail in the `view.py` file in the `vib2`
+Finally, we mention a detail in the `controller.py` file in the `vib2`
 app: instead of sending `form.var.data` to the `compute` function we
 may automatically generate a set of local variables such that the
 application of data from the web page, here in the `compute` call, looks nicer:
 
-@@@CODE ${app_path}/view.py fromto: def index@
+@@@CODE ${app_path}/controller.py fromto: def index@
 The idea is just to run `exec` on a declaration of a local variable
 with name `field.name` for each field in the form. This trick is often
 neat if web variables are buried in objects (`form.T.data`) and you want these
@@ -359,7 +354,7 @@ app_path = src_path + 'flask_apps/vib3'
 
 idx{`getattr`} idx{`setattr`} idx{`hasattr`}
 
-We shall now present generic `model.py`, `view.py`, and `controller.py`
+We shall now present generic `model.py` and `controller.py`
 files that work with *any* `compute` function (!). This example will
 demonstrate some advanced, powerful features of Python. The source code
 is found in the "`vib3`": "${github_path}/${app_path}"
@@ -427,7 +422,7 @@ then goes as follows:
 only application-specific statement in this code and will be explained later.)
 
 __Generating the view.__
-The call to `compute` in the `view.py` file must also be expressed
+The call to `compute` in the `controller.py` file must also be expressed
 in a general way such that the call handles any type and number of
 parameters. This can be done in two ways, using either positional
 or keyword arguments.
@@ -500,7 +495,7 @@ object is dumped to the web page:
 The `index` function must combine the two pieces of templates.
 The complete, generic form of this function is then
 
-@@@CODE ${app_path}/view.py fromto: def index@
+@@@CODE ${app_path}/controller.py fromto: def index@
 
 __Application.__
 Let us apply the files above to plot the gamma probability density function
@@ -542,7 +537,7 @@ The design is realized in the file `view_results.html` shown below.
 
 To create the web application, we just copy the generic `controller.py`,
 `model.py`,
-`view.py`,and `templates/view_forms.html` files, add the
+and `templates/view_forms.html` files, add the
 application-specific
 `compute.py` and `templates/view_results.html` files given above,
 and *write one line* in
@@ -655,7 +650,7 @@ The `compute_gamma` function returns six values:
 the PNG data for the $g$ plot, the PNG data for the $G$ plot,
 the SVG XML code for the $g$ plot, the SVG XML code for the $G$ plot,
 the mean value, and the value of the standard deviation. We can
-keep the `view.py` unchanged (except for the URL, which is now `vib4`)
+keep the `controller.py` unchanged (except for the URL, which is now `vib4`)
 and adjust the `view_results.html`
 template only. The `result` object is now a tuple with 6 elements.
 For illustration purposes we make two rows with plots, one with

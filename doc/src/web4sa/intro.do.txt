@@ -162,7 +162,7 @@ split to meet the requirements of the MVC software design pattern.
 <%
 #src_path = '../../../src/apps/'
 src_path = 'src-web4sa/apps/'
-app_path = src_path + 'hw/orig'
+app_path = src_path + 'py_apps/hw_orig'
 github_path = 'https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa'
 %>
 
@@ -192,7 +192,7 @@ label{wf:hw:mvc}
 
 ## Define Mako variable for path to source code
 <%
-app_path = src_path + 'hw/mvc'
+app_path = src_path + 'py_apps/hw_mvc'
 %>
 
 Before thinking of a web application, we first *refactor* our program
