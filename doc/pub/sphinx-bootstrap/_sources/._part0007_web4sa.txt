@@ -7,9 +7,33 @@ Programming the Django application  (1)
 
 The Django application is about filling the files ``views.py`` and ``models.py``
 with content. The mathematical computations are performed in ``compute.py``
-so we copy this file from the ``mvc`` directory to the ``hw1_django`` directory
+so we copy this file from the ``mvc`` directory to the ``hw1`` directory
 for convenience (we could alternatively add ``../mvc`` to ``sys.path`` such that
-``import compute`` would work from the ``hw1_django`` directory).
+``import compute`` would work from the ``hw1`` directory).
+
+*The user interaction.* The web application offers a text field where the user can
+write the value of ``r``, see Figure :ref:`wf:hw1:django:fig:input`.
+After clicking on the *equals* button,
+the mathematics is performed and a new page as
+seen in Figure :ref:`wf:hw1:django:fig:result` appears.
+
+
+.. _wf:hw1:django:fig:input:
+
+.. figure:: fig-web4sa/hw1_django_input.png
+   :width: 600
+
+   *The input page*
+
+
+
+.. _wf:hw1:django:fig:result:
+
+.. figure:: fig-web4sa/hw1_django_output.png
+   :width: 600
+
+   *The result page*
+
 
 
 .. index::
@@ -20,7 +44,7 @@ for convenience (we could alternatively add ``../mvc`` to ``sys.path`` such that
    single: Django; models.py
 
 
-*The model.* The ``models.py`` file contains the model which consists
+*The model.* The ``models.py`` file contains the model, which consists
 of the data we need in the application, stored in Django's data types.
 Our data consists of one number, called ``r``, and ``models.py`` then
 look like
@@ -41,7 +65,7 @@ look like
 The ``Input`` class lists variables representing data as static class
 attributes. The ``django.db.models`` module contains various classes
 for different types of data, here we use ``FloatField`` to represent
-a floating-point number (corresponding to a Python ``float``).
+a floating-point number.
 The ``InputForm`` class has a the shown generic form across applications
 if we by convention apply the name ``Input`` for the class holding the data.
 
@@ -54,11 +78,11 @@ if we by convention apply the name ``Input`` for the class holding the data.
    single: Django; views.py
 
 
-*The view.* The ``views.py`` file contains a function ``index`` which performs
+*The view.* The ``views.py`` file contains a function ``index`` which defines
 the actions we want to perform when invoking
-the URL ( here ``http://127.0.0.1:8000/hw/``).
+the URL ( here ``http://127.0.0.1:8000/hw1/``).
 In addition, ``views.py`` has the ``present_output`` function from
-the ``view.py`` file in the ``mvc_django`` directory.
+the ``view.py`` file in the ``mvc`` directory.
 
 
 .. code-block:: python
@@ -141,17 +165,6 @@ results in the HTML code
             <input type="submit" value="equals" />
         </form>
 
-Figure :ref:`wf:hw1:django:fig:input` shows how the input page looks like in the
-web browser.
-
-
-.. _wf:hw1:django:fig:input:
-
-.. figure:: fig-web4sa/hw1_django_input.png
-   :width: 600
-
-   *The input page*
-
 
 *Making the results page.* When then user has filled in a value in the text field on the input
 page, the ``index`` function is called again and ``request.method`` equals
@@ -181,18 +194,16 @@ do in more advanced cases, we here illustrate the possibility to
 send raw HTML to the output page by returning an ``HttpResponse``
 object initialized by a string containing the desired HTML code.
 
-
-.. _wf:hw1:django:fig:result:
-
-.. figure:: fig-web4sa/hw1_django_output.png
-   :width: 600
-
-   *The result page*
+Launch this application by filling in the address ``http://127.0.0.1:8000/hw1/``
+in your web browser. Make sure the Django development server is running,
+and if not, restart it by
 
 
-Launch this application by filling in the address ``http://127.0.0.1:8000/hw/``
-in your web browser (make sure the Django development server is running,
-and if not, restart it by ``python manage.py runserver``). Try to fill
+.. code-block:: console
+
+        Terminal> python ../../../django_project/manage.py runserver
+
+Fill
 in some number on the input page and view the output.
 To show how easy it is to change the application, invoke the ``views.py``
 file in an editor and add some color to the output HTML code from
@@ -229,10 +240,12 @@ The output page should then look as shown in Figure :ref:`wf:hw2:django:fig:resu
    *The modified result page*
 
 
-We need to make a new Django application, now called ``hw2_django``.
-Instead of running
-``manage.py startapp hw2_django`` we can simply copy the ``hw1_django``
-directory. We need, of course, to add information about this
+We need to make a new Django application, now called
+`hw2 <https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/django_apps/hw2>`_.
+Instead of running the standard
+``manage.py startapp hw2`` command,
+we can simply copy the ``hw1``
+directory to ``hw2``. We need, of course, to add information about this
 new application in ``settings.py`` and ``urls.py``.
 In the former file we must have
 
@@ -240,8 +253,8 @@ In the former file we must have
 .. code-block:: python
 
         TEMPLATE_DIRS = (
-            relative2absolute_path('../../apps/hw1_django/templates'),
-            relative2absolute_path('../../apps/hw2_django/templates'),
+            relative2absolute_path('../../apps/django_apps/hw1/templates'),
+            relative2absolute_path('../../apps/django_apps/hw2/templates'),
         )
         
         INSTALLED_APPS = (
@@ -255,19 +268,19 @@ In the former file we must have
             # 'django.contrib.admin',
             # Uncomment the next line to enable admin documentation:
             # 'django.contrib.admindocs',
-            'hw1_django',
-            'hw2_django',
+            'hw1',
+            'hw2',
         )
 
 In ``urls.py`` we add the URL ``hw2`` which is to call our ``index`` function
-in the ``views.py`` file of the ``hw2_django`` app:
+in the ``views.py`` file of the ``hw2`` app:
 
 
 .. code-block:: python
 
         urlpatterns = patterns('',
-            url(r'^hw1/', 'hw1_django.views.index'),
-            url(r'^hw2/', 'hw2_django.views.index'),
+            url(r'^hw1/', 'django_apps.hw1.views.index'),
+            url(r'^hw2/', 'django_apps.hw2.views.index'),
 
 
 The ``views.py`` file changes a bit since we shall generate almost the same
@@ -313,10 +326,13 @@ The difference from ``hw1.html`` is that we right after the *equals*
 button write out the value of ``s``. However, we make a test that
 the value is only written if it is computed, here recognized by
 being a non-empty string. The ``s`` in the template file
-is substituted by value corresponding to the key ``'s'`` in the
+is substituted by the value of the object
+corresponding to the key ``'s'`` in the
 dictionary we pass to the ``render_to_response``. As seen,
 we pass a string where ``s`` is formatted with five digits if ``s``
 is a float, i.e., if ``s`` is computed. Otherwise, ``s`` has the
 default value ``None`` and we send an empty string to the template.
+The template language allows tests using Python syntax, but the
+if-block must be explicitly ended by ``{% endif %}``.
 
 

@@ -1,106 +1,3 @@
-<html>
-<head>
-<!--
-This style is adopted from the (now old) vagrant 1.0 web
-pages. The style builds on the Twitter Bootstrap style.
-Modifications by Hans Petter Langtangen, hpl@simula.no.
-
-This style file should be copied and the following
-elements edited:
-
-Logo heading:
-
- LogoWord
- withSubWord
-
-Navigation links at the top:
-
- GO TO 1
- GO TO 2
-
-Footer at the end:
-
- Here goes a footer, if desired, maybe with a Copyright &copy;
-
--->
-
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="generator" content="Doconce: http://code.google.com/p/doconce/" />
-
-<link rel="stylesheet" href="html_templates/css/twitter_bootstrap.css">
-<link rel="stylesheet" href="html_templates/css/vagrant.css">
-<!-- Define color of headings here (last definition counts) -->
-<style type="text/css">
-h1, h2, h3, h4, h5, h6 {
-  color: #000;     /* black */
-  color: #999;     /* gray */
-  color: #005580;  /* dark blue */
-  color: #08c;     /* characteristic blue */
-</style>
-</head>
-<body>
-
-<title> Exercise 1: Add two numbers </title>
-
-<!-- ------------------- main content ------------------------>
-
-<div class="container">
- <div class="row Header with-border">
-  <div class="span3 Module logo">
-   <h1><a href="/">Flask<span class="subtitle">4scientists</span></a></h1>
-  </div>
-  <div class="span9">
-   <div class="Module navigation">
-   <!-- Navigation at the top of the page -->
-    <ul>
-     <li> <a href="http://flask.pocoo.org/">Flask</a></li>
-    </ul>
-   </div>
-  </div>
- </div>
-</div>
-
-
-<!-- Here goes the table of contents in the sidebar
-     <li class="active"> means dark blue background for current section
--->
-<div class="row">
- <div class="span3 Module sidebar">
-  <div class="well" style="padding: 8px 0px;">
-   <ul class="nav nav-list">
-     <!-- Syntax:
-     <li> <a href="...">Section 1</a></li>
-     <li> <a href="...">Section 2</a></li>
-     <li> &nbsp;&nbsp;&nbsp; <a href="...">Section 2a</a></li>
-     <li> &nbsp;&nbsp;&nbsp; <a href="...">Section 2b</a></li>
-     -->
-     <!-- Doconce automatically fills in the table of contents -->
-          <!-- vagrant nav toc: " Web frameworks " --> <li>  <a href="._part0000_web4sa_flask.html#___sec0"> Web frameworks </a>
-     <!-- vagrant nav toc: " The MVC pattern " --> <li> &nbsp;  <a href="._part0001_web4sa_flask.html#___sec1"> The MVC pattern </a>
-     <!-- vagrant nav toc: " A very simple application " --> <li> &nbsp;  <a href="._part0002_web4sa_flask.html#___sec2"> A very simple application </a>
-     <!-- vagrant nav toc: " Application of the MVC pattern " --> <li> &nbsp;  <a href="._part0003_web4sa_flask.html#wf:hw:mvc"> Application of the MVC pattern </a>
-     <!-- vagrant nav toc: " Making a Flask application " --> <li>  <a href="._part0004_web4sa_flask.html#___sec4"> Making a Flask application </a>
-     <!-- vagrant nav toc: " Programming the Flask application " --> <li> &nbsp;  <a href="._part0004_web4sa_flask.html#___sec5"> Programming the Flask application </a>
-     <!-- vagrant nav toc: " Equipping the input page with output results " --> <li> &nbsp;  <a href="._part0004_web4sa_flask.html#___sec6"> Equipping the input page with output results </a>
-     <!-- vagrant nav toc: " Splitting the app into model, view, and controller files " --> <li> &nbsp;  <a href="._part0004_web4sa_flask.html#wf:hw3:flask"> Splitting the app into model, view, and controller files </a>
-     <!-- vagrant nav toc: " Troubleshooting " --> <li> &nbsp;  <a href="._part0005_web4sa_flask.html#___sec8"> Troubleshooting </a>
-     <!-- vagrant nav toc: " Handling multiple input variables in Flask " --> <li>  <a href="._part0006_web4sa_flask.html#wf:vib:flask"> Handling multiple input variables in Flask </a>
-     <!-- vagrant nav toc: " Programming the Flask application " --> <li> &nbsp;  <a href="._part0006_web4sa_flask.html#___sec10"> Programming the Flask application </a>
-     <!-- vagrant nav toc: " Implementing error checking in the template " --> <li> &nbsp;  <a href="._part0007_web4sa_flask.html#___sec11"> Implementing error checking in the template </a>
-     <!-- vagrant nav toc: " Using style sheets " --> <li> &nbsp;  <a href="._part0008_web4sa_flask.html#___sec12"> Using style sheets </a>
-     <!-- vagrant nav toc: " Using LaTeX mathematics " --> <li> &nbsp;  <a href="._part0008_web4sa_flask.html#___sec13"> Using LaTeX mathematics </a>
-     <!-- vagrant nav toc: " Rearringing the elements in the HTML template " --> <li> &nbsp;  <a href="._part0008_web4sa_flask.html#___sec14"> Rearringing the elements in the HTML template </a>
-     <!-- vagrant nav toc: " User-provided validation " --> <li> &nbsp;  <a href="._part0009_web4sa_flask.html#___sec15"> User-provided validation </a>
-     <!-- vagrant nav toc: " Autogenerating the code " --> <li> &nbsp;  <a href="._part0010_web4sa_flask.html#wf:vib3:flask:autogen"> Autogenerating the code </a>
-     <!-- vagrant nav toc: " Exercises " --> <li class="active">  <a href="._part0011_web4sa_flask.html#___sec17"> Exercises </a>
-     <!-- vagrant nav toc: " Exercise 1: Add two numbers " --> <li> &nbsp;  <a href="._part0011_web4sa_flask.html#wf:exer:add2"> Exercise 1: Add two numbers </a>
-
-    </ul>
-   </div>
-  </div>
-
-  <div class="span9">
-
 
 <!-- tocinfo
 {'highest level': 1,
@@ -126,7 +23,10 @@ h1, h2, h3, h4, h5, h6 {
                1,
                'wf:vib:flask',
                'wf:vib:flask'),
-              (' Programming the Flask application ', 2, None, '___sec10'),
+              (' Programming the Flask application ',
+               2,
+               'wf:vib1:flask:app',
+               'wf:vib1:flask:app'),
               (' Implementing error checking in the template ',
                2,
                None,
@@ -137,16 +37,37 @@ h1, h2, h3, h4, h5, h6 {
                2,
                None,
                '___sec14'),
-              (' User-provided validation ', 2, None, '___sec15'),
+              (' User-provided validation ',
+               2,
+               'wf:vib1:flask:validation',
+               'wf:vib1:flask:validation'),
               (' Autogenerating the code ',
                2,
                'wf:vib3:flask:autogen',
                'wf:vib3:flask:autogen'),
-              (' Exercises ', 1, None, '___sec17'),
+              (' Avoiding plot files ',
+               2,
+               'wf:vib3:flask:nofiles',
+               'wf:vib3:flask:nofiles'),
+              (' PNG plots ', 3, None, '___sec18'),
+              (' SVG plots ', 3, None, '___sec19'),
+              (' Exercises ', 1, None, '___sec20'),
               (' Exercise 1: Add two numbers ',
                2,
                'wf:exer:add2',
-               'wf:exer:add2')]}
+               'wf:exer:add2'),
+              (' Exercise 2: Extend the `vib3_flask` app ',
+               2,
+               'wf:exer:vib3:demo',
+               'wf:exer:vib3:demo'),
+              (' Exercise 3: Equip the `vib3_flask` app with more data types ',
+               2,
+               'wf:exer:vib3:lists',
+               'wf:exer:vib3:lists'),
+              (' Exercise 4: Auto-generate code from function signature ',
+               2,
+               None,
+               '___sec24')]}
 end of tocinfo -->
 
 
@@ -171,66 +92,177 @@ MathJax.Hub.Config({
 
 
 <a name="part0011"></a>
+
+    <a href="._part0010_web4sa_flask.html"><img src="https://doconce.googlecode.com/hg/bundled/html_images/prev1.png" border=0 alt="previous"></a>
+    
+    <a href="._part0012_web4sa_flask.html"><img src="https://doconce.googlecode.com/hg/bundled/html_images/next1.png" border=0 alt="next"></a>
+    <p>
 <!-- !split -->
 
-<h2>Exercises  <a name="___sec17"></a></h2>
+<h3>Avoiding plot files <a name="wf:vib3:flask:nofiles"></a></h3>
+
+<p>
+Files with plots are easy to deal with as long as they are in the
+<code>static</code> subdirectory of the Flask application directory. However,
+the less files a web app makes use of, the better. Also, the problem
+with ensuring that new plots are really loaded into the browser
+required us to generate unique filenames. Therefore, it would be
+convenient to get the plot as a string and embed the string data
+directly into the HTML code. This is relatively easy with Matplotlib
+and Python. The relevant code constitutes the
+<a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/vib4"><tt>vib4</tt></a> app in the
+directory of the same name.
+
+<h4>PNG plots  <a name="___sec18"></a></h4>
+
+<p>
+Python has the <code>StringIO</code> object that is a string buffer with the
+look and behavior of a file. The idea is to let Matplotlib write to
+a <code>StringIO</code> object and afterwards extract the string from this object:
 
 <p>
 
-<!-- --- begin exercise --- -->
+<!-- code=python (from !bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plot</span>
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">StringIO</span> <span style="color: #008000; font-weight: bold">import</span> StringIO
+<span style="color: #408080; font-style: italic"># run plt.plot, plt.title, etc.</span>
+figfile <span style="color: #666666">=</span> StringIO()
+plt<span style="color: #666666">.</span>savefig(figfile, format<span style="color: #666666">=</span><span style="color: #BA2121">&#39;png&#39;</span>)
+figfile<span style="color: #666666">.</span>seek(<span style="color: #666666">0</span>)  <span style="color: #408080; font-style: italic"># rewind to beginning of file</span>
+figdata_png <span style="color: #666666">=</span> figfile<span style="color: #666666">.</span>buf  <span style="color: #408080; font-style: italic"># extract string</span>
+</pre></div>
+<p>
+Before the PNG data can be embedded in HTML we need to convert the
+data to base64 format:
 
 <p>
 
-<h3>Exercise 1: Add two numbers <a name="wf:exer:add2"></a></h3>
+<!-- code=python (from !bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">base64</span>
+figdata_png <span style="color: #666666">=</span> base64<span style="color: #666666">.</span>b64encode(figdata_png)
+</pre></div>
+<p>
+Now we can embed the PNG data in HTML by
 
 <p>
-Make a web application that reads two numbers from a web page,
-adds the numbers, and prints the sum in a new web page.
-Package the necessary files that constitute the application
-in a tar file.
-Filename: <code>add2.tar.gz</code>.
+
+<!-- code=python (from !bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># html is some file object for the HTML file</span>
+html<span style="color: #666666">.</span>write(<span style="color: #BA2121">&quot;&quot;&quot;</span>
+<span style="color: #BA2121">&lt;img src=&quot;data:image/png;base64,</span><span style="color: #BB6688; font-weight: bold">%(figdata_png)s</span><span style="color: #BA2121">&quot; width=500&gt;</span>
+<span style="color: #BA2121">&quot;&quot;&quot;</span> <span style="color: #666666">%</span> <span style="color: #008000">vars</span>())
+</pre></div>
+<p>
+The corresponding syntax in an HTML template is
 
 <p>
-<!-- --- end exercise --- -->
+
+<!-- code=html (from !bc htmlcod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">&lt;img</span> <span style="color: #7D9029">src=</span><span style="color: #BA2121">&quot;data:image/png;base64,{{ figdata_png }}&quot;</span> <span style="color: #7D9029">width=</span><span style="color: #BA2121">500</span><span style="color: #008000; font-weight: bold">&gt;</span>
+</pre></div>
+
+<h4>SVG plots  <a name="___sec19"></a></h4>
 
 <p>
-<!-- ------------------- end of main content --------------- -->
-
-
-<!--
-Preliminary examples/discussion on vagrant style syntax
-
-<div class='alert alert-block alert-notice'>
-  <h3>What about PHP? Python? Java?</h3>
-<p>
-bla-bla.
-</div>
+Inline figures in HTML, instead of using files, are most often realized
+by XML code with the figure data in SVG format.
+Plot strings in the SVG format are created very similarly to the PNG
+example:
 
 <p>
-While the <div class="deep-blue">rest of the</div> getting started
--->
 
-<ul class="pager">
-  <li class="previous">
-    <a href="._part0010_web4sa_flask.html">&larr; Prev</a>
-  </li>
+<!-- code=python (from !bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">figfile <span style="color: #666666">=</span> StringIO()
+plt<span style="color: #666666">.</span>savefig(figfile, format<span style="color: #666666">=</span><span style="color: #BA2121">&#39;svg&#39;</span>)
+figdata_svg <span style="color: #666666">=</span> figfile<span style="color: #666666">.</span>buf
+</pre></div>
+<p>
+The <code>figdata_svg</code> string contains XML code text can almost
+be directly embedded in
+HTML5. However, the beginning of the text contains information before
+the <code>svg</code> tag that we want to remove:
 
+<p>
 
-</ul>
+<!-- code=text (from !bc dat) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; standalone=&quot;no&quot;?&gt;
+&lt;!DOCTYPE svg PUBLIC &quot;-//W3C//DTD SVG 1.1//EN&quot;
+  &quot;http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd&quot;&gt;
+&lt;!-- Created with matplotlib (http://matplotlib.sourceforge.net/) --&gt;
+&lt;svg height=&quot;441pt&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 585 441&quot; ...
+</pre></div>
+<p>
+The removal is done with a little string manipulation:
 
- </div>
+<p>
 
-<!-- ------------------- end of main content --------------- -->
+<!-- code=python (from !bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">figdata_svg <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;&lt;svg&#39;</span> <span style="color: #666666">+</span> figfile<span style="color: #666666">.</span>buf<span style="color: #666666">.</span>split(<span style="color: #BA2121">&#39;&lt;svg&#39;</span>)[<span style="color: #666666">1</span>]
+</pre></div>
+<p>
+Now, <code>figdata_svg</code> can be directly inserted in HTML code without
+any surrounding tags.
+The file <a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/vib4/compute.py"><tt>compute.py</tt></a>
+in the <code>vib4_flask</code> application directory contains all the details.
 
- <div class="row Footer">
-  <div class="span12">
-  Copyright &copy 2013; Hans Petter Langtangen and Anders E. Johansen.
-  Last update: Mar 22, 2013.
-  </div>
- </div>
-</div>
-</body>
-</html>
+<p>
+The <code>compute_gamma</code> function returns six values:
+the PNG data for the \( g \) plot, the PNG data for the \( G \) plot,
+the SVG XML code for the \( g \) plot, the SVG XML code for the \( G \) plot,
+the mean value, and the value of the standard deviation. We can
+keep the <code>controller.py</code> unchanged (except for the URL, which is now <code>vib4</code>)
+and adjust the <code>view_results.html</code>
+template only. The <code>result</code> object is now a tuple with 6 elements.
+For illustration purposes we make two rows with plots, one with
+PNG data and one with SVG data. The template becomes
 
+<p>
 
+<!-- code=html (from !bc htmlpro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">{% if result != None %}
+<span style="color: #008000; font-weight: bold">&lt;p&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;table&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;tr&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;td&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;img</span> <span style="color: #7D9029">src=</span><span style="color: #BA2121">&quot;data:image/png;base64,{{ result[0] }}&quot;</span> <span style="color: #7D9029">width=</span><span style="color: #BA2121">&quot;400&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/td&gt;&lt;td&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;img</span> <span style="color: #7D9029">src=</span><span style="color: #BA2121">&quot;data:image/png;base64,{{ result[1] }}&quot;</span> <span style="color: #7D9029">width=</span><span style="color: #BA2121">&quot;400&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/td&gt;&lt;/tr&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;tr&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;td&gt;</span>{{ result[2]|safe }}<span style="color: #008000; font-weight: bold">&lt;/td&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;td&gt;</span>{{ result[3]|safe }}<span style="color: #008000; font-weight: bold">&lt;/td&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/tr&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;tr&gt;&lt;td&gt;</span>
+Mean value: {{ result[4] }} <span style="color: #008000; font-weight: bold">&lt;br&gt;</span>
+Standard deviation value: {{ result[5] }}
+<span style="color: #008000; font-weight: bold">&lt;/td&gt;&lt;/tr&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/table&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/p&gt;</span>
+{% endif %}
+</pre></div>
+<p>
+Special HTML characters like <code><</code>, <code>></code>,
+<code>&</code>, <code>"</code>, and <code>'</code> are escaped in a template string like <code>{{ str }}</code>
+(i.e., <code>&</code> is replaced by <code>&amp;</code> `<` is replaced by <code>&lt;</code>, etc.).
+We need to avoid this manipulation of the string content
+because <code>result[2]</code> and <code>result[3]</code> contain
+XML code where the mentioned characters are essential part of the syntax.
+Writing <code>{{str|safe}}</code> ensures that the contents of the string <code>str</code>
+are not altered before being embedded in the HTML text.
+
+<p>
+Trying out the <code>vib4_flask</code> application we see that the SVG plots are
+much bigger than the width-controlled PNG plots.
+The width and height of SVG plots are specified in the XML code and can
+of course be changed by proper string replacements for the
+<code>width</code>, <code>height</code>, and <code>viewBox</code> specifications. It is far easier to
+just write the <code>width</code> specification in the image tag for the PNG plot.
+
+<p>
+<p>
+
+                <a href="._part0010_web4sa_flask.html"><img src="https://doconce.googlecode.com/hg/bundled/html_images/prev1.png" border=0 alt="previous"></a>
+                
+                <a href="._part0012_web4sa_flask.html"><img src="https://doconce.googlecode.com/hg/bundled/html_images/next1.png" border=0 alt="next"></a>
+                <!-- ------------------- end of main content --------------- -->
 

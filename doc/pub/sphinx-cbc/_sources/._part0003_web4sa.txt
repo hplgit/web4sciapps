@@ -15,18 +15,19 @@ Here we create four modules: ``model``, ``view``,
 ``compute``, and ``controller``.
 
  * The ``compute`` module contains a function ``compute(r)`` that performs
-   the mathematics and returns the value of ``s``.
+   the mathematics and returns the value ``s``, which equals ``sin(r)``.
 
  * The ``model`` module holds the input data, here ``r``.
 
  * The ``view`` module has two functions, one for reading input data,
    ``get_input``,
    and one for presenting the output, ``present_output``.
-   The later takes the input, calls ``compute`` functionalty, and
+   The latter takes the input, calls ``compute`` functionalty, and
    generates the output.
 
- * The ``controller`` module initializes model's data from the view
-   and calls the view to present the output.
+ * The ``controller`` module calls the view to initialize
+   the model's data from the command line. Thereafter, the
+   view is called to present the output.
 
 The ``model.py`` file contains the ``r`` variable, which must
 be declared with a default value in order to create the data object:
@@ -91,7 +92,7 @@ Let us try our refactored code:
         Hello, World! sin(1.2)=0.932039
 
 
-Our goal is to create a web interface to our scientific hello world
+The next step is to create a web interface to our scientific hello world
 program such that we can fill in the number ``r`` in a text field, click a
 *Compute* button and get back a new web page with the output text
 shown above: "Hello, World! sin(r)=s".

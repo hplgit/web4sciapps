@@ -6,17 +6,18 @@ Handling multiple input variables in Flask
 ==========================================
 
 The scientific hello world example shows how to work with one input
-variable and one output variable. We can easily derive a solution for
-a collection of input variables and some corresponding HTML code
-as result. Multiple input variables are listed in the ``InputForm``
-class using different types for different forms (text field,
-float field, integer field, check box field for boolean values, etc.).
-The value of these variables will be available in a ``form`` object
-for computation. It is then a matter of taking the output from the
-computation and format the corresponding HTML code for presenting
-the result.
+variable and one output variable. We can easily derive an extensible
+recipe for apps with a collection of input variables and some
+corresponding HTML code as result. Multiple input variables are listed
+in the ``InputForm`` class using different types for different forms
+(text field, float field, integer field, check box field for boolean
+values, etc.).  The value of these variables will be available in a
+``form`` object for computation. It is then a matter of setting
+up a template code where the various variables if the ``form`` object
+are formatted in HTML code as desired.
 
-We address the task of plotting the function :math:`u(t)=Ae^{-bt}\sin (wt)` for
+Our sample web application
+addresses the task of plotting the function :math:`u(t)=Ae^{-bt}\sin (wt)` for
 :math:`t\in [0,T]`. The web application must have fields for the numbers :math:`A`,
 :math:`b`, :math:`w`, and :math:`T`, and a *Compute* button, as shown in Figure
 :ref:`wf:vib1:flask:fig:input`. Filling in values, say :math:`0.1` for :math:`b` and
@@ -37,10 +38,12 @@ button.
 .. _wf:vib1:flask:fig:result:
 
 .. figure:: fig-web4sa/vib1_flask_output.png
-   :width: 500
+   :width: 700
 
    *The result page*
 
+
+.. _wf:vib1:flask:app:
 
 Programming the Flask application  (2)
 --------------------------------------
@@ -53,12 +56,13 @@ and :ref:`wf:vib1:flask:fig:result`. We start with the
 ``compute.py`` module since it contains only the computation of :math:`u(t)`
 and the making of the plot, without any interaction with Flask.
 
-More specifically, inside ``compute.py``, we have a function for
+*The compute part.* More specifically, inside ``compute.py``, we have a function for
 evaluating :math:`u(t)` and a ``compute`` function for making the plot. The
-return value is the name of the plot file, which should get a unique
-name every time the ``compute`` function is called such that the browser
-cannot reuse an already cached image. Flask applications must have all
-extra files (CSS, images, etc.) in a subdirectory ``static``.
+return value of the latter is the name of the plot file, which should
+get a unique name every time the ``compute`` function is called such
+that the browser cannot reuse an already cached image. Flask
+applications must have all extra files (CSS, images, etc.) in a
+subdirectory ``static``.
 
 
 .. code-block:: python
@@ -102,7 +106,9 @@ We organize the model, view, and controller as three separate
 files, as illustrated in
 the section :ref:`wf:hw3:flask`. This more complicated app involves
 more code and especially the model will soon be handy to isolate in its own
-file. Our first version of ``model.py`` reads
+file.
+
+*The model.* Our first version of ``model.py`` reads
 
 
 .. code-block:: python
@@ -137,10 +143,11 @@ fill in all values.
    single: Flask; index function
 
 
-The view will of course make use of templates, and we shall experiment
+
+*The view.* The view component will of course make use of templates, and we shall experiment
 with different templates. Therefore, we allow a command-line argument
 to this Flask app for choosing which template we want. The rest of
-the ``view.py`` file follows much the same set up as for the scientific
+the ``controller.py`` file follows much the same set up as for the scientific
 hello world app:
 
 
@@ -169,6 +176,9 @@ hello world app:
         
             return render_template(template_name + '.html',
                                    form=form, result=result)
+        
+        if __name__ == '__main__':
+            app.run(debug=True)
 
 
 The details governing how the web page really looks like lie in the
@@ -204,26 +214,15 @@ through the ``label`` keyword when constructing the field object, and
 writing the field object itself generates the text area for
 input (i.e., the HTML input form). The control statements we can
 use in the template are part of the `Jinja2 <http://jinja.pocoo.org/docs/>`_
-*templating language*. For now, the if-test, for-loop and
+templating language. For now, the if-test, for-loop and
 output of values (``{{ object }}``) are enough to generate the HTML
 code we want.
 
 Recall that the objects we need in the template, like ``result`` and ``form``
 in the present case, are transferred to the template via keyword
 arguments to the ``render_template`` function. We can easily pass on
-any object in our application to the template.
-
-To get a runnable Flask application it remains to
-run the ``app`` object from ``controller.py``:
-
-
-.. code-block:: python
-
-        from view import app
-        
-        if __name__ == '__main__':
-            app.run(debug=True)
-
+any object in our application to the template. Debugging of the template
+is done by viewing the HTML source of the web page in the browser.
 
 You are encouraged to run ``python controller.py`` and load ``http://127.0.0.1:5000/vib1`` into your web browser for testing.
 

@@ -174,7 +174,7 @@
                 <div class="body">
                   
   <div class="section" id="user-provided-validation-1">
-<h1>User-provided validation  (1)<a class="headerlink" href="#user-provided-validation-1" title="Permalink to this headline">¶</a></h1>
+<span id="wf-vib1-flask-validation"></span><h1>User-provided validation  (1)<a class="headerlink" href="#user-provided-validation-1" title="Permalink to this headline">¶</a></h1>
 <p id="index-0">The <tt class="docutils literal"><span class="pre">FloatField</span></tt> objects can check that the input is compatible with
 a number, but what if we want to control that <span class="math">\(A&gt;0\)</span>, <span class="math">\(b&gt;0\)</span>, and
 <span class="math">\(T\)</span> is not greater than 30 periods (otherwise the plot gets cluttered)?
@@ -182,7 +182,7 @@ We can write functions for checking appropriate conditions and
 supply the function to the list of validator functions in the call to
 the <tt class="docutils literal"><span class="pre">FloatField</span></tt> constructor or other field constructors. The extra
 code is a part of the <tt class="docutils literal"><span class="pre">model.py</span></tt> and the presented extensions appear
-in the directory <tt class="docutils literal"><span class="pre">vib2_flask</span></tt>.</p>
+in the directory <a class="reference external" href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/vib2">vib2</a>.</p>
 <p>The simplest approach to validation is to use existing functionality
 in the web framework. Checking that <span class="math">\(A&gt;0\)</span> can be done by
 the <tt class="docutils literal"><span class="pre">NumberRange</span></tt> validator which checks that the value is inside
@@ -227,7 +227,7 @@ constructor for <tt class="docutils literal"><span class="pre">T</span></tt>:</p
 </pre></div>
 </div>
 <p>The validator
-objects are tested one by one as the appear in the list, and if
+objects are tested one by one as they appear in the list, and if
 one fails, the others are not invoked.
 We therefore add <tt class="docutils literal"><span class="pre">check_T</span></tt> after the check of input such that we know we
 have a value for all data when we run the computations and test
@@ -247,22 +247,24 @@ A general such function may take the form</p>
     <span class="k">if</span> <span class="n">max_value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">field</span><span class="o">.</span><span class="n">data</span> <span class="o">&gt;</span> <span class="n">max_value</span><span class="p">:</span>
             <span class="n">failure</span> <span class="o">=</span> <span class="bp">True</span>
-    <span class="n">min_value</span> <span class="o">=</span> <span class="s">&#39;-infty&#39;</span> <span class="k">if</span> <span class="n">min_value</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="nb">str</span><span class="p">(</span><span class="n">min_value</span><span class="p">)</span>
-    <span class="n">max_value</span> <span class="o">=</span>  <span class="s">&#39;infty&#39;</span> <span class="k">if</span> <span class="n">max_value</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="nb">str</span><span class="p">(</span><span class="n">max_value</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">failure</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">validators</span><span class="o">.</span><span class="n">ValidationError</span><span class="p">(</span>
-            <span class="s">&#39;</span><span class="si">%s</span><span class="s">=</span><span class="si">%s</span><span class="s"> not in [</span><span class="si">%s</span><span class="s">, </span><span class="si">%s</span><span class="s">]&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">field</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
-                                       <span class="n">min_value</span><span class="p">,</span> <span class="n">max_value</span><span class="p">))</span>
+            <span class="s">&#39;</span><span class="si">%s</span><span class="s">=</span><span class="si">%s</span><span class="s"> not in [</span><span class="si">%s</span><span class="s">, </span><span class="si">%s</span><span class="s">]&#39;</span> <span class="o">%</span>
+            <span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">field</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
+             <span class="s">&#39;-infty&#39;</span> <span class="k">if</span> <span class="n">min_value</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="nb">str</span><span class="p">(</span><span class="n">min_value</span><span class="p">),</span>
+             <span class="s">&#39;infty&#39;</span>  <span class="k">if</span> <span class="n">max_value</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="nb">str</span><span class="p">(</span><span class="n">max_value</span><span class="p">)))</span>
 </pre></div>
 </div>
 <p id="index-1">The problem is that <tt class="docutils literal"><span class="pre">check_interval</span></tt> takes four arguments, not only
-the <tt class="docutils literal"><span class="pre">form</span></tt> and <tt class="docutils literal"><span class="pre">field</span></tt> arguments that a validator function can accept.
+the <tt class="docutils literal"><span class="pre">form</span></tt> and <tt class="docutils literal"><span class="pre">field</span></tt> arguments that a validator function in the
+Flask framework can accept.
 The way out of this difficulty is to use a Python tool <tt class="docutils literal"><span class="pre">functools.partial</span></tt>
-which allows us to call a function with some of the arguments set.
+which allows us to call a function with some of the arguments set beforehand.
 Here, we want to create a new function that calls <tt class="docutils literal"><span class="pre">check_interval</span></tt>
 with some prescribed values of <tt class="docutils literal"><span class="pre">min_value</span></tt> and <tt class="docutils literal"><span class="pre">max_value</span></tt>.
 This function looks like it does not have these arguments, only
-<tt class="docutils literal"><span class="pre">form</span></tt> and <tt class="docutils literal"><span class="pre">field</span></tt>. The following function produces this function:</p>
+<tt class="docutils literal"><span class="pre">form</span></tt> and <tt class="docutils literal"><span class="pre">field</span></tt>. The following function produces this function, which we
+can use as a valid Flask validator function:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">functools</span>
 
 <span class="k">def</span> <span class="nf">interval</span><span class="p">(</span><span class="n">min_value</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
@@ -270,9 +272,8 @@ This function looks like it does not have these arguments, only
         <span class="n">check_interval</span><span class="p">,</span> <span class="n">min_value</span><span class="o">=</span><span class="n">min_value</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="n">max_value</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>We can in any field constructor just add
-<tt class="docutils literal"><span class="pre">interval(a,</span> <span class="pre">b)</span></tt> as a validator function checking if the field value is
-in the interval between <tt class="docutils literal"><span class="pre">a</span></tt> and <tt class="docutils literal"><span class="pre">b</span></tt>:</p>
+<p>We can now in any field constructor just add
+<tt class="docutils literal"><span class="pre">interval(a,</span> <span class="pre">b)</span></tt> as a validator function, here checking that <span class="math">\(b\in [0,\infty)\)</span>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">InputForm</span><span class="p">(</span><span class="n">Form</span><span class="p">):</span>
     <span class="o">...</span>
     <span class="n">b</span> <span class="o">=</span> <span class="n">FloatField</span><span class="p">(</span>
@@ -281,24 +282,25 @@ in the interval between <tt class="docutils literal"><span class="pre">a</span><
 </pre></div>
 </div>
 <p>Let us test our tailored error checking. Run <tt class="docutils literal"><span class="pre">python</span> <span class="pre">controller.py</span></tt>
-in the <tt class="docutils literal"><span class="pre">vib2_flask</span></tt> directory and fill in <span class="math">\(-1.0\)</span> in the <span class="math">\(b\)</span> field.
+in the <tt class="docutils literal"><span class="pre">vib2</span></tt> directory and fill in <span class="math">\(-1.0\)</span> in the <span class="math">\(b\)</span> field.
 Pressing <em>Compute</em> invokes our <tt class="docutils literal"><span class="pre">interval(0,None)</span></tt> function, which
-is nothing but a call <tt class="docutils literal"><span class="pre">check_interval(field,</span> <span class="pre">form,</span> <span class="pre">0,</span> <span class="pre">None)</span></tt>,
-and the test <tt class="docutils literal"><span class="pre">if</span> <span class="pre">field.data</span> <span class="pre">&lt;</span> <span class="pre">min_value</span></tt> becomes true, <tt class="docutils literal"><span class="pre">failure</span></tt>
-is set and the exception is raised. The message in the exception
+is nothing but a call <tt class="docutils literal"><span class="pre">check_interval(field,</span> <span class="pre">form,</span> <span class="pre">0,</span> <span class="pre">None)</span></tt>.
+Inside this function,
+the test <tt class="docutils literal"><span class="pre">if</span> <span class="pre">field.data</span> <span class="pre">&lt;</span> <span class="pre">min_value</span></tt> becomes true, <tt class="docutils literal"><span class="pre">failure</span></tt>
+is set, and the exception is raised. The message in the exception
 is available in the <tt class="docutils literal"><span class="pre">field.errors</span></tt> attribute so our template
-will write it out in red, see Figure <a class="reference internal" href="#wf-vib2-flask-fig-error1"><em>Triggering of a user-defined error check</em></a>.
-The template used in <tt class="docutils literal"><span class="pre">vib_flask</span></tt> is basically the same as <tt class="docutils literal"><span class="pre">view3.html</span></tt>
-in <tt class="docutils literal"><span class="pre">vib1_flask</span></tt>, i.e., it feaures LaTeX mathematics and checking of
+will write it out in red, see Figure <a class="reference internal" href="web4sa.html#wf-vib2-flask-fig-error1"><em>Triggering of a user-defined error check</em></a>.
+The template used in <tt class="docutils literal"><span class="pre">vib2</span></tt> is basically the same as <tt class="docutils literal"><span class="pre">view3.html</span></tt>
+in <tt class="docutils literal"><span class="pre">vib1</span></tt>, i.e., it feaures LaTeX mathematics and checking of
 <tt class="docutils literal"><span class="pre">field.errors</span></tt>.</p>
 <div class="figure" id="wf-vib2-flask-fig-error1">
 <img alt="_images/vib2_flask_error1.png" src="_images/vib2_flask_error1.png" style="width: 500px;" />
 <p class="caption"><em>Triggering of a user-defined error check</em></p>
 </div>
-<p>Finally, we mention a detail in the <tt class="docutils literal"><span class="pre">view.py</span></tt> file in the <tt class="docutils literal"><span class="pre">vib2_flask</span></tt>
+<p>Finally, we mention a detail in the <tt class="docutils literal"><span class="pre">controller.py</span></tt> file in the <tt class="docutils literal"><span class="pre">vib2</span></tt>
 app: instead of sending <tt class="docutils literal"><span class="pre">form.var.data</span></tt> to the <tt class="docutils literal"><span class="pre">compute</span></tt> function we
 may automatically generate a set of local variables such that the
-work with data from the web page looks nicer:</p>
+application of data from the web page, here in the <tt class="docutils literal"><span class="pre">compute</span></tt> call, looks nicer:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
     <span class="n">form</span> <span class="o">=</span> <span class="n">InputForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">&#39;POST&#39;</span> <span class="ow">and</span> <span class="n">form</span><span class="o">.</span><span class="n">validate</span><span class="p">():</span>
@@ -310,12 +312,16 @@ work with data from the web page looks nicer:</p>
         <span class="n">result</span> <span class="o">=</span> <span class="bp">None</span>
 
     <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s">&#39;view.html&#39;</span><span class="p">,</span> <span class="n">form</span><span class="o">=</span><span class="n">form</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="n">result</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The idea is just to run <tt class="docutils literal"><span class="pre">exec</span></tt> on a declaration of a local variable
 with name <tt class="docutils literal"><span class="pre">field.name</span></tt> for each field in the form. This trick is often
-neat if data are buried in objects and you want variables in your
-code to look like they do in mathematical writing.</p>
+neat if web variables are buried in objects (<tt class="docutils literal"><span class="pre">form.T.data</span></tt>) and you want these
+variables in your
+code to look like they do in mathematical writing (<tt class="docutils literal"><span class="pre">T</span></tt> for <span class="math">\(T\)</span>).</p>
 </div>
 
 

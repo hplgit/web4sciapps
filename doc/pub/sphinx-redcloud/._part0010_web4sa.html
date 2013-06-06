@@ -66,7 +66,7 @@
 <p id="index-0">Web developers make heavy use of CSS style sheets to control the look
 and feel of web pages. Templates can utilize style sheets as any other
 standard HTML code. Here is a very simple example where we introduce
-a class <tt class="docutils literal"><span class="pre">name</span></tt> for the column with the field name and set the
+a class <tt class="docutils literal"><span class="pre">name</span></tt> for the HTML table&#8217;s column with the field name and set the
 foreground color of the text in this column to blue.
 The style sheet is called <tt class="docutils literal"><span class="pre">basic.css</span></tt> and <em>must</em> reside in the
 <tt class="docutils literal"><span class="pre">static</span></tt> subdirectory of the Flask application directory:</p>
@@ -101,13 +101,13 @@ of the variables to set in the web page are blue.</p>
 <p id="index-1">Scientific applications frequently have many input data that are
 defined through mathematics and where the typesetting on the
 web page should be as close as possible to the typesetting where
-the mathematics is explained. In the present example we would like
+the mathematics is documented. In the present example we would like
 to typeset <span class="math">\(A\)</span>, <span class="math">\(b\)</span>, <span class="math">\(w\)</span>, and <span class="math">\(T\)</span> with italic font as done
 in LaTeX. Fortunately, native LaTeX typesetting is available in
 HTML through the tool <a class="reference external" href="http://www.mathjax.org/">MathJax</a>.
 Our template <tt class="docutils literal"><span class="pre">view3.html</span></tt> enables MathJax. Formulas are written
 with standard LaTeX inside <tt class="docutils literal"><span class="pre">\(</span></tt> and <tt class="docutils literal"><span class="pre">\)</span></tt>, while equations are surrounded
-by <tt class="docutils literal"><span class="pre">$$</span></tt>. Here we use formulas exclusively:</p>
+by <tt class="docutils literal"><span class="pre">$$</span></tt>. Here we use formulas only:</p>
 <div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/x-mathjax-config&quot;</span><span class="nt">&gt;</span>
 <span class="nx">MathJax</span><span class="p">.</span><span class="nx">Hub</span><span class="p">.</span><span class="nx">Config</span><span class="p">({</span>
   <span class="nx">TeX</span><span class="o">:</span> <span class="p">{</span>
@@ -132,17 +132,17 @@ u(t) = Ae^{-bt}\sin (w t), \hbox{ for } t\in [0,T]
     <span class="nt">&lt;td&gt;</span>{{ field.label }}<span class="nt">&lt;/td&gt;</span>
 </pre></div>
 </div>
-<p>Figure <a class="reference internal" href="#wf-vib1-flask-fig-latex"><em>LaTeX typesetting of mathematical symbols</em></a> displays how the
+<p>Figure <a class="reference internal" href="web4sa.html#wf-vib1-flask-fig-latex"><em>LaTeX typesetting of mathematical symbols</em></a> displays how the
 LaTeX rendering looks like in the browser.</p>
 <div class="figure" id="wf-vib1-flask-fig-latex">
-<img alt="_images/vib1_flask_latex.png" src="_images/vib1_flask_latex.png" style="width: 500px;" />
+<img alt="_images/vib1_flask_latex.png" src="_images/vib1_flask_latex.png" style="width: 650px;" />
 <p class="caption"><em>LaTeX typesetting of mathematical symbols</em></p>
 </div>
 </div>
 <div class="section" id="rearringing-the-elements-in-the-html-template">
 <h1>Rearringing the elements in the HTML template<a class="headerlink" href="#rearringing-the-elements-in-the-html-template" title="Permalink to this headline">¶</a></h1>
 <p>Now we want to place the plot to the right of the input forms in
-the web page, see Figure <a class="reference internal" href="#wf-vib1-flask-fig-sidebyside"><em>New design with input and output side by side</em></a>. This can
+the web page, see Figure <a class="reference internal" href="web4sa.html#wf-vib1-flask-fig-sidebyside"><em>New design with input and output side by side</em></a>. This can
 be accomplished by having an outer table with two rows. The first
 row contains the table with the input forms in the first column and
 the plot in the second column, while the second row features the
@@ -151,7 +151,7 @@ the plot in the second column, while the second row features the
 <img alt="_images/vib1_flask_table2.png" src="_images/vib1_flask_table2.png" style="width: 700px;" />
 <p class="caption"><em>New design with input and output side by side</em></p>
 </div>
-<p>A relevant template file is <tt class="docutils literal"><span class="pre">view4.html</span></tt>:</p>
+<p>The enabling template file is <tt class="docutils literal"><span class="pre">view4.html</span></tt>:</p>
 <div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/x-mathjax-config&quot;</span><span class="nt">&gt;</span>
 <span class="nx">MathJax</span><span class="p">.</span><span class="nx">Hub</span><span class="p">.</span><span class="nx">Config</span><span class="p">({</span>
   <span class="nx">TeX</span><span class="o">:</span> <span class="p">{</span>

@@ -3,16 +3,6 @@
 Making a Django application
 ===========================
 
-Django applies two concepts, *project* and *application*. The application,
-or app for short,
-is the program we want to run through a web interface. The project is
-a Python package containing common settings and configurations for
-a collection of apps. This means that before we can make a Django app,
-we must to establish a Django project.
-
-Installing Django
------------------
-
 
 .. index::
    single: Django; installation
@@ -42,6 +32,12 @@ Setting up a Django project
    single: Django; making a project
 
 
+Django applies two concepts: *project* and *application* (or *app*).
+The app is the program we want to run through a web interface. The
+project is a Python package containing common settings and
+configurations for a collection of apps. This means that before we can
+make a Django app, we must to establish a Django project.
+
 A Django project for managing a set of Django apps is
 created by the command
 
@@ -50,7 +46,8 @@ created by the command
 
         Terminal> django-admin.py startproject django_project
 
-The result is a directory ``django_project`` whose content can be explored
+The result in this example
+is a directory ``django_project`` whose content can be explored
 by some ``ls`` and ``cd`` commands:
 
 
@@ -62,21 +59,21 @@ by some ``ls`` and ``cd`` commands:
         Terminal> ls
         __init__.py settings.py urls.py wsgi.py
 
-The meaning of the generated files are briefly listed below.
+The meaning of the generated files is briefly listed below.
 
-  1. The outer ``django_project/`` directory is just a container for your project. Its name does not matter to Django.
+   * The outer ``django_project/`` directory is just a container for your project. Its name does not matter to Django.
 
-  2. ``manage.py`` is a command-line utility that lets you interact with this Django project in various ways. You will typically run ``manage.py`` to launch a Django application.
+   * ``manage.py`` is a command-line utility that lets you interact with this Django project in various ways. You will typically run ``manage.py`` to launch a Django application.
 
-  3. The inner ``django_project/`` directory is a Python package for the Django project. Its name is used in import statements in Python code (e.g., ``import django_project.settings``).
+   * The inner ``django_project/`` directory is a Python package for the Django project. Its name is used in import statements in Python code (e.g., ``import django_project.settings``).
 
-  4. ``django_project/__init__.py`` is an empty file that just tells Python that this directory should be considered a Python package.
+   * ``django_project/__init__.py`` is an empty file that just tells Python that this directory should be considered a Python package.
 
-  5. ``django_project/settings.py`` contains the settings and configurations for this Django project.
+   * ``django_project/settings.py`` contains the settings and configurations for this Django project.
 
-  6. ``django_project/urls.py`` maps URLs to specific functions and thereby defines that actions that various URLs imply.
+   * ``django_project/urls.py`` maps URLs to specific functions and thereby defines that actions that various URLs imply.
 
-  7. ``django_project/wsgi.py`` is not needed in our examples.
+   * ``django_project/wsgi.py`` is not needed in our examples.
 
 Django comes with a web server for developing and debugging applications.
 The server is started by running
@@ -85,16 +82,24 @@ The server is started by running
 .. code-block:: console
 
         Terminal> python manage.py runserver
+        Validating models...
+        
+        0 errors found
+        March 23, 2013 - 01:09:24
+        Django version 1.5, using settings 'django_project.settings'
+        Development server is running at http://127.0.0.1:8000/
+        Quit the server with CONTROL-C.
 
-You will see that the server runs on the URL "http://127.0.0.1:8000/".
+The output from starting the server tells that the server runs on the
+URL ``http://127.0.0.1:8000/``.
 Load this URL into your browser to see a welcome message from Django,
 meaning that the server is working.
 
 Despite the fact that our web applications do not need a database, you
-have to register a database with a Django project. To this end,
+have to register a database with any Django project. To this end,
 open the ``django_project/settings.py`` file in a text editor,
-locate the ``DATABASES`` dictionary and make sure the following
-code is there:
+locate the ``DATABASES`` dictionary and type in the following
+code:
 
 
 .. code-block:: python
@@ -118,8 +123,8 @@ more convenient for us to specify relative paths. Therefore,
 we made a function that figures out the absolute path to the ``settings.py``
 file and then combines this absolute path with the relative path.
 The location and name of the database file can be chosen as desired.
-Note that one should not use ``os.path.join`` to create paths as Django
-applies the forward slash between directories also on Windows.
+Note that one should *not* use ``os.path.join`` to create paths as Django
+always applies the forward slash between directories, also on Windows.
 
 
 Setting up a Django application
@@ -135,47 +140,52 @@ world program. We can place the app in any directory, but here we
 utilize the following organization.
 As neighbor to ``django_project`` we have
 a directory ``apps`` containing our various scientific applications.
-Under ``apps`` we create a directory ``hw``
-for the various versions of the scientific hello world applications:
-``orig`` for the original ``hw.py`` program, ``mvc`` for a split of this
-program according to the original MVC pattern, ``mvc_django`` for
-the MVC split according to the way Django requires,
-and ``hw1_django`` for a first version of
-the program with a Django-based web interface.
+Under ``apps`` we create a directory ``django_apps`` with
+our different versions of Django applications.
+The directory ``py_apps`` contains the
+original ``hw.py`` program in the subdirectory ``orig``,
+while split of this
+program according to the MVC pattern appears in the ``mvc`` directory.
 
+The directory ``django_apps/hw1`` is our first attempt to write
+a Django-based web interface for the ``hw.py`` program.
+The directory structure is laid out by
 
 .. code-block:: console
 
         Terminal> cd ..
         Terminal> mkdir apps
         Terminal> cd apps
-        Terminal> mkdir hw
-        Terminal> cd hw
+        Terminal> mkdir py_apps
+        Terminal> cd py
         Terminal> mkdir orig mvc
+        Terminal> cd ../..
+        Terminal> mkdir django_apps
+        Terminal> cd django_apps
 
 The file ``hw.py`` is moved to ``orig`` while ``mvc`` contains
 the MVC refactored version with the files ``model.py``, ``view.py``, ``compute.py``,
 and ``controller.py``.
 
-The ``hw1_django`` directory, containing the Django application, must be
+The ``hw1`` directory, containing our first Django application, must be
 made with
 
 .. code-block:: console
 
-        Terminal> python ../../django_project/manage.py startapp hw1_django
+        Terminal> python ../../django_project/manage.py startapp hw1
 
-The command creates a directory ``hw1_django`` with the content
+The command creates a directory ``hw1`` with four empty files:
 
 
 .. code-block:: console
 
-        Terminal> cd hw1_django
+        Terminal> cd hw1
         Terminal> ls
         __init__.py models.py tests.py views.py
 
-The ``__init__.py`` file is empty and needed to ensure that the
-Django application is a Python package. The other files are also
-empty, but ``models.py`` and ``views.py`` will soon be filled with content.
+The ``__init__.py`` file will remain empty to just indicate that the
+Django application is a Python package. The other files need to be
+filled with the right content, which happens in the next section.
 
 At this point,
 we need to register some information about our application in the
@@ -183,7 +193,6 @@ we need to register some information about our application in the
 
 *Step 1: Add the app.* Locate the ``INSTALLED_APPS``
 tuple in ``settings.py`` and add your Django application as a Python package:
-directory ``django``:
 
 
 .. code-block:: python
@@ -192,22 +201,22 @@ directory ``django``:
             'django.contrib.auth',
             'django.contrib.contenttypes',
             ...
-            'hw1_django',
+            'hw1',
         )
 
-However, Django will not be able to find the package ``hw1_django``
+Unfortunately, Django will not be able to find the package ``hw1``
 unless we register the parent directory in ``sys.path``:
 
 
 .. code-block:: python
 
         import sys
-        sys.path.insert(0, relative2absolute_path('../../apps/hw'))
+        sys.path.insert(0, relative2absolute_path('../../apps/django_apps'))
 
 Note here that the relative path is given with respect to the
 location of the ``settings.py`` script.
 
-*Step 2: Adding a template directory.* Make a subdirectory ``templates`` under ``hw1_django``,
+*Step 2: Add a template directory.* Make a subdirectory ``templates`` under ``hw1``,
 
 
 .. code-block:: console
@@ -220,29 +229,31 @@ and add the absolute path of this directory to the ``TEMPLATE_DIRS`` tuple:
 .. code-block:: python
 
         TEMPLATE_DIRS = (
-            relative2absolute_path('../../apps/hw/hw1_django/templates'),
+            relative2absolute_path('../../apps/django_apps/hw1/templates'),
         )
 
 The ``templates`` directory will hold templates for the HTML code applied
-in the web interfaces. The trailing comma is important (as this is
-a tuple with only one element).
+in the web interfaces. The trailing comma is important as this is
+a tuple with only one element.
 
-*Step 3: Defining the URL.* We need to connect the Django app with
-an URL, i.e., the address we write into the web browser to launch the
-app. Our app will be associated with a Python function ``index``
-in the ``views`` module within the ``hw1_django`` package.
+*Step 3: Define the URL.* We need to connect the Django app with
+an URL. Our app will be associated with a Python function ``index``
+in the ``views`` module within the ``hw1`` package.
 Say we want the corresponding URL to
-be named ``hw``. This is registered in the ``django_project/urls.py`` file
-by
+be named ``hw1`` relative to the server URL.
+This information is registered in the ``django_project/urls.py`` file
+by the syntax
 
 
 .. code-block:: python
 
         urlpatterns = patterns('',
-            url(r'^hw1/', 'hw1_django.views.index'),
+            url(r'^hw1/', 'django_apps.hw1.views.index'),
 
 The first argument to the ``url`` function is a regular expression for
-the URL and the second argument is the name of the function to call.
-The name ``index`` resembles the ``index.html`` main page associated
+the URL and the second argument is the name of the function to call,
+using Python's syntax for a function ``index`` in a module ``views`` in
+a package ``hw1``.
+The function name ``index`` resembles the ``index.html`` main page associated
 with an URL, but any other name than ``index`` can be used.
 

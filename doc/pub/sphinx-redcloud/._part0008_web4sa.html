@@ -64,20 +64,21 @@
   <div class="section" id="handling-multiple-input-variables-in-flask">
 <span id="wf-vib-flask"></span><h1>Handling multiple input variables in Flask<a class="headerlink" href="#handling-multiple-input-variables-in-flask" title="Permalink to this headline">¶</a></h1>
 <p>The scientific hello world example shows how to work with one input
-variable and one output variable. We can easily derive a solution for
-a collection of input variables and some corresponding HTML code
-as result. Multiple input variables are listed in the <tt class="docutils literal"><span class="pre">InputForm</span></tt>
-class using different types for different forms (text field,
-float field, integer field, check box field for boolean values, etc.).
-The value of these variables will be available in a <tt class="docutils literal"><span class="pre">form</span></tt> object
-for computation. It is then a matter of taking the output from the
-computation and format the corresponding HTML code for presenting
-the result.</p>
-<p>We address the task of plotting the function <span class="math">\(u(t)=Ae^{-bt}\sin (wt)\)</span> for
+variable and one output variable. We can easily derive an extensible
+recipe for apps with a collection of input variables and some
+corresponding HTML code as result. Multiple input variables are listed
+in the <tt class="docutils literal"><span class="pre">InputForm</span></tt> class using different types for different forms
+(text field, float field, integer field, check box field for boolean
+values, etc.).  The value of these variables will be available in a
+<tt class="docutils literal"><span class="pre">form</span></tt> object for computation. It is then a matter of setting
+up a template code where the various variables if the <tt class="docutils literal"><span class="pre">form</span></tt> object
+are formatted in HTML code as desired.</p>
+<p>Our sample web application
+addresses the task of plotting the function <span class="math">\(u(t)=Ae^{-bt}\sin (wt)\)</span> for
 <span class="math">\(t\in [0,T]\)</span>. The web application must have fields for the numbers <span class="math">\(A\)</span>,
 <span class="math">\(b\)</span>, <span class="math">\(w\)</span>, and <span class="math">\(T\)</span>, and a <em>Compute</em> button, as shown in Figure
-<a class="reference internal" href="#wf-vib1-flask-fig-input"><em>The input page</em></a>. Filling in values, say <span class="math">\(0.1\)</span> for <span class="math">\(b\)</span> and
-<span class="math">\(20\)</span> for <span class="math">\(T\)</span>, results in what we see in Figure <a class="reference internal" href="#wf-vib1-flask-fig-result"><em>The result page</em></a>,
+<a class="reference internal" href="web4sa.html#wf-vib1-flask-fig-input"><em>The input page</em></a>. Filling in values, say <span class="math">\(0.1\)</span> for <span class="math">\(b\)</span> and
+<span class="math">\(20\)</span> for <span class="math">\(T\)</span>, results in what we see in Figure <a class="reference internal" href="web4sa.html#wf-vib1-flask-fig-result"><em>The result page</em></a>,
 i.e., a plot of <span class="math">\(u(t)\)</span> is added after the input fields and the <em>Compute</em>
 button.</p>
 <div class="figure" id="wf-vib1-flask-fig-input">
@@ -85,22 +86,23 @@ button.</p>
 <p class="caption"><em>The input page</em></p>
 </div>
 <div class="figure" id="wf-vib1-flask-fig-result">
-<img alt="_images/vib1_flask_output.png" src="_images/vib1_flask_output.png" style="width: 500px;" />
+<img alt="_images/vib1_flask_output.png" src="_images/vib1_flask_output.png" style="width: 700px;" />
 <p class="caption"><em>The result page</em></p>
 </div>
 <div class="section" id="programming-the-flask-application-2">
-<h2>Programming the Flask application  (2)<a class="headerlink" href="#programming-the-flask-application-2" title="Permalink to this headline">¶</a></h2>
+<span id="wf-vib1-flask-app"></span><h2>Programming the Flask application  (2)<a class="headerlink" href="#programming-the-flask-application-2" title="Permalink to this headline">¶</a></h2>
 <p>The forthcoming text explains the necessary steps to realize a
-Flask app that behaves as depicted in Figures <a class="reference internal" href="#wf-vib1-flask-fig-input"><em>The input page</em></a>
-and <a class="reference internal" href="#wf-vib1-flask-fig-result"><em>The result page</em></a>. We start with the
+Flask app that behaves as depicted in Figures <a class="reference internal" href="web4sa.html#wf-vib1-flask-fig-input"><em>The input page</em></a>
+and <a class="reference internal" href="web4sa.html#wf-vib1-flask-fig-result"><em>The result page</em></a>. We start with the
 <tt class="docutils literal"><span class="pre">compute.py</span></tt> module since it contains only the computation of <span class="math">\(u(t)\)</span>
 and the making of the plot, without any interaction with Flask.</p>
-<p>More specifically, inside <tt class="docutils literal"><span class="pre">compute.py</span></tt>, we have a function for
+<p><em>The compute part.</em> More specifically, inside <tt class="docutils literal"><span class="pre">compute.py</span></tt>, we have a function for
 evaluating <span class="math">\(u(t)\)</span> and a <tt class="docutils literal"><span class="pre">compute</span></tt> function for making the plot. The
-return value is the name of the plot file, which should get a unique
-name every time the <tt class="docutils literal"><span class="pre">compute</span></tt> function is called such that the browser
-cannot reuse an already cached image. Flask applications must have all
-extra files (CSS, images, etc.) in a subdirectory <tt class="docutils literal"><span class="pre">static</span></tt>.</p>
+return value of the latter is the name of the plot file, which should
+get a unique name every time the <tt class="docutils literal"><span class="pre">compute</span></tt> function is called such
+that the browser cannot reuse an already cached image. Flask
+applications must have all extra files (CSS, images, etc.) in a
+subdirectory <tt class="docutils literal"><span class="pre">static</span></tt>.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">exp</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">linspace</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">time</span><span class="o">,</span> <span class="nn">glob</span>
@@ -133,9 +135,10 @@ extra files (CSS, images, etc.) in a subdirectory <tt class="docutils literal"><
 </div>
 <p id="index-0">We organize the model, view, and controller as three separate
 files, as illustrated in
-the section <a class="reference internal" href="._part0004_web4sa.html#wf-hw3-flask"><em>Splitting the app into model, view, and controller files</em></a>. This more complicated app involves
+the section <a class="reference internal" href="web4sa.html#wf-hw3-flask"><em>Splitting the app into model, view, and controller files</em></a>. This more complicated app involves
 more code and especially the model will soon be handy to isolate in its own
-file. Our first version of <tt class="docutils literal"><span class="pre">model.py</span></tt> reads</p>
+file.</p>
+<p><em>The model.</em> Our first version of <tt class="docutils literal"><span class="pre">model.py</span></tt> reads</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">wtforms</span> <span class="kn">import</span> <span class="n">Form</span><span class="p">,</span> <span class="n">FloatField</span><span class="p">,</span> <span class="n">validators</span>
 <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">pi</span>
 
@@ -160,10 +163,10 @@ measured. It is also possible to add a <tt class="docutils literal"><span class=
 some help message. Furthermore, we include a <tt class="docutils literal"><span class="pre">default</span></tt> value, which
 will appear in the text field such that the user does not need to
 fill in all values.</p>
-<p id="index-1">The view will of course make use of templates, and we shall experiment
+<p id="index-1"><em>The view.</em> The view component will of course make use of templates, and we shall experiment
 with different templates. Therefore, we allow a command-line argument
 to this Flask app for choosing which template we want. The rest of
-the <tt class="docutils literal"><span class="pre">view.py</span></tt> file follows much the same set up as for the scientific
+the <tt class="docutils literal"><span class="pre">controller.py</span></tt> file follows much the same set up as for the scientific
 hello world app:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">model</span> <span class="kn">import</span> <span class="n">InputForm</span>
 <span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">request</span>
@@ -188,6 +191,9 @@ hello world app:</p>
 
     <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="n">template_name</span> <span class="o">+</span> <span class="s">&#39;.html&#39;</span><span class="p">,</span>
                            <span class="n">form</span><span class="o">=</span><span class="n">form</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="n">result</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The details governing how the web page really looks like lie in the
@@ -220,21 +226,14 @@ through the <tt class="docutils literal"><span class="pre">label</span></tt> key
 writing the field object itself generates the text area for
 input (i.e., the HTML input form). The control statements we can
 use in the template are part of the <a class="reference external" href="http://jinja.pocoo.org/docs/">Jinja2</a>
-<em>templating language</em>. For now, the if-test, for-loop and
+templating language. For now, the if-test, for-loop and
 output of values (<tt class="docutils literal"><span class="pre">{{</span> <span class="pre">object</span> <span class="pre">}}</span></tt>) are enough to generate the HTML
 code we want.</p>
 <p>Recall that the objects we need in the template, like <tt class="docutils literal"><span class="pre">result</span></tt> and <tt class="docutils literal"><span class="pre">form</span></tt>
 in the present case, are transferred to the template via keyword
 arguments to the <tt class="docutils literal"><span class="pre">render_template</span></tt> function. We can easily pass on
-any object in our application to the template.</p>
-<p>To get a runnable Flask application it remains to
-run the <tt class="docutils literal"><span class="pre">app</span></tt> object from <tt class="docutils literal"><span class="pre">controller.py</span></tt>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">view</span> <span class="kn">import</span> <span class="n">app</span>
-
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-</pre></div>
-</div>
+any object in our application to the template. Debugging of the template
+is done by viewing the HTML source of the web page in the browser.</p>
 <p>You are encouraged to run <tt class="docutils literal"><span class="pre">python</span> <span class="pre">controller.py</span></tt> and load <tt class="docutils literal"><span class="pre">http://127.0.0.1:5000/vib1</span></tt> into your web browser for testing.</p>
 </div>
 </div>

@@ -65,10 +65,23 @@
 <h1>Programming the Django application  (1)<a class="headerlink" href="#programming-the-django-application-1" title="Permalink to this headline">¶</a></h1>
 <p>The Django application is about filling the files <tt class="docutils literal"><span class="pre">views.py</span></tt> and <tt class="docutils literal"><span class="pre">models.py</span></tt>
 with content. The mathematical computations are performed in <tt class="docutils literal"><span class="pre">compute.py</span></tt>
-so we copy this file from the <tt class="docutils literal"><span class="pre">mvc</span></tt> directory to the <tt class="docutils literal"><span class="pre">hw1_django</span></tt> directory
+so we copy this file from the <tt class="docutils literal"><span class="pre">mvc</span></tt> directory to the <tt class="docutils literal"><span class="pre">hw1</span></tt> directory
 for convenience (we could alternatively add <tt class="docutils literal"><span class="pre">../mvc</span></tt> to <tt class="docutils literal"><span class="pre">sys.path</span></tt> such that
-<tt class="docutils literal"><span class="pre">import</span> <span class="pre">compute</span></tt> would work from the <tt class="docutils literal"><span class="pre">hw1_django</span></tt> directory).</p>
-<span class="target" id="index-0"></span><p id="index-1"><em>The model.</em> The <tt class="docutils literal"><span class="pre">models.py</span></tt> file contains the model which consists
+<tt class="docutils literal"><span class="pre">import</span> <span class="pre">compute</span></tt> would work from the <tt class="docutils literal"><span class="pre">hw1</span></tt> directory).</p>
+<p><em>The user interaction.</em> The web application offers a text field where the user can
+write the value of <tt class="docutils literal"><span class="pre">r</span></tt>, see Figure <a class="reference internal" href="web4sa.html#wf-hw1-django-fig-input"><em>The input page</em></a>.
+After clicking on the <em>equals</em> button,
+the mathematics is performed and a new page as
+seen in Figure <a class="reference internal" href="web4sa.html#wf-hw1-django-fig-result"><em>The result page</em></a> appears.</p>
+<div class="figure" id="wf-hw1-django-fig-input">
+<img alt="_images/hw1_django_input.png" src="_images/hw1_django_input.png" style="width: 600px;" />
+<p class="caption"><em>The input page</em></p>
+</div>
+<div class="figure" id="wf-hw1-django-fig-result">
+<img alt="_images/hw1_django_output.png" src="_images/hw1_django_output.png" style="width: 600px;" />
+<p class="caption"><em>The result page</em></p>
+</div>
+<span class="target" id="index-0"></span><p id="index-1"><em>The model.</em> The <tt class="docutils literal"><span class="pre">models.py</span></tt> file contains the model, which consists
 of the data we need in the application, stored in Django&#8217;s data types.
 Our data consists of one number, called <tt class="docutils literal"><span class="pre">r</span></tt>, and <tt class="docutils literal"><span class="pre">models.py</span></tt> then
 look like</p>
@@ -86,14 +99,14 @@ look like</p>
 <p>The <tt class="docutils literal"><span class="pre">Input</span></tt> class lists variables representing data as static class
 attributes. The <tt class="docutils literal"><span class="pre">django.db.models</span></tt> module contains various classes
 for different types of data, here we use <tt class="docutils literal"><span class="pre">FloatField</span></tt> to represent
-a floating-point number (corresponding to a Python <tt class="docutils literal"><span class="pre">float</span></tt>).
+a floating-point number.
 The <tt class="docutils literal"><span class="pre">InputForm</span></tt> class has a the shown generic form across applications
 if we by convention apply the name <tt class="docutils literal"><span class="pre">Input</span></tt> for the class holding the data.</p>
-<span class="target" id="index-2"></span><p id="index-3"><em>The view.</em> The <tt class="docutils literal"><span class="pre">views.py</span></tt> file contains a function <tt class="docutils literal"><span class="pre">index</span></tt> which performs
+<span class="target" id="index-2"></span><p id="index-3"><em>The view.</em> The <tt class="docutils literal"><span class="pre">views.py</span></tt> file contains a function <tt class="docutils literal"><span class="pre">index</span></tt> which defines
 the actions we want to perform when invoking
-the URL ( here <tt class="docutils literal"><span class="pre">http://127.0.0.1:8000/hw/</span></tt>).
+the URL ( here <tt class="docutils literal"><span class="pre">http://127.0.0.1:8000/hw1/</span></tt>).
 In addition, <tt class="docutils literal"><span class="pre">views.py</span></tt> has the <tt class="docutils literal"><span class="pre">present_output</span></tt> function from
-the <tt class="docutils literal"><span class="pre">view.py</span></tt> file in the <tt class="docutils literal"><span class="pre">mvc_django</span></tt> directory.</p>
+the <tt class="docutils literal"><span class="pre">view.py</span></tt> file in the <tt class="docutils literal"><span class="pre">mvc</span></tt> directory.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render_to_response</span>
 <span class="kn">from</span> <span class="nn">django.template</span> <span class="kn">import</span> <span class="n">RequestContext</span>
 <span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpResponse</span>
@@ -157,18 +170,12 @@ results in the HTML code</p>
 <span class="nt">&lt;/form&gt;</span>
 </pre></div>
 </div>
-<p>Figure <a class="reference internal" href="#wf-hw1-django-fig-input"><em>The input page</em></a> shows how the input page looks like in the
-web browser.</p>
-<div class="figure" id="wf-hw1-django-fig-input">
-<img alt="_images/hw1_django_input.png" src="_images/hw1_django_input.png" style="width: 600px;" />
-<p class="caption"><em>The input page</em></p>
-</div>
 <p><em>Making the results page.</em> When then user has filled in a value in the text field on the input
 page, the <tt class="docutils literal"><span class="pre">index</span></tt> function is called again and <tt class="docutils literal"><span class="pre">request.method</span></tt> equals
 <tt class="docutils literal"><span class="pre">'POST'</span></tt>. A new form object is made, this time with user info (<tt class="docutils literal"><span class="pre">request.POST</span></tt>).
 We can check that the form is valid and if so, proceed with
 computations followed by presenting the results in a
-new web page (see Figure <a class="reference internal" href="#wf-hw1-django-fig-result"><em>The result page</em></a>):</p>
+new web page (see Figure <a class="reference internal" href="web4sa.html#wf-hw1-django-fig-result"><em>The result page</em></a>):</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">&#39;POST&#39;</span><span class="p">:</span>
         <span class="n">form</span> <span class="o">=</span> <span class="n">InputForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>
@@ -187,13 +194,13 @@ Instead of using a template for the output page, which is natural to
 do in more advanced cases, we here illustrate the possibility to
 send raw HTML to the output page by returning an <tt class="docutils literal"><span class="pre">HttpResponse</span></tt>
 object initialized by a string containing the desired HTML code.</p>
-<div class="figure" id="wf-hw1-django-fig-result">
-<img alt="_images/hw1_django_output.png" src="_images/hw1_django_output.png" style="width: 600px;" />
-<p class="caption"><em>The result page</em></p>
+<p>Launch this application by filling in the address <tt class="docutils literal"><span class="pre">http://127.0.0.1:8000/hw1/</span></tt>
+in your web browser. Make sure the Django development server is running,
+and if not, restart it by</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">Terminal&gt; python ../../../django_project/manage.py runserver</span>
+</pre></div>
 </div>
-<p>Launch this application by filling in the address <tt class="docutils literal"><span class="pre">http://127.0.0.1:8000/hw/</span></tt>
-in your web browser (make sure the Django development server is running,
-and if not, restart it by <tt class="docutils literal"><span class="pre">python</span> <span class="pre">manage.py</span> <span class="pre">runserver</span></tt>). Try to fill
+<p>Fill
 in some number on the input page and view the output.
 To show how easy it is to change the application, invoke the <tt class="docutils literal"><span class="pre">views.py</span></tt>
 file in an editor and add some color to the output HTML code from
@@ -212,20 +219,22 @@ the &#8220;Hello&#8221; word now has a blue color.</p>
 <p>Instead of making a separate output page with the result, we can
 simply add the sine value to the input page. This makes the user
 feel that she interacts with the same page, as when operating a calculator.
-The output page should then look as shown in Figure <a class="reference internal" href="#wf-hw2-django-fig-result"><em>The modified result page</em></a>.</p>
+The output page should then look as shown in Figure <a class="reference internal" href="web4sa.html#wf-hw2-django-fig-result"><em>The modified result page</em></a>.</p>
 <div class="figure" id="wf-hw2-django-fig-result">
 <img alt="_images/hw2_django_output.png" src="_images/hw2_django_output.png" style="width: 600px;" />
 <p class="caption"><em>The modified result page</em></p>
 </div>
-<p>We need to make a new Django application, now called <tt class="docutils literal"><span class="pre">hw2_django</span></tt>.
-Instead of running
-<tt class="docutils literal"><span class="pre">manage.py</span> <span class="pre">startapp</span> <span class="pre">hw2_django</span></tt> we can simply copy the <tt class="docutils literal"><span class="pre">hw1_django</span></tt>
-directory. We need, of course, to add information about this
+<p>We need to make a new Django application, now called
+<a class="reference external" href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/django_apps/hw2">hw2</a>.
+Instead of running the standard
+<tt class="docutils literal"><span class="pre">manage.py</span> <span class="pre">startapp</span> <span class="pre">hw2</span></tt> command,
+we can simply copy the <tt class="docutils literal"><span class="pre">hw1</span></tt>
+directory to <tt class="docutils literal"><span class="pre">hw2</span></tt>. We need, of course, to add information about this
 new application in <tt class="docutils literal"><span class="pre">settings.py</span></tt> and <tt class="docutils literal"><span class="pre">urls.py</span></tt>.
 In the former file we must have</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">TEMPLATE_DIRS</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="n">relative2absolute_path</span><span class="p">(</span><span class="s">&#39;../../apps/hw1_django/templates&#39;</span><span class="p">),</span>
-    <span class="n">relative2absolute_path</span><span class="p">(</span><span class="s">&#39;../../apps/hw2_django/templates&#39;</span><span class="p">),</span>
+    <span class="n">relative2absolute_path</span><span class="p">(</span><span class="s">&#39;../../apps/django_apps/hw1/templates&#39;</span><span class="p">),</span>
+    <span class="n">relative2absolute_path</span><span class="p">(</span><span class="s">&#39;../../apps/django_apps/hw2/templates&#39;</span><span class="p">),</span>
 <span class="p">)</span>
 
 <span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">(</span>
@@ -239,16 +248,16 @@ In the former file we must have</p>
     <span class="c"># &#39;django.contrib.admin&#39;,</span>
     <span class="c"># Uncomment the next line to enable admin documentation:</span>
     <span class="c"># &#39;django.contrib.admindocs&#39;,</span>
-    <span class="s">&#39;hw1_django&#39;</span><span class="p">,</span>
-    <span class="s">&#39;hw2_django&#39;</span><span class="p">,</span>
+    <span class="s">&#39;hw1&#39;</span><span class="p">,</span>
+    <span class="s">&#39;hw2&#39;</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 <p>In <tt class="docutils literal"><span class="pre">urls.py</span></tt> we add the URL <tt class="docutils literal"><span class="pre">hw2</span></tt> which is to call our <tt class="docutils literal"><span class="pre">index</span></tt> function
-in the <tt class="docutils literal"><span class="pre">views.py</span></tt> file of the <tt class="docutils literal"><span class="pre">hw2_django</span></tt> app:</p>
+in the <tt class="docutils literal"><span class="pre">views.py</span></tt> file of the <tt class="docutils literal"><span class="pre">hw2</span></tt> app:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">urlpatterns</span> <span class="o">=</span> <span class="n">patterns</span><span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">,</span>
-    <span class="n">url</span><span class="p">(</span><span class="s">r&#39;^hw1/&#39;</span><span class="p">,</span> <span class="s">&#39;hw1_django.views.index&#39;</span><span class="p">),</span>
-    <span class="n">url</span><span class="p">(</span><span class="s">r&#39;^hw2/&#39;</span><span class="p">,</span> <span class="s">&#39;hw2_django.views.index&#39;</span><span class="p">),</span>
+    <span class="n">url</span><span class="p">(</span><span class="s">r&#39;^hw1/&#39;</span><span class="p">,</span> <span class="s">&#39;django_apps.hw1.views.index&#39;</span><span class="p">),</span>
+    <span class="n">url</span><span class="p">(</span><span class="s">r&#39;^hw2/&#39;</span><span class="p">,</span> <span class="s">&#39;django_apps.hw2.views.index&#39;</span><span class="p">),</span>
 </pre></div>
 </div>
 <p>The <tt class="docutils literal"><span class="pre">views.py</span></tt> file changes a bit since we shall generate almost the same
@@ -287,11 +296,14 @@ looks like</p>
 button write out the value of <tt class="docutils literal"><span class="pre">s</span></tt>. However, we make a test that
 the value is only written if it is computed, here recognized by
 being a non-empty string. The <tt class="docutils literal"><span class="pre">s</span></tt> in the template file
-is substituted by value corresponding to the key <tt class="docutils literal"><span class="pre">'s'</span></tt> in the
+is substituted by the value of the object
+corresponding to the key <tt class="docutils literal"><span class="pre">'s'</span></tt> in the
 dictionary we pass to the <tt class="docutils literal"><span class="pre">render_to_response</span></tt>. As seen,
 we pass a string where <tt class="docutils literal"><span class="pre">s</span></tt> is formatted with five digits if <tt class="docutils literal"><span class="pre">s</span></tt>
 is a float, i.e., if <tt class="docutils literal"><span class="pre">s</span></tt> is computed. Otherwise, <tt class="docutils literal"><span class="pre">s</span></tt> has the
-default value <tt class="docutils literal"><span class="pre">None</span></tt> and we send an empty string to the template.</p>
+default value <tt class="docutils literal"><span class="pre">None</span></tt> and we send an empty string to the template.
+The template language allows tests using Python syntax, but the
+if-block must be explicitly ended by <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">endif</span> <span class="pre">%}</span></tt>.</p>
 </div>
 
 

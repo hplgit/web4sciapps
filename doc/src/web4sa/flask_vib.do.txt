@@ -580,7 +580,7 @@ Python has the `StringIO` object that is a string buffer with the
 look and behavior of a file. The idea is to let Matplotlib write to
 a `StringIO` object and afterwards extract the string from this object:
 
-!bc pydoc
+!bc pycod
 import matplotlib.pyplot as plot
 from StringIO import StringIO
 # run plt.plot, plt.title, etc.

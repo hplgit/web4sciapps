@@ -67,7 +67,7 @@
 instead of a number? Actually nothing! The <tt class="docutils literal"><span class="pre">FloatField</span></tt> object
 checks that the input is compatible with a real number in the
 <tt class="docutils literal"><span class="pre">form.validate()</span></tt> call, but returns just <tt class="docutils literal"><span class="pre">False</span></tt> if this is not
-the case. Looking at the code in <tt class="docutils literal"><span class="pre">view.py</span></tt>,</p>
+the case. Looking at the code in <tt class="docutils literal"><span class="pre">controller.py</span></tt>,</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
     <span class="n">form</span> <span class="o">=</span> <span class="n">InputForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">&#39;POST&#39;</span> <span class="ow">and</span> <span class="n">form</span><span class="o">.</span><span class="n">validate</span><span class="p">():</span>
@@ -78,7 +78,7 @@ the case. Looking at the code in <tt class="docutils literal"><span class="pre">
 </pre></div>
 </div>
 <p>we realize that wrong input implies <tt class="docutils literal"><span class="pre">result</span> <span class="pre">=</span> <span class="pre">None</span></tt> and no computations
-and plot. Fortunately, each field object gets an attribute <tt class="docutils literal"><span class="pre">error</span></tt>
+and no plot! Fortunately, each field object gets an attribute <tt class="docutils literal"><span class="pre">error</span></tt>
 with information on errors that occur on input. We can write out
 this information on the web page, as exemplified in the template
 <tt class="docutils literal"><span class="pre">view1.html</span></tt>:</p>
@@ -100,7 +100,6 @@ this information on the web page, as exemplified in the template
 <span class="nt">&lt;p&gt;&lt;input</span> <span class="na">type=</span><span class="s">submit</span> <span class="na">value=</span><span class="s">Compute</span><span class="nt">&gt;&lt;/form&gt;&lt;/p&gt;</span>
 <span class="nt">&lt;p&gt;</span>
 {% if result != None %}
-<span class="nt">&lt;h4&gt;</span>Plot:<span class="nt">&lt;/h4&gt;</span>
 <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;{{ result }}&quot;</span> <span class="na">width=</span><span class="s">500</span><span class="nt">&gt;</span>
 {% endif %}
 <span class="nt">&lt;/p&gt;</span>
@@ -113,9 +112,10 @@ user writes the numbers, here set to 12 characters.</li>
 <li>We can make an extra column in the HTML table with a list
 of possible errors for each field object.</li>
 </ol>
-<p>Let us test the <tt class="docutils literal"><span class="pre">A</span></tt> field by writing <tt class="docutils literal"><span class="pre">asd</span></tt> instead of a number. This
-triggers an error, which is written in red to the right of the label,
-see Figure <a class="reference internal" href="._part0011_web4sa.html#wf-vib2-flask-fig-error1"><em>Triggering of a user-defined error check</em></a>.</p>
+<p>Let us test the error handling of the <tt class="docutils literal"><span class="pre">A</span></tt> field by
+writing <tt class="docutils literal"><span class="pre">asd</span></tt> instead of a number. This input
+triggers an error, whose message is written in red to the right of the label,
+see Figure <a class="reference internal" href="web4sa.html#wf-vib1-flask-fig-error1"><em>Error message because of wrong input</em></a>.</p>
 <div class="figure" id="wf-vib1-flask-fig-error1">
 <img alt="_images/vib1_flask_error1.png" src="_images/vib1_flask_error1.png" style="width: 500px;" />
 <p class="caption"><em>Error message because of wrong input</em></p>

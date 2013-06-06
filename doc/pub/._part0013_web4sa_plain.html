@@ -1,30 +1,33 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html>
 <!--
 Automatically generated HTML file from Doconce source
 (http://code.google.com/p/doconce/)
 -->
-
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="Doconce: http://code.google.com/p/doconce/" />
 <meta name="description" content="Using Web Frameworks for Scientific Web Applications">
-<meta name="keywords" content="web frameworks,MVC pattern,Flask installation,Flask input forms,Flask HTML templates,Flask MVC pattern,Flask troubleshooting,Django installation,Django making a project,Django making an application,Django input forms,Django HTML templates,Flask input forms,Flask error checking,Flask CSS style sheets,Flask LaTeX mathematics,Flask input validation,Django input forms,Django input validation">
+<meta name="keywords" content="web frameworks,MVC pattern,Flask installation,Flask input forms,Flask HTML templates,Flask MVC pattern,Flask troubleshooting,Django installation,Django making a project,Django making an application,Django input forms,Django HTML templates,Flask input forms,Flask error checking,Flask CSS style sheets,Flask LaTeX mathematics,Flask input validation,inline PNG image in HTML,base64 encoding of PNG images,inline SVG figure in HTML,Django input forms,Django input validation">
 
 
 
 <style type="text/css">
+    /* Color definitions:  http://www.december.com/html/spec/color0.html
+       CSS examples:       http://www.w3schools.com/css/css_examples.asp */
+
     body {
-      font-family: Helvetica, Verdana, Arial, Sans-serif;
-      color: #404040;
-      background: #ffffff;
+      margin-top: 1.0em;
+      background-color: #ffffff;
+      font-family: Helvetica, Arial, FreeSans, san-serif;
+      color: #000000;
     }
-    h1 { font-size: 1.8em;  color: #8A0808; }
-    h2 { font-size: 1.5em;  color: #8A0808; }
-    h3, h4 { color: #8A0808; }
-    a { color: #8A0808; text-decoration:none; }
+    h1 { font-size: 1.8em; color: #1e36ce; }
+    h2 { font-size: 1.5em; color: #1e36ce; }
+    h3 { color: #1e36ce; }
+    a { color: #1e36ce; text-decoration:none; }
     tt { font-family: "Courier New", Courier; }
-    pre { background: #ededed; color: #000; padding: 15px;}
+    
     p { text-indent: 0px; }
     hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
     p.caption { width: 80%; font-style: normal; text-align: left; }
@@ -55,46 +58,69 @@ Automatically generated HTML file from Doconce source
                'wf:hw3:flask'),
               (' Troubleshooting ', 2, None, '___sec8'),
               (' Making a Django application ', 1, None, '___sec9'),
-              (' Installing Django ', 2, None, '___sec10'),
-              (' Setting up a Django project ', 2, None, '___sec11'),
-              (' Setting up a Django application ', 2, None, '___sec12'),
-              (' Programming the Django application ', 2, None, '___sec13'),
+              (' Setting up a Django project ', 2, None, '___sec10'),
+              (' Setting up a Django application ', 2, None, '___sec11'),
+              (' Programming the Django application ', 2, None, '___sec12'),
               (' Equipping the input page with output results ',
                2,
                None,
-               '___sec14'),
+               '___sec13'),
               (' Handling multiple input variables in Flask ',
                1,
                'wf:vib:flask',
                'wf:vib:flask'),
-              (' Programming the Flask application ', 2, None, '___sec16'),
+              (' Programming the Flask application ',
+               2,
+               'wf:vib1:flask:app',
+               'wf:vib1:flask:app'),
               (' Implementing error checking in the template ',
                2,
                None,
-               '___sec17'),
-              (' Using style sheets ', 2, None, '___sec18'),
-              (' Using LaTeX mathematics ', 2, None, '___sec19'),
+               '___sec16'),
+              (' Using style sheets ', 2, None, '___sec17'),
+              (' Using LaTeX mathematics ', 2, None, '___sec18'),
               (' Rearringing the elements in the HTML template ',
                2,
                None,
-               '___sec20'),
-              (' User-provided validation ', 2, None, '___sec21'),
+               '___sec19'),
+              (' User-provided validation ',
+               2,
+               'wf:vib1:flask:validation',
+               'wf:vib1:flask:validation'),
               (' Autogenerating the code ',
                2,
                'wf:vib3:flask:autogen',
                'wf:vib3:flask:autogen'),
+              (' Avoiding plot files ',
+               2,
+               'wf:vib3:flask:nofiles',
+               'wf:vib3:flask:nofiles'),
+              (' PNG plots ', 3, None, '___sec23'),
+              (' SVG plots ', 3, None, '___sec24'),
               (' Handling multiple input variables in Django ',
                1,
                'wf:vib:django',
                'wf:vib:django'),
-              (' Programming the Django application ', 2, None, '___sec24'),
-              (' User-provided validation ', 2, None, '___sec25'),
-              (' Exercises ', 1, None, '___sec26'),
+              (' Programming the Django application ', 2, None, '___sec26'),
+              (' User-provided validation ', 2, None, '___sec27'),
+              (' Exercises ', 1, None, '___sec28'),
               (' Exercise 1: Add two numbers ',
                2,
                'wf:exer:add2',
                'wf:exer:add2'),
-              (' Remaining ', 1, None, '___sec28')]}
+              (' Exercise 2: Extend the `vib3_flask` app ',
+               2,
+               'wf:exer:vib3:demo',
+               'wf:exer:vib3:demo'),
+              (' Exercise 3: Equip the `vib3_flask` app with more data types ',
+               2,
+               'wf:exer:vib3:lists',
+               'wf:exer:vib3:lists'),
+              (' Exercise 4: Auto-generate code from function signature ',
+               2,
+               None,
+               '___sec32'),
+              (' Remaining ', 1, None, '___sec33')]}
 end of tocinfo -->
 
 <body>
@@ -127,280 +153,164 @@ MathJax.Hub.Config({
     <p>
 <!-- !split -->
 
-<h2>Handling multiple input variables in Django <a name="wf:vib:django"></a></h2>
+<h3>Avoiding plot files <a name="wf:vib3:flask:nofiles"></a></h3>
 
 <p>
-We shall briefly demonstrate how to make the multi-variable input
-application from the section <a href="._part0008_web4sa_plain.html#wf:vib:flask">Handling multiple input variables in Flask</a> in Django.
-There are four float input variables: \( A \), \( b \), \( w \), and \( T \).
-A function <code>compute</code> in the file <code>compute.py</code> makes
-a plot of a function depending on these four parameters and returns
-the name of the plot file. Our task is to define four input fields,
-execute the <code>compute</code> function and show the input fields together with
-the resulting plot, cf. Figures <a href="._part0008_web4sa_plain.html#wf:vib1:flask:fig:input">7</a>
-and <a href="._part0008_web4sa_plain.html#wf:vib1:flask:fig:result">8</a>.
+Files with plots are easy to deal with as long as they are in the
+<code>static</code> subdirectory of the Flask application directory. However,
+the less files a web app makes use of, the better. Also, the problem
+with ensuring that new plots are really loaded into the browser
+required us to generate unique filenames. Therefore, it would be
+convenient to get the plot as a string and embed the string data
+directly into the HTML code. This is relatively easy with Matplotlib
+and Python. The relevant code constitutes the
+<a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/vib4"><tt>vib4</tt></a> app in the
+directory of the same name.
+
+<h4>PNG plots  <a name="___sec23"></a></h4>
 
 <p>
-
-<h3>Programming the Django application  <a name="___sec24"></a></h3>
-
-<p>
-
-
-Any Django app needs a project, but here we reuse the project
-we set up for the scientific hello world examples. We go to
-<code>apps/vib</code> and create the Django app
+Python has the <code>StringIO</code> object that is a string buffer with the
+look and behavior of a file. The idea is to let Matplotlib write to
+a <code>StringIO</code> object and afterwards extract the string from this object:
 
 <p>
 
-
-<!-- code typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; python ../../django_project/manage.py startapp vib1_django
+<!-- code=python (from !bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plot</span>
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">StringIO</span> <span style="color: #008000; font-weight: bold">import</span> StringIO
+<span style="color: #408080; font-style: italic"># run plt.plot, plt.title, etc.</span>
+figfile <span style="color: #666666">=</span> StringIO()
+plt<span style="color: #666666">.</span>savefig(figfile, format<span style="color: #666666">=</span><span style="color: #BA2121">&#39;png&#39;</span>)
+figfile<span style="color: #666666">.</span>seek(<span style="color: #666666">0</span>)  <span style="color: #408080; font-style: italic"># rewind to beginning of file</span>
+figdata_png <span style="color: #666666">=</span> figfile<span style="color: #666666">.</span>buf  <span style="color: #408080; font-style: italic"># extract string</span>
 </pre></div>
 <p>
-Then we
+Before the PNG data can be embedded in HTML we need to convert the
+data to base64 format:
 
 <p>
 
-<ol>
-<li> add <code>sys.path.insert(0, relative2absolute_path('../../apps/vib'))</code>
-   in <code>settings.py</code>,</li>
-<li> add <code>relative2absolute_path('../../apps/vib/vib1_django/templates'),</code>
-   to the <code>TEMPLATE_DIRS</code> tuple in <code>settings.py</code>, and</li>
-<li> add <code>url(r'^vib1/', 'vib1_django.views.index')</code> to the <code>patterns</code>
-   call in <code>urls.py</code>.</li>
-</ol>
-
-We can now invoke <code>models.py</code> to add form fields for the four
-input variables:
-
-<p>
-
-
-<!-- code typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">django.db</span> <span style="color: #008000; font-weight: bold">import</span> models
-<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">django.forms</span> <span style="color: #008000; font-weight: bold">import</span> ModelForm
-<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> pi
-
-<span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Input</span>(models<span style="color: #666666">.</span>Model):
-    A <span style="color: #666666">=</span> models<span style="color: #666666">.</span>FloatField(
-        verbose_name<span style="color: #666666">=</span><span style="color: #BA2121">&#39; amplitude (m)&#39;</span>, default<span style="color: #666666">=1.0</span>)
-    b <span style="color: #666666">=</span> models<span style="color: #666666">.</span>FloatField(
-        verbose_name<span style="color: #666666">=</span><span style="color: #BA2121">&#39; damping coefficient (kg/s)&#39;</span>, default<span style="color: #666666">=0.0</span>)
-    w <span style="color: #666666">=</span> models<span style="color: #666666">.</span>FloatField(
-        verbose_name<span style="color: #666666">=</span><span style="color: #BA2121">&#39; frequency (1/s)&#39;</span>, default<span style="color: #666666">=2*</span>pi)
-    T <span style="color: #666666">=</span> models<span style="color: #666666">.</span>FloatField(
-        verbose_name<span style="color: #666666">=</span><span style="color: #BA2121">&#39; time interval (s)&#39;</span>, default<span style="color: #666666">=18</span>)
-
-<span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">InputForm</span>(ModelForm):
-    <span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Meta</span>:
-        model <span style="color: #666666">=</span> Input
+<!-- code=python (from !bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">base64</span>
+figdata_png <span style="color: #666666">=</span> base64<span style="color: #666666">.</span>b64encode(figdata_png)
 </pre></div>
 <p>
-Note here that we can provide a more explanatory name than just
-the variable name, e.g., <code>' amplitude (m)'</code> for <code>A</code>. However,
-Django will always capitalize these descriptions, so if one really
-needs lower case names (e.g., to be compatible with mathematics),
-one must start the text with a space. We also provide a default
-value such that all fields have a value when the user sees
-the page.
+Now we can embed the PNG data in HTML by
 
 <p>
 
-The <code>views.py</code> file looks as follows:
-
-<p>
-
-
-<!-- code typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">django.shortcuts</span> <span style="color: #008000; font-weight: bold">import</span> render_to_response
-<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">django.template</span> <span style="color: #008000; font-weight: bold">import</span> RequestContext
-<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">django.http</span> <span style="color: #008000; font-weight: bold">import</span> HttpResponse
-<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">models</span> <span style="color: #008000; font-weight: bold">import</span> InputForm
-<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">compute</span> <span style="color: #008000; font-weight: bold">import</span> compute
-<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">os</span>
-
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">index</span>(request):
-    os<span style="color: #666666">.</span>chdir(os<span style="color: #666666">.</span>path<span style="color: #666666">.</span>dirname(__file__))
-    result <span style="color: #666666">=</span> <span style="color: #008000">None</span>
-    <span style="color: #008000; font-weight: bold">if</span> request<span style="color: #666666">.</span>method <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;POST&#39;</span>:
-        form <span style="color: #666666">=</span> InputForm(request<span style="color: #666666">.</span>POST)
-        <span style="color: #008000; font-weight: bold">if</span> form<span style="color: #666666">.</span>is_valid():
-            form2 <span style="color: #666666">=</span> form<span style="color: #666666">.</span>save(commit<span style="color: #666666">=</span><span style="color: #008000">False</span>)
-            result <span style="color: #666666">=</span> compute(form2<span style="color: #666666">.</span>A, form2<span style="color: #666666">.</span>b, form2<span style="color: #666666">.</span>w, form2<span style="color: #666666">.</span>T)
-            result <span style="color: #666666">=</span> result<span style="color: #666666">.</span>replace(<span style="color: #BA2121">&#39;static/&#39;</span>, <span style="color: #BA2121">&#39;&#39;</span>)
-    <span style="color: #008000; font-weight: bold">else</span>:
-        form <span style="color: #666666">=</span> InputForm()
-
-    <span style="color: #008000; font-weight: bold">return</span> render_to_response(<span style="color: #BA2121">&#39;vib1.html&#39;</span>,
-            {<span style="color: #BA2121">&#39;form&#39;</span>: form,
-             <span style="color: #BA2121">&#39;result&#39;</span>: result,
-             }, context_instance<span style="color: #666666">=</span>RequestContext(request))
+<!-- code=python (from !bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># html is some file object for the HTML file</span>
+html<span style="color: #666666">.</span>write(<span style="color: #BA2121">&quot;&quot;&quot;</span>
+<span style="color: #BA2121">&lt;img src=&quot;data:image/png;base64,</span><span style="color: #BB6688; font-weight: bold">%(figdata_png)s</span><span style="color: #BA2121">&quot; width=500&gt;</span>
+<span style="color: #BA2121">&quot;&quot;&quot;</span> <span style="color: #666666">%</span> <span style="color: #008000">vars</span>())
 </pre></div>
 <p>
-Some remarks are necessary:
+The corresponding syntax in an HTML template is
 
 <p>
 
-<ol>
-<li> Doing an <code>os.chdir</code> to the current working directory is necessary
-   as Django may be back in another working directory if you have
-   tested other apps.</li>
-<li> The <code>form2</code> object from <code>form.save</code> is the object we extract
-   data from and send to <code>compute</code>, but the original <code>form</code>
-   object is needed when making the HTML page through the template.</li>
-<li> Images, media files, style sheets, javascript files, etc. must
-   reside in a subdirectory <code>static</code>. The specifications of the
-   URL applies tools to find this <code>static</code> directory and then
-   the <code>static</code> prefix in the <code>result</code> filename must be removed.</li>
-</ol>
+<!-- code=html (from !bc htmlcod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">&lt;img</span> <span style="color: #7D9029">src=</span><span style="color: #BA2121">&quot;data:image/png;base64,{{ figdata_png }}&quot;</span> <span style="color: #7D9029">width=</span><span style="color: #BA2121">500</span><span style="color: #008000; font-weight: bold">&gt;</span>
+</pre></div>
 
-The template for rendering the page is listed next.
+<h4>SVG plots  <a name="___sec24"></a></h4>
+
+<p>
+Inline figures in HTML, instead of using files, are most often realized
+by XML code with the figure data in SVG format.
+Plot strings in the SVG format are created very similarly to the PNG
+example:
 
 <p>
 
+<!-- code=python (from !bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">figfile <span style="color: #666666">=</span> StringIO()
+plt<span style="color: #666666">.</span>savefig(figfile, format<span style="color: #666666">=</span><span style="color: #BA2121">&#39;svg&#39;</span>)
+figdata_svg <span style="color: #666666">=</span> figfile<span style="color: #666666">.</span>buf
+</pre></div>
+<p>
+The <code>figdata_svg</code> string contains XML code text can almost
+be directly embedded in
+HTML5. However, the beginning of the text contains information before
+the <code>svg</code> tag that we want to remove:
 
-<!-- code typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">&lt;form</span> <span style="color: #7D9029">method=</span><span style="color: #BA2121">post</span> <span style="color: #7D9029">action=</span><span style="color: #BA2121">&quot;&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>{% csrf_token %}
-<span style="color: #008000; font-weight: bold">&lt;table&gt;</span>
-  {% for field in form %}
-    <span style="color: #008000; font-weight: bold">&lt;tr&gt;</span>
-    <span style="color: #008000; font-weight: bold">&lt;td&gt;</span>{{ field.name }}<span style="color: #008000; font-weight: bold">&lt;/td&gt;</span>
-    <span style="color: #008000; font-weight: bold">&lt;td&gt;</span>{{ field }}<span style="color: #008000; font-weight: bold">&lt;/td&gt;</span>
-    <span style="color: #008000; font-weight: bold">&lt;td&gt;</span>{{ field.label }}<span style="color: #008000; font-weight: bold">&lt;/td&gt;</span>
-    <span style="color: #008000; font-weight: bold">&lt;td&gt;</span>{{ field.errors }}<span style="color: #008000; font-weight: bold">&lt;/td&gt;</span>
-    <span style="color: #008000; font-weight: bold">&lt;td&gt;&lt;/td&gt;</span>
-    <span style="color: #008000; font-weight: bold">&lt;/tr&gt;</span>
-  {% endfor %}
-<span style="color: #008000; font-weight: bold">&lt;/table&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;p&gt;&lt;input</span> <span style="color: #7D9029">type=</span><span style="color: #BA2121">submit</span> <span style="color: #7D9029">value=</span><span style="color: #BA2121">Compute</span><span style="color: #008000; font-weight: bold">&gt;&lt;/form&gt;&lt;/p&gt;</span>
+<p>
 
+<!-- code=text (from !bc dat) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; standalone=&quot;no&quot;?&gt;
+&lt;!DOCTYPE svg PUBLIC &quot;-//W3C//DTD SVG 1.1//EN&quot;
+  &quot;http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd&quot;&gt;
+&lt;!-- Created with matplotlib (http://matplotlib.sourceforge.net/) --&gt;
+&lt;svg height=&quot;441pt&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 585 441&quot; ...
+</pre></div>
+<p>
+The removal is done with a little string manipulation:
+
+<p>
+
+<!-- code=python (from !bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">figdata_svg <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;&lt;svg&#39;</span> <span style="color: #666666">+</span> figfile<span style="color: #666666">.</span>buf<span style="color: #666666">.</span>split(<span style="color: #BA2121">&#39;&lt;svg&#39;</span>)[<span style="color: #666666">1</span>]
+</pre></div>
+<p>
+Now, <code>figdata_svg</code> can be directly inserted in HTML code without
+any surrounding tags.
+The file <a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/vib4/compute.py"><tt>compute.py</tt></a>
+in the <code>vib4_flask</code> application directory contains all the details.
+
+<p>
+The <code>compute_gamma</code> function returns six values:
+the PNG data for the \( g \) plot, the PNG data for the \( G \) plot,
+the SVG XML code for the \( g \) plot, the SVG XML code for the \( G \) plot,
+the mean value, and the value of the standard deviation. We can
+keep the <code>controller.py</code> unchanged (except for the URL, which is now <code>vib4</code>)
+and adjust the <code>view_results.html</code>
+template only. The <code>result</code> object is now a tuple with 6 elements.
+For illustration purposes we make two rows with plots, one with
+PNG data and one with SVG data. The template becomes
+
+<p>
+
+<!-- code=html (from !bc htmlpro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">{% if result != None %}
 <span style="color: #008000; font-weight: bold">&lt;p&gt;</span>
-{% if result != None %}
-{% load static %}
-<span style="color: #008000; font-weight: bold">&lt;img</span> <span style="color: #7D9029">src=</span><span style="color: #BA2121">&quot;{% get_static_prefix %}{{ result }}&quot;</span> <span style="color: #7D9029">width=</span><span style="color: #BA2121">500</span><span style="color: #008000; font-weight: bold">&gt;</span>
-{% endif %}
+<span style="color: #008000; font-weight: bold">&lt;table&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;tr&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;td&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;img</span> <span style="color: #7D9029">src=</span><span style="color: #BA2121">&quot;data:image/png;base64,{{ result[0] }}&quot;</span> <span style="color: #7D9029">width=</span><span style="color: #BA2121">&quot;400&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/td&gt;&lt;td&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;img</span> <span style="color: #7D9029">src=</span><span style="color: #BA2121">&quot;data:image/png;base64,{{ result[1] }}&quot;</span> <span style="color: #7D9029">width=</span><span style="color: #BA2121">&quot;400&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/td&gt;&lt;/tr&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;tr&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;td&gt;</span>{{ result[2]|safe }}<span style="color: #008000; font-weight: bold">&lt;/td&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;td&gt;</span>{{ result[3]|safe }}<span style="color: #008000; font-weight: bold">&lt;/td&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/tr&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;tr&gt;&lt;td&gt;</span>
+Mean value: {{ result[4] }} <span style="color: #008000; font-weight: bold">&lt;br&gt;</span>
+Standard deviation value: {{ result[5] }}
+<span style="color: #008000; font-weight: bold">&lt;/td&gt;&lt;/tr&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/table&gt;</span>
 <span style="color: #008000; font-weight: bold">&lt;/p&gt;</span>
+{% endif %}
 </pre></div>
 <p>
-The tricky part is the syntax for displaying <em>static content</em>, such as
-the plot file made in the <code>compute</code> function.
+Special HTML characters like <code><</code>, <code>></code>,
+<code>&</code>, <code>"</code>, and <code>'</code> are escaped in a template string like <code>{{ str }}</code>
+(i.e., <code>&</code> is replaced by <code>&amp;</code> `<` is replaced by <code>&lt;</code>, etc.).
+We need to avoid this manipulation of the string content
+because <code>result[2]</code> and <code>result[3]</code> contain
+XML code where the mentioned characters are essential part of the syntax.
+Writing <code>{{str|safe}}</code> ensures that the contents of the string <code>str</code>
+are not altered before being embedded in the HTML text.
 
 <p>
-
-<h3>User-provided validation  <a name="___sec25"></a></h3>
-
-<p>
-
-Django has a series of methods available for user-provided validation
-of form data. These are exemplified in the app <code>vib2_django</code>, which
-is an extension of the <code>vib1_django</code> app (with additional code, and
-of course, registrations in <code>settings.py</code> and <code>urls.py</code>).
-
-<p>
-
-Checking that \( A>0 \) is easiest done with a built-in Django
-validator:
-
-<p>
-
-
-<!-- code typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Input</span>(models<span style="color: #666666">.</span>Model):
-    A <span style="color: #666666">=</span> models<span style="color: #666666">.</span>FloatField(
-        verbose_name<span style="color: #666666">=</span><span style="color: #BA2121">&#39; amplitude (m)&#39;</span>, default<span style="color: #666666">=1.0</span>,
-        validators<span style="color: #666666">=</span>[MinValueValidator(<span style="color: #666666">0</span>)])
-</pre></div>
-<p>
-
-We can write our own validators, which are functions taking one parameter
-as argument, a value, and raising a <code>ValidationError</code> if the value
-is wrong. Checking that a value is inside an interval can first be
-implemented by
-
-<p>
-
-
-<!-- code typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">check_interval</span>(value, min_value<span style="color: #666666">=</span><span style="color: #008000">None</span>, max_value<span style="color: #666666">=</span><span style="color: #008000">None</span>):
-    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Validate that a value is inside an interval.&quot;&quot;&quot;</span>
-    failure <span style="color: #666666">=</span> <span style="color: #008000">False</span>
-    <span style="color: #008000; font-weight: bold">if</span> min_value <span style="color: #AA22FF; font-weight: bold">is</span> <span style="color: #AA22FF; font-weight: bold">not</span> <span style="color: #008000">None</span>:
-        <span style="color: #008000; font-weight: bold">if</span> value <span style="color: #666666">&lt;</span> min_value:
-            failure <span style="color: #666666">=</span> <span style="color: #008000">True</span>
-    <span style="color: #008000; font-weight: bold">if</span> max_value <span style="color: #AA22FF; font-weight: bold">is</span> <span style="color: #AA22FF; font-weight: bold">not</span> <span style="color: #008000">None</span>:
-        <span style="color: #008000; font-weight: bold">if</span> value <span style="color: #666666">&gt;</span> max_value:
-            failure <span style="color: #666666">=</span> <span style="color: #008000">True</span>
-    min_value <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;-infty&#39;</span> <span style="color: #008000; font-weight: bold">if</span> min_value <span style="color: #AA22FF; font-weight: bold">is</span> <span style="color: #008000">None</span> <span style="color: #008000; font-weight: bold">else</span> <span style="color: #008000">str</span>(min_value)
-    max_value <span style="color: #666666">=</span>  <span style="color: #BA2121">&#39;infty&#39;</span> <span style="color: #008000; font-weight: bold">if</span> max_value <span style="color: #AA22FF; font-weight: bold">is</span> <span style="color: #008000">None</span> <span style="color: #008000; font-weight: bold">else</span> <span style="color: #008000">str</span>(max_value)
-    <span style="color: #008000; font-weight: bold">if</span> failure:
-        <span style="color: #008000; font-weight: bold">raise</span> ValidationError(
-            <span style="color: #BA2121">&#39;value=</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> not in [</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">, </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">]&#39;</span> <span style="color: #666666">%</span>
-            (value, min_value, max_value))
-</pre></div>
-<p>
-However, this function takes more than the value as argument. We therefore
-need to wrap it by a function with <code>value</code> as the only argument:
-
-<p>
-
-
-<!-- code typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">functools</span>
-
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">interval</span>(min_value<span style="color: #666666">=</span><span style="color: #008000">None</span>, max_value<span style="color: #666666">=</span><span style="color: #008000">None</span>):
-    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Django-compatible interface to check_interval.&quot;&quot;&quot;</span>
-    <span style="color: #008000; font-weight: bold">return</span> functools<span style="color: #666666">.</span>partial(
-        check_interval, min_value<span style="color: #666666">=</span>min_value, max_value<span style="color: #666666">=</span>max_value)
-</pre></div>
-<p>
-Now, <code>interval(0, 1)</code> returns a function that takes <code>value</code> as its
-only argument and checks if it is inside \( [0,1] \).
-Such a function can be inserted in the <code>validators</code> list in
-the field constructor, here to tell that \( b \) must be in \( [0,\infty) \):
-
-<p>
-
-
-<!-- code typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Input</span>(models<span style="color: #666666">.</span>Model):
-    <span style="color: #666666">...</span>
-    b <span style="color: #666666">=</span> models<span style="color: #666666">.</span>FloatField(
-        verbose_name<span style="color: #666666">=</span><span style="color: #BA2121">&#39; damping coefficient (kg/s)&#39;</span>, default<span style="color: #666666">=0.0</span>,
-        validators<span style="color: #666666">=</span>[interval(<span style="color: #666666">0</span>,<span style="color: #008000">None</span>)])
-</pre></div>
-<p>
-
-A final example on custom validation is to avoid plotting more
-than 30 periods of the oscillating function \( u \). This translates
-to checking of \( T \) is geater
-than 30 periods, i.e., \( T>30\cdot 2\pi/w \). The task is done in
-the <code>InputForm</code> class, where any method <code>clean_T</code> can do
-validation and adjustment of the field name <code>T</code>. The code goes
-as follows:
-
-<p>
-
-
-<!-- code typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">InputForm</span>(ModelForm):
-    <span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Meta</span>:
-        model <span style="color: #666666">=</span> Input
-
-    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">clean_T</span>(<span style="color: #008000">self</span>):
-        T <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>cleaned_data[<span style="color: #BA2121">&#39;T&#39;</span>]
-        w <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>cleaned_data[<span style="color: #BA2121">&#39;w&#39;</span>]
-        period <span style="color: #666666">=</span> <span style="color: #666666">2*</span>pi<span style="color: #666666">/</span>w
-        <span style="color: #008000; font-weight: bold">if</span> T <span style="color: #666666">&gt;</span> <span style="color: #666666">30*</span>period:
-            num_periods <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #008000">round</span>(T<span style="color: #666666">/</span>period))
-            <span style="color: #008000; font-weight: bold">raise</span> ValidationError(
-                <span style="color: #BA2121">&#39;Cannot plot as much as </span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121"> periods! T &lt; </span><span style="color: #BB6688; font-weight: bold">%.2f</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span>
-                (num_periods, <span style="color: #666666">30*</span>period))
-        <span style="color: #008000; font-weight: bold">return</span> T
-</pre></div>
-<p>
-We refer to the vast Django documentation for many other ways of
-validating forms.
+Trying out the <code>vib4_flask</code> application we see that the SVG plots are
+much bigger than the width-controlled PNG plots.
+The width and height of SVG plots are specified in the XML code and can
+of course be changed by proper string replacements for the
+<code>width</code>, <code>height</code>, and <code>viewBox</code> specifications. It is far easier to
+just write the <code>width</code> specification in the image tag for the PNG plot.
 
 <p>
 <p>

@@ -1,5 +1,7 @@
 .. !split
 
+.. _wf:vib1:flask:validation:
+
 User-provided validation  (1)
 -----------------------------
 
@@ -18,7 +20,7 @@ We can write functions for checking appropriate conditions and
 supply the function to the list of validator functions in the call to
 the ``FloatField`` constructor or other field constructors. The extra
 code is a part of the ``model.py`` and the presented extensions appear
-in the directory ``vib2_flask``.
+in the directory `vib2 <https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/vib2>`_.
 
 The simplest approach to validation is to use existing functionality
 in the web framework. Checking that :math:`A>0` can be done by
@@ -74,7 +76,7 @@ constructor for ``T``:
                 validators=[validators.InputRequired(), check_T])
 
 The validator
-objects are tested one by one as the appear in the list, and if
+objects are tested one by one as they appear in the list, and if
 one fails, the others are not invoked.
 We therefore add ``check_T`` after the check of input such that we know we
 have a value for all data when we run the computations and test
@@ -99,12 +101,12 @@ A general such function may take the form
             if max_value is not None:
                 if field.data > max_value:
                     failure = True
-            min_value = '-infty' if min_value is None else str(min_value)
-            max_value =  'infty' if max_value is None else str(max_value)
             if failure:
                 raise validators.ValidationError(
-                    '%s=%s not in [%s, %s]' % (field.name, field.data,
-                                               min_value, max_value))
+                    '%s=%s not in [%s, %s]' %
+                    (field.name, field.data,
+                     '-infty' if min_value is None else str(min_value),
+                     'infty'  if max_value is None else str(max_value)))
 
 
 
@@ -112,13 +114,15 @@ A general such function may take the form
 
 
 The problem is that ``check_interval`` takes four arguments, not only
-the ``form`` and ``field`` arguments that a validator function can accept.
+the ``form`` and ``field`` arguments that a validator function in the
+Flask framework can accept.
 The way out of this difficulty is to use a Python tool ``functools.partial``
-which allows us to call a function with some of the arguments set.
+which allows us to call a function with some of the arguments set beforehand.
 Here, we want to create a new function that calls ``check_interval``
 with some prescribed values of ``min_value`` and ``max_value``.
 This function looks like it does not have these arguments, only
-``form`` and ``field``. The following function produces this function:
+``form`` and ``field``. The following function produces this function, which we
+can use as a valid Flask validator function:
 
 
 .. code-block:: python
@@ -129,9 +133,8 @@ This function looks like it does not have these arguments, only
             return functools.partial(
                 check_interval, min_value=min_value, max_value=max_value)
 
-We can in any field constructor just add
-``interval(a, b)`` as a validator function checking if the field value is
-in the interval between ``a`` and ``b``:
+We can now in any field constructor just add
+``interval(a, b)`` as a validator function, here checking that :math:`b\in [0,\infty)`:
 
 
 .. code-block:: python
@@ -144,15 +147,16 @@ in the interval between ``a`` and ``b``:
 
 
 Let us test our tailored error checking. Run ``python controller.py``
-in the ``vib2_flask`` directory and fill in :math:`-1.0` in the :math:`b` field.
+in the ``vib2`` directory and fill in :math:`-1.0` in the :math:`b` field.
 Pressing *Compute* invokes our ``interval(0,None)`` function, which
-is nothing but a call ``check_interval(field, form, 0, None)``,
-and the test ``if field.data < min_value`` becomes true, ``failure``
-is set and the exception is raised. The message in the exception
+is nothing but a call ``check_interval(field, form, 0, None)``.
+Inside this function,
+the test ``if field.data < min_value`` becomes true, ``failure``
+is set, and the exception is raised. The message in the exception
 is available in the ``field.errors`` attribute so our template
 will write it out in red, see Figure :ref:`wf:vib2:flask:fig:error1`.
-The template used in ``vib_flask`` is basically the same as ``view3.html``
-in ``vib1_flask``, i.e., it feaures LaTeX mathematics and checking of
+The template used in ``vib2`` is basically the same as ``view3.html``
+in ``vib1``, i.e., it feaures LaTeX mathematics and checking of
 ``field.errors``.
 
 
@@ -164,10 +168,10 @@ in ``vib1_flask``, i.e., it feaures LaTeX mathematics and checking of
    *Triggering of a user-defined error check*
 
 
-Finally, we mention a detail in the ``view.py`` file in the ``vib2_flask``
+Finally, we mention a detail in the ``controller.py`` file in the ``vib2``
 app: instead of sending ``form.var.data`` to the ``compute`` function we
 may automatically generate a set of local variables such that the
-work with data from the web page looks nicer:
+application of data from the web page, here in the ``compute`` call, looks nicer:
 
 
 .. code-block:: python
@@ -183,9 +187,13 @@ work with data from the web page looks nicer:
                 result = None
         
             return render_template('view.html', form=form, result=result)
+        
+        if __name__ == '__main__':
+            app.run(debug=True)
 
 The idea is just to run ``exec`` on a declaration of a local variable
 with name ``field.name`` for each field in the form. This trick is often
-neat if data are buried in objects and you want variables in your
-code to look like they do in mathematical writing.
+neat if web variables are buried in objects (``form.T.data``) and you want these
+variables in your
+code to look like they do in mathematical writing (``T`` for :math:`T`).
 

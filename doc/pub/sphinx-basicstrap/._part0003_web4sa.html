@@ -184,15 +184,16 @@ Here we create four modules: <tt class="docutils literal"><span class="pre">mode
 <blockquote>
 <div><ul class="simple">
 <li>The <tt class="docutils literal"><span class="pre">compute</span></tt> module contains a function <tt class="docutils literal"><span class="pre">compute(r)</span></tt> that performs
-the mathematics and returns the value of <tt class="docutils literal"><span class="pre">s</span></tt>.</li>
+the mathematics and returns the value <tt class="docutils literal"><span class="pre">s</span></tt>, which equals <tt class="docutils literal"><span class="pre">sin(r)</span></tt>.</li>
 <li>The <tt class="docutils literal"><span class="pre">model</span></tt> module holds the input data, here <tt class="docutils literal"><span class="pre">r</span></tt>.</li>
 <li>The <tt class="docutils literal"><span class="pre">view</span></tt> module has two functions, one for reading input data,
 <tt class="docutils literal"><span class="pre">get_input</span></tt>,
 and one for presenting the output, <tt class="docutils literal"><span class="pre">present_output</span></tt>.
-The later takes the input, calls <tt class="docutils literal"><span class="pre">compute</span></tt> functionalty, and
+The latter takes the input, calls <tt class="docutils literal"><span class="pre">compute</span></tt> functionalty, and
 generates the output.</li>
-<li>The <tt class="docutils literal"><span class="pre">controller</span></tt> module initializes model&#8217;s data from the view
-and calls the view to present the output.</li>
+<li>The <tt class="docutils literal"><span class="pre">controller</span></tt> module calls the view to initialize
+the model&#8217;s data from the command line. Thereafter, the
+view is called to present the output.</li>
 </ul>
 </div></blockquote>
 <p>The <tt class="docutils literal"><span class="pre">model.py</span></tt> file contains the <tt class="docutils literal"><span class="pre">r</span></tt> variable, which must
@@ -238,7 +239,7 @@ be declared with a default value in order to create the data object:</p>
 <span class="go">Hello, World! sin(1.2)=0.932039</span>
 </pre></div>
 </div>
-<p>Our goal is to create a web interface to our scientific hello world
+<p>The next step is to create a web interface to our scientific hello world
 program such that we can fill in the number <tt class="docutils literal"><span class="pre">r</span></tt> in a text field, click a
 <em>Compute</em> button and get back a new web page with the output text
 shown above: &#8220;Hello, World! sin(r)=s&#8221;.</p>

@@ -24,10 +24,10 @@ You can add ``--upgrade`` to upgrade a previous installation.
 Programming the Flask application  (1)
 --------------------------------------
 
-We want our input page to feature in text field where the user can
+*The user interaction.* We want our input page to feature a text field where the user can
 write the value of ``r``, see Figure :ref:`wf:hw1:flask:fig:input`.
-By clicking *equals*
-we compute the corresponding ``s`` and write out the result page
+By clicking on the *equals* button
+the corresponding ``s`` value is computed and written out the result page
 seen in Figure :ref:`wf:hw1:flask:fig:result`.
 
 
@@ -50,14 +50,14 @@ seen in Figure :ref:`wf:hw1:flask:fig:result`.
 
 
 
-Flask does not require us to use the MVC pattern so there is actually
-no need to split the original program into ``model.py``, ``view.py``,
-``controller.py``, and ``compute.py`` as already explained.  First we make
-a ``controller.py`` file where the view, the model, and the controller
-parts are within the same part. Later, we split the view, model, and
-controller into three files for illustration. The ``compute`` component
-is always in a separate files as we like to encapsulate the
-computations completely from user interfaces.
+*The Python code.* Flask does not require us to use the MVC pattern so there is actually
+no need to split the original program into model, view, controller,
+and compute files as already explained (but it will be
+done later).  First we make a ``controller.py`` file where the view, the
+model, and the controller parts appear within the same file.
+The ``compute`` component is always in a separate file as
+we like to encapsulate the computations completely from user
+interfaces.
 
 
 .. index::
@@ -68,7 +68,8 @@ The view that the user sees is determined by
 HTML templates in a subdirectory ``templates``, and consequently
 we name the template files ``view*.html``.
 The model and other parts of the view concept are just parts of
-the ``controller.py`` file:
+the ``controller.py`` file. The complete file is short and explained
+in detail below.
 
 
 .. code-block:: python
@@ -97,22 +98,20 @@ the ``controller.py`` file:
         if __name__ == '__main__':
             app.run(debug=True)
 
-We collect the files associated with a Flask app in a directory,
-here called ``hw1_flask``.
 
-The web application is the ``app`` object of class ``Flask`` initialized
+*Dissection.* The web application is the ``app`` object of class ``Flask``, and initialized
 as shown. The model is a special Flask class derived from ``Form``
 where the data are listed as static class attributes and initialized
 by various form field objects from the ``wtforms`` package.
 These form fields correspond to HTML forms in the input page.
 For the ``r`` variable we apply ``FloatField`` since it is a floating-point
 variable. A default validator, here checking that the user supplies
-a real number, is easily included.
+a real number, is automatically included.
 
-The view, controlling how the user interacts with the data, consists
-an URL and corresponding function to call when this is invoked URL.
-The function name is here ``index`` (corresponding to the standard
-``index.html`` page that is the main page of a URL) and the
+The view part of this Python code consists of
+a URL and a corresponding function to call when the URL is invoked.
+The function name is here chosen to be ``index`` (corresponding to the standard
+``index.html`` page that is the main page of a URL). The
 decorator ``@app.route('/hw1', ...)`` maps the URL
 ``http://127.0.0.1:5000/hw1`` to a call to ``index``.
 The ``methods`` argument must be as shown to allow the user to communicate
@@ -128,7 +127,7 @@ the model, here class ``InputForm``. Then there are two possibilities:
 either the user has provided data in the HTML form or the user is
 to be offered an input form. In the former case, ``request.method``
 equals ``'POST'`` and we can extract the numerical value of ``r``
-from the ``form`` object, ``form.r.data``, call up our mathematical
+from the ``form`` object, using ``form.r.data``, call up our mathematical
 computations, and make a web page with the result.
 In the latter case, we make an input page as displayed in
 Figure :ref:`wf:hw1:flask:fig:input`.
@@ -138,20 +137,21 @@ Figure :ref:`wf:hw1:flask:fig:input`.
    single: Flask; HTML templates
 
 
-Making a web page with Flask is conveniently done through an HTML
+*The template files.* Making a web page with Flask is conveniently done by an HTML
 template. Since the output page is simplest we display the
 ``view_output.html`` template first:
 
 
 .. code-block:: html
 
-        Hello, World! sin({{form.r.data}})={{s}}.
+        Hello, World! sin({{ form.r.data }})={{s}}.
 
 
 Keyword arguments sent to ``render_template`` are available in the
-HTML template. With the ``form`` object we extract the value of
-``r`` in the HTML code by ``{{form.r.data}}``. Similarly, the value of ``s``
-is simply ``{{s}}``.
+HTML template. Here we have ``form`` and ``s``.
+With the ``form`` object we extract the value of
+``r`` in the HTML code by ``{{ form.r.data }}``. Similarly, the value of ``s``
+is simply ``{{ s }}``.
 
 The HTML template for the input page is slightly more complicated
 as we need to use an HTML form:
@@ -160,18 +160,27 @@ as we need to use an HTML form:
 .. code-block:: html
 
         <form method=post action="">
-          Hello, World! The sine of {{form.r}}
+          Hello, World! The sine of {{ form.r }}
           <input type=submit value=equals>
         </form>
 
 
-All you have to do in order to run this web application is
+
+*Testing the application.* We collect the files associated with a Flask application (often called
+just *app*) in a directory,
+here called `hw1 <https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/hw1>`_.
+All you have to do in order to run this web application is to find
+this directory and run
 
 
 .. code-block:: console
 
         Terminal> python controller.py
+         * Running on http://127.0.0.1:5000/
+         * Restarting with reloader
 
+Open a new window or tab in your browser and type in the URL
+``http://127.0.0.1:5000/hw1``.
 
 Equipping the input page with output results  (1)
 -------------------------------------------------
@@ -192,9 +201,10 @@ web application, which is a kind of calculator. Figure :ref:`wf:hw2:flask:fig:re
    *The modified result page*
 
 
-To let the user stay within the same page, we create a new directory ``hw2_flask``
+To let the user stay within the same page, we create a new directory
+`hw2 <https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/hw2>`_.
 for this modified Flask app and copy the files from the previous
-``hw1_flask`` directory.  The idea now is to make use of just one
+``hw1`` directory.  The idea now is to make use of just one
 template, in ``templates/view.html``:
 
 
@@ -202,7 +212,7 @@ template, in ``templates/view.html``:
 
         <form method=post action="">
           Hello, World! The sine of
-          {{(form.r)}}
+          {{( form.r )}}
           <input type=submit value=equals>
         {% if s != None %}
         {{s}}
@@ -210,13 +220,19 @@ template, in ``templates/view.html``:
         </form>
 
 
-The form is identical to what we used in ``view_input.html``, and the only
-new thing is the value of ``s``. We supply ``s`` as an object to the
-``render_template`` function and this object is available for
-some programming in the HTML template. We can test on the value of ``s``:
+The form is identical to what we used in ``view_input.html`` in
+the ``hw1`` directory, and the only
+new thing is the output of ``s`` below the form.
+The template language supports some programming with Python objects
+inside ``{%`` and ``%}`` tags.
+Specifically in this file, we can test on the value of ``s``:
 if it is ``None``, we know that the computations are not performed and
 ``s`` should not appear on the page, otherwise ``s`` holds the sine
-value and we can write it out. The generated HTML code reads
+value and we can write it out. Note that, contrary to plain Python,
+the template language does not rely on indentation of blocks and
+therefore needs an explicit end statement ``{% endif %}`` to finish
+the if-test.
+The generated HTML code from this template file reads
 
 
 .. code-block:: html
@@ -231,7 +247,8 @@ value and we can write it out. The generated HTML code reads
         </form>
 
 
-The ``index`` function needs adjustments since we use the same
+The ``index`` function of our modified application
+needs adjustments since we use the same
 template for the input and the output page:
 
 
@@ -259,7 +276,7 @@ It is seen that if the user has given data, ``s`` is a ``float``, otherwise
 
 and loading ``http://127.0.0.1:5000/hw2`` into your browser.
 A nice little exercise is to control the formatting of the result ``s``.
-To this end, you transform ``s`` to a string: ``s = '%.5f' % s`` before
+To this end, you can simply transform ``s`` to a string: ``s = '%.5f' % s`` before
 sending it to ``render_template``.
 
 .. _wf:hw3:flask:
@@ -274,14 +291,19 @@ Splitting the app into model, view, and controller files
    single: Flask; MVC pattern
 
 
-In our previous to Flask apps we have had the model, view, and
-controller parts in one file ``controller.py``. For illustration we
-may split the previous ``controller.py`` into three files:
-``model.py``, ``view.py``, and ``controller.py``, located in a
-directory ``hw3_flask``. The contents
-in these files reflects the splitting introduced in the original
+In our previous two Flask apps we have had the view displayed for the
+user in a separate template file, and the computations as always in
+``compute.py``, but everything else was placed in one file ``controller.py``.
+For illustration of the MVC concept we
+may split the ``controller.py`` into two files: ``model.py`` and
+``controller.py``. The view is in ``templates/view.html``.
+These new files are located in a
+directory
+`hw3_flask <https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/hw3>`_
+The contents
+in the files reflect the splitting introduced in the original
 scienticic hello world program in the section :ref:`wf:hw:mvc`.
-In the Flask context we have ``model.py`` as
+The ``model.py`` file now consists of the input form class:
 
 
 .. code-block:: python
@@ -292,7 +314,7 @@ In the Flask context we have ``model.py`` as
             r = FloatField(validators=[validators.InputRequired()])
 
 
-The view in 'view.py' consists of
+The file ``templates/view.html`` is as before, while ``controller.py`` contains
 
 
 .. code-block:: python
@@ -312,20 +334,13 @@ The view in 'view.py' consists of
                 s = None
         
             return render_template("view.html", form=form, s=s)
-
-
-The ``controller.py`` file finally runs the view's ``app``:
-
-
-.. code-block:: python
-
-        from view import app
+        
         
         if __name__ == '__main__':
             app.run(debug=True)
 
 
-The statements are indentical to those in the ``hw2_flask`` app, only
+The statements are indentical to those in the ``hw2`` app, only
 the organization of the statement in files differ.
 
 

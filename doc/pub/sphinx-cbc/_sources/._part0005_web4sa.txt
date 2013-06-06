@@ -11,7 +11,9 @@ Troubleshooting
 *Address already in use.* You can easily kill the Flask application and restart it, but sometimes
 you will get an error that the address is already in use.
 To recover from this problem, run the ``lsof`` program to see which program
-that applies the 5000 port (Flask runs its server on ``http://127.0.0.1:5000``):
+that applies the 5000 port (Flask runs its server on ``http://127.0.0.1:5000``,
+which means that it uses the 5000 port). Find the PID of the program
+that occupies the port and force abortion of that program:
 
 
 .. code-block:: console
@@ -21,6 +23,5 @@ that applies the 5000 port (Flask runs its server on ``http://127.0.0.1:5000``):
         python  48824  hpl    3u  IPv4 1128848      0t0  TCP ...
         Terminal> kill -9 48824
 
-The last command killed the ``python`` job that ran the test server and
-you are ready to relaunch the Flask application.
+You are now ready to restart a Flask application.
 

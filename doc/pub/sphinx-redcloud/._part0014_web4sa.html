@@ -9,7 +9,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Exercises &mdash; Using Web Frameworks for Scientific Web Applications</title>
+    <title>Handling multiple input variables in Django &mdash; Using Web Frameworks for Scientific Web Applications</title>
     
     <link rel="stylesheet" href="_static/redcloud.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -31,7 +31,8 @@
     <script type="text/javascript" src="_static/jquery.cookie.js"></script>
     <script type="text/javascript" src="_static/toggle_sections.js"></script>
     <link rel="top" title="Using Web Frameworks for Scientific Web Applications" href="index.html" />
-    <link rel="prev" title="Handling multiple input variables in Django" href="._part0013_web4sa.html" /> 
+    <link rel="next" title="Exercises" href="._part0015_web4sa.html" />
+    <link rel="prev" title="Avoiding plot files" href="._part0013_web4sa.html" /> 
   </head>
   <body>
     <div class="relbar-top">
@@ -43,7 +44,10 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="._part0013_web4sa.html" title="Handling multiple input variables in Django"
+          <a href="._part0015_web4sa.html" title="Exercises"
+             accesskey="N">next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="._part0013_web4sa.html" title="Avoiding plot files"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="index.html">Using Web Frameworks for Scientific Web Applications</a> &raquo;</li>
  
@@ -57,29 +61,222 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="exercises">
-<h1>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="exercise-1-add-two-numbers">
-<span id="wf-exer-add2"></span><h2>Exercise 1: Add two numbers<a class="headerlink" href="#exercise-1-add-two-numbers" title="Permalink to this headline">¶</a></h2>
-<p>Make a web application that reads two numbers from a web page,
-adds the numbers, and prints the sum in a new web page.
-Package the necessary files that constitute the application
-in a tar file.
-Filename: <tt class="docutils literal"><span class="pre">add2.tar.gz</span></tt>.</p>
+  <div class="section" id="handling-multiple-input-variables-in-django">
+<span id="wf-vib-django"></span><h1>Handling multiple input variables in Django<a class="headerlink" href="#handling-multiple-input-variables-in-django" title="Permalink to this headline">¶</a></h1>
+<p>We shall briefly how to work with multi-variable input in Django.
+The text is the Django counterpart to the section <a class="reference internal" href="web4sa.html#wf-vib-flask"><em>Handling multiple input variables in Flask</em></a>.
+There are four float input variables: <span class="math">\(A\)</span>, <span class="math">\(b\)</span>, <span class="math">\(w\)</span>, and <span class="math">\(T\)</span>.
+A function <tt class="docutils literal"><span class="pre">compute</span></tt> in the file <tt class="docutils literal"><span class="pre">compute.py</span></tt> makes
+a plot of the function <span class="math">\(u(t)=Ae^{-bt}\sin (wt)\)</span>
+depending on these four parameters and returns
+the name of the plot file. Our task is to define four input fields,
+execute the <tt class="docutils literal"><span class="pre">compute</span></tt> function and show the input fields together with
+the resulting plot,
+cf. Figures <a class="reference internal" href="web4sa.html#wf-vib1-flask-fig-input"><em>The input page</em></a>
+and <a class="reference internal" href="web4sa.html#wf-vib1-flask-fig-result"><em>The result page</em></a>.</p>
+<div class="section" id="programming-the-django-application-2">
+<h2>Programming the Django application  (2)<a class="headerlink" href="#programming-the-django-application-2" title="Permalink to this headline">¶</a></h2>
+<p>Any Django app needs a project, but here we reuse the project
+we set up for the scientific hello world examples. We go to
+the directory <tt class="docutils literal"><span class="pre">apps/django_apps</span></tt> and create the Django app <tt class="docutils literal"><span class="pre">vib1</span></tt>:</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">Terminal&gt; python ../../django_project/manage.py startapp vib1</span>
+</pre></div>
 </div>
+<p>Then we</p>
+<ol class="arabic simple">
+<li>add <tt class="docutils literal"><span class="pre">relative2absolute_path('../../apps/django_apps/vib1/templates'),</span></tt>
+to the <tt class="docutils literal"><span class="pre">TEMPLATE_DIRS</span></tt> tuple in <tt class="docutils literal"><span class="pre">settings.py</span></tt>,</li>
+<li>add <tt class="docutils literal"><span class="pre">vib1</span></tt> to the <tt class="docutils literal"><span class="pre">INSTALLED_APPS</span></tt> tuple, and</li>
+<li>add <tt class="docutils literal"><span class="pre">url(r'^vib1/',</span> <span class="pre">'django_apps.vib1.views.index')</span></tt> to the <tt class="docutils literal"><span class="pre">patterns</span></tt>
+call in <tt class="docutils literal"><span class="pre">urls.py</span></tt>.</li>
+</ol>
+<p>These steps ensure that Django can find our application as a module/package,
+that Django can find our templates associated with this application,
+and that the URL address applies the name <tt class="docutils literal"><span class="pre">vib1</span></tt> to reach the application.</p>
+<p>The computations in our application are put in a file <tt class="docutils literal"><span class="pre">compute.py</span></tt>
+and explained in detail in the section <a class="reference internal" href="web4sa.html#wf-vib1-flask-app"><em>Programming the Flask application  (2)</em></a>.</p>
+<p id="index-0">We can now write <tt class="docutils literal"><span class="pre">models.py</span></tt> and the <tt class="docutils literal"><span class="pre">Input</span></tt> class that defines
+the form fields for the four input variables:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
+<span class="kn">from</span> <span class="nn">django.forms</span> <span class="kn">import</span> <span class="n">ModelForm</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">pi</span>
+
+<span class="k">class</span> <span class="nc">Input</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">FloatField</span><span class="p">(</span>
+        <span class="n">verbose_name</span><span class="o">=</span><span class="s">&#39; amplitude (m)&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">FloatField</span><span class="p">(</span>
+        <span class="n">verbose_name</span><span class="o">=</span><span class="s">&#39; damping coefficient (kg/s)&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">FloatField</span><span class="p">(</span>
+        <span class="n">verbose_name</span><span class="o">=</span><span class="s">&#39; frequency (1/s)&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="p">)</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">FloatField</span><span class="p">(</span>
+        <span class="n">verbose_name</span><span class="o">=</span><span class="s">&#39; time interval (s)&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">InputForm</span><span class="p">(</span><span class="n">ModelForm</span><span class="p">):</span>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Input</span>
+</pre></div>
 </div>
-<div class="section" id="remaining">
-<h1>Remaining<a class="headerlink" href="#remaining" title="Permalink to this headline">¶</a></h1>
-<blockquote>
-<div><ul class="simple">
-<li>apply (generated apps) to simviz (make py simviz too and describe that)</li>
-<li>store data in database</li>
-<li>discuss list values read as text and use of eval, perhaps exercise</li>
-<li>avoid Flask or Django in exercises, just do not specify and have
-common exercises at the very end</li>
-<li>app: username, TextAreaField, store in database and retrieve for admin</li>
-</ul>
-</div></blockquote>
+<p>Note here that we can provide a more explanatory name than just
+the variable name, e.g., <tt class="docutils literal"><span class="pre">'</span> <span class="pre">amplitude</span> <span class="pre">(m)'</span></tt> for <tt class="docutils literal"><span class="pre">A</span></tt>. However,
+Django will always capitalize these descriptions, so if one really
+needs lower case names (e.g., to be compatible with a mathematical notation
+or when just listing the unit),
+one must start the text with a space, as we have demonstrated above.
+We also provide a default
+value such that all fields have a value when the user sees
+the page.</p>
+<p id="index-1">The <tt class="docutils literal"><span class="pre">views.py</span></tt> file looks as follows:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render_to_response</span>
+<span class="kn">from</span> <span class="nn">django.template</span> <span class="kn">import</span> <span class="n">RequestContext</span>
+<span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpResponse</span>
+<span class="kn">from</span> <span class="nn">models</span> <span class="kn">import</span> <span class="n">InputForm</span>
+<span class="kn">from</span> <span class="nn">compute</span> <span class="kn">import</span> <span class="n">compute</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">))</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">InputForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+            <span class="n">form2</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">commit</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">compute</span><span class="p">(</span><span class="n">form2</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="n">form2</span><span class="o">.</span><span class="n">b</span><span class="p">,</span> <span class="n">form2</span><span class="o">.</span><span class="n">w</span><span class="p">,</span> <span class="n">form2</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39;static/&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">InputForm</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;vib1.html&#39;</span><span class="p">,</span>
+            <span class="p">{</span><span class="s">&#39;form&#39;</span><span class="p">:</span> <span class="n">form</span><span class="p">,</span>
+             <span class="s">&#39;result&#39;</span><span class="p">:</span> <span class="n">result</span><span class="p">,</span>
+             <span class="p">},</span> <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Some remarks are necessary:</p>
+<ol class="arabic simple">
+<li>Doing an <tt class="docutils literal"><span class="pre">os.chdir</span></tt> to the current working directory is necessary
+as Django may be left back in another working directory if you have
+tested other apps.</li>
+<li>The <tt class="docutils literal"><span class="pre">form2</span></tt> object from <tt class="docutils literal"><span class="pre">form.save</span></tt> is the object we extract
+data from and send to <tt class="docutils literal"><span class="pre">compute</span></tt>, but the original <tt class="docutils literal"><span class="pre">form</span></tt>
+object is needed when making the HTML page through the template.</li>
+<li>Images, media files, style sheets, javascript files, etc. must
+reside in a subdirectory <tt class="docutils literal"><span class="pre">static</span></tt>. The specifications of the
+URL applies tools to find this <tt class="docutils literal"><span class="pre">static</span></tt> directory and then
+the <tt class="docutils literal"><span class="pre">static</span></tt> prefix in the <tt class="docutils literal"><span class="pre">result</span></tt> filename must be removed.</li>
+</ol>
+<p>The template for rendering the page is listed next.</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;form</span> <span class="na">method=</span><span class="s">post</span> <span class="na">action=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span>{% csrf_token %}
+<span class="nt">&lt;table&gt;</span>
+  {% for field in form %}
+    <span class="nt">&lt;tr&gt;</span>
+    <span class="nt">&lt;td&gt;</span>{{ field.name }}<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>{{ field }}<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>{{ field.label }}<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>{{ field.errors }}<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;&lt;/td&gt;</span>
+    <span class="nt">&lt;/tr&gt;</span>
+  {% endfor %}
+<span class="nt">&lt;/table&gt;</span>
+<span class="nt">&lt;p&gt;&lt;input</span> <span class="na">type=</span><span class="s">submit</span> <span class="na">value=</span><span class="s">Compute</span><span class="nt">&gt;&lt;/form&gt;&lt;/p&gt;</span>
+
+<span class="nt">&lt;p&gt;</span>
+{% if result != None %}
+{% load static %}
+<span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;{% get_static_prefix %}{{ result }}&quot;</span> <span class="na">width=</span><span class="s">500</span><span class="nt">&gt;</span>
+{% endif %}
+<span class="nt">&lt;/p&gt;</span>
+</pre></div>
+</div>
+<p>The tricky part is the syntax for displaying <em>static content</em>, such as
+the plot file made in the <tt class="docutils literal"><span class="pre">compute</span></tt> function.</p>
+</div>
+<div class="section" id="user-provided-validation-2">
+<h2>User-provided validation  (2)<a class="headerlink" href="#user-provided-validation-2" title="Permalink to this headline">¶</a></h2>
+<p>Django has a series of methods available for user-provided validation
+of form data. These are exemplified in the app <tt class="docutils literal"><span class="pre">vib2</span></tt>, which
+is an extension of the <tt class="docutils literal"><span class="pre">vib1</span></tt> app with additional code. (This other
+app needs of course registrations in <tt class="docutils literal"><span class="pre">settings.py</span></tt> and <tt class="docutils literal"><span class="pre">urls.py</span></tt>, similar
+to what we did for the <tt class="docutils literal"><span class="pre">vib1</span></tt> app.)</p>
+<p id="index-2">Making sure that <span class="math">\(A&gt;0\)</span> is easiest done with a built-in Django
+validator for minimum value checking:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Input</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">FloatField</span><span class="p">(</span>
+        <span class="n">verbose_name</span><span class="o">=</span><span class="s">&#39; amplitude (m)&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">MinValueValidator</span><span class="p">(</span><span class="mi">0</span><span class="p">)])</span>
+</pre></div>
+</div>
+<p>We can write our own validators, which are functions taking the value
+is the only argument and raising a <tt class="docutils literal"><span class="pre">ValidationError</span></tt> exception if the
+value is wrong. Checking that a value is inside an interval can first
+be implemented by</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">check_interval</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">min_value</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Validate that a value is inside an interval.&quot;&quot;&quot;</span>
+    <span class="n">failure</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="k">if</span> <span class="n">min_value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="n">min_value</span><span class="p">:</span>
+            <span class="n">failure</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="k">if</span> <span class="n">max_value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="n">max_value</span><span class="p">:</span>
+            <span class="n">failure</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="k">if</span> <span class="n">failure</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span>
+            <span class="s">&#39;value=</span><span class="si">%s</span><span class="s"> not in [</span><span class="si">%s</span><span class="s">, </span><span class="si">%s</span><span class="s">]&#39;</span> <span class="o">%</span>
+            <span class="p">(</span><span class="n">value</span><span class="p">,</span>
+             <span class="s">&#39;-infty&#39;</span> <span class="k">if</span> <span class="n">min_value</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="nb">str</span><span class="p">(</span><span class="n">min_value</span><span class="p">),</span>
+             <span class="s">&#39;infty&#39;</span> <span class="k">if</span> <span class="n">max_value</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="nb">str</span><span class="p">(</span><span class="n">max_value</span><span class="p">)))</span>
+</pre></div>
+</div>
+<p>However, this function takes more than the value as argument. We therefore
+need to wrap it by a function with <tt class="docutils literal"><span class="pre">value</span></tt> as the only argument. The following
+utility returns such a
+function (see the section <a class="reference internal" href="web4sa.html#wf-vib1-flask-validation"><em>User-provided validation  (1)</em></a> for more
+explanation):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">functools</span>
+
+<span class="k">def</span> <span class="nf">interval</span><span class="p">(</span><span class="n">min_value</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Django-compatible interface to check_interval.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span>
+        <span class="n">check_interval</span><span class="p">,</span> <span class="n">min_value</span><span class="o">=</span><span class="n">min_value</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="n">max_value</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now, <tt class="docutils literal"><span class="pre">interval(0,</span> <span class="pre">1)</span></tt> returns a function that takes <tt class="docutils literal"><span class="pre">value</span></tt> as its
+only argument and checks if it is inside <span class="math">\([0,1]\)</span>.
+Such a function can be inserted in the <tt class="docutils literal"><span class="pre">validators</span></tt> list in
+the field constructor, here to tell that <span class="math">\(b\)</span> must be in <span class="math">\([0,\infty)\)</span>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Input</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="o">...</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">FloatField</span><span class="p">(</span>
+        <span class="n">verbose_name</span><span class="o">=</span><span class="s">&#39; damping coefficient (kg/s)&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">interval</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="bp">None</span><span class="p">)])</span>
+</pre></div>
+</div>
+<p>A final example on custom validation is to avoid plotting more
+than 30 periods of the oscillating function <span class="math">\(u\)</span>. This translates
+to checking that <span class="math">\(T\)</span> is geater
+than 30 periods, i.e., <span class="math">\(T&gt;30\cdot 2\pi/w\)</span>. The task is done in
+the <tt class="docutils literal"><span class="pre">InputForm</span></tt> class, where any method <tt class="docutils literal"><span class="pre">clean_name</span></tt> can do
+validation and adjustment of the field name <tt class="docutils literal"><span class="pre">name</span></tt>. The code for
+a <tt class="docutils literal"><span class="pre">clean_T</span></tt> method goes as follows:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">InputForm</span><span class="p">(</span><span class="n">ModelForm</span><span class="p">):</span>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Input</span>
+
+    <span class="k">def</span> <span class="nf">clean_T</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">T</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cleaned_data</span><span class="p">[</span><span class="s">&#39;T&#39;</span><span class="p">]</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cleaned_data</span><span class="p">[</span><span class="s">&#39;w&#39;</span><span class="p">]</span>
+        <span class="n">period</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="o">/</span><span class="n">w</span>
+        <span class="k">if</span> <span class="n">T</span> <span class="o">&gt;</span> <span class="mi">30</span><span class="o">*</span><span class="n">period</span><span class="p">:</span>
+            <span class="n">num_periods</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">T</span><span class="o">/</span><span class="n">period</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span>
+                <span class="s">&#39;Cannot plot as much as </span><span class="si">%d</span><span class="s"> periods! T &lt; </span><span class="si">%.2f</span><span class="s">&#39;</span> <span class="o">%</span>
+                <span class="p">(</span><span class="n">num_periods</span><span class="p">,</span> <span class="mi">30</span><span class="o">*</span><span class="n">period</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">T</span>
+</pre></div>
+</div>
+<p>We refer to the vast Django documentation for many other ways of
+validating forms. The reader is encouraged to run the <tt class="docutils literal"><span class="pre">vib2</span></tt>
+application and test out the validations we have implemented.</p>
+</div>
 </div>
 
 
@@ -90,16 +287,19 @@ common exercises at the very end</li>
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Exercises</a><ul>
-<li><a class="reference internal" href="#exercise-1-add-two-numbers">Exercise 1: Add two numbers</a></li>
+<li><a class="reference internal" href="#">Handling multiple input variables in Django</a><ul>
+<li><a class="reference internal" href="#programming-the-django-application-2">Programming the Django application  (2)</a></li>
+<li><a class="reference internal" href="#user-provided-validation-2">User-provided validation  (2)</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#remaining">Remaining</a></li>
 </ul>
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="._part0013_web4sa.html"
-                        title="previous chapter">Handling multiple input variables in Django</a></p>
+                        title="previous chapter">Avoiding plot files</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="._part0015_web4sa.html"
+                        title="next chapter">Exercises</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/._part0014_web4sa.txt"
@@ -131,7 +331,10 @@ common exercises at the very end</li>
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="._part0013_web4sa.html" title="Handling multiple input variables in Django"
+          <a href="._part0015_web4sa.html" title="Exercises"
+             >next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="._part0013_web4sa.html" title="Avoiding plot files"
              >previous</a> &nbsp; &nbsp;</li>
     <li><a href="index.html">Using Web Frameworks for Scientific Web Applications</a> &raquo;</li>
  

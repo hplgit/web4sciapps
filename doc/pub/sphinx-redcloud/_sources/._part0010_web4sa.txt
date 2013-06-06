@@ -11,7 +11,7 @@ Using style sheets
 Web developers make heavy use of CSS style sheets to control the look
 and feel of web pages. Templates can utilize style sheets as any other
 standard HTML code. Here is a very simple example where we introduce
-a class ``name`` for the column with the field name and set the
+a class ``name`` for the HTML table's column with the field name and set the
 foreground color of the text in this column to blue.
 The style sheet is called ``basic.css`` and *must* reside in the
 ``static`` subdirectory of the Flask application directory:
@@ -58,13 +58,13 @@ Using LaTeX mathematics
 Scientific applications frequently have many input data that are
 defined through mathematics and where the typesetting on the
 web page should be as close as possible to the typesetting where
-the mathematics is explained. In the present example we would like
+the mathematics is documented. In the present example we would like
 to typeset :math:`A`, :math:`b`, :math:`w`, and :math:`T` with italic font as done
 in LaTeX. Fortunately, native LaTeX typesetting is available in
 HTML through the tool `MathJax <http://www.mathjax.org/>`_.
 Our template ``view3.html`` enables MathJax. Formulas are written
 with standard LaTeX inside ``\(`` and ``\)``, while equations are surrounded
-by ``$$``. Here we use formulas exclusively:
+by ``$$``. Here we use formulas only:
 
 
 .. code-block:: html
@@ -99,7 +99,7 @@ LaTeX rendering looks like in the browser.
 .. _wf:vib1:flask:fig:latex:
 
 .. figure:: fig-web4sa/vib1_flask_latex.png
-   :width: 500
+   :width: 650
 
    *LaTeX typesetting of mathematical symbols*
 
@@ -124,7 +124,7 @@ the plot in the second column, while the second row features the
    *New design with input and output side by side*
 
 
-A relevant template file is ``view4.html``:
+The enabling template file is ``view4.html``:
 
 
 .. code-block:: html

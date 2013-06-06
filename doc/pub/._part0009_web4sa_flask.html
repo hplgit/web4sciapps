@@ -1,106 +1,3 @@
-<html>
-<head>
-<!--
-This style is adopted from the (now old) vagrant 1.0 web
-pages. The style builds on the Twitter Bootstrap style.
-Modifications by Hans Petter Langtangen, hpl@simula.no.
-
-This style file should be copied and the following
-elements edited:
-
-Logo heading:
-
- LogoWord
- withSubWord
-
-Navigation links at the top:
-
- GO TO 1
- GO TO 2
-
-Footer at the end:
-
- Here goes a footer, if desired, maybe with a Copyright &copy;
-
--->
-
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="generator" content="Doconce: http://code.google.com/p/doconce/" />
-
-<link rel="stylesheet" href="html_templates/css/twitter_bootstrap.css">
-<link rel="stylesheet" href="html_templates/css/vagrant.css">
-<!-- Define color of headings here (last definition counts) -->
-<style type="text/css">
-h1, h2, h3, h4, h5, h6 {
-  color: #000;     /* black */
-  color: #999;     /* gray */
-  color: #005580;  /* dark blue */
-  color: #08c;     /* characteristic blue */
-</style>
-</head>
-<body>
-
-<title> Exercise 1: Add two numbers </title>
-
-<!-- ------------------- main content ------------------------>
-
-<div class="container">
- <div class="row Header with-border">
-  <div class="span3 Module logo">
-   <h1><a href="/">Flask<span class="subtitle">4scientists</span></a></h1>
-  </div>
-  <div class="span9">
-   <div class="Module navigation">
-   <!-- Navigation at the top of the page -->
-    <ul>
-     <li> <a href="http://flask.pocoo.org/">Flask</a></li>
-    </ul>
-   </div>
-  </div>
- </div>
-</div>
-
-
-<!-- Here goes the table of contents in the sidebar
-     <li class="active"> means dark blue background for current section
--->
-<div class="row">
- <div class="span3 Module sidebar">
-  <div class="well" style="padding: 8px 0px;">
-   <ul class="nav nav-list">
-     <!-- Syntax:
-     <li> <a href="...">Section 1</a></li>
-     <li> <a href="...">Section 2</a></li>
-     <li> &nbsp;&nbsp;&nbsp; <a href="...">Section 2a</a></li>
-     <li> &nbsp;&nbsp;&nbsp; <a href="...">Section 2b</a></li>
-     -->
-     <!-- Doconce automatically fills in the table of contents -->
-          <!-- vagrant nav toc: " Web frameworks " --> <li>  <a href="._part0000_web4sa_flask.html#___sec0"> Web frameworks </a>
-     <!-- vagrant nav toc: " The MVC pattern " --> <li> &nbsp;  <a href="._part0001_web4sa_flask.html#___sec1"> The MVC pattern </a>
-     <!-- vagrant nav toc: " A very simple application " --> <li> &nbsp;  <a href="._part0002_web4sa_flask.html#___sec2"> A very simple application </a>
-     <!-- vagrant nav toc: " Application of the MVC pattern " --> <li> &nbsp;  <a href="._part0003_web4sa_flask.html#wf:hw:mvc"> Application of the MVC pattern </a>
-     <!-- vagrant nav toc: " Making a Flask application " --> <li>  <a href="._part0004_web4sa_flask.html#___sec4"> Making a Flask application </a>
-     <!-- vagrant nav toc: " Programming the Flask application " --> <li> &nbsp;  <a href="._part0004_web4sa_flask.html#___sec5"> Programming the Flask application </a>
-     <!-- vagrant nav toc: " Equipping the input page with output results " --> <li> &nbsp;  <a href="._part0004_web4sa_flask.html#___sec6"> Equipping the input page with output results </a>
-     <!-- vagrant nav toc: " Splitting the app into model, view, and controller files " --> <li> &nbsp;  <a href="._part0004_web4sa_flask.html#wf:hw3:flask"> Splitting the app into model, view, and controller files </a>
-     <!-- vagrant nav toc: " Troubleshooting " --> <li> &nbsp;  <a href="._part0005_web4sa_flask.html#___sec8"> Troubleshooting </a>
-     <!-- vagrant nav toc: " Handling multiple input variables in Flask " --> <li>  <a href="._part0006_web4sa_flask.html#wf:vib:flask"> Handling multiple input variables in Flask </a>
-     <!-- vagrant nav toc: " Programming the Flask application " --> <li> &nbsp;  <a href="._part0006_web4sa_flask.html#___sec10"> Programming the Flask application </a>
-     <!-- vagrant nav toc: " Implementing error checking in the template " --> <li> &nbsp;  <a href="._part0007_web4sa_flask.html#___sec11"> Implementing error checking in the template </a>
-     <!-- vagrant nav toc: " Using style sheets " --> <li> &nbsp;  <a href="._part0008_web4sa_flask.html#___sec12"> Using style sheets </a>
-     <!-- vagrant nav toc: " Using LaTeX mathematics " --> <li> &nbsp;  <a href="._part0008_web4sa_flask.html#___sec13"> Using LaTeX mathematics </a>
-     <!-- vagrant nav toc: " Rearringing the elements in the HTML template " --> <li> &nbsp;  <a href="._part0008_web4sa_flask.html#___sec14"> Rearringing the elements in the HTML template </a>
-     <!-- vagrant nav toc: " User-provided validation " --> <li class="active"> &nbsp;  <a href="._part0009_web4sa_flask.html#___sec15"> User-provided validation </a>
-     <!-- vagrant nav toc: " Autogenerating the code " --> <li> &nbsp;  <a href="._part0010_web4sa_flask.html#wf:vib3:flask:autogen"> Autogenerating the code </a>
-     <!-- vagrant nav toc: " Exercises " --> <li>  <a href="._part0011_web4sa_flask.html#___sec17"> Exercises </a>
-     <!-- vagrant nav toc: " Exercise 1: Add two numbers " --> <li> &nbsp;  <a href="._part0011_web4sa_flask.html#wf:exer:add2"> Exercise 1: Add two numbers </a>
-
-    </ul>
-   </div>
-  </div>
-
-  <div class="span9">
-
 
 <!-- tocinfo
 {'highest level': 1,
@@ -126,7 +23,10 @@ h1, h2, h3, h4, h5, h6 {
                1,
                'wf:vib:flask',
                'wf:vib:flask'),
-              (' Programming the Flask application ', 2, None, '___sec10'),
+              (' Programming the Flask application ',
+               2,
+               'wf:vib1:flask:app',
+               'wf:vib1:flask:app'),
               (' Implementing error checking in the template ',
                2,
                None,
@@ -137,16 +37,37 @@ h1, h2, h3, h4, h5, h6 {
                2,
                None,
                '___sec14'),
-              (' User-provided validation ', 2, None, '___sec15'),
+              (' User-provided validation ',
+               2,
+               'wf:vib1:flask:validation',
+               'wf:vib1:flask:validation'),
               (' Autogenerating the code ',
                2,
                'wf:vib3:flask:autogen',
                'wf:vib3:flask:autogen'),
-              (' Exercises ', 1, None, '___sec17'),
+              (' Avoiding plot files ',
+               2,
+               'wf:vib3:flask:nofiles',
+               'wf:vib3:flask:nofiles'),
+              (' PNG plots ', 3, None, '___sec18'),
+              (' SVG plots ', 3, None, '___sec19'),
+              (' Exercises ', 1, None, '___sec20'),
               (' Exercise 1: Add two numbers ',
                2,
                'wf:exer:add2',
-               'wf:exer:add2')]}
+               'wf:exer:add2'),
+              (' Exercise 2: Extend the `vib3_flask` app ',
+               2,
+               'wf:exer:vib3:demo',
+               'wf:exer:vib3:demo'),
+              (' Exercise 3: Equip the `vib3_flask` app with more data types ',
+               2,
+               'wf:exer:vib3:lists',
+               'wf:exer:vib3:lists'),
+              (' Exercise 4: Auto-generate code from function signature ',
+               2,
+               None,
+               '___sec24')]}
 end of tocinfo -->
 
 
@@ -171,12 +92,16 @@ MathJax.Hub.Config({
 
 
 <a name="part0009"></a>
+
+    <a href="._part0008_web4sa_flask.html"><img src="https://doconce.googlecode.com/hg/bundled/html_images/prev1.png" border=0 alt="previous"></a>
+    
+    <a href="._part0010_web4sa_flask.html"><img src="https://doconce.googlecode.com/hg/bundled/html_images/next1.png" border=0 alt="next"></a>
+    <p>
 <!-- !split -->
 
-<h3>User-provided validation  <a name="___sec15"></a></h3>
+<h3>User-provided validation <a name="wf:vib1:flask:validation"></a></h3>
 
 <p>
-
 The <code>FloatField</code> objects can check that the input is compatible with
 a number, but what if we want to control that \( A>0 \), \( b>0 \), and
 \( T \) is not greater than 30 periods (otherwise the plot gets cluttered)?
@@ -184,7 +109,7 @@ We can write functions for checking appropriate conditions and
 supply the function to the list of validator functions in the call to
 the <code>FloatField</code> constructor or other field constructors. The extra
 code is a part of the <code>model.py</code> and the presented extensions appear
-in the directory <code>vib2_flask</code>.
+in the directory <a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/vib2"><tt>vib2</tt></a>.
 
 <p>
 The simplest approach to validation is to use existing functionality
@@ -194,8 +119,7 @@ a prescribed interval:
 
 <p>
 
-
-<!-- code typeset with pygments style "default" -->
+<!-- code=python (from !bc pycod) typeset with pygments style "default" -->
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">wtforms</span> <span style="color: #008000; font-weight: bold">import</span> Form, FloatField, validators
 
 <span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">InputForm</span>(Form):
@@ -204,7 +128,6 @@ a prescribed interval:
         validators<span style="color: #666666">=</span>[validators<span style="color: #666666">.</span>NumberRange(<span style="color: #666666">0</span>, <span style="color: #666666">1E+20</span>)])
 </pre></div>
 <p>
-
 We can also easily provide our own more tailored validators.
 As an example, let us explain how we can check that \( T \) is less than 30 periods.
 One period is \( 2\pi /w \) so we need to check if \( T> 30\cdot 2\pi/w \)
@@ -214,8 +137,7 @@ specific <code>field</code> to test:
 
 <p>
 
-
-<!-- code typeset with pygments style "default" -->
+<!-- code=python (from !bc pycod) typeset with pygments style "default" -->
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">check_T</span>(form, field):
     <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Form validation: failure if T &gt; 30 periods.&quot;&quot;&quot;</span>
     w <span style="color: #666666">=</span> form<span style="color: #666666">.</span>w<span style="color: #666666">.</span>data
@@ -237,8 +159,7 @@ constructor for <code>T</code>:
 
 <p>
 
-
-<!-- code typeset with pygments style "default" -->
+<!-- code=python (from !bc pycod) typeset with pygments style "default" -->
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">InputForm</span>(Form):
     <span style="color: #666666">...</span>
     T <span style="color: #666666">=</span> FloatField(
@@ -247,7 +168,7 @@ constructor for <code>T</code>:
 </pre></div>
 <p>
 The validator
-objects are tested one by one as the appear in the list, and if
+objects are tested one by one as they appear in the list, and if
 one fails, the others are not invoked.
 We therefore add <code>check_T</code> after the check of input such that we know we
 have a value for all data when we run the computations and test
@@ -263,8 +184,7 @@ A general such function may take the form
 
 <p>
 
-
-<!-- code typeset with pygments style "default" -->
+<!-- code=python (from !bc pycod) typeset with pygments style "default" -->
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">check_interval</span>(form, field, min_value<span style="color: #666666">=</span><span style="color: #008000">None</span>, max_value<span style="color: #666666">=</span><span style="color: #008000">None</span>):
     <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;For validation: failure if value is outside an interval.&quot;&quot;&quot;</span>
     failure <span style="color: #666666">=</span> <span style="color: #008000">False</span>
@@ -274,28 +194,28 @@ A general such function may take the form
     <span style="color: #008000; font-weight: bold">if</span> max_value <span style="color: #AA22FF; font-weight: bold">is</span> <span style="color: #AA22FF; font-weight: bold">not</span> <span style="color: #008000">None</span>:
         <span style="color: #008000; font-weight: bold">if</span> field<span style="color: #666666">.</span>data <span style="color: #666666">&gt;</span> max_value:
             failure <span style="color: #666666">=</span> <span style="color: #008000">True</span>
-    min_value <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;-infty&#39;</span> <span style="color: #008000; font-weight: bold">if</span> min_value <span style="color: #AA22FF; font-weight: bold">is</span> <span style="color: #008000">None</span> <span style="color: #008000; font-weight: bold">else</span> <span style="color: #008000">str</span>(min_value)
-    max_value <span style="color: #666666">=</span>  <span style="color: #BA2121">&#39;infty&#39;</span> <span style="color: #008000; font-weight: bold">if</span> max_value <span style="color: #AA22FF; font-weight: bold">is</span> <span style="color: #008000">None</span> <span style="color: #008000; font-weight: bold">else</span> <span style="color: #008000">str</span>(max_value)
     <span style="color: #008000; font-weight: bold">if</span> failure:
         <span style="color: #008000; font-weight: bold">raise</span> validators<span style="color: #666666">.</span>ValidationError(
-            <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">=</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> not in [</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">, </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">]&#39;</span> <span style="color: #666666">%</span> (field<span style="color: #666666">.</span>name, field<span style="color: #666666">.</span>data,
-                                       min_value, max_value))
+            <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">=</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> not in [</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">, </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">]&#39;</span> <span style="color: #666666">%</span>
+            (field<span style="color: #666666">.</span>name, field<span style="color: #666666">.</span>data,
+             <span style="color: #BA2121">&#39;-infty&#39;</span> <span style="color: #008000; font-weight: bold">if</span> min_value <span style="color: #AA22FF; font-weight: bold">is</span> <span style="color: #008000">None</span> <span style="color: #008000; font-weight: bold">else</span> <span style="color: #008000">str</span>(min_value),
+             <span style="color: #BA2121">&#39;infty&#39;</span>  <span style="color: #008000; font-weight: bold">if</span> max_value <span style="color: #AA22FF; font-weight: bold">is</span> <span style="color: #008000">None</span> <span style="color: #008000; font-weight: bold">else</span> <span style="color: #008000">str</span>(max_value)))
 </pre></div>
 <p>
-
 The problem is that <code>check_interval</code> takes four arguments, not only
-the <code>form</code> and <code>field</code> arguments that a validator function can accept.
+the <code>form</code> and <code>field</code> arguments that a validator function in the
+Flask framework can accept.
 The way out of this difficulty is to use a Python tool <code>functools.partial</code>
-which allows us to call a function with some of the arguments set.
+which allows us to call a function with some of the arguments set beforehand.
 Here, we want to create a new function that calls <code>check_interval</code>
 with some prescribed values of <code>min_value</code> and <code>max_value</code>.
 This function looks like it does not have these arguments, only
-<code>form</code> and <code>field</code>. The following function produces this function:
+<code>form</code> and <code>field</code>. The following function produces this function, which we
+can use as a valid Flask validator function:
 
 <p>
 
-
-<!-- code typeset with pygments style "default" -->
+<!-- code=python (from !bc pycod) typeset with pygments style "default" -->
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">functools</span>
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">interval</span>(min_value<span style="color: #666666">=</span><span style="color: #008000">None</span>, max_value<span style="color: #666666">=</span><span style="color: #008000">None</span>):
@@ -303,14 +223,12 @@ This function looks like it does not have these arguments, only
         check_interval, min_value<span style="color: #666666">=</span>min_value, max_value<span style="color: #666666">=</span>max_value)
 </pre></div>
 <p>
-We can in any field constructor just add
-<code>interval(a, b)</code> as a validator function checking if the field value is
-in the interval between <code>a</code> and <code>b</code>:
+We can now in any field constructor just add
+<code>interval(a, b)</code> as a validator function, here checking that \( b\in [0,\infty) \):
 
 <p>
 
-
-<!-- code typeset with pygments style "default" -->
+<!-- code=python (from !bc pycod) typeset with pygments style "default" -->
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">InputForm</span>(Form):
     <span style="color: #666666">...</span>
     b <span style="color: #666666">=</span> FloatField(
@@ -318,21 +236,20 @@ in the interval between <code>a</code> and <code>b</code>:
         validators<span style="color: #666666">=</span>[validators<span style="color: #666666">.</span>InputRequired(), interval(<span style="color: #666666">0</span>,<span style="color: #008000">None</span>)])
 </pre></div>
 <p>
-
 Let us test our tailored error checking. Run <code>python controller.py</code>
-in the <code>vib2_flask</code> directory and fill in \( -1.0 \) in the \( b \) field.
+in the <code>vib2</code> directory and fill in \( -1.0 \) in the \( b \) field.
 Pressing <em>Compute</em> invokes our <code>interval(0,None)</code> function, which
-is nothing but a call <code>check_interval(field, form, 0, None)</code>,
-and the test <code>if field.data < min_value</code> becomes true, <code>failure</code>
-is set and the exception is raised. The message in the exception
+is nothing but a call <code>check_interval(field, form, 0, None)</code>.
+Inside this function,
+the test <code>if field.data < min_value</code> becomes true, <code>failure</code>
+is set, and the exception is raised. The message in the exception
 is available in the <code>field.errors</code> attribute so our template
 will write it out in red, see Figure <a href="#wf:vib2:flask:fig:error1">9</a>.
-The template used in <code>vib_flask</code> is basically the same as <code>view3.html</code>
-in <code>vib1_flask</code>, i.e., it feaures LaTeX mathematics and checking of
+The template used in <code>vib2</code> is basically the same as <code>view3.html</code>
+in <code>vib1</code>, i.e., it feaures LaTeX mathematics and checking of
 <code>field.errors</code>.
 
 <p>
-
 <center> <!-- figure -->
 <hr class="figure">
 <center><p class="caption">Figure 9:  Triggering of a user-defined error check. <a name="wf:vib2:flask:fig:error1"></a> </p></center>
@@ -340,16 +257,14 @@ in <code>vib1_flask</code>, i.e., it feaures LaTeX mathematics and checking of
 </center>
 
 <p>
-
-Finally, we mention a detail in the <code>view.py</code> file in the <code>vib2_flask</code>
+Finally, we mention a detail in the <code>controller.py</code> file in the <code>vib2</code>
 app: instead of sending <code>form.var.data</code> to the <code>compute</code> function we
 may automatically generate a set of local variables such that the
-work with data from the web page looks nicer:
+application of data from the web page, here in the <code>compute</code> call, looks nicer:
 
 <p>
 
-
-<!-- code typeset with pygments style "default" -->
+<!-- code=python (from !bc pycod) typeset with pygments style "default" -->
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">index</span>():
     form <span style="color: #666666">=</span> InputForm(request<span style="color: #666666">.</span>form)
     <span style="color: #008000; font-weight: bold">if</span> request<span style="color: #666666">.</span>method <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;POST&#39;</span> <span style="color: #AA22FF; font-weight: bold">and</span> form<span style="color: #666666">.</span>validate():
@@ -361,55 +276,22 @@ work with data from the web page looks nicer:
         result <span style="color: #666666">=</span> <span style="color: #008000">None</span>
 
     <span style="color: #008000; font-weight: bold">return</span> render_template(<span style="color: #BA2121">&#39;view.html&#39;</span>, form<span style="color: #666666">=</span>form, result<span style="color: #666666">=</span>result)
+
+<span style="color: #008000; font-weight: bold">if</span> __name__ <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;__main__&#39;</span>:
+    app<span style="color: #666666">.</span>run(debug<span style="color: #666666">=</span><span style="color: #008000">True</span>)
 </pre></div>
 <p>
 The idea is just to run <code>exec</code> on a declaration of a local variable
 with name <code>field.name</code> for each field in the form. This trick is often
-neat if data are buried in objects and you want variables in your
-code to look like they do in mathematical writing.
+neat if web variables are buried in objects (<code>form.T.data</code>) and you want these
+variables in your
+code to look like they do in mathematical writing (<code>T</code> for \( T \)).
 
 <p>
 <p>
-<!-- ------------------- end of main content --------------- -->
 
-
-<!--
-Preliminary examples/discussion on vagrant style syntax
-
-<div class='alert alert-block alert-notice'>
-  <h3>What about PHP? Python? Java?</h3>
-<p>
-bla-bla.
-</div>
-
-<p>
-While the <div class="deep-blue">rest of the</div> getting started
--->
-
-<ul class="pager">
-  <li class="previous">
-    <a href="._part0008_web4sa_flask.html">&larr; Prev</a>
-  </li>
-
-  <li class="next">
-    <a href="._part0010_web4sa_flask.html">Next &rarr;</a>
-  </li>
-
-</ul>
-
- </div>
-
-<!-- ------------------- end of main content --------------- -->
-
- <div class="row Footer">
-  <div class="span12">
-  Copyright &copy 2013; Hans Petter Langtangen and Anders E. Johansen.
-  Last update: Mar 22, 2013.
-  </div>
- </div>
-</div>
-</body>
-</html>
-
-
+                <a href="._part0008_web4sa_flask.html"><img src="https://doconce.googlecode.com/hg/bundled/html_images/prev1.png" border=0 alt="previous"></a>
+                
+                <a href="._part0010_web4sa_flask.html"><img src="https://doconce.googlecode.com/hg/bundled/html_images/next1.png" border=0 alt="next"></a>
+                <!-- ------------------- end of main content --------------- -->
 

@@ -7,6 +7,7 @@ sh clean.sh
 name=web4sa
 doconce format html $name -DTOPIC=Flask+Django --html-style=bloodish
 if [ $? -ne 0 ]; then exit; fi
+cp $name.html ${name}_plain_all.html
 cp $name.html ${name}_plain.html
 doconce split_html ${name}_plain
 if [ $? -ne 0 ]; then exit; fi
@@ -45,6 +46,6 @@ pdflatex -shell-escape $name
 doconce format html index --html-style=bloodish
 
 # Publish
-dest=../../pub
-cp -r *.html .*.html fig-$name sphinx-* $dest
-rm -rf $dest/sphinx-rootdir
+#dest=../../pub
+#cp -r *.html .*.html fig-$name sphinx-* $dest
+#rm -rf $dest/sphinx-rootdir

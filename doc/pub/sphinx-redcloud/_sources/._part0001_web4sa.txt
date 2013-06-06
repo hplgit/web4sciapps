@@ -22,9 +22,9 @@ MVC pattern introduces
 
  * the model to hold the data
 
- * the view to display data
+ * the view to display the data
 
- * the controller to move data by gluing the model and the view.
+ * the controller to move the data by gluing the model and the view.
 
 For applications performing mathematical computations we find it
 convenient to explicitly introduce a fourth component that we call
@@ -34,8 +34,8 @@ between data (model), the way data is presented (view), the
 computations (compute), and the way these components communicate
 (controller). In a small program such a separation may look as
 overkill, but it pays off in more complicated applications. More
-importantly, the concepts of the MVC pattern saturates the modules and
-files of web frameworks so one really needs to adapt to the MVC way of
+importantly, the concepts of the MVC pattern are widely used in
+web frameworks so one should really adapt to the MVC way of
 thinking.
 
 Web frameworks often have their own way of interpreting the
@@ -62,7 +62,7 @@ the code needed to build web applications can easily be split into
 model, view, controller, and compute components, as will be shown later.
 Django, on the other hand, automatically generates application files with names
 ``views.py`` and ``models.py`` so it is
-necessary to have some idea what Django means with these terms.
+necessary to have some idea what Django means by these terms.
 The controller functionality in Django lies both in the ``views.py`` file and
 in the configuration
 files (``settings.py`` and ``urls.py``). The view component of the application

@@ -78,7 +78,6 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="._part0005_web4sa.html">Troubleshooting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="._part0006_web4sa.html">Making a Django application</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="._part0006_web4sa.html#installing-django">Installing Django</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._part0006_web4sa.html#setting-up-a-django-project">Setting up a Django project</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._part0006_web4sa.html#setting-up-a-django-application">Setting up a Django application</a></li>
 </ul>
@@ -95,16 +94,24 @@
 <li class="toctree-l1"><a class="reference internal" href="._part0010_web4sa.html#rearringing-the-elements-in-the-html-template">Rearringing the elements in the HTML template</a></li>
 <li class="toctree-l1"><a class="reference internal" href="._part0011_web4sa.html">User-provided validation  (1)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="._part0012_web4sa.html">Autogenerating the code</a></li>
-<li class="toctree-l1"><a class="reference internal" href="._part0013_web4sa.html">Handling multiple input variables in Django</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="._part0013_web4sa.html#programming-the-django-application-2">Programming the Django application  (2)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._part0013_web4sa.html#user-provided-validation-2">User-provided validation  (2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._part0013_web4sa.html">Avoiding plot files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="._part0013_web4sa.html#png-plots">PNG plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._part0013_web4sa.html#svg-plots">SVG plots</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="._part0014_web4sa.html">Exercises</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="._part0014_web4sa.html#exercise-1-add-two-numbers">Exercise 1: Add two numbers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._part0014_web4sa.html">Handling multiple input variables in Django</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="._part0014_web4sa.html#programming-the-django-application-2">Programming the Django application  (2)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._part0014_web4sa.html#user-provided-validation-2">User-provided validation  (2)</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="._part0014_web4sa.html#remaining">Remaining</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._part0015_web4sa.html">Exercises</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="._part0015_web4sa.html#exercise-1-add-two-numbers">Exercise 1: Add two numbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._part0015_web4sa.html#exercise-2-extend-the-vib3-flask-app">Exercise 2: Extend the <tt class="docutils literal"><span class="pre">vib3_flask</span></tt> app</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._part0015_web4sa.html#exercise-3-equip-the-vib3-flask-app-with-more-data-types">Exercise 3: Equip the <tt class="docutils literal"><span class="pre">vib3_flask</span></tt> app with more data types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._part0015_web4sa.html#exercise-4-auto-generate-code-from-function-signature">Exercise 4: Auto-generate code from function signature</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="._part0015_web4sa.html#remaining">Remaining</a></li>
 </ul>
 </ul>
 </li>
@@ -160,8 +167,8 @@ MVC pattern introduces</p>
 <blockquote>
 <div><ul class="simple">
 <li>the model to hold the data</li>
-<li>the view to display data</li>
-<li>the controller to move data by gluing the model and the view.</li>
+<li>the view to display the data</li>
+<li>the controller to move the data by gluing the model and the view.</li>
 </ul>
 </div></blockquote>
 <p>For applications performing mathematical computations we find it
@@ -172,8 +179,8 @@ between data (model), the way data is presented (view), the
 computations (compute), and the way these components communicate
 (controller). In a small program such a separation may look as
 overkill, but it pays off in more complicated applications. More
-importantly, the concepts of the MVC pattern saturates the modules and
-files of web frameworks so one really needs to adapt to the MVC way of
+importantly, the concepts of the MVC pattern are widely used in
+web frameworks so one should really adapt to the MVC way of
 thinking.</p>
 <p>Web frameworks often have their own way of interpreting the
 model, view, and controller parts of the MVC pattern.
@@ -199,7 +206,7 @@ the code needed to build web applications can easily be split into
 model, view, controller, and compute components, as will be shown later.
 Django, on the other hand, automatically generates application files with names
 <tt class="docutils literal"><span class="pre">views.py</span></tt> and <tt class="docutils literal"><span class="pre">models.py</span></tt> so it is
-necessary to have some idea what Django means with these terms.
+necessary to have some idea what Django means by these terms.
 The controller functionality in Django lies both in the <tt class="docutils literal"><span class="pre">views.py</span></tt> file and
 in the configuration
 files (<tt class="docutils literal"><span class="pre">settings.py</span></tt> and <tt class="docutils literal"><span class="pre">urls.py</span></tt>). The view component of the application
