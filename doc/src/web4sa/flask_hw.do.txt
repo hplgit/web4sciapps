@@ -30,13 +30,13 @@ FIGURE: [fig-web4sa/hw1_flask_output, width=600] The output page. label{wf:hw1:f
 
 ## Define Mako variable for path to source code
 <%
-app_path = src_path + 'hw/hw1_flask'
+app_path = src_path + 'flask_apps/hw1'
 %>
 
 __The Python code.__
 Flask does not require us to use the MVC pattern so there is actually
-no need to split the original program into `model.py`, `view.py`,
-`controller.py`, and `compute.py` as already explained (but it will be
+no need to split the original program into model, view, controller,
+and compute files as already explained (but it will be
 done later).  First we make a `controller.py` file where the view, the
 model, and the controller parts appear within the same file.
 The `compute` component is always in a separate file as
@@ -109,7 +109,7 @@ as we need to use an HTML form:
 __Testing the application.__
 We collect the files associated with a Flask application (often called
 just *app*) in a directory,
-here called "`hw1_flask`": "${github_path}/${app_path}".
+here called "`hw1`": "${github_path}/${app_path}".
 All you have to do in order to run this web application is to find
 this directory and run
 
@@ -125,7 +125,7 @@ Open a new window or tab in your browser and type in the URL
 
 ## Define Mako variable for path to source code
 <%
-app_path = src_path + 'hw/hw2_flask'
+app_path = src_path + 'flask_apps/hw2'
 %>
 
 Our application made two distinct pages for grabbing input from the
@@ -136,15 +136,15 @@ web application, which is a kind of calculator. Figure ref{wf:hw2:flask:fig:resu
 FIGURE: [fig-web4sa/hw2_flask_output, width=600] The modified result page. label{wf:hw2:flask:fig:result}
 
 To let the user stay within the same page, we create a new directory
-"`hw2_flask`": "${github_path}/${app_path}".
+"`hw2`": "${github_path}/${app_path}".
 for this modified Flask app and copy the files from the previous
-`hw1_flask` directory.  The idea now is to make use of just one
+`hw1` directory.  The idea now is to make use of just one
 template, in `templates/view.html`:
 
 @@@CODE ${app_path}/templates/view.html
 
 The form is identical to what we used in `view_input.html` in
-the `hw1_flask` directory, and the only
+the `hw1` directory, and the only
 new thing is the output of `s` below the form.
 The template language supports some programming with Python objects
 inside `{%` and `%}` tags.
@@ -189,33 +189,32 @@ label{wf:hw3:flask}
 
 ## Define Mako variable for path to source code
 <%
-app_path = src_path + 'hw/hw3_flask'
+app_path = src_path + 'flask_apps/hw3'
 %>
 
 idx{Flask!MVC pattern}
 
-In our previous two Flask apps we have had the model, view, and
-controller parts in one file `controller.py`. For illustration we
-may split the `controller.py` into three files:
-`model.py`, `view.py`, and `controller.py`, located in a
+In our previous two Flask apps we have had the view displayed for the
+user in a separate template file, and the computations as always in
+`compute.py`, but everything else was placed in one file `controller.py`.
+For illustration of the MVC concept we
+may split the `controller.py` into two files: `model.py` and
+`controller.py`. The view is in `templates/view.html`.
+These new files are located in a
 directory
 "`hw3_flask`": "${github_path}/${app_path}"
 The contents
-in these files reflect the splitting introduced in the original
+in the files reflect the splitting introduced in the original
 scienticic hello world program in Section ref{wf:hw:mvc}.
 The `model.py` file now consists of the input form class:
 
 @@@CODE ${app_path}/model.py
 
-The file `view.py` has the content
-
-@@@CODE ${app_path}/view.py
-
-The `controller.py` file finally runs the view's `app`:
+The file `templates/view.html` is as before, while `controller.py` contains
 
 @@@CODE ${app_path}/controller.py
 
-The statements are indentical to those in the `hw2_flask` app, only
+The statements are indentical to those in the `hw2` app, only
 the organization of the statement in files differ.
 
 

@@ -116,15 +116,14 @@ ROOT_URLCONF = 'django_project.urls'
 WSGI_APPLICATION = 'django_project.wsgi.application'
 
 TEMPLATE_DIRS = (
-    relative2absolute_path('../../apps/hw/hw1_django/templates'),
-    relative2absolute_path('../../apps/hw/hw2_django/templates'),
-    relative2absolute_path('../../apps/vib/vib1_django/templates'),
-    relative2absolute_path('../../apps/vib/vib2_django/templates'),
+    relative2absolute_path('../../apps/django_apps/hw1/templates'),
+    relative2absolute_path('../../apps/django_apps/hw2/templates'),
+    relative2absolute_path('../../apps/django_apps/vib1/templates'),
+    relative2absolute_path('../../apps/django_apps/vib2/templates'),
 )
 
 import sys
-sys.path.insert(0, relative2absolute_path('../../apps/hw'))
-sys.path.insert(0, relative2absolute_path('../../apps/vib'))
+sys.path.insert(0, relative2absolute_path('../../apps/django_apps'))
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -137,10 +136,10 @@ INSTALLED_APPS = (
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-    'hw1_django',
-    'hw2_django',
-    'vib1_django',
-    'vib2_django',
+    'hw1',
+    'hw2',
+    'vib1',
+    'vib2',
     )
 
 # A sample logging configuration. The only tangible logging

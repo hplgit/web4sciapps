@@ -117,34 +117,40 @@ world program. We can place the app in any directory, but here we
 utilize the following organization.
 As neighbor to `django_project` we have
 a directory `apps` containing our various scientific applications.
-Under `apps` we create a directory `hw`
-for the various versions of the scientific hello world applications:
-`orig` for the original `hw.py` program, `mvc` for a split of this
-program according to the MVC pattern,
-and `hw1_django` for a first version of
-the program with a Django-based web interface.
+Under `apps` we create a directory `django_apps` with
+our different versions of Django applications.
+The directory `py_apps` contains the
+original `hw.py` program in the subdirectory `orig`,
+while split of this
+program according to the MVC pattern appears in the `mvc` directory.
 
+The directory `django_apps/hw1` is our first attempt to write
+a Django-based web interface for the `hw.py` program.
+The directory structure is laid out by
 !bc sys
 Terminal> cd ..
 Terminal> mkdir apps
 Terminal> cd apps
-Terminal> mkdir hw
-Terminal> cd hw
+Terminal> mkdir py_apps
+Terminal> cd py
 Terminal> mkdir orig mvc
+Terminal> cd ../..
+Terminal> mkdir django_apps
+Terminal> cd django_apps
 !ec
 The file `hw.py` is moved to `orig` while `mvc` contains
 the MVC refactored version with the files `model.py`, `view.py`, `compute.py`,
 and `controller.py`.
 
-The `hw1_django` directory, containing the Django application, must be
+The `hw1` directory, containing our first Django application, must be
 made with
 !bc sys
-Terminal> python ../../django_project/manage.py startapp hw1_django
+Terminal> python ../../django_project/manage.py startapp hw1
 !ec
-The command creates a directory `hw1_django` with four empty files:
+The command creates a directory `hw1` with four empty files:
 
 !bc sys
-Terminal> cd hw1_django
+Terminal> cd hw1
 Terminal> ls
 __init__.py models.py tests.py views.py
 !ec
@@ -164,21 +170,21 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     ...
-    'hw1_django',
+    'hw1',
 )
 !ec
-Unfortunately, Django will not be able to find the package `hw1_django`
+Unfortunately, Django will not be able to find the package `hw1`
 unless we register the parent directory in `sys.path`:
 
 !bc pycod
 import sys
-sys.path.insert(0, relative2absolute_path('../../apps/hw'))
+sys.path.insert(0, relative2absolute_path('../../apps/django_apps'))
 !ec
 Note here that the relative path is given with respect to the
 location of the `settings.py` script.
 
 __Step 2: Add a template directory.__
-Make a subdirectory `templates` under `hw1_django`,
+Make a subdirectory `templates` under `hw1`,
 
 !bc sys
 mkdir templates
@@ -187,7 +193,7 @@ and add the absolute path of this directory to the `TEMPLATE_DIRS` tuple:
 
 !bc pycod
 TEMPLATE_DIRS = (
-    relative2absolute_path('../../apps/hw/hw1_django/templates'),
+    relative2absolute_path('../../apps/django_apps/hw1/templates'),
 )
 !ec
 The `templates` directory will hold templates for the HTML code applied
@@ -196,7 +202,7 @@ a tuple with only one element.
 
 __Step 3: Define the URL.__ We need to connect the Django app with
 an URL. Our app will be associated with a Python function `index`
-in the `views` module within the `hw1_django` package.
+in the `views` module within the `hw1` package.
 Say we want the corresponding URL to
 be named `hw1` relative to the server URL.
 This information is registered in the `django_project/urls.py` file
@@ -204,12 +210,12 @@ by the syntax
 
 !bc pycod
 urlpatterns = patterns('',
-    url(r'^hw1/', 'hw1_django.views.index'),
+    url(r'^hw1/', 'django_apps.hw1.views.index'),
 !ec
 The first argument to the `url` function is a regular expression for
 the URL and the second argument is the name of the function to call,
 using Python's syntax for a function `index` in a module `views` in
-a package `hw1_django`.
+a package `hw1`.
 The function name `index` resembles the `index.html` main page associated
 with an URL, but any other name than `index` can be used.
 
@@ -218,14 +224,14 @@ with an URL, but any other name than `index` can be used.
 
 ## Define Mako variable for path to source code
 <%
-app_path = src_path + 'hw/hw1_django'
+app_path = src_path + 'django_apps/hw1'
 %>
 
 The Django application is about filling the files `views.py` and `models.py`
 with content. The mathematical computations are performed in `compute.py`
-so we copy this file from the `mvc` directory to the `hw1_django` directory
+so we copy this file from the `mvc` directory to the `hw1` directory
 for convenience (we could alternatively add `../mvc` to `sys.path` such that
-`import compute` would work from the `hw1_django` directory).
+`import compute` would work from the `hw1` directory).
 
 __The user interaction.__
 The web application offers a text field where the user can
@@ -360,7 +366,7 @@ the "Hello" word now has a blue color.
 
 ## Define Mako variable for path to source code
 <%
-app_path = src_path + 'hw/hw2_django'
+app_path = src_path + 'django_apps/hw2'
 %>
 
 Instead of making a separate output page with the result, we can
@@ -371,18 +377,18 @@ The output page should then look as shown in Figure ref{wf:hw2:django:fig:result
 FIGURE: [fig-web4sa/hw2_django_output, width=600] The modified result page. label{wf:hw2:django:fig:result}
 
 We need to make a new Django application, now called
-"`hw2_django`" : "${github_path}/${app_path}".
+"`hw2`" : "${github_path}/${app_path}".
 Instead of running the standard
-`manage.py startapp hw2_django` command,
-we can simply copy the `hw1_django`
-directory to `hw2_django`. We need, of course, to add information about this
+`manage.py startapp hw2` command,
+we can simply copy the `hw1`
+directory to `hw2`. We need, of course, to add information about this
 new application in `settings.py` and `urls.py`.
 In the former file we must have
 
 !bc pycod
 TEMPLATE_DIRS = (
-    relative2absolute_path('../../apps/hw1_django/templates'),
-    relative2absolute_path('../../apps/hw2_django/templates'),
+    relative2absolute_path('../../apps/django_apps/hw1/templates'),
+    relative2absolute_path('../../apps/django_apps/hw2/templates'),
 )
 
 INSTALLED_APPS = (
@@ -396,17 +402,17 @@ INSTALLED_APPS = (
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-    'hw1_django',
-    'hw2_django',
+    'hw1',
+    'hw2',
 )
 !ec
 In `urls.py` we add the URL `hw2` which is to call our `index` function
-in the `views.py` file of the `hw2_django` app:
+in the `views.py` file of the `hw2` app:
 
 !bc pycod
 urlpatterns = patterns('',
-    url(r'^hw1/', 'hw1_django.views.index'),
-    url(r'^hw2/', 'hw2_django.views.index'),
+    url(r'^hw1/', 'django_apps.hw1.views.index'),
+    url(r'^hw2/', 'django_apps.hw2.views.index'),
 !ec
 
 The `views.py` file changes a bit since we shall generate almost the same
