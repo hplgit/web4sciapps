@@ -674,7 +674,12 @@ of course be changed by proper string replacements for the
 just write the `width` specification in the image tag for the PNG plot.
 
 
+======= Further work =======
 
+ * Uploading of files
+ * Log in and users
+ * Persistence and databases
+ * Drawing in HTML5
 
 
 
