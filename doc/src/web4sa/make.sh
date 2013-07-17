@@ -5,6 +5,7 @@
 sh clean.sh
 
 name=web4sa
+
 doconce format html $name -DTOPIC=Flask+Django --html_style=bloodish
 if [ $? -ne 0 ]; then exit; fi
 cp $name.html ${name}_plain_all.html
@@ -12,14 +13,13 @@ cp $name.html ${name}_plain.html
 doconce split_html ${name}_plain
 if [ $? -ne 0 ]; then exit; fi
 
-doconce format html ${name}_flask -DTOPIC=Flask --html_style=vagrant --html_template=html_templates/template_flask.html
+doconce format html ${name} -DTOPIC=Flask --html_style=vagrant --html_template=html_templates/template_flask.html --html_output=${name}_flask
 if [ $? -ne 0 ]; then exit; fi
 doconce split_html ${name}_flask
 if [ $? -ne 0 ]; then exit; fi
 
-doconce format html ${name}_django -DTOPIC=Django --html_style=vagrant --html_template=html_templates/template_django.html
+doconce format html ${name} -DTOPIC=Django --html_style=vagrant --html_template=html_templates/template_django.html --html_output=${name}_django
 if [ $? -ne 0 ]; then exit; fi
-cp ${name}_django.html tmp.html
 doconce split_html ${name}_django
 if [ $? -ne 0 ]; then exit; fi
 

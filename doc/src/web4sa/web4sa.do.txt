@@ -1,25 +1,35 @@
+# #if TOPIC == 'Flask+Django'
 TITLE: Using Web Frameworks for Scientific Web Applications
 AUTHOR: Hans Petter Langtangen at Center for Biomedical Computing, Simula Research Laboratory and Department of Informatics, University of Oslo
 AUTHOR: Anders E. Johansen at Center for Biomedical Computing, Simula Research Laboratory
 DATE: today
+# #else
+# Use vagrant template only and therefore comment out TITLE
+#TITLE: Using ${TOPIC} for Scientific Web Applications
+# #endif
 
 TOC: on
 
-# #ifdef EXTRA
-Web2py links:
-
- * "5-part tutorial": "https://github.com/mjhea0/web2py"
- * URL: "http://www.youtube.com/watch?v=BXzqmHx6edY"
- * URL: "http://www.web2py.com/"
- * URL: "http://web2py.com/book"
-# #endif
 
 # #include "intro.do.txt"
+
+# #if TOPIC in ('Flask+Django', 'Flask')
 # #include "flask_hw.do.txt"
+# #endif
+
+# #if TOPIC in ('Flask+Django', 'Django')
 # #include "django_hw.do.txt"
+
+# #if TOPIC in ('Flask+Django', 'Flask')
 # #include "flask_vib.do.txt"
+# #endif
+
+# #if TOPIC in ('Flask+Django', 'Django')
 # #include "django_vib.do.txt"
+# #endif
+
 # #include "exercises.do.txt"
+# #include "links.do.txt"
 
 
 ======= Remaining =======

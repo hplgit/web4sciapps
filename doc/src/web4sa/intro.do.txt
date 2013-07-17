@@ -25,19 +25,30 @@ understood the basic demos.
 
 # #if TOPIC == 'Flask+Django'
 We shall explore two web frameworks: the very popular "Django framework": "https://www.djangoproject.com/" and the more high-level and easy-to-use framework
-"Flask": "http://flask.pocoo.org/". In addition, our examples are also
-implemented in the "web2py": "http://www.web2py.com/" framework.
-#Its slogan says "Django makes it easier to build better Web apps more quickly and with less code".
+"Flask": "http://flask.pocoo.org/". Our introductory examples were also
+implemented in the "web2py": "http://www.web2py.com/" framework, but according
+to our experience, Flask and Django are easier to explain to scientists.
 The primary advantage of Django
 over other web frameworks is the rich set of documentation and
 examples. Googling for "Django tutorials" gives lots of hits including
 a  list of "web tutorials": "https://code.djangoproject.com/wiki/Tutorials"
-and a list of "YouTube videos": "http://www.youtube.com/playlist?list=PL385A53B00B8B158E". There is also an electronic "Django book": "http://www.djangobook.com/en/2.0/". At the time of this writing, Flask is not
-much documented beyond the "official web site": "http://flask.pocoo.org/" and the "WTForms Documentation": "http://wtforms.simplecodes.com/docs/0.6/index.html". There is, unfortunately, hardly any examples on how Django or Flask can be used to enable typical scientific applications for the web, and that is why we have developed some targeted examples on this topic.
+and a list of "YouTube videos": "http://www.youtube.com/playlist?list=PL385A53B00B8B158E". There is also an electronic "Django book": "http://www.djangobook.com/en/2.0/". At the time of this writing, the Flask documentation is not comparable. The two most important resources are the
+ "official web site": "http://flask.pocoo.org/" and the "WTForms Documentation": "http://wtforms.simplecodes.com/docs/0.6/index.html". There is, unfortunately, hardly any examples on how Django or Flask can be used to enable typical scientific applications for the web, and that is why we have developed some targeted examples on this topic.
+
+A basic question is, of course, whether you should apply Flask or
+Django for your web project. Googling for "flask vs django" gives a
+lot of diverging opinions. The authors' viewpoint is that Flask is
+much easier to get started with than Django. You can grow your
+application to a really big one with both frameworks, but some
+advanced features is easier on one framework than the other. For
+example, if you want users to log into your account and store their
+work in databases, we found this to be much more straightforward in
+Django.
+
 # #elif TOPIC == 'Flask'
 We shall in the forthcoming text explore the very easy-to-use "Flask framework":
-"http://flask.pocoo.org/".  At the time of this writing, Flask is not
-much documented beyond the "official web site": "http://flask.pocoo.org/" and the "WTForms Documentation": "http://wtforms.simplecodes.com/docs/0.6/index.html". That is why we have made specific examples for the application of Flask in computational science.
+"http://flask.pocoo.org/".  At the time of this writing, the primary Flask
+documentation is the "official web site": "http://flask.pocoo.org/" and the "WTForms Documentation": "http://wtforms.simplecodes.com/docs/0.6/index.html". That is why we have made specific examples for the application of Flask in computational science.
 # #elif TOPIC == 'Django'
 We shall explore the very popular "Django framework": "https://www.djangoproject.com/" in the following.
 The primary advantage of Django

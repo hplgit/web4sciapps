@@ -1,0 +1,31 @@
+# #if TOPIC == 'Flask+Django'
+======= Resources =======
+# #else
+======= ${TOPIC} resources =======
+# #endif
+
+# #if TOPIC in ('Flask+Django', 'Flask')
+
+# #if TOPIC == 'Flask+Django'
+===== Flask resources =====
+# #endif
+
+ * "Flask website": "http://flask.pocoo.org/"
+ * "The Flask Mega-Tutorial": "http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world" by Miguel Grinberg
+ * "WTForms Documentation": "http://wtforms.simplecodes.com/docs/0.6/index.html"
+ * "The Jinja2 templating language": "http://jinja.pocoo.org/docs/"
+ * "The Werkzeug library": "http://werkzeug.pocoo.org/"
+
+# #endif
+
+# #if TOPIC in ('Flask+Django', 'Django')
+
+# #if TOPIC == 'Flask+Django'
+===== Django resources =====
+# #endif
+
+ * "Django webpage": "https://www.djangoproject.com/"
+ * "Web tutorials": "https://code.djangoproject.com/wiki/Tutorials"
+ * "YouTube videos": "http://www.youtube.com/playlist?list=PL385A53B00B8B158E"
+
+# #endif
