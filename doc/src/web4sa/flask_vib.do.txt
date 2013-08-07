@@ -150,6 +150,10 @@ see Figure ref{wf:vib1:flask:fig:error1}.
 
 FIGURE: [fig-web4sa/vib1_flask_error1, width=500] Error message because of wrong input. label{wf:vib1:flask:fig:error1}
 
+It is possible to use the additional HTML5 fields for input in a Flask
+context. Instead of explaining how here, we recommend to use the
+`parampool` package to automatically generate Flask files.
+
 !split
 ===== Using style sheets =====
 
@@ -676,9 +680,13 @@ just write the `width` specification in the image tag for the PNG plot.
 
 ======= Further work =======
 
- * Uploading of files
- * Log in and users
- * Persistence and databases
+ * Uploading of files: Just one button for a data file where we
+   compute mean and variance, see the average function but drop
+   the array argument.
+ * Log in and users. use a simple "compute" function to generate
+   code, just a textarea (string) that can be stored (diary).
+   This requires databases. Can generate a vib example via parampool to
+   display some more realistic code.
  * Drawing in HTML5
 
 
