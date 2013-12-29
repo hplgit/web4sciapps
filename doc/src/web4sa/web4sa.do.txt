@@ -19,6 +19,7 @@ TOC: on
 
 # #if TOPIC in ('Flask+Django', 'Django')
 # #include "django_hw.do.txt"
+# #endif
 
 # #if TOPIC in ('Flask+Django', 'Flask')
 # #include "flask_vib.do.txt"
@@ -27,6 +28,7 @@ TOC: on
 # #if TOPIC in ('Flask+Django', 'Django')
 # #include "django_vib.do.txt"
 # #endif
+
 
 # #include "exercises.do.txt"
 # #include "links.do.txt"
@@ -40,5 +42,3 @@ TOC: on
  * avoid Flask or Django in exercises, just do not specify and have
    common exercises at the very end
  * app: username, TextAreaField, store in database and retrieve for admin
-
-

@@ -1,3 +1,113 @@
+<html>
+<head>
+<!--
+This style is adopted from the (now old) vagrant 1.0 web
+pages. The style builds on the Twitter Bootstrap style.
+Modifications by Hans Petter Langtangen, hpl@simula.no.
+
+This style file should be copied and the following
+elements edited:
+
+Logo heading:
+
+ LogoWord
+ withSubWord
+
+Navigation links at the top:
+
+ GO TO 1
+ GO TO 2
+
+Footer at the end:
+
+ Here goes a footer, if desired, maybe with a Copyright &copy;
+
+-->
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Doconce: http://code.google.com/p/doconce/" />
+
+<link rel="stylesheet" href="html_templates/css/twitter_bootstrap.css">
+<link rel="stylesheet" href="html_templates/css/vagrant.css">
+<!-- Define color of headings here (last definition counts) -->
+<style type="text/css">
+h1, h2, h3, h4, h5, h6 {
+  color: #000;     /* black */
+  color: #999;     /* gray */
+  color: #005580;  /* dark blue */
+  color: #08c;     /* characteristic blue */
+</style>
+</head>
+<body>
+
+<title> Remaining </title>
+
+<div class="container">
+ <div class="row Header with-border">
+  <div class="span3 Module logo">
+   <h1><a href="/">Flask<span class="subtitle">4scientists</span></a></h1>
+  </div>
+  <div class="span9">
+   <div class="Module navigation">
+   <!-- Navigation at the top of the page -->
+    <ul>
+     <li> <a href="http://flask.pocoo.org/">Flask</a></li>
+    </ul>
+   </div>
+  </div>
+ </div>
+</div>
+
+
+<!-- Here goes the table of contents in the sidebar
+     <li class="active"> means dark blue background for current section
+-->
+<div class="row">
+ <div class="span3 Module sidebar">
+  <div class="well" style="padding: 8px 0px;">
+   <ul class="nav nav-list">
+     <!-- Syntax:
+     <li> <a href="...">Section 1</a></li>
+     <li> <a href="...">Section 2</a></li>
+     <li> &nbsp;&nbsp;&nbsp; <a href="...">Section 2a</a></li>
+     <li> &nbsp;&nbsp;&nbsp; <a href="...">Section 2b</a></li>
+     -->
+     <!-- Doconce automatically fills in the table of contents -->
+          <!-- vagrant nav toc: " Web frameworks " --> <li>  <a href="._part0000_web4sa_flask.html#___sec0"> Web frameworks </a>
+     <!-- vagrant nav toc: " The MVC pattern " --> <li> &nbsp;  <a href="._part0001_web4sa_flask.html#___sec1"> The MVC pattern </a>
+     <!-- vagrant nav toc: " A very simple application " --> <li> &nbsp;  <a href="._part0002_web4sa_flask.html#___sec2"> A very simple application </a>
+     <!-- vagrant nav toc: " Application of the MVC pattern " --> <li> &nbsp;  <a href="._part0003_web4sa_flask.html#wf:hw:mvc"> Application of the MVC pattern </a>
+     <!-- vagrant nav toc: " Making a Flask application " --> <li>  <a href="._part0004_web4sa_flask.html#___sec4"> Making a Flask application </a>
+     <!-- vagrant nav toc: " Programming the Flask application " --> <li> &nbsp;  <a href="._part0004_web4sa_flask.html#___sec5"> Programming the Flask application </a>
+     <!-- vagrant nav toc: " Equipping the input page with output results " --> <li> &nbsp;  <a href="._part0004_web4sa_flask.html#___sec6"> Equipping the input page with output results </a>
+     <!-- vagrant nav toc: " Splitting the app into model, view, and controller files " --> <li> &nbsp;  <a href="._part0004_web4sa_flask.html#wf:hw3:flask"> Splitting the app into model, view, and controller files </a>
+     <!-- vagrant nav toc: " Troubleshooting " --> <li> &nbsp;  <a href="._part0005_web4sa_flask.html#___sec8"> Troubleshooting </a>
+     <!-- vagrant nav toc: " Handling multiple input variables in Flask " --> <li>  <a href="._part0006_web4sa_flask.html#wf:vib:flask"> Handling multiple input variables in Flask </a>
+     <!-- vagrant nav toc: " Programming the Flask application " --> <li> &nbsp;  <a href="._part0006_web4sa_flask.html#wf:vib1:flask:app"> Programming the Flask application </a>
+     <!-- vagrant nav toc: " Implementing error checking in the template " --> <li> &nbsp;  <a href="._part0007_web4sa_flask.html#___sec11"> Implementing error checking in the template </a>
+     <!-- vagrant nav toc: " Using style sheets " --> <li> &nbsp;  <a href="._part0008_web4sa_flask.html#___sec12"> Using style sheets </a>
+     <!-- vagrant nav toc: " Using LaTeX mathematics " --> <li> &nbsp;  <a href="._part0008_web4sa_flask.html#___sec13"> Using LaTeX mathematics </a>
+     <!-- vagrant nav toc: " Rearringing the elements in the HTML template " --> <li> &nbsp;  <a href="._part0008_web4sa_flask.html#___sec14"> Rearringing the elements in the HTML template </a>
+     <!-- vagrant nav toc: " User-provided validation " --> <li> &nbsp;  <a href="._part0009_web4sa_flask.html#wf:vib1:flask:validation"> User-provided validation </a>
+     <!-- vagrant nav toc: " Autogenerating the code " --> <li> &nbsp;  <a href="._part0010_web4sa_flask.html#wf:vib3:flask:autogen"> Autogenerating the code </a>
+     <!-- vagrant nav toc: " Avoiding plot files " --> <li> &nbsp;  <a href="._part0011_web4sa_flask.html#wf:vib3:flask:nofiles"> Avoiding plot files </a>
+     <!-- vagrant nav toc: " PNG plots " --> <li> &nbsp; &nbsp;  <a href="._part0011_web4sa_flask.html#___sec18"> PNG plots </a>
+     <!-- vagrant nav toc: " SVG plots " --> <li> &nbsp; &nbsp;  <a href="._part0011_web4sa_flask.html#___sec19"> SVG plots </a>
+     <!-- vagrant nav toc: " Further work " --> <li>  <a href="._part0011_web4sa_flask.html#___sec20"> Further work </a>
+     <!-- vagrant nav toc: " Exercises " --> <li class="active">  <a href="._part0012_web4sa_flask.html#___sec21"> Exercises </a>
+     <!-- vagrant nav toc: " Exercise 1: Add two numbers " --> <li> &nbsp;  <a href="._part0012_web4sa_flask.html#wf:exer:add2"> Exercise 1: Add two numbers </a>
+     <!-- vagrant nav toc: " Exercise 2: Extend the <code>vib3_flask</code> app " --> <li> &nbsp;  <a href="._part0012_web4sa_flask.html#wf:exer:vib3:demo"> Exercise 2: Extend the <code>vib3_flask</code> app </a>
+     <!-- vagrant nav toc: " Exercise 3: Equip the <code>vib3_flask</code> app with more data types " --> <li> &nbsp;  <a href="._part0012_web4sa_flask.html#wf:exer:vib3:lists"> Exercise 3: Equip the <code>vib3_flask</code> app with more data types </a>
+     <!-- vagrant nav toc: " Exercise 4: Auto-generate code from function signature " --> <li> &nbsp;  <a href="._part0012_web4sa_flask.html#___sec25"> Exercise 4: Auto-generate code from function signature </a>
+     <!-- vagrant nav toc: " Flask resources " --> <li>  <a href="._part0012_web4sa_flask.html#___sec26"> Flask resources </a>
+     <!-- vagrant nav toc: " Remaining " --> <li>  <a href="._part0012_web4sa_flask.html#___sec27"> Remaining </a>
+
+    </ul>
+   </div>
+  </div>
+
+  <div class="span9">
+
 
 <!-- tocinfo
 {'highest level': 1,
@@ -51,7 +161,8 @@
                'wf:vib3:flask:nofiles'),
               (' PNG plots ', 3, None, '___sec18'),
               (' SVG plots ', 3, None, '___sec19'),
-              (' Exercises ', 1, None, '___sec20'),
+              (' Further work ', 1, None, '___sec20'),
+              (' Exercises ', 1, None, '___sec21'),
               (' Exercise 1: Add two numbers ',
                2,
                'wf:exer:add2',
@@ -67,7 +178,9 @@
               (' Exercise 4: Auto-generate code from function signature ',
                2,
                None,
-               '___sec24')]}
+               '___sec25'),
+              (' Flask resources ', 1, None, '___sec26'),
+              (' Remaining ', 1, None, '___sec27')]}
 end of tocinfo -->
 
 
@@ -77,7 +190,7 @@ end of tocinfo -->
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   TeX: {
-     equationNumbers: {  autoNumber: "AMS"  },
+     equationNumbers: {  autoNumber: "none"  },
      extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js"]
   }
 });
@@ -92,12 +205,9 @@ MathJax.Hub.Config({
 
 
 <a name="part0012"></a>
-
-    <a href="._part0011_web4sa_flask.html"><img src="https://doconce.googlecode.com/hg/bundled/html_images/prev1.png" border=0 alt="previous"></a>
-    <p>
 <!-- !split -->
 
-<h2>Exercises  <a name="___sec20"></a></h2>
+<h2>Exercises  <a name="___sec21"></a></h2>
 
 <p>
 <!-- --- begin exercise --- -->
@@ -121,7 +231,7 @@ Filename: <code>add2.tar.gz</code>.
 
 <p>
 Add a new argument <code>x_axis</code> to the <code>compute</code> function in the
-<a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/vib_flask3"><tt>vib_flask3</tt></a> application from the section <a href="._part0010_web4sa_flask.html#wf:vib3:flask:autogen">Autogenerating the code</a>. The <code>x_axis</code> argument measures the extent
+<a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/vib_flask3" target="_self"><tt>vib_flask3</tt></a> application from the section <a href="._part0010_web4sa_flask.html#wf:vib3:flask:autogen">Autogenerating the code</a>. The <code>x_axis</code> argument measures the extent
 of the \( x \) axis in the plots in terms of the number of standard
 deviations (default may be 7).  Observe how the web interface
 automatically adds the new argument and how the plots adapt!
@@ -135,7 +245,7 @@ automatically adds the new argument and how the plots adapt!
 <h3>Exercise 3: Equip the <code>vib3_flask</code> app with more data types <a name="wf:exer:vib3:lists"></a></h3>
 
 <p>
-In the <a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/vib_flask3"><tt>vib_flask3</tt></a>
+In the <a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/vib_flask3" target="_self"><tt>vib_flask3</tt></a>
 application from the section <a href="._part0010_web4sa_flask.html#wf:vib3:flask:autogen">Autogenerating the code</a>,
 use the <code>label</code> argument in the form field objects to add an
 information of the type of data that is to be supplied in the
@@ -154,7 +264,7 @@ Filename: <code>vib3_ext.tar.gz</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h3>Exercise 4: Auto-generate code from function signature  <a name="___sec24"></a></h3>
+<h3>Exercise 4: Auto-generate code from function signature  <a name="___sec25"></a></h3>
 
 <p>
 Given a <code>compute</code> with a set of positional and keyword
@@ -176,8 +286,68 @@ Filename: <code>generate_flask.py</code>.
 <p>
 <!-- --- end exercise --- -->
 
+<h2>Flask resources  <a name="___sec26"></a></h2>
+
 <p>
 
-                <a href="._part0011_web4sa_flask.html"><img src="https://doconce.googlecode.com/hg/bundled/html_images/prev1.png" border=0 alt="previous"></a>
-                <!-- ------------------- end of main content --------------- -->
+<ul>
+ <li> <a href="http://flask.pocoo.org/" target="_self">Flask website</a></li>
+ <li> <a href="http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world" target="_self">The Flask Mega-Tutorial</a> by Miguel Grinberg</li>
+ <li> <a href="http://wtforms.simplecodes.com/docs/0.6/index.html" target="_self">WTForms Documentation</a></li>
+ <li> <a href="http://jinja.pocoo.org/docs/" target="_self">The Jinja2 templating language</a></li>
+ <li> <a href="http://werkzeug.pocoo.org/" target="_self">The Werkzeug library</a></li>
+</ul>
+
+<h2>Remaining  <a name="___sec27"></a></h2>
+
+<p>
+
+<ul>
+ <li> apply (generated apps) to simviz (make py simviz too and describe that)</li>
+ <li> store data in database</li>
+ <li> discuss list values read as text and use of eval, perhaps exercise</li>
+ <li> avoid Flask or Django in exercises, just do not specify and have
+   common exercises at the very end</li>
+ <li> app: username, TextAreaField, store in database and retrieve for admin</li>
+</ul>
+
+
+<p>
+<!-- ------------------- end of main content --------------- -->
+
+
+<!--
+Preliminary examples/discussion on vagrant style syntax
+
+<div class='alert alert-block alert-notice'>
+  <h3>What about PHP? Python? Java?</h3>
+<p>
+bla-bla.
+</div>
+
+<p>
+While the <div class="deep-blue">rest of the</div> getting started
+-->
+
+<ul class="pager">
+  <li class="previous">
+    <a href="._part0011_web4sa_flask.html">&larr; Prev</a>
+  </li>
+
+
+</ul>
+
+ </div>
+
+ <div class="row Footer">
+  <div class="span12">
+  Copyright &copy 2013; Hans Petter Langtangen and Anders E. Johansen.
+  Last update: .
+  </div>
+ </div>
+</div>
+</body>
+</html>
+
+
 

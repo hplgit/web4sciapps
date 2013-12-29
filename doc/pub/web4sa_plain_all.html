@@ -1,31 +1,30 @@
 <!DOCTYPE html>
 <!--
 Automatically generated HTML file from Doconce source
-(http://code.google.com/p/doconce/)
+(https://github.com/hplgit/doconce/)
 -->
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="generator" content="Doconce: http://code.google.com/p/doconce/" />
+<meta name="generator" content="Doconce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Using Web Frameworks for Scientific Web Applications">
 <meta name="keywords" content="web frameworks,MVC pattern,Flask installation,Flask input forms,Flask HTML templates,Flask MVC pattern,Flask troubleshooting,Django installation,Django making a project,Django making an application,Django input forms,Django HTML templates,Flask input forms,Flask error checking,Flask CSS style sheets,Flask LaTeX mathematics,Flask input validation,inline PNG image in HTML,base64 encoding of PNG images,inline SVG figure in HTML,Django input forms,Django input validation">
 
 
 
 <style type="text/css">
-    /* Color definitions:  http://www.december.com/html/spec/color0.html
-       CSS examples:       http://www.w3schools.com/css/css_examples.asp */
+    /* bloodish style */
 
     body {
-      margin-top: 1.0em;
-      background-color: #ffffff;
-      font-family: Helvetica, Arial, FreeSans, san-serif;
-      color: #000000;
+      font-family: Helvetica, Verdana, Arial, Sans-serif;
+      color: #404040;
+      background: #ffffff;
     }
-    h1 { font-size: 1.8em; color: #1e36ce; }
-    h2 { font-size: 1.5em; color: #1e36ce; }
-    h3 { color: #1e36ce; }
-    a { color: #1e36ce; text-decoration:none; }
+    h1 { font-size: 1.8em;  color: #8A0808; }
+    h2 { font-size: 1.6em;  color: #8A0808; }
+    h3 { font-size: 1.4em;  color: #8A0808; }
+    h4 { color: #8A0808; }
+    a { color: #8A0808; text-decoration:none; }
     tt { font-family: "Courier New", Courier; }
     
     p { text-indent: 0px; }
@@ -97,13 +96,15 @@ Automatically generated HTML file from Doconce source
                'wf:vib3:flask:nofiles'),
               (' PNG plots ', 3, None, '___sec23'),
               (' SVG plots ', 3, None, '___sec24'),
+              (' Further work ', 1, None, '___sec25'),
               (' Handling multiple input variables in Django ',
                1,
                'wf:vib:django',
                'wf:vib:django'),
-              (' Programming the Django application ', 2, None, '___sec26'),
-              (' User-provided validation ', 2, None, '___sec27'),
-              (' Exercises ', 1, None, '___sec28'),
+              (' Programming the Django application ', 2, None, '___sec27'),
+              (' User-provided validation ', 2, None, '___sec28'),
+              (' Customizing widgets ', 2, None, '___sec29'),
+              (' Exercises ', 1, None, '___sec30'),
               (' Exercise 1: Add two numbers ',
                2,
                'wf:exer:add2',
@@ -119,8 +120,11 @@ Automatically generated HTML file from Doconce source
               (' Exercise 4: Auto-generate code from function signature ',
                2,
                None,
-               '___sec32'),
-              (' Remaining ', 1, None, '___sec33')]}
+               '___sec34'),
+              (' Resources ', 1, None, '___sec35'),
+              (' Flask resources ', 2, None, '___sec36'),
+              (' Django resources ', 2, None, '___sec37'),
+              (' Remaining ', 1, None, '___sec38')]}
 end of tocinfo -->
 
 <body>
@@ -153,14 +157,14 @@ MathJax.Hub.Config({
 <center><h1>Using Web Frameworks for Scientific Web Applications</h1></center>  <!-- document title -->
 
 <p>
-<!-- author(s): Hans Petter Langtangen, and Anders Johansen -->
+<!-- author(s): Hans Petter Langtangen, and Anders E. Johansen -->
 
 <center>
 <b>Hans Petter Langtangen</b> [1, 2]
 </center>
 
 <center>
-<b>Anders Johansen</b> [1]
+<b>Anders E. Johansen</b> [1]
 </center>
 
 
@@ -170,7 +174,7 @@ MathJax.Hub.Config({
 <center>[1] <b>Center for Biomedical Computing, Simula Research Laboratory</b></center>
 <center>[2] <b>Department of Informatics, University of Oslo</b></center>
 <p>
-<center><h4>Jun 6, 2013</h4></center> <!-- date -->
+<center><h4>Nov 26, 2013</h4></center> <!-- date -->
 
 <h2>Table of contents</h2>
 
@@ -200,15 +204,20 @@ MathJax.Hub.Config({
 &nbsp; &nbsp; &nbsp; <a href="#wf:vib3:flask:nofiles"> Avoiding plot files </a><br>
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="#___sec23"> PNG plots </a><br>
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="#___sec24"> SVG plots </a><br>
+<a href="#___sec25"> Further work </a><br>
 <a href="#wf:vib:django"> Handling multiple input variables in Django </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec26"> Programming the Django application </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec27"> User-provided validation </a><br>
-<a href="#___sec28"> Exercises </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec27"> Programming the Django application </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec28"> User-provided validation </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec29"> Customizing widgets </a><br>
+<a href="#___sec30"> Exercises </a><br>
 &nbsp; &nbsp; &nbsp; <a href="#wf:exer:add2"> Exercise 1: Add two numbers </a><br>
 &nbsp; &nbsp; &nbsp; <a href="#wf:exer:vib3:demo"> Exercise 2: Extend the <code>vib3_flask</code> app </a><br>
 &nbsp; &nbsp; &nbsp; <a href="#wf:exer:vib3:lists"> Exercise 3: Equip the <code>vib3_flask</code> app with more data types </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec32"> Exercise 4: Auto-generate code from function signature </a><br>
-<a href="#___sec33"> Remaining </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec34"> Exercise 4: Auto-generate code from function signature </a><br>
+<a href="#___sec35"> Resources </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec36"> Flask resources </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec37"> Django resources </a><br>
+<a href="#___sec38"> Remaining </a><br>
 
 <h2>Web frameworks  <a name="___sec0"></a></h2>
 
@@ -236,16 +245,27 @@ without an overwhelming amount of programming, as soon as you have
 understood the basic demos.
 
 <p>
-We shall explore two web frameworks: the very popular <a href="https://www.djangoproject.com/">Django framework</a> and the more high-level and easy-to-use framework
-<a href="http://flask.pocoo.org/">Flask</a>. In addition, our examples are also
-implemented in the <a href="http://www.web2py.com/">web2py</a> framework.
-<!-- Its slogan says "Django makes it easier to build better Web apps more quickly and with less code". -->
+We shall explore two web frameworks: the very popular <a href="https://www.djangoproject.com/" target="_self">Django framework</a> and the more high-level and easy-to-use framework
+<a href="http://flask.pocoo.org/" target="_self">Flask</a>. Our introductory examples were also
+implemented in the <a href="http://www.web2py.com/" target="_self">web2py</a> framework, but according
+to our experience, Flask and Django are easier to explain to scientists.
 The primary advantage of Django
 over other web frameworks is the rich set of documentation and
 examples. Googling for "Django tutorials" gives lots of hits including
-a  list of <a href="https://code.djangoproject.com/wiki/Tutorials">web tutorials</a>
-and a list of <a href="http://www.youtube.com/playlist?list=PL385A53B00B8B158E">YouTube videos</a>. There is also an electronic <a href="http://www.djangobook.com/en/2.0/">Django book</a>. At the time of this writing, Flask is not
-much documented beyond the <a href="http://flask.pocoo.org/">official web site</a> and the <a href="http://wtforms.simplecodes.com/docs/0.6/index.html">WTForms Documentation</a>. There is, unfortunately, hardly any examples on how Django or Flask can be used to enable typical scientific applications for the web, and that is why we have developed some targeted examples on this topic.
+a  list of <a href="https://code.djangoproject.com/wiki/Tutorials" target="_self">web tutorials</a>
+and a list of <a href="http://www.youtube.com/playlist?list=PL385A53B00B8B158E" target="_self">YouTube videos</a>. There is also an electronic <a href="http://www.djangobook.com/en/2.0/" target="_self">Django book</a>. At the time of this writing, the Flask documentation is not comparable. The two most important resources are the
+ <a href="http://flask.pocoo.org/" target="_self">official web site</a> and the <a href="http://wtforms.simplecodes.com/docs/0.6/index.html" target="_self">WTForms Documentation</a>. There is, unfortunately, hardly any examples on how Django or Flask can be used to enable typical scientific applications for the web, and that is why we have developed some targeted examples on this topic.
+
+<p>
+A basic question is, of course, whether you should apply Flask or
+Django for your web project. Googling for "flask vs django" gives a
+lot of diverging opinions. The authors' viewpoint is that Flask is
+much easier to get started with than Django. You can grow your
+application to a really big one with both frameworks, but some
+advanced features is easier on one framework than the other. For
+example, if you want users to log into your account and store their
+work in databases, we found this to be much more straightforward in
+Django.
 
 <p>
 The problem for a computational scientist who wants to enable
@@ -280,7 +300,7 @@ separating the user's interaction with an application from the inner
 workings of the application. In a scientific application this
 usually means separaring mathematical computations from the
 user interface and visualization of results.
-The <a href="http://en.wikipedia.org/wiki/MVC_Pattern">Wikipedia definition of the MVC pattern</a> gives a very high-level
+The <a href="http://en.wikipedia.org/wiki/MVC_Pattern" target="_self">Wikipedia definition of the MVC pattern</a> gives a very high-level
 explanation of what the model, view, and controller do and mentions
 the fact that different web frameworks interpret the three components
 differently. Any web application works with a set of data and needs
@@ -640,7 +660,7 @@ as we need to use an HTML form:
 <b>Testing the application.</b>
 We collect the files associated with a Flask application (often called
 just <em>app</em>) in a directory,
-here called <a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/hw1"><tt>hw1</tt></a>.
+here called <a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/hw1" target="_self"><tt>hw1</tt></a>.
 All you have to do in order to run this web application is to find
 this directory and run
 
@@ -672,7 +692,7 @@ web application, which is a kind of calculator. Figure <a href="#wf:hw2:flask:fi
 
 <p>
 To let the user stay within the same page, we create a new directory
-<a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/hw2"><tt>hw2</tt></a>.
+<a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/hw2" target="_self"><tt>hw2</tt></a>.
 for this modified Flask app and copy the files from the previous
 <code>hw1</code> directory.  The idea now is to make use of just one
 template, in <code>templates/view.html</code>:
@@ -762,7 +782,7 @@ may split the <code>controller.py</code> into two files: <code>model.py</code> a
 <code>controller.py</code>. The view is in <code>templates/view.html</code>.
 These new files are located in a
 directory
-<a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/hw3"><tt>hw3_flask</tt></a>
+<a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/hw3" target="_self"><tt>hw3_flask</tt></a>
 The contents
 in the files reflect the splitting introduced in the original
 scienticic hello world program in the section <a href="#wf:hw:mvc">Application of the MVC pattern</a>.
@@ -839,7 +859,7 @@ You are now ready to restart a Flask application.
 <p>
 We recommend to
 download and istall the latest official version from
-<a href="http://www.djangoproject.com/download/"><tt>http://www.djangoproject.com/download/</tt></a>. Pack out the tarfile, go
+<a href="http://www.djangoproject.com/download/" target="_self"><tt>http://www.djangoproject.com/download/</tt></a>. Pack out the tarfile, go
 to the directory, and run <code>setup.py</code>:
 
 <p>
@@ -1323,7 +1343,7 @@ The output page should then look as shown in Figure <a href="#wf:hw2:django:fig:
 
 <p>
 We need to make a new Django application, now called
-<a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/django_apps/hw2"><tt>hw2</tt></a>.
+<a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/django_apps/hw2" target="_self"><tt>hw2</tt></a>.
 Instead of running the standard
 <code>manage.py startapp hw2</code> command,
 we can simply copy the <code>hw1</code>
@@ -1622,7 +1642,7 @@ for each field: <code>field.name</code> is the name of the variable in the
 through the <code>label</code> keyword when constructing the field object, and
 writing the field object itself generates the text area for
 input (i.e., the HTML input form). The control statements we can
-use in the template are part of the <a href="http://jinja.pocoo.org/docs/">Jinja2</a>
+use in the template are part of the <a href="http://jinja.pocoo.org/docs/" target="_self">Jinja2</a>
 templating language. For now, the if-test, for-loop and
 output of values (<code>{{ object }}</code>) are enough to generate the HTML
 code we want.
@@ -1717,6 +1737,11 @@ see Figure <a href="#wf:vib1:flask:fig:error1">9</a>.
 </center>
 
 <p>
+It is possible to use the additional HTML5 fields for input in a Flask
+context. Instead of explaining how here, we recommend to use the
+<code>parampool</code> package to automatically generate Flask files.
+
+<p>
 <!-- !split -->
 
 <h3>Using style sheets  <a name="___sec17"></a></h3>
@@ -1772,7 +1797,7 @@ web page should be as close as possible to the typesetting where
 the mathematics is documented. In the present example we would like
 to typeset \( A \), \( b \), \( w \), and \( T \) with italic font as done
 in LaTeX. Fortunately, native LaTeX typesetting is available in
-HTML through the tool <a href="http://www.mathjax.org/">MathJax</a>.
+HTML through the tool <a href="http://www.mathjax.org/" target="_self">MathJax</a>.
 Our template <code>view3.html</code> enables MathJax. Formulas are written
 with standard LaTeX inside <code>\(</code> and <code>\)</code>, while equations are surrounded
 by <code>$$</code>. Here we use formulas only:
@@ -1896,7 +1921,7 @@ We can write functions for checking appropriate conditions and
 supply the function to the list of validator functions in the call to
 the <code>FloatField</code> constructor or other field constructors. The extra
 code is a part of the <code>model.py</code> and the presented extensions appear
-in the directory <a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/vib2"><tt>vib2</tt></a>.
+in the directory <a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/vib2" target="_self"><tt>vib2</tt></a>.
 
 <p>
 The simplest approach to validation is to use existing functionality
@@ -2083,7 +2108,7 @@ code to look like they do in mathematical writing (<code>T</code> for \( T \)).
 We shall now present generic <code>model.py</code> and <code>controller.py</code>
 files that work with <em>any</em> <code>compute</code> function (!). This example will
 demonstrate some advanced, powerful features of Python. The source code
-is found in the <a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/vib3"><tt>vib3</tt></a>
+is found in the <a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/vib3" target="_self"><tt>vib3</tt></a>
 directory.
 
 <p>
@@ -2496,7 +2521,7 @@ required us to generate unique filenames. Therefore, it would be
 convenient to get the plot as a string and embed the string data
 directly into the HTML code. This is relatively easy with Matplotlib
 and Python. The relevant code constitutes the
-<a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/vib4"><tt>vib4</tt></a> app in the
+<a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/vib4" target="_self"><tt>vib4</tt></a> app in the
 directory of the same name.
 
 <h4>PNG plots  <a name="___sec23"></a></h4>
@@ -2588,7 +2613,7 @@ The removal is done with a little string manipulation:
 <p>
 Now, <code>figdata_svg</code> can be directly inserted in HTML code without
 any surrounding tags.
-The file <a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/vib4/compute.py"><tt>compute.py</tt></a>
+The file <a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/vib4/compute.py" target="_self"><tt>compute.py</tt></a>
 in the <code>vib4_flask</code> application directory contains all the details.
 
 <p>
@@ -2644,7 +2669,33 @@ of course be changed by proper string replacements for the
 <code>width</code>, <code>height</code>, and <code>viewBox</code> specifications. It is far easier to
 just write the <code>width</code> specification in the image tag for the PNG plot.
 
+<h2>Further work  <a name="___sec25"></a></h2>
+
 <p>
+
+<ul>
+ <li> Uploading of files: Just one button for a data file where we
+   compute mean and variance, see the average function but drop
+   the array argument.</li>
+ <li> Log in and users. use a simple "compute" function to generate
+   code, just a textarea (string) that can be stored (diary).
+   This requires databases. Can generate a vib example via parampool to
+   display some more realistic code.</li>
+ <li> Drawing in HTML5</li>
+</ul>
+
+Resources:
+
+<p>
+
+<ul>
+ <li> <a href="https://docs.djangoproject.com/en/dev/topics/auth/default/#user-objects" target="_self">Django: make user</a></li>
+ <li> <a href="https://docs.djangoproject.com/en/dev/topics/db/queries/" target="_self">Django: read and write database</a></li>
+ <li> Flask: read and write database:
+   <a href="http://pythonhosted.org/Flask-SQLAlchemy/quickstart.html" target="_self"><tt>http://pythonhosted.org/Flask-SQLAlchemy/quickstart.html</tt></a>,
+   <a href="http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-iv-database" target="_self"><tt>http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-iv-database</tt></a>, and <a href="https://flask-login.readthedocs.org/en/latest/" target="_self">the Flask login extension</a></li>
+</ul>
+
 <!-- !split -->
 
 <h2>Handling multiple input variables in Django <a name="wf:vib:django"></a></h2>
@@ -2662,9 +2713,10 @@ the resulting plot,
 cf. Figures <a href="#wf:vib1:flask:fig:input">7</a>
 and <a href="#wf:vib1:flask:fig:result">8</a>.
 
-<h3>Programming the Django application  <a name="___sec26"></a></h3>
+<h3>Programming the Django application  <a name="___sec27"></a></h3>
 
 <p>
+<b>Adding the app to a project.</b>
 Any Django app needs a project, but here we reuse the project
 we set up for the scientific hello world examples. We go to
 the directory <code>apps/django_apps</code> and create the Django app <code>vib1</code>:
@@ -2692,10 +2744,12 @@ that Django can find our templates associated with this application,
 and that the URL address applies the name <code>vib1</code> to reach the application.
 
 <p>
+<b>The compute part.</b>
 The computations in our application are put in a file <code>compute.py</code>
 and explained in detail in the section <a href="#wf:vib1:flask:app">Programming the Flask application</a>.
 
 <p>
+<b>The model.</b>
 We can now write <code>models.py</code> and the <code>Input</code> class that defines
 the form fields for the four input variables:
 
@@ -2732,6 +2786,7 @@ value such that all fields have a value when the user sees
 the page.
 
 <p>
+<b>The view.</b>
 The <code>views.py</code> file looks as follows:
 
 <p>
@@ -2809,7 +2864,7 @@ The template for rendering the page is listed next.
 The tricky part is the syntax for displaying <em>static content</em>, such as
 the plot file made in the <code>compute</code> function.
 
-<h3>User-provided validation  <a name="___sec27"></a></h3>
+<h3>User-provided validation  <a name="___sec28"></a></h3>
 
 <p>
 Django has a series of methods available for user-provided validation
@@ -2919,10 +2974,46 @@ We refer to the vast Django documentation for many other ways of
 validating forms. The reader is encouraged to run the <code>vib2</code>
 application and test out the validations we have implemented.
 
+<h3>Customizing widgets  <a name="___sec29"></a></h3>
+
+<p>
+One will occasionally have full control of the layout of the individual
+elements in a web form. These are typeset inside <code>input</code> tags in
+HTML. Django associates the term <em>widget</em> with an HTML form field. To set
+the size (width) of the field and other properties, one must in
+Django specify a <code>widgets</code> dictionary in the form class. The key
+is the name of the parameter in the model class, while the value
+is a widget class name. Standard input fields for numbers and
+text apply the <code>TextInput</code> widget. An example
+on setting the size of the <code>T</code> field to a width of 10 characters goes
+like
+
+<p>
+
+<!-- code=python (from !bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">django.forms</span> <span style="color: #008000; font-weight: bold">import</span> TextInput
+
+<span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">InputForm</span>(ModelForm):
+    <span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Meta</span>:
+        model <span style="color: #666666">=</span> Input
+        widgets <span style="color: #666666">=</span> {
+            <span style="color: #BA2121">&#39;T&#39;</span>: TextInput(attrs<span style="color: #666666">=</span>{<span style="color: #BA2121">&#39;size&#39;</span>: <span style="color: #666666">10</span>}),
+        }
+</pre></div>
+<p>
+At the time of this writing, Django does not yet support the many
+additional HTML5 input fields. Nevertheless, the <code>parampool</code> package
+gives access to HTML5 widgets in a Django context.
+We recommend to use <code>parampool</code> to automatically generate the necessary
+Django files, and
+then one can view the form class in the <code>models.py</code> file for how
+HTML5 widgets can be used in the definition of the <code>widgets</code>
+dictionary.
+
 <p>
 <!-- !split -->
 
-<h2>Exercises  <a name="___sec28"></a></h2>
+<h2>Exercises  <a name="___sec30"></a></h2>
 
 <p>
 <!-- --- begin exercise --- -->
@@ -2946,7 +3037,7 @@ Filename: <code>add2.tar.gz</code>.
 
 <p>
 Add a new argument <code>x_axis</code> to the <code>compute</code> function in the
-<a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/vib_flask3"><tt>vib_flask3</tt></a> application from the section <a href="#wf:vib3:flask:autogen">Autogenerating the code</a>. The <code>x_axis</code> argument measures the extent
+<a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/vib_flask3" target="_self"><tt>vib_flask3</tt></a> application from the section <a href="#wf:vib3:flask:autogen">Autogenerating the code</a>. The <code>x_axis</code> argument measures the extent
 of the \( x \) axis in the plots in terms of the number of standard
 deviations (default may be 7).  Observe how the web interface
 automatically adds the new argument and how the plots adapt!
@@ -2960,7 +3051,7 @@ automatically adds the new argument and how the plots adapt!
 <h3>Exercise 3: Equip the <code>vib3_flask</code> app with more data types <a name="wf:exer:vib3:lists"></a></h3>
 
 <p>
-In the <a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/vib_flask3"><tt>vib_flask3</tt></a>
+In the <a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/vib_flask3" target="_self"><tt>vib_flask3</tt></a>
 application from the section <a href="#wf:vib3:flask:autogen">Autogenerating the code</a>,
 use the <code>label</code> argument in the form field objects to add an
 information of the type of data that is to be supplied in the
@@ -2979,7 +3070,7 @@ Filename: <code>vib3_ext.tar.gz</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h3>Exercise 4: Auto-generate code from function signature  <a name="___sec32"></a></h3>
+<h3>Exercise 4: Auto-generate code from function signature  <a name="___sec34"></a></h3>
 
 <p>
 Given a <code>compute</code> with a set of positional and keyword
@@ -3001,7 +3092,31 @@ Filename: <code>generate_flask.py</code>.
 <p>
 <!-- --- end exercise --- -->
 
-<h2>Remaining  <a name="___sec33"></a></h2>
+<h2>Resources  <a name="___sec35"></a></h2>
+
+<h3>Flask resources  <a name="___sec36"></a></h3>
+
+<p>
+
+<ul>
+ <li> <a href="http://flask.pocoo.org/" target="_self">Flask website</a></li>
+ <li> <a href="http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world" target="_self">The Flask Mega-Tutorial</a> by Miguel Grinberg</li>
+ <li> <a href="http://wtforms.simplecodes.com/docs/0.6/index.html" target="_self">WTForms Documentation</a></li>
+ <li> <a href="http://jinja.pocoo.org/docs/" target="_self">The Jinja2 templating language</a></li>
+ <li> <a href="http://werkzeug.pocoo.org/" target="_self">The Werkzeug library</a></li>
+</ul>
+
+<h3>Django resources  <a name="___sec37"></a></h3>
+
+<p>
+
+<ul>
+ <li> <a href="https://www.djangoproject.com/" target="_self">Django webpage</a></li>
+ <li> <a href="https://code.djangoproject.com/wiki/Tutorials" target="_self">Web tutorials</a></li>
+ <li> <a href="http://www.youtube.com/playlist?list=PL385A53B00B8B158E" target="_self">YouTube videos</a></li>
+</ul>
+
+<h2>Remaining  <a name="___sec38"></a></h2>
 
 <p>
 

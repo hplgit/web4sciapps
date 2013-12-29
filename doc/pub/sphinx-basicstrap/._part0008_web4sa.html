@@ -205,8 +205,8 @@ are formatted in HTML code as desired.</p>
 addresses the task of plotting the function <span class="math">\(u(t)=Ae^{-bt}\sin (wt)\)</span> for
 <span class="math">\(t\in [0,T]\)</span>. The web application must have fields for the numbers <span class="math">\(A\)</span>,
 <span class="math">\(b\)</span>, <span class="math">\(w\)</span>, and <span class="math">\(T\)</span>, and a <em>Compute</em> button, as shown in Figure
-<a class="reference internal" href="web4sa.html#wf-vib1-flask-fig-input"><em>The input page</em></a>. Filling in values, say <span class="math">\(0.1\)</span> for <span class="math">\(b\)</span> and
-<span class="math">\(20\)</span> for <span class="math">\(T\)</span>, results in what we see in Figure <a class="reference internal" href="web4sa.html#wf-vib1-flask-fig-result"><em>The result page</em></a>,
+<a class="reference internal" href="#wf-vib1-flask-fig-input"><em>The input page</em></a>. Filling in values, say <span class="math">\(0.1\)</span> for <span class="math">\(b\)</span> and
+<span class="math">\(20\)</span> for <span class="math">\(T\)</span>, results in what we see in Figure <a class="reference internal" href="#wf-vib1-flask-fig-result"><em>The result page</em></a>,
 i.e., a plot of <span class="math">\(u(t)\)</span> is added after the input fields and the <em>Compute</em>
 button.</p>
 <div class="figure" id="wf-vib1-flask-fig-input">
@@ -220,11 +220,12 @@ button.</p>
 <div class="section" id="programming-the-flask-application-2">
 <span id="wf-vib1-flask-app"></span><h2>Programming the Flask application  (2)<a class="headerlink" href="#programming-the-flask-application-2" title="Permalink to this headline">¶</a></h2>
 <p>The forthcoming text explains the necessary steps to realize a
-Flask app that behaves as depicted in Figures <a class="reference internal" href="web4sa.html#wf-vib1-flask-fig-input"><em>The input page</em></a>
-and <a class="reference internal" href="web4sa.html#wf-vib1-flask-fig-result"><em>The result page</em></a>. We start with the
+Flask app that behaves as depicted in Figures <a class="reference internal" href="#wf-vib1-flask-fig-input"><em>The input page</em></a>
+and <a class="reference internal" href="#wf-vib1-flask-fig-result"><em>The result page</em></a>. We start with the
 <tt class="docutils literal"><span class="pre">compute.py</span></tt> module since it contains only the computation of <span class="math">\(u(t)\)</span>
 and the making of the plot, without any interaction with Flask.</p>
-<p><em>The compute part.</em> More specifically, inside <tt class="docutils literal"><span class="pre">compute.py</span></tt>, we have a function for
+<p><strong>The compute part.</strong>
+More specifically, inside <tt class="docutils literal"><span class="pre">compute.py</span></tt>, we have a function for
 evaluating <span class="math">\(u(t)\)</span> and a <tt class="docutils literal"><span class="pre">compute</span></tt> function for making the plot. The
 return value of the latter is the name of the plot file, which should
 get a unique name every time the <tt class="docutils literal"><span class="pre">compute</span></tt> function is called such
@@ -263,10 +264,11 @@ subdirectory <tt class="docutils literal"><span class="pre">static</span></tt>.<
 </div>
 <p id="index-0">We organize the model, view, and controller as three separate
 files, as illustrated in
-the section <a class="reference internal" href="web4sa.html#wf-hw3-flask"><em>Splitting the app into model, view, and controller files</em></a>. This more complicated app involves
+the section <a class="reference internal" href="._part0004_web4sa.html#wf-hw3-flask"><em>Splitting the app into model, view, and controller files</em></a>. This more complicated app involves
 more code and especially the model will soon be handy to isolate in its own
 file.</p>
-<p><em>The model.</em> Our first version of <tt class="docutils literal"><span class="pre">model.py</span></tt> reads</p>
+<p><strong>The model.</strong>
+Our first version of <tt class="docutils literal"><span class="pre">model.py</span></tt> reads</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">wtforms</span> <span class="kn">import</span> <span class="n">Form</span><span class="p">,</span> <span class="n">FloatField</span><span class="p">,</span> <span class="n">validators</span>
 <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">pi</span>
 
@@ -291,7 +293,8 @@ measured. It is also possible to add a <tt class="docutils literal"><span class=
 some help message. Furthermore, we include a <tt class="docutils literal"><span class="pre">default</span></tt> value, which
 will appear in the text field such that the user does not need to
 fill in all values.</p>
-<p id="index-1"><em>The view.</em> The view component will of course make use of templates, and we shall experiment
+<p id="index-1"><strong>The view.</strong>
+The view component will of course make use of templates, and we shall experiment
 with different templates. Therefore, we allow a command-line argument
 to this Flask app for choosing which template we want. The rest of
 the <tt class="docutils literal"><span class="pre">controller.py</span></tt> file follows much the same set up as for the scientific

@@ -72,9 +72,13 @@ see Figure :ref:`wf:vib1:flask:fig:error1`.
 
 .. _wf:vib1:flask:fig:error1:
 
-.. figure:: fig-web4sa/vib1_flask_error1.png
+.. figure:: vib1_flask_error1.png
    :width: 500
 
    *Error message because of wrong input*
 
+
+It is possible to use the additional HTML5 fields for input in a Flask
+context. Instead of explaining how here, we recommend to use the
+``parampool`` package to automatically generate Flask files.
 

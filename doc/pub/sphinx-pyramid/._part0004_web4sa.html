@@ -71,11 +71,12 @@ performed by</p>
 <p>You can add <tt class="docutils literal"><span class="pre">--upgrade</span></tt> to upgrade a previous installation.</p>
 <div class="section" id="programming-the-flask-application-1">
 <h2>Programming the Flask application  (1)<a class="headerlink" href="#programming-the-flask-application-1" title="Permalink to this headline">¶</a></h2>
-<p><em>The user interaction.</em> We want our input page to feature a text field where the user can
-write the value of <tt class="docutils literal"><span class="pre">r</span></tt>, see Figure <a class="reference internal" href="web4sa.html#wf-hw1-flask-fig-input"><em>The input page</em></a>.
+<p><strong>The user interaction.</strong>
+We want our input page to feature a text field where the user can
+write the value of <tt class="docutils literal"><span class="pre">r</span></tt>, see Figure <a class="reference internal" href="#wf-hw1-flask-fig-input"><em>The input page</em></a>.
 By clicking on the <em>equals</em> button
 the corresponding <tt class="docutils literal"><span class="pre">s</span></tt> value is computed and written out the result page
-seen in Figure <a class="reference internal" href="web4sa.html#wf-hw1-flask-fig-result"><em>The output page</em></a>.</p>
+seen in Figure <a class="reference internal" href="#wf-hw1-flask-fig-result"><em>The output page</em></a>.</p>
 <div class="figure" id="wf-hw1-flask-fig-input">
 <img alt="_images/hw1_flask_input.png" src="_images/hw1_flask_input.png" style="width: 600px;" />
 <p class="caption"><em>The input page</em></p>
@@ -84,7 +85,8 @@ seen in Figure <a class="reference internal" href="web4sa.html#wf-hw1-flask-fig-
 <img alt="_images/hw1_flask_output.png" src="_images/hw1_flask_output.png" style="width: 600px;" />
 <p class="caption"><em>The output page</em></p>
 </div>
-<p><em>The Python code.</em> Flask does not require us to use the MVC pattern so there is actually
+<p><strong>The Python code.</strong>
+Flask does not require us to use the MVC pattern so there is actually
 no need to split the original program into model, view, controller,
 and compute files as already explained (but it will be
 done later).  First we make a <tt class="docutils literal"><span class="pre">controller.py</span></tt> file where the view, the
@@ -123,7 +125,8 @@ in detail below.</p>
     <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><em>Dissection.</em> The web application is the <tt class="docutils literal"><span class="pre">app</span></tt> object of class <tt class="docutils literal"><span class="pre">Flask</span></tt>, and initialized
+<p><strong>Dissection.</strong>
+The web application is the <tt class="docutils literal"><span class="pre">app</span></tt> object of class <tt class="docutils literal"><span class="pre">Flask</span></tt>, and initialized
 as shown. The model is a special Flask class derived from <tt class="docutils literal"><span class="pre">Form</span></tt>
 where the data are listed as static class attributes and initialized
 by various form field objects from the <tt class="docutils literal"><span class="pre">wtforms</span></tt> package.
@@ -147,8 +150,9 @@ equals <tt class="docutils literal"><span class="pre">'POST'</span></tt> and we 
 from the <tt class="docutils literal"><span class="pre">form</span></tt> object, using <tt class="docutils literal"><span class="pre">form.r.data</span></tt>, call up our mathematical
 computations, and make a web page with the result.
 In the latter case, we make an input page as displayed in
-Figure <a class="reference internal" href="web4sa.html#wf-hw1-flask-fig-input"><em>The input page</em></a>.</p>
-<p id="index-3"><em>The template files.</em> Making a web page with Flask is conveniently done by an HTML
+Figure <a class="reference internal" href="#wf-hw1-flask-fig-input"><em>The input page</em></a>.</p>
+<p id="index-3"><strong>The template files.</strong>
+Making a web page with Flask is conveniently done by an HTML
 template. Since the output page is simplest we display the
 <tt class="docutils literal"><span class="pre">view_output.html</span></tt> template first:</p>
 <div class="highlight-html"><div class="highlight"><pre>Hello, World! sin({{ form.r.data }})={{s}}.
@@ -167,7 +171,8 @@ as we need to use an HTML form:</p>
 <span class="nt">&lt;/form&gt;</span>
 </pre></div>
 </div>
-<p><em>Testing the application.</em> We collect the files associated with a Flask application (often called
+<p><strong>Testing the application.</strong>
+We collect the files associated with a Flask application (often called
 just <em>app</em>) in a directory,
 here called <a class="reference external" href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/hw1">hw1</a>.
 All you have to do in order to run this web application is to find
@@ -185,7 +190,7 @@ this directory and run</p>
 <p>Our application made two distinct pages for grabbing input from the
 user and presenting the result. It is often more natural to add
 the result to the input page. This is particularly the case in the present
-web application, which is a kind of calculator. Figure <a class="reference internal" href="web4sa.html#wf-hw2-flask-fig-result"><em>The modified result page</em></a> shows what the user sees after clicking the <em>equals</em> button.</p>
+web application, which is a kind of calculator. Figure <a class="reference internal" href="#wf-hw2-flask-fig-result"><em>The modified result page</em></a> shows what the user sees after clicking the <em>equals</em> button.</p>
 <div class="figure" id="wf-hw2-flask-fig-result">
 <img alt="_images/hw2_flask_output.png" src="_images/hw2_flask_output.png" style="width: 600px;" />
 <p class="caption"><em>The modified result page</em></p>
@@ -267,7 +272,7 @@ directory
 <a class="reference external" href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/hw3">hw3_flask</a>
 The contents
 in the files reflect the splitting introduced in the original
-scienticic hello world program in the section <a class="reference internal" href="web4sa.html#wf-hw-mvc"><em>Application of the MVC pattern</em></a>.
+scienticic hello world program in the section <a class="reference internal" href="._part0003_web4sa.html#wf-hw-mvc"><em>Application of the MVC pattern</em></a>.
 The <tt class="docutils literal"><span class="pre">model.py</span></tt> file now consists of the input form class:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">wtforms</span> <span class="kn">import</span> <span class="n">Form</span><span class="p">,</span> <span class="n">FloatField</span><span class="p">,</span> <span class="n">validators</span>
 

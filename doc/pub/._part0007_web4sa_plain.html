@@ -1,31 +1,30 @@
 <!DOCTYPE html>
 <!--
 Automatically generated HTML file from Doconce source
-(http://code.google.com/p/doconce/)
+(https://github.com/hplgit/doconce/)
 -->
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="generator" content="Doconce: http://code.google.com/p/doconce/" />
+<meta name="generator" content="Doconce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Using Web Frameworks for Scientific Web Applications">
 <meta name="keywords" content="web frameworks,MVC pattern,Flask installation,Flask input forms,Flask HTML templates,Flask MVC pattern,Flask troubleshooting,Django installation,Django making a project,Django making an application,Django input forms,Django HTML templates,Flask input forms,Flask error checking,Flask CSS style sheets,Flask LaTeX mathematics,Flask input validation,inline PNG image in HTML,base64 encoding of PNG images,inline SVG figure in HTML,Django input forms,Django input validation">
 
 
 
 <style type="text/css">
-    /* Color definitions:  http://www.december.com/html/spec/color0.html
-       CSS examples:       http://www.w3schools.com/css/css_examples.asp */
+    /* bloodish style */
 
     body {
-      margin-top: 1.0em;
-      background-color: #ffffff;
-      font-family: Helvetica, Arial, FreeSans, san-serif;
-      color: #000000;
+      font-family: Helvetica, Verdana, Arial, Sans-serif;
+      color: #404040;
+      background: #ffffff;
     }
-    h1 { font-size: 1.8em; color: #1e36ce; }
-    h2 { font-size: 1.5em; color: #1e36ce; }
-    h3 { color: #1e36ce; }
-    a { color: #1e36ce; text-decoration:none; }
+    h1 { font-size: 1.8em;  color: #8A0808; }
+    h2 { font-size: 1.6em;  color: #8A0808; }
+    h3 { font-size: 1.4em;  color: #8A0808; }
+    h4 { color: #8A0808; }
+    a { color: #8A0808; text-decoration:none; }
     tt { font-family: "Courier New", Courier; }
     
     p { text-indent: 0px; }
@@ -97,13 +96,15 @@ Automatically generated HTML file from Doconce source
                'wf:vib3:flask:nofiles'),
               (' PNG plots ', 3, None, '___sec23'),
               (' SVG plots ', 3, None, '___sec24'),
+              (' Further work ', 1, None, '___sec25'),
               (' Handling multiple input variables in Django ',
                1,
                'wf:vib:django',
                'wf:vib:django'),
-              (' Programming the Django application ', 2, None, '___sec26'),
-              (' User-provided validation ', 2, None, '___sec27'),
-              (' Exercises ', 1, None, '___sec28'),
+              (' Programming the Django application ', 2, None, '___sec27'),
+              (' User-provided validation ', 2, None, '___sec28'),
+              (' Customizing widgets ', 2, None, '___sec29'),
+              (' Exercises ', 1, None, '___sec30'),
               (' Exercise 1: Add two numbers ',
                2,
                'wf:exer:add2',
@@ -119,8 +120,11 @@ Automatically generated HTML file from Doconce source
               (' Exercise 4: Auto-generate code from function signature ',
                2,
                None,
-               '___sec32'),
-              (' Remaining ', 1, None, '___sec33')]}
+               '___sec34'),
+              (' Resources ', 1, None, '___sec35'),
+              (' Flask resources ', 2, None, '___sec36'),
+              (' Django resources ', 2, None, '___sec37'),
+              (' Remaining ', 1, None, '___sec38')]}
 end of tocinfo -->
 
 <body>
@@ -130,7 +134,7 @@ end of tocinfo -->
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   TeX: {
-     equationNumbers: {  autoNumber: "AMS"  },
+     equationNumbers: {  autoNumber: "none"  },
      extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js"]
   }
 });
@@ -146,11 +150,13 @@ MathJax.Hub.Config({
 
     
 <a name="part0007"></a>
+<!-- begin top navigation -->
+<a href="._part0006_web4sa_plain.html"><img src="http://hplgit.github.io/doconce/bundled/html_images/prev1.png" border=0 alt="previous"></a>
 
-    <a href="._part0006_web4sa_plain.html"><img src="https://doconce.googlecode.com/hg/bundled/html_images/prev1.png" border=0 alt="previous"></a>
-    
-    <a href="._part0008_web4sa_plain.html"><img src="https://doconce.googlecode.com/hg/bundled/html_images/next1.png" border=0 alt="next"></a>
-    <p>
+<a href="._part0008_web4sa_plain.html"><img src="http://hplgit.github.io/doconce/bundled/html_images/next1.png" border=0 alt="next"></a>
+<!-- end top navigation -->
+
+<p>
 <!-- !split -->
 
 <h3>Programming the Django application  <a name="___sec12"></a></h3>
@@ -377,7 +383,7 @@ The output page should then look as shown in Figure <a href="#wf:hw2:django:fig:
 
 <p>
 We need to make a new Django application, now called
-<a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/django_apps/hw2"><tt>hw2</tt></a>.
+<a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/django_apps/hw2" target="_self"><tt>hw2</tt></a>.
 Instead of running the standard
 <code>manage.py startapp hw2</code> command,
 we can simply copy the <code>hw1</code>
@@ -475,11 +481,13 @@ if-block must be explicitly ended by <code>{% endif %}</code>.
 
 <p>
 <p>
+<!-- begin bottom navigation -->
+<a href="._part0006_web4sa_plain.html"><img src="http://hplgit.github.io/doconce/bundled/html_images/prev1.png" border=0 alt="previous"></a>
 
-                <a href="._part0006_web4sa_plain.html"><img src="https://doconce.googlecode.com/hg/bundled/html_images/prev1.png" border=0 alt="previous"></a>
-                
-                <a href="._part0008_web4sa_plain.html"><img src="https://doconce.googlecode.com/hg/bundled/html_images/next1.png" border=0 alt="next"></a>
-                <!-- ------------------- end of main content --------------- -->
+<a href="._part0008_web4sa_plain.html"><img src="http://hplgit.github.io/doconce/bundled/html_images/next1.png" border=0 alt="next"></a>
+<!-- end bottom navigation -->
+
+<!-- ------------------- end of main content --------------- -->
 
 
 </body>

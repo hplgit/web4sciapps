@@ -1,3 +1,102 @@
+<html>
+<head>
+<!--
+This style is adopted from the (now old) vagrant 1.0 web
+pages. The style builds on the Twitter Bootstrap style.
+Modifications by Hans Petter Langtangen, hpl@simula.no.
+
+This style file should be copied and the following
+elements edited:
+
+Logo heading:
+
+ LogoWord
+ withSubWord
+
+Navigation links at the top:
+
+ GO TO 1
+ GO TO 2
+
+Footer at the end:
+
+ Here goes a footer, if desired, maybe with a Copyright &copy;
+
+-->
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Doconce: http://code.google.com/p/doconce/" />
+
+<link rel="stylesheet" href="html_templates/css/twitter_bootstrap.css">
+<link rel="stylesheet" href="html_templates/css/vagrant.css">
+<!-- Define color of headings here (last definition counts) -->
+<style type="text/css">
+h1, h2, h3, h4, h5, h6 {
+  color: #000;     /* black */
+  color: #999;     /* gray */
+  color: #005580;  /* dark blue */
+  color: #08c;     /* characteristic blue */
+</style>
+</head>
+<body>
+
+<title> Remaining </title>
+
+<div class="container">
+ <div class="row Header with-border">
+  <div class="span3 Module logo">
+   <h1><a href="/">Django<span class="subtitle">4scientists</span></a></h1>
+  </div>
+  <div class="span9">
+   <div class="Module navigation">
+   <!-- Navigation at the top of the page -->
+    <ul>
+     <li> <a href="https://www.djangoproject.com/">Django</a></li>
+    </ul>
+   </div>
+  </div>
+ </div>
+</div>
+
+
+<!-- Here goes the table of contents in the sidebar
+     <li class="active"> means dark blue background for current section
+-->
+<div class="row">
+ <div class="span3 Module sidebar">
+  <div class="well" style="padding: 8px 0px;">
+   <ul class="nav nav-list">
+     <!-- Syntax:
+     <li> <a href="...">Section 1</a></li>
+     <li> <a href="...">Section 2</a></li>
+     <li> &nbsp;&nbsp;&nbsp; <a href="...">Section 2a</a></li>
+     <li> &nbsp;&nbsp;&nbsp; <a href="...">Section 2b</a></li>
+     -->
+     <!-- Doconce automatically fills in the table of contents -->
+          <!-- vagrant nav toc: " Web frameworks " --> <li>  <a href="._part0000_web4sa_django.html#___sec0"> Web frameworks </a>
+     <!-- vagrant nav toc: " The MVC pattern " --> <li> &nbsp;  <a href="._part0001_web4sa_django.html#___sec1"> The MVC pattern </a>
+     <!-- vagrant nav toc: " A very simple application " --> <li> &nbsp;  <a href="._part0002_web4sa_django.html#___sec2"> A very simple application </a>
+     <!-- vagrant nav toc: " Application of the MVC pattern " --> <li> &nbsp;  <a href="._part0003_web4sa_django.html#wf:hw:mvc"> Application of the MVC pattern </a>
+     <!-- vagrant nav toc: " Making a Django application " --> <li>  <a href="._part0004_web4sa_django.html#___sec4"> Making a Django application </a>
+     <!-- vagrant nav toc: " Setting up a Django project " --> <li> &nbsp;  <a href="._part0004_web4sa_django.html#___sec5"> Setting up a Django project </a>
+     <!-- vagrant nav toc: " Setting up a Django application " --> <li> &nbsp;  <a href="._part0004_web4sa_django.html#___sec6"> Setting up a Django application </a>
+     <!-- vagrant nav toc: " Programming the Django application " --> <li class="active"> &nbsp;  <a href="._part0005_web4sa_django.html#___sec7"> Programming the Django application </a>
+     <!-- vagrant nav toc: " Equipping the input page with output results " --> <li> &nbsp;  <a href="._part0005_web4sa_django.html#___sec8"> Equipping the input page with output results </a>
+     <!-- vagrant nav toc: " Handling multiple input variables in Django " --> <li>  <a href="._part0006_web4sa_django.html#wf:vib:django"> Handling multiple input variables in Django </a>
+     <!-- vagrant nav toc: " Programming the Django application " --> <li class="active"> &nbsp;  <a href="._part0006_web4sa_django.html#___sec10"> Programming the Django application </a>
+     <!-- vagrant nav toc: " User-provided validation " --> <li> &nbsp;  <a href="._part0006_web4sa_django.html#___sec11"> User-provided validation </a>
+     <!-- vagrant nav toc: " Customizing widgets " --> <li> &nbsp;  <a href="._part0006_web4sa_django.html#___sec12"> Customizing widgets </a>
+     <!-- vagrant nav toc: " Exercises " --> <li>  <a href="._part0007_web4sa_django.html#___sec13"> Exercises </a>
+     <!-- vagrant nav toc: " Exercise 1: Add two numbers " --> <li> &nbsp;  <a href="._part0007_web4sa_django.html#wf:exer:add2"> Exercise 1: Add two numbers </a>
+     <!-- vagrant nav toc: " Django resources " --> <li>  <a href="._part0007_web4sa_django.html#___sec15"> Django resources </a>
+     <!-- vagrant nav toc: " Remaining " --> <li>  <a href="._part0007_web4sa_django.html#___sec16"> Remaining </a>
+
+    </ul>
+   </div>
+  </div>
+
+  <div class="span9">
+
 
 <!-- tocinfo
 {'highest level': 1,
@@ -22,11 +121,14 @@
                'wf:vib:django'),
               (' Programming the Django application ', 2, None, '___sec10'),
               (' User-provided validation ', 2, None, '___sec11'),
-              (' Exercises ', 1, None, '___sec12'),
+              (' Customizing widgets ', 2, None, '___sec12'),
+              (' Exercises ', 1, None, '___sec13'),
               (' Exercise 1: Add two numbers ',
                2,
                'wf:exer:add2',
-               'wf:exer:add2')]}
+               'wf:exer:add2'),
+              (' Django resources ', 1, None, '___sec15'),
+              (' Remaining ', 1, None, '___sec16')]}
 end of tocinfo -->
 
 
@@ -36,7 +138,7 @@ end of tocinfo -->
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   TeX: {
-     equationNumbers: {  autoNumber: "AMS"  },
+     equationNumbers: {  autoNumber: "none"  },
      extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js"]
   }
 });
@@ -51,280 +153,370 @@ MathJax.Hub.Config({
 
 
 <a name="part0005"></a>
-
-    <a href="._part0004_web4sa_django.html"><img src="https://doconce.googlecode.com/hg/bundled/html_images/prev1.png" border=0 alt="previous"></a>
-    
-    <a href="._part0006_web4sa_django.html"><img src="https://doconce.googlecode.com/hg/bundled/html_images/next1.png" border=0 alt="next"></a>
-    <p>
 <!-- !split -->
 
-<h2>Making a Django application  <a name="___sec4"></a></h2>
+<h3>Programming the Django application  <a name="___sec7"></a></h3>
 
 <p>
-We recommend to
-download and istall the latest official version from
-<a href="http://www.djangoproject.com/download/"><tt>http://www.djangoproject.com/download/</tt></a>. Pack out the tarfile, go
-to the directory, and run <code>setup.py</code>:
+The Django application is about filling the files <code>views.py</code> and <code>models.py</code>
+with content. The mathematical computations are performed in <code>compute.py</code>
+so we copy this file from the <code>mvc</code> directory to the <code>hw1</code> directory
+for convenience (we could alternatively add <code>../mvc</code> to <code>sys.path</code> such that
+<code>import compute</code> would work from the <code>hw1</code> directory).
+
+<p>
+<b>The user interaction.</b>
+The web application offers a text field where the user can
+write the value of <code>r</code>, see Figure <a href="#wf:hw1:django:fig:input">1</a>.
+After clicking on the <em>equals</em> button,
+the mathematics is performed and a new page as
+seen in Figure <a href="#wf:hw1:django:fig:result">2</a> appears.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 1:  The input page. <a name="wf:hw1:django:fig:input"></a> </p></center>
+<p><img src="fig-web4sa/hw1_django_input.png" align="bottom" width=600></p>
+</center>
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 2:  The result page. <a name="wf:hw1:django:fig:result"></a> </p></center>
+<p><img src="fig-web4sa/hw1_django_output.png" align="bottom" width=600></p>
+</center>
+
+<p>
+<b>The model.</b>
+The <code>models.py</code> file contains the model, which consists
+of the data we need in the application, stored in Django's data types.
+Our data consists of one number, called <code>r</code>, and <code>models.py</code> then
+look like
 
 <p>
 
-<!-- code=bash (from !bc sys) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; tar xvzf Django-1.5-tar.gz
-Terminal&gt; <span style="color: #008000">cd </span>Django-1.5
-Terminal&gt; sudo python setup.py install
+<!-- code=python (from !bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">django.db</span> <span style="color: #008000; font-weight: bold">import</span> models
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">django.forms</span> <span style="color: #008000; font-weight: bold">import</span> ModelForm
+
+<span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Input</span>(models<span style="color: #666666">.</span>Model):
+    r <span style="color: #666666">=</span> models<span style="color: #666666">.</span>FloatField()
+
+<span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">InputForm</span>(ModelForm):
+    <span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Meta</span>:
+        model <span style="color: #666666">=</span> Input
 </pre></div>
 <p>
-The version in this example, 1.5, may be different at the time you
-follow these instructions.
-
-<h3>Setting up a Django project  <a name="___sec5"></a></h3>
-
-<p>
-Django applies two concepts: <em>project</em> and <em>application</em> (or <em>app</em>).
-The app is the program we want to run through a web interface. The
-project is a Python package containing common settings and
-configurations for a collection of apps. This means that before we can
-make a Django app, we must to establish a Django project.
+The <code>Input</code> class lists variables representing data as static class
+attributes. The <code>django.db.models</code> module contains various classes
+for different types of data, here we use <code>FloatField</code> to represent
+a floating-point number.
+The <code>InputForm</code> class has a the shown generic form across applications
+if we by convention apply the name <code>Input</code> for the class holding the data.
 
 <p>
-A Django project for managing a set of Django apps is
-created by the command
+<b>The view.</b>
+The <code>views.py</code> file contains a function <code>index</code> which defines
+the actions we want to perform when invoking
+the URL ( here <code>http://127.0.0.1:8000/hw1/</code>).
+In addition, <code>views.py</code> has the <code>present_output</code> function from
+the <code>view.py</code> file in the <code>mvc</code> directory.
 
 <p>
 
-<!-- code=bash (from !bc sys) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; django-admin.py startproject django_project
+<!-- code=python (from !bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">django.shortcuts</span> <span style="color: #008000; font-weight: bold">import</span> render_to_response
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">django.template</span> <span style="color: #008000; font-weight: bold">import</span> RequestContext
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">django.http</span> <span style="color: #008000; font-weight: bold">import</span> HttpResponse
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">models</span> <span style="color: #008000; font-weight: bold">import</span> InputForm
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">compute</span> <span style="color: #008000; font-weight: bold">import</span> compute
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">index</span>(request):
+    <span style="color: #008000; font-weight: bold">if</span> request<span style="color: #666666">.</span>method <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;POST&#39;</span>:
+        form <span style="color: #666666">=</span> InputForm(request<span style="color: #666666">.</span>POST)
+        <span style="color: #008000; font-weight: bold">if</span> form<span style="color: #666666">.</span>is_valid():
+            form <span style="color: #666666">=</span> form<span style="color: #666666">.</span>save(commit<span style="color: #666666">=</span><span style="color: #008000">False</span>)
+            <span style="color: #008000; font-weight: bold">return</span> present_output(form)
+    <span style="color: #008000; font-weight: bold">else</span>:
+        form <span style="color: #666666">=</span> InputForm()
+
+    <span style="color: #008000; font-weight: bold">return</span> render_to_response(<span style="color: #BA2121">&#39;hw1.html&#39;</span>,
+            {<span style="color: #BA2121">&#39;form&#39;</span>: form}, context_instance<span style="color: #666666">=</span>RequestContext(request))
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">present_output</span>(form):
+    r <span style="color: #666666">=</span> form<span style="color: #666666">.</span>r
+    s <span style="color: #666666">=</span> compute(r)
+    <span style="color: #008000; font-weight: bold">return</span> HttpResponse(<span style="color: #BA2121">&#39;Hello, World! sin(</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">)=</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (r, s))
 </pre></div>
 <p>
-The result in this example
-is a directory <code>django_project</code> whose content can be explored
-by some <code>ls</code> and <code>cd</code> commands:
+The <code>index</code> function deserves some explanation. It must take one
+argument, usually called <code>request</code>. There are two modes in the function. Either
+the user has provided input on the web page, which means that
+<code>request.method</code> equals <code>'POST'</code>, or we show a new web page
+with which the user is supposed to interact.
 
 <p>
-
-<!-- code=bash (from !bc sys) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; ls django_project
-manage.py django_project
-Terminal&gt; <span style="color: #008000">cd </span>django_project/django_project
-Terminal&gt; ls
-__init__.py settings.py urls.py wsgi.py
-</pre></div>
-<p>
-The meaning of the generated files is briefly listed below.
-
-<p>
-
-<ul>
-   <li> The outer <code>django_project/</code> directory is just a container for your project. Its name does not matter to Django.</li>
-   <li> <code>manage.py</code> is a command-line utility that lets you interact with this Django project in various ways. You will typically run <code>manage.py</code> to launch a Django application.</li>
-   <li> The inner <code>django_project/</code> directory is a Python package for the Django project. Its name is used in import statements in Python code (e.g., <code>import django_project.settings</code>).</li>
-   <li> <code>django_project/__init__.py</code> is an empty file that just tells Python that this directory should be considered a Python package.</li>
-   <li> <code>django_project/settings.py</code> contains the settings and configurations for this Django project.</li>
-   <li> <code>django_project/urls.py</code> maps URLs to specific functions and thereby defines that actions that various URLs imply.</li>
-   <li> <code>django_project/wsgi.py</code> is not needed in our examples.</li>
-</ul>
-
-Django comes with a web server for developing and debugging applications.
-The server is started by running
-
-<p>
-
-<!-- code=bash (from !bc sys) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; python manage.py runserver
-Validating models...
-
-0 errors found
-March 23, 2013 - 01:09:24
-Django version 1.5, using settings <span style="color: #BA2121">&#39;django_project.settings&#39;</span>
-Development server is running at http://127.0.0.1:8000/
-Quit the server with CONTROL-C.
-</pre></div>
-<p>
-The output from starting the server tells that the server runs on the
-URL <code>http://127.0.0.1:8000/</code>.
-Load this URL into your browser to see a welcome message from Django,
-meaning that the server is working.
-
-<p>
-Despite the fact that our web applications do not need a database, you
-have to register a database with any Django project. To this end,
-open the <code>django_project/settings.py</code> file in a text editor,
-locate the <code>DATABASES</code> dictionary and type in the following
-code:
+<b>Making the input page.</b>
+The input consists of a web form with
+one field where we can fill in our <code>r</code> variable. This page
+is realized by the two central statements
 
 <p>
 
 <!-- code=python (from !bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">os</span>
-
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">relative2absolute_path</span>(relative_path):
-    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Return the absolute path correspodning to relative_path.&quot;&quot;&quot;</span>
-    dir_of_this_file <span style="color: #666666">=</span> os<span style="color: #666666">.</span>path<span style="color: #666666">.</span>dirname(os<span style="color: #666666">.</span>path<span style="color: #666666">.</span>abspath(__file__))
-    <span style="color: #008000; font-weight: bold">return</span> os<span style="color: #666666">.</span>path<span style="color: #666666">.</span>join(dir_of_this_file, relative_path)
-
-DATABASES <span style="color: #666666">=</span> {
-   <span style="color: #BA2121">&#39;default&#39;</span> : {
-      <span style="color: #BA2121">&#39;ENGINE&#39;</span>: <span style="color: #BA2121">&#39;django.db.backends.sqlite3&#39;</span>,
-      <span style="color: #BA2121">&#39;NAME&#39;</span>: relative2absolute_path(<span style="color: #BA2121">&#39;../database.db&#39;</span>)
-   }
-}
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># Make info needed in the web form</span>
+form <span style="color: #666666">=</span> InputForm()
+<span style="color: #408080; font-style: italic"># Make HTML code</span>
+render_to_response(<span style="color: #BA2121">&#39;hw1.html&#39;</span>,
+    {<span style="color: #BA2121">&#39;form&#39;</span>: form}, context_instance<span style="color: #666666">=</span>RequestContext(request))
 </pre></div>
 <p>
-The <code>settings.py</code> file needs absolute paths to files, while it is
-more convenient for us to specify relative paths. Therefore,
-we made a function that figures out the absolute path to the <code>settings.py</code>
-file and then combines this absolute path with the relative path.
-The location and name of the database file can be chosen as desired.
-Note that one should <em>not</em> use <code>os.path.join</code> to create paths as Django
-always applies the forward slash between directories, also on Windows.
-
-<h3>Setting up a Django application  <a name="___sec6"></a></h3>
+The <code>hw1.html</code> file resides in the <code>templates</code> subdirectory and contains
+a template for the HTML code:
 
 <p>
-The next step is to create a Django app for our scientific hello
-world program. We can place the app in any directory, but here we
-utilize the following organization.
-As neighbor to <code>django_project</code> we have
-a directory <code>apps</code> containing our various scientific applications.
-Under <code>apps</code> we create a directory <code>django_apps</code> with
-our different versions of Django applications.
-The directory <code>py_apps</code> contains the
-original <code>hw.py</code> program in the subdirectory <code>orig</code>,
-while split of this
-program according to the MVC pattern appears in the <code>mvc</code> directory.
 
-<p>
-The directory <code>django_apps/hw1</code> is our first attempt to write
-a Django-based web interface for the <code>hw.py</code> program.
-The directory structure is laid out by
-<p>
-
-<!-- code=bash (from !bc sys) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; <span style="color: #008000">cd</span> ..
-Terminal&gt; mkdir apps
-Terminal&gt; <span style="color: #008000">cd </span>apps
-Terminal&gt; mkdir py_apps
-Terminal&gt; <span style="color: #008000">cd </span>py
-Terminal&gt; mkdir orig mvc
-Terminal&gt; <span style="color: #008000">cd</span> ../..
-Terminal&gt; mkdir django_apps
-Terminal&gt; <span style="color: #008000">cd </span>django_apps
+<!-- code=html (from !bc htmlpro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">&lt;form</span> <span style="color: #7D9029">method=</span><span style="color: #BA2121">&quot;post&quot;</span> <span style="color: #7D9029">action=</span><span style="color: #BA2121">&quot;&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>{% csrf_token %}
+    Hello, World! The sine of {{ form.r }}
+    <span style="color: #008000; font-weight: bold">&lt;input</span> <span style="color: #7D9029">type=</span><span style="color: #BA2121">&quot;submit&quot;</span> <span style="color: #7D9029">value=</span><span style="color: #BA2121">&quot;equals&quot;</span> <span style="color: #008000; font-weight: bold">/&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/form&gt;</span>
 </pre></div>
 <p>
-The file <code>hw.py</code> is moved to <code>orig</code> while <code>mvc</code> contains
-the MVC refactored version with the files <code>model.py</code>, <code>view.py</code>, <code>compute.py</code>,
-and <code>controller.py</code>.
+This is a <em>template file</em> because it contains instructions like
+<code>{% csrf_token %}</code> and variables like <code>{{ form.r }}</code>. Django will
+replace the former by some appropriate HTML statements, while the
+latter simply extracts the numerical value of the variable <code>r</code> in
+our form (specified in the <code>Input</code> class in <code>models.py</code>).
+Typically, this <code>hw1.html</code> file
+results in the HTML code
 
 <p>
-The <code>hw1</code> directory, containing our first Django application, must be
-made with
-<p>
 
-<!-- code=bash (from !bc sys) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; python ../../django_project/manage.py startapp hw1
+<!-- code=html (from !bc htmlpro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">&lt;form</span> <span style="color: #7D9029">method=</span><span style="color: #BA2121">&quot;post&quot;</span> <span style="color: #7D9029">action=</span><span style="color: #BA2121">&quot;&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;div</span> <span style="color: #7D9029">style=</span><span style="color: #BA2121">&#39;display:none&#39;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;input</span> <span style="color: #7D9029">type=</span><span style="color: #BA2121">&#39;hidden&#39;</span> <span style="color: #7D9029">name=</span><span style="color: #BA2121">&#39;csrfmiddlewaretoken&#39;</span>
+<span style="color: #7D9029">value=</span><span style="color: #BA2121">&#39;oPWMuuy1gLlXm9GvUZINv49eVUYnux5Q&#39;</span> <span style="color: #008000; font-weight: bold">/&gt;&lt;/div&gt;</span>
+    Hello, World! The sine of <span style="color: #008000; font-weight: bold">&lt;input</span> <span style="color: #7D9029">type=</span><span style="color: #BA2121">&quot;text&quot;</span> <span style="color: #7D9029">name=</span><span style="color: #BA2121">&quot;r&quot;</span> <span style="color: #7D9029">id=</span><span style="color: #BA2121">&quot;id_r&quot;</span> <span style="color: #008000; font-weight: bold">/&gt;</span>
+    <span style="color: #008000; font-weight: bold">&lt;input</span> <span style="color: #7D9029">type=</span><span style="color: #BA2121">&quot;submit&quot;</span> <span style="color: #7D9029">value=</span><span style="color: #BA2121">&quot;equals&quot;</span> <span style="color: #008000; font-weight: bold">/&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/form&gt;</span>
 </pre></div>
 <p>
-The command creates a directory <code>hw1</code> with four empty files:
-
-<p>
-
-<!-- code=bash (from !bc sys) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; <span style="color: #008000">cd </span>hw1
-Terminal&gt; ls
-__init__.py models.py tests.py views.py
-</pre></div>
-<p>
-The <code>__init__.py</code> file will remain empty to just indicate that the
-Django application is a Python package. The other files need to be
-filled with the right content, which happens in the next section.
-
-<p>
-At this point,
-we need to register some information about our application in the
-<code>django_project/settings.py</code> and <code>django_project/urls.py</code> files.
-
-<p>
-<b>Step 1: Add the app.</b>
-Locate the <code>INSTALLED_APPS</code>
-tuple in <code>settings.py</code> and add your Django application as a Python package:
+<b>Making the results page.</b>
+When then user has filled in a value in the text field on the input
+page, the <code>index</code> function is called again and <code>request.method</code> equals
+<code>'POST'</code>. A new form object is made, this time with user info (<code>request.POST</code>).
+We can check that the form is valid and if so, proceed with
+computations followed by presenting the results in a
+new web page (see Figure <a href="#wf:hw1:django:fig:result">2</a>):
 
 <p>
 
 <!-- code=python (from !bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">INSTALLED_APPS <span style="color: #666666">=</span> (
-    <span style="color: #BA2121">&#39;django.contrib.auth&#39;</span>,
-    <span style="color: #BA2121">&#39;django.contrib.contenttypes&#39;</span>,
-    <span style="color: #666666">...</span>
-    <span style="color: #BA2121">&#39;hw1&#39;</span>,
-)
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">index</span>(request):
+    <span style="color: #008000; font-weight: bold">if</span> request<span style="color: #666666">.</span>method <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;POST&#39;</span>:
+        form <span style="color: #666666">=</span> InputForm(request<span style="color: #666666">.</span>POST)
+        <span style="color: #008000; font-weight: bold">if</span> form<span style="color: #666666">.</span>is_valid():
+            form <span style="color: #666666">=</span> form<span style="color: #666666">.</span>save(commit<span style="color: #666666">=</span><span style="color: #008000">False</span>)
+            <span style="color: #008000; font-weight: bold">return</span> present_output(form)
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">present_output</span>(form):
+    r <span style="color: #666666">=</span> form<span style="color: #666666">.</span>r
+    s <span style="color: #666666">=</span> compute(r)
+    <span style="color: #008000; font-weight: bold">return</span> HttpResponse(<span style="color: #BA2121">&#39;Hello, World! sin(</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">)=</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (r, s))
 </pre></div>
 <p>
-Unfortunately, Django will not be able to find the package <code>hw1</code>
-unless we register the parent directory in <code>sys.path</code>:
+The numerical value of <code>r</code> as given by the user is available as <code>form.r</code>.
+Instead of using a template for the output page, which is natural to
+do in more advanced cases, we here illustrate the possibility to
+send raw HTML to the output page by returning an <code>HttpResponse</code>
+object initialized by a string containing the desired HTML code.
 
 <p>
-
-<!-- code=python (from !bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sys</span>
-sys<span style="color: #666666">.</span>path<span style="color: #666666">.</span>insert(<span style="color: #666666">0</span>, relative2absolute_path(<span style="color: #BA2121">&#39;../../apps/django_apps&#39;</span>))
-</pre></div>
-<p>
-Note here that the relative path is given with respect to the
-location of the <code>settings.py</code> script.
-
-<p>
-<b>Step 2: Add a template directory.</b>
-Make a subdirectory <code>templates</code> under <code>hw1</code>,
+Launch this application by filling in the address <code>http://127.0.0.1:8000/hw1/</code>
+in your web browser. Make sure the Django development server is running,
+and if not, restart it by
 
 <p>
 
 <!-- code=bash (from !bc sys) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">mkdir templates
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; python ../../../django_project/manage.py runserver
 </pre></div>
 <p>
-and add the absolute path of this directory to the <code>TEMPLATE_DIRS</code> tuple:
+Fill
+in some number on the input page and view the output.
+To show how easy it is to change the application, invoke the <code>views.py</code>
+file in an editor and add some color to the output HTML code from
+the <code>present_output</code> function:
+
+<p>
+
+<!-- code=python (from !bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    <span style="color: #008000; font-weight: bold">return</span> HttpResponse(<span style="color: #BA2121">&quot;&quot;&quot;</span>
+<span style="color: #BA2121">&lt;font color=&#39;blue&#39;&gt;Hello&lt;/font&gt;, World!</span>
+<span style="color: #BA2121">sin(</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">)=</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"></span>
+<span style="color: #BA2121">&quot;&quot;&quot;</span><span style="color: #666666">%</span> (r, s))
+</pre></div>
+<p>
+Go back to the input page, provide a new number, and observe how
+the "Hello" word now has a blue color.
+
+<h3>Equipping the input page with output results  <a name="___sec8"></a></h3>
+
+<p>
+Instead of making a separate output page with the result, we can
+simply add the sine value to the input page. This makes the user
+feel that she interacts with the same page, as when operating a calculator.
+The output page should then look as shown in Figure <a href="#wf:hw2:django:fig:result">3</a>.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 3:  The modified result page. <a name="wf:hw2:django:fig:result"></a> </p></center>
+<p><img src="fig-web4sa/hw2_django_output.png" align="bottom" width=600></p>
+</center>
+
+<p>
+We need to make a new Django application, now called
+<a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/django_apps/hw2" target="_self"><tt>hw2</tt></a>.
+Instead of running the standard
+<code>manage.py startapp hw2</code> command,
+we can simply copy the <code>hw1</code>
+directory to <code>hw2</code>. We need, of course, to add information about this
+new application in <code>settings.py</code> and <code>urls.py</code>.
+In the former file we must have
 
 <p>
 
 <!-- code=python (from !bc pycod) typeset with pygments style "default" -->
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">TEMPLATE_DIRS <span style="color: #666666">=</span> (
     relative2absolute_path(<span style="color: #BA2121">&#39;../../apps/django_apps/hw1/templates&#39;</span>),
+    relative2absolute_path(<span style="color: #BA2121">&#39;../../apps/django_apps/hw2/templates&#39;</span>),
+)
+
+INSTALLED_APPS <span style="color: #666666">=</span> (
+    <span style="color: #BA2121">&#39;django.contrib.auth&#39;</span>,
+    <span style="color: #BA2121">&#39;django.contrib.contenttypes&#39;</span>,
+    <span style="color: #BA2121">&#39;django.contrib.sessions&#39;</span>,
+    <span style="color: #BA2121">&#39;django.contrib.sites&#39;</span>,
+    <span style="color: #BA2121">&#39;django.contrib.messages&#39;</span>,
+    <span style="color: #BA2121">&#39;django.contrib.staticfiles&#39;</span>,
+    <span style="color: #408080; font-style: italic"># Uncomment the next line to enable the admin:</span>
+    <span style="color: #408080; font-style: italic"># &#39;django.contrib.admin&#39;,</span>
+    <span style="color: #408080; font-style: italic"># Uncomment the next line to enable admin documentation:</span>
+    <span style="color: #408080; font-style: italic"># &#39;django.contrib.admindocs&#39;,</span>
+    <span style="color: #BA2121">&#39;hw1&#39;</span>,
+    <span style="color: #BA2121">&#39;hw2&#39;</span>,
 )
 </pre></div>
 <p>
-The <code>templates</code> directory will hold templates for the HTML code applied
-in the web interfaces. The trailing comma is important as this is
-a tuple with only one element.
-
-<p>
-<b>Step 3: Define the URL.</b>
-We need to connect the Django app with
-an URL. Our app will be associated with a Python function <code>index</code>
-in the <code>views</code> module within the <code>hw1</code> package.
-Say we want the corresponding URL to
-be named <code>hw1</code> relative to the server URL.
-This information is registered in the <code>django_project/urls.py</code> file
-by the syntax
+In <code>urls.py</code> we add the URL <code>hw2</code> which is to call our <code>index</code> function
+in the <code>views.py</code> file of the <code>hw2</code> app:
 
 <p>
 
 <!-- code=python (from !bc pycod) typeset with pygments style "default" -->
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">urlpatterns <span style="color: #666666">=</span> patterns(<span style="color: #BA2121">&#39;&#39;</span>,
     url(<span style="color: #BA2121">r&#39;^hw1/&#39;</span>, <span style="color: #BA2121">&#39;django_apps.hw1.views.index&#39;</span>),
+    url(<span style="color: #BA2121">r&#39;^hw2/&#39;</span>, <span style="color: #BA2121">&#39;django_apps.hw2.views.index&#39;</span>),
 </pre></div>
 <p>
-The first argument to the <code>url</code> function is a regular expression for
-the URL and the second argument is the name of the function to call,
-using Python's syntax for a function <code>index</code> in a module <code>views</code> in
-a package <code>hw1</code>.
-The function name <code>index</code> resembles the <code>index.html</code> main page associated
-with an URL, but any other name than <code>index</code> can be used.
+The <code>views.py</code> file changes a bit since we shall generate almost the same
+web page on input and output. This makes the <code>present_output</code> function
+unnatural, and everything is done within the <code>index</code> function:
+
+<p>
+
+<!-- code=python (from !bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">index</span>(request):
+    s <span style="color: #666666">=</span> <span style="color: #008000">None</span>  <span style="color: #408080; font-style: italic"># initial value of result</span>
+    <span style="color: #008000; font-weight: bold">if</span> request<span style="color: #666666">.</span>method <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;POST&#39;</span>:
+        form <span style="color: #666666">=</span> InputForm(request<span style="color: #666666">.</span>POST)
+        <span style="color: #008000; font-weight: bold">if</span> form<span style="color: #666666">.</span>is_valid():
+            form <span style="color: #666666">=</span> form<span style="color: #666666">.</span>save(commit<span style="color: #666666">=</span><span style="color: #008000">False</span>)
+            r <span style="color: #666666">=</span> form<span style="color: #666666">.</span>r
+            s <span style="color: #666666">=</span> compute(r)
+    <span style="color: #008000; font-weight: bold">else</span>:
+        form <span style="color: #666666">=</span> InputForm()
+
+    <span style="color: #008000; font-weight: bold">return</span> render_to_response(<span style="color: #BA2121">&#39;hw2.html&#39;</span>,
+            {<span style="color: #BA2121">&#39;form&#39;</span>: form,
+             <span style="color: #BA2121">&#39;s&#39;</span>: <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%.5f</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> s <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">isinstance</span>(s, <span style="color: #008000">float</span>) <span style="color: #008000; font-weight: bold">else</span> <span style="color: #BA2121">&#39;&#39;</span>
+             }, context_instance<span style="color: #666666">=</span>RequestContext(request))
+</pre></div>
+<p>
+Note that the output variable <code>s</code> is computed within the <code>index</code>
+function and defaults to <code>None</code>. The template file <code>hw2.html</code>
+looks like
+
+<p>
+
+<!-- code=html (from !bc htmlpro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">&lt;form</span> <span style="color: #7D9029">method=</span><span style="color: #BA2121">&quot;post&quot;</span> <span style="color: #7D9029">action=</span><span style="color: #BA2121">&quot;&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>{% csrf_token %}
+    Hello, World! The sine of {{ form.r }}
+    <span style="color: #008000; font-weight: bold">&lt;input</span> <span style="color: #7D9029">type=</span><span style="color: #BA2121">&quot;submit&quot;</span> <span style="color: #7D9029">value=</span><span style="color: #BA2121">&quot;equals&quot;</span> <span style="color: #008000; font-weight: bold">/&gt;</span>
+{% if s != &#39;&#39; %}
+{{ s }}
+{% endif %}
+<span style="color: #008000; font-weight: bold">&lt;/form&gt;</span>
+</pre></div>
+<p>
+The difference from <code>hw1.html</code> is that we right after the <em>equals</em>
+button write out the value of <code>s</code>. However, we make a test that
+the value is only written if it is computed, here recognized by
+being a non-empty string. The <code>s</code> in the template file
+is substituted by the value of the object
+corresponding to the key <code>'s'</code> in the
+dictionary we pass to the <code>render_to_response</code>. As seen,
+we pass a string where <code>s</code> is formatted with five digits if <code>s</code>
+is a float, i.e., if <code>s</code> is computed. Otherwise, <code>s</code> has the
+default value <code>None</code> and we send an empty string to the template.
+The template language allows tests using Python syntax, but the
+if-block must be explicitly ended by <code>{% endif %}</code>.
 
 <p>
 <p>
+<!-- ------------------- end of main content --------------- -->
 
-                <a href="._part0004_web4sa_django.html"><img src="https://doconce.googlecode.com/hg/bundled/html_images/prev1.png" border=0 alt="previous"></a>
-                
-                <a href="._part0006_web4sa_django.html"><img src="https://doconce.googlecode.com/hg/bundled/html_images/next1.png" border=0 alt="next"></a>
-                <!-- ------------------- end of main content --------------- -->
+
+<!--
+Preliminary examples/discussion on vagrant style syntax
+
+<div class='alert alert-block alert-notice'>
+  <h3>What about PHP? Python? Java?</h3>
+<p>
+bla-bla.
+</div>
+
+<p>
+While the <div class="deep-blue">rest of the</div> getting started
+-->
+
+<!-- Do not edit anything in the navigation code below -
+     doconce split_html requires the text as it stands -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._part0004_web4sa_django.html">&larr; Prev</a>
+  </li>
+
+  <li class="next">
+    <a href="._part0006_web4sa_django.html">Next &rarr;</a>
+  </li>
+
+</ul>
+
+ </div>
+
+ <div class="row Footer">
+  <div class="span12">
+  Copyright &copy 2013; Hans Petter Langtangen and Anders E. Johansen.
+  Last update: .
+  </div>
+ </div>
+</div>
+</body>
+</html>
+
+
 

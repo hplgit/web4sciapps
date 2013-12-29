@@ -329,7 +329,8 @@ filled with the right content, which happens in the next section.</p>
 <p>At this point,
 we need to register some information about our application in the
 <tt class="docutils literal"><span class="pre">django_project/settings.py</span></tt> and <tt class="docutils literal"><span class="pre">django_project/urls.py</span></tt> files.</p>
-<p><em>Step 1: Add the app.</em> Locate the <tt class="docutils literal"><span class="pre">INSTALLED_APPS</span></tt>
+<p><strong>Step 1: Add the app.</strong>
+Locate the <tt class="docutils literal"><span class="pre">INSTALLED_APPS</span></tt>
 tuple in <tt class="docutils literal"><span class="pre">settings.py</span></tt> and add your Django application as a Python package:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">(</span>
     <span class="s">&#39;django.contrib.auth&#39;</span><span class="p">,</span>
@@ -347,7 +348,8 @@ unless we register the parent directory in <tt class="docutils literal"><span cl
 </div>
 <p>Note here that the relative path is given with respect to the
 location of the <tt class="docutils literal"><span class="pre">settings.py</span></tt> script.</p>
-<p><em>Step 2: Add a template directory.</em> Make a subdirectory <tt class="docutils literal"><span class="pre">templates</span></tt> under <tt class="docutils literal"><span class="pre">hw1</span></tt>,</p>
+<p><strong>Step 2: Add a template directory.</strong>
+Make a subdirectory <tt class="docutils literal"><span class="pre">templates</span></tt> under <tt class="docutils literal"><span class="pre">hw1</span></tt>,</p>
 <div class="highlight-console"><div class="highlight"><pre><span class="go">mkdir templates</span>
 </pre></div>
 </div>
@@ -360,7 +362,8 @@ location of the <tt class="docutils literal"><span class="pre">settings.py</span
 <p>The <tt class="docutils literal"><span class="pre">templates</span></tt> directory will hold templates for the HTML code applied
 in the web interfaces. The trailing comma is important as this is
 a tuple with only one element.</p>
-<p><em>Step 3: Define the URL.</em> We need to connect the Django app with
+<p><strong>Step 3: Define the URL.</strong>
+We need to connect the Django app with
 an URL. Our app will be associated with a Python function <tt class="docutils literal"><span class="pre">index</span></tt>
 in the <tt class="docutils literal"><span class="pre">views</span></tt> module within the <tt class="docutils literal"><span class="pre">hw1</span></tt> package.
 Say we want the corresponding URL to

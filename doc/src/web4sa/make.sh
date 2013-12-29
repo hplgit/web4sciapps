@@ -1,7 +1,7 @@
 #!/bin/sh
 # Compile document in HTML versions, Flask+Django, Flask only,
 # Django only, Sphinx version, and LaTeX/PDF version.
-
+set -x
 sh clean.sh
 
 name=web4sa
@@ -46,6 +46,8 @@ pdflatex -shell-escape $name
 doconce format html index --html-style=bloodish
 
 # Publish
-#dest=../../pub
-#cp -r *.html .*.html fig-$name sphinx-* $dest
-#rm -rf $dest/sphinx-rootdir
+dest=../../pub
+rm -rf $dest/sphinx-rootdir $dest/sphinx-*
+cp -r ${name}*.html .*${name}*.html $name.pdf sphinx-* $dest
+cp -r fig-$name/* $dest/fig-$name/
+cp -r html_templates/* $dest/html_templates/

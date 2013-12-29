@@ -191,7 +191,8 @@ At this point,
 we need to register some information about our application in the
 ``django_project/settings.py`` and ``django_project/urls.py`` files.
 
-*Step 1: Add the app.* Locate the ``INSTALLED_APPS``
+**Step 1: Add the app.**
+Locate the ``INSTALLED_APPS``
 tuple in ``settings.py`` and add your Django application as a Python package:
 
 
@@ -216,7 +217,8 @@ unless we register the parent directory in ``sys.path``:
 Note here that the relative path is given with respect to the
 location of the ``settings.py`` script.
 
-*Step 2: Add a template directory.* Make a subdirectory ``templates`` under ``hw1``,
+**Step 2: Add a template directory.**
+Make a subdirectory ``templates`` under ``hw1``,
 
 
 .. code-block:: console
@@ -236,7 +238,8 @@ The ``templates`` directory will hold templates for the HTML code applied
 in the web interfaces. The trailing comma is important as this is
 a tuple with only one element.
 
-*Step 3: Define the URL.* We need to connect the Django app with
+**Step 3: Define the URL.**
+We need to connect the Django app with
 an URL. Our app will be associated with a Python function ``index``
 in the ``views`` module within the ``hw1`` package.
 Say we want the corresponding URL to

@@ -191,9 +191,9 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Author:</th><td class="field-body">Hans Petter Langtangen, Anders Johansen</td>
+<tr class="field-odd field"><th class="field-name">Author:</th><td class="field-body">Hans Petter Langtangen, Anders E. Johansen</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Date:</th><td class="field-body">Jun 6, 2013</td>
+<tr class="field-even field"><th class="field-name">Date:</th><td class="field-body">Nov 26, 2013</td>
 </tr>
 </tbody>
 </table>
@@ -220,14 +220,25 @@ works.  The upside is that advanced applications are within reach,
 without an overwhelming amount of programming, as soon as you have
 understood the basic demos.</p>
 <p>We shall explore two web frameworks: the very popular <a class="reference external" href="https://www.djangoproject.com/">Django framework</a> and the more high-level and easy-to-use framework
-<a class="reference external" href="http://flask.pocoo.org/">Flask</a>. In addition, our examples are also
-implemented in the <a class="reference external" href="http://www.web2py.com/">web2py</a> framework.</p>
-<p>The primary advantage of Django
+<a class="reference external" href="http://flask.pocoo.org/">Flask</a>. Our introductory examples were also
+implemented in the <a class="reference external" href="http://www.web2py.com/">web2py</a> framework, but according
+to our experience, Flask and Django are easier to explain to scientists.
+The primary advantage of Django
 over other web frameworks is the rich set of documentation and
 examples. Googling for &#8220;Django tutorials&#8221; gives lots of hits including
 a  list of <a class="reference external" href="https://code.djangoproject.com/wiki/Tutorials">web tutorials</a>
-and a list of <a class="reference external" href="http://www.youtube.com/playlist?list=PL385A53B00B8B158E">YouTube videos</a>. There is also an electronic <a class="reference external" href="http://www.djangobook.com/en/2.0/">Django book</a>. At the time of this writing, Flask is not
-much documented beyond the <a class="reference external" href="http://flask.pocoo.org/">official web site</a> and the <a class="reference external" href="http://wtforms.simplecodes.com/docs/0.6/index.html">WTForms Documentation</a>. There is, unfortunately, hardly any examples on how Django or Flask can be used to enable typical scientific applications for the web, and that is why we have developed some targeted examples on this topic.</p>
+and a list of <a class="reference external" href="http://www.youtube.com/playlist?list=PL385A53B00B8B158E">YouTube videos</a>. There is also an electronic <a class="reference external" href="http://www.djangobook.com/en/2.0/">Django book</a>. At the time of this writing, the Flask documentation is not comparable. The two most important resources are the</p>
+<blockquote>
+<div><a class="reference external" href="http://flask.pocoo.org/">official web site</a> and the <a class="reference external" href="http://wtforms.simplecodes.com/docs/0.6/index.html">WTForms Documentation</a>. There is, unfortunately, hardly any examples on how Django or Flask can be used to enable typical scientific applications for the web, and that is why we have developed some targeted examples on this topic.</div></blockquote>
+<p>A basic question is, of course, whether you should apply Flask or
+Django for your web project. Googling for &#8220;flask vs django&#8221; gives a
+lot of diverging opinions. The authors&#8217; viewpoint is that Flask is
+much easier to get started with than Django. You can grow your
+application to a really big one with both frameworks, but some
+advanced features is easier on one framework than the other. For
+example, if you want users to log into your account and store their
+work in databases, we found this to be much more straightforward in
+Django.</p>
 <p>The problem for a computational scientist who wants to enable
 mathematical calculations through the web is that most of
 the introductory examples on utilizing a particular

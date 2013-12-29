@@ -162,7 +162,7 @@ in ``vib1``, i.e., it feaures LaTeX mathematics and checking of
 
 .. _wf:vib2:flask:fig:error1:
 
-.. figure:: fig-web4sa/vib2_flask_error1.png
+.. figure:: vib2_flask_error1.png
    :width: 500
 
    *Triggering of a user-defined error check*

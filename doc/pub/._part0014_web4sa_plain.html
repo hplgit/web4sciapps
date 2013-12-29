@@ -1,31 +1,30 @@
 <!DOCTYPE html>
 <!--
 Automatically generated HTML file from Doconce source
-(http://code.google.com/p/doconce/)
+(https://github.com/hplgit/doconce/)
 -->
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="generator" content="Doconce: http://code.google.com/p/doconce/" />
+<meta name="generator" content="Doconce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Using Web Frameworks for Scientific Web Applications">
 <meta name="keywords" content="web frameworks,MVC pattern,Flask installation,Flask input forms,Flask HTML templates,Flask MVC pattern,Flask troubleshooting,Django installation,Django making a project,Django making an application,Django input forms,Django HTML templates,Flask input forms,Flask error checking,Flask CSS style sheets,Flask LaTeX mathematics,Flask input validation,inline PNG image in HTML,base64 encoding of PNG images,inline SVG figure in HTML,Django input forms,Django input validation">
 
 
 
 <style type="text/css">
-    /* Color definitions:  http://www.december.com/html/spec/color0.html
-       CSS examples:       http://www.w3schools.com/css/css_examples.asp */
+    /* bloodish style */
 
     body {
-      margin-top: 1.0em;
-      background-color: #ffffff;
-      font-family: Helvetica, Arial, FreeSans, san-serif;
-      color: #000000;
+      font-family: Helvetica, Verdana, Arial, Sans-serif;
+      color: #404040;
+      background: #ffffff;
     }
-    h1 { font-size: 1.8em; color: #1e36ce; }
-    h2 { font-size: 1.5em; color: #1e36ce; }
-    h3 { color: #1e36ce; }
-    a { color: #1e36ce; text-decoration:none; }
+    h1 { font-size: 1.8em;  color: #8A0808; }
+    h2 { font-size: 1.6em;  color: #8A0808; }
+    h3 { font-size: 1.4em;  color: #8A0808; }
+    h4 { color: #8A0808; }
+    a { color: #8A0808; text-decoration:none; }
     tt { font-family: "Courier New", Courier; }
     
     p { text-indent: 0px; }
@@ -97,13 +96,15 @@ Automatically generated HTML file from Doconce source
                'wf:vib3:flask:nofiles'),
               (' PNG plots ', 3, None, '___sec23'),
               (' SVG plots ', 3, None, '___sec24'),
+              (' Further work ', 1, None, '___sec25'),
               (' Handling multiple input variables in Django ',
                1,
                'wf:vib:django',
                'wf:vib:django'),
-              (' Programming the Django application ', 2, None, '___sec26'),
-              (' User-provided validation ', 2, None, '___sec27'),
-              (' Exercises ', 1, None, '___sec28'),
+              (' Programming the Django application ', 2, None, '___sec27'),
+              (' User-provided validation ', 2, None, '___sec28'),
+              (' Customizing widgets ', 2, None, '___sec29'),
+              (' Exercises ', 1, None, '___sec30'),
               (' Exercise 1: Add two numbers ',
                2,
                'wf:exer:add2',
@@ -119,8 +120,11 @@ Automatically generated HTML file from Doconce source
               (' Exercise 4: Auto-generate code from function signature ',
                2,
                None,
-               '___sec32'),
-              (' Remaining ', 1, None, '___sec33')]}
+               '___sec34'),
+              (' Resources ', 1, None, '___sec35'),
+              (' Flask resources ', 2, None, '___sec36'),
+              (' Django resources ', 2, None, '___sec37'),
+              (' Remaining ', 1, None, '___sec38')]}
 end of tocinfo -->
 
 <body>
@@ -130,7 +134,7 @@ end of tocinfo -->
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   TeX: {
-     equationNumbers: {  autoNumber: "AMS"  },
+     equationNumbers: {  autoNumber: "none"  },
      extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js"]
   }
 });
@@ -146,11 +150,13 @@ MathJax.Hub.Config({
 
     
 <a name="part0014"></a>
+<!-- begin top navigation -->
+<a href="._part0013_web4sa_plain.html"><img src="http://hplgit.github.io/doconce/bundled/html_images/prev1.png" border=0 alt="previous"></a>
 
-    <a href="._part0013_web4sa_plain.html"><img src="https://doconce.googlecode.com/hg/bundled/html_images/prev1.png" border=0 alt="previous"></a>
-    
-    <a href="._part0015_web4sa_plain.html"><img src="https://doconce.googlecode.com/hg/bundled/html_images/next1.png" border=0 alt="next"></a>
-    <p>
+<a href="._part0015_web4sa_plain.html"><img src="http://hplgit.github.io/doconce/bundled/html_images/next1.png" border=0 alt="next"></a>
+<!-- end top navigation -->
+
+<p>
 <!-- !split -->
 
 <h2>Handling multiple input variables in Django <a name="wf:vib:django"></a></h2>
@@ -168,9 +174,10 @@ the resulting plot,
 cf. Figures <a href="._part0008_web4sa_plain.html#wf:vib1:flask:fig:input">7</a>
 and <a href="._part0008_web4sa_plain.html#wf:vib1:flask:fig:result">8</a>.
 
-<h3>Programming the Django application  <a name="___sec26"></a></h3>
+<h3>Programming the Django application  <a name="___sec27"></a></h3>
 
 <p>
+<b>Adding the app to a project.</b>
 Any Django app needs a project, but here we reuse the project
 we set up for the scientific hello world examples. We go to
 the directory <code>apps/django_apps</code> and create the Django app <code>vib1</code>:
@@ -198,10 +205,12 @@ that Django can find our templates associated with this application,
 and that the URL address applies the name <code>vib1</code> to reach the application.
 
 <p>
+<b>The compute part.</b>
 The computations in our application are put in a file <code>compute.py</code>
 and explained in detail in the section <a href="._part0008_web4sa_plain.html#wf:vib1:flask:app">Programming the Flask application</a>.
 
 <p>
+<b>The model.</b>
 We can now write <code>models.py</code> and the <code>Input</code> class that defines
 the form fields for the four input variables:
 
@@ -238,6 +247,7 @@ value such that all fields have a value when the user sees
 the page.
 
 <p>
+<b>The view.</b>
 The <code>views.py</code> file looks as follows:
 
 <p>
@@ -315,7 +325,7 @@ The template for rendering the page is listed next.
 The tricky part is the syntax for displaying <em>static content</em>, such as
 the plot file made in the <code>compute</code> function.
 
-<h3>User-provided validation  <a name="___sec27"></a></h3>
+<h3>User-provided validation  <a name="___sec28"></a></h3>
 
 <p>
 Django has a series of methods available for user-provided validation
@@ -425,13 +435,51 @@ We refer to the vast Django documentation for many other ways of
 validating forms. The reader is encouraged to run the <code>vib2</code>
 application and test out the validations we have implemented.
 
+<h3>Customizing widgets  <a name="___sec29"></a></h3>
+
 <p>
+One will occasionally have full control of the layout of the individual
+elements in a web form. These are typeset inside <code>input</code> tags in
+HTML. Django associates the term <em>widget</em> with an HTML form field. To set
+the size (width) of the field and other properties, one must in
+Django specify a <code>widgets</code> dictionary in the form class. The key
+is the name of the parameter in the model class, while the value
+is a widget class name. Standard input fields for numbers and
+text apply the <code>TextInput</code> widget. An example
+on setting the size of the <code>T</code> field to a width of 10 characters goes
+like
+
 <p>
 
-                <a href="._part0013_web4sa_plain.html"><img src="https://doconce.googlecode.com/hg/bundled/html_images/prev1.png" border=0 alt="previous"></a>
-                
-                <a href="._part0015_web4sa_plain.html"><img src="https://doconce.googlecode.com/hg/bundled/html_images/next1.png" border=0 alt="next"></a>
-                <!-- ------------------- end of main content --------------- -->
+<!-- code=python (from !bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">django.forms</span> <span style="color: #008000; font-weight: bold">import</span> TextInput
+
+<span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">InputForm</span>(ModelForm):
+    <span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Meta</span>:
+        model <span style="color: #666666">=</span> Input
+        widgets <span style="color: #666666">=</span> {
+            <span style="color: #BA2121">&#39;T&#39;</span>: TextInput(attrs<span style="color: #666666">=</span>{<span style="color: #BA2121">&#39;size&#39;</span>: <span style="color: #666666">10</span>}),
+        }
+</pre></div>
+<p>
+At the time of this writing, Django does not yet support the many
+additional HTML5 input fields. Nevertheless, the <code>parampool</code> package
+gives access to HTML5 widgets in a Django context.
+We recommend to use <code>parampool</code> to automatically generate the necessary
+Django files, and
+then one can view the form class in the <code>models.py</code> file for how
+HTML5 widgets can be used in the definition of the <code>widgets</code>
+dictionary.
+
+<p>
+<p>
+<!-- begin bottom navigation -->
+<a href="._part0013_web4sa_plain.html"><img src="http://hplgit.github.io/doconce/bundled/html_images/prev1.png" border=0 alt="previous"></a>
+
+<a href="._part0015_web4sa_plain.html"><img src="http://hplgit.github.io/doconce/bundled/html_images/next1.png" border=0 alt="next"></a>
+<!-- end bottom navigation -->
+
+<!-- ------------------- end of main content --------------- -->
 
 
 </body>

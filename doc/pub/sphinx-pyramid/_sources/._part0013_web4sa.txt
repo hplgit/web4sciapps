@@ -175,7 +175,27 @@ of course be changed by proper string replacements for the
 just write the ``width`` specification in the image tag for the PNG plot.
 
 
+Further work
+============
 
+ * Uploading of files: Just one button for a data file where we
+   compute mean and variance, see the average function but drop
+   the array argument.
 
+ * Log in and users. use a simple "compute" function to generate
+   code, just a textarea (string) that can be stored (diary).
+   This requires databases. Can generate a vib example via parampool to
+   display some more realistic code.
 
+ * Drawing in HTML5
+
+Resources:
+
+ * `Django: make user <https://docs.djangoproject.com/en/dev/topics/auth/default/#user-objects>`_
+
+ * `Django: read and write database <https://docs.djangoproject.com/en/dev/topics/db/queries/>`_
+
+ * Flask: read and write database:
+   `<http://pythonhosted.org/Flask-SQLAlchemy/quickstart.html>`_,
+   `<http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-iv-database>`_, and `the Flask login extension <https://flask-login.readthedocs.org/en/latest/>`_
 

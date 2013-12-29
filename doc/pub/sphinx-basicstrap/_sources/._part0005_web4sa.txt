@@ -8,7 +8,8 @@ Troubleshooting
    single: Flask; troubleshooting
 
 
-*Address already in use.* You can easily kill the Flask application and restart it, but sometimes
+**Address already in use.**
+You can easily kill the Flask application and restart it, but sometimes
 you will get an error that the address is already in use.
 To recover from this problem, run the ``lsof`` program to see which program
 that applies the 5000 port (Flask runs its server on ``http://127.0.0.1:5000``,
@@ -24,4 +25,5 @@ that occupies the port and force abortion of that program:
         Terminal> kill -9 48824
 
 You are now ready to restart a Flask application.
+
 

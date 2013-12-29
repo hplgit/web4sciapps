@@ -108,6 +108,7 @@
 <li><a class="reference internal" href="#">Handling multiple input variables in Django</a><ul>
 <li><a class="reference internal" href="#programming-the-django-application-2">Programming the Django application  (2)</a></li>
 <li><a class="reference internal" href="#user-provided-validation-2">User-provided validation  (2)</a></li>
+<li><a class="reference internal" href="#customizing-widgets">Customizing widgets</a></li>
 </ul>
 </li>
 </ul>
@@ -152,6 +153,7 @@
 <li><a class="reference internal" href="#">Handling multiple input variables in Django</a><ul>
 <li><a class="reference internal" href="#programming-the-django-application-2">Programming the Django application  (2)</a></li>
 <li><a class="reference internal" href="#user-provided-validation-2">User-provided validation  (2)</a></li>
+<li><a class="reference internal" href="#customizing-widgets">Customizing widgets</a></li>
 </ul>
 </li>
 </ul>
@@ -194,7 +196,7 @@
   <div class="section" id="handling-multiple-input-variables-in-django">
 <span id="wf-vib-django"></span><h1>Handling multiple input variables in Django<a class="headerlink" href="#handling-multiple-input-variables-in-django" title="Permalink to this headline">¶</a></h1>
 <p>We shall briefly how to work with multi-variable input in Django.
-The text is the Django counterpart to the section <a class="reference internal" href="web4sa.html#wf-vib-flask"><em>Handling multiple input variables in Flask</em></a>.
+The text is the Django counterpart to the section <a class="reference internal" href="._part0008_web4sa.html#wf-vib-flask"><em>Handling multiple input variables in Flask</em></a>.
 There are four float input variables: <span class="math">\(A\)</span>, <span class="math">\(b\)</span>, <span class="math">\(w\)</span>, and <span class="math">\(T\)</span>.
 A function <tt class="docutils literal"><span class="pre">compute</span></tt> in the file <tt class="docutils literal"><span class="pre">compute.py</span></tt> makes
 a plot of the function <span class="math">\(u(t)=Ae^{-bt}\sin (wt)\)</span>
@@ -202,11 +204,12 @@ depending on these four parameters and returns
 the name of the plot file. Our task is to define four input fields,
 execute the <tt class="docutils literal"><span class="pre">compute</span></tt> function and show the input fields together with
 the resulting plot,
-cf. Figures <a class="reference internal" href="web4sa.html#wf-vib1-flask-fig-input"><em>The input page</em></a>
-and <a class="reference internal" href="web4sa.html#wf-vib1-flask-fig-result"><em>The result page</em></a>.</p>
+cf. Figures <a class="reference internal" href="._part0008_web4sa.html#wf-vib1-flask-fig-input"><em>The input page</em></a>
+and <a class="reference internal" href="._part0008_web4sa.html#wf-vib1-flask-fig-result"><em>The result page</em></a>.</p>
 <div class="section" id="programming-the-django-application-2">
 <h2>Programming the Django application  (2)<a class="headerlink" href="#programming-the-django-application-2" title="Permalink to this headline">¶</a></h2>
-<p>Any Django app needs a project, but here we reuse the project
+<p><strong>Adding the app to a project.</strong>
+Any Django app needs a project, but here we reuse the project
 we set up for the scientific hello world examples. We go to
 the directory <tt class="docutils literal"><span class="pre">apps/django_apps</span></tt> and create the Django app <tt class="docutils literal"><span class="pre">vib1</span></tt>:</p>
 <div class="highlight-console"><div class="highlight"><pre><span class="go">Terminal&gt; python ../../django_project/manage.py startapp vib1</span>
@@ -223,9 +226,11 @@ call in <tt class="docutils literal"><span class="pre">urls.py</span></tt>.</li>
 <p>These steps ensure that Django can find our application as a module/package,
 that Django can find our templates associated with this application,
 and that the URL address applies the name <tt class="docutils literal"><span class="pre">vib1</span></tt> to reach the application.</p>
-<p>The computations in our application are put in a file <tt class="docutils literal"><span class="pre">compute.py</span></tt>
-and explained in detail in the section <a class="reference internal" href="web4sa.html#wf-vib1-flask-app"><em>Programming the Flask application  (2)</em></a>.</p>
-<p id="index-0">We can now write <tt class="docutils literal"><span class="pre">models.py</span></tt> and the <tt class="docutils literal"><span class="pre">Input</span></tt> class that defines
+<p><strong>The compute part.</strong>
+The computations in our application are put in a file <tt class="docutils literal"><span class="pre">compute.py</span></tt>
+and explained in detail in the section <a class="reference internal" href="._part0008_web4sa.html#wf-vib1-flask-app"><em>Programming the Flask application  (2)</em></a>.</p>
+<p id="index-0"><strong>The model.</strong>
+We can now write <tt class="docutils literal"><span class="pre">models.py</span></tt> and the <tt class="docutils literal"><span class="pre">Input</span></tt> class that defines
 the form fields for the four input variables:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
 <span class="kn">from</span> <span class="nn">django.forms</span> <span class="kn">import</span> <span class="n">ModelForm</span>
@@ -255,7 +260,8 @@ one must start the text with a space, as we have demonstrated above.
 We also provide a default
 value such that all fields have a value when the user sees
 the page.</p>
-<p id="index-1">The <tt class="docutils literal"><span class="pre">views.py</span></tt> file looks as follows:</p>
+<p id="index-1"><strong>The view.</strong>
+The <tt class="docutils literal"><span class="pre">views.py</span></tt> file looks as follows:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render_to_response</span>
 <span class="kn">from</span> <span class="nn">django.template</span> <span class="kn">import</span> <span class="n">RequestContext</span>
 <span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpResponse</span>
@@ -359,7 +365,7 @@ be implemented by</p>
 <p>However, this function takes more than the value as argument. We therefore
 need to wrap it by a function with <tt class="docutils literal"><span class="pre">value</span></tt> as the only argument. The following
 utility returns such a
-function (see the section <a class="reference internal" href="web4sa.html#wf-vib1-flask-validation"><em>User-provided validation  (1)</em></a> for more
+function (see the section <a class="reference internal" href="._part0011_web4sa.html#wf-vib1-flask-validation"><em>User-provided validation  (1)</em></a> for more
 explanation):</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">functools</span>
 
@@ -406,6 +412,37 @@ a <tt class="docutils literal"><span class="pre">clean_T</span></tt> method goes
 <p>We refer to the vast Django documentation for many other ways of
 validating forms. The reader is encouraged to run the <tt class="docutils literal"><span class="pre">vib2</span></tt>
 application and test out the validations we have implemented.</p>
+</div>
+<div class="section" id="customizing-widgets">
+<h2>Customizing widgets<a class="headerlink" href="#customizing-widgets" title="Permalink to this headline">¶</a></h2>
+<p>One will occasionally have full control of the layout of the individual
+elements in a web form. These are typeset inside <tt class="docutils literal"><span class="pre">input</span></tt> tags in
+HTML. Django associates the term <em>widget</em> with an HTML form field. To set
+the size (width) of the field and other properties, one must in
+Django specify a <tt class="docutils literal"><span class="pre">widgets</span></tt> dictionary in the form class. The key
+is the name of the parameter in the model class, while the value
+is a widget class name. Standard input fields for numbers and
+text apply the <tt class="docutils literal"><span class="pre">TextInput</span></tt> widget. An example
+on setting the size of the <tt class="docutils literal"><span class="pre">T</span></tt> field to a width of 10 characters goes
+like</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.forms</span> <span class="kn">import</span> <span class="n">TextInput</span>
+
+<span class="k">class</span> <span class="nc">InputForm</span><span class="p">(</span><span class="n">ModelForm</span><span class="p">):</span>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Input</span>
+        <span class="n">widgets</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s">&#39;T&#39;</span><span class="p">:</span> <span class="n">TextInput</span><span class="p">(</span><span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;size&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">}),</span>
+        <span class="p">}</span>
+</pre></div>
+</div>
+<p>At the time of this writing, Django does not yet support the many
+additional HTML5 input fields. Nevertheless, the <tt class="docutils literal"><span class="pre">parampool</span></tt> package
+gives access to HTML5 widgets in a Django context.
+We recommend to use <tt class="docutils literal"><span class="pre">parampool</span></tt> to automatically generate the necessary
+Django files, and
+then one can view the form class in the <tt class="docutils literal"><span class="pre">models.py</span></tt> file for how
+HTML5 widgets can be used in the definition of the <tt class="docutils literal"><span class="pre">widgets</span></tt>
+dictionary.</p>
 </div>
 </div>
 

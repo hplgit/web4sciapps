@@ -697,11 +697,3 @@ Resources:
    URL: "http://pythonhosted.org/Flask-SQLAlchemy/quickstart.html",
    URL: "http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-iv-database", and "the Flask login extension": "https://flask-login.readthedocs.org/en/latest/"
 
-
-!bc
-For å presentere dette tror jeg, for både Django og Flask, at det er lurt å starte med et veldig enkelt lagre til og lese fra database-case, uten noen form for bruker involvert. F.eks. en type dagbok-app, der eneste input er et TextAreaField, og alle tidligere poster kan vises. Bare som første eksempel på at tidligere kjøringer kan lagres.
-
-Og deretter bruke de samme prinsippene på å opprette bruker, da uten noen annen form for lagring til databasen enn brukeridentiteten. Ser for meg et enkelt eksempel der det er lite annet i view.html enn å vise hvem som er logget inn, f.eks. vise brukerinfo som brukernavn, fornavn, etternavn og email. Og da er det lite problem å lage login og logout også, så man kan logge ut og inn uten at noe går tapt.
-
-Tilslutt kan dette syes sammen ved å koble bruker- og den aktuelle problemdatabasen sammen vha foreignkey. For INF3331, der det virker som mange lider av litt matteangst, kan jo dette f.eks. resultere i en blogg, som virker å være veldig populært i diverse tutorials.
-!ec

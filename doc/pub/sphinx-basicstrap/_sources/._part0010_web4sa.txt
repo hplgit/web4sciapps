@@ -98,7 +98,7 @@ LaTeX rendering looks like in the browser.
 
 .. _wf:vib1:flask:fig:latex:
 
-.. figure:: fig-web4sa/vib1_flask_latex.png
+.. figure:: vib1_flask_latex.png
    :width: 650
 
    *LaTeX typesetting of mathematical symbols*
@@ -118,7 +118,7 @@ the plot in the second column, while the second row features the
 
 .. _wf:vib1:flask:fig:sidebyside:
 
-.. figure:: fig-web4sa/vib1_flask_table2.png
+.. figure:: vib1_flask_table2.png
    :width: 700
 
    *New design with input and output side by side*

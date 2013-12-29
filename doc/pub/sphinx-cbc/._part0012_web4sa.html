@@ -59,7 +59,8 @@ files that work with <em>any</em> <tt class="docutils literal"><span class="pre"
 demonstrate some advanced, powerful features of Python. The source code
 is found in the <a class="reference external" href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/vib3">vib3</a>
 directory.</p>
-<p><em>Inspecting function signatures.</em> The basic idea is that the Python module <tt class="docutils literal"><span class="pre">inspect</span></tt> can be used to
+<p><strong>Inspecting function signatures.</strong>
+The basic idea is that the Python module <tt class="docutils literal"><span class="pre">inspect</span></tt> can be used to
 retrieve the names of the arguments and the default values of
 keyword arguments of <em>any</em> given <tt class="docutils literal"><span class="pre">compute</span></tt> function. Say we have some</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">mycompute</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">x_range</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">]):</span>
@@ -81,7 +82,8 @@ keyword arguments of <em>any</em> given <tt class="docutils literal"><span class
 <p>We have all the argument names in <tt class="docutils literal"><span class="pre">arg_names</span></tt> and
 <tt class="docutils literal"><span class="pre">defaults[i]</span></tt> is the default value of keyword argument
 <tt class="docutils literal"><span class="pre">arg_names[j]</span></tt>, where <tt class="docutils literal"><span class="pre">j</span> <span class="pre">=</span> <span class="pre">len(arg_names)</span> <span class="pre">-</span> <span class="pre">len(defaults)</span> <span class="pre">+</span> <span class="pre">i</span></tt>.</p>
-<p><em>Generating the model.</em> Knowing the name <tt class="docutils literal"><span class="pre">name</span></tt> of some argument in the <tt class="docutils literal"><span class="pre">compute</span></tt>
+<p><strong>Generating the model.</strong>
+Knowing the name <tt class="docutils literal"><span class="pre">name</span></tt> of some argument in the <tt class="docutils literal"><span class="pre">compute</span></tt>
 function, we can make the corresponding class attribute
 in the <tt class="docutils literal"><span class="pre">InputForm</span></tt> class by</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="nb">setattr</span><span class="p">(</span><span class="n">InputForm</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">FloatForm</span><span class="p">())</span>
@@ -153,7 +155,8 @@ then goes as follows:</p>
 </div>
 <p>(The <tt class="docutils literal"><span class="pre">compute_gamma</span></tt> function imported from <tt class="docutils literal"><span class="pre">compute</span></tt> is the
 only application-specific statement in this code and will be explained later.)</p>
-<p><em>Generating the view.</em> The call to <tt class="docutils literal"><span class="pre">compute</span></tt> in the <tt class="docutils literal"><span class="pre">controller.py</span></tt> file must also be expressed
+<p><strong>Generating the view.</strong>
+The call to <tt class="docutils literal"><span class="pre">compute</span></tt> in the <tt class="docutils literal"><span class="pre">controller.py</span></tt> file must also be expressed
 in a general way such that the call handles any type and number of
 parameters. This can be done in two ways, using either positional
 or keyword arguments.</p>
@@ -199,7 +202,8 @@ The generic solution is</p>
 <p>The <tt class="docutils literal"><span class="pre">compute(**kwargs)</span></tt> call is equivalent to <tt class="docutils literal"><span class="pre">compute(A=1,</span> <span class="pre">b=3,</span> <span class="pre">w=0.5)</span></tt>
 in case <tt class="docutils literal"><span class="pre">kwargs</span> <span class="pre">=</span> <span class="pre">{'w'=0.5,</span> <span class="pre">'A':1,</span> <span class="pre">'b':3}</span></tt> (recall that the order of
 the keys in a Python dictionary is undetermined).</p>
-<p><em>Generating the template.</em> It remains to generate the right HTML template. The HTML code depends
+<p><strong>Generating the template.</strong>
+It remains to generate the right HTML template. The HTML code depends
 on what the returned <tt class="docutils literal"><span class="pre">result</span></tt> object from <tt class="docutils literal"><span class="pre">compute</span></tt> contains. Only a
 human who has the read <tt class="docutils literal"><span class="pre">compute</span></tt> code knows the details of the returned
 result. Therefore, we leave it to a human to provide the part
@@ -266,7 +270,8 @@ The complete, generic form of this function is then</p>
     <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><em>Application.</em> Let us apply the files above to plot the gamma probability density function</p>
+<p><strong>Application.</strong>
+Let us apply the files above to plot the gamma probability density function</p>
 <div class="math">
 \[g(x; a, h, A) = \frac{|h|}{\Gamma(a)A}\left(\frac{x}{A}\right)^{ah-1}
 e^{-\left(\frac{x}{A}\right)^h},\]</div>
@@ -331,7 +336,7 @@ making a plot of <span class="math">\(g\)</span> og <span class="math">\(G\)</sp
 </pre></div>
 </div>
 <p>The <tt class="docutils literal"><span class="pre">compute_gamma</span></tt> function returns a tuple of four values.
-We want output as displayed in Figure <a class="reference internal" href="web4sa.html#wf-vib3-flask-fig-gamma"><em>Design of a web page illustrating the gamma probability functions</em></a>.</p>
+We want output as displayed in Figure <a class="reference internal" href="#wf-vib3-flask-fig-gamma"><em>Design of a web page illustrating the gamma probability functions</em></a>.</p>
 <div class="figure" id="wf-vib3-flask-fig-gamma">
 <img alt="_images/vib3_flask_gamma.png" src="_images/vib3_flask_gamma.png" style="width: 700px;" />
 <p class="caption"><em>Design of a web page illustrating the gamma probability functions</em></p>

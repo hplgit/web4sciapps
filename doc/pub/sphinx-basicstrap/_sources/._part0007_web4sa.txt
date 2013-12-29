@@ -11,7 +11,8 @@ so we copy this file from the ``mvc`` directory to the ``hw1`` directory
 for convenience (we could alternatively add ``../mvc`` to ``sys.path`` such that
 ``import compute`` would work from the ``hw1`` directory).
 
-*The user interaction.* The web application offers a text field where the user can
+**The user interaction.**
+The web application offers a text field where the user can
 write the value of ``r``, see Figure :ref:`wf:hw1:django:fig:input`.
 After clicking on the *equals* button,
 the mathematics is performed and a new page as
@@ -20,7 +21,7 @@ seen in Figure :ref:`wf:hw1:django:fig:result` appears.
 
 .. _wf:hw1:django:fig:input:
 
-.. figure:: fig-web4sa/hw1_django_input.png
+.. figure:: hw1_django_input.png
    :width: 600
 
    *The input page*
@@ -29,7 +30,7 @@ seen in Figure :ref:`wf:hw1:django:fig:result` appears.
 
 .. _wf:hw1:django:fig:result:
 
-.. figure:: fig-web4sa/hw1_django_output.png
+.. figure:: hw1_django_output.png
    :width: 600
 
    *The result page*
@@ -44,7 +45,8 @@ seen in Figure :ref:`wf:hw1:django:fig:result` appears.
    single: Django; models.py
 
 
-*The model.* The ``models.py`` file contains the model, which consists
+**The model.**
+The ``models.py`` file contains the model, which consists
 of the data we need in the application, stored in Django's data types.
 Our data consists of one number, called ``r``, and ``models.py`` then
 look like
@@ -78,7 +80,8 @@ if we by convention apply the name ``Input`` for the class holding the data.
    single: Django; views.py
 
 
-*The view.* The ``views.py`` file contains a function ``index`` which defines
+**The view.**
+The ``views.py`` file contains a function ``index`` which defines
 the actions we want to perform when invoking
 the URL ( here ``http://127.0.0.1:8000/hw1/``).
 In addition, ``views.py`` has the ``present_output`` function from
@@ -122,7 +125,8 @@ with which the user is supposed to interact.
    single: Django; HTML templates
 
 
-*Making the input page.* The input consists of a web form with
+**Making the input page.**
+The input consists of a web form with
 one field where we can fill in our ``r`` variable. This page
 is realized by the two central statements
 
@@ -166,7 +170,8 @@ results in the HTML code
         </form>
 
 
-*Making the results page.* When then user has filled in a value in the text field on the input
+**Making the results page.**
+When then user has filled in a value in the text field on the input
 page, the ``index`` function is called again and ``request.method`` equals
 ``'POST'``. A new form object is made, this time with user info (``request.POST``).
 We can check that the form is valid and if so, proceed with
@@ -234,7 +239,7 @@ The output page should then look as shown in Figure :ref:`wf:hw2:django:fig:resu
 
 .. _wf:hw2:django:fig:result:
 
-.. figure:: fig-web4sa/hw2_django_output.png
+.. figure:: hw2_django_output.png
    :width: 600
 
    *The modified result page*
@@ -334,5 +339,6 @@ is a float, i.e., if ``s`` is computed. Otherwise, ``s`` has the
 default value ``None`` and we send an empty string to the template.
 The template language allows tests using Python syntax, but the
 if-block must be explicitly ended by ``{% endif %}``.
+
 
 

@@ -21,7 +21,8 @@ demonstrate some advanced, powerful features of Python. The source code
 is found in the `vib3 <https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/vib3>`_
 directory.
 
-*Inspecting function signatures.* The basic idea is that the Python module ``inspect`` can be used to
+**Inspecting function signatures.**
+The basic idea is that the Python module ``inspect`` can be used to
 retrieve the names of the arguments and the default values of
 keyword arguments of *any* given ``compute`` function. Say we have some
 
@@ -53,7 +54,8 @@ We have all the argument names in ``arg_names`` and
 ``defaults[i]`` is the default value of keyword argument
 ``arg_names[j]``, where ``j = len(arg_names) - len(defaults) + i``.
 
-*Generating the model.* Knowing the name ``name`` of some argument in the ``compute``
+**Generating the model.**
+Knowing the name ``name`` of some argument in the ``compute``
 function, we can make the corresponding class attribute
 in the ``InputForm`` class by
 
@@ -138,7 +140,8 @@ then goes as follows:
 (The ``compute_gamma`` function imported from ``compute`` is the
 only application-specific statement in this code and will be explained later.)
 
-*Generating the view.* The call to ``compute`` in the ``controller.py`` file must also be expressed
+**Generating the view.**
+The call to ``compute`` in the ``controller.py`` file must also be expressed
 in a general way such that the call handles any type and number of
 parameters. This can be done in two ways, using either positional
 or keyword arguments.
@@ -196,7 +199,8 @@ The ``compute(**kwargs)`` call is equivalent to ``compute(A=1, b=3, w=0.5)``
 in case ``kwargs = {'w'=0.5, 'A':1, 'b':3}`` (recall that the order of
 the keys in a Python dictionary is undetermined).
 
-*Generating the template.* It remains to generate the right HTML template. The HTML code depends
+**Generating the template.**
+It remains to generate the right HTML template. The HTML code depends
 on what the returned ``result`` object from ``compute`` contains. Only a
 human who has the read ``compute`` code knows the details of the returned
 result. Therefore, we leave it to a human to provide the part
@@ -274,7 +278,8 @@ The complete, generic form of this function is then
             app.run(debug=True)
 
 
-*Application.* Let us apply the files above to plot the gamma probability density function
+**Application.**
+Let us apply the files above to plot the gamma probability density function
 
 
 .. math::
@@ -357,7 +362,7 @@ We want output as displayed in Figure :ref:`wf:vib3:flask:fig:gamma`.
 
 .. _wf:vib3:flask:fig:gamma:
 
-.. figure:: fig-web4sa/vib3_flask_gamma.png
+.. figure:: vib3_flask_gamma.png
    :width: 700
 
    *Design of a web page illustrating the gamma probability functions*
