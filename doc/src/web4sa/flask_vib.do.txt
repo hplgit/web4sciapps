@@ -27,6 +27,14 @@ FIGURE: [fig-web4sa/vib1_flask_input, width=500] The input page. label{wf:vib1:f
 
 FIGURE: [fig-web4sa/vib1_flask_output, width=700] The result page. label{wf:vib1:flask:fig:result}
 
+We shall make a series of different versions of this app:
+
+ * `vib1` for the basic set-up and illustration of tailoring the HTML code.
+ * `vib2` for custom validation of input, governed by the programmer.
+ * `vib3` for automatic generation of the Flask app (!).
+ * `vib4` for inlining graphics in the HTML code.
+ * `vib5` for storing computed results in user accounts.
+
 ===== Programming the Flask application =====
 label{wf:vib1:flask:app}
 
@@ -40,6 +48,9 @@ Flask app that behaves as depicted in Figures ref{wf:vib1:flask:fig:input}
 and ref{wf:vib1:flask:fig:result}. We start with the
 `compute.py` module since it contains only the computation of $u(t)$
 and the making of the plot, without any interaction with Flask.
+
+The files associated with this app are found in the "`vib1`":
+"${github_path}/${app_path}" directory.
 
 __The compute part.__
 More specifically, inside `compute.py`, we have a function for
@@ -217,7 +228,7 @@ The enabling template file is `view4.html`:
 
 
 !split
-===== User-provided validation =====
+===== Custom validation =====
 label{wf:vib1:flask:validation}
 
 ## Define Mako variable for path to source code
@@ -648,7 +659,7 @@ figdata_svg = '<svg' + figfile.buf.split('<svg')[1]
 Now, `figdata_svg` can be directly inserted in HTML code without
 any surrounding tags.
 The file "`compute.py`": "${github_path}/${app_path}/compute.py"
-in the `vib4_flask` application directory contains all the details.
+in the `vib4` application directory contains all the details.
 
 The `compute_gamma` function returns six values:
 the PNG data for the $g$ plot, the PNG data for the $G$ plot,
@@ -670,12 +681,50 @@ XML code where the mentioned characters are essential part of the syntax.
 Writing `{{str|safe}}` ensures that the contents of the string `str`
 are not altered before being embedded in the HTML text.
 
-Trying out the `vib4_flask` application we see that the SVG plots are
+Trying out the `vib4` application we see that the SVG plots are
 much bigger than the width-controlled PNG plots.
 The width and height of SVG plots are specified in the XML code and can
 of course be changed by proper string replacements for the
 `width`, `height`, and `viewBox` specifications. It is far easier to
 just write the `width` specification in the image tag for the PNG plot.
+
+!split
+===== User login and storage of computed results =====
+label{wf:vib1:flask:login}
+
+## Define Mako variable for path to source code
+<%
+app_path = src_path + 'flask_apps/vib5'
+%>
+
+idx{Flask!login}
+idx{Flask!database}
+
+We now want to make an app where the computed results can be stored in
+a database. To this end, each user must create an account and login to
+this account for archiving results and for browsing previous runs of
+the application. More files are needed for this purpose, compared to
+the previous apps, and the files are located in the "`vib5`":
+"${github_path}/${app_path}". The `compute.py` file contains the
+`compute_gamma` function from the previous app (`vib4`) in Section
+ref{wf:vib3:flask:nofiles}.
+
+`db_models.py`:
+
+@@@CODE ${app_path}/db_models.py
+
+`app.py`:
+
+@@@CODE ${app_path}/app.py
+
+`forms.py`:
+
+@@@CODE ${app_path}/forms.py
+
+`controller.py`:
+
+@@@CODE ${app_path}/controller.py
+
 
 
 ======= Further work =======
@@ -696,4 +745,3 @@ Resources:
  * Flask: read and write database:
    URL: "http://pythonhosted.org/Flask-SQLAlchemy/quickstart.html",
    URL: "http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-iv-database", and "the Flask login extension": "https://flask-login.readthedocs.org/en/latest/"
-

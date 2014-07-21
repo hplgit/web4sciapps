@@ -100,7 +100,7 @@ The template for rendering the page is listed next.
 The tricky part is the syntax for displaying *static content*, such as
 the plot file made in the `compute` function.
 
-===== User-provided validation =====
+===== Custom validation =====
 
 ## Define Mako variable for path to source code
 <%

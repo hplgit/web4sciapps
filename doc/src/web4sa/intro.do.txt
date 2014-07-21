@@ -85,6 +85,17 @@ To work with Django, you need to know about Python packages, modules,
 and classes.
 # #endif
 
+<%
+src_path = 'src-web4sa/apps/'
+github_path = 'https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa'
+%>
+
+All the files associated with this document are available in a
+"GitHub repository": "https://github.com/hplgit/web4sciapps/".
+The relevant files for the web applications are located
+in a subtree "`doc/src/web4sa/src-web4sa/apps`": "${github_path}/${app_path}"
+of this repository.
+
 !split
 ===== The MVC pattern =====
 
@@ -174,7 +185,6 @@ split to meet the requirements of the MVC software design pattern.
 #src_path = '../../../src/apps/'
 src_path = 'src-web4sa/apps/'
 app_path = src_path + 'py_apps/hw_orig'
-github_path = 'https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa'
 %>
 
 We shall start with the simplest possible application,
