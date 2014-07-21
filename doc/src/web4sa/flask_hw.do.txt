@@ -238,4 +238,3 @@ python  48824  hpl    3u  IPv4 1128848      0t0  TCP ...
 Terminal> kill -9 48824
 !ec
 You are now ready to restart a Flask application.
-
