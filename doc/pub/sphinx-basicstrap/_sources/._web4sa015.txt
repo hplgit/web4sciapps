@@ -1,0 +1,15 @@
+.. !split
+
+.. _wf:vib1:flask:bootstrap:
+
+Using Bootstrap styles
+----------------------
+
+.. index::
+   single: Flask; bootstrap style
+
+.. `<http://pythonhosted.org/Flask-Bootstrap/basic-usage.html>`_
+
+Not yet written. Must be based on
+`<http://pythonhosted.org/Flask-Bootstrap/basic-usage.html>`_.
+

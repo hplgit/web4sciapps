@@ -1,0 +1,431 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Doconce: http://code.google.com/p/doconce/" />
+
+<link rel="stylesheet" href="https://raw.githubusercontent.com/hplgit/doconce/master/bundled/html_styles/style_vagrant/css/twitter_bootstrap.css">
+<link rel="stylesheet" href="https://raw.githubusercontent.com/hplgit/doconce/master/bundled/html_styles/style_vagrant/css/vagrant.css">
+<!-- Define color of headings here (last definition counts) -->
+<style type="text/css">
+h1, h2, h3, h4, h5, h6 {
+  color: #000;     /* black */
+  color: #999;     /* gray */
+  color: #005580;  /* dark blue */
+  color: #08c;     /* characteristic blue */
+</style>
+</head>
+<body>
+
+<title>Using Flask for Scientific Web Applications</title>
+
+<div class="container">
+ <div class="row Header with-border">
+  <div class="span3 Module logo">
+   <h1><a href="/">Flask<span class="subtitle">4scientists</span></a></h1>
+  </div>
+  <div class="span9">
+   <div class="Module navigation">
+    <ul>
+     <li> <a href="http://flask.pocoo.org/">Flask</a></li>
+    </ul>
+   </div>
+  </div>
+ </div>
+</div>
+
+<div class="row">
+ <div class="span3 Module sidebar">
+  <div class="well" style="padding: 8px 0px;">
+   <ul class="nav nav-list">
+          <!-- navigation toc: "Web frameworks" --> <li><a href="._web4sa_flask000.html#___sec0" style="font-size: 80%;"><b>Web frameworks</b></a></li>
+     <!-- navigation toc: "The MVC pattern" --> <li><a href="._web4sa_flask001.html#___sec1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The MVC pattern</a></li>
+     <!-- navigation toc: "A very simple application" --> <li><a href="._web4sa_flask002.html#___sec2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;A very simple application</a></li>
+     <!-- navigation toc: "Application of the MVC pattern" --> <li><a href="._web4sa_flask003.html#wf:hw:mvc" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Application of the MVC pattern</a></li>
+     <!-- navigation toc: "Making a Flask application" --> <li><a href="._web4sa_flask004.html#___sec4" style="font-size: 80%;"><b>Making a Flask application</b></a></li>
+     <!-- navigation toc: "Programming the Flask application" --> <li><a href="._web4sa_flask004.html#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Programming the Flask application</a></li>
+     <!-- navigation toc: "Equipping the input page with output results" --> <li><a href="._web4sa_flask004.html#___sec6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Equipping the input page with output results</a></li>
+     <!-- navigation toc: "Splitting the app into model, view, and controller files" --> <li><a href="._web4sa_flask004.html#wf:hw3:flask" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Splitting the app into model, view, and controller files</a></li>
+     <!-- navigation toc: "Troubleshooting" --> <li><a href="._web4sa_flask005.html#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Troubleshooting</a></li>
+     <!-- navigation toc: "Handling multiple input variables in Flask" --> <li class="active"><a href=#wf:vib:flask" style="font-size: 80%;"><b>Handling multiple input variables in Flask</b></a></li>
+     <!-- navigation toc: "Programming the Flask application" --> <li><a href=#wf:vib1:flask:app" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Programming the Flask application</a></li>
+     <!-- navigation toc: "Implementing error checking in the template" --> <li><a href="._web4sa_flask007.html#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementing error checking in the template</a></li>
+     <!-- navigation toc: "Using style sheets" --> <li><a href="._web4sa_flask008.html#___sec12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Using style sheets</a></li>
+     <!-- navigation toc: "Using LaTeX mathematics" --> <li><a href="._web4sa_flask008.html#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Using LaTeX mathematics</a></li>
+     <!-- navigation toc: "Rearringing the elements in the HTML template" --> <li><a href="._web4sa_flask008.html#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Rearringing the elements in the HTML template</a></li>
+     <!-- navigation toc: "Custom validation" --> <li><a href="._web4sa_flask009.html#wf:vib1:flask:validation" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Custom validation</a></li>
+     <!-- navigation toc: "Autogenerating the code" --> <li><a href="._web4sa_flask010.html#wf:vib3:flask:autogen" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Autogenerating the code</a></li>
+     <!-- navigation toc: "Avoiding plot files" --> <li><a href="._web4sa_flask011.html#wf:vib3:flask:nofiles" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Avoiding plot files</a></li>
+     <!-- navigation toc: "User login and storage of computed results" --> <li><a href="._web4sa_flask012.html#wf:vib1:flask:login" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;User login and storage of computed results</a></li>
+     <!-- navigation toc: "Using Bootstrap styles" --> <li><a href="._web4sa_flask013.html#wf:vib1:flask:bootstrap" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Using Bootstrap styles</a></li>
+     <!-- navigation toc: "Further work" --> <li><a href="._web4sa_flask014.html#___sec22" style="font-size: 80%;"><b>Further work</b></a></li>
+     <!-- navigation toc: "Exercises" --> <li><a href="._web4sa_flask015.html#___sec23" style="font-size: 80%;"><b>Exercises</b></a></li>
+     <!-- navigation toc: "Exercise 1: Add two numbers" --> <li><a href="._web4sa_flask015.html#wf:exer:add2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 1: Add two numbers</a></li>
+     <!-- navigation toc: "Exercise 2: Extend the <code>vib3_flask</code> app" --> <li><a href="._web4sa_flask015.html#wf:exer:vib3:demo" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 2: Extend the <code>vib3_flask</code> app</a></li>
+     <!-- navigation toc: "Exercise 3: Equip the <code>vib3_flask</code> app with more data types" --> <li><a href="._web4sa_flask015.html#wf:exer:vib3:lists" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 3: Equip the <code>vib3_flask</code> app with more data types</a></li>
+     <!-- navigation toc: "Exercise 4: Auto-generate code from function signature" --> <li><a href="._web4sa_flask015.html#___sec27" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 4: Auto-generate code from function signature</a></li>
+     <!-- navigation toc: "Flask resources" --> <li><a href="._web4sa_flask015.html#___sec28" style="font-size: 80%;"><b>Flask resources</b></a></li>
+     <!-- navigation toc: "Remaining" --> <li><a href="._web4sa_flask015.html#___sec29" style="font-size: 80%;"><b>Remaining</b></a></li>
+
+    </ul>
+   </div>
+  </div>
+
+  <div class="span9">
+
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Web frameworks ', 1, None, '___sec0'),
+              (' The MVC pattern ', 2, None, '___sec1'),
+              (' A very simple application ', 2, None, '___sec2'),
+              (' Application of the MVC pattern ',
+               2,
+               'wf:hw:mvc',
+               'wf:hw:mvc'),
+              (' Making a Flask application ', 1, None, '___sec4'),
+              (' Programming the Flask application ', 2, None, '___sec5'),
+              (' Equipping the input page with output results ',
+               2,
+               None,
+               '___sec6'),
+              (' Splitting the app into model, view, and controller files ',
+               2,
+               'wf:hw3:flask',
+               'wf:hw3:flask'),
+              (' Troubleshooting ', 2, None, '___sec8'),
+              (' Handling multiple input variables in Flask ',
+               1,
+               'wf:vib:flask',
+               'wf:vib:flask'),
+              (' Programming the Flask application ',
+               2,
+               'wf:vib1:flask:app',
+               'wf:vib1:flask:app'),
+              (' Implementing error checking in the template ',
+               2,
+               None,
+               '___sec11'),
+              (' Using style sheets ', 2, None, '___sec12'),
+              (' Using LaTeX mathematics ', 2, None, '___sec13'),
+              (' Rearringing the elements in the HTML template ',
+               2,
+               None,
+               '___sec14'),
+              (' Custom validation ',
+               2,
+               'wf:vib1:flask:validation',
+               'wf:vib1:flask:validation'),
+              (' Autogenerating the code ',
+               2,
+               'wf:vib3:flask:autogen',
+               'wf:vib3:flask:autogen'),
+              (' Avoiding plot files ',
+               2,
+               'wf:vib3:flask:nofiles',
+               'wf:vib3:flask:nofiles'),
+              (' PNG plots ', 3, None, '___sec18'),
+              (' SVG plots ', 3, None, '___sec19'),
+              (' User login and storage of computed results ',
+               2,
+               'wf:vib1:flask:login',
+               'wf:vib1:flask:login'),
+              (' Using Bootstrap styles ',
+               2,
+               'wf:vib1:flask:bootstrap',
+               'wf:vib1:flask:bootstrap'),
+              (' Further work ', 1, None, '___sec22'),
+              (' Exercises ', 1, None, '___sec23'),
+              (' Exercise 1: Add two numbers ',
+               2,
+               'wf:exer:add2',
+               'wf:exer:add2'),
+              (' Exercise 2: Extend the `vib3_flask` app ',
+               2,
+               'wf:exer:vib3:demo',
+               'wf:exer:vib3:demo'),
+              (' Exercise 3: Equip the `vib3_flask` app with more data types ',
+               2,
+               'wf:exer:vib3:lists',
+               'wf:exer:vib3:lists'),
+              (' Exercise 4: Auto-generate code from function signature ',
+               2,
+               None,
+               '___sec27'),
+              (' Flask resources ', 1, None, '___sec28'),
+              (' Remaining ', 1, None, '___sec29')]}
+end of tocinfo -->
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<a name="part0006"></a>
+<!-- !split -->
+
+<h1 id="wf:vib:flask">Handling multiple input variables in Flask<a name="wf:vib:flask"></a></h1>
+
+The scientific hello world example shows how to work with one input
+variable and one output variable. We can easily derive an extensible
+recipe for apps with a collection of input variables and some
+corresponding HTML code as result. Multiple input variables are listed
+in the <code>InputForm</code> class using different types for different forms
+(text field, float field, integer field, check box field for boolean
+values, etc.).  The value of these variables will be available in a
+<code>form</code> object for computation. It is then a matter of setting
+up a template code where the various variables if the <code>form</code> object
+are formatted in HTML code as desired.
+
+<p>
+Our sample web application
+addresses the task of plotting the function \( u(t)=Ae^{-bt}\sin (wt) \) for
+\( t\in [0,T] \). The web application must have fields for the numbers \( A \),
+\( b \), \( w \), and \( T \), and a <em>Compute</em> button, as shown in Figure
+<a href="#wf:vib1:flask:fig:input">4</a>. Filling in values, say \( 0.1 \) for \( b \) and
+\( 20 \) for \( T \), results in what we see in Figure <a href="#wf:vib1:flask:fig:result">5</a>,
+i.e., a plot of \( u(t) \) is added after the input fields and the <em>Compute</em>
+button.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 4:  The input page. <a name="wf:vib1:flask:fig:input"></a> </p></center>
+<p><img src="fig-web4sa/vib1_flask_input.png" align="bottom" width=500></p>
+</center>
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 5:  The result page. <a name="wf:vib1:flask:fig:result"></a> </p></center>
+<p><img src="fig-web4sa/vib1_flask_output.png" align="bottom" width=700></p>
+</center>
+
+<p>
+We shall make a series of different versions of this app:
+
+<ul>
+ <li> <code>vib1</code> for the basic set-up and illustration of tailoring the HTML code.</li>
+ <li> <code>vib2</code> for custom validation of input, governed by the programmer.</li>
+ <li> <code>vib3</code> for automatic generation of the Flask app (!).</li>
+ <li> <code>vib4</code> for inlining graphics in the HTML code.</li>
+ <li> <code>vib5</code> for storing computed results in user accounts.</li>
+</ul>
+
+<h2 id="wf:vib1:flask:app">Programming the Flask application<a name="wf:vib1:flask:app"></a></h2>
+
+The forthcoming text explains the necessary steps to realize a
+Flask app that behaves as depicted in Figures <a href="#wf:vib1:flask:fig:input">4</a>
+and <a href="#wf:vib1:flask:fig:result">5</a>. We start with the
+<code>compute.py</code> module since it contains only the computation of \( u(t) \)
+and the making of the plot, without any interaction with Flask.
+
+<p>
+The files associated with this app are found in the <a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/vib1" target="_self"><tt>vib1</tt></a> directory.
+
+<p>
+<b>The compute part.</b>
+More specifically, inside <code>compute.py</code>, we have a function for
+evaluating \( u(t) \) and a <code>compute</code> function for making the plot. The
+return value of the latter is the name of the plot file, which should
+get a unique name every time the <code>compute</code> function is called such
+that the browser cannot reuse an already cached image. Flask
+applications must have all extra files (CSS, images, etc.) in a
+subdirectory <code>static</code>.
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> exp, cos, linspace
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plt</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">os</span><span style="color: #666666">,</span> <span style="color: #0000FF; font-weight: bold">time</span><span style="color: #666666">,</span> <span style="color: #0000FF; font-weight: bold">glob</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">damped_vibrations</span>(t, A, b, w):
+    <span style="color: #008000; font-weight: bold">return</span> A<span style="color: #666666">*</span>exp(<span style="color: #666666">-</span>b<span style="color: #666666">*</span>t)<span style="color: #666666">*</span>cos(w<span style="color: #666666">*</span>t)
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">compute</span>(A, b, w, T, resolution<span style="color: #666666">=500</span>):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Return filename of plot of the damped_vibration function.&quot;&quot;&quot;</span>
+    t <span style="color: #666666">=</span> linspace(<span style="color: #666666">0</span>, T, resolution<span style="color: #666666">+1</span>)
+    y <span style="color: #666666">=</span> damped_vibrations(t, A, b, w)
+    plt<span style="color: #666666">.</span>figure()  <span style="color: #408080; font-style: italic"># needed to avoid adding curves in plot</span>
+    plt<span style="color: #666666">.</span>plot(t, y)
+    plt<span style="color: #666666">.</span>title(<span style="color: #BA2121">&#39;A=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">, b=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">, w=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (A, b, w))
+    <span style="color: #008000; font-weight: bold">if</span> <span style="color: #AA22FF; font-weight: bold">not</span> os<span style="color: #666666">.</span>path<span style="color: #666666">.</span>isdir(<span style="color: #BA2121">&#39;static&#39;</span>):
+        os<span style="color: #666666">.</span>mkdir(<span style="color: #BA2121">&#39;static&#39;</span>)
+    <span style="color: #008000; font-weight: bold">else</span>:
+        <span style="color: #408080; font-style: italic"># Remove old plot files</span>
+        <span style="color: #008000; font-weight: bold">for</span> filename <span style="color: #AA22FF; font-weight: bold">in</span> glob<span style="color: #666666">.</span>glob(os<span style="color: #666666">.</span>path<span style="color: #666666">.</span>join(<span style="color: #BA2121">&#39;static&#39;</span>, <span style="color: #BA2121">&#39;*.png&#39;</span>)):
+            os<span style="color: #666666">.</span>remove(filename)
+    <span style="color: #408080; font-style: italic"># Use time since Jan 1, 1970 in filename in order make</span>
+    <span style="color: #408080; font-style: italic"># a unique filename that the browser has not chached</span>
+    plotfile <span style="color: #666666">=</span> os<span style="color: #666666">.</span>path<span style="color: #666666">.</span>join(<span style="color: #BA2121">&#39;static&#39;</span>, <span style="color: #008000">str</span>(time<span style="color: #666666">.</span>time()) <span style="color: #666666">+</span> <span style="color: #BA2121">&#39;.png&#39;</span>)
+    plt<span style="color: #666666">.</span>savefig(plotfile)
+    <span style="color: #008000; font-weight: bold">return</span> plotfile
+
+<span style="color: #008000; font-weight: bold">if</span> __name__ <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;__main__&#39;</span>:
+    <span style="color: #008000; font-weight: bold">print</span> compute(<span style="color: #666666">1</span>, <span style="color: #666666">0.1</span>, <span style="color: #666666">1</span>, <span style="color: #666666">20</span>)
+</pre></div>
+<p>
+We organize the model, view, and controller as three separate
+files, as illustrated in
+the section <a href="._web4sa_flask004.html#wf:hw3:flask">Splitting the app into model, view, and controller files</a>. This more complicated app involves
+more code and especially the model will soon be handy to isolate in its own
+file.
+
+<p>
+<b>The model.</b>
+Our first version of <code>model.py</code> reads
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">wtforms</span> <span style="color: #008000; font-weight: bold">import</span> Form, FloatField, validators
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> pi
+
+<span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">InputForm</span>(Form):
+    A <span style="color: #666666">=</span> FloatField(
+        label<span style="color: #666666">=</span><span style="color: #BA2121">&#39;amplitude (m)&#39;</span>, default<span style="color: #666666">=1.0</span>,
+        validators<span style="color: #666666">=</span>[validators<span style="color: #666666">.</span>InputRequired()])
+    b <span style="color: #666666">=</span> FloatField(
+        label<span style="color: #666666">=</span><span style="color: #BA2121">&#39;damping factor (kg/s)&#39;</span>, default<span style="color: #666666">=0</span>,
+        validators<span style="color: #666666">=</span>[validators<span style="color: #666666">.</span>InputRequired()])
+    w <span style="color: #666666">=</span> FloatField(
+        label<span style="color: #666666">=</span><span style="color: #BA2121">&#39;frequency (1/s)&#39;</span>, default<span style="color: #666666">=2*</span>pi,
+        validators<span style="color: #666666">=</span>[validators<span style="color: #666666">.</span>InputRequired()])
+    T <span style="color: #666666">=</span> FloatField(
+        label<span style="color: #666666">=</span><span style="color: #BA2121">&#39;time interval (s)&#39;</span>, default<span style="color: #666666">=18</span>,
+        validators<span style="color: #666666">=</span>[validators<span style="color: #666666">.</span>InputRequired()])
+</pre></div>
+<p>
+As seen, the field classes can take a <code>label</code> argument for a longer
+description, here also including the units in which the variable is
+measured. It is also possible to add a <code>description</code> argument with
+some help message. Furthermore, we include a <code>default</code> value, which
+will appear in the text field such that the user does not need to
+fill in all values.
+
+<p>
+<b>The view.</b>
+The view component will of course make use of templates, and we shall experiment
+with different templates. Therefore, we allow a command-line argument
+to this Flask app for choosing which template we want. The rest of
+the <code>controller.py</code> file follows much the same set up as for the scientific
+hello world app:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">model</span> <span style="color: #008000; font-weight: bold">import</span> InputForm
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">flask</span> <span style="color: #008000; font-weight: bold">import</span> Flask, render_template, request
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">compute</span> <span style="color: #008000; font-weight: bold">import</span> compute
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sys</span>
+
+<span style="color: #008000; font-weight: bold">try</span>:
+    template_name <span style="color: #666666">=</span> sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>]
+<span style="color: #008000; font-weight: bold">except</span> <span style="color: #D2413A; font-weight: bold">IndexError</span>:
+    template_name <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;view0&#39;</span>
+
+app <span style="color: #666666">=</span> Flask(__name__)
+
+<span style="color: #AA22FF">@app.route</span>(<span style="color: #BA2121">&#39;/vib1&#39;</span>, methods<span style="color: #666666">=</span>[<span style="color: #BA2121">&#39;GET&#39;</span>, <span style="color: #BA2121">&#39;POST&#39;</span>])
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">index</span>():
+    form <span style="color: #666666">=</span> InputForm(request<span style="color: #666666">.</span>form)
+    <span style="color: #008000; font-weight: bold">if</span> request<span style="color: #666666">.</span>method <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;POST&#39;</span> <span style="color: #AA22FF; font-weight: bold">and</span> form<span style="color: #666666">.</span>validate():
+        result <span style="color: #666666">=</span> compute(form<span style="color: #666666">.</span>A<span style="color: #666666">.</span>data, form<span style="color: #666666">.</span>b<span style="color: #666666">.</span>data,
+                         form<span style="color: #666666">.</span>w<span style="color: #666666">.</span>data, form<span style="color: #666666">.</span>T<span style="color: #666666">.</span>data)
+    <span style="color: #008000; font-weight: bold">else</span>:
+        result <span style="color: #666666">=</span> <span style="color: #008000">None</span>
+
+    <span style="color: #008000; font-weight: bold">return</span> render_template(template_name <span style="color: #666666">+</span> <span style="color: #BA2121">&#39;.html&#39;</span>,
+                           form<span style="color: #666666">=</span>form, result<span style="color: #666666">=</span>result)
+
+<span style="color: #008000; font-weight: bold">if</span> __name__ <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;__main__&#39;</span>:
+    app<span style="color: #666666">.</span>run(debug<span style="color: #666666">=</span><span style="color: #008000">True</span>)
+</pre></div>
+<p>
+The details governing how the web page really looks like lie in the
+template file. Since we have several fields and want them nicely
+align in a tabular fashion, we place the field name, text areas,
+and labels inside an HTML table in our first attempt to write a
+template, <code>view0.html</code>:
+
+<p>
+
+<!-- code=html (!bc htmlpro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">&lt;form</span> <span style="color: #7D9029">method=</span><span style="color: #BA2121">post</span> <span style="color: #7D9029">action=</span><span style="color: #BA2121">&quot;&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;table&gt;</span>
+  {% for field in form %}
+    <span style="color: #008000; font-weight: bold">&lt;tr&gt;</span>
+    <span style="color: #008000; font-weight: bold">&lt;td&gt;</span>{{ field.name }}<span style="color: #008000; font-weight: bold">&lt;/td&gt;&lt;td&gt;</span>{{ field }}<span style="color: #008000; font-weight: bold">&lt;/td&gt;</span>
+    <span style="color: #008000; font-weight: bold">&lt;td&gt;</span>{{ field.label }}<span style="color: #008000; font-weight: bold">&lt;/td&gt;</span>
+    <span style="color: #008000; font-weight: bold">&lt;/tr&gt;</span>
+  {% endfor %}
+<span style="color: #008000; font-weight: bold">&lt;/table&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;p&gt;&lt;input</span> <span style="color: #7D9029">type=</span><span style="color: #BA2121">submit</span> <span style="color: #7D9029">value=</span><span style="color: #BA2121">Compute</span><span style="color: #008000; font-weight: bold">&gt;&lt;/form&gt;&lt;/p&gt;</span>
+
+<span style="color: #008000; font-weight: bold">&lt;p&gt;</span>
+{% if result != None %}
+<span style="color: #008000; font-weight: bold">&lt;img</span> <span style="color: #7D9029">src=</span><span style="color: #BA2121">&quot;{{ result }}&quot;</span> <span style="color: #7D9029">width=</span><span style="color: #BA2121">500</span><span style="color: #008000; font-weight: bold">&gt;</span>
+{% endif %}
+<span style="color: #008000; font-weight: bold">&lt;/p&gt;</span>
+</pre></div>
+<p>
+Observe how easy it is to iterate over the <code>form</code> object and grab data
+for each field: <code>field.name</code> is the name of the variable in the
+<code>InputForm</code> class, <code>field.label</code> is the full name with units as given
+through the <code>label</code> keyword when constructing the field object, and
+writing the field object itself generates the text area for
+input (i.e., the HTML input form). The control statements we can
+use in the template are part of the <a href="http://jinja.pocoo.org/docs/" target="_self">Jinja2</a>
+templating language. For now, the if-test, for-loop and
+output of values (<code>{{ object }}</code>) are enough to generate the HTML
+code we want.
+
+<p>
+Recall that the objects we need in the template, like <code>result</code> and <code>form</code>
+in the present case, are transferred to the template via keyword
+arguments to the <code>render_template</code> function. We can easily pass on
+any object in our application to the template. Debugging of the template
+is done by viewing the HTML source of the web page in the browser.
+
+<p>
+You are encouraged to run <code>python controller.py</code> and load <code>http://127.0.0.1:5000/vib1</code> into your web browser for testing.
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._web4sa_flask005.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="._web4sa_flask007.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+
+ </div>
+
+ <div class="row Footer">
+  <div class="span12">
+  &copy 2013; Hans Petter Langtangen and Anders E. Johansen.
+  Last update: .
+  </div>
+ </div>
+</div>
+</body>
+</html>
+

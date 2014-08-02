@@ -726,7 +726,23 @@ ref{wf:vib3:flask:nofiles}.
 @@@CODE ${app_path}/controller.py
 
 
+!split
+===== Using Bootstrap styles =====
+label{wf:vib1:flask:bootstrap}
 
+## Define Mako variable for path to source code
+<%
+app_path = src_path + 'flask_apps/vib6'
+%>
+
+idx{Flask!bootstrap style}
+
+# http://pythonhosted.org/Flask-Bootstrap/basic-usage.html
+
+Not yet written. Must be based on
+URL: "http://pythonhosted.org/Flask-Bootstrap/basic-usage.html".
+
+!split
 ======= Further work =======
 
  * Uploading of files: Just one button for a data file where we
