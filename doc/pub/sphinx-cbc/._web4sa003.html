@@ -1,0 +1,207 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Application of the MVC pattern &mdash; Using Web Frameworks for Scientific Web Applications</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/sidebar.js"></script>
+
+        <script src="http://sagecell.sagemath.org/static/jquery.min.js"></script>
+        <script src="http://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+
+        <script>sagecell.makeSagecell({inputLocation: ".sage"});</script>
+
+        <style type="text/css">
+                .sagecell .CodeMirror-scroll {
+                        overflow-y: hidden;
+                        overflow-x: auto;
+                }
+                .sagecell .CodeMirror {
+                        height: auto;
+                }
+        </style>
+
+    
+    <link rel="top" title="Using Web Frameworks for Scientific Web Applications" href="index.html" />
+    <link rel="next" title="Making a Flask application" href="._web4sa004.html" />
+    <link rel="prev" title="A very simple application" href="._web4sa002.html" />
+ 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="._web4sa004.html" title="Making a Flask application"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="._web4sa002.html" title="A very simple application"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Using Web Frameworks for Scientific Web Applications</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="application-of-the-mvc-pattern">
+<span id="wf-hw-mvc"></span><h1>Application of the MVC pattern<a class="headerlink" href="#application-of-the-mvc-pattern" title="Permalink to this headline">¶</a></h1>
+<p>Before thinking of a web application, we first <em>refactor</em> our program
+such that it fits with the classical MVC pattern and a compute component.
+The refactoring does not change the functionality of the code, it
+just distributes the original statements in functions and modules.
+Here we create four modules: <tt class="docutils literal"><span class="pre">model</span></tt>, <tt class="docutils literal"><span class="pre">view</span></tt>,
+<tt class="docutils literal"><span class="pre">compute</span></tt>, and <tt class="docutils literal"><span class="pre">controller</span></tt>.</p>
+<blockquote>
+<div><ul class="simple">
+<li>The <tt class="docutils literal"><span class="pre">compute</span></tt> module contains a function <tt class="docutils literal"><span class="pre">compute(r)</span></tt> that performs
+the mathematics and returns the value <tt class="docutils literal"><span class="pre">s</span></tt>, which equals <tt class="docutils literal"><span class="pre">sin(r)</span></tt>.</li>
+<li>The <tt class="docutils literal"><span class="pre">model</span></tt> module holds the input data, here <tt class="docutils literal"><span class="pre">r</span></tt>.</li>
+<li>The <tt class="docutils literal"><span class="pre">view</span></tt> module has two functions, one for reading input data,
+<tt class="docutils literal"><span class="pre">get_input</span></tt>,
+and one for presenting the output, <tt class="docutils literal"><span class="pre">present_output</span></tt>.
+The latter takes the input, calls <tt class="docutils literal"><span class="pre">compute</span></tt> functionalty, and
+generates the output.</li>
+<li>The <tt class="docutils literal"><span class="pre">controller</span></tt> module calls the view to initialize
+the model&#8217;s data from the command line. Thereafter, the
+view is called to present the output.</li>
+</ul>
+</div></blockquote>
+<p>The <tt class="docutils literal"><span class="pre">model.py</span></tt> file contains the <tt class="docutils literal"><span class="pre">r</span></tt> variable, which must
+be declared with a default value in order to create the data object:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">r</span> <span class="o">=</span> <span class="mf">0.0</span>    <span class="c"># input</span>
+<span class="n">s</span> <span class="o">=</span> <span class="bp">None</span>   <span class="c"># output</span>
+</pre></div>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">view.py</span></tt> file is restricted to the communication with the user and reads</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">compute</span>
+
+<span class="c"># Input: float r</span>
+<span class="c"># Output: &quot;Hello, World! sin(r)=...&quot;</span>
+
+<span class="k">def</span> <span class="nf">get_input</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Get input data from the command line.&quot;&quot;&quot;</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">r</span>
+
+<span class="k">def</span> <span class="nf">present_output</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Write results to terminal window.&quot;&quot;&quot;</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">compute</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">&#39;Hello, World! sin(</span><span class="si">%g</span><span class="s">)=</span><span class="si">%g</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The mathematics is encapsulated in <tt class="docutils literal"><span class="pre">compute.py</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">math</span>
+
+<span class="k">def</span> <span class="nf">compute</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Finally, <tt class="docutils literal"><span class="pre">controller.py</span></tt> glues the model and the view:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">model</span><span class="o">,</span> <span class="nn">view</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">r</span> <span class="o">=</span> <span class="n">view</span><span class="o">.</span><span class="n">get_input</span><span class="p">()</span>
+<span class="n">view</span><span class="o">.</span><span class="n">present_output</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">r</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let us try our refactored code:</p>
+<div class="highlight-text"><div class="highlight"><pre>Terminal&gt; python controller.py 1.2
+Hello, World! sin(1.2)=0.932039
+</pre></div>
+</div>
+<p>The next step is to create a web interface to our scientific hello world
+program such that we can fill in the number <tt class="docutils literal"><span class="pre">r</span></tt> in a text field, click a
+<em>Compute</em> button and get back a new web page with the output text
+shown above: &#8220;Hello, World! sin(r)=s&#8221;.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <center>
+            <p class="logo"><a href="http://cbc.simula.no/" title="Go to Center for Biomedical Computing">
+              <img class="logo" src="_static/cbc_logo.png" alt="Logo"/>
+            </a></p>
+            </center>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="._web4sa002.html"
+                        title="previous chapter">A very simple application</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="._web4sa004.html"
+                        title="next chapter">Making a Flask application</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/._web4sa003.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="._web4sa004.html" title="Making a Flask application"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="._web4sa002.html" title="A very simple application"
+             >previous</a> |</li>
+        <li><a href="index.html">Using Web Frameworks for Scientific Web Applications</a> &raquo;</li> 
+      </ul>
+    </div>
+<div class="wrapper">
+  <div class="footer">
+  <a href="http://cbc.simula.no"><img src="_static/cbc_banner.png" width="100%"><a>
+  </div>
+</div>
+
+  </body>
+</html>

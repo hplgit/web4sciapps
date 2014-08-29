@@ -1,0 +1,236 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Doconce: http://code.google.com/p/doconce/" />
+
+<link rel="stylesheet" href="https://raw.githubusercontent.com/hplgit/doconce/master/bundled/html_styles/style_vagrant/css/twitter_bootstrap.css">
+<link rel="stylesheet" href="https://raw.githubusercontent.com/hplgit/doconce/master/bundled/html_styles/style_vagrant/css/vagrant.css">
+<!-- Define color of headings here (last definition counts) -->
+<style type="text/css">
+h1, h2, h3, h4, h5, h6 {
+  color: #000;     /* black */
+  color: #999;     /* gray */
+  color: #005580;  /* dark blue */
+  color: #08c;     /* characteristic blue */
+</style>
+</head>
+<body>
+
+<title>Using Django for Scientific Web Applications</title>
+
+<div class="container">
+ <div class="row Header with-border">
+  <div class="span3 Module logo">
+   <h1><a href="/">Django<span class="subtitle">4scientists</span></a></h1>
+  </div>
+  <div class="span9">
+   <div class="Module navigation">
+    <ul>
+     <li> <a href="https://www.djangoproject.com/">Django</a></li>
+    </ul>
+   </div>
+  </div>
+ </div>
+</div>
+
+
+<div class="row">
+ <div class="span3 Module sidebar">
+  <div class="well" style="padding: 8px 0px;">
+   <ul class="nav nav-list">
+          <!-- navigation toc: "Web frameworks" --> <li><a href="._web4sa_django000.html#___sec0" style="font-size: 80%;"><b>Web frameworks</b></a></li>
+     <!-- navigation toc: "The MVC pattern" --> <li><a href="._web4sa_django001.html#___sec1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The MVC pattern</a></li>
+     <!-- navigation toc: "A very simple application" --> <li><a href="._web4sa_django002.html#___sec2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;A very simple application</a></li>
+     <!-- navigation toc: "Application of the MVC pattern" --> <li class="active"><a href=#wf:hw:mvc" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Application of the MVC pattern</a></li>
+     <!-- navigation toc: "Making a Django application" --> <li><a href="._web4sa_django004.html#___sec4" style="font-size: 80%;"><b>Making a Django application</b></a></li>
+     <!-- navigation toc: "Setting up a Django project" --> <li><a href="._web4sa_django004.html#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Setting up a Django project</a></li>
+     <!-- navigation toc: "Setting up a Django application" --> <li><a href="._web4sa_django004.html#___sec6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Setting up a Django application</a></li>
+     <!-- navigation toc: "Programming the Django application" --> <li><a href="._web4sa_django005.html#___sec7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Programming the Django application</a></li>
+     <!-- navigation toc: "Equipping the input page with output results" --> <li><a href="._web4sa_django005.html#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Equipping the input page with output results</a></li>
+     <!-- navigation toc: "Handling multiple input variables in Django" --> <li><a href="._web4sa_django006.html#wf:vib:django" style="font-size: 80%;"><b>Handling multiple input variables in Django</b></a></li>
+     <!-- navigation toc: "Programming the Django application" --> <li><a href="._web4sa_django006.html#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Programming the Django application</a></li>
+     <!-- navigation toc: "Custom validation" --> <li><a href="._web4sa_django006.html#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Custom validation</a></li>
+     <!-- navigation toc: "Customizing widgets" --> <li><a href="._web4sa_django006.html#___sec12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Customizing widgets</a></li>
+     <!-- navigation toc: "Exercises" --> <li><a href="._web4sa_django007.html#___sec13" style="font-size: 80%;"><b>Exercises</b></a></li>
+     <!-- navigation toc: "Exercise 1: Add two numbers" --> <li><a href="._web4sa_django007.html#wf:exer:add2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 1: Add two numbers</a></li>
+     <!-- navigation toc: "Django resources" --> <li><a href="._web4sa_django007.html#___sec15" style="font-size: 80%;"><b>Django resources</b></a></li>
+     <!-- navigation toc: "Remaining" --> <li><a href="._web4sa_django007.html#___sec16" style="font-size: 80%;"><b>Remaining</b></a></li>
+
+    </ul>
+   </div>
+  </div>
+
+  <div class="span9">
+
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Web frameworks ', 1, None, '___sec0'),
+              (' The MVC pattern ', 2, None, '___sec1'),
+              (' A very simple application ', 2, None, '___sec2'),
+              (' Application of the MVC pattern ',
+               2,
+               'wf:hw:mvc',
+               'wf:hw:mvc'),
+              (' Making a Django application ', 1, None, '___sec4'),
+              (' Setting up a Django project ', 2, None, '___sec5'),
+              (' Setting up a Django application ', 2, None, '___sec6'),
+              (' Programming the Django application ', 2, None, '___sec7'),
+              (' Equipping the input page with output results ',
+               2,
+               None,
+               '___sec8'),
+              (' Handling multiple input variables in Django ',
+               1,
+               'wf:vib:django',
+               'wf:vib:django'),
+              (' Programming the Django application ', 2, None, '___sec10'),
+              (' Custom validation ', 2, None, '___sec11'),
+              (' Customizing widgets ', 2, None, '___sec12'),
+              (' Exercises ', 1, None, '___sec13'),
+              (' Exercise 1: Add two numbers ',
+               2,
+               'wf:exer:add2',
+               'wf:exer:add2'),
+              (' Django resources ', 1, None, '___sec15'),
+              (' Remaining ', 1, None, '___sec16')]}
+end of tocinfo -->
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<a name="part0003"></a>
+<!-- !split -->
+
+<h2 id="wf:hw:mvc">Application of the MVC pattern<a name="wf:hw:mvc"></a></h2>
+
+Before thinking of a web application, we first <em>refactor</em> our program
+such that it fits with the classical MVC pattern and a compute component.
+The refactoring does not change the functionality of the code, it
+just distributes the original statements in functions and modules.
+Here we create four modules: <code>model</code>, <code>view</code>,
+<code>compute</code>, and <code>controller</code>.
+
+<ul>
+ <li> The <code>compute</code> module contains a function <code>compute(r)</code> that performs
+   the mathematics and returns the value <code>s</code>, which equals <code>sin(r)</code>.</li>
+ <li> The <code>model</code> module holds the input data, here <code>r</code>.</li>
+ <li> The <code>view</code> module has two functions, one for reading input data,
+   <code>get_input</code>,
+   and one for presenting the output, <code>present_output</code>.
+   The latter takes the input, calls <code>compute</code> functionalty, and
+   generates the output.</li>
+ <li> The <code>controller</code> module calls the view to initialize
+   the model's data from the command line. Thereafter, the
+   view is called to present the output.</li>
+</ul>
+
+The <code>model.py</code> file contains the <code>r</code> variable, which must
+be declared with a default value in order to create the data object:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">r <span style="color: #666666">=</span> <span style="color: #666666">0.0</span>    <span style="color: #408080; font-style: italic"># input</span>
+s <span style="color: #666666">=</span> <span style="color: #008000">None</span>   <span style="color: #408080; font-style: italic"># output</span>
+</pre></div>
+<p>
+The <code>view.py</code> file is restricted to the communication with the user and reads
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sys</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">compute</span>
+
+<span style="color: #408080; font-style: italic"># Input: float r</span>
+<span style="color: #408080; font-style: italic"># Output: &quot;Hello, World! sin(r)=...&quot;</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">get_input</span>():
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Get input data from the command line.&quot;&quot;&quot;</span>
+    r <span style="color: #666666">=</span> <span style="color: #008000">float</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>])
+    <span style="color: #008000; font-weight: bold">return</span> r
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">present_output</span>(r):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Write results to terminal window.&quot;&quot;&quot;</span>
+    s <span style="color: #666666">=</span> compute<span style="color: #666666">.</span>compute(r)
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Hello, World! sin(</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">)=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (r, s)
+</pre></div>
+<p>
+The mathematics is encapsulated in <code>compute.py</code>:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">math</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">compute</span>(r):
+    <span style="color: #008000; font-weight: bold">return</span> math<span style="color: #666666">.</span>sin(r)
+</pre></div>
+<p>
+Finally, <code>controller.py</code> glues the model and the view:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">model</span><span style="color: #666666">,</span> <span style="color: #0000FF; font-weight: bold">view</span>
+
+model<span style="color: #666666">.</span>r <span style="color: #666666">=</span> view<span style="color: #666666">.</span>get_input()
+view<span style="color: #666666">.</span>present_output(model<span style="color: #666666">.</span>r)
+</pre></div>
+<p>
+Let us try our refactored code:
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; python controller.py 1.2
+Hello, World! sin(1.2)=0.932039
+</pre></div>
+<p>
+The next step is to create a web interface to our scientific hello world
+program such that we can fill in the number <code>r</code> in a text field, click a
+<em>Compute</em> button and get back a new web page with the output text
+shown above: "Hello, World! sin(r)=s".
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._web4sa_django002.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="._web4sa_django004.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+
+ </div>
+
+ <div class="row Footer">
+  <div class="span12">
+  &copy 2013; Hans Petter Langtangen and Anders E. Johansen.
+  Last update: .
+  </div>
+ </div>
+</div>
+</body>
+</html>
+

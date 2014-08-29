@@ -9,22 +9,25 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
-   ._part0000_web4sa
-   ._part0001_web4sa
-   ._part0002_web4sa
-   ._part0003_web4sa
-   ._part0004_web4sa
-   ._part0005_web4sa
-   ._part0006_web4sa
-   ._part0007_web4sa
-   ._part0008_web4sa
-   ._part0009_web4sa
-   ._part0010_web4sa
-   ._part0011_web4sa
-   ._part0012_web4sa
-   ._part0013_web4sa
-   ._part0014_web4sa
-   ._part0015_web4sa
+   ._web4sa000
+   ._web4sa001
+   ._web4sa002
+   ._web4sa003
+   ._web4sa004
+   ._web4sa005
+   ._web4sa006
+   ._web4sa007
+   ._web4sa008
+   ._web4sa009
+   ._web4sa010
+   ._web4sa011
+   ._web4sa012
+   ._web4sa013
+   ._web4sa014
+   ._web4sa015
+   ._web4sa016
+   ._web4sa017
+   ._web4sa018
 
 
 Indices and tables

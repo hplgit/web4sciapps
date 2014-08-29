@@ -86,8 +86,8 @@ and classes.
 # #endif
 
 <%
-src_path = 'src-web4sa/apps/'
 github_path = 'https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa'
+app_path = 'src-web4sa/apps/'
 %>
 
 All the files associated with this document are available in a

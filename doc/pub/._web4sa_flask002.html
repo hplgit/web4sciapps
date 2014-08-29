@@ -1,0 +1,239 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Doconce: http://code.google.com/p/doconce/" />
+
+<link rel="stylesheet" href="https://raw.githubusercontent.com/hplgit/doconce/master/bundled/html_styles/style_vagrant/css/twitter_bootstrap.css">
+<link rel="stylesheet" href="https://raw.githubusercontent.com/hplgit/doconce/master/bundled/html_styles/style_vagrant/css/vagrant.css">
+<!-- Define color of headings here (last definition counts) -->
+<style type="text/css">
+h1, h2, h3, h4, h5, h6 {
+  color: #000;     /* black */
+  color: #999;     /* gray */
+  color: #005580;  /* dark blue */
+  color: #08c;     /* characteristic blue */
+</style>
+</head>
+<body>
+
+<title>Using Flask for Scientific Web Applications</title>
+
+<div class="container">
+ <div class="row Header with-border">
+  <div class="span3 Module logo">
+   <h1><a href="/">Flask<span class="subtitle">4scientists</span></a></h1>
+  </div>
+  <div class="span9">
+   <div class="Module navigation">
+    <ul>
+     <li> <a href="http://flask.pocoo.org/">Flask</a></li>
+    </ul>
+   </div>
+  </div>
+ </div>
+</div>
+
+<div class="row">
+ <div class="span3 Module sidebar">
+  <div class="well" style="padding: 8px 0px;">
+   <ul class="nav nav-list">
+          <!-- navigation toc: "Web frameworks" --> <li><a href="._web4sa_flask000.html#___sec0" style="font-size: 80%;"><b>Web frameworks</b></a></li>
+     <!-- navigation toc: "The MVC pattern" --> <li><a href="._web4sa_flask001.html#___sec1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The MVC pattern</a></li>
+     <!-- navigation toc: "A very simple application" --> <li class="active"><a href=#___sec2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;A very simple application</a></li>
+     <!-- navigation toc: "Application of the MVC pattern" --> <li><a href="._web4sa_flask003.html#wf:hw:mvc" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Application of the MVC pattern</a></li>
+     <!-- navigation toc: "Making a Flask application" --> <li><a href="._web4sa_flask004.html#___sec4" style="font-size: 80%;"><b>Making a Flask application</b></a></li>
+     <!-- navigation toc: "Programming the Flask application" --> <li><a href="._web4sa_flask004.html#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Programming the Flask application</a></li>
+     <!-- navigation toc: "Equipping the input page with output results" --> <li><a href="._web4sa_flask004.html#___sec6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Equipping the input page with output results</a></li>
+     <!-- navigation toc: "Splitting the app into model, view, and controller files" --> <li><a href="._web4sa_flask004.html#wf:hw3:flask" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Splitting the app into model, view, and controller files</a></li>
+     <!-- navigation toc: "Troubleshooting" --> <li><a href="._web4sa_flask005.html#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Troubleshooting</a></li>
+     <!-- navigation toc: "Handling multiple input variables in Flask" --> <li><a href="._web4sa_flask006.html#wf:vib:flask" style="font-size: 80%;"><b>Handling multiple input variables in Flask</b></a></li>
+     <!-- navigation toc: "Programming the Flask application" --> <li><a href="._web4sa_flask006.html#wf:vib1:flask:app" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Programming the Flask application</a></li>
+     <!-- navigation toc: "Implementing error checking in the template" --> <li><a href="._web4sa_flask007.html#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementing error checking in the template</a></li>
+     <!-- navigation toc: "Using style sheets" --> <li><a href="._web4sa_flask008.html#___sec12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Using style sheets</a></li>
+     <!-- navigation toc: "Using LaTeX mathematics" --> <li><a href="._web4sa_flask008.html#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Using LaTeX mathematics</a></li>
+     <!-- navigation toc: "Rearringing the elements in the HTML template" --> <li><a href="._web4sa_flask008.html#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Rearringing the elements in the HTML template</a></li>
+     <!-- navigation toc: "Custom validation" --> <li><a href="._web4sa_flask009.html#wf:vib1:flask:validation" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Custom validation</a></li>
+     <!-- navigation toc: "Autogenerating the code" --> <li><a href="._web4sa_flask010.html#wf:vib3:flask:autogen" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Autogenerating the code</a></li>
+     <!-- navigation toc: "Avoiding plot files" --> <li><a href="._web4sa_flask011.html#wf:vib3:flask:nofiles" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Avoiding plot files</a></li>
+     <!-- navigation toc: "User login and storage of computed results" --> <li><a href="._web4sa_flask012.html#wf:vib1:flask:login" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;User login and storage of computed results</a></li>
+     <!-- navigation toc: "Using Bootstrap styles" --> <li><a href="._web4sa_flask013.html#wf:vib1:flask:bootstrap" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Using Bootstrap styles</a></li>
+     <!-- navigation toc: "Further work" --> <li><a href="._web4sa_flask014.html#___sec22" style="font-size: 80%;"><b>Further work</b></a></li>
+     <!-- navigation toc: "Exercises" --> <li><a href="._web4sa_flask015.html#___sec23" style="font-size: 80%;"><b>Exercises</b></a></li>
+     <!-- navigation toc: "Exercise 1: Add two numbers" --> <li><a href="._web4sa_flask015.html#wf:exer:add2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 1: Add two numbers</a></li>
+     <!-- navigation toc: "Exercise 2: Extend the <code>vib3_flask</code> app" --> <li><a href="._web4sa_flask015.html#wf:exer:vib3:demo" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 2: Extend the <code>vib3_flask</code> app</a></li>
+     <!-- navigation toc: "Exercise 3: Equip the <code>vib3_flask</code> app with more data types" --> <li><a href="._web4sa_flask015.html#wf:exer:vib3:lists" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 3: Equip the <code>vib3_flask</code> app with more data types</a></li>
+     <!-- navigation toc: "Exercise 4: Auto-generate code from function signature" --> <li><a href="._web4sa_flask015.html#___sec27" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 4: Auto-generate code from function signature</a></li>
+     <!-- navigation toc: "Flask resources" --> <li><a href="._web4sa_flask015.html#___sec28" style="font-size: 80%;"><b>Flask resources</b></a></li>
+     <!-- navigation toc: "Remaining" --> <li><a href="._web4sa_flask015.html#___sec29" style="font-size: 80%;"><b>Remaining</b></a></li>
+
+    </ul>
+   </div>
+  </div>
+
+  <div class="span9">
+
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Web frameworks ', 1, None, '___sec0'),
+              (' The MVC pattern ', 2, None, '___sec1'),
+              (' A very simple application ', 2, None, '___sec2'),
+              (' Application of the MVC pattern ',
+               2,
+               'wf:hw:mvc',
+               'wf:hw:mvc'),
+              (' Making a Flask application ', 1, None, '___sec4'),
+              (' Programming the Flask application ', 2, None, '___sec5'),
+              (' Equipping the input page with output results ',
+               2,
+               None,
+               '___sec6'),
+              (' Splitting the app into model, view, and controller files ',
+               2,
+               'wf:hw3:flask',
+               'wf:hw3:flask'),
+              (' Troubleshooting ', 2, None, '___sec8'),
+              (' Handling multiple input variables in Flask ',
+               1,
+               'wf:vib:flask',
+               'wf:vib:flask'),
+              (' Programming the Flask application ',
+               2,
+               'wf:vib1:flask:app',
+               'wf:vib1:flask:app'),
+              (' Implementing error checking in the template ',
+               2,
+               None,
+               '___sec11'),
+              (' Using style sheets ', 2, None, '___sec12'),
+              (' Using LaTeX mathematics ', 2, None, '___sec13'),
+              (' Rearringing the elements in the HTML template ',
+               2,
+               None,
+               '___sec14'),
+              (' Custom validation ',
+               2,
+               'wf:vib1:flask:validation',
+               'wf:vib1:flask:validation'),
+              (' Autogenerating the code ',
+               2,
+               'wf:vib3:flask:autogen',
+               'wf:vib3:flask:autogen'),
+              (' Avoiding plot files ',
+               2,
+               'wf:vib3:flask:nofiles',
+               'wf:vib3:flask:nofiles'),
+              (' PNG plots ', 3, None, '___sec18'),
+              (' SVG plots ', 3, None, '___sec19'),
+              (' User login and storage of computed results ',
+               2,
+               'wf:vib1:flask:login',
+               'wf:vib1:flask:login'),
+              (' Using Bootstrap styles ',
+               2,
+               'wf:vib1:flask:bootstrap',
+               'wf:vib1:flask:bootstrap'),
+              (' Further work ', 1, None, '___sec22'),
+              (' Exercises ', 1, None, '___sec23'),
+              (' Exercise 1: Add two numbers ',
+               2,
+               'wf:exer:add2',
+               'wf:exer:add2'),
+              (' Exercise 2: Extend the `vib3_flask` app ',
+               2,
+               'wf:exer:vib3:demo',
+               'wf:exer:vib3:demo'),
+              (' Exercise 3: Equip the `vib3_flask` app with more data types ',
+               2,
+               'wf:exer:vib3:lists',
+               'wf:exer:vib3:lists'),
+              (' Exercise 4: Auto-generate code from function signature ',
+               2,
+               None,
+               '___sec27'),
+              (' Flask resources ', 1, None, '___sec28'),
+              (' Remaining ', 1, None, '___sec29')]}
+end of tocinfo -->
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<a name="part0002"></a>
+<!-- !split -->
+
+<h2 id="___sec2">A very simple application <a name="___sec2"></a></h2>
+
+We shall start with the simplest possible application,
+a "scientific hello world program", where the
+task is to read a number and write out "Hello, World!" followed by
+the sine of the number. This application has one input variable and
+a line of text as output.
+
+<p>
+Our first implementation reads the input from the command
+line and writes the results to the terminal window:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic">#!/usr/bin/env python</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sys</span><span style="color: #666666">,</span> <span style="color: #0000FF; font-weight: bold">math</span>
+r <span style="color: #666666">=</span> <span style="color: #008000">float</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>])
+s <span style="color: #666666">=</span> math<span style="color: #666666">.</span>sin(r)
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Hello, World! sin(</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">)=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (r, s)
+</pre></div>
+<p>
+In the terminal we can exemplify the program
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; python hw.py 1.2
+Hello, World! sin(1.2)=0.932039
+</pre></div>
+<p>
+The task of the web version of this program is to read the <code>r</code>
+variable from a web page, compute the sine,
+and write out a new web page with the resulting text.
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._web4sa_flask001.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="._web4sa_flask003.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+
+ </div>
+
+ <div class="row Footer">
+  <div class="span12">
+  &copy 2013; Hans Petter Langtangen and Anders E. Johansen.
+  Last update: .
+  </div>
+ </div>
+</div>
+</body>
+</html>
+

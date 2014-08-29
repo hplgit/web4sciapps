@@ -1,0 +1,371 @@
+
+<!DOCTYPE html>
+
+
+
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    
+    <title>Avoiding plot files &mdash; Using Web Frameworks for Scientific Web Applications</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    
+<link rel="stylesheet" href="_static/css/basicstrap-base.css" type="text/css" />
+<link rel="stylesheet" href="_static/css/bootstrap.min.css" type="text/css" />
+<link rel="stylesheet" href="_static/css/font-awesome.min.css">
+<!--[if IE 7]>
+<link rel="stylesheet" href="_static/css/font-awesome-ie7.min.css">
+<![endif]-->
+<style type="text/css">
+  body {
+    padding-top: 60px;
+    padding-bottom: 40px;
+  }
+}
+</style>
+<link rel="stylesheet" href="_static/basicstrap.css" type="text/css" />
+<link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+<link rel="stylesheet" href="_static/css/bootstrap-responsive.min.css" type="text/css" />
+    
+<script type="text/javascript">
+  var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:    './',
+            VERSION:     '1.0',
+            COLLAPSE_INDEX: false,
+            FILE_SUFFIX: '.html',
+            HAS_SOURCE:  true
+  };
+</script>
+<script type="text/javascript" src="_static/js/jquery.min.js"></script>
+<script type="text/javascript" src="_static/underscore.js"></script>
+<script type="text/javascript" src="_static/doctools.js"></script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript" src="_static/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.show-sidebar').click(function(e) {
+       e.preventDefault();
+       if ($(".show-sidebar").html() == "Open Table Of Contents") {
+          $('.for-mobile').removeClass('hidden-phone');
+          $(".show-sidebar").html("Close Table Of Contents");
+       } else {
+          $(".show-sidebar").html("Open Table Of Contents");
+       }
+    });
+  });
+</script>
+
+        <script src="http://sagecell.sagemath.org/static/jquery.min.js"></script>
+        <script src="http://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+
+        <script>sagecell.makeSagecell({inputLocation: ".sage"});</script>
+
+        <style type="text/css">
+                .sagecell .CodeMirror-scroll {
+                        overflow-y: hidden;
+                        overflow-x: auto;
+                }
+                .sagecell .CodeMirror {
+                        height: auto;
+                }
+        </style>
+
+    
+    <link rel="top" title="Using Web Frameworks for Scientific Web Applications" href="index.html" />
+    <link rel="next" title="User login and storage of computed results" href="._web4sa014.html" />
+    <link rel="prev" title="Autogenerating the code" href="._web4sa012.html" />
+ 
+  </head>
+  <body>
+    <div class="navbar navbar-fixed-top ">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="index.html">Using Web Frameworks for Scientific Web Applications</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav pull-right">
+              
+                <li>
+                <a href="genindex.html" title="General Index" accesskey="I">index</a>
+                </li>
+                <li>
+                <a href="._web4sa014.html" title="User login and storage of computed results" accesskey="N">next</a>
+                </li>
+                <li>
+                <a href="._web4sa012.html" title="Autogenerating the code" accesskey="P">previous</a>
+                </li>
+              
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
+    <!-- container -->
+    <div class="container-fluid">
+
+
+      
+      <div class="row-fluid hidden-desktop hidden-tablet">
+      
+<div class="span3 ">
+  <a class="visible-phone btn btn-small show-sidebar" data-toggle="collapse" data-target=".for-mobile">Open Table Of Contents</a>
+  <div class="for-mobile sidebar hidden-phone">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Avoiding plot files</a><ul>
+<li><a class="reference internal" href="#png-plots">PNG plots</a></li>
+<li><a class="reference internal" href="#svg-plots">SVG plots</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="._web4sa012.html"
+                        title="previous chapter">Autogenerating the code</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="._web4sa014.html"
+                        title="next chapter">User login and storage of computed results</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/._web4sa013.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox">
+  <h3>Quick search</h3>
+  <form class="search form-search" action="search.html" method="get">
+      <div class="input-append">
+        <input type="text" class="search-query" name="q">
+        <input type="submit" class="btn" value="Go" />
+      </div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+  </div>
+</div>
+      </div>
+      
+
+      <!-- row -->
+      <div class="row-fluid">
+         
+<div class="span3 visible-desktop visible-tablet">
+  <div class=" sidebar hidden-phone">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Avoiding plot files</a><ul>
+<li><a class="reference internal" href="#png-plots">PNG plots</a></li>
+<li><a class="reference internal" href="#svg-plots">SVG plots</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="._web4sa012.html"
+                        title="previous chapter">Autogenerating the code</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="._web4sa014.html"
+                        title="next chapter">User login and storage of computed results</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/._web4sa013.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox">
+  <h3>Quick search</h3>
+  <form class="search form-search" action="search.html" method="get">
+      <div class="input-append">
+        <input type="text" class="search-query" name="q">
+        <input type="submit" class="btn" value="Go" />
+      </div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+  </div>
+</div> 
+        
+
+        <div class="span9">
+          <div class="document">
+            <div class="documentwrapper">
+              <div class="bodywrapper">
+                <div class="body">
+                  
+  <div class="section" id="avoiding-plot-files">
+<span id="wf-vib3-flask-nofiles"></span><h1>Avoiding plot files<a class="headerlink" href="#avoiding-plot-files" title="Permalink to this headline">¶</a></h1>
+<p>Files with plots are easy to deal with as long as they are in the
+<tt class="docutils literal"><span class="pre">static</span></tt> subdirectory of the Flask application directory. However,
+the less files a web app makes use of, the better. Also, the problem
+with ensuring that new plots are really loaded into the browser
+required us to generate unique filenames. Therefore, it would be
+convenient to get the plot as a string and embed the string data
+directly into the HTML code. This is relatively easy with Matplotlib
+and Python. The relevant code constitutes the
+<a class="reference external" href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/vib4">vib4</a> app in the
+directory of the same name.</p>
+<span class="target" id="index-0"></span><span class="target" id="index-1"></span><span class="target" id="index-2"></span><span class="target" id="index-3"></span><div class="section" id="png-plots">
+<span id="index-4"></span><h2>PNG plots<a class="headerlink" href="#png-plots" title="Permalink to this headline">¶</a></h2>
+<p>Python has the <tt class="docutils literal"><span class="pre">StringIO</span></tt> object that is a string buffer with the
+look and behavior of a file. The idea is to let Matplotlib write to
+a <tt class="docutils literal"><span class="pre">StringIO</span></tt> object and afterwards extract the string from this object:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plot</span>
+<span class="kn">from</span> <span class="nn">StringIO</span> <span class="kn">import</span> <span class="n">StringIO</span>
+<span class="c"># run plt.plot, plt.title, etc.</span>
+<span class="n">figfile</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">figfile</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s">&#39;png&#39;</span><span class="p">)</span>
+<span class="n">figfile</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c"># rewind to beginning of file</span>
+<span class="n">figdata_png</span> <span class="o">=</span> <span class="n">figfile</span><span class="o">.</span><span class="n">buf</span>  <span class="c"># extract string</span>
+</pre></div>
+</div>
+<p>Before the PNG data can be embedded in HTML we need to convert the
+data to base64 format:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">base64</span>
+<span class="n">figdata_png</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">figdata_png</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now we can embed the PNG data in HTML by</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># html is some file object for the HTML file</span>
+<span class="n">html</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">&lt;img src=&quot;data:image/png;base64,</span><span class="si">%(figdata_png)s</span><span class="s">&quot; width=500&gt;</span>
+<span class="s">&quot;&quot;&quot;</span> <span class="o">%</span> <span class="nb">vars</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>The corresponding syntax in an HTML template is</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;data:image/png;base64,{{ figdata_png }}&quot;</span> <span class="na">width=</span><span class="s">500</span><span class="nt">&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="svg-plots">
+<span id="index-5"></span><h2>SVG plots<a class="headerlink" href="#svg-plots" title="Permalink to this headline">¶</a></h2>
+<p>Inline figures in HTML, instead of using files, are most often realized
+by XML code with the figure data in SVG format.
+Plot strings in the SVG format are created very similarly to the PNG
+example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">figfile</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">figfile</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s">&#39;svg&#39;</span><span class="p">)</span>
+<span class="n">figdata_svg</span> <span class="o">=</span> <span class="n">figfile</span><span class="o">.</span><span class="n">buf</span>
+</pre></div>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">figdata_svg</span></tt> string contains XML code text can almost
+be directly embedded in
+HTML5. However, the beginning of the text contains information before
+the <tt class="docutils literal"><span class="pre">svg</span></tt> tag that we want to remove:</p>
+<div class="highlight-text"><div class="highlight"><pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; standalone=&quot;no&quot;?&gt;
+&lt;!DOCTYPE svg PUBLIC &quot;-//W3C//DTD SVG 1.1//EN&quot;
+  &quot;http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd&quot;&gt;
+&lt;!-- Created with matplotlib (http://matplotlib.sourceforge.net/) --&gt;
+&lt;svg height=&quot;441pt&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 585 441&quot; ...
+</pre></div>
+</div>
+<p>The removal is done with a little string manipulation:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">figdata_svg</span> <span class="o">=</span> <span class="s">&#39;&lt;svg&#39;</span> <span class="o">+</span> <span class="n">figfile</span><span class="o">.</span><span class="n">buf</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;&lt;svg&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Now, <tt class="docutils literal"><span class="pre">figdata_svg</span></tt> can be directly inserted in HTML code without
+any surrounding tags.
+The file <a class="reference external" href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/vib4/compute.py">compute.py</a>
+in the <tt class="docutils literal"><span class="pre">vib4</span></tt> application directory contains all the details.</p>
+<p>The <tt class="docutils literal"><span class="pre">compute_gamma</span></tt> function returns six values:
+the PNG data for the <span class="math">\(g\)</span> plot, the PNG data for the <span class="math">\(G\)</span> plot,
+the SVG XML code for the <span class="math">\(g\)</span> plot, the SVG XML code for the <span class="math">\(G\)</span> plot,
+the mean value, and the value of the standard deviation. We can
+keep the <tt class="docutils literal"><span class="pre">controller.py</span></tt> unchanged (except for the URL, which is now <tt class="docutils literal"><span class="pre">vib4</span></tt>)
+and adjust the <tt class="docutils literal"><span class="pre">view_results.html</span></tt>
+template only. The <tt class="docutils literal"><span class="pre">result</span></tt> object is now a tuple with 6 elements.
+For illustration purposes we make two rows with plots, one with
+PNG data and one with SVG data. The template becomes</p>
+<div class="highlight-html"><div class="highlight"><pre>{% if result != None %}
+<span class="nt">&lt;p&gt;</span>
+<span class="nt">&lt;table&gt;</span>
+<span class="nt">&lt;tr&gt;</span>
+<span class="nt">&lt;td&gt;</span>
+<span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;data:image/png;base64,{{ result[0] }}&quot;</span> <span class="na">width=</span><span class="s">&quot;400&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/td&gt;&lt;td&gt;</span>
+<span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;data:image/png;base64,{{ result[1] }}&quot;</span> <span class="na">width=</span><span class="s">&quot;400&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/td&gt;&lt;/tr&gt;</span>
+<span class="nt">&lt;tr&gt;</span>
+<span class="nt">&lt;td&gt;</span>{{ result[2]|safe }}<span class="nt">&lt;/td&gt;</span>
+<span class="nt">&lt;td&gt;</span>{{ result[3]|safe }}<span class="nt">&lt;/td&gt;</span>
+<span class="nt">&lt;/tr&gt;</span>
+<span class="nt">&lt;tr&gt;&lt;td&gt;</span>
+Mean value: {{ result[4] }} <span class="nt">&lt;br&gt;</span>
+Standard deviation value: {{ result[5] }}
+<span class="nt">&lt;/td&gt;&lt;/tr&gt;</span>
+<span class="nt">&lt;/table&gt;</span>
+<span class="nt">&lt;/p&gt;</span>
+{% endif %}
+</pre></div>
+</div>
+<p>Special HTML characters like <tt class="docutils literal"><span class="pre">&lt;</span></tt>, <tt class="docutils literal"><span class="pre">&gt;</span></tt>,
+<tt class="docutils literal"><span class="pre">&amp;</span></tt>, <tt class="docutils literal"><span class="pre">&quot;</span></tt>, and <tt class="docutils literal"><span class="pre">'</span></tt> are escaped in a template string like <tt class="docutils literal"><span class="pre">{{</span> <span class="pre">str</span> <span class="pre">}}</span></tt>
+(i.e., <tt class="docutils literal"><span class="pre">&amp;</span></tt> is replaced by <tt class="docutils literal"><span class="pre">&amp;amp;</span></tt> <cite>&lt;</cite> is replaced by <tt class="docutils literal"><span class="pre">&amp;lt;</span></tt>, etc.).
+We need to avoid this manipulation of the string content
+because <tt class="docutils literal"><span class="pre">result[2]</span></tt> and <tt class="docutils literal"><span class="pre">result[3]</span></tt> contain
+XML code where the mentioned characters are essential part of the syntax.
+Writing <tt class="docutils literal"><span class="pre">{{str|safe}}</span></tt> ensures that the contents of the string <tt class="docutils literal"><span class="pre">str</span></tt>
+are not altered before being embedded in the HTML text.</p>
+<p>Trying out the <tt class="docutils literal"><span class="pre">vib4</span></tt> application we see that the SVG plots are
+much bigger than the width-controlled PNG plots.
+The width and height of SVG plots are specified in the XML code and can
+of course be changed by proper string replacements for the
+<tt class="docutils literal"><span class="pre">width</span></tt>, <tt class="docutils literal"><span class="pre">height</span></tt>, and <tt class="docutils literal"><span class="pre">viewBox</span></tt> specifications. It is far easier to
+just write the <tt class="docutils literal"><span class="pre">width</span></tt> specification in the image tag for the PNG plot.</p>
+</div>
+</div>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        
+      </div><!-- /row -->
+
+      <!-- row -->
+      <div class="row-fluid">
+<div class="related navbar ">
+  <div class="navbar-inner">
+    <ul class="nav pull-right">
+      
+        <li><a href="genindex.html" title="General Index" >index</a></li>
+        <li><a href="._web4sa014.html" title="User login and storage of computed results" >next</a></li>
+        <li><a href="._web4sa012.html" title="Autogenerating the code" >previous</a></li>
+        <li><a href="index.html">Using Web Frameworks for Scientific Web Applications</a></li> 
+      
+    </ul>
+  </div>
+</div>
+      </div><!-- /row -->
+
+      <!-- footer -->
+      <footer>
+          &copy; Copyright 2014, H. P. Langtangen and A. E. Johansen.
+        Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.
+      </footer>
+      <!-- /footer -->
+
+    </div>
+    <!-- /container -->
+
+  </body>
+</html>

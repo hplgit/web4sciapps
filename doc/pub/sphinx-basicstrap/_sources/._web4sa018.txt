@@ -1,0 +1,117 @@
+.. !split
+
+Exercises
+=========
+
+.. --- begin exercise ---
+
+.. _wf:exer:add2:
+
+Exercise 1: Add two numbers
+---------------------------
+
+Make a web application that reads two numbers from a web page,
+adds the numbers, and prints the sum in a new web page.
+Package the necessary files that constitute the application
+in a tar file.
+Filename: ``add2.tar.gz``.
+
+.. --- end exercise ---
+
+.. --- begin exercise ---
+
+.. _wf:exer:vib3:demo:
+
+Exercise 2: Extend the ``vib3_flask`` app
+-----------------------------------------
+
+Add a new argument ``x_axis`` to the ``compute`` function in the
+`vib_flask3 <https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/vib_flask3>`__ application from the section :ref:`wf:vib3:flask:autogen`. The ``x_axis`` argument measures the extent
+of the :math:`x` axis in the plots in terms of the number of standard
+deviations (default may be 7).  Observe how the web interface
+automatically adds the new argument and how the plots adapt!
+
+.. --- end exercise ---
+
+.. --- begin exercise ---
+
+.. _wf:exer:vib3:lists:
+
+Exercise 3: Equip the ``vib3_flask`` app with more data types
+-------------------------------------------------------------
+
+In the `vib_flask3 <https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/vib_flask3>`__
+application from the section :ref:`wf:vib3:flask:autogen`,
+use the ``label`` argument in the form field objects to add an
+information of the type of data that is to be supplied in the
+text field. Extend the ``model.py`` file to also handle
+lists, tuples, and Numerical Python arrays. For these three
+new data types, use a ``TextField`` object and run ``eval``
+on the text in the ``view.py`` file.
+A simple test is to extend the ``compute`` function with an
+argument ``x_range`` for the range of the :math:`x` axis, specified as
+an interval (2-list or 2-tuple).
+Filename: ``vib3_ext.tar.gz``.
+
+.. --- end exercise ---
+
+.. --- begin exercise ---
+
+Exercise 4: Auto-generate code from function signature
+------------------------------------------------------
+
+Given a ``compute`` with a set of positional and keyword
+arguments, the purpose of this exercise is to *automatically* generate the
+Flask files ``model.py`` and ``view.py``. Use the Python ``inspect``
+module, see the section :ref:`wf:vib3:flask:autogen`, to extract
+the positional and keyword arguments in ``compute``, and use this
+information to construct the relevant Python code. Assume as
+in the section :ref:`wf:vib3:flask:autogen` that the user provides
+a file ``view_results.html`` for defining how the returned object
+from the ``compute`` function is to be rendered.
+
+Test the code generator on the ``compute`` function in the ``vib1_flask``
+application to check that the generated
+``model.py`` and ``view.py`` files are correct.
+Filename: ``generate_flask.py``.
+
+.. --- end exercise ---
+
+Resources
+=========
+
+Flask resources
+---------------
+
+ * `Flask website <http://flask.pocoo.org/>`__
+
+ * `The Flask Mega-Tutorial <http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world>`__ by Miguel Grinberg
+
+ * `WTForms Documentation <http://wtforms.simplecodes.com/docs/0.6/index.html>`__
+
+ * `The Jinja2 templating language <http://jinja.pocoo.org/docs/>`__
+
+ * `The Werkzeug library <http://werkzeug.pocoo.org/>`__
+
+Django resources
+----------------
+
+ * `Django webpage <https://www.djangoproject.com/>`__
+
+ * `Web tutorials <https://code.djangoproject.com/wiki/Tutorials>`__
+
+ * `YouTube videos <http://www.youtube.com/playlist?list=PL385A53B00B8B158E>`__
+
+Remaining
+=========
+
+ * apply (generated apps) to simviz (make py simviz too and describe that)
+
+ * store data in database
+
+ * discuss list values read as text and use of eval, perhaps exercise
+
+ * avoid Flask or Django in exercises, just do not specify and have
+   common exercises at the very end
+
+ * app: username, TextAreaField, store in database and retrieve for admin

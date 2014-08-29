@@ -1,0 +1,343 @@
+
+<!DOCTYPE html>
+
+
+
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    
+    <title>Exercises &mdash; Using Web Frameworks for Scientific Web Applications</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    
+<link rel="stylesheet" href="_static/css/basicstrap-base.css" type="text/css" />
+<link rel="stylesheet" href="_static/css/bootstrap.min.css" type="text/css" />
+<link rel="stylesheet" href="_static/css/font-awesome.min.css">
+<!--[if IE 7]>
+<link rel="stylesheet" href="_static/css/font-awesome-ie7.min.css">
+<![endif]-->
+<style type="text/css">
+  body {
+    padding-top: 60px;
+    padding-bottom: 40px;
+  }
+}
+</style>
+<link rel="stylesheet" href="_static/basicstrap.css" type="text/css" />
+<link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+<link rel="stylesheet" href="_static/css/bootstrap-responsive.min.css" type="text/css" />
+    
+<script type="text/javascript">
+  var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:    './',
+            VERSION:     '1.0',
+            COLLAPSE_INDEX: false,
+            FILE_SUFFIX: '.html',
+            HAS_SOURCE:  true
+  };
+</script>
+<script type="text/javascript" src="_static/js/jquery.min.js"></script>
+<script type="text/javascript" src="_static/underscore.js"></script>
+<script type="text/javascript" src="_static/doctools.js"></script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript" src="_static/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.show-sidebar').click(function(e) {
+       e.preventDefault();
+       if ($(".show-sidebar").html() == "Open Table Of Contents") {
+          $('.for-mobile').removeClass('hidden-phone');
+          $(".show-sidebar").html("Close Table Of Contents");
+       } else {
+          $(".show-sidebar").html("Open Table Of Contents");
+       }
+    });
+  });
+</script>
+
+        <script src="http://sagecell.sagemath.org/static/jquery.min.js"></script>
+        <script src="http://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+
+        <script>sagecell.makeSagecell({inputLocation: ".sage"});</script>
+
+        <style type="text/css">
+                .sagecell .CodeMirror-scroll {
+                        overflow-y: hidden;
+                        overflow-x: auto;
+                }
+                .sagecell .CodeMirror {
+                        height: auto;
+                }
+        </style>
+
+    
+    <link rel="top" title="Using Web Frameworks for Scientific Web Applications" href="index.html" />
+    <link rel="prev" title="Handling multiple input variables in Django" href="._web4sa017.html" />
+ 
+  </head>
+  <body>
+    <div class="navbar navbar-fixed-top ">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="index.html">Using Web Frameworks for Scientific Web Applications</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav pull-right">
+              
+                <li>
+                <a href="genindex.html" title="General Index" accesskey="I">index</a>
+                </li>
+                <li>
+                <a href="._web4sa017.html" title="Handling multiple input variables in Django" accesskey="P">previous</a>
+                </li>
+              
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
+    <!-- container -->
+    <div class="container-fluid">
+
+
+      
+      <div class="row-fluid hidden-desktop hidden-tablet">
+      
+<div class="span3 ">
+  <a class="visible-phone btn btn-small show-sidebar" data-toggle="collapse" data-target=".for-mobile">Open Table Of Contents</a>
+  <div class="for-mobile sidebar hidden-phone">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Exercises</a><ul>
+<li><a class="reference internal" href="#exercise-1-add-two-numbers">Exercise 1: Add two numbers</a></li>
+<li><a class="reference internal" href="#exercise-2-extend-the-vib3-flask-app">Exercise 2: Extend the <tt class="docutils literal"><span class="pre">vib3_flask</span></tt> app</a></li>
+<li><a class="reference internal" href="#exercise-3-equip-the-vib3-flask-app-with-more-data-types">Exercise 3: Equip the <tt class="docutils literal"><span class="pre">vib3_flask</span></tt> app with more data types</a></li>
+<li><a class="reference internal" href="#exercise-4-auto-generate-code-from-function-signature">Exercise 4: Auto-generate code from function signature</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#resources">Resources</a><ul>
+<li><a class="reference internal" href="#flask-resources">Flask resources</a></li>
+<li><a class="reference internal" href="#django-resources">Django resources</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#remaining">Remaining</a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="._web4sa017.html"
+                        title="previous chapter">Handling multiple input variables in Django</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/._web4sa018.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox">
+  <h3>Quick search</h3>
+  <form class="search form-search" action="search.html" method="get">
+      <div class="input-append">
+        <input type="text" class="search-query" name="q">
+        <input type="submit" class="btn" value="Go" />
+      </div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+  </div>
+</div>
+      </div>
+      
+
+      <!-- row -->
+      <div class="row-fluid">
+         
+<div class="span3 visible-desktop visible-tablet">
+  <div class=" sidebar hidden-phone">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Exercises</a><ul>
+<li><a class="reference internal" href="#exercise-1-add-two-numbers">Exercise 1: Add two numbers</a></li>
+<li><a class="reference internal" href="#exercise-2-extend-the-vib3-flask-app">Exercise 2: Extend the <tt class="docutils literal"><span class="pre">vib3_flask</span></tt> app</a></li>
+<li><a class="reference internal" href="#exercise-3-equip-the-vib3-flask-app-with-more-data-types">Exercise 3: Equip the <tt class="docutils literal"><span class="pre">vib3_flask</span></tt> app with more data types</a></li>
+<li><a class="reference internal" href="#exercise-4-auto-generate-code-from-function-signature">Exercise 4: Auto-generate code from function signature</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#resources">Resources</a><ul>
+<li><a class="reference internal" href="#flask-resources">Flask resources</a></li>
+<li><a class="reference internal" href="#django-resources">Django resources</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#remaining">Remaining</a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="._web4sa017.html"
+                        title="previous chapter">Handling multiple input variables in Django</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/._web4sa018.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox">
+  <h3>Quick search</h3>
+  <form class="search form-search" action="search.html" method="get">
+      <div class="input-append">
+        <input type="text" class="search-query" name="q">
+        <input type="submit" class="btn" value="Go" />
+      </div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+  </div>
+</div> 
+        
+
+        <div class="span9">
+          <div class="document">
+            <div class="documentwrapper">
+              <div class="bodywrapper">
+                <div class="body">
+                  
+  <div class="section" id="exercises">
+<h1>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="exercise-1-add-two-numbers">
+<span id="wf-exer-add2"></span><h2>Exercise 1: Add two numbers<a class="headerlink" href="#exercise-1-add-two-numbers" title="Permalink to this headline">¶</a></h2>
+<p>Make a web application that reads two numbers from a web page,
+adds the numbers, and prints the sum in a new web page.
+Package the necessary files that constitute the application
+in a tar file.
+Filename: <tt class="docutils literal"><span class="pre">add2.tar.gz</span></tt>.</p>
+</div>
+<div class="section" id="exercise-2-extend-the-vib3-flask-app">
+<span id="wf-exer-vib3-demo"></span><h2>Exercise 2: Extend the <tt class="docutils literal"><span class="pre">vib3_flask</span></tt> app<a class="headerlink" href="#exercise-2-extend-the-vib3-flask-app" title="Permalink to this headline">¶</a></h2>
+<p>Add a new argument <tt class="docutils literal"><span class="pre">x_axis</span></tt> to the <tt class="docutils literal"><span class="pre">compute</span></tt> function in the
+<a class="reference external" href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/vib_flask3">vib_flask3</a> application from the section <a class="reference internal" href="._web4sa012.html#wf-vib3-flask-autogen"><em>Autogenerating the code</em></a>. The <tt class="docutils literal"><span class="pre">x_axis</span></tt> argument measures the extent
+of the <span class="math">\(x\)</span> axis in the plots in terms of the number of standard
+deviations (default may be 7).  Observe how the web interface
+automatically adds the new argument and how the plots adapt!</p>
+</div>
+<div class="section" id="exercise-3-equip-the-vib3-flask-app-with-more-data-types">
+<span id="wf-exer-vib3-lists"></span><h2>Exercise 3: Equip the <tt class="docutils literal"><span class="pre">vib3_flask</span></tt> app with more data types<a class="headerlink" href="#exercise-3-equip-the-vib3-flask-app-with-more-data-types" title="Permalink to this headline">¶</a></h2>
+<p>In the <a class="reference external" href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/vib_flask3">vib_flask3</a>
+application from the section <a class="reference internal" href="._web4sa012.html#wf-vib3-flask-autogen"><em>Autogenerating the code</em></a>,
+use the <tt class="docutils literal"><span class="pre">label</span></tt> argument in the form field objects to add an
+information of the type of data that is to be supplied in the
+text field. Extend the <tt class="docutils literal"><span class="pre">model.py</span></tt> file to also handle
+lists, tuples, and Numerical Python arrays. For these three
+new data types, use a <tt class="docutils literal"><span class="pre">TextField</span></tt> object and run <tt class="docutils literal"><span class="pre">eval</span></tt>
+on the text in the <tt class="docutils literal"><span class="pre">view.py</span></tt> file.
+A simple test is to extend the <tt class="docutils literal"><span class="pre">compute</span></tt> function with an
+argument <tt class="docutils literal"><span class="pre">x_range</span></tt> for the range of the <span class="math">\(x\)</span> axis, specified as
+an interval (2-list or 2-tuple).
+Filename: <tt class="docutils literal"><span class="pre">vib3_ext.tar.gz</span></tt>.</p>
+</div>
+<div class="section" id="exercise-4-auto-generate-code-from-function-signature">
+<h2>Exercise 4: Auto-generate code from function signature<a class="headerlink" href="#exercise-4-auto-generate-code-from-function-signature" title="Permalink to this headline">¶</a></h2>
+<p>Given a <tt class="docutils literal"><span class="pre">compute</span></tt> with a set of positional and keyword
+arguments, the purpose of this exercise is to <em>automatically</em> generate the
+Flask files <tt class="docutils literal"><span class="pre">model.py</span></tt> and <tt class="docutils literal"><span class="pre">view.py</span></tt>. Use the Python <tt class="docutils literal"><span class="pre">inspect</span></tt>
+module, see the section <a class="reference internal" href="._web4sa012.html#wf-vib3-flask-autogen"><em>Autogenerating the code</em></a>, to extract
+the positional and keyword arguments in <tt class="docutils literal"><span class="pre">compute</span></tt>, and use this
+information to construct the relevant Python code. Assume as
+in the section <a class="reference internal" href="._web4sa012.html#wf-vib3-flask-autogen"><em>Autogenerating the code</em></a> that the user provides
+a file <tt class="docutils literal"><span class="pre">view_results.html</span></tt> for defining how the returned object
+from the <tt class="docutils literal"><span class="pre">compute</span></tt> function is to be rendered.</p>
+<p>Test the code generator on the <tt class="docutils literal"><span class="pre">compute</span></tt> function in the <tt class="docutils literal"><span class="pre">vib1_flask</span></tt>
+application to check that the generated
+<tt class="docutils literal"><span class="pre">model.py</span></tt> and <tt class="docutils literal"><span class="pre">view.py</span></tt> files are correct.
+Filename: <tt class="docutils literal"><span class="pre">generate_flask.py</span></tt>.</p>
+</div>
+</div>
+<div class="section" id="resources">
+<h1>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="flask-resources">
+<h2>Flask resources<a class="headerlink" href="#flask-resources" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="http://flask.pocoo.org/">Flask website</a></li>
+<li><a class="reference external" href="http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world">The Flask Mega-Tutorial</a> by Miguel Grinberg</li>
+<li><a class="reference external" href="http://wtforms.simplecodes.com/docs/0.6/index.html">WTForms Documentation</a></li>
+<li><a class="reference external" href="http://jinja.pocoo.org/docs/">The Jinja2 templating language</a></li>
+<li><a class="reference external" href="http://werkzeug.pocoo.org/">The Werkzeug library</a></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="django-resources">
+<h2>Django resources<a class="headerlink" href="#django-resources" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="https://www.djangoproject.com/">Django webpage</a></li>
+<li><a class="reference external" href="https://code.djangoproject.com/wiki/Tutorials">Web tutorials</a></li>
+<li><a class="reference external" href="http://www.youtube.com/playlist?list=PL385A53B00B8B158E">YouTube videos</a></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="remaining">
+<h1>Remaining<a class="headerlink" href="#remaining" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><ul class="simple">
+<li>apply (generated apps) to simviz (make py simviz too and describe that)</li>
+<li>store data in database</li>
+<li>discuss list values read as text and use of eval, perhaps exercise</li>
+<li>avoid Flask or Django in exercises, just do not specify and have
+common exercises at the very end</li>
+<li>app: username, TextAreaField, store in database and retrieve for admin</li>
+</ul>
+</div></blockquote>
+</div>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        
+      </div><!-- /row -->
+
+      <!-- row -->
+      <div class="row-fluid">
+<div class="related navbar ">
+  <div class="navbar-inner">
+    <ul class="nav pull-right">
+      
+        <li><a href="genindex.html" title="General Index" >index</a></li>
+        <li><a href="._web4sa017.html" title="Handling multiple input variables in Django" >previous</a></li>
+        <li><a href="index.html">Using Web Frameworks for Scientific Web Applications</a></li> 
+      
+    </ul>
+  </div>
+</div>
+      </div><!-- /row -->
+
+      <!-- footer -->
+      <footer>
+          &copy; Copyright 2014, H. P. Langtangen and A. E. Johansen.
+        Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.
+      </footer>
+      <!-- /footer -->
+
+    </div>
+    <!-- /container -->
+
+  </body>
+</html>

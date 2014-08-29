@@ -13,12 +13,12 @@ cp $name.html ${name}_plain.html
 doconce split_html ${name}_plain
 if [ $? -ne 0 ]; then exit; fi
 
-doconce format html ${name} -DTOPIC=Flask --html_style=vagrant --html_template=html_templates/template_flask.html --html_output=${name}_flask
+doconce format html ${name} -DTOPIC=Flask --html_style=bootstrap --html_template=html_templates/template_flask.html --html_output=${name}_flask
 if [ $? -ne 0 ]; then exit; fi
 doconce split_html ${name}_flask
 if [ $? -ne 0 ]; then exit; fi
 
-doconce format html ${name} -DTOPIC=Django --html_style=vagrant --html_template=html_templates/template_django.html --html_output=${name}_django
+doconce format html ${name} -DTOPIC=Django --html_style=bootstrap --html_template=html_templates/template_django.html --html_output=${name}_django
 if [ $? -ne 0 ]; then exit; fi
 doconce split_html ${name}_django
 if [ $? -ne 0 ]; then exit; fi
@@ -50,4 +50,3 @@ dest=../../pub
 rm -rf $dest/sphinx-rootdir $dest/sphinx-*
 cp -r ${name}*.html .*${name}*.html $name.pdf sphinx-* $dest
 cp -r fig-$name/* $dest/fig-$name/
-cp -r html_templates/* $dest/html_templates/
