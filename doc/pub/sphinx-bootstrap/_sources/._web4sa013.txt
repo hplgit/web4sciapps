@@ -1,0 +1,157 @@
+.. !split
+
+.. _wf:vib3:flask:nofiles:
+
+Avoiding plot files
+-------------------
+
+Files with plots are easy to deal with as long as they are in the
+``static`` subdirectory of the Flask application directory. However,
+the less files a web app makes use of, the better. Also, the problem
+with ensuring that new plots are really loaded into the browser
+required us to generate unique filenames. Therefore, it would be
+convenient to get the plot as a string and embed the string data
+directly into the HTML code. This is relatively easy with Matplotlib
+and Python. The relevant code constitutes the
+`vib4 <https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/vib4>`__ app in the
+directory of the same name.
+
+.. index:: inline PNG image in HTML
+
+.. index:: StringIO objects
+
+.. index:: file-like string objects (StringIO)
+
+.. index:: strings as files (StringIO)
+
+.. index:: base64 encoding of PNG images
+
+PNG plots
+~~~~~~~~~
+
+Python has the ``StringIO`` object that is a string buffer with the
+look and behavior of a file. The idea is to let Matplotlib write to
+a ``StringIO`` object and afterwards extract the string from this object:
+
+.. code-block:: python
+
+        import matplotlib.pyplot as plot
+        from StringIO import StringIO
+        # run plt.plot, plt.title, etc.
+        figfile = StringIO()
+        plt.savefig(figfile, format='png')
+        figfile.seek(0)  # rewind to beginning of file
+        figdata_png = figfile.buf  # extract string
+
+Before the PNG data can be embedded in HTML we need to convert the
+data to base64 format:
+
+.. code-block:: python
+
+        import base64
+        figdata_png = base64.b64encode(figdata_png)
+
+Now we can embed the PNG data in HTML by
+
+.. code-block:: python
+
+        # html is some file object for the HTML file
+        html.write("""
+        <img src="data:image/png;base64,%(figdata_png)s" width=500>
+        """ % vars())
+
+The corresponding syntax in an HTML template is
+
+.. code-block:: html
+
+        <img src="data:image/png;base64,{{ figdata_png }}" width=500>
+
+.. index:: inline SVG figure in HTML
+
+SVG plots
+~~~~~~~~~
+
+Inline figures in HTML, instead of using files, are most often realized
+by XML code with the figure data in SVG format.
+Plot strings in the SVG format are created very similarly to the PNG
+example:
+
+.. code-block:: python
+
+        figfile = StringIO()
+        plt.savefig(figfile, format='svg')
+        figdata_svg = figfile.buf
+
+The ``figdata_svg`` string contains XML code text can almost
+be directly embedded in
+HTML5. However, the beginning of the text contains information before
+the ``svg`` tag that we want to remove:
+
+.. code-block:: text
+
+        <?xml version="1.0" encoding="utf-8" standalone="no"?>
+        <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+          "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+        <!-- Created with matplotlib (http://matplotlib.sourceforge.net/) -->
+        <svg height="441pt" version="1.1" viewBox="0 0 585 441" ...
+
+The removal is done with a little string manipulation:
+
+.. code-block:: python
+
+        figdata_svg = '<svg' + figfile.buf.split('<svg')[1]
+
+Now, ``figdata_svg`` can be directly inserted in HTML code without
+any surrounding tags.
+The file `compute.py <https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/vib4/compute.py>`__
+in the ``vib4`` application directory contains all the details.
+
+The ``compute_gamma`` function returns six values:
+the PNG data for the :math:`g` plot, the PNG data for the :math:`G` plot,
+the SVG XML code for the :math:`g` plot, the SVG XML code for the :math:`G` plot,
+the mean value, and the value of the standard deviation. We can
+keep the ``controller.py`` unchanged (except for the URL, which is now ``vib4``)
+and adjust the ``view_results.html``
+template only. The ``result`` object is now a tuple with 6 elements.
+For illustration purposes we make two rows with plots, one with
+PNG data and one with SVG data. The template becomes
+
+.. code-block:: html
+
+        {% if result != None %}
+        <p>
+        <table>
+        <tr>
+        <td>
+        <img src="data:image/png;base64,{{ result[0] }}" width="400">
+        </td><td>
+        <img src="data:image/png;base64,{{ result[1] }}" width="400">
+        </td></tr>
+        <tr>
+        <td>{{ result[2]|safe }}</td>
+        <td>{{ result[3]|safe }}</td>
+        </tr>
+        <tr><td>
+        Mean value: {{ result[4] }} <br>
+        Standard deviation value: {{ result[5] }}
+        </td></tr>
+        </table>
+        </p>
+        {% endif %}
+
+Special HTML characters like ``<``, ``>``,
+``&``, ``"``, and ``'`` are escaped in a template string like ``{{ str }}``
+(i.e., ``&`` is replaced by ``&amp;`` `<` is replaced by ``&lt;``, etc.).
+We need to avoid this manipulation of the string content
+because ``result[2]`` and ``result[3]`` contain
+XML code where the mentioned characters are essential part of the syntax.
+Writing ``{{str|safe}}`` ensures that the contents of the string ``str``
+are not altered before being embedded in the HTML text.
+
+Trying out the ``vib4`` application we see that the SVG plots are
+much bigger than the width-controlled PNG plots.
+The width and height of SVG plots are specified in the XML code and can
+of course be changed by proper string replacements for the
+``width``, ``height``, and ``viewBox`` specifications. It is far easier to
+just write the ``width`` specification in the image tag for the PNG plot.
+
