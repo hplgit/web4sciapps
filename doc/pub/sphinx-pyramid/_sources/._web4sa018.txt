@@ -77,8 +77,8 @@ Filename: ``generate_flask.py``.
 
 .. --- end exercise ---
 
-Resources
-=========
+Resources  (2)
+==============
 
 Flask resources
 ---------------

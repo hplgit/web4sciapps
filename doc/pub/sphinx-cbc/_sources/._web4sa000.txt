@@ -1,11 +1,11 @@
-.. Automatically generated Sphinx-extended reStructuredText file from Doconce source
+.. Automatically generated Sphinx-extended reStructuredText file from DocOnce source
    (https://github.com/hplgit/doconce/)
 
 Using Web Frameworks for Scientific Web Applications
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 :Authors: Hans Petter Langtangen, Anders E. Johansen
-:Date: Aug 2, 2014
+:Date: Aug 30, 2014
 
 Web frameworks
 ==============

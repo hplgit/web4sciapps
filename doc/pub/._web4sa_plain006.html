@@ -1,15 +1,15 @@
 <!--
-Automatically generated HTML file from Doconce source
+Automatically generated HTML file from DocOnce source
 (https://github.com/hplgit/doconce/)
 -->
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="generator" content="Doconce: https://github.com/hplgit/doconce/" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Using Web Frameworks for Scientific Web Applications">
 <meta name="keywords" content="web frameworks,MVC pattern,Flask installation,Flask input forms,Flask HTML templates,Flask MVC pattern,Flask troubleshooting,Django installation,Django making a project,Django making an application,Django input forms,Django HTML templates,Flask input forms,Flask error checking,Flask CSS style sheets,Flask LaTeX mathematics,Flask input validation,inline PNG image in HTML,base64 encoding of PNG images,inline SVG figure in HTML,Flask login,Flask database,Flask bootstrap style,Django input forms,Django input validation">
 
-
+<title>Using Web Frameworks for Scientific Web Applications</title>
 
 
 <style type="text/css">
@@ -31,6 +31,32 @@ p { text-indent: 0px; }
 hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
 p.caption { width: 80%; font-style: normal; text-align: left; }
 hr.figure { border: 0; width: 80%; border-bottom: 1px solid #aaa}
+.alert-text-small   { font-size: 80%;  }
+.alert-text-large   { font-size: 130%; }
+.alert-text-normal  { font-size: 90%;  }
+.alert {
+  padding:8px 35px 8px 14px; margin-bottom:18px;
+  text-shadow:0 1px 0 rgba(255,255,255,0.5);
+  border:1px solid #bababa;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  color: #555;
+  background-color: #f8f8f8;
+  background-position: 10px 5px;
+  background-repeat: no-repeat;
+  background-size: 38px;
+  padding-left: 55px;
+  width: 75%;
+ }
+.alert-block {padding-top:14px; padding-bottom:14px}
+.alert-block > p, .alert-block > ul {margin-bottom:1em}
+.alert li {margin-top: 1em}
+.alert-block p+p {margin-top:5px}
+.alert-notice { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_gray_notice.png); }
+.alert-summary  { background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_gray_summary.png); }
+.alert-warning { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_gray_warning.png); }
+.alert-question {background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_gray_question.png); }
 
 div { text-align: justify; text-justify: inter-word; }
 </style>
@@ -106,14 +132,15 @@ div { text-align: justify; text-justify: inter-word; }
                'wf:vib1:flask:bootstrap',
                'wf:vib1:flask:bootstrap'),
               (' Further work ', 1, None, '___sec27'),
+              (' Resources ', 3, None, '___sec28'),
               (' Handling multiple input variables in Django ',
                1,
                'wf:vib:django',
                'wf:vib:django'),
-              (' Programming the Django application ', 2, None, '___sec29'),
-              (' Custom validation ', 2, None, '___sec30'),
-              (' Customizing widgets ', 2, None, '___sec31'),
-              (' Exercises ', 1, None, '___sec32'),
+              (' Programming the Django application ', 2, None, '___sec30'),
+              (' Custom validation ', 2, None, '___sec31'),
+              (' Customizing widgets ', 2, None, '___sec32'),
+              (' Exercises ', 1, None, '___sec33'),
               (' Exercise 1: Add two numbers ',
                2,
                'wf:exer:add2',
@@ -129,11 +156,11 @@ div { text-align: justify; text-justify: inter-word; }
               (' Exercise 4: Auto-generate code from function signature ',
                2,
                None,
-               '___sec36'),
-              (' Resources ', 1, None, '___sec37'),
-              (' Flask resources ', 2, None, '___sec38'),
-              (' Django resources ', 2, None, '___sec39'),
-              (' Remaining ', 1, None, '___sec40')]}
+               '___sec37'),
+              (' Resources ', 1, None, '___sec38'),
+              (' Flask resources ', 2, None, '___sec39'),
+              (' Django resources ', 2, None, '___sec40'),
+              (' Remaining ', 1, None, '___sec41')]}
 end of tocinfo -->
 
 <body>
@@ -144,7 +171,7 @@ end of tocinfo -->
 MathJax.Hub.Config({
   TeX: {
      equationNumbers: {  autoNumber: "none"  },
-     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js"]
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
   }
 });
 </script>
@@ -156,11 +183,15 @@ MathJax.Hub.Config({
 
     
 <a name="part0006"></a>
+<p>
 <!-- begin top navigation -->
-<a href="._web4sa_plain005.html"><img src="http://hplgit.github.io/doconce/bundled/html_images/prev1.png" border=0 alt="&laquo; Previous"></a>
-
-<a href="._web4sa_plain007.html"><img src="http://hplgit.github.io/doconce/bundled/html_images/next1.png" border=0 alt="Next &raquo;"></a>
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._web4sa_plain005.html"><img src="http://hplgit.github.io/doconce/bundled/html_images/prev1.png" border=0 alt="&laquo; Previous"></a></div>
+</td><td>
+<div style="text-align: right;"><a href="._web4sa_plain007.html"><img src="http://hplgit.github.io/doconce/bundled/html_images/next1.png" border=0 alt="Next &raquo;"></a></div>
+</td></tr></table>
 <!-- end top navigation -->
+</p>
 
 <p>
 <!-- !split -->
@@ -425,10 +456,13 @@ with an URL, but any other name than <code>index</code> can be used.
 <p>
 <p>
 <!-- begin bottom navigation -->
-<a href="._web4sa_plain005.html"><img src="http://hplgit.github.io/doconce/bundled/html_images/prev1.png" border=0 alt="&laquo; Previous"></a>
-
-<a href="._web4sa_plain007.html"><img src="http://hplgit.github.io/doconce/bundled/html_images/next1.png" border=0 alt="Next &raquo;"></a>
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._web4sa_plain005.html"><img src="http://hplgit.github.io/doconce/bundled/html_images/prev1.png" border=0 alt="&laquo; Previous"></a></div>
+</td><td>
+<div style="text-align: right;"><a href="._web4sa_plain007.html"><img src="http://hplgit.github.io/doconce/bundled/html_images/next1.png" border=0 alt="Next &raquo;"></a></div>
+</td></tr></table>
 <!-- end bottom navigation -->
+</p>
 
 <!-- ------------------- end of main content --------------- -->
 

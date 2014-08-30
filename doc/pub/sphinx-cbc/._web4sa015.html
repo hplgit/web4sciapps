@@ -15,7 +15,7 @@
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
+        URL_ROOT:    '',
         VERSION:     '1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -27,27 +27,9 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="_static/sidebar.js"></script>
-
-        <script src="http://sagecell.sagemath.org/static/jquery.min.js"></script>
-        <script src="http://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
-
-        <script>sagecell.makeSagecell({inputLocation: ".sage"});</script>
-
-        <style type="text/css">
-                .sagecell .CodeMirror-scroll {
-                        overflow-y: hidden;
-                        overflow-x: auto;
-                }
-                .sagecell .CodeMirror {
-                        height: auto;
-                }
-        </style>
-
-    
     <link rel="top" title="Using Web Frameworks for Scientific Web Applications" href="index.html" />
     <link rel="next" title="Further work" href="._web4sa016.html" />
-    <link rel="prev" title="User login and storage of computed results" href="._web4sa014.html" />
- 
+    <link rel="prev" title="User login and storage of computed results" href="._web4sa014.html" /> 
   </head>
   <body>
     <div class="related">
@@ -73,8 +55,52 @@
             
   <div class="section" id="using-bootstrap-styles">
 <span id="wf-vib1-flask-bootstrap"></span><h1>Using Bootstrap styles<a class="headerlink" href="#using-bootstrap-styles" title="Permalink to this headline">¶</a></h1>
-<span class="target" id="index-0"></span><p>Not yet written. Must be based on
-<a class="reference external" href="http://pythonhosted.org/Flask-Bootstrap/basic-usage.html">http://pythonhosted.org/Flask-Bootstrap/basic-usage.html</a>.</p>
+<p id="index-0">The design and layout of the graphical web interface is completely
+governed by template file. So far, we have used only basic HTML
+elements in this file. With CSS it is possible to improve the
+design, but why not adopt popular frameworks that offer an attractive
+look-and-feel and much nice functionality such as responsive pages
+across a wide range of devices? The <a class="reference external" href="http://getbootstrap.com/">Bootstrap</a>
+framework is free and open software that gives developers a kick start
+with respect to web page design and functionality.
+Many designs are built on Bootstrap: &#8220;Bootswatch&#8221;: &#8220;<a class="reference external" href="http:bootswatch.com">http:bootswatch.com</a>&#8221;,
+<a class="reference external" href="http://startbootstrap.com/">Start Bootstrap</a>,
+<a class="reference external" href="http://bootstrapzero.com/">Bootstrap Zero</a>, and <a class="reference external" href="http://www.prepbootstrap.com/">PrepBootstrap</a>.</p>
+<p>It would obviously be advantageous to create Flask templates that
+can utilize the Bootstrap technology. A package <a class="reference external" href="http://pythonhosted.org/Flask-Bootstrap/">Flask-Bootstrap</a>
+is already supporting this idea.</p>
+<div class="admonition-project admonition">
+<p class="first admonition-title">Project</p>
+<ul class="last">
+<li><p class="first">Test out the Flask-Bootstrap package by redoing a selection
+of the previous examples with the Bootstrap design and functionality.</p>
+</li>
+<li><p class="first">How easy is it to take advantage of various Bootstrap designs,
+say the Bootswatch themes, in a template based on Flask-Bootstrap?</p>
+</li>
+<li><p class="first">Make a new GUI <a class="footnote-reference" href="#app" id="id1">[1]</a> with different types of input fields and see how
+the design looks like in Bootstrap-based themes:</p>
+<blockquote>
+<div><ul class="simple">
+<li>one selection from a list (radio buttons, drop-down list)</li>
+<li>multiple selections from a list (check buttons)</li>
+<li>one-line text field</li>
+<li>multi-line text field</li>
+<li>floating-point number</li>
+<li>integer</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<table class="docutils footnote" frame="void" id="app" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>The compute function can be very simple, e.g., just returning some HTML
+typesetting of the arguments. This subexercise is for test purposes
+only.</td></tr>
+</tbody>
+</table>
 </div>
 
 

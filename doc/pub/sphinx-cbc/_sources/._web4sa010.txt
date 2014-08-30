@@ -14,7 +14,7 @@ foreground color of the text in this column to blue.
 The style sheet is called ``basic.css`` and *must* reside in the
 ``static`` subdirectory of the Flask application directory:
 
-.. code-block:: css
+.. code-block:: text
 
         td.name { color: blue; }
 
