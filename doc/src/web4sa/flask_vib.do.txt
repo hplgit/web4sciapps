@@ -737,10 +737,48 @@ app_path = src_path + 'flask_apps/vib6'
 
 idx{Flask!bootstrap style}
 
+The design and layout of the graphical web interface is completely
+governed by template file. So far, we have used only basic HTML
+elements in this file. With CSS it is possible to improve the
+design, but why not adopt popular frameworks that offer an attractive
+look-and-feel and much nice functionality such as responsive pages
+across a wide range of devices? The "Bootstrap": "http://getbootstrap.com/"
+framework is free and open software that gives developers a kick start
+with respect to web page design and functionality.
+Many designs are built on Bootstrap: "Bootswatch": "http:bootswatch.com",
+"Start Bootstrap": "http://startbootstrap.com/",
+"Bootstrap Zero": "http://bootstrapzero.com/", and "PrepBootstrap":
+"http://www.prepbootstrap.com/".
+
+It would obviously be advantageous to create Flask templates that
+can utilize the Bootstrap technology. A package "Flask-Bootstrap":
+"http://pythonhosted.org/Flask-Bootstrap/"
+is already supporting this idea.
+
+!bnotice Project
+  * Test out the Flask-Bootstrap package by redoing a selection
+    of the previous examples with the Bootstrap design and functionality.
+  * How easy is it to take advantage of various Bootstrap designs,
+    say the Bootswatch themes, in a template based on Flask-Bootstrap?
+  * Make a new GUI[^app] with different types of input fields and see how
+    the design looks like in Bootstrap-based themes:
+     * one selection from a list (radio buttons, drop-down list)
+     * multiple selections from a list (check buttons)
+     * one-line text field
+     * multi-line text field
+     * floating-point number
+     * integer
+!enotice
+
+
+[^app]: The compute function can be very simple, e.g., just returning some HTML
+typesetting of the arguments. This subexercise is for test purposes
+only.
+
 # http://pythonhosted.org/Flask-Bootstrap/basic-usage.html
 
-Not yet written. Must be based on
-URL: "http://pythonhosted.org/Flask-Bootstrap/basic-usage.html".
+#Not yet written. Must be based on
+#URL: "http://pythonhosted.org/Flask-Bootstrap/basic-usage.html".
 
 !split
 ======= Further work =======
@@ -754,7 +792,8 @@ URL: "http://pythonhosted.org/Flask-Bootstrap/basic-usage.html".
    display some more realistic code.
  * Drawing in HTML5
 
-Resources:
+
+=== Resources ===
 
  * "Django: make user": "https://docs.djangoproject.com/en/dev/topics/auth/default/#user-objects"
  * "Django: read and write database": "https://docs.djangoproject.com/en/dev/topics/db/queries/"

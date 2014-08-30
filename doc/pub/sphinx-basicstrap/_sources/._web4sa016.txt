@@ -14,7 +14,8 @@ Further work
 
  * Drawing in HTML5
 
-Resources:
+Resources  (1)
+~~~~~~~~~~~~~~
 
  * `Django: make user <https://docs.djangoproject.com/en/dev/topics/auth/default/#user-objects>`__
 

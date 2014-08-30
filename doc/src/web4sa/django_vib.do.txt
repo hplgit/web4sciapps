@@ -222,3 +222,11 @@ Django files, and
 then one can view the form class in the `models.py` file for how
 HTML5 widgets can be used in the definition of the `widgets`
 dictionary.
+# #ifdef COMING
+!split
+======= Djano and Bootstrap =======
+
+ * URL: "http://stackoverflow.com/questions/11821116/django-and-bootstrap-what-app-is-recommended"
+ * URL: "https://github.com/dyve/django-bootstrap3"
+ * URL: "https://www.youtube.com/watch?v=3Bwl5CYa5Uc"
+# #endif

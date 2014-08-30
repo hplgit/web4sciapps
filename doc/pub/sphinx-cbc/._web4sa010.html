@@ -15,7 +15,7 @@
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
+        URL_ROOT:    '',
         VERSION:     '1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -27,27 +27,9 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="_static/sidebar.js"></script>
-
-        <script src="http://sagecell.sagemath.org/static/jquery.min.js"></script>
-        <script src="http://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
-
-        <script>sagecell.makeSagecell({inputLocation: ".sage"});</script>
-
-        <style type="text/css">
-                .sagecell .CodeMirror-scroll {
-                        overflow-y: hidden;
-                        overflow-x: auto;
-                }
-                .sagecell .CodeMirror {
-                        height: auto;
-                }
-        </style>
-
-    
     <link rel="top" title="Using Web Frameworks for Scientific Web Applications" href="index.html" />
     <link rel="next" title="Custom validation (1)" href="._web4sa011.html" />
-    <link rel="prev" title="Implementing error checking in the template" href="._web4sa009.html" />
- 
+    <link rel="prev" title="Implementing error checking in the template" href="._web4sa009.html" /> 
   </head>
   <body>
     <div class="related">
@@ -80,7 +62,7 @@ a class <tt class="docutils literal"><span class="pre">name</span></tt> for the 
 foreground color of the text in this column to blue.
 The style sheet is called <tt class="docutils literal"><span class="pre">basic.css</span></tt> and <em>must</em> reside in the
 <tt class="docutils literal"><span class="pre">static</span></tt> subdirectory of the Flask application directory:</p>
-<div class="highlight-css"><div class="highlight"><pre><span class="nt">td</span><span class="nc">.name</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span> <span class="p">}</span>
+<div class="highlight-text"><div class="highlight"><pre>td.name { color: blue; }
 </pre></div>
 </div>
 <p>The <tt class="docutils literal"><span class="pre">view2.html</span></tt> file using this style sheet features a <tt class="docutils literal"><span class="pre">link</span></tt> tag
@@ -145,7 +127,7 @@ u(t) = Ae^{-bt}\sin (w t), \hbox{ for } t\in [0,T]
 <p>Figure <a class="reference internal" href="#wf-vib1-flask-fig-latex"><em>LaTeX typesetting of mathematical symbols</em></a> displays how the
 LaTeX rendering looks like in the browser.</p>
 <div class="figure" id="wf-vib1-flask-fig-latex">
-<a class="reference internal image-reference" href="_images/vib1_flask_latex.png"><img alt="_images/vib1_flask_latex.png" src="_images/vib1_flask_latex.png" style="width: 650px;" /></a>
+<img alt="_images/vib1_flask_latex.png" src="_images/vib1_flask_latex.png" style="width: 650px;" />
 <p class="caption"><em>LaTeX typesetting of mathematical symbols</em></p>
 </div>
 </div>
@@ -158,7 +140,7 @@ row contains the table with the input forms in the first column and
 the plot in the second column, while the second row features the
 <em>Compute</em> button in the first column.</p>
 <div class="figure" id="wf-vib1-flask-fig-sidebyside">
-<a class="reference internal image-reference" href="_images/vib1_flask_table2.png"><img alt="_images/vib1_flask_table2.png" src="_images/vib1_flask_table2.png" style="width: 700px;" /></a>
+<img alt="_images/vib1_flask_table2.png" src="_images/vib1_flask_table2.png" style="width: 700px;" />
 <p class="caption"><em>New design with input and output side by side</em></p>
 </div>
 <p>The enabling template file is <tt class="docutils literal"><span class="pre">view4.html</span></tt>:</p>

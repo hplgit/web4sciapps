@@ -7,7 +7,7 @@ Using Web Frameworks for Scientific Web Applications
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
 
    ._web4sa000
    ._web4sa001
