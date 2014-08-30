@@ -1,0 +1,248 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The MVC pattern &mdash; Using Web Frameworks for Scientific Web Applications</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-2.3.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-2.3.0/css/bootstrap-responsive.min.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-2.3.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="Using Web Frameworks for Scientific Web Applications" href="index.html" />
+    <link rel="next" title="A very simple application" href="._web4sa002.html" />
+    <link rel="prev" title="Using Web Frameworks for Scientific Web Applications" href="._web4sa000.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+<div class="container">
+  
+  <div id="navbar" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+      <button class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <a class="brand" href="index.html">Using Web Frameworks for Scientific Web Applications</a>
+      <span class="navbar-text pull-left"><b>1.0</b></span>
+
+      <div class="nav-collapse">
+        <ul class="nav">
+          <li class="divider-vertical"></li>
+          
+            <li class="dropdown globaltoc-container">
+  <a href="index.html"
+     class="dropdown-toggle"
+     data-toggle="dropdown">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+    ><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="._web4sa000.html">Using Web Frameworks for Scientific Web Applications</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa000.html#web-frameworks">Web frameworks</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">The MVC pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._web4sa002.html">A very simple application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._web4sa003.html">Application of the MVC pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._web4sa004.html">Making a Flask application</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa004.html#programming-the-flask-application-1">Programming the Flask application  (1)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa004.html#equipping-the-input-page-with-output-results-1">Equipping the input page with output results  (1)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa004.html#splitting-the-app-into-model-view-and-controller-files">Splitting the app into model, view, and controller files</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="._web4sa005.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._web4sa006.html">Making a Django application</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa006.html#setting-up-a-django-project">Setting up a Django project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa006.html#setting-up-a-django-application">Setting up a Django application</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="._web4sa007.html">Programming the Django application  (1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._web4sa007.html#equipping-the-input-page-with-output-results-2">Equipping the input page with output results  (2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._web4sa008.html">Handling multiple input variables in Flask</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa008.html#programming-the-flask-application-2">Programming the Flask application  (2)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="._web4sa009.html">Implementing error checking in the template</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._web4sa010.html">Using style sheets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._web4sa010.html#using-latex-mathematics">Using LaTeX mathematics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._web4sa010.html#rearringing-the-elements-in-the-html-template">Rearringing the elements in the HTML template</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._web4sa011.html">Custom validation  (1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._web4sa012.html">Autogenerating the code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._web4sa013.html">Avoiding plot files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa013.html#png-plots">PNG plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa013.html#svg-plots">SVG plots</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="._web4sa014.html">User login and storage of computed results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._web4sa015.html">Using Bootstrap styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._web4sa016.html">Further work</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa016.html#resources-1">Resources  (1)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="._web4sa017.html">Handling multiple input variables in Django</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa017.html#programming-the-django-application-2">Programming the Django application  (2)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa017.html#custom-validation-2">Custom validation  (2)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa017.html#customizing-widgets">Customizing widgets</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="._web4sa018.html">Exercises</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa018.html#exercise-1-add-two-numbers">Exercise 1: Add two numbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa018.html#exercise-2-extend-the-vib3-flask-app">Exercise 2: Extend the <tt class="docutils literal"><span class="pre">vib3_flask</span></tt> app</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa018.html#exercise-3-equip-the-vib3-flask-app-with-more-data-types">Exercise 3: Equip the <tt class="docutils literal"><span class="pre">vib3_flask</span></tt> app with more data types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa018.html#exercise-4-auto-generate-code-from-function-signature">Exercise 4: Auto-generate code from function signature</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="._web4sa018.html#resources-2">Resources  (2)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa018.html#flask-resources">Flask resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa018.html#django-resources">Django resources</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="._web4sa018.html#remaining">Remaining</a></li>
+</ul>
+</ul>
+</li>
+            <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"><ul>
+<li><a class="reference internal" href="#">The MVC pattern</a></li>
+</ul>
+</ul>
+</li>
+          
+          
+            
+  <li><a href="._web4sa000.html"
+         title="previous chapter">&laquo; Using Web Frameworks for Scientific Web Applications</a></li>
+  <li><a href="._web4sa002.html"
+         title="next chapter">A very simple application &raquo;</a></li>
+          
+          
+            <li>
+  <a href="_sources/._web4sa001.txt"
+     rel="nofollow">Source</a></li>
+          
+        </ul>
+
+        
+          
+<form class="navbar-search pull-right" style="margin-bottom:-3px;" action="search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="section" id="the-mvc-pattern">
+<h1>The MVC pattern<a class="headerlink" href="#the-mvc-pattern" title="Permalink to this headline">¶</a></h1>
+<p id="index-0">The MVC pattern stands for Model-View-Controller and is a way of
+separating the user&#8217;s interaction with an application from the inner
+workings of the application. In a scientific application this
+usually means separaring mathematical computations from the
+user interface and visualization of results.
+The <a class="reference external" href="http://en.wikipedia.org/wiki/MVC_Pattern">Wikipedia definition of the MVC pattern</a> gives a very high-level
+explanation of what the model, view, and controller do and mentions
+the fact that different web frameworks interpret the three components
+differently. Any web application works with a set of data and needs
+a user interface for the communication of data between the user and
+some data processing software. The classical
+MVC pattern introduces</p>
+<blockquote>
+<div><ul class="simple">
+<li>the model to hold the data</li>
+<li>the view to display the data</li>
+<li>the controller to move the data by gluing the model and the view.</li>
+</ul>
+</div></blockquote>
+<p>For applications performing mathematical computations we find it
+convenient to explicitly introduce a fourth component that we call
+<em>compute</em> where the mathematical computations are encapsulated.  With
+the MVC pattern and the compute component we have a clear separation
+between data (model), the way data is presented (view), the
+computations (compute), and the way these components communicate
+(controller). In a small program such a separation may look as
+overkill, but it pays off in more complicated applications. More
+importantly, the concepts of the MVC pattern are widely used in
+web frameworks so one should really adapt to the MVC way of
+thinking.</p>
+<p>Web frameworks often have their own way of interpreting the
+model, view, and controller parts of the MVC pattern.
+In particular, most frameworks often divide the view into two parts:
+one software component and one HTML template. The latter takes care
+of the look and feel of the web page while the former often takes
+the role of being the controller too.
+For our scientific applications
+we shall employ an interpretation of the MVC pattern
+which is compatible with what we need later on:</p>
+<blockquote>
+<div><ul class="simple">
+<li>the model contains the data (often only the input data) of the application,</li>
+<li>the view controls the user interface that handles input and output data,
+and also calls to functionality that computes the output given the input.</li>
+</ul>
+</div></blockquote>
+<p>The model will be a Python class with static attributes holding the data.
+The view consists of Python code processing the model&#8217;s data and HTML
+templates for the design of the web pages.</p>
+<p>Flask does not force any MVC pattern on the programmer, but
+the code needed to build web applications can easily be split into
+model, view, controller, and compute components, as will be shown later.
+Django, on the other hand, automatically generates application files with names
+<tt class="docutils literal"><span class="pre">views.py</span></tt> and <tt class="docutils literal"><span class="pre">models.py</span></tt> so it is
+necessary to have some idea what Django means by these terms.
+The controller functionality in Django lies both in the <tt class="docutils literal"><span class="pre">views.py</span></tt> file and
+in the configuration
+files (<tt class="docutils literal"><span class="pre">settings.py</span></tt> and <tt class="docutils literal"><span class="pre">urls.py</span></tt>). The view component of the application
+consists both of the <tt class="docutils literal"><span class="pre">views.py</span></tt> file and template files used to create
+the HTML code in the web pages.</p>
+<p>Forthcoming examples will illustrate how a scientific application is
+split to meet the requirements of the MVC software design pattern.</p>
+</div>
+
+
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2014, H. P. Langtangen and A. E. Johansen.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

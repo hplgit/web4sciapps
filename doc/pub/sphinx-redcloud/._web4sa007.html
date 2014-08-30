@@ -1,0 +1,380 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Programming the Django application (1) &mdash; Using Web Frameworks for Scientific Web Applications</title>
+    
+    <link rel="stylesheet" href="_static/redcloud.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Noticia+Text|Droid+Sans+Mono" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/jquery.cookie.js"></script>
+    <script type="text/javascript" src="_static/toggle_sections.js"></script>
+    <link rel="top" title="Using Web Frameworks for Scientific Web Applications" href="index.html" />
+    <link rel="next" title="Handling multiple input variables in Flask" href="._web4sa008.html" />
+    <link rel="prev" title="Making a Django application" href="._web4sa006.html" /> 
+  </head>
+  <body>
+    <div class="relbar-top">
+        
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="._web4sa008.html" title="Handling multiple input variables in Flask"
+             accesskey="N">next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="._web4sa006.html" title="Making a Django application"
+             accesskey="P">previous</a> &nbsp; &nbsp;</li>
+    <li><a href="index.html">Using Web Frameworks for Scientific Web Applications</a> &raquo;</li>
+ 
+      </ul>
+    </div>
+    </div>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="programming-the-django-application-1">
+<h1>Programming the Django application  (1)<a class="headerlink" href="#programming-the-django-application-1" title="Permalink to this headline">¶</a></h1>
+<p>The Django application is about filling the files <tt class="docutils literal"><span class="pre">views.py</span></tt> and <tt class="docutils literal"><span class="pre">models.py</span></tt>
+with content. The mathematical computations are performed in <tt class="docutils literal"><span class="pre">compute.py</span></tt>
+so we copy this file from the <tt class="docutils literal"><span class="pre">mvc</span></tt> directory to the <tt class="docutils literal"><span class="pre">hw1</span></tt> directory
+for convenience (we could alternatively add <tt class="docutils literal"><span class="pre">../mvc</span></tt> to <tt class="docutils literal"><span class="pre">sys.path</span></tt> such that
+<tt class="docutils literal"><span class="pre">import</span> <span class="pre">compute</span></tt> would work from the <tt class="docutils literal"><span class="pre">hw1</span></tt> directory).</p>
+<p><strong>The user interaction.</strong>
+The web application offers a text field where the user can
+write the value of <tt class="docutils literal"><span class="pre">r</span></tt>, see Figure <a class="reference internal" href="#wf-hw1-django-fig-input"><em>The input page</em></a>.
+After clicking on the <em>equals</em> button,
+the mathematics is performed and a new page as
+seen in Figure <a class="reference internal" href="#wf-hw1-django-fig-result"><em>The result page</em></a> appears.</p>
+<div class="figure" id="wf-hw1-django-fig-input">
+<img alt="_images/hw1_django_input.png" src="_images/hw1_django_input.png" style="width: 600px;" />
+<p class="caption"><em>The input page</em></p>
+</div>
+<div class="figure" id="wf-hw1-django-fig-result">
+<img alt="_images/hw1_django_output.png" src="_images/hw1_django_output.png" style="width: 600px;" />
+<p class="caption"><em>The result page</em></p>
+</div>
+<span class="target" id="index-0"></span><p id="index-1"><strong>The model.</strong>
+The <tt class="docutils literal"><span class="pre">models.py</span></tt> file contains the model, which consists
+of the data we need in the application, stored in Django&#8217;s data types.
+Our data consists of one number, called <tt class="docutils literal"><span class="pre">r</span></tt>, and <tt class="docutils literal"><span class="pre">models.py</span></tt> then
+look like</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
+<span class="kn">from</span> <span class="nn">django.forms</span> <span class="kn">import</span> <span class="n">ModelForm</span>
+
+<span class="k">class</span> <span class="nc">Input</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">FloatField</span><span class="p">()</span>
+
+<span class="k">class</span> <span class="nc">InputForm</span><span class="p">(</span><span class="n">ModelForm</span><span class="p">):</span>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Input</span>
+</pre></div>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">Input</span></tt> class lists variables representing data as static class
+attributes. The <tt class="docutils literal"><span class="pre">django.db.models</span></tt> module contains various classes
+for different types of data, here we use <tt class="docutils literal"><span class="pre">FloatField</span></tt> to represent
+a floating-point number.
+The <tt class="docutils literal"><span class="pre">InputForm</span></tt> class has a the shown generic form across applications
+if we by convention apply the name <tt class="docutils literal"><span class="pre">Input</span></tt> for the class holding the data.</p>
+<span class="target" id="index-2"></span><p id="index-3"><strong>The view.</strong>
+The <tt class="docutils literal"><span class="pre">views.py</span></tt> file contains a function <tt class="docutils literal"><span class="pre">index</span></tt> which defines
+the actions we want to perform when invoking
+the URL ( here <tt class="docutils literal"><span class="pre">http://127.0.0.1:8000/hw1/</span></tt>).
+In addition, <tt class="docutils literal"><span class="pre">views.py</span></tt> has the <tt class="docutils literal"><span class="pre">present_output</span></tt> function from
+the <tt class="docutils literal"><span class="pre">view.py</span></tt> file in the <tt class="docutils literal"><span class="pre">mvc</span></tt> directory.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render_to_response</span>
+<span class="kn">from</span> <span class="nn">django.template</span> <span class="kn">import</span> <span class="n">RequestContext</span>
+<span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpResponse</span>
+<span class="kn">from</span> <span class="nn">models</span> <span class="kn">import</span> <span class="n">InputForm</span>
+<span class="kn">from</span> <span class="nn">compute</span> <span class="kn">import</span> <span class="n">compute</span>
+
+<span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">InputForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+            <span class="n">form</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">commit</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">present_output</span><span class="p">(</span><span class="n">form</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">InputForm</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;hw1.html&#39;</span><span class="p">,</span>
+            <span class="p">{</span><span class="s">&#39;form&#39;</span><span class="p">:</span> <span class="n">form</span><span class="p">},</span> <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">present_output</span><span class="p">(</span><span class="n">form</span><span class="p">):</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">r</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">compute</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s">&#39;Hello, World! sin(</span><span class="si">%s</span><span class="s">)=</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">s</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">index</span></tt> function deserves some explanation. It must take one
+argument, usually called <tt class="docutils literal"><span class="pre">request</span></tt>. There are two modes in the function. Either
+the user has provided input on the web page, which means that
+<tt class="docutils literal"><span class="pre">request.method</span></tt> equals <tt class="docutils literal"><span class="pre">'POST'</span></tt>, or we show a new web page
+with which the user is supposed to interact.</p>
+<p id="index-4"><strong>Making the input page.</strong>
+The input consists of a web form with
+one field where we can fill in our <tt class="docutils literal"><span class="pre">r</span></tt> variable. This page
+is realized by the two central statements</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># Make info needed in the web form</span>
+<span class="n">form</span> <span class="o">=</span> <span class="n">InputForm</span><span class="p">()</span>
+<span class="c"># Make HTML code</span>
+<span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;hw1.html&#39;</span><span class="p">,</span>
+    <span class="p">{</span><span class="s">&#39;form&#39;</span><span class="p">:</span> <span class="n">form</span><span class="p">},</span> <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">hw1.html</span></tt> file resides in the <tt class="docutils literal"><span class="pre">templates</span></tt> subdirectory and contains
+a template for the HTML code:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;form</span> <span class="na">method=</span><span class="s">&quot;post&quot;</span> <span class="na">action=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span>{% csrf_token %}
+    Hello, World! The sine of {{ form.r }}
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">value=</span><span class="s">&quot;equals&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+</pre></div>
+</div>
+<p>This is a <em>template file</em> because it contains instructions like
+<tt class="docutils literal"><span class="pre">{%</span> <span class="pre">csrf_token</span> <span class="pre">%}</span></tt> and variables like <tt class="docutils literal"><span class="pre">{{</span> <span class="pre">form.r</span> <span class="pre">}}</span></tt>. Django will
+replace the former by some appropriate HTML statements, while the
+latter simply extracts the numerical value of the variable <tt class="docutils literal"><span class="pre">r</span></tt> in
+our form (specified in the <tt class="docutils literal"><span class="pre">Input</span></tt> class in <tt class="docutils literal"><span class="pre">models.py</span></tt>).
+Typically, this <tt class="docutils literal"><span class="pre">hw1.html</span></tt> file
+results in the HTML code</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;form</span> <span class="na">method=</span><span class="s">&quot;post&quot;</span> <span class="na">action=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">style=</span><span class="s">&#39;display:none&#39;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&#39;hidden&#39;</span> <span class="na">name=</span><span class="s">&#39;csrfmiddlewaretoken&#39;</span>
+<span class="na">value=</span><span class="s">&#39;oPWMuuy1gLlXm9GvUZINv49eVUYnux5Q&#39;</span> <span class="nt">/&gt;&lt;/div&gt;</span>
+    Hello, World! The sine of <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">name=</span><span class="s">&quot;r&quot;</span> <span class="na">id=</span><span class="s">&quot;id_r&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">value=</span><span class="s">&quot;equals&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+</pre></div>
+</div>
+<p><strong>Making the results page.</strong>
+When then user has filled in a value in the text field on the input
+page, the <tt class="docutils literal"><span class="pre">index</span></tt> function is called again and <tt class="docutils literal"><span class="pre">request.method</span></tt> equals
+<tt class="docutils literal"><span class="pre">'POST'</span></tt>. A new form object is made, this time with user info (<tt class="docutils literal"><span class="pre">request.POST</span></tt>).
+We can check that the form is valid and if so, proceed with
+computations followed by presenting the results in a
+new web page (see Figure <a class="reference internal" href="#wf-hw1-django-fig-result"><em>The result page</em></a>):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">InputForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+            <span class="n">form</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">commit</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">present_output</span><span class="p">(</span><span class="n">form</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">present_output</span><span class="p">(</span><span class="n">form</span><span class="p">):</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">r</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">compute</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s">&#39;Hello, World! sin(</span><span class="si">%s</span><span class="s">)=</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">s</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The numerical value of <tt class="docutils literal"><span class="pre">r</span></tt> as given by the user is available as <tt class="docutils literal"><span class="pre">form.r</span></tt>.
+Instead of using a template for the output page, which is natural to
+do in more advanced cases, we here illustrate the possibility to
+send raw HTML to the output page by returning an <tt class="docutils literal"><span class="pre">HttpResponse</span></tt>
+object initialized by a string containing the desired HTML code.</p>
+<p>Launch this application by filling in the address <tt class="docutils literal"><span class="pre">http://127.0.0.1:8000/hw1/</span></tt>
+in your web browser. Make sure the Django development server is running,
+and if not, restart it by</p>
+<div class="highlight-text"><div class="highlight"><pre>Terminal&gt; python ../../../django_project/manage.py runserver
+</pre></div>
+</div>
+<p>Fill
+in some number on the input page and view the output.
+To show how easy it is to change the application, invoke the <tt class="docutils literal"><span class="pre">views.py</span></tt>
+file in an editor and add some color to the output HTML code from
+the <tt class="docutils literal"><span class="pre">present_output</span></tt> function:</p>
+<div class="highlight-python"><div class="highlight"><pre>    <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">&lt;font color=&#39;blue&#39;&gt;Hello&lt;/font&gt;, World!</span>
+<span class="s">sin(</span><span class="si">%s</span><span class="s">)=</span><span class="si">%s</span><span class="s"></span>
+<span class="s">&quot;&quot;&quot;</span><span class="o">%</span> <span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">s</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Go back to the input page, provide a new number, and observe how
+the &#8220;Hello&#8221; word now has a blue color.</p>
+</div>
+<div class="section" id="equipping-the-input-page-with-output-results-2">
+<h1>Equipping the input page with output results  (2)<a class="headerlink" href="#equipping-the-input-page-with-output-results-2" title="Permalink to this headline">¶</a></h1>
+<p>Instead of making a separate output page with the result, we can
+simply add the sine value to the input page. This makes the user
+feel that she interacts with the same page, as when operating a calculator.
+The output page should then look as shown in Figure <a class="reference internal" href="#wf-hw2-django-fig-result"><em>The modified result page</em></a>.</p>
+<div class="figure" id="wf-hw2-django-fig-result">
+<img alt="_images/hw2_django_output.png" src="_images/hw2_django_output.png" style="width: 600px;" />
+<p class="caption"><em>The modified result page</em></p>
+</div>
+<p>We need to make a new Django application, now called
+<a class="reference external" href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/django_apps/hw2">hw2</a>.
+Instead of running the standard
+<tt class="docutils literal"><span class="pre">manage.py</span> <span class="pre">startapp</span> <span class="pre">hw2</span></tt> command,
+we can simply copy the <tt class="docutils literal"><span class="pre">hw1</span></tt>
+directory to <tt class="docutils literal"><span class="pre">hw2</span></tt>. We need, of course, to add information about this
+new application in <tt class="docutils literal"><span class="pre">settings.py</span></tt> and <tt class="docutils literal"><span class="pre">urls.py</span></tt>.
+In the former file we must have</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">TEMPLATE_DIRS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">relative2absolute_path</span><span class="p">(</span><span class="s">&#39;../../apps/django_apps/hw1/templates&#39;</span><span class="p">),</span>
+    <span class="n">relative2absolute_path</span><span class="p">(</span><span class="s">&#39;../../apps/django_apps/hw2/templates&#39;</span><span class="p">),</span>
+<span class="p">)</span>
+
+<span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s">&#39;django.contrib.auth&#39;</span><span class="p">,</span>
+    <span class="s">&#39;django.contrib.contenttypes&#39;</span><span class="p">,</span>
+    <span class="s">&#39;django.contrib.sessions&#39;</span><span class="p">,</span>
+    <span class="s">&#39;django.contrib.sites&#39;</span><span class="p">,</span>
+    <span class="s">&#39;django.contrib.messages&#39;</span><span class="p">,</span>
+    <span class="s">&#39;django.contrib.staticfiles&#39;</span><span class="p">,</span>
+    <span class="c"># Uncomment the next line to enable the admin:</span>
+    <span class="c"># &#39;django.contrib.admin&#39;,</span>
+    <span class="c"># Uncomment the next line to enable admin documentation:</span>
+    <span class="c"># &#39;django.contrib.admindocs&#39;,</span>
+    <span class="s">&#39;hw1&#39;</span><span class="p">,</span>
+    <span class="s">&#39;hw2&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>In <tt class="docutils literal"><span class="pre">urls.py</span></tt> we add the URL <tt class="docutils literal"><span class="pre">hw2</span></tt> which is to call our <tt class="docutils literal"><span class="pre">index</span></tt> function
+in the <tt class="docutils literal"><span class="pre">views.py</span></tt> file of the <tt class="docutils literal"><span class="pre">hw2</span></tt> app:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">urlpatterns</span> <span class="o">=</span> <span class="n">patterns</span><span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">,</span>
+    <span class="n">url</span><span class="p">(</span><span class="s">r&#39;^hw1/&#39;</span><span class="p">,</span> <span class="s">&#39;django_apps.hw1.views.index&#39;</span><span class="p">),</span>
+    <span class="n">url</span><span class="p">(</span><span class="s">r&#39;^hw2/&#39;</span><span class="p">,</span> <span class="s">&#39;django_apps.hw2.views.index&#39;</span><span class="p">),</span>
+</pre></div>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">views.py</span></tt> file changes a bit since we shall generate almost the same
+web page on input and output. This makes the <tt class="docutils literal"><span class="pre">present_output</span></tt> function
+unnatural, and everything is done within the <tt class="docutils literal"><span class="pre">index</span></tt> function:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="bp">None</span>  <span class="c"># initial value of result</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">InputForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+            <span class="n">form</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">commit</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">r</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">compute</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">InputForm</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;hw2.html&#39;</span><span class="p">,</span>
+            <span class="p">{</span><span class="s">&#39;form&#39;</span><span class="p">:</span> <span class="n">form</span><span class="p">,</span>
+             <span class="s">&#39;s&#39;</span><span class="p">:</span> <span class="s">&#39;</span><span class="si">%.5f</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">s</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span> <span class="k">else</span> <span class="s">&#39;&#39;</span>
+             <span class="p">},</span> <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Note that the output variable <tt class="docutils literal"><span class="pre">s</span></tt> is computed within the <tt class="docutils literal"><span class="pre">index</span></tt>
+function and defaults to <tt class="docutils literal"><span class="pre">None</span></tt>. The template file <tt class="docutils literal"><span class="pre">hw2.html</span></tt>
+looks like</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;form</span> <span class="na">method=</span><span class="s">&quot;post&quot;</span> <span class="na">action=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span>{% csrf_token %}
+    Hello, World! The sine of {{ form.r }}
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">value=</span><span class="s">&quot;equals&quot;</span> <span class="nt">/&gt;</span>
+{% if s != &#39;&#39; %}
+{{ s }}
+{% endif %}
+<span class="nt">&lt;/form&gt;</span>
+</pre></div>
+</div>
+<p>The difference from <tt class="docutils literal"><span class="pre">hw1.html</span></tt> is that we right after the <em>equals</em>
+button write out the value of <tt class="docutils literal"><span class="pre">s</span></tt>. However, we make a test that
+the value is only written if it is computed, here recognized by
+being a non-empty string. The <tt class="docutils literal"><span class="pre">s</span></tt> in the template file
+is substituted by the value of the object
+corresponding to the key <tt class="docutils literal"><span class="pre">'s'</span></tt> in the
+dictionary we pass to the <tt class="docutils literal"><span class="pre">render_to_response</span></tt>. As seen,
+we pass a string where <tt class="docutils literal"><span class="pre">s</span></tt> is formatted with five digits if <tt class="docutils literal"><span class="pre">s</span></tt>
+is a float, i.e., if <tt class="docutils literal"><span class="pre">s</span></tt> is computed. Otherwise, <tt class="docutils literal"><span class="pre">s</span></tt> has the
+default value <tt class="docutils literal"><span class="pre">None</span></tt> and we send an empty string to the template.
+The template language allows tests using Python syntax, but the
+if-block must be explicitly ended by <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">endif</span> <span class="pre">%}</span></tt>.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Programming the Django application  (1)</a></li>
+<li><a class="reference internal" href="#equipping-the-input-page-with-output-results-2">Equipping the input page with output results  (2)</a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="._web4sa006.html"
+                        title="previous chapter">Making a Django application</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="._web4sa008.html"
+                        title="next chapter">Handling multiple input variables in Flask</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/._web4sa007.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="relbar-bottom">
+        
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="._web4sa008.html" title="Handling multiple input variables in Flask"
+             >next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="._web4sa006.html" title="Making a Django application"
+             >previous</a> &nbsp; &nbsp;</li>
+    <li><a href="index.html">Using Web Frameworks for Scientific Web Applications</a> &raquo;</li>
+ 
+      </ul>
+    </div>
+    </div>
+
+    <div class="footer">
+        &copy; Copyright 2014, H. P. Langtangen and A. E. Johansen.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+    <!-- cloud_sptheme 1.3 -->
+  </body>
+</html>
