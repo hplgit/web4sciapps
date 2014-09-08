@@ -36,7 +36,7 @@ and a list of "YouTube videos": "http://www.youtube.com/playlist?list=PL385A53B0
  "official web site": "http://flask.pocoo.org/" and the "WTForms Documentation": "http://wtforms.simplecodes.com/docs/0.6/index.html". There is, unfortunately, hardly any examples on how Django or Flask can be used to enable typical scientific applications for the web, and that is why we have developed some targeted examples on this topic.
 
 A basic question is, of course, whether you should apply Flask or
-Django for your web project. Googling for "flask vs django" gives a
+Django for your web project. Googling for *flask vs django* gives a
 lot of diverging opinions. The authors' viewpoint is that Flask is
 much easier to get started with than Django. You can grow your
 application to a really big one with both frameworks, but some
@@ -49,6 +49,20 @@ Django.
 We shall in the forthcoming text explore the very easy-to-use "Flask framework":
 "http://flask.pocoo.org/".  At the time of this writing, the primary Flask
 documentation is the "official web site": "http://flask.pocoo.org/" and the "WTForms Documentation": "http://wtforms.simplecodes.com/docs/0.6/index.html". That is why we have made specific examples for the application of Flask in computational science.
+
+A framework quite similar to Flask is "Bottle": "http://bottlepy.org/docs/dev/index.html".
+
+## 2DO:
+## PyORMish database interface plays well with Flask (check it out!).
+##   Probably easy to store away any type of user data.
+## See how easy it is to generate examples for Bottle or make
+## exercises to do that.
+## Comparison of micro web frameworks for Python:
+## http://www.pythondiary.com/blog/Feb.14,2012/too-many-micro-webframeworks.html
+## Seems that Flask is the most mature and advanced.
+## CherryPy has sessions. See if Flask has something similar, more natural
+## for login...
+
 # #elif TOPIC == 'Django'
 We shall explore the very popular "Django framework": "https://www.djangoproject.com/" in the following.
 The primary advantage of Django
