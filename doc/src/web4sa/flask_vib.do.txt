@@ -616,13 +616,13 @@ Now we can embed the PNG data in HTML by
 !bc pycod
 # html is some file object for the HTML file
 html.write("""
-<img src="data:image/png;base64,%(figdata_png)s" width=500>
+<img src="data:image/png;base64,%(figdata_png)s" width="500">
 """ % vars())
 !ec
 The corresponding syntax in an HTML template is
 
 !bc htmlcod
-<img src="data:image/png;base64,{{ figdata_png }}" width=500>
+<img src="data:image/png;base64,{{ figdata_png }}" width="500">
 !ec
 
 idx{inline SVG figure in HTML}
