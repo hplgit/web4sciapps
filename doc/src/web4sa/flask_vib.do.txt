@@ -513,15 +513,21 @@ def index():
     return render_template('view.html', form=form, result=result)
 !ec
 
+!bnotice Avoid file writing in apps
 A perhaps simpler alternative would be to have a generic
 `view_forms.html` file and a user-specific
 `view_results.html` and explicitly combining them into a new
 file. This requires file writing by the app, which one normally
 wants to avoid. Especially if the web app gets multiple users,
 the file writing may lead to corrupt files.
-(We already use file writing when creating the plot file, but
+
+__Remark.__
+We already use file writing when creating the plot file, but
 the filename depends on the time in seconds and will for multiple
-users normally be different.)
+users normally be different. Section ref{wf:vib3:flask:nofiles}
+explains how we can avoid storing the plot in a file. The
+resulting app does not involve any file writing.
+!enotice
 
 The complete, generic form of the `index` function becomes
 

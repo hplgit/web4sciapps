@@ -25,14 +25,8 @@ def index():
         result = compute(**kwargs)
     else:
         result = None
-    # Concatenate view_forms.html and view_results.html
-    forms_html   = os.path.join('templates', 'view_forms.html')
-    results_html = os.path.join('templates', 'view_results.html')
-    view_html    = os.path.join('templates', 'view.html')
-    f_forms = open(forms_html, 'r')
-    f_res   = open(results_html, 'r')
-    f_view  = open(view_html, 'w')
-    f_view.write(f_forms.read() + f_res.read())
-    f_forms.close();  f_res.close();  f_view.close()
-    return render_template(os.path.basename(view_html),
-                           form=form, result=result)
+    if result:
+        # result must be transformed to HTML and inserted as a
+        # string in the generic view.html file
+        result = render_template('view_results.html', result=result)
+    return render_template('view.html', form=form, result=result)
