@@ -492,7 +492,7 @@ the keys in a Python dictionary is undetermined).
 __Generating the template.__
 It remains to generate the right HTML template. The HTML code depends
 on what the returned `result` object from `compute` contains. Only a
-human who has the read `compute` code knows the details of the returned
+human who has read the `compute` code knows the details of the returned
 result. Therefore, we leave it to a human to provide the part
 of the HTML template that renders the result. The file `templates/view_results.html` contains this human-provided code, while `templates/view_forms.html`
 is a completely generic template for the forms:
