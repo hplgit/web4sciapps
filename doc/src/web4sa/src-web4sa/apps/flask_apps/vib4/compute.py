@@ -54,7 +54,7 @@ def compute_gamma(a=0.5, h=2.0, A=math.sqrt(2), resolution=500):
     figdata_cumulative_svg = '<svg' + figfile.buf.split('<svg')[1]
     return figdata_density_png, figdata_cumulative_png, \
            figdata_density_svg, figdata_cumulative_svg, \
-           mean, stdev
+           '%.2f' % mean, '%.2f' % stdev
 
 if __name__ == '__main__':
     print compute_vib()

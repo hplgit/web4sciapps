@@ -66,7 +66,7 @@ def compute_gamma(a=0.5, h=2.0, A=math.sqrt(2), resolution=500):
     plt.plot(x, y)
     plt.grid(True)
     plt.savefig(plotfile2)
-    return plotfile1, plotfile2, mean, stdev
+    return plotfile1, plotfile2, '%.2f' % mean, '%.2f' % stdev
 
 if __name__ == '__main__':
     print compute_vib()
