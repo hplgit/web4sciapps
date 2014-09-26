@@ -8,7 +8,7 @@
   <head>
     <meta charset="utf-8" />
     
-    <title>Making a Django application &mdash; Using Web Frameworks for Scientific Web Applications</title>
+    <title>Making a Django application &mdash; Using Web Frameworks for Scientific Applications</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
@@ -34,7 +34,7 @@
     
 <script type="text/javascript">
   var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:    '',
+            URL_ROOT:    './',
             VERSION:     '1.0',
             COLLAPSE_INDEX: false,
             FILE_SUFFIX: '.html',
@@ -59,9 +59,27 @@
     });
   });
 </script>
-    <link rel="top" title="Using Web Frameworks for Scientific Web Applications" href="index.html" />
+
+        <script src="http://sagecell.sagemath.org/static/jquery.min.js"></script>
+        <script src="http://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+
+        <script>sagecell.makeSagecell({inputLocation: ".sage"});</script>
+
+        <style type="text/css">
+                .sagecell .CodeMirror-scroll {
+                        overflow-y: hidden;
+                        overflow-x: auto;
+                }
+                .sagecell .CodeMirror {
+                        height: auto;
+                }
+        </style>
+
+    
+    <link rel="top" title="Using Web Frameworks for Scientific Applications" href="index.html" />
     <link rel="next" title="Programming the Django application (1)" href="._web4sa007.html" />
-    <link rel="prev" title="Troubleshooting" href="._web4sa005.html" /> 
+    <link rel="prev" title="Troubleshooting" href="._web4sa005.html" />
+ 
   </head>
   <body>
     <div class="navbar navbar-fixed-top ">
@@ -72,7 +90,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="index.html">Using Web Frameworks for Scientific Web Applications</a>
+          <a class="brand" href="index.html">Using Web Frameworks for Scientific Applications</a>
           <div class="nav-collapse collapse">
             <ul class="nav pull-right">
               
@@ -194,7 +212,7 @@
   <div class="section" id="making-a-django-application">
 <h1>Making a Django application<a class="headerlink" href="#making-a-django-application" title="Permalink to this headline">¶</a></h1>
 <p id="index-0">We recommend to
-download and istall the latest official version from
+download and istall the latest official version of Django from
 <a class="reference external" href="http://www.djangoproject.com/download/">http://www.djangoproject.com/download/</a>. Pack out the tarfile, go
 to the directory, and run <tt class="docutils literal"><span class="pre">setup.py</span></tt>:</p>
 <div class="highlight-text"><div class="highlight"><pre>Terminal&gt; tar xvzf Django-1.5-tar.gz
@@ -244,7 +262,7 @@ The server is started by running</p>
 Validating models...
 
 0 errors found
-March 23, 2013 - 01:09:24
+March 34, 201x - 01:09:24
 Django version 1.5, using settings &#39;django_project.settings&#39;
 Development server is running at http://127.0.0.1:8000/
 Quit the server with CONTROL-C.
@@ -254,7 +272,8 @@ Quit the server with CONTROL-C.
 URL <tt class="docutils literal"><span class="pre">http://127.0.0.1:8000/</span></tt>.
 Load this URL into your browser to see a welcome message from Django,
 meaning that the server is working.</p>
-<p>Despite the fact that our web applications do not need a database, you
+<p>Despite the fact that our introductory
+web applications do not need a database, you
 have to register a database with any Django project. To this end,
 open the <tt class="docutils literal"><span class="pre">django_project/settings.py</span></tt> file in a text editor,
 locate the <tt class="docutils literal"><span class="pre">DATABASES</span></tt> dictionary and type in the following
@@ -264,7 +283,7 @@ code:</p>
 <span class="k">def</span> <span class="nf">relative2absolute_path</span><span class="p">(</span><span class="n">relative_path</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return the absolute path correspodning to relative_path.&quot;&quot;&quot;</span>
     <span class="n">dir_of_this_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">__file__</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir_of_this_file</span><span class="p">,</span> <span class="n">relative_path</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dir_of_this_file</span> <span class="o">+</span> <span class="s">&#39;/&#39;</span> <span class="o">+</span> <span class="n">relative_path</span>
 
 <span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span>
    <span class="s">&#39;default&#39;</span> <span class="p">:</span> <span class="p">{</span>
@@ -350,7 +369,7 @@ unless we register the parent directory in <tt class="docutils literal"><span cl
 location of the <tt class="docutils literal"><span class="pre">settings.py</span></tt> script.</p>
 <p><strong>Step 2: Add a template directory.</strong>
 Make a subdirectory <tt class="docutils literal"><span class="pre">templates</span></tt> under <tt class="docutils literal"><span class="pre">hw1</span></tt>,</p>
-<div class="highlight-text"><div class="highlight"><pre>mkdir templates
+<div class="highlight-text"><div class="highlight"><pre>Terminal&gt; mkdir templates
 </pre></div>
 </div>
 <p>and add the absolute path of this directory to the <tt class="docutils literal"><span class="pre">TEMPLATE_DIRS</span></tt> tuple:</p>
@@ -402,7 +421,7 @@ with an URL, but any other name than <tt class="docutils literal"><span class="p
         <li><a href="genindex.html" title="General Index" >index</a></li>
         <li><a href="._web4sa007.html" title="Programming the Django application (1)" >next</a></li>
         <li><a href="._web4sa005.html" title="Troubleshooting" >previous</a></li>
-        <li><a href="index.html">Using Web Frameworks for Scientific Web Applications</a></li> 
+        <li><a href="index.html">Using Web Frameworks for Scientific Applications</a></li> 
       
     </ul>
   </div>
@@ -412,7 +431,7 @@ with an URL, but any other name than <tt class="docutils literal"><span class="p
       <!-- footer -->
       <footer>
           &copy; Copyright 2014, H. P. Langtangen and A. E. Johansen.
-        Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+        Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.
       </footer>
       <!-- /footer -->
 

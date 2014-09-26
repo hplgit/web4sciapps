@@ -8,14 +8,14 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>The MVC pattern &mdash; Using Web Frameworks for Scientific Web Applications</title>
+    <title>The MVC pattern &mdash; Using Web Frameworks for Scientific Applications</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     '1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -27,9 +27,27 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="_static/sidebar.js"></script>
-    <link rel="top" title="Using Web Frameworks for Scientific Web Applications" href="index.html" />
+
+        <script src="http://sagecell.sagemath.org/static/jquery.min.js"></script>
+        <script src="http://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+
+        <script>sagecell.makeSagecell({inputLocation: ".sage"});</script>
+
+        <style type="text/css">
+                .sagecell .CodeMirror-scroll {
+                        overflow-y: hidden;
+                        overflow-x: auto;
+                }
+                .sagecell .CodeMirror {
+                        height: auto;
+                }
+        </style>
+
+    
+    <link rel="top" title="Using Web Frameworks for Scientific Applications" href="index.html" />
     <link rel="next" title="A very simple application" href="._web4sa002.html" />
-    <link rel="prev" title="Using Web Frameworks for Scientific Web Applications" href="._web4sa000.html" /> 
+    <link rel="prev" title="Using Web Frameworks for Scientific Applications" href="._web4sa000.html" />
+ 
   </head>
   <body>
     <div class="related">
@@ -42,9 +60,9 @@
           <a href="._web4sa002.html" title="A very simple application"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="._web4sa000.html" title="Using Web Frameworks for Scientific Web Applications"
+          <a href="._web4sa000.html" title="Using Web Frameworks for Scientific Applications"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">Using Web Frameworks for Scientific Web Applications</a> &raquo;</li> 
+        <li><a href="index.html">Using Web Frameworks for Scientific Applications</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -58,7 +76,7 @@
 <p id="index-0">The MVC pattern stands for Model-View-Controller and is a way of
 separating the user&#8217;s interaction with an application from the inner
 workings of the application. In a scientific application this
-usually means separaring mathematical computations from the
+usually means separating mathematical computations from the
 user interface and visualization of results.
 The <a class="reference external" href="http://en.wikipedia.org/wiki/MVC_Pattern">Wikipedia definition of the MVC pattern</a> gives a very high-level
 explanation of what the model, view, and controller do and mentions
@@ -82,9 +100,9 @@ between data (model), the way data is presented (view), the
 computations (compute), and the way these components communicate
 (controller). In a small program such a separation may look as
 overkill, but it pays off in more complicated applications. More
-importantly, the concepts of the MVC pattern are widely used in
-web frameworks so one should really adapt to the MVC way of
-thinking.</p>
+importantly, the concepts of the MVC pattern are widely used in web
+frameworks and their documentation so one should really adapt to the
+MVC way of thinking.</p>
 <p>Web frameworks often have their own way of interpreting the
 model, view, and controller parts of the MVC pattern.
 In particular, most frameworks often divide the view into two parts:
@@ -102,7 +120,8 @@ and also calls to functionality that computes the output given the input.</li>
 </ul>
 </div></blockquote>
 <p>The model will be a Python class with static attributes holding the data.
-The view consists of Python code processing the model&#8217;s data and HTML
+The view consists of Python code processing the model&#8217;s data, calling the
+compute component, and specifying HTML
 templates for the design of the web pages.</p>
 <p>Flask does not force any MVC pattern on the programmer, but
 the code needed to build web applications can easily be split into
@@ -132,7 +151,7 @@ split to meet the requirements of the MVC software design pattern.</p>
             </center>
   <h4>Previous topic</h4>
   <p class="topless"><a href="._web4sa000.html"
-                        title="previous chapter">Using Web Frameworks for Scientific Web Applications</a></p>
+                        title="previous chapter">Using Web Frameworks for Scientific Applications</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="._web4sa002.html"
                         title="next chapter">A very simple application</a></p>
@@ -168,9 +187,9 @@ split to meet the requirements of the MVC software design pattern.</p>
           <a href="._web4sa002.html" title="A very simple application"
              >next</a> |</li>
         <li class="right" >
-          <a href="._web4sa000.html" title="Using Web Frameworks for Scientific Web Applications"
+          <a href="._web4sa000.html" title="Using Web Frameworks for Scientific Applications"
              >previous</a> |</li>
-        <li><a href="index.html">Using Web Frameworks for Scientific Web Applications</a> &raquo;</li> 
+        <li><a href="index.html">Using Web Frameworks for Scientific Applications</a> &raquo;</li> 
       </ul>
     </div>
 <div class="wrapper">

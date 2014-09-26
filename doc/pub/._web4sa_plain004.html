@@ -6,10 +6,10 @@ Automatically generated HTML file from DocOnce source
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
-<meta name="description" content="Using Web Frameworks for Scientific Web Applications">
+<meta name="description" content="Using Web Frameworks for Scientific Applications">
 <meta name="keywords" content="web frameworks,MVC pattern,Flask installation,Flask input forms,Flask HTML templates,Flask MVC pattern,Flask troubleshooting,Django installation,Django making a project,Django making an application,Django input forms,Django HTML templates,Flask input forms,Flask error checking,Flask CSS style sheets,Flask LaTeX mathematics,Flask input validation,inline PNG image in HTML,base64 encoding of PNG images,inline SVG figure in HTML,Flask login,Flask database,Flask bootstrap style,Django input forms,Django input validation">
 
-<title>Using Web Frameworks for Scientific Web Applications</title>
+<title>Using Web Frameworks for Scientific Applications</title>
 
 
 <style type="text/css">
@@ -61,6 +61,7 @@ hr.figure { border: 0; width: 80%; border-bottom: 1px solid #aaa}
 div { text-align: justify; text-justify: inter-word; }
 </style>
 
+
 </head>
 
 <!-- tocinfo
@@ -105,14 +106,19 @@ div { text-align: justify; text-justify: inter-word; }
                '___sec16'),
               (' Using style sheets ', 2, None, '___sec17'),
               (' Using LaTeX mathematics ', 2, None, '___sec18'),
-              (' Rearringing the elements in the HTML template ',
+              (' Rearranging the elements in the HTML template ',
                2,
                None,
                '___sec19'),
+              (' Bootstrap HTML style ', 2, None, '___sec20'),
               (' Custom validation ',
                2,
                'wf:vib1:flask:validation',
                'wf:vib1:flask:validation'),
+              (' Using Flask validators ', 3, None, '___sec22'),
+              (' Tailored validation ', 3, None, '___sec23'),
+              (' Tailored validation of intervals ', 3, None, '___sec24'),
+              (' Demo ', 3, None, '___sec25'),
               (' Autogenerating the code ',
                2,
                'wf:vib3:flask:autogen',
@@ -121,46 +127,46 @@ div { text-align: justify; text-justify: inter-word; }
                2,
                'wf:vib3:flask:nofiles',
                'wf:vib3:flask:nofiles'),
-              (' PNG plots ', 3, None, '___sec23'),
-              (' SVG plots ', 3, None, '___sec24'),
+              (' PNG plots ', 3, None, '___sec28'),
+              (' SVG plots ', 3, None, '___sec29'),
               (' User login and storage of computed results ',
                2,
                'wf:vib1:flask:login',
                'wf:vib1:flask:login'),
-              (' Using Bootstrap styles ',
+              (' Project 1: Using Bootstrap styles ',
                2,
                'wf:vib1:flask:bootstrap',
                'wf:vib1:flask:bootstrap'),
-              (' Further work ', 1, None, '___sec27'),
-              (' Resources ', 3, None, '___sec28'),
+              (' Further work ', 1, None, '___sec32'),
+              (' Resources ', 3, None, '___sec33'),
               (' Handling multiple input variables in Django ',
                1,
                'wf:vib:django',
                'wf:vib:django'),
-              (' Programming the Django application ', 2, None, '___sec30'),
-              (' Custom validation ', 2, None, '___sec31'),
-              (' Customizing widgets ', 2, None, '___sec32'),
-              (' Exercises ', 1, None, '___sec33'),
-              (' Exercise 1: Add two numbers ',
+              (' Programming the Django application ', 2, None, '___sec35'),
+              (' Custom validation ', 2, None, '___sec36'),
+              (' Customizing widgets ', 2, None, '___sec37'),
+              (' Exercises ', 1, None, '___sec38'),
+              (' Exercise 2: Add two numbers ',
                2,
                'wf:exer:add2',
                'wf:exer:add2'),
-              (' Exercise 2: Extend the `vib3_flask` app ',
+              (' Exercise 3: Extend the `vib3_flask` app ',
                2,
                'wf:exer:vib3:demo',
                'wf:exer:vib3:demo'),
-              (' Exercise 3: Equip the `vib3_flask` app with more data types ',
+              (' Exercise 4: Equip the `vib3_flask` app with more data types ',
                2,
                'wf:exer:vib3:lists',
                'wf:exer:vib3:lists'),
-              (' Exercise 4: Auto-generate code from function signature ',
+              (' Exercise 5: Auto-generate code from function signature ',
                2,
                None,
-               '___sec37'),
-              (' Resources ', 1, None, '___sec38'),
-              (' Flask resources ', 2, None, '___sec39'),
-              (' Django resources ', 2, None, '___sec40'),
-              (' Remaining ', 1, None, '___sec41')]}
+               '___sec42'),
+              (' Resources ', 1, None, '___sec43'),
+              (' Flask resources ', 2, None, '___sec44'),
+              (' Django resources ', 2, None, '___sec45'),
+              (' Remaining ', 1, None, '___sec46')]}
 end of tocinfo -->
 
 <body>
@@ -198,6 +204,7 @@ MathJax.Hub.Config({
 
 <h1>Making a Flask application  <a name="___sec4"></a></h1>
 
+<p>
 Not much code or configuration is needed to make a Flask application.
 Actually one short file is enough. For this file to work you need to
 install Flask and some corresponding packages. This is easiest
@@ -210,10 +217,11 @@ performed by
 Terminal&gt; sudo pip install WTForms
 </pre></div>
 <p>
-You can add <code>--upgrade</code> to upgrade a previous installation.
+You must add <code>--upgrade</code> to upgrade a previous installation (<code>pip install --upgrade Flask</code>).
 
 <h2>Programming the Flask application  <a name="___sec5"></a></h2>
 
+<p>
 <b>The user interaction.</b>
 We want our input page to feature a text field where the user can
 write the value of <code>r</code>, see Figure <a href="#wf:hw1:flask:fig:input">1</a>.
@@ -285,18 +293,21 @@ app <span style="color: #666666">=</span> Flask(__name__)
 <b>Dissection.</b>
 The web application is the <code>app</code> object of class <code>Flask</code>, and initialized
 as shown. The model is a special Flask class derived from <code>Form</code>
-where the data are listed as static class attributes and initialized
-by various form field objects from the <code>wtforms</code> package.
-These form fields correspond to HTML forms in the input page.
+where the input variable in the app is listed as a
+static class attribute and initialized
+by a special form field object from the <code>wtforms</code> package.
+Such form field objects correspond to HTML forms in the input page.
 For the <code>r</code> variable we apply <code>FloatField</code> since it is a floating-point
 variable. A default validator, here checking that the user supplies
-a real number, is automatically included.
+a real number, is automatically included, but we add another validator,
+<code>InputRequired</code>, to force the user to provide input before clicking on
+the <em>equals</em> button.
 
 <p>
 The view part of this Python code consists of
 a URL and a corresponding function to call when the URL is invoked.
-The function name is here chosen to be <code>index</code> (corresponding to the standard
-<code>index.html</code> page that is the main page of a URL). The
+The function name is here chosen to be <code>index</code> (inspired by the standard
+<code>index.html</code> page that is the main page of a web app). The
 decorator <code>@app.route('/hw1', ...)</code> maps the URL
 <code>http://127.0.0.1:5000/hw1</code> to a call to <code>index</code>.
 The <code>methods</code> argument must be as shown to allow the user to communicate
@@ -364,6 +375,7 @@ Open a new window or tab in your browser and type in the URL
 
 <h2>Equipping the input page with output results  <a name="___sec6"></a></h2>
 
+<p>
 Our application made two distinct pages for grabbing input from the
 user and presenting the result. It is often more natural to add
 the result to the input page. This is particularly the case in the present
@@ -378,7 +390,7 @@ web application, which is a kind of calculator. Figure <a href="#wf:hw2:flask:fi
 
 <p>
 To let the user stay within the same page, we create a new directory
-<a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/hw2" target="_self"><tt>hw2</tt></a>.
+<a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/hw2" target="_self"><tt>hw2</tt></a>
 for this modified Flask app and copy the files from the previous
 <code>hw1</code> directory.  The idea now is to make use of just one
 template, in <code>templates/view.html</code>:
@@ -399,6 +411,8 @@ template, in <code>templates/view.html</code>:
 The form is identical to what we used in <code>view_input.html</code> in
 the <code>hw1</code> directory, and the only
 new thing is the output of <code>s</code> below the form.
+
+<p>
 The template language supports some programming with Python objects
 inside <code>{%</code> and <code>%}</code> tags.
 Specifically in this file, we can test on the value of <code>s</code>:
@@ -459,6 +473,7 @@ sending it to <code>render_template</code>.
 
 <h2>Splitting the app into model, view, and controller files <a name="wf:hw3:flask"></a></h2>
 
+<p>
 In our previous two Flask apps we have had the view displayed for the
 user in a separate template file, and the computations as always in
 <code>compute.py</code>, but everything else was placed in one file <code>controller.py</code>.
@@ -470,7 +485,7 @@ directory
 <a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/hw3" target="_self"><tt>hw3_flask</tt></a>
 The contents
 in the files reflect the splitting introduced in the original
-scienticic hello world program in the section <a href="._web4sa_plain003.html#wf:hw:mvc">Application of the MVC pattern</a>.
+scientific hello world program in the section <a href="._web4sa_plain003.html#wf:hw:mvc">Application of the MVC pattern</a>.
 The <code>model.py</code> file now consists of the input form class:
 
 <p>

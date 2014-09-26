@@ -43,7 +43,7 @@ makeindex $name
 pdflatex -shell-escape $name
 pdflatex -shell-escape $name
 
-doconce format html index --html-style=bloodish
+doconce format html index --html_style=bootstrap --html_boostrap_jumbotron=off --html_bootstrap_navbar=off
 
 # Publish
 dest=../../pub

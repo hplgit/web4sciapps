@@ -1,377 +1,193 @@
 .. !split
 
-.. _wf:vib3:flask:autogen:
+.. _wf:vib1:flask:validation:
 
-Autogenerating the code
------------------------
+Custom validation  (1)
+----------------------
 
-.. index:: getattr
+.. index::
+   single: Flask; input validation
 
-.. index:: setattr
+The ``FloatField`` objects can check that the input is compatible with
+a number, but what if we want to control that :math:`A>0`, :math:`b>0`, and
+:math:`T` is not greater than 30 periods (otherwise the plot gets cluttered)?
+We can write functions for checking appropriate conditions and
+supply the function to the list of validator functions in the call to
+the ``FloatField`` constructor or other field constructors. The extra
+code is a part of the ``model.py`` and the presented extensions appear
+in the directory `vib2 <https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/vib2>`__.
 
-.. index:: hasattr
+Using Flask validators
+~~~~~~~~~~~~~~~~~~~~~~
 
-We shall now present generic ``model.py`` and ``controller.py``
-files that work with *any* ``compute`` function (!). This example will
-demonstrate some advanced, powerful features of Python. The source code
-is found in the `vib3 <https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/vib3>`__
-directory.
-
-**Inspecting function signatures.**
-The basic idea is that the Python module ``inspect`` can be used to
-retrieve the names of the arguments and the default values of
-keyword arguments of *any* given ``compute`` function. Say we have some
+The simplest approach to validation is to use existing functionality
+in the web framework. Checking that :math:`A>0` can be done by
+the ``NumberRange`` validator which checks that the value is inside
+a prescribed interval:
 
 .. code-block:: python
 
-        def mycompute(A, m=0, s=1, w=1, x_range=[-3,3]):
+        from wtforms import Form, FloatField, validators
+        
+        class InputForm(Form):
+            A = FloatField(
+                label='amplitude (m)', default=1.0,
+                validators=[validators.NumberRange(0, 1E+20)])
+
+Tailored validation
+~~~~~~~~~~~~~~~~~~~
+
+We can also easily provide our own more tailored validators.
+As an example, let us explain how we can check that :math:`T` is less than 30 periods.
+One period is :math:`2\pi /w` so we need to check if :math:`T> 30\cdot 2\pi/w`
+and raise an exception in that case.
+A validation function takes two arguments: the whole ``form`` and the
+specific ``field`` to test:
+
+.. code-block:: python
+
+        def check_T(form, field):
+            """Form validation: failure if T > 30 periods."""
+            w = form.w.data
+            T = field.data
+            period = 2*pi/w
+            if T > 30*period:
+                num_periods = int(round(T/period))
+                raise validators.ValidationError(
+                    'Cannot plot as much as %d periods! T<%.2f' %
+                    (num_periods, 30*period))
+
+The appropriate exception is of type ``validators.ValidationError``.
+Observe that through ``form`` we have in fact access to all the input
+data so we can easily use the value of :math:`w` when checking the validity
+of the value of :math:`T`. The ``check_T`` function is easy to
+add to the list of validator functions in the call to the ``FloatField``
+constructor for ``T``:
+
+.. code-block:: python
+
+        class InputForm(Form):
             ...
-            return result
+            T = FloatField(
+                label='time interval', default=6*pi,
+                validators=[validators.InputRequired(), check_T])
 
-Running
+The validator
+objects are tested one by one as they appear in the list, and if
+one fails, the others are not invoked.
+We therefore add ``check_T`` after the check of input such that we know we
+have a value for all data when we run the computations and test
+in ``check_T``.
 
-.. code-block:: python
+Tailored validation of intervals
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-        import inspect
-        arg_names = inspect.getargspec(mycompute).args
-        defaults  = inspect.getargspec(mycompute).defaults
-
-leads to
-
-.. code-block:: python
-
-        arg_names = ['A', 'm', 's', 'w', 'x_range']
-        defaults = (0, 1, 1, [-3, 3])
-
-We have all the argument names in ``arg_names`` and
-``defaults[i]`` is the default value of keyword argument
-``arg_names[j]``, where ``j = len(arg_names) - len(defaults) + i``.
-
-**Generating the model.**
-Knowing the name ``name`` of some argument in the ``compute``
-function, we can make the corresponding class attribute
-in the ``InputForm`` class by
+Although there is already a ``NumberRange`` validator for checking
+whether a value is inside an interval, we can write our own
+version with some improved functionality for open intervals where
+the maximum or minimum value can be infinite.
+The infinite value can on input be represented by ``None``.
+A general such function may take the form
 
 .. code-block:: python
 
-        setattr(InputForm, name, FloatForm())
+        def check_interval(form, field, min_value=None, max_value=None):
+            """For validation: failure if value is outside an interval."""
+            failure = False
+            if min_value is not None:
+                if field.data < min_value:
+                    failure = True
+            if max_value is not None:
+                if field.data > max_value:
+                    failure = True
+            if failure:
+                raise validators.ValidationError(
+                    '%s=%s not in [%s, %s]' %
+                    (field.name, field.data,
+                     '-infty' if min_value is None else str(min_value),
+                     'infty'  if max_value is None else str(max_value)))
 
-For name equal to ``'A'`` this is the same as hardcoding
+.. index:: functools
+
+The problem is that ``check_interval`` takes four arguments, not only
+the ``form`` and ``field`` arguments that a validator function in the
+Flask framework can accept.
+The way out of this difficulty is to use a Python tool ``functools.partial``
+which allows us to call a function with some of the arguments set beforehand.
+Here, we want to create a new function that calls ``check_interval``
+with some prescribed values of ``min_value`` and ``max_value``.
+This function looks like it does not have these arguments, only
+``form`` and ``field``. The following function produces this function, which we
+can use as a valid Flask validator function:
 
 .. code-block:: python
 
-        class InputForm:
-            A = FloatForm()
-
-Assuming that all arguments in ``compute`` are floats, we could
-do
-
-.. code-block:: python
-
-        class InputForm:
-            pass  # Empty class
+        import functools
         
-        arg_names = inspect.getargspec(mycompute).args
-        for name in arg_names:
-            setattr(InputForm, name, FloatForm())
+        def interval(min_value=None, max_value=None):
+            return functools.partial(
+                check_interval, min_value=min_value, max_value=max_value)
 
-However, we can do better than this: for
-keyword arguments the type of the default value can be used to
-select the appropriate form class. The complete ``model.py`` file
-then goes as follows:
+We can now in any field constructor just add
+``interval(a, b)`` as a validator function, here checking that :math:`b\in [0,\infty)`:
 
 .. code-block:: python
 
-        """
-        Example on generic model.py file which inspects the arguments
-        of the compute function and automatically generates a relevant
-        InputForm class.
-        """
-        
-        import wtforms
-        from math import pi
-        
-        from compute import compute_gamma as compute
-        import inspect
-        arg_names = inspect.getargspec(compute).args
-        defaults  = inspect.getargspec(compute).defaults
-        
-        class InputForm(wtforms.Form):
-            pass
-        
-        # Augment defaults with None elements for the positional
-        # arguments
-        defaults = [None]*(len(arg_names)-len(defaults)) + list(defaults)
-        # Map type of default to right form field
-        type2form = {type(1.0): wtforms.FloatField,
-                     type(1):   wtforms.IntegerField,
-                     type(''):  wtforms.TextField,
-                     }
-        
-        for name, value in zip(arg_names, defaults):
-            if value is None:
-                setattr(InputForm, name, wtforms.FloatField(
-                    validators=[wtforms.validators.InputRequired()]))
-            else:
-                if type(value) in type2form:
-                    setattr(InputForm, name, type2form[type(value)](
-                        default=value,
-                        validators=[wtforms.validators.InputRequired()]))
-                else:
-                    raise TypeError('argument %s %s not supported' %
-                                    name, type(value))
-        
-        if __name__ == '__main__':
-            for item in dir(InputForm):
-                if item in arg_names:
-                    print item, getattr(InputForm, item)
+        class InputForm(Form):
+            ...
+            b = FloatField(
+                label='damping factor (kg/s)', default=0,
+                validators=[validators.InputRequired(), interval(0,None)])
 
-(The ``compute_gamma`` function imported from ``compute`` is the
-only application-specific statement in this code and will be explained later.)
+Demo
+~~~~
 
-**Generating the view.**
-The call to ``compute`` in the ``controller.py`` file must also be expressed
-in a general way such that the call handles any type and number of
-parameters. This can be done in two ways, using either positional
-or keyword arguments.
+Let us test our tailored error checking. Run ``python controller.py``
+in the ``vib2`` directory and fill in :math:`-1.0` in the :math:`b` field.
+Pressing *Compute* invokes our ``interval(0,None)`` function, which
+is nothing but a call to ``check_interval`` with the
+arguments ``field``, ``form``, ``0``, and ``None``.
+Inside this function,
+the test ``if field.data < min_value`` becomes true, ``failure``
+is set, and the exception is raised. The message in the exception
+is available in the ``field.errors`` attribute so our template
+will write it out in red, see Figure :ref:`wf:vib2:flask:fig:error1`.
+The template used in ``vib2`` is basically the same as ``view_tex.html``
+in ``vib1``, i.e., it feaures LaTeX mathematics and checking of
+``field.errors``.
 
-The technique with positional arguments
-is explained first. It consists of collecting all parameters in
-a list or tuple, called ``args``, and then calling ``compute(*args)``
-(which is equivalent to ``compute(args[0], args[1], ..., args[n])``
-if ``n`` is ``len(args)-1``). The elements of ``args`` are the values of the
-form variables. We know the name of a form variable as a string
-``name`` (from ``arg_names``), and if ``form`` is the form object,
-the construction ``getattr(form, name).data`` extracts the value
-that the user provided (``getattr(obj, attr)`` gets the attribute, with name
-available as a string in ``attr``, in the object ``obj``).
-For exampe, if ``name`` is ``'A'``, ``getattr(form, name).data`` is the same as
-``form.A.data``.
-Collecting all form variables, placing them in a list,
-and calling ``compute`` are done with
+.. _wf:vib2:flask:fig:error1:
 
-.. code-block:: python
+.. figure:: vib2_flask_error1.png
+   :width: 500
 
-        arg_names = inspect.getargspec(compute).args
-        args = [getattr(form, name).data for name in arg_names]
-        result = compute(*args)
+   *Triggering of a user-defined error check*
 
-Our ``InputForm`` class guarantees that all arguments in ``compute``
-are present in the form, but to be absolutely safe we can
-test if ``name`` is present in the ``form`` object:
-
-.. code-block:: python
-
-        args = [getattr(form, name).data for name in arg_names
-                if hasattr(form, name)]
-
-A potential problem with the ``args`` list is that the values might
-be in wrong order. It appears, fortunately, that the order we
-assign attributes to the form class is preserved when iterating over
-the form. Nevertheless, using keyword arguments instead of positional
-arguments provides a completely safe solution to calling ``compute``
-with the correct arguments. Keyword arguments are placed in a
-dictionary ``kwargs`` and ``compute`` is called as ``compute(**kwargs)``.
-The generic solution is
-
-.. code-block:: python
-
-        kwargs = {name: getattr(form, name).data for name in arg_names
-                  if hasattr(form, name)}
-        result = compute(**kwargs)
-
-The ``compute(**kwargs)`` call is equivalent to ``compute(A=1, b=3, w=0.5)``
-in case ``kwargs = {'w'=0.5, 'A':1, 'b':3}`` (recall that the order of
-the keys in a Python dictionary is undetermined).
-
-**Generating the template.**
-It remains to generate the right HTML template. The HTML code depends
-on what the returned ``result`` object from ``compute`` contains. Only a
-human who has the read ``compute`` code knows the details of the returned
-result. Therefore, we leave it to a human to provide the part
-of the HTML template that renders the result. The file ``templates/view_results.html`` contains this human-provided code, while ``templates/view_forms.html``
-is a completely generic template for the forms:
-
-.. code-block:: html
-
-        <form method=post action="">
-        <table>
-          {% for field in form %}
-            <tr><td>{{ field.name }}</td> <td>{{ field }}</td>
-            <td>{% if field.errors %}
-              <ul class=errors>
-              {% for error in field.errors %}
-                <li>{{ error }}</li>
-              {% endfor %}</ul>
-            {% endif %}</td></tr>
-          {% endfor %}
-        </table>
-        <p><input type=submit value=Compute></form></p>
-
-A somewhat generic solution for rendering the results can be
-provided by default. In the file ``templates/view_results_default.html`` we
-offer a code that checks if ``results`` is a string ending in ``'.png'``
-or other typical file extensions for HTML images, and then writes out
-the code for an image, and otherwise a string version of the ``results``
-object is dumped to the web page:
-
-.. code-block:: python
-
-        <p>
-        {% if result != None %}
-          {% if type(result) == type("") and
-                result[:-4] == '.png' or  result[:-4] == '.gif' or
-                result[:-4] == '.jpg' %}
-        <img src="{{ result }}">
-          {% else %}
-        {{ str(result) }}
-          {% endif %}
-        {% endif %}
-        </p>
-
-The ``index`` function must combine the two pieces of templates.
-The complete, generic form of this function is then
+Finally, we mention a detail in the ``controller.py`` file in the ``vib2``
+app: instead of sending ``form.var.data`` to the ``compute`` function we
+may automatically generate a set of local variables such that the
+application of data from the web page, here in the ``compute`` call, looks nicer:
 
 .. code-block:: python
 
         def index():
             form = InputForm(request.form)
             if request.method == 'POST' and form.validate():
-                arg_names = inspect.getargspec(compute).args
-                kwargs = {name: getattr(form, name).data
-                          for name in arg_names if hasattr(form, name)}
-                result = compute(**kwargs)
+                for field in form:
+                    # Make local variable (name field.name)
+                    exec('%s = %s' % (field.name, field.data))
+                result = compute(A, b, w, T)
             else:
                 result = None
-            # Concatenate view_forms.html and view_results.html
-            forms_html   = os.path.join('templates', 'view_forms.html')
-            results_html = os.path.join('templates', 'view_results.html')
-            view_html    = os.path.join('templates', 'view.html')
-            f_forms = open(forms_html, 'r')
-            f_res   = open(results_html, 'r')
-            f_view  = open(view_html, 'w')
-            f_view.write(f_forms.read() + f_res.read())
-            f_forms.close();  f_res.close();  f_view.close()
-            return render_template(os.path.basename(view_html),
-                                   form=form, result=result)
+        
+            return render_template('view.html', form=form, result=result)
         
         if __name__ == '__main__':
             app.run(debug=True)
 
-**Application.**
-Let us apply the files above to plot the gamma probability density function
-
-.. math::
-         g(x; a, h, A) = \frac{|h|}{\Gamma(a)A}\left(\frac{x}{A}\right)^{ah-1}
-        e^{-\left(\frac{x}{A}\right)^h},
-        
-
-and its cumulative density
-
-.. math::
-         G(x; a, h, A) = \int_0^x g(\tau; a, h, A)d\tau,
-
-computed by numerically the Trapezoidal rule, for instance.
-We also want to compute and display
-the mean value :math:`A\Gamma(a + 1/h)/\Gamma(a)` and
-standard deviation
-
-.. math::
-         \sigma = \frac{A}{\Gamma(a)}\sqrt{\Gamma(a + 2/h)\Gamma(a) - \Gamma(a+1/h)^2}.
-
-Here, :math:`\Gamma(a)` is the gamma function, which can be computed
-by ``math.gamma(a)`` in Python.
-Below is a ``compute.py`` file with the
-relevant implementations of :math:`g(x;a,h,A)` (``gamma_density``),
-:math:`G(x; a, h, A)` (``gamma_cumulative``), and a function ``compute_gamma`` for
-making a plot of :math:`g` og :math:`G` for :math:`x\in [0,7\sigma]`.
-
-.. code-block:: python
-
-        def gamma_density(x, a, h, A):
-            # http://en.wikipedia.org/wiki/Gamma_distribution
-            xA = x/float(A)
-            return abs(h)/(math.gamma(a)*A)*(xA)**(a*h-1)*exp(-xA**h)
-        
-        def gamma_cumulative(x, a, h, A):
-            # Integrate gamma_density using the Trapezoidal rule.
-            # Assume x is array.
-            g = gamma_density(x, a, h, A)
-            r = zeros_like(x)
-            for i in range(len(r)-1):
-                r[i+1] = r[i] + 0.5*(g[i] + g[i+1])*(x[i+1] - x[i])
-            return r
-        
-        def compute_gamma(a=0.5, h=2.0, A=math.sqrt(2), resolution=500):
-            """Return plot and mean/st.dev. value of the gamma density."""
-            gah = math.gamma(a + 1./h)
-            mean = A*gah/math.gamma(a)
-            stdev = A/math.gamma(a)*math.sqrt(
-                math.gamma(a + 2./h)*math.gamma(a) - gah**2)
-            x = linspace(0, 7*stdev, resolution+1)
-            y = gamma_density(x, a, h, A)
-            plt.figure()  # needed to avoid adding curves in plot
-            plt.plot(x, y)
-            plt.title('a=%g, h=%g, A=%g' % (a, h, A))
-            if not os.path.isdir('static'):
-                os.mkdir('static')
-            else:
-                # Remove old plot files
-                for filename in glob.glob(os.path.join('static', '*.png')):
-                    os.remove(filename)
-            # Use time since Jan 1, 1970 in filename in order make
-            # a unique filename that the browser has not chached
-            t = str(time.time())
-            plotfile1 = os.path.join('static', 'density_%s.png' % t)
-            plotfile2 = os.path.join('static', 'cumulative_%s.png' % t)
-            plt.savefig(plotfile1)
-            y = gamma_cumulative(x, a, h, A)
-            plt.figure()
-            plt.plot(x, y)
-            plt.grid(True)
-            plt.savefig(plotfile2)
-            return plotfile1, plotfile2, mean, stdev
-
-The ``compute_gamma`` function returns a tuple of four values.
-We want output as displayed in Figure :ref:`wf:vib3:flask:fig:gamma`.
-
-.. _wf:vib3:flask:fig:gamma:
-
-.. figure:: vib3_flask_gamma.png
-   :width: 700
-
-   *Design of a web page illustrating the gamma probability functions*
-
-The design is realized in the file ``view_results.html`` shown below.
-
-.. code-block:: html
-
-        {% if result != None %}
-        <p>
-        <table>
-        <tr>
-        <td><img src="{{ result[0] }}" width="400"></td>
-        <td><img src="{{ result[1] }}" width="400"></td>
-        </tr>
-        <tr><td>
-        Mean value: {{ result[2] }} <br>
-        Standard deviation value: {{ result[3] }}
-        </td></tr>
-        </table>
-        </p>
-        {% endif %}
-
-To create the web application, we just copy the generic ``controller.py``,
-``model.py``,
-and ``templates/view_forms.html`` files, add the
-application-specific
-``compute.py`` and ``templates/view_results.html`` files given above,
-and *write one line* in
-``model.py``:
-
-.. code-block:: python
-
-        from compute import compute_gamma as compute
-
-That's it! Running ``controller.py`` file starts the app.
+The idea is just to run ``exec`` on a declaration of a local variable
+with name ``field.name`` for each field in the form. This trick is often
+neat if web variables are buried in objects (``form.T.data``) and you want these
+variables in your
+code to look like they do in mathematical writing (``T`` for :math:`T`).
 

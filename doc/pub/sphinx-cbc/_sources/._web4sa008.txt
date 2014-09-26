@@ -8,7 +8,7 @@ Handling multiple input variables in Flask
 The scientific hello world example shows how to work with one input
 variable and one output variable. We can easily derive an extensible
 recipe for apps with a collection of input variables and some
-corresponding HTML code as result. Multiple input variables are listed
+associated HTML code as result. Multiple input variables are listed
 in the ``InputForm`` class using different types for different forms
 (text field, float field, integer field, check box field for boolean
 values, etc.).  The value of these variables will be available in a
@@ -69,7 +69,8 @@ More specifically, inside ``compute.py``, we have a function for
 evaluating :math:`u(t)` and a ``compute`` function for making the plot. The
 return value of the latter is the name of the plot file, which should
 get a unique name every time the ``compute`` function is called such
-that the browser cannot reuse an already cached image. Flask
+that the browser cannot reuse an already cached image when displaying
+the plot. Flask
 applications must have all extra files (CSS, images, etc.) in a
 subdirectory ``static``.
 
@@ -106,6 +107,21 @@ subdirectory ``static``.
 
 .. index::
    single: Flask; input forms
+
+
+.. admonition:: Avoid file writing
+
+   It is in general not a good idea to write plots to file or let a
+   web app write to file. If this app is deployed at some web site and
+   multiple users are running the app, the ``os.remove`` statements may remove
+   plots created by all other users. However, the app is useful as a
+   graphical user interface run locally on a machine.
+   Later, we shall avoid writing plot files and instead
+   store plots in strings and embed the strings
+   in the ``img`` tag in the HTML code.
+
+
+
 
 We organize the model, view, and controller as three separate
 files, as illustrated in
@@ -162,9 +178,13 @@ hello world app:
         try:
             template_name = sys.argv[1]
         except IndexError:
-            template_name = 'view0'
+            template_name = 'view_plain'
         
         app = Flask(__name__)
+        
+        if template_name == 'view_flask_bootstrap':
+            from flask_bootstrap import Bootstrap
+            Bootstrap(app)
         
         @app.route('/vib1', methods=['GET', 'POST'])
         def index():
@@ -175,17 +195,19 @@ hello world app:
             else:
                 result = None
         
+            print 'XXX', result
             return render_template(template_name + '.html',
                                    form=form, result=result)
         
         if __name__ == '__main__':
             app.run(debug=True)
 
+**The HTML template.**
 The details governing how the web page really looks like lie in the
 template file. Since we have several fields and want them nicely
 align in a tabular fashion, we place the field name, text areas,
 and labels inside an HTML table in our first attempt to write a
-template, ``view0.html``:
+template, ``view_plain.html``:
 
 .. code-block:: html
 
@@ -202,7 +224,7 @@ template, ``view0.html``:
         
         <p>
         {% if result != None %}
-        <img src="{{ result }}" width=500>
+        <img src="{{ result }}" width="500">
         {% endif %}
         </p>
 
@@ -223,5 +245,12 @@ arguments to the ``render_template`` function. We can easily pass on
 any object in our application to the template. Debugging of the template
 is done by viewing the HTML source of the web page in the browser.
 
-You are encouraged to run ``python controller.py`` and load ``http://127.0.0.1:5000/vib1`` into your web browser for testing.
+You are encouraged to go to the ``vib`` directory,
+run ``python controller.py``, and load
+
+.. code-block:: text
+
+        `http://127.0.0.1:5000/vib1`
+
+into your web browser for testing.
 

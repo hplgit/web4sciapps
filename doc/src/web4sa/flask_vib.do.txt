@@ -6,7 +6,7 @@ label{wf:vib:flask}
 The scientific hello world example shows how to work with one input
 variable and one output variable. We can easily derive an extensible
 recipe for apps with a collection of input variables and some
-corresponding HTML code as result. Multiple input variables are listed
+associated HTML code as result. Multiple input variables are listed
 in the `InputForm` class using different types for different forms
 (text field, float field, integer field, check box field for boolean
 values, etc.).  The value of these variables will be available in a
@@ -57,13 +57,25 @@ More specifically, inside `compute.py`, we have a function for
 evaluating $u(t)$ and a `compute` function for making the plot. The
 return value of the latter is the name of the plot file, which should
 get a unique name every time the `compute` function is called such
-that the browser cannot reuse an already cached image. Flask
+that the browser cannot reuse an already cached image when displaying
+the plot. Flask
 applications must have all extra files (CSS, images, etc.) in a
 subdirectory `static`.
 
 @@@CODE ${app_path}/compute.py
 
 idx{Flask!input forms}
+
+!bwarning Avoid file writing
+It is in general not a good idea to write plots to file or let a
+web app write to file. If this app is deployed at some web site and
+multiple users are running the app, the `os.remove` statements may remove
+plots created by all other users. However, the app is useful as a
+graphical user interface run locally on a machine.
+Later, we shall avoid writing plot files and instead
+store plots in strings and embed the strings
+in the `img` tag in the HTML code.
+!ewarning
 
 We organize the model, view, and controller as three separate
 files, as illustrated in
@@ -94,13 +106,14 @@ hello world app:
 
 @@@CODE ${app_path}/controller.py
 
+__The HTML template.__
 The details governing how the web page really looks like lie in the
 template file. Since we have several fields and want them nicely
 align in a tabular fashion, we place the field name, text areas,
 and labels inside an HTML table in our first attempt to write a
-template, `view0.html`:
+template, `view_plain.html`:
 
-@@@CODE ${app_path}/templates/view0.html
+@@@CODE ${app_path}/templates/view_plain.html
 Observe how easy it is to iterate over the `form` object and grab data
 for each field: `field.name` is the name of the variable in the
 `InputForm` class, `field.label` is the full name with units as given
@@ -118,7 +131,13 @@ arguments to the `render_template` function. We can easily pass on
 any object in our application to the template. Debugging of the template
 is done by viewing the HTML source of the web page in the browser.
 
-You are encouraged to run `python controller.py` and load `http://127.0.0.1:5000/vib1` into your web browser for testing.
+You are encouraged to go to the `vib` directory,
+run `python controller.py`, and load
+
+!bc
+`http://127.0.0.1:5000/vib1`
+!ec
+into your web browser for testing.
 
 !split
 ===== Implementing error checking in the template =====
@@ -144,9 +163,9 @@ we realize that wrong input implies `result = None` and no computations
 and no plot! Fortunately, each field object gets an attribute `error`
 with information on errors that occur on input. We can write out
 this information on the web page, as exemplified in the template
-`view1.html`:
+`view_errcheck.html`:
 
-@@@CODE ${app_path}/templates/view1.html
+@@@CODE ${app_path}/templates/view_errcheck.html
 Two things are worth noticing here:
 
  o We can control the width of the text field where the
@@ -163,7 +182,8 @@ FIGURE: [fig-web4sa/vib1_flask_error1, width=500] Error message because of wrong
 
 It is possible to use the additional HTML5 fields for input in a Flask
 context. Instead of explaining how here, we recommend to use the
-`parampool` package to automatically generate Flask files.
+"Parampool": "https://github.com/hplgit/parampool"
+package to automatically generate Flask files with HTML5 fields.
 
 !split
 ===== Using style sheets =====
@@ -176,17 +196,18 @@ standard HTML code. Here is a very simple example where we introduce
 a class `name` for the HTML table's column with the field name and set the
 foreground color of the text in this column to blue.
 The style sheet is called `basic.css` and *must* reside in the
-`static` subdirectory of the Flask application directory:
+`static` subdirectory of the Flask application directory. The content
+of `basic.css` is just the line
 
 @@@CODE ${app_path}/static/basic.css
-The `view2.html` file using this style sheet features a `link` tag
+The `view_css.html` file using this style sheet features a `link` tag
 to the style sheet in the HTML header, and the column containing
 the field name has
 the HTML tag `<td class="name">` to trigger the specification in
 the style sheet:
 
-@@@CODE ${app_path}/templates/view2.html fromto: @\{% if field\.errors
-Just run `python controller.py view2` to see that the names
+@@@CODE ${app_path}/templates/view_css.html fromto: @\{% if field\.errors
+Just run `python controller.py view_css` to see that the names
 of the variables to set in the web page are blue.
 
 ===== Using LaTeX mathematics =====
@@ -200,18 +221,18 @@ the mathematics is documented. In the present example we would like
 to typeset $A$, $b$, $w$, and $T$ with italic font as done
 in LaTeX. Fortunately, native LaTeX typesetting is available in
 HTML through the tool "MathJax": "http://www.mathjax.org/".
-Our template `view3.html` enables MathJax. Formulas are written
+Our template `view_tex.html` enables MathJax. Formulas are written
 with standard LaTeX inside `\(` and `\)`, while equations are surrounded
 by `$$`. Here we use formulas only:
 
-@@@CODE ${app_path}/templates/view3.html fromto: @\{% if field\.errors
+@@@CODE ${app_path}/templates/view_tex.html fromto: @\{% if field\.errors
 Figure ref{wf:vib1:flask:fig:latex} displays how the
 LaTeX rendering looks like in the browser.
 
 FIGURE: [fig-web4sa/vib1_flask_latex, width=650] LaTeX typesetting of mathematical symbols. label{wf:vib1:flask:fig:latex}
 
 
-===== Rearringing the elements in the HTML template =====
+===== Rearranging the elements in the HTML template =====
 
 Now we want to place the plot to the right of the input forms in
 the web page, see Figure ref{wf:vib1:flask:fig:sidebyside}. This can
@@ -222,10 +243,39 @@ the plot in the second column, while the second row features the
 
 FIGURE: [fig-web4sa/vib1_flask_table2, width=700] New design with input and output side by side. label{wf:vib1:flask:fig:sidebyside}
 
-The enabling template file is `view4.html`:
+The enabling template file is `view_table.html`:
 
-@@@CODE ${app_path}/templates/view4.html
+@@@CODE ${app_path}/templates/view_table.html
 
+!split
+===== Bootstrap HTML style =====
+
+The "Bootstrap": "http://getbootstrap.com/" framework for creating web pages
+has been very popular in recent years, both because of the design and
+the automatic support for responsive pages on all sorts of devices.
+Bootstrap can be used in combination with Flask. The template file
+`view_bootstrap.html` is identical to the former `view_table.html`,
+except that we load the Bootstrap CSS file and include in comments
+how to add the typical navigation bar found in many Bootstrap-based
+web pages. The template looks like
+
+@@@CODE ${app_path}/templates/view_bootstrap.html
+The input fields and fonts now get the typical Bootstrap look and feel.
+
+While `view_bootstrap.html` makes use of plain Bootstrap HTML code, there is
+also a higher-level framework, called "Flask-Bootstrap": "http://pythonhosted.org/Flask-Bootstrap/" that combines Flask and Bootstrap. Installation of
+this extension is done by `sudo pip install flask-bootstrap`.
+
+After `app = Flask(__name__)` we need to do
+
+!bc pycod
+from flask_bootstrap import Bootstrap
+Bootstrap(app)
+!ec
+
+The template employs new keywords `extends` and `block`:
+
+@@@CODE ${app_path}/templates/view_flask_bootstrap.html
 
 !split
 ===== Custom validation =====
@@ -248,6 +298,8 @@ the `FloatField` constructor or other field constructors. The extra
 code is a part of the `model.py` and the presented extensions appear
 in the directory "`vib2`": "${github_path}/${app_path}".
 
+=== Using Flask validators ===
+
 The simplest approach to validation is to use existing functionality
 in the web framework. Checking that $A>0$ can be done by
 the `NumberRange` validator which checks that the value is inside
@@ -261,6 +313,8 @@ class InputForm(Form):
         label='amplitude (m)', default=1.0,
         validators=[validators.NumberRange(0, 1E+20)])
 !ec
+
+=== Tailored validation ===
 
 We can also easily provide our own more tailored validators.
 As an example, let us explain how we can check that $T$ is less than 30 periods.
@@ -290,6 +344,8 @@ one fails, the others are not invoked.
 We therefore add `check_T` after the check of input such that we know we
 have a value for all data when we run the computations and test
 in `check_T`.
+
+=== Tailored validation of intervals ===
 
 Although there is already a `NumberRange` validator for checking
 whether a value is inside an interval, we can write our own
@@ -331,16 +387,19 @@ class InputForm(Form):
         validators=[validators.InputRequired(), interval(0,None)])
 !ec
 
+=== Demo ===
+
 Let us test our tailored error checking. Run `python controller.py`
 in the `vib2` directory and fill in $-1.0$ in the $b$ field.
 Pressing *Compute* invokes our `interval(0,None)` function, which
-is nothing but a call `check_interval(field, form, 0, None)`.
+is nothing but a call to `check_interval` with the
+arguments `field`, `form`, `0`, and `None`.
 Inside this function,
 the test `if field.data < min_value` becomes true, `failure`
 is set, and the exception is raised. The message in the exception
 is available in the `field.errors` attribute so our template
 will write it out in red, see Figure ref{wf:vib2:flask:fig:error1}.
-The template used in `vib2` is basically the same as `view3.html`
+The template used in `vib2` is basically the same as `view_tex.html`
 in `vib1`, i.e., it feaures LaTeX mathematics and checking of
 `field.errors`.
 
@@ -357,6 +416,7 @@ with name `field.name` for each field in the form. This trick is often
 neat if web variables are buried in objects (`form.T.data`) and you want these
 variables in your
 code to look like they do in mathematical writing (`T` for $T$).
+
 
 !split
 ===== Autogenerating the code =====
@@ -494,10 +554,10 @@ It remains to generate the right HTML template. The HTML code depends
 on what the returned `result` object from `compute` contains. Only a
 human who has read the `compute` code knows the details of the returned
 result. Therefore, we leave it to a human to provide the part
-of the HTML template that renders the result. The file `templates/view_results.html` contains this human-provided code, while `templates/view_forms.html`
+of the HTML template that renders the result. The file `templates/view_results.html` contains this human-provided code, while `templates/view.html`
 is a completely generic template for the forms:
 
-@@@CODE ${app_path}/templates/view_forms.html
+@@@CODE ${app_path}/templates/view.html
 At the end of this code, an HTML text `result` (string) is to be
 inserted.  This text is typically generated by calling Flask's
 `render_template` function, which uses `templates/view_results.html`
@@ -513,20 +573,13 @@ def index():
     return render_template('view.html', form=form, result=result)
 !ec
 
-!bnotice Avoid file writing in apps
+!bnotice
 A perhaps simpler alternative would be to have a generic
 `view_forms.html` file and a user-specific
 `view_results.html` and explicitly combining them into a new
 file. This requires file writing by the app, which one normally
 wants to avoid. Especially if the web app gets multiple users,
 the file writing may lead to corrupt files.
-
-__Remark.__
-We already use file writing when creating the plot file, but
-the filename depends on the time in seconds and will for multiple
-users normally be different. Section ref{wf:vib3:flask:nofiles}
-explains how we can avoid storing the plot in a file. The
-resulting app does not involve any file writing.
 !enotice
 
 The complete, generic form of the `index` function becomes
@@ -748,7 +801,7 @@ ref{wf:vib3:flask:nofiles}.
 
 
 !split
-===== Using Bootstrap styles =====
+===== Project: Using Bootstrap styles =====
 label{wf:vib1:flask:bootstrap}
 
 ## Define Mako variable for path to source code

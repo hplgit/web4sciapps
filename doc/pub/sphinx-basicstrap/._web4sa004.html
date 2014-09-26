@@ -8,7 +8,7 @@
   <head>
     <meta charset="utf-8" />
     
-    <title>Making a Flask application &mdash; Using Web Frameworks for Scientific Web Applications</title>
+    <title>Making a Flask application &mdash; Using Web Frameworks for Scientific Applications</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
@@ -34,7 +34,7 @@
     
 <script type="text/javascript">
   var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:    '',
+            URL_ROOT:    './',
             VERSION:     '1.0',
             COLLAPSE_INDEX: false,
             FILE_SUFFIX: '.html',
@@ -59,9 +59,27 @@
     });
   });
 </script>
-    <link rel="top" title="Using Web Frameworks for Scientific Web Applications" href="index.html" />
+
+        <script src="http://sagecell.sagemath.org/static/jquery.min.js"></script>
+        <script src="http://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+
+        <script>sagecell.makeSagecell({inputLocation: ".sage"});</script>
+
+        <style type="text/css">
+                .sagecell .CodeMirror-scroll {
+                        overflow-y: hidden;
+                        overflow-x: auto;
+                }
+                .sagecell .CodeMirror {
+                        height: auto;
+                }
+        </style>
+
+    
+    <link rel="top" title="Using Web Frameworks for Scientific Applications" href="index.html" />
     <link rel="next" title="Troubleshooting" href="._web4sa005.html" />
-    <link rel="prev" title="Application of the MVC pattern" href="._web4sa003.html" /> 
+    <link rel="prev" title="Application of the MVC pattern" href="._web4sa003.html" />
+ 
   </head>
   <body>
     <div class="navbar navbar-fixed-top ">
@@ -72,7 +90,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="index.html">Using Web Frameworks for Scientific Web Applications</a>
+          <a class="brand" href="index.html">Using Web Frameworks for Scientific Applications</a>
           <div class="nav-collapse collapse">
             <ul class="nav pull-right">
               
@@ -203,7 +221,7 @@ performed by</p>
 Terminal&gt; sudo pip install WTForms
 </pre></div>
 </div>
-<p>You can add <tt class="docutils literal"><span class="pre">--upgrade</span></tt> to upgrade a previous installation.</p>
+<p>You must add <tt class="docutils literal"><span class="pre">--upgrade</span></tt> to upgrade a previous installation (<tt class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">--upgrade</span> <span class="pre">Flask</span></tt>).</p>
 <div class="section" id="programming-the-flask-application-1">
 <h2>Programming the Flask application  (1)<a class="headerlink" href="#programming-the-flask-application-1" title="Permalink to this headline">¶</a></h2>
 <p><strong>The user interaction.</strong>
@@ -213,11 +231,11 @@ By clicking on the <em>equals</em> button
 the corresponding <tt class="docutils literal"><span class="pre">s</span></tt> value is computed and written out the result page
 seen in Figure <a class="reference internal" href="#wf-hw1-flask-fig-result"><em>The output page</em></a>.</p>
 <div class="figure" id="wf-hw1-flask-fig-input">
-<img alt="_images/hw1_flask_input.png" src="_images/hw1_flask_input.png" style="width: 600px;" />
+<a class="reference internal image-reference" href="_images/hw1_flask_input.png"><img alt="_images/hw1_flask_input.png" src="_images/hw1_flask_input.png" style="width: 600px;" /></a>
 <p class="caption"><em>The input page</em></p>
 </div>
 <div class="figure" id="wf-hw1-flask-fig-result">
-<img alt="_images/hw1_flask_output.png" src="_images/hw1_flask_output.png" style="width: 600px;" />
+<a class="reference internal image-reference" href="_images/hw1_flask_output.png"><img alt="_images/hw1_flask_output.png" src="_images/hw1_flask_output.png" style="width: 600px;" /></a>
 <p class="caption"><em>The output page</em></p>
 </div>
 <p><strong>The Python code.</strong>
@@ -263,16 +281,19 @@ in detail below.</p>
 <p><strong>Dissection.</strong>
 The web application is the <tt class="docutils literal"><span class="pre">app</span></tt> object of class <tt class="docutils literal"><span class="pre">Flask</span></tt>, and initialized
 as shown. The model is a special Flask class derived from <tt class="docutils literal"><span class="pre">Form</span></tt>
-where the data are listed as static class attributes and initialized
-by various form field objects from the <tt class="docutils literal"><span class="pre">wtforms</span></tt> package.
-These form fields correspond to HTML forms in the input page.
+where the input variable in the app is listed as a
+static class attribute and initialized
+by a special form field object from the <tt class="docutils literal"><span class="pre">wtforms</span></tt> package.
+Such form field objects correspond to HTML forms in the input page.
 For the <tt class="docutils literal"><span class="pre">r</span></tt> variable we apply <tt class="docutils literal"><span class="pre">FloatField</span></tt> since it is a floating-point
 variable. A default validator, here checking that the user supplies
-a real number, is automatically included.</p>
+a real number, is automatically included, but we add another validator,
+<tt class="docutils literal"><span class="pre">InputRequired</span></tt>, to force the user to provide input before clicking on
+the <em>equals</em> button.</p>
 <p>The view part of this Python code consists of
 a URL and a corresponding function to call when the URL is invoked.
-The function name is here chosen to be <tt class="docutils literal"><span class="pre">index</span></tt> (corresponding to the standard
-<tt class="docutils literal"><span class="pre">index.html</span></tt> page that is the main page of a URL). The
+The function name is here chosen to be <tt class="docutils literal"><span class="pre">index</span></tt> (inspired by the standard
+<tt class="docutils literal"><span class="pre">index.html</span></tt> page that is the main page of a web app). The
 decorator <tt class="docutils literal"><span class="pre">&#64;app.route('/hw1',</span> <span class="pre">...)</span></tt> maps the URL
 <tt class="docutils literal"><span class="pre">http://127.0.0.1:5000/hw1</span></tt> to a call to <tt class="docutils literal"><span class="pre">index</span></tt>.
 The <tt class="docutils literal"><span class="pre">methods</span></tt> argument must be as shown to allow the user to communicate
@@ -327,11 +348,11 @@ user and presenting the result. It is often more natural to add
 the result to the input page. This is particularly the case in the present
 web application, which is a kind of calculator. Figure <a class="reference internal" href="#wf-hw2-flask-fig-result"><em>The modified result page</em></a> shows what the user sees after clicking the <em>equals</em> button.</p>
 <div class="figure" id="wf-hw2-flask-fig-result">
-<img alt="_images/hw2_flask_output.png" src="_images/hw2_flask_output.png" style="width: 600px;" />
+<a class="reference internal image-reference" href="_images/hw2_flask_output.png"><img alt="_images/hw2_flask_output.png" src="_images/hw2_flask_output.png" style="width: 600px;" /></a>
 <p class="caption"><em>The modified result page</em></p>
 </div>
 <p>To let the user stay within the same page, we create a new directory
-<a class="reference external" href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/hw2">hw2</a>.
+<a class="reference external" href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/hw2">hw2</a>
 for this modified Flask app and copy the files from the previous
 <tt class="docutils literal"><span class="pre">hw1</span></tt> directory.  The idea now is to make use of just one
 template, in <tt class="docutils literal"><span class="pre">templates/view.html</span></tt>:</p>
@@ -347,8 +368,8 @@ template, in <tt class="docutils literal"><span class="pre">templates/view.html<
 </div>
 <p>The form is identical to what we used in <tt class="docutils literal"><span class="pre">view_input.html</span></tt> in
 the <tt class="docutils literal"><span class="pre">hw1</span></tt> directory, and the only
-new thing is the output of <tt class="docutils literal"><span class="pre">s</span></tt> below the form.
-The template language supports some programming with Python objects
+new thing is the output of <tt class="docutils literal"><span class="pre">s</span></tt> below the form.</p>
+<p>The template language supports some programming with Python objects
 inside <tt class="docutils literal"><span class="pre">{%</span></tt> and <tt class="docutils literal"><span class="pre">%}</span></tt> tags.
 Specifically in this file, we can test on the value of <tt class="docutils literal"><span class="pre">s</span></tt>:
 if it is <tt class="docutils literal"><span class="pre">None</span></tt>, we know that the computations are not performed and
@@ -407,7 +428,7 @@ directory
 <a class="reference external" href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/hw3">hw3_flask</a>
 The contents
 in the files reflect the splitting introduced in the original
-scienticic hello world program in the section <a class="reference internal" href="._web4sa003.html#wf-hw-mvc"><em>Application of the MVC pattern</em></a>.
+scientific hello world program in the section <a class="reference internal" href="._web4sa003.html#wf-hw-mvc"><em>Application of the MVC pattern</em></a>.
 The <tt class="docutils literal"><span class="pre">model.py</span></tt> file now consists of the input form class:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">wtforms</span> <span class="kn">import</span> <span class="n">Form</span><span class="p">,</span> <span class="n">FloatField</span><span class="p">,</span> <span class="n">validators</span>
 
@@ -461,7 +482,7 @@ the organization of the statement in files differ.</p>
         <li><a href="genindex.html" title="General Index" >index</a></li>
         <li><a href="._web4sa005.html" title="Troubleshooting" >next</a></li>
         <li><a href="._web4sa003.html" title="Application of the MVC pattern" >previous</a></li>
-        <li><a href="index.html">Using Web Frameworks for Scientific Web Applications</a></li> 
+        <li><a href="index.html">Using Web Frameworks for Scientific Applications</a></li> 
       
     </ul>
   </div>
@@ -471,7 +492,7 @@ the organization of the statement in files differ.</p>
       <!-- footer -->
       <footer>
           &copy; Copyright 2014, H. P. Langtangen and A. E. Johansen.
-        Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+        Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.
       </footer>
       <!-- /footer -->
 

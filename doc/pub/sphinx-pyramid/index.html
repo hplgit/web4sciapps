@@ -7,14 +7,14 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Using Web Frameworks for Scientific Web Applications &mdash; Using Web Frameworks for Scientific Web Applications</title>
+    <title>Using Web Frameworks for Scientific Applications &mdash; Using Web Frameworks for Scientific Applications</title>
     
     <link rel="stylesheet" href="_static/pyramid.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     '1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -25,8 +25,26 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="Using Web Frameworks for Scientific Web Applications" href="#" />
-    <link rel="next" title="Using Web Frameworks for Scientific Web Applications" href="._web4sa000.html" />
+
+        <script src="http://sagecell.sagemath.org/static/jquery.min.js"></script>
+        <script src="http://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+
+        <script>sagecell.makeSagecell({inputLocation: ".sage"});</script>
+
+        <style type="text/css">
+                .sagecell .CodeMirror-scroll {
+                        overflow-y: hidden;
+                        overflow-x: auto;
+                }
+                .sagecell .CodeMirror {
+                        height: auto;
+                }
+        </style>
+
+    
+    <link rel="top" title="Using Web Frameworks for Scientific Applications" href="#" />
+    <link rel="next" title="Using Web Frameworks for Scientific Applications" href="._web4sa000.html" />
+
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <!--[if lte IE 6]>
@@ -43,9 +61,9 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="._web4sa000.html" title="Using Web Frameworks for Scientific Web Applications"
+          <a href="._web4sa000.html" title="Using Web Frameworks for Scientific Applications"
              accesskey="N">next</a> |</li>
-        <li><a href="#">Using Web Frameworks for Scientific Web Applications</a> &raquo;</li> 
+        <li><a href="#">Using Web Frameworks for Scientific Applications</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -54,12 +72,12 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="using-web-frameworks-for-scientific-web-applications">
-<h1>Using Web Frameworks for Scientific Web Applications<a class="headerlink" href="#using-web-frameworks-for-scientific-web-applications" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="using-web-frameworks-for-scientific-applications">
+<h1>Using Web Frameworks for Scientific Applications<a class="headerlink" href="#using-web-frameworks-for-scientific-applications" title="Permalink to this headline">¶</a></h1>
 <p>Contents:</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="._web4sa000.html">Using Web Frameworks for Scientific Web Applications</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="._web4sa000.html">Using Web Frameworks for Scientific Applications</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="._web4sa000.html#web-frameworks">Web frameworks</a></li>
 </ul>
 </li>
@@ -87,39 +105,46 @@
 <li class="toctree-l1"><a class="reference internal" href="._web4sa009.html">Implementing error checking in the template</a></li>
 <li class="toctree-l1"><a class="reference internal" href="._web4sa010.html">Using style sheets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="._web4sa010.html#using-latex-mathematics">Using LaTeX mathematics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="._web4sa010.html#rearringing-the-elements-in-the-html-template">Rearringing the elements in the HTML template</a></li>
-<li class="toctree-l1"><a class="reference internal" href="._web4sa011.html">Custom validation  (1)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="._web4sa012.html">Autogenerating the code</a></li>
-<li class="toctree-l1"><a class="reference internal" href="._web4sa013.html">Avoiding plot files</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="._web4sa013.html#png-plots">PNG plots</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._web4sa013.html#svg-plots">SVG plots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._web4sa010.html#rearranging-the-elements-in-the-html-template">Rearranging the elements in the HTML template</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._web4sa011.html">Bootstrap HTML style</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._web4sa012.html">Custom validation  (1)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa012.html#using-flask-validators">Using Flask validators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa012.html#tailored-validation">Tailored validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa012.html#tailored-validation-of-intervals">Tailored validation of intervals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa012.html#demo">Demo</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="._web4sa014.html">User login and storage of computed results</a></li>
-<li class="toctree-l1"><a class="reference internal" href="._web4sa015.html">Using Bootstrap styles</a></li>
-<li class="toctree-l1"><a class="reference internal" href="._web4sa016.html">Further work</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="._web4sa016.html#resources-1">Resources  (1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._web4sa013.html">Autogenerating the code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._web4sa014.html">Avoiding plot files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa014.html#png-plots">PNG plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa014.html#svg-plots">SVG plots</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="._web4sa017.html">Handling multiple input variables in Django</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="._web4sa017.html#programming-the-django-application-2">Programming the Django application  (2)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._web4sa017.html#custom-validation-2">Custom validation  (2)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._web4sa017.html#customizing-widgets">Customizing widgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._web4sa015.html">User login and storage of computed results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._web4sa016.html">Project 1: Using Bootstrap styles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._web4sa017.html">Further work</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa017.html#resources-1">Resources  (1)</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="._web4sa018.html">Exercises</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="._web4sa018.html#exercise-1-add-two-numbers">Exercise 1: Add two numbers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._web4sa018.html#exercise-2-extend-the-vib3-flask-app">Exercise 2: Extend the <tt class="docutils literal"><span class="pre">vib3_flask</span></tt> app</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._web4sa018.html#exercise-3-equip-the-vib3-flask-app-with-more-data-types">Exercise 3: Equip the <tt class="docutils literal"><span class="pre">vib3_flask</span></tt> app with more data types</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._web4sa018.html#exercise-4-auto-generate-code-from-function-signature">Exercise 4: Auto-generate code from function signature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._web4sa018.html">Handling multiple input variables in Django</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa018.html#programming-the-django-application-2">Programming the Django application  (2)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa018.html#custom-validation-2">Custom validation  (2)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa018.html#customizing-widgets">Customizing widgets</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="._web4sa018.html#resources-2">Resources  (2)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="._web4sa018.html#flask-resources">Flask resources</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._web4sa018.html#django-resources">Django resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._web4sa019.html">Exercises</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa019.html#exercise-2-add-two-numbers">Exercise 2: Add two numbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa019.html#exercise-3-extend-the-vib3-flask-app">Exercise 3: Extend the <tt class="docutils literal"><span class="pre">vib3_flask</span></tt> app</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa019.html#exercise-4-equip-the-vib3-flask-app-with-more-data-types">Exercise 4: Equip the <tt class="docutils literal"><span class="pre">vib3_flask</span></tt> app with more data types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa019.html#exercise-5-auto-generate-code-from-function-signature">Exercise 5: Auto-generate code from function signature</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="._web4sa018.html#remaining">Remaining</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._web4sa019.html#resources-2">Resources  (2)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa019.html#flask-resources">Flask resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa019.html#django-resources">Django resources</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="._web4sa019.html#remaining">Remaining</a></li>
 </ul>
 </div>
 </div>
@@ -140,7 +165,7 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="#">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Using Web Frameworks for Scientific Web Applications</a><ul>
+<li><a class="reference internal" href="#">Using Web Frameworks for Scientific Applications</a><ul>
 </ul>
 </li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
@@ -148,7 +173,7 @@
 
   <h4>Next topic</h4>
   <p class="topless"><a href="._web4sa000.html"
-                        title="next chapter">Using Web Frameworks for Scientific Web Applications</a></p>
+                        title="next chapter">Using Web Frameworks for Scientific Applications</a></p>
 <div id="searchbox" style="display: none">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
@@ -173,14 +198,14 @@
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="._web4sa000.html" title="Using Web Frameworks for Scientific Web Applications"
+          <a href="._web4sa000.html" title="Using Web Frameworks for Scientific Applications"
              >next</a> |</li>
-        <li><a href="#">Using Web Frameworks for Scientific Web Applications</a> &raquo;</li> 
+        <li><a href="#">Using Web Frameworks for Scientific Applications</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
         &copy; Copyright 2014, H. P. Langtangen and A. E. Johansen.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.
     </div>
   </body>
 </html>

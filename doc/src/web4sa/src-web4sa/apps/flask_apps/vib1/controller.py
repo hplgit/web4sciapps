@@ -6,9 +6,13 @@ import sys
 try:
     template_name = sys.argv[1]
 except IndexError:
-    template_name = 'view0'
+    template_name = 'view_plain'
 
 app = Flask(__name__)
+
+if template_name == 'view_flask_bootstrap':
+    from flask_bootstrap import Bootstrap
+    Bootstrap(app)
 
 @app.route('/vib1', methods=['GET', 'POST'])
 def index():
@@ -19,6 +23,7 @@ def index():
     else:
         result = None
 
+    print 'XXX', result
     return render_template(template_name + '.html',
                            form=form, result=result)
 

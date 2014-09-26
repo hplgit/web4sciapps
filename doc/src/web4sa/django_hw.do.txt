@@ -4,7 +4,7 @@
 idx{Django!installation}
 
 We recommend to
-download and istall the latest official version from
+download and istall the latest official version of Django from
 URL: "http://www.djangoproject.com/download/". Pack out the tarfile, go
 to the directory, and run `setup.py`:
 
@@ -68,7 +68,7 @@ Terminal> python manage.py runserver
 Validating models...
 
 0 errors found
-March 23, 2013 - 01:09:24
+March 34, 201x - 01:09:24
 Django version 1.5, using settings 'django_project.settings'
 Development server is running at http://127.0.0.1:8000/
 Quit the server with CONTROL-C.
@@ -78,7 +78,8 @@ URL `http://127.0.0.1:8000/`.
 Load this URL into your browser to see a welcome message from Django,
 meaning that the server is working.
 
-Despite the fact that our web applications do not need a database, you
+Despite the fact that our introductory
+web applications do not need a database, you
 have to register a database with any Django project. To this end,
 open the `django_project/settings.py` file in a text editor,
 locate the `DATABASES` dictionary and type in the following
@@ -90,7 +91,7 @@ import os
 def relative2absolute_path(relative_path):
     """Return the absolute path correspodning to relative_path."""
     dir_of_this_file = os.path.dirname(os.path.abspath(__file__))
-    return os.path.join(dir_of_this_file, relative_path)
+    return dir_of_this_file + '/' + relative_path
 
 DATABASES = {
    'default' : {
@@ -187,7 +188,7 @@ __Step 2: Add a template directory.__
 Make a subdirectory `templates` under `hw1`,
 
 !bc sys
-mkdir templates
+Terminal> mkdir templates
 !ec
 and add the absolute path of this directory to the `TEMPLATE_DIRS` tuple:
 
@@ -438,4 +439,3 @@ is a float, i.e., if `s` is computed. Otherwise, `s` has the
 default value `None` and we send an empty string to the template.
 The template language allows tests using Python syntax, but the
 if-block must be explicitly ended by `{% endif %}`.
-

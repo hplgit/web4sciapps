@@ -6,10 +6,10 @@ Automatically generated HTML file from DocOnce source
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
-<meta name="description" content="Using Web Frameworks for Scientific Web Applications">
+<meta name="description" content="Using Web Frameworks for Scientific Applications">
 <meta name="keywords" content="web frameworks,MVC pattern,Flask installation,Flask input forms,Flask HTML templates,Flask MVC pattern,Flask troubleshooting,Django installation,Django making a project,Django making an application,Django input forms,Django HTML templates,Flask input forms,Flask error checking,Flask CSS style sheets,Flask LaTeX mathematics,Flask input validation,inline PNG image in HTML,base64 encoding of PNG images,inline SVG figure in HTML,Flask login,Flask database,Flask bootstrap style,Django input forms,Django input validation">
 
-<title>Using Web Frameworks for Scientific Web Applications</title>
+<title>Using Web Frameworks for Scientific Applications</title>
 
 
 <style type="text/css">
@@ -61,6 +61,7 @@ hr.figure { border: 0; width: 80%; border-bottom: 1px solid #aaa}
 div { text-align: justify; text-justify: inter-word; }
 </style>
 
+
 </head>
 
 <!-- tocinfo
@@ -105,14 +106,19 @@ div { text-align: justify; text-justify: inter-word; }
                '___sec16'),
               (' Using style sheets ', 2, None, '___sec17'),
               (' Using LaTeX mathematics ', 2, None, '___sec18'),
-              (' Rearringing the elements in the HTML template ',
+              (' Rearranging the elements in the HTML template ',
                2,
                None,
                '___sec19'),
+              (' Bootstrap HTML style ', 2, None, '___sec20'),
               (' Custom validation ',
                2,
                'wf:vib1:flask:validation',
                'wf:vib1:flask:validation'),
+              (' Using Flask validators ', 3, None, '___sec22'),
+              (' Tailored validation ', 3, None, '___sec23'),
+              (' Tailored validation of intervals ', 3, None, '___sec24'),
+              (' Demo ', 3, None, '___sec25'),
               (' Autogenerating the code ',
                2,
                'wf:vib3:flask:autogen',
@@ -121,46 +127,46 @@ div { text-align: justify; text-justify: inter-word; }
                2,
                'wf:vib3:flask:nofiles',
                'wf:vib3:flask:nofiles'),
-              (' PNG plots ', 3, None, '___sec23'),
-              (' SVG plots ', 3, None, '___sec24'),
+              (' PNG plots ', 3, None, '___sec28'),
+              (' SVG plots ', 3, None, '___sec29'),
               (' User login and storage of computed results ',
                2,
                'wf:vib1:flask:login',
                'wf:vib1:flask:login'),
-              (' Using Bootstrap styles ',
+              (' Project 1: Using Bootstrap styles ',
                2,
                'wf:vib1:flask:bootstrap',
                'wf:vib1:flask:bootstrap'),
-              (' Further work ', 1, None, '___sec27'),
-              (' Resources ', 3, None, '___sec28'),
+              (' Further work ', 1, None, '___sec32'),
+              (' Resources ', 3, None, '___sec33'),
               (' Handling multiple input variables in Django ',
                1,
                'wf:vib:django',
                'wf:vib:django'),
-              (' Programming the Django application ', 2, None, '___sec30'),
-              (' Custom validation ', 2, None, '___sec31'),
-              (' Customizing widgets ', 2, None, '___sec32'),
-              (' Exercises ', 1, None, '___sec33'),
-              (' Exercise 1: Add two numbers ',
+              (' Programming the Django application ', 2, None, '___sec35'),
+              (' Custom validation ', 2, None, '___sec36'),
+              (' Customizing widgets ', 2, None, '___sec37'),
+              (' Exercises ', 1, None, '___sec38'),
+              (' Exercise 2: Add two numbers ',
                2,
                'wf:exer:add2',
                'wf:exer:add2'),
-              (' Exercise 2: Extend the `vib3_flask` app ',
+              (' Exercise 3: Extend the `vib3_flask` app ',
                2,
                'wf:exer:vib3:demo',
                'wf:exer:vib3:demo'),
-              (' Exercise 3: Equip the `vib3_flask` app with more data types ',
+              (' Exercise 4: Equip the `vib3_flask` app with more data types ',
                2,
                'wf:exer:vib3:lists',
                'wf:exer:vib3:lists'),
-              (' Exercise 4: Auto-generate code from function signature ',
+              (' Exercise 5: Auto-generate code from function signature ',
                2,
                None,
-               '___sec37'),
-              (' Resources ', 1, None, '___sec38'),
-              (' Flask resources ', 2, None, '___sec39'),
-              (' Django resources ', 2, None, '___sec40'),
-              (' Remaining ', 1, None, '___sec41')]}
+               '___sec42'),
+              (' Resources ', 1, None, '___sec43'),
+              (' Flask resources ', 2, None, '___sec44'),
+              (' Django resources ', 2, None, '___sec45'),
+              (' Remaining ', 1, None, '___sec46')]}
 end of tocinfo -->
 
 <body>
@@ -196,29 +202,70 @@ MathJax.Hub.Config({
 <p>
 <!-- !split -->
 
-<h1>Further work  <a name="___sec27"></a></h1>
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Project 1: Using Bootstrap styles <a name="wf:vib1:flask:bootstrap"></a></h2>
+
+<p>
+The design and layout of the graphical web interface is completely
+governed by template file. So far, we have used only basic HTML
+elements in this file. With CSS it is possible to improve the
+design, but why not adopt popular frameworks that offer an attractive
+look-and-feel and much nice functionality such as responsive pages
+across a wide range of devices? The <a href="http://getbootstrap.com/" target="_self">Bootstrap</a>
+framework is free and open software that gives developers a kick start
+with respect to web page design and functionality.
+Many designs are built on Bootstrap: "Bootswatch": "http:bootswatch.com",
+<a href="http://startbootstrap.com/" target="_self">Start Bootstrap</a>,
+<a href="http://bootstrapzero.com/" target="_self">Bootstrap Zero</a>, and <a href="http://www.prepbootstrap.com/" target="_self">PrepBootstrap</a>.
+
+<p>
+It would obviously be advantageous to create Flask templates that
+can utilize the Bootstrap technology. A package <a href="http://pythonhosted.org/Flask-Bootstrap/" target="_self">Flask-Bootstrap</a>
+is already supporting this idea.
+
+<p>
+<div class="alert alert-block alert-notice alert-text-normal">
+<b>Project.</b>
+<p>
 
 <ul>
- <li> Uploading of files: Just one button for a data file where we
-   compute mean and variance, see the average function but drop
-   the array argument.</li>
- <li> Log in and users. use a simple "compute" function to generate
-   code, just a textarea (string) that can be stored (diary).
-   This requires databases. Can generate a vib example via parampool to
-   display some more realistic code.</li>
- <li> Drawing in HTML5</li>
-</ul>
-
-<h3>Resources  <a name="___sec28"></a></h3>
+  <li> Test out the Flask-Bootstrap package by redoing a selection
+    of the previous examples with the Bootstrap design and functionality.</li>
+  <li> How easy is it to take advantage of various Bootstrap designs,
+    say the Bootswatch themes, in a template based on Flask-Bootstrap?</li>
+  <li> Make a new GUI [<a name="link_footnote_1"><a><a href="#def_footnote_1">1</a>] with different types of input fields and see how
+    the design looks like in Bootstrap-based themes:</li>
 
 <ul>
- <li> <a href="https://docs.djangoproject.com/en/dev/topics/auth/default/#user-objects" target="_self">Django: make user</a></li>
- <li> <a href="https://docs.djangoproject.com/en/dev/topics/db/queries/" target="_self">Django: read and write database</a></li>
- <li> Flask: read and write database:
-   <a href="http://pythonhosted.org/Flask-SQLAlchemy/quickstart.html" target="_self"><tt>http://pythonhosted.org/Flask-SQLAlchemy/quickstart.html</tt></a>,
-   <a href="http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-iv-database" target="_self"><tt>http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-iv-database</tt></a>, and <a href="https://flask-login.readthedocs.org/en/latest/" target="_self">the Flask login extension</a></li>
+     <li> one selection from a list (radio buttons, drop-down list)</li>
+     <li> multiple selections from a list (check buttons)</li>
+     <li> one-line text field</li>
+     <li> multi-line text field</li>
+     <li> floating-point number</li>
+     <li> integer</li>
 </ul>
 
+</ul>
+</div>
+
+
+<p><a name="def_footnote_1"></a><a href="#link_footnote_1"><b>1:</b></a> The compute function can be very simple, e.g., just returning some HTML
+typesetting of the arguments. This subexercise is for test purposes
+only.
+
+<p>
+<!-- <a href="http://pythonhosted.org/Flask-Bootstrap/basic-usage.html" target="_self"><tt>http://pythonhosted.org/Flask-Bootstrap/basic-usage.html</tt></a>. -->
+<!-- Not yet written. Must be based on -->
+
+<p>
+<!-- <a href="http://pythonhosted.org/Flask-Bootstrap/basic-usage.html" target="_self"><tt>http://pythonhosted.org/Flask-Bootstrap/basic-usage.html</tt></a> -->
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
 <p>
 <!-- begin bottom navigation -->
 <table style="width: 100%"><tr><td>

@@ -119,8 +119,9 @@ MathJax.Hub.Config({
 
 <h1 id="___sec4">Making a Django application <a name="___sec4"></a></h1>
 
+<p>
 We recommend to
-download and istall the latest official version from
+download and istall the latest official version of Django from
 <a href="http://www.djangoproject.com/download/" target="_self"><tt>http://www.djangoproject.com/download/</tt></a>. Pack out the tarfile, go
 to the directory, and run <code>setup.py</code>:
 
@@ -137,6 +138,7 @@ follow these instructions.
 
 <h2 id="___sec5">Setting up a Django project <a name="___sec5"></a></h2>
 
+<p>
 Django applies two concepts: <em>project</em> and <em>application</em> (or <em>app</em>).
 The app is the program we want to run through a web interface. The
 project is a Python package containing common settings and
@@ -189,7 +191,7 @@ The server is started by running
 Validating models...
 
 0 errors found
-March 23, 2013 - 01:09:24
+March 34, 201x - 01:09:24
 Django version 1.5, using settings &#39;django_project.settings&#39;
 Development server is running at http://127.0.0.1:8000/
 Quit the server with CONTROL-C.
@@ -201,7 +203,8 @@ Load this URL into your browser to see a welcome message from Django,
 meaning that the server is working.
 
 <p>
-Despite the fact that our web applications do not need a database, you
+Despite the fact that our introductory
+web applications do not need a database, you
 have to register a database with any Django project. To this end,
 open the <code>django_project/settings.py</code> file in a text editor,
 locate the <code>DATABASES</code> dictionary and type in the following
@@ -215,7 +218,7 @@ code:
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">relative2absolute_path</span>(relative_path):
     <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Return the absolute path correspodning to relative_path.&quot;&quot;&quot;</span>
     dir_of_this_file <span style="color: #666666">=</span> os<span style="color: #666666">.</span>path<span style="color: #666666">.</span>dirname(os<span style="color: #666666">.</span>path<span style="color: #666666">.</span>abspath(__file__))
-    <span style="color: #008000; font-weight: bold">return</span> os<span style="color: #666666">.</span>path<span style="color: #666666">.</span>join(dir_of_this_file, relative_path)
+    <span style="color: #008000; font-weight: bold">return</span> dir_of_this_file <span style="color: #666666">+</span> <span style="color: #BA2121">&#39;/&#39;</span> <span style="color: #666666">+</span> relative_path
 
 DATABASES <span style="color: #666666">=</span> {
    <span style="color: #BA2121">&#39;default&#39;</span> : {
@@ -235,6 +238,7 @@ always applies the forward slash between directories, also on Windows.
 
 <h2 id="___sec6">Setting up a Django application <a name="___sec6"></a></h2>
 
+<p>
 The next step is to create a Django app for our scientific hello
 world program. We can place the app in any directory, but here we
 utilize the following organization.
@@ -333,7 +337,7 @@ Make a subdirectory <code>templates</code> under <code>hw1</code>,
 <p>
 
 <!-- code=text (!bc sys) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">mkdir templates
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; mkdir templates
 </pre></div>
 <p>
 and add the absolute path of this directory to the <code>TEMPLATE_DIRS</code> tuple:

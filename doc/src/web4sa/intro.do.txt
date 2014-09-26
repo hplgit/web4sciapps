@@ -40,10 +40,7 @@ Django for your web project. Googling for *flask vs django* gives a
 lot of diverging opinions. The authors' viewpoint is that Flask is
 much easier to get started with than Django. You can grow your
 application to a really big one with both frameworks, but some
-advanced features is easier on one framework than the other. For
-example, if you want users to log into your account and store their
-work in databases, we found this to be much more straightforward in
-Django.
+advanced features is easier in one framework than in the other.
 
 # #elif TOPIC == 'Flask'
 We shall in the forthcoming text explore the very easy-to-use "Flask framework":
@@ -118,7 +115,7 @@ idx{MVC pattern}
 The MVC pattern stands for Model-View-Controller and is a way of
 separating the user's interaction with an application from the inner
 workings of the application. In a scientific application this
-usually means separaring mathematical computations from the
+usually means separating mathematical computations from the
 user interface and visualization of results.
 The "Wikipedia definition of the MVC pattern": "http://en.wikipedia.org/wiki/MVC_Pattern" gives a very high-level
 explanation of what the model, view, and controller do and mentions
@@ -140,9 +137,9 @@ between data (model), the way data is presented (view), the
 computations (compute), and the way these components communicate
 (controller). In a small program such a separation may look as
 overkill, but it pays off in more complicated applications. More
-importantly, the concepts of the MVC pattern are widely used in
-web frameworks so one should really adapt to the MVC way of
-thinking.
+importantly, the concepts of the MVC pattern are widely used in web
+frameworks and their documentation so one should really adapt to the
+MVC way of thinking.
 
 Web frameworks often have their own way of interpreting the
 model, view, and controller parts of the MVC pattern.
@@ -159,7 +156,8 @@ which is compatible with what we need later on:
    and also calls to functionality that computes the output given the input.
 
 The model will be a Python class with static attributes holding the data.
-The view consists of Python code processing the model's data and HTML
+The view consists of Python code processing the model's data, calling the
+compute component, and specifying HTML
 templates for the design of the web pages.
 
 # #if TOPIC == 'Django'

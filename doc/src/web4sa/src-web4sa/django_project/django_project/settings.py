@@ -14,7 +14,7 @@ import os
 def relative2absolute_path(relative_path):
     """Return the absolute path correspodning to relative_path."""
     dir_of_this_file = os.path.dirname(os.path.abspath(__file__))
-    return os.path.join(dir_of_this_file, relative_path)
+    return dir_of_this_file + '/' + relative_path
 
 DATABASES = {
     'default': {

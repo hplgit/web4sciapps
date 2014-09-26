@@ -6,10 +6,10 @@ Automatically generated HTML file from DocOnce source
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
-<meta name="description" content="Using Web Frameworks for Scientific Web Applications">
+<meta name="description" content="Using Web Frameworks for Scientific Applications">
 <meta name="keywords" content="web frameworks,MVC pattern,Flask installation,Flask input forms,Flask HTML templates,Flask MVC pattern,Flask troubleshooting,Django installation,Django making a project,Django making an application,Django input forms,Django HTML templates,Flask input forms,Flask error checking,Flask CSS style sheets,Flask LaTeX mathematics,Flask input validation,inline PNG image in HTML,base64 encoding of PNG images,inline SVG figure in HTML,Flask login,Flask database,Flask bootstrap style,Django input forms,Django input validation">
 
-<title>Using Web Frameworks for Scientific Web Applications</title>
+<title>Using Web Frameworks for Scientific Applications</title>
 
 
 <style type="text/css">
@@ -61,6 +61,7 @@ hr.figure { border: 0; width: 80%; border-bottom: 1px solid #aaa}
 div { text-align: justify; text-justify: inter-word; }
 </style>
 
+
 </head>
 
 <!-- tocinfo
@@ -105,14 +106,19 @@ div { text-align: justify; text-justify: inter-word; }
                '___sec16'),
               (' Using style sheets ', 2, None, '___sec17'),
               (' Using LaTeX mathematics ', 2, None, '___sec18'),
-              (' Rearringing the elements in the HTML template ',
+              (' Rearranging the elements in the HTML template ',
                2,
                None,
                '___sec19'),
+              (' Bootstrap HTML style ', 2, None, '___sec20'),
               (' Custom validation ',
                2,
                'wf:vib1:flask:validation',
                'wf:vib1:flask:validation'),
+              (' Using Flask validators ', 3, None, '___sec22'),
+              (' Tailored validation ', 3, None, '___sec23'),
+              (' Tailored validation of intervals ', 3, None, '___sec24'),
+              (' Demo ', 3, None, '___sec25'),
               (' Autogenerating the code ',
                2,
                'wf:vib3:flask:autogen',
@@ -121,46 +127,46 @@ div { text-align: justify; text-justify: inter-word; }
                2,
                'wf:vib3:flask:nofiles',
                'wf:vib3:flask:nofiles'),
-              (' PNG plots ', 3, None, '___sec23'),
-              (' SVG plots ', 3, None, '___sec24'),
+              (' PNG plots ', 3, None, '___sec28'),
+              (' SVG plots ', 3, None, '___sec29'),
               (' User login and storage of computed results ',
                2,
                'wf:vib1:flask:login',
                'wf:vib1:flask:login'),
-              (' Using Bootstrap styles ',
+              (' Project 1: Using Bootstrap styles ',
                2,
                'wf:vib1:flask:bootstrap',
                'wf:vib1:flask:bootstrap'),
-              (' Further work ', 1, None, '___sec27'),
-              (' Resources ', 3, None, '___sec28'),
+              (' Further work ', 1, None, '___sec32'),
+              (' Resources ', 3, None, '___sec33'),
               (' Handling multiple input variables in Django ',
                1,
                'wf:vib:django',
                'wf:vib:django'),
-              (' Programming the Django application ', 2, None, '___sec30'),
-              (' Custom validation ', 2, None, '___sec31'),
-              (' Customizing widgets ', 2, None, '___sec32'),
-              (' Exercises ', 1, None, '___sec33'),
-              (' Exercise 1: Add two numbers ',
+              (' Programming the Django application ', 2, None, '___sec35'),
+              (' Custom validation ', 2, None, '___sec36'),
+              (' Customizing widgets ', 2, None, '___sec37'),
+              (' Exercises ', 1, None, '___sec38'),
+              (' Exercise 2: Add two numbers ',
                2,
                'wf:exer:add2',
                'wf:exer:add2'),
-              (' Exercise 2: Extend the `vib3_flask` app ',
+              (' Exercise 3: Extend the `vib3_flask` app ',
                2,
                'wf:exer:vib3:demo',
                'wf:exer:vib3:demo'),
-              (' Exercise 3: Equip the `vib3_flask` app with more data types ',
+              (' Exercise 4: Equip the `vib3_flask` app with more data types ',
                2,
                'wf:exer:vib3:lists',
                'wf:exer:vib3:lists'),
-              (' Exercise 4: Auto-generate code from function signature ',
+              (' Exercise 5: Auto-generate code from function signature ',
                2,
                None,
-               '___sec37'),
-              (' Resources ', 1, None, '___sec38'),
-              (' Flask resources ', 2, None, '___sec39'),
-              (' Django resources ', 2, None, '___sec40'),
-              (' Remaining ', 1, None, '___sec41')]}
+               '___sec42'),
+              (' Resources ', 1, None, '___sec43'),
+              (' Flask resources ', 2, None, '___sec44'),
+              (' Django resources ', 2, None, '___sec45'),
+              (' Remaining ', 1, None, '___sec46')]}
 end of tocinfo -->
 
 <body>
@@ -196,62 +202,386 @@ MathJax.Hub.Config({
 <p>
 <!-- !split -->
 
-<h2>Using Bootstrap styles <a name="wf:vib1:flask:bootstrap"></a></h2>
-
-The design and layout of the graphical web interface is completely
-governed by template file. So far, we have used only basic HTML
-elements in this file. With CSS it is possible to improve the
-design, but why not adopt popular frameworks that offer an attractive
-look-and-feel and much nice functionality such as responsive pages
-across a wide range of devices? The <a href="http://getbootstrap.com/" target="_self">Bootstrap</a>
-framework is free and open software that gives developers a kick start
-with respect to web page design and functionality.
-Many designs are built on Bootstrap: "Bootswatch": "http:bootswatch.com",
-<a href="http://startbootstrap.com/" target="_self">Start Bootstrap</a>,
-<a href="http://bootstrapzero.com/" target="_self">Bootstrap Zero</a>, and <a href="http://www.prepbootstrap.com/" target="_self">PrepBootstrap</a>.
+<h2>User login and storage of computed results <a name="wf:vib1:flask:login"></a></h2>
 
 <p>
-It would obviously be advantageous to create Flask templates that
-can utilize the Bootstrap technology. A package <a href="http://pythonhosted.org/Flask-Bootstrap/" target="_self">Flask-Bootstrap</a>
-is already supporting this idea.
+We now want to make an app where the computed results can be stored in
+a database. To this end, each user must create an account and login to
+this account for archiving results and for browsing previous runs of
+the application. More files are needed for this purpose, compared to
+the previous apps, and the files are located in the <a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/vib5" target="_self"><tt>vib5</tt></a>. The <code>compute.py</code> file contains the
+<code>compute_gamma</code> function from the previous app (<code>vib4</code>) in the section <a href="._web4sa_plain014.html#wf:vib3:flask:nofiles">Avoiding plot files</a>.
 
 <p>
-<div class="alert alert-block alert-notice alert-text-normal">
-<b>Project.</b>
-<p>
-
-<ul>
-  <li> Test out the Flask-Bootstrap package by redoing a selection
-    of the previous examples with the Bootstrap design and functionality.</li>
-  <li> How easy is it to take advantage of various Bootstrap designs,
-    say the Bootswatch themes, in a template based on Flask-Bootstrap?</li>
-  <li> Make a new GUI [<a name="link_footnote_1"><a><a href="#def_footnote_1">1</a>] with different types of input fields and see how
-    the design looks like in Bootstrap-based themes:</li>
-
-<ul>
-     <li> one selection from a list (radio buttons, drop-down list)</li>
-     <li> multiple selections from a list (check buttons)</li>
-     <li> one-line text field</li>
-     <li> multi-line text field</li>
-     <li> floating-point number</li>
-     <li> integer</li>
-</ul>
-
-</ul>
-</div>
-
-
-<p><a name="def_footnote_1"></a><a href="#link_footnote_1"><b>1:</b></a> The compute function can be very simple, e.g., just returning some HTML
-typesetting of the arguments. This subexercise is for test purposes
-only.
+<code>db_models.py</code>:
 
 <p>
-<!-- <a href="http://pythonhosted.org/Flask-Bootstrap/basic-usage.html" target="_self"><tt>http://pythonhosted.org/Flask-Bootstrap/basic-usage.html</tt></a> -->
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">flask.ext.sqlalchemy</span> <span style="color: #008000; font-weight: bold">import</span> SQLAlchemy
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">werkzeug</span> <span style="color: #008000; font-weight: bold">import</span> generate_password_hash, check_password_hash
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">app</span> <span style="color: #008000; font-weight: bold">import</span> app
+
+db <span style="color: #666666">=</span> SQLAlchemy(app)
+
+<span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">User</span>(db<span style="color: #666666">.</span>Model):
+    <span style="color: #008000">id</span> <span style="color: #666666">=</span> db<span style="color: #666666">.</span>Column(db<span style="color: #666666">.</span>Integer, primary_key<span style="color: #666666">=</span><span style="color: #008000">True</span>)
+    username <span style="color: #666666">=</span> db<span style="color: #666666">.</span>Column(db<span style="color: #666666">.</span>String(<span style="color: #666666">50</span>), unique<span style="color: #666666">=</span><span style="color: #008000">True</span>)
+    pwhash <span style="color: #666666">=</span> db<span style="color: #666666">.</span>Column(db<span style="color: #666666">.</span>String())
+    email <span style="color: #666666">=</span> db<span style="color: #666666">.</span>Column(db<span style="color: #666666">.</span>String(<span style="color: #666666">120</span>), nullable<span style="color: #666666">=</span><span style="color: #008000">True</span>)
+    notify <span style="color: #666666">=</span> db<span style="color: #666666">.</span>Column(db<span style="color: #666666">.</span>Boolean())
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__repr__</span>(<span style="color: #008000">self</span>):
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #BA2121">&#39;&lt;User </span><span style="color: #BB6688; font-weight: bold">%r</span><span style="color: #BA2121">&gt;&#39;</span> <span style="color: #666666">%</span> (<span style="color: #008000">self</span><span style="color: #666666">.</span>username)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">check_password</span>(<span style="color: #008000">self</span>, pw):
+        <span style="color: #008000; font-weight: bold">return</span> check_password_hash(<span style="color: #008000">self</span><span style="color: #666666">.</span>pwhash, pw)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">set_password</span>(<span style="color: #008000">self</span>, pw):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>pwhash <span style="color: #666666">=</span> generate_password_hash(pw)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">is_authenticated</span>(<span style="color: #008000">self</span>):
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">True</span>
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">is_active</span>(<span style="color: #008000">self</span>):
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">True</span>
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">is_anonymous</span>(<span style="color: #008000">self</span>):
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">False</span>
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">get_id</span>(<span style="color: #008000">self</span>):
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>id
+
+<span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Gamma</span>(db<span style="color: #666666">.</span>Model):
+    <span style="color: #008000">id</span> <span style="color: #666666">=</span> db<span style="color: #666666">.</span>Column(db<span style="color: #666666">.</span>Integer, primary_key<span style="color: #666666">=</span><span style="color: #008000">True</span>)
+
+    a          <span style="color: #666666">=</span> db<span style="color: #666666">.</span>Column(db<span style="color: #666666">.</span>Float)
+    h          <span style="color: #666666">=</span> db<span style="color: #666666">.</span>Column(db<span style="color: #666666">.</span>Float)
+    A          <span style="color: #666666">=</span> db<span style="color: #666666">.</span>Column(db<span style="color: #666666">.</span>Float)
+    resolution <span style="color: #666666">=</span> db<span style="color: #666666">.</span>Column(db<span style="color: #666666">.</span>Integer)
+
+    result   <span style="color: #666666">=</span> db<span style="color: #666666">.</span>Column(db<span style="color: #666666">.</span>String())
+    comments <span style="color: #666666">=</span> db<span style="color: #666666">.</span>Column(db<span style="color: #666666">.</span>String(), nullable<span style="color: #666666">=</span><span style="color: #008000">True</span>)
+    user_id  <span style="color: #666666">=</span> db<span style="color: #666666">.</span>Column(db<span style="color: #666666">.</span>Integer, db<span style="color: #666666">.</span>ForeignKey(<span style="color: #BA2121">&#39;user.id&#39;</span>))
+    user     <span style="color: #666666">=</span> db<span style="color: #666666">.</span>relationship(<span style="color: #BA2121">&#39;User&#39;</span>,
+                backref<span style="color: #666666">=</span>db<span style="color: #666666">.</span>backref(<span style="color: #BA2121">&#39;Gamma&#39;</span>, lazy<span style="color: #666666">=</span><span style="color: #BA2121">&#39;dynamic&#39;</span>))
+</pre></div>
+<p>
+<code>app.py</code>:
 
 <p>
-<!-- Not yet written. Must be based on -->
-<!-- <a href="http://pythonhosted.org/Flask-Bootstrap/basic-usage.html" target="_self"><tt>http://pythonhosted.org/Flask-Bootstrap/basic-usage.html</tt></a>. -->
 
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">os</span>
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">flask</span> <span style="color: #008000; font-weight: bold">import</span> Flask
+
+app <span style="color: #666666">=</span> Flask(__name__)
+app<span style="color: #666666">.</span>config[<span style="color: #BA2121">&#39;SQLALCHEMY_DATABASE_URI&#39;</span>] <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;sqlite:///sqlite.db&#39;</span>
+app<span style="color: #666666">.</span>secret_key <span style="color: #666666">=</span> os<span style="color: #666666">.</span>urandom(<span style="color: #666666">24</span>)
+
+<span style="color: #408080; font-style: italic"># Email settings</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">base64</span>
+app<span style="color: #666666">.</span>config<span style="color: #666666">.</span>update(
+        MAIL_SERVER<span style="color: #666666">=</span><span style="color: #BA2121">&#39;smtp.gmail.com&#39;</span>,
+        MAIL_PORT<span style="color: #666666">=587</span>,
+        MAIL_USE_TLS<span style="color: #666666">=</span><span style="color: #008000">True</span>,
+        MAIL_USERNAME <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;cbcwebsolvermail@gmail.com&#39;</span>,
+        MAIL_PASSWORD <span style="color: #666666">=</span> base64<span style="color: #666666">.</span>decodestring(<span style="color: #BA2121">&#39;RGlmZmljdWx0UFch&#39;</span>),
+        MAIL_DEFAULT_SENDER <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;Flask Gamma Email &lt;cbcwebsolvermail@gmail.com&gt;&#39;</span>
+        )
+</pre></div>
+<p>
+<code>forms.py</code>:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">wtforms</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">wtf</span>
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">parampool.html5.flask.fields</span> <span style="color: #008000; font-weight: bold">import</span> HTML5FloatField
+
+<span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">GammaForm</span>(wtf<span style="color: #666666">.</span>Form):
+    a          <span style="color: #666666">=</span> HTML5FloatField(default<span style="color: #666666">=0.5</span>,
+                             validators<span style="color: #666666">=</span>[wtf<span style="color: #666666">.</span>validators<span style="color: #666666">.</span>InputRequired()])
+    h          <span style="color: #666666">=</span> HTML5FloatField(default<span style="color: #666666">=2.0</span>,
+                             validators<span style="color: #666666">=</span>[wtf<span style="color: #666666">.</span>validators<span style="color: #666666">.</span>InputRequired()])
+    A          <span style="color: #666666">=</span> HTML5FloatField(default<span style="color: #666666">=1.41421356237</span>,
+                             validators<span style="color: #666666">=</span>[wtf<span style="color: #666666">.</span>validators<span style="color: #666666">.</span>InputRequired()])
+    resolution <span style="color: #666666">=</span> wtf<span style="color: #666666">.</span>IntegerField(default<span style="color: #666666">=500</span>,
+                             validators<span style="color: #666666">=</span>[wtf<span style="color: #666666">.</span>validators<span style="color: #666666">.</span>InputRequired()])
+
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">db_models</span> <span style="color: #008000; font-weight: bold">import</span> db, User
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">flask.ext.wtf.html5</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">html5</span>
+
+<span style="color: #408080; font-style: italic"># Standard Forms</span>
+<span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">register_form</span>(wtf<span style="color: #666666">.</span>Form):
+    username <span style="color: #666666">=</span> wtf<span style="color: #666666">.</span>TextField(
+        <span style="color: #BA2121">&#39;Username&#39;</span>, [wtf<span style="color: #666666">.</span>validators<span style="color: #666666">.</span>Required()])
+    password <span style="color: #666666">=</span> wtf<span style="color: #666666">.</span>PasswordField(
+        <span style="color: #BA2121">&#39;Password&#39;</span>, [wtf<span style="color: #666666">.</span>validators<span style="color: #666666">.</span>Required(),
+                     wtf<span style="color: #666666">.</span>validators<span style="color: #666666">.</span>EqualTo(
+                         <span style="color: #BA2121">&#39;confirm&#39;</span>,
+                         message<span style="color: #666666">=</span><span style="color: #BA2121">&#39;Passwords must match&#39;</span>)])
+    confirm  <span style="color: #666666">=</span> wtf<span style="color: #666666">.</span>PasswordField(
+        <span style="color: #BA2121">&#39;Confirm Password&#39;</span>, [wtf<span style="color: #666666">.</span>validators<span style="color: #666666">.</span>Required()])
+    email    <span style="color: #666666">=</span> html5<span style="color: #666666">.</span>EmailField(<span style="color: #BA2121">&#39;Email&#39;</span>)
+    notify   <span style="color: #666666">=</span> wtf<span style="color: #666666">.</span>BooleanField(<span style="color: #BA2121">&#39;Email notifications&#39;</span>)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">validate</span>(<span style="color: #008000">self</span>):
+        <span style="color: #008000; font-weight: bold">if</span> <span style="color: #AA22FF; font-weight: bold">not</span> wtf<span style="color: #666666">.</span>Form<span style="color: #666666">.</span>validate(<span style="color: #008000">self</span>):
+            <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">False</span>
+
+        <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>notify<span style="color: #666666">.</span>data <span style="color: #AA22FF; font-weight: bold">and</span> <span style="color: #AA22FF; font-weight: bold">not</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>email<span style="color: #666666">.</span>data:
+            <span style="color: #008000">self</span><span style="color: #666666">.</span>notify<span style="color: #666666">.</span>errors<span style="color: #666666">.</span>append(
+                <span style="color: #BA2121">&#39;Cannot send notifications without a valid email address&#39;</span>)
+            <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">False</span>
+
+        <span style="color: #008000; font-weight: bold">if</span> db<span style="color: #666666">.</span>session<span style="color: #666666">.</span>query(User)<span style="color: #666666">.</span>filter_by(
+            username<span style="color: #666666">=</span><span style="color: #008000">self</span><span style="color: #666666">.</span>username<span style="color: #666666">.</span>data)<span style="color: #666666">.</span>count() <span style="color: #666666">&gt;</span> <span style="color: #666666">0</span>:
+            <span style="color: #008000">self</span><span style="color: #666666">.</span>username<span style="color: #666666">.</span>errors<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;User already exists&#39;</span>)
+            <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">False</span>
+
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">True</span>
+
+<span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">login_form</span>(wtf<span style="color: #666666">.</span>Form):
+    username <span style="color: #666666">=</span> wtf<span style="color: #666666">.</span>TextField(
+        <span style="color: #BA2121">&#39;Username&#39;</span>, [wtf<span style="color: #666666">.</span>validators<span style="color: #666666">.</span>Required()])
+    password <span style="color: #666666">=</span> wtf<span style="color: #666666">.</span>PasswordField(
+        <span style="color: #BA2121">&#39;Password&#39;</span>, [wtf<span style="color: #666666">.</span>validators<span style="color: #666666">.</span>Required()])
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">validate</span>(<span style="color: #008000">self</span>):
+        <span style="color: #008000; font-weight: bold">if</span> <span style="color: #AA22FF; font-weight: bold">not</span> wtf<span style="color: #666666">.</span>Form<span style="color: #666666">.</span>validate(<span style="color: #008000">self</span>):
+            <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">False</span>
+
+        user <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>get_user()
+
+        <span style="color: #008000; font-weight: bold">if</span> user <span style="color: #AA22FF; font-weight: bold">is</span> <span style="color: #008000">None</span>:
+            <span style="color: #008000">self</span><span style="color: #666666">.</span>username<span style="color: #666666">.</span>errors<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;Unknown username&#39;</span>)
+            <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">False</span>
+
+        <span style="color: #008000; font-weight: bold">if</span> <span style="color: #AA22FF; font-weight: bold">not</span> user<span style="color: #666666">.</span>check_password(<span style="color: #008000">self</span><span style="color: #666666">.</span>password<span style="color: #666666">.</span>data):
+            <span style="color: #008000">self</span><span style="color: #666666">.</span>password<span style="color: #666666">.</span>errors<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;Invalid password&#39;</span>)
+            <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">False</span>
+
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">True</span>
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">get_user</span>(<span style="color: #008000">self</span>):
+        <span style="color: #008000; font-weight: bold">return</span> db<span style="color: #666666">.</span>session<span style="color: #666666">.</span>query(User)<span style="color: #666666">.</span>filter_by(
+            username<span style="color: #666666">=</span><span style="color: #008000">self</span><span style="color: #666666">.</span>username<span style="color: #666666">.</span>data)<span style="color: #666666">.</span>first()
+</pre></div>
+<p>
+<code>controller.py</code>:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">os</span>
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">compute</span> <span style="color: #008000; font-weight: bold">import</span> compute_gamma <span style="color: #008000; font-weight: bold">as</span> compute_function
+
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">flask</span> <span style="color: #008000; font-weight: bold">import</span> Flask, render_template, request, redirect, url_for
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">forms</span> <span style="color: #008000; font-weight: bold">import</span> GammaForm
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">db_models</span> <span style="color: #008000; font-weight: bold">import</span> db, User, Gamma
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">flask.ext.login</span> <span style="color: #008000; font-weight: bold">import</span> LoginManager, current_user, login_user, logout_user, login_required
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">app</span> <span style="color: #008000; font-weight: bold">import</span> app
+
+login_manager <span style="color: #666666">=</span> LoginManager()
+login_manager<span style="color: #666666">.</span>init_app(app)
+
+<span style="color: #AA22FF">@login_manager.user_loader</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">load_user</span>(user_id):
+    <span style="color: #008000; font-weight: bold">return</span> db<span style="color: #666666">.</span>session<span style="color: #666666">.</span>query(User)<span style="color: #666666">.</span>get(user_id)
+
+<span style="color: #408080; font-style: italic"># Path to the web application</span>
+<span style="color: #AA22FF">@app.route</span>(<span style="color: #BA2121">&#39;/&#39;</span>, methods<span style="color: #666666">=</span>[<span style="color: #BA2121">&#39;GET&#39;</span>, <span style="color: #BA2121">&#39;POST&#39;</span>])
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">index</span>():
+    result <span style="color: #666666">=</span> <span style="color: #008000">None</span>
+    user <span style="color: #666666">=</span> current_user
+    form <span style="color: #666666">=</span> GammaForm(request<span style="color: #666666">.</span>form)
+    <span style="color: #008000; font-weight: bold">if</span> request<span style="color: #666666">.</span>method <span style="color: #666666">==</span> <span style="color: #BA2121">&quot;POST&quot;</span>:
+        <span style="color: #008000; font-weight: bold">if</span> form<span style="color: #666666">.</span>validate():
+
+
+            result <span style="color: #666666">=</span> compute(form)
+            <span style="color: #008000; font-weight: bold">if</span> user<span style="color: #666666">.</span>is_authenticated():
+                <span style="color: #008000">object</span> <span style="color: #666666">=</span> Gamma()
+                form<span style="color: #666666">.</span>populate_obj(<span style="color: #008000">object</span>)
+                <span style="color: #008000">object</span><span style="color: #666666">.</span>result <span style="color: #666666">=</span> result
+                <span style="color: #008000">object</span><span style="color: #666666">.</span>user <span style="color: #666666">=</span> user
+                db<span style="color: #666666">.</span>session<span style="color: #666666">.</span>add(<span style="color: #008000">object</span>)
+                db<span style="color: #666666">.</span>session<span style="color: #666666">.</span>commit()
+
+                <span style="color: #408080; font-style: italic"># Send email notification</span>
+                <span style="color: #008000; font-weight: bold">if</span> user<span style="color: #666666">.</span>notify <span style="color: #AA22FF; font-weight: bold">and</span> user<span style="color: #666666">.</span>email:
+                    send_email(user)
+
+    <span style="color: #008000; font-weight: bold">else</span>:
+        <span style="color: #008000; font-weight: bold">if</span> user<span style="color: #666666">.</span>is_authenticated():
+            <span style="color: #008000; font-weight: bold">if</span> user<span style="color: #666666">.</span>Gamma<span style="color: #666666">.</span>count() <span style="color: #666666">&gt;</span> <span style="color: #666666">0</span>:
+                instance <span style="color: #666666">=</span> user<span style="color: #666666">.</span>Gamma<span style="color: #666666">.</span>order_by(<span style="color: #BA2121">&#39;-id&#39;</span>)<span style="color: #666666">.</span>first()
+                result <span style="color: #666666">=</span> instance<span style="color: #666666">.</span>result
+                form <span style="color: #666666">=</span> populate_form_from_instance(instance)
+
+    <span style="color: #008000; font-weight: bold">return</span> render_template(<span style="color: #BA2121">&quot;view.html&quot;</span>, form<span style="color: #666666">=</span>form, result<span style="color: #666666">=</span>result, user<span style="color: #666666">=</span>user)
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">compute</span>(form):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    Generic function for compute_function with arguments</span>
+<span style="color: #BA2121; font-style: italic">    taken from a form object (wtforms.Form subclass).</span>
+<span style="color: #BA2121; font-style: italic">    Return the output from the compute_function.</span>
+<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+    <span style="color: #408080; font-style: italic"># Extract arguments to the compute function</span>
+    <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">inspect</span>
+    arg_names <span style="color: #666666">=</span> inspect<span style="color: #666666">.</span>getargspec(compute_function)<span style="color: #666666">.</span>args
+
+    <span style="color: #408080; font-style: italic"># Extract values from form</span>
+    form_values <span style="color: #666666">=</span> [<span style="color: #008000">getattr</span>(form, name) <span style="color: #008000; font-weight: bold">for</span> name <span style="color: #AA22FF; font-weight: bold">in</span> arg_names
+                   <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">hasattr</span>(form, name)]
+
+    form_data <span style="color: #666666">=</span> [value<span style="color: #666666">.</span>data <span style="color: #008000; font-weight: bold">for</span> value <span style="color: #AA22FF; font-weight: bold">in</span> form_values]
+
+    defaults  <span style="color: #666666">=</span> inspect<span style="color: #666666">.</span>getargspec(compute_function)<span style="color: #666666">.</span>defaults
+
+    <span style="color: #408080; font-style: italic"># Make defaults as long as arg_names so we can traverse both with zip</span>
+    <span style="color: #008000; font-weight: bold">if</span> defaults:
+        defaults <span style="color: #666666">=</span> [<span style="color: #BA2121">&quot;none&quot;</span>]<span style="color: #666666">*</span>(<span style="color: #008000">len</span>(arg_names)<span style="color: #666666">-</span><span style="color: #008000">len</span>(defaults)) <span style="color: #666666">+</span> <span style="color: #008000">list</span>(defaults)
+    <span style="color: #008000; font-weight: bold">else</span>:
+        defaults <span style="color: #666666">=</span> [<span style="color: #BA2121">&quot;none&quot;</span>]<span style="color: #666666">*</span><span style="color: #008000">len</span>(arg_names)
+
+    <span style="color: #408080; font-style: italic"># Convert form data to the right type:</span>
+    <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span>
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(form_data)):
+        <span style="color: #008000; font-weight: bold">if</span> defaults[i] <span style="color: #666666">!=</span> <span style="color: #BA2121">&quot;none&quot;</span>:
+            <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">isinstance</span>(defaults[i], (<span style="color: #008000">str</span>,<span style="color: #008000">bool</span>,<span style="color: #008000">int</span>,<span style="color: #008000">float</span>)):
+                <span style="color: #008000; font-weight: bold">pass</span>  <span style="color: #408080; font-style: italic"># special widgets for these types do the conversion</span>
+            <span style="color: #008000; font-weight: bold">elif</span> <span style="color: #008000">isinstance</span>(defaults[i], numpy<span style="color: #666666">.</span>ndarray):
+                form_data[i] <span style="color: #666666">=</span> numpy<span style="color: #666666">.</span>array(<span style="color: #008000">eval</span>(form_data[i]))
+            <span style="color: #008000; font-weight: bold">elif</span> defaults[i] <span style="color: #AA22FF; font-weight: bold">is</span> <span style="color: #008000">None</span>:
+                <span style="color: #008000; font-weight: bold">if</span> form_data[i] <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;None&#39;</span>:
+                    form_data[i] <span style="color: #666666">=</span> <span style="color: #008000">None</span>
+                <span style="color: #008000; font-weight: bold">else</span>:
+                    <span style="color: #008000; font-weight: bold">try</span>:
+                        <span style="color: #408080; font-style: italic"># Try eval if it succeeds...</span>
+                        form_data[i] <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(form_data[i])
+                    <span style="color: #008000; font-weight: bold">except</span>:
+                        <span style="color: #008000; font-weight: bold">pass</span> <span style="color: #408080; font-style: italic"># Just keep the text</span>
+            <span style="color: #008000; font-weight: bold">else</span>:
+                <span style="color: #408080; font-style: italic"># Use eval to convert to right type (hopefully)</span>
+                <span style="color: #008000; font-weight: bold">try</span>:
+                    form_data[i] <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(form_data[i])
+                <span style="color: #008000; font-weight: bold">except</span>:
+                    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Could not convert text </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> to </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> for argument </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (form_data[i], <span style="color: #008000">type</span>(defaults[i]), arg_names[i])
+                    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;when calling the compute function...&#39;</span>
+
+    <span style="color: #408080; font-style: italic"># Run computations</span>
+    result <span style="color: #666666">=</span> compute_function(<span style="color: #666666">*</span>form_data)
+    <span style="color: #008000; font-weight: bold">return</span> result
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">populate_form_from_instance</span>(instance):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Repopulate form with previous values&quot;&quot;&quot;</span>
+    form <span style="color: #666666">=</span> GammaForm()
+    <span style="color: #008000; font-weight: bold">for</span> field <span style="color: #AA22FF; font-weight: bold">in</span> form:
+        field<span style="color: #666666">.</span>data <span style="color: #666666">=</span> <span style="color: #008000">getattr</span>(instance, field<span style="color: #666666">.</span>name)
+    <span style="color: #008000; font-weight: bold">return</span> form
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">send_email</span>(user):
+    <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">flask.ext.mail</span> <span style="color: #008000; font-weight: bold">import</span> Mail, Message
+    mail <span style="color: #666666">=</span> Mail(app)
+    msg <span style="color: #666666">=</span> Message(<span style="color: #BA2121">&quot;Gamma Computations Complete&quot;</span>,
+                  recipients<span style="color: #666666">=</span>[user<span style="color: #666666">.</span>email])
+    msg<span style="color: #666666">.</span>body <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;&quot;&quot;A simulation has been completed by the Flask Gamma app. Please log in at</span>
+
+<span style="color: #BA2121">http://localhost:5000/login</span>
+
+<span style="color: #BA2121">to see the results.</span>
+
+<span style="color: #BA2121">---</span>
+<span style="color: #BA2121">This email has been automatically generated by the Gamma app created by</span>
+<span style="color: #BA2121">Parampool. If you don&#39;t want email notifications when a result is found, please</span>
+<span style="color: #BA2121">register a new user and leave the &#39;notify&#39; field unchecked.&quot;&quot;&quot;</span>
+    mail<span style="color: #666666">.</span>send(msg)
+
+<span style="color: #AA22FF">@app.route</span>(<span style="color: #BA2121">&#39;/reg&#39;</span>, methods<span style="color: #666666">=</span>[<span style="color: #BA2121">&#39;GET&#39;</span>, <span style="color: #BA2121">&#39;POST&#39;</span>])
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">create_login</span>():
+    <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">forms</span> <span style="color: #008000; font-weight: bold">import</span> register_form
+    form <span style="color: #666666">=</span> register_form(request<span style="color: #666666">.</span>form)
+    <span style="color: #008000; font-weight: bold">if</span> request<span style="color: #666666">.</span>method <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;POST&#39;</span> <span style="color: #AA22FF; font-weight: bold">and</span> form<span style="color: #666666">.</span>validate():
+        user <span style="color: #666666">=</span> User()
+        form<span style="color: #666666">.</span>populate_obj(user)
+        user<span style="color: #666666">.</span>set_password(form<span style="color: #666666">.</span>password<span style="color: #666666">.</span>data)
+
+        db<span style="color: #666666">.</span>session<span style="color: #666666">.</span>add(user)
+        db<span style="color: #666666">.</span>session<span style="color: #666666">.</span>commit()
+
+        login_user(user)
+        <span style="color: #008000; font-weight: bold">return</span> redirect(url_for(<span style="color: #BA2121">&#39;index&#39;</span>))
+    <span style="color: #008000; font-weight: bold">return</span> render_template(<span style="color: #BA2121">&quot;reg.html&quot;</span>, form<span style="color: #666666">=</span>form)
+
+<span style="color: #AA22FF">@app.route</span>(<span style="color: #BA2121">&#39;/login&#39;</span>, methods<span style="color: #666666">=</span>[<span style="color: #BA2121">&#39;GET&#39;</span>, <span style="color: #BA2121">&#39;POST&#39;</span>])
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">login</span>():
+    <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">forms</span> <span style="color: #008000; font-weight: bold">import</span> login_form
+    form <span style="color: #666666">=</span> login_form(request<span style="color: #666666">.</span>form)
+    <span style="color: #008000; font-weight: bold">if</span> request<span style="color: #666666">.</span>method <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;POST&#39;</span> <span style="color: #AA22FF; font-weight: bold">and</span> form<span style="color: #666666">.</span>validate():
+        user <span style="color: #666666">=</span> form<span style="color: #666666">.</span>get_user()
+        login_user(user)
+        <span style="color: #008000; font-weight: bold">return</span> redirect(url_for(<span style="color: #BA2121">&#39;index&#39;</span>))
+    <span style="color: #008000; font-weight: bold">return</span> render_template(<span style="color: #BA2121">&quot;login.html&quot;</span>, form<span style="color: #666666">=</span>form)
+
+<span style="color: #AA22FF">@app.route</span>(<span style="color: #BA2121">&#39;/logout&#39;</span>)
+<span style="color: #AA22FF">@login_required</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">logout</span>():
+    logout_user()
+    <span style="color: #008000; font-weight: bold">return</span> redirect(url_for(<span style="color: #BA2121">&#39;index&#39;</span>))
+
+<span style="color: #AA22FF">@app.route</span>(<span style="color: #BA2121">&#39;/old&#39;</span>)
+<span style="color: #AA22FF">@login_required</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">old</span>():
+    data <span style="color: #666666">=</span> []
+    user <span style="color: #666666">=</span> current_user
+    <span style="color: #008000; font-weight: bold">if</span> user<span style="color: #666666">.</span>is_authenticated():
+        instances <span style="color: #666666">=</span> user<span style="color: #666666">.</span>Gamma<span style="color: #666666">.</span>order_by(<span style="color: #BA2121">&#39;-id&#39;</span>)<span style="color: #666666">.</span>all()
+        <span style="color: #008000; font-weight: bold">for</span> instance <span style="color: #AA22FF; font-weight: bold">in</span> instances:
+            form <span style="color: #666666">=</span> populate_form_from_instance(instance)
+
+            result <span style="color: #666666">=</span> instance<span style="color: #666666">.</span>result
+            <span style="color: #008000; font-weight: bold">if</span> instance<span style="color: #666666">.</span>comments:
+                result <span style="color: #666666">+=</span> <span style="color: #BA2121">&quot;&lt;h3&gt;Comments&lt;/h3&gt;&quot;</span> <span style="color: #666666">+</span> instance<span style="color: #666666">.</span>comments
+            data<span style="color: #666666">.</span>append({<span style="color: #BA2121">&#39;form&#39;</span>:form, <span style="color: #BA2121">&#39;result&#39;</span>:result, <span style="color: #BA2121">&#39;id&#39;</span>:instance<span style="color: #666666">.</span>id})
+
+    <span style="color: #008000; font-weight: bold">return</span> render_template(<span style="color: #BA2121">&quot;old.html&quot;</span>, data<span style="color: #666666">=</span>data)
+
+<span style="color: #AA22FF">@app.route</span>(<span style="color: #BA2121">&#39;/add_comment&#39;</span>, methods<span style="color: #666666">=</span>[<span style="color: #BA2121">&#39;GET&#39;</span>, <span style="color: #BA2121">&#39;POST&#39;</span>])
+<span style="color: #AA22FF">@login_required</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">add_comment</span>():
+    user <span style="color: #666666">=</span> current_user
+    <span style="color: #008000; font-weight: bold">if</span> request<span style="color: #666666">.</span>method <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;POST&#39;</span> <span style="color: #AA22FF; font-weight: bold">and</span> user<span style="color: #666666">.</span>is_authenticated():
+        instance <span style="color: #666666">=</span> user<span style="color: #666666">.</span>Gamma<span style="color: #666666">.</span>order_by(<span style="color: #BA2121">&#39;-id&#39;</span>)<span style="color: #666666">.</span>first()
+        instance<span style="color: #666666">.</span>comments <span style="color: #666666">=</span> request<span style="color: #666666">.</span>form<span style="color: #666666">.</span>get(<span style="color: #BA2121">&quot;comments&quot;</span>, <span style="color: #008000">None</span>)
+        db<span style="color: #666666">.</span>session<span style="color: #666666">.</span>commit()
+    <span style="color: #008000; font-weight: bold">return</span> redirect(url_for(<span style="color: #BA2121">&#39;index&#39;</span>))
+
+<span style="color: #AA22FF">@app.route</span>(<span style="color: #BA2121">&#39;/delete/&lt;id&gt;&#39;</span>, methods<span style="color: #666666">=</span>[<span style="color: #BA2121">&#39;GET&#39;</span>, <span style="color: #BA2121">&#39;POST&#39;</span>])
+<span style="color: #AA22FF">@login_required</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">delete_post</span>(<span style="color: #008000">id</span>):
+    <span style="color: #008000">id</span> <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #008000">id</span>)
+    user <span style="color: #666666">=</span> current_user
+    <span style="color: #008000; font-weight: bold">if</span> user<span style="color: #666666">.</span>is_authenticated():
+        <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">id</span> <span style="color: #666666">==</span> <span style="color: #666666">-1</span>:
+            instances <span style="color: #666666">=</span> user<span style="color: #666666">.</span>Gamma<span style="color: #666666">.</span>delete()
+        <span style="color: #008000; font-weight: bold">else</span>:
+            <span style="color: #008000; font-weight: bold">try</span>:
+                instance <span style="color: #666666">=</span> user<span style="color: #666666">.</span>Gamma<span style="color: #666666">.</span>filter_by(<span style="color: #008000">id</span><span style="color: #666666">=</span><span style="color: #008000">id</span>)<span style="color: #666666">.</span>first()
+                db<span style="color: #666666">.</span>session<span style="color: #666666">.</span>delete(instance)
+            <span style="color: #008000; font-weight: bold">except</span>:
+                <span style="color: #008000; font-weight: bold">pass</span>
+
+        db<span style="color: #666666">.</span>session<span style="color: #666666">.</span>commit()
+    <span style="color: #008000; font-weight: bold">return</span> redirect(url_for(<span style="color: #BA2121">&#39;old&#39;</span>))
+
+
+<span style="color: #008000; font-weight: bold">if</span> __name__ <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;__main__&#39;</span>:
+    <span style="color: #008000; font-weight: bold">if</span> <span style="color: #AA22FF; font-weight: bold">not</span> os<span style="color: #666666">.</span>path<span style="color: #666666">.</span>isfile(os<span style="color: #666666">.</span>path<span style="color: #666666">.</span>join(os<span style="color: #666666">.</span>path<span style="color: #666666">.</span>dirname(__file__), <span style="color: #BA2121">&#39;sqlite.db&#39;</span>)):
+        db<span style="color: #666666">.</span>create_all()
+    app<span style="color: #666666">.</span>run(debug<span style="color: #666666">=</span><span style="color: #008000">True</span>)
+</pre></div>
 <p>
 <p>
 <!-- begin bottom navigation -->

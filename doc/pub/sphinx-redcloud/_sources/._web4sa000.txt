@@ -1,11 +1,11 @@
 .. Automatically generated Sphinx-extended reStructuredText file from DocOnce source
    (https://github.com/hplgit/doconce/)
 
-Using Web Frameworks for Scientific Web Applications
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Using Web Frameworks for Scientific Applications
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 :Authors: Hans Petter Langtangen, Anders E. Johansen
-:Date: Aug 30, 2014
+:Date: Sep 26, 2014
 
 Web frameworks
 ==============
@@ -45,14 +45,11 @@ and a list of `YouTube videos <http://www.youtube.com/playlist?list=PL385A53B00B
  `official web site <http://flask.pocoo.org/>`__ and the `WTForms Documentation <http://wtforms.simplecodes.com/docs/0.6/index.html>`__. There is, unfortunately, hardly any examples on how Django or Flask can be used to enable typical scientific applications for the web, and that is why we have developed some targeted examples on this topic.
 
 A basic question is, of course, whether you should apply Flask or
-Django for your web project. Googling for "flask vs django" gives a
+Django for your web project. Googling for *flask vs django* gives a
 lot of diverging opinions. The authors' viewpoint is that Flask is
 much easier to get started with than Django. You can grow your
 application to a really big one with both frameworks, but some
-advanced features is easier on one framework than the other. For
-example, if you want users to log into your account and store their
-work in databases, we found this to be much more straightforward in
-Django.
+advanced features is easier in one framework than in the other.
 
 The problem for a computational scientist who wants to enable
 mathematical calculations through the web is that most of

@@ -6,10 +6,10 @@ Automatically generated HTML file from DocOnce source
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
-<meta name="description" content="Using Web Frameworks for Scientific Web Applications">
+<meta name="description" content="Using Web Frameworks for Scientific Applications">
 <meta name="keywords" content="web frameworks,MVC pattern,Flask installation,Flask input forms,Flask HTML templates,Flask MVC pattern,Flask troubleshooting,Django installation,Django making a project,Django making an application,Django input forms,Django HTML templates,Flask input forms,Flask error checking,Flask CSS style sheets,Flask LaTeX mathematics,Flask input validation,inline PNG image in HTML,base64 encoding of PNG images,inline SVG figure in HTML,Flask login,Flask database,Flask bootstrap style,Django input forms,Django input validation">
 
-<title>Using Web Frameworks for Scientific Web Applications</title>
+<title>Using Web Frameworks for Scientific Applications</title>
 
 
 <style type="text/css">
@@ -61,6 +61,7 @@ hr.figure { border: 0; width: 80%; border-bottom: 1px solid #aaa}
 div { text-align: justify; text-justify: inter-word; }
 </style>
 
+
 </head>
 
 <!-- tocinfo
@@ -105,14 +106,19 @@ div { text-align: justify; text-justify: inter-word; }
                '___sec16'),
               (' Using style sheets ', 2, None, '___sec17'),
               (' Using LaTeX mathematics ', 2, None, '___sec18'),
-              (' Rearringing the elements in the HTML template ',
+              (' Rearranging the elements in the HTML template ',
                2,
                None,
                '___sec19'),
+              (' Bootstrap HTML style ', 2, None, '___sec20'),
               (' Custom validation ',
                2,
                'wf:vib1:flask:validation',
                'wf:vib1:flask:validation'),
+              (' Using Flask validators ', 3, None, '___sec22'),
+              (' Tailored validation ', 3, None, '___sec23'),
+              (' Tailored validation of intervals ', 3, None, '___sec24'),
+              (' Demo ', 3, None, '___sec25'),
               (' Autogenerating the code ',
                2,
                'wf:vib3:flask:autogen',
@@ -121,46 +127,46 @@ div { text-align: justify; text-justify: inter-word; }
                2,
                'wf:vib3:flask:nofiles',
                'wf:vib3:flask:nofiles'),
-              (' PNG plots ', 3, None, '___sec23'),
-              (' SVG plots ', 3, None, '___sec24'),
+              (' PNG plots ', 3, None, '___sec28'),
+              (' SVG plots ', 3, None, '___sec29'),
               (' User login and storage of computed results ',
                2,
                'wf:vib1:flask:login',
                'wf:vib1:flask:login'),
-              (' Using Bootstrap styles ',
+              (' Project 1: Using Bootstrap styles ',
                2,
                'wf:vib1:flask:bootstrap',
                'wf:vib1:flask:bootstrap'),
-              (' Further work ', 1, None, '___sec27'),
-              (' Resources ', 3, None, '___sec28'),
+              (' Further work ', 1, None, '___sec32'),
+              (' Resources ', 3, None, '___sec33'),
               (' Handling multiple input variables in Django ',
                1,
                'wf:vib:django',
                'wf:vib:django'),
-              (' Programming the Django application ', 2, None, '___sec30'),
-              (' Custom validation ', 2, None, '___sec31'),
-              (' Customizing widgets ', 2, None, '___sec32'),
-              (' Exercises ', 1, None, '___sec33'),
-              (' Exercise 1: Add two numbers ',
+              (' Programming the Django application ', 2, None, '___sec35'),
+              (' Custom validation ', 2, None, '___sec36'),
+              (' Customizing widgets ', 2, None, '___sec37'),
+              (' Exercises ', 1, None, '___sec38'),
+              (' Exercise 2: Add two numbers ',
                2,
                'wf:exer:add2',
                'wf:exer:add2'),
-              (' Exercise 2: Extend the `vib3_flask` app ',
+              (' Exercise 3: Extend the `vib3_flask` app ',
                2,
                'wf:exer:vib3:demo',
                'wf:exer:vib3:demo'),
-              (' Exercise 3: Equip the `vib3_flask` app with more data types ',
+              (' Exercise 4: Equip the `vib3_flask` app with more data types ',
                2,
                'wf:exer:vib3:lists',
                'wf:exer:vib3:lists'),
-              (' Exercise 4: Auto-generate code from function signature ',
+              (' Exercise 5: Auto-generate code from function signature ',
                2,
                None,
-               '___sec37'),
-              (' Resources ', 1, None, '___sec38'),
-              (' Flask resources ', 2, None, '___sec39'),
-              (' Django resources ', 2, None, '___sec40'),
-              (' Remaining ', 1, None, '___sec41')]}
+               '___sec42'),
+              (' Resources ', 1, None, '___sec43'),
+              (' Flask resources ', 2, None, '___sec44'),
+              (' Django resources ', 2, None, '___sec45'),
+              (' Remaining ', 1, None, '___sec46')]}
 end of tocinfo -->
 
 <body>
@@ -197,7 +203,7 @@ MathJax.Hub.Config({
 
 
 
-<center><h1>Using Web Frameworks for Scientific Web Applications</h1></center>  <!-- document title -->
+<center><h1>Using Web Frameworks for Scientific Applications</h1></center>  <!-- document title -->
 
 <p>
 <!-- author(s): Hans Petter Langtangen, and Anders E. Johansen -->
@@ -217,10 +223,11 @@ MathJax.Hub.Config({
 <center>[1] <b>Center for Biomedical Computing, Simula Research Laboratory</b></center>
 <center>[2] <b>Department of Informatics, University of Oslo</b></center>
 <p>
-<center><h4>Aug 30, 2014</h4></center> <!-- date -->
+<center><h4>Sep 26, 2014</h4></center> <!-- date -->
 
 <h2>Table of contents</h2>
 
+<p>
 <a href="#___sec0"> Web frameworks </a><br>
 &nbsp; &nbsp; &nbsp; <a href="._web4sa_plain001.html#___sec1"> The MVC pattern </a><br>
 &nbsp; &nbsp; &nbsp; <a href="._web4sa_plain002.html#___sec2"> A very simple application </a><br>
@@ -240,33 +247,39 @@ MathJax.Hub.Config({
 &nbsp; &nbsp; &nbsp; <a href="._web4sa_plain009.html#___sec16"> Implementing error checking in the template </a><br>
 &nbsp; &nbsp; &nbsp; <a href="._web4sa_plain010.html#___sec17"> Using style sheets </a><br>
 &nbsp; &nbsp; &nbsp; <a href="._web4sa_plain010.html#___sec18"> Using LaTeX mathematics </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain010.html#___sec19"> Rearringing the elements in the HTML template </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain011.html#wf:vib1:flask:validation"> Custom validation </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain012.html#wf:vib3:flask:autogen"> Autogenerating the code </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain013.html#wf:vib3:flask:nofiles"> Avoiding plot files </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_plain013.html#___sec23"> PNG plots </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_plain013.html#___sec24"> SVG plots </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain014.html#wf:vib1:flask:login"> User login and storage of computed results </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain015.html#wf:vib1:flask:bootstrap"> Using Bootstrap styles </a><br>
-<a href="._web4sa_plain016.html#___sec27"> Further work </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_plain016.html#___sec28"> Resources </a><br>
-<a href="._web4sa_plain017.html#wf:vib:django"> Handling multiple input variables in Django </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain017.html#___sec30"> Programming the Django application </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain017.html#___sec31"> Custom validation </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain017.html#___sec32"> Customizing widgets </a><br>
-<a href="._web4sa_plain018.html#___sec33"> Exercises </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain018.html#wf:exer:add2"> Exercise 1: Add two numbers </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain018.html#wf:exer:vib3:demo"> Exercise 2: Extend the <code>vib3_flask</code> app </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain018.html#wf:exer:vib3:lists"> Exercise 3: Equip the <code>vib3_flask</code> app with more data types </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain018.html#___sec37"> Exercise 4: Auto-generate code from function signature </a><br>
-<a href="._web4sa_plain018.html#___sec38"> Resources </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain018.html#___sec39"> Flask resources </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain018.html#___sec40"> Django resources </a><br>
-<a href="._web4sa_plain018.html#___sec41"> Remaining </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain010.html#___sec19"> Rearranging the elements in the HTML template </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain011.html#___sec20"> Bootstrap HTML style </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain012.html#wf:vib1:flask:validation"> Custom validation </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_plain012.html#___sec22"> Using Flask validators </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_plain012.html#___sec23"> Tailored validation </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_plain012.html#___sec24"> Tailored validation of intervals </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_plain012.html#___sec25"> Demo </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain013.html#wf:vib3:flask:autogen"> Autogenerating the code </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain014.html#wf:vib3:flask:nofiles"> Avoiding plot files </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_plain014.html#___sec28"> PNG plots </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_plain014.html#___sec29"> SVG plots </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain015.html#wf:vib1:flask:login"> User login and storage of computed results </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain016.html#wf:vib1:flask:bootstrap"> Project 1: Using Bootstrap styles </a><br>
+<a href="._web4sa_plain017.html#___sec32"> Further work </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_plain017.html#___sec33"> Resources </a><br>
+<a href="._web4sa_plain018.html#wf:vib:django"> Handling multiple input variables in Django </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain018.html#___sec35"> Programming the Django application </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain018.html#___sec36"> Custom validation </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain018.html#___sec37"> Customizing widgets </a><br>
+<a href="._web4sa_plain019.html#___sec38"> Exercises </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain019.html#wf:exer:add2"> Exercise 2: Add two numbers </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain019.html#wf:exer:vib3:demo"> Exercise 3: Extend the <code>vib3_flask</code> app </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain019.html#wf:exer:vib3:lists"> Exercise 4: Equip the <code>vib3_flask</code> app with more data types </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain019.html#___sec42"> Exercise 5: Auto-generate code from function signature </a><br>
+<a href="._web4sa_plain019.html#___sec43"> Resources </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain019.html#___sec44"> Flask resources </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain019.html#___sec45"> Django resources </a><br>
+<a href="._web4sa_plain019.html#___sec46"> Remaining </a><br>
 </p>
 
 <h1>Web frameworks  <a name="___sec0"></a></h1>
 
+<p>
 Computational scientists may want to offer their applications through
 a web interface, thereby making a <em>web application</em>.
 Basically, this means that users can set input data
@@ -303,14 +316,11 @@ and a list of <a href="http://www.youtube.com/playlist?list=PL385A53B00B8B158E" 
 
 <p>
 A basic question is, of course, whether you should apply Flask or
-Django for your web project. Googling for "flask vs django" gives a
+Django for your web project. Googling for <em>flask vs django</em> gives a
 lot of diverging opinions. The authors' viewpoint is that Flask is
 much easier to get started with than Django. You can grow your
 application to a really big one with both frameworks, but some
-advanced features is easier on one framework than the other. For
-example, if you want users to log into your account and store their
-work in databases, we found this to be much more straightforward in
-Django.
+advanced features is easier in one framework than in the other.
 
 <p>
 The problem for a computational scientist who wants to enable

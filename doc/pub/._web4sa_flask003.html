@@ -40,10 +40,10 @@ h1, h2, h3, h4, h5, h6 {
           <!-- navigation toc: --> <li><a href="._web4sa_flask000.html#___sec0" style="font-size: 80%;">Web frameworks</a></li>
      <!-- navigation toc: --> <li><a href="._web4sa_flask004.html#___sec4" style="font-size: 80%;">Making a Flask application</a></li>
      <!-- navigation toc: --> <li><a href="._web4sa_flask006.html#wf:vib:flask" style="font-size: 80%;">Handling multiple input variables in Flask</a></li>
-     <!-- navigation toc: --> <li><a href="._web4sa_flask014.html#___sec22" style="font-size: 80%;">Further work</a></li>
-     <!-- navigation toc: --> <li><a href="._web4sa_flask015.html#___sec24" style="font-size: 80%;">Exercises</a></li>
-     <!-- navigation toc: --> <li><a href="._web4sa_flask015.html#___sec29" style="font-size: 80%;">Flask resources</a></li>
-     <!-- navigation toc: --> <li><a href="._web4sa_flask015.html#___sec30" style="font-size: 80%;">Remaining</a></li>
+     <!-- navigation toc: --> <li><a href="._web4sa_flask015.html#___sec27" style="font-size: 80%;">Further work</a></li>
+     <!-- navigation toc: --> <li><a href="._web4sa_flask016.html#___sec29" style="font-size: 80%;">Exercises</a></li>
+     <!-- navigation toc: --> <li><a href="._web4sa_flask016.html#___sec34" style="font-size: 80%;">Flask resources</a></li>
+     <!-- navigation toc: --> <li><a href="._web4sa_flask016.html#___sec35" style="font-size: 80%;">Remaining</a></li>
 
     </ul>
    </div>
@@ -86,14 +86,19 @@ h1, h2, h3, h4, h5, h6 {
                '___sec11'),
               (' Using style sheets ', 2, None, '___sec12'),
               (' Using LaTeX mathematics ', 2, None, '___sec13'),
-              (' Rearringing the elements in the HTML template ',
+              (' Rearranging the elements in the HTML template ',
                2,
                None,
                '___sec14'),
+              (' Bootstrap HTML style ', 2, None, '___sec15'),
               (' Custom validation ',
                2,
                'wf:vib1:flask:validation',
                'wf:vib1:flask:validation'),
+              (' Using Flask validators ', 3, None, '___sec17'),
+              (' Tailored validation ', 3, None, '___sec18'),
+              (' Tailored validation of intervals ', 3, None, '___sec19'),
+              (' Demo ', 3, None, '___sec20'),
               (' Autogenerating the code ',
                2,
                'wf:vib3:flask:autogen',
@@ -102,37 +107,37 @@ h1, h2, h3, h4, h5, h6 {
                2,
                'wf:vib3:flask:nofiles',
                'wf:vib3:flask:nofiles'),
-              (' PNG plots ', 3, None, '___sec18'),
-              (' SVG plots ', 3, None, '___sec19'),
+              (' PNG plots ', 3, None, '___sec23'),
+              (' SVG plots ', 3, None, '___sec24'),
               (' User login and storage of computed results ',
                2,
                'wf:vib1:flask:login',
                'wf:vib1:flask:login'),
-              (' Using Bootstrap styles ',
+              (' Project 1: Using Bootstrap styles ',
                2,
                'wf:vib1:flask:bootstrap',
                'wf:vib1:flask:bootstrap'),
-              (' Further work ', 1, None, '___sec22'),
-              (' Resources ', 3, None, '___sec23'),
-              (' Exercises ', 1, None, '___sec24'),
-              (' Exercise 1: Add two numbers ',
+              (' Further work ', 1, None, '___sec27'),
+              (' Resources ', 3, None, '___sec28'),
+              (' Exercises ', 1, None, '___sec29'),
+              (' Exercise 2: Add two numbers ',
                2,
                'wf:exer:add2',
                'wf:exer:add2'),
-              (' Exercise 2: Extend the `vib3_flask` app ',
+              (' Exercise 3: Extend the `vib3_flask` app ',
                2,
                'wf:exer:vib3:demo',
                'wf:exer:vib3:demo'),
-              (' Exercise 3: Equip the `vib3_flask` app with more data types ',
+              (' Exercise 4: Equip the `vib3_flask` app with more data types ',
                2,
                'wf:exer:vib3:lists',
                'wf:exer:vib3:lists'),
-              (' Exercise 4: Auto-generate code from function signature ',
+              (' Exercise 5: Auto-generate code from function signature ',
                2,
                None,
-               '___sec28'),
-              (' Flask resources ', 1, None, '___sec29'),
-              (' Remaining ', 1, None, '___sec30')]}
+               '___sec33'),
+              (' Flask resources ', 1, None, '___sec34'),
+              (' Remaining ', 1, None, '___sec35')]}
 end of tocinfo -->
 
 
@@ -158,6 +163,7 @@ MathJax.Hub.Config({
 
 <h2 id="wf:hw:mvc">Application of the MVC pattern<a name="wf:hw:mvc"></a></h2>
 
+<p>
 Before thinking of a web application, we first <em>refactor</em> our program
 such that it fits with the classical MVC pattern and a compute component.
 The refactoring does not change the functionality of the code, it

@@ -6,10 +6,10 @@ Automatically generated HTML file from DocOnce source
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
-<meta name="description" content="Using Web Frameworks for Scientific Web Applications">
+<meta name="description" content="Using Web Frameworks for Scientific Applications">
 <meta name="keywords" content="web frameworks,MVC pattern,Flask installation,Flask input forms,Flask HTML templates,Flask MVC pattern,Flask troubleshooting,Django installation,Django making a project,Django making an application,Django input forms,Django HTML templates,Flask input forms,Flask error checking,Flask CSS style sheets,Flask LaTeX mathematics,Flask input validation,inline PNG image in HTML,base64 encoding of PNG images,inline SVG figure in HTML,Flask login,Flask database,Flask bootstrap style,Django input forms,Django input validation">
 
-<title>Using Web Frameworks for Scientific Web Applications</title>
+<title>Using Web Frameworks for Scientific Applications</title>
 
 
 <style type="text/css">
@@ -61,6 +61,7 @@ hr.figure { border: 0; width: 80%; border-bottom: 1px solid #aaa}
 div { text-align: justify; text-justify: inter-word; }
 </style>
 
+
 </head>
 
 <!-- tocinfo
@@ -105,14 +106,19 @@ div { text-align: justify; text-justify: inter-word; }
                '___sec16'),
               (' Using style sheets ', 2, None, '___sec17'),
               (' Using LaTeX mathematics ', 2, None, '___sec18'),
-              (' Rearringing the elements in the HTML template ',
+              (' Rearranging the elements in the HTML template ',
                2,
                None,
                '___sec19'),
+              (' Bootstrap HTML style ', 2, None, '___sec20'),
               (' Custom validation ',
                2,
                'wf:vib1:flask:validation',
                'wf:vib1:flask:validation'),
+              (' Using Flask validators ', 3, None, '___sec22'),
+              (' Tailored validation ', 3, None, '___sec23'),
+              (' Tailored validation of intervals ', 3, None, '___sec24'),
+              (' Demo ', 3, None, '___sec25'),
               (' Autogenerating the code ',
                2,
                'wf:vib3:flask:autogen',
@@ -121,46 +127,46 @@ div { text-align: justify; text-justify: inter-word; }
                2,
                'wf:vib3:flask:nofiles',
                'wf:vib3:flask:nofiles'),
-              (' PNG plots ', 3, None, '___sec23'),
-              (' SVG plots ', 3, None, '___sec24'),
+              (' PNG plots ', 3, None, '___sec28'),
+              (' SVG plots ', 3, None, '___sec29'),
               (' User login and storage of computed results ',
                2,
                'wf:vib1:flask:login',
                'wf:vib1:flask:login'),
-              (' Using Bootstrap styles ',
+              (' Project 1: Using Bootstrap styles ',
                2,
                'wf:vib1:flask:bootstrap',
                'wf:vib1:flask:bootstrap'),
-              (' Further work ', 1, None, '___sec27'),
-              (' Resources ', 3, None, '___sec28'),
+              (' Further work ', 1, None, '___sec32'),
+              (' Resources ', 3, None, '___sec33'),
               (' Handling multiple input variables in Django ',
                1,
                'wf:vib:django',
                'wf:vib:django'),
-              (' Programming the Django application ', 2, None, '___sec30'),
-              (' Custom validation ', 2, None, '___sec31'),
-              (' Customizing widgets ', 2, None, '___sec32'),
-              (' Exercises ', 1, None, '___sec33'),
-              (' Exercise 1: Add two numbers ',
+              (' Programming the Django application ', 2, None, '___sec35'),
+              (' Custom validation ', 2, None, '___sec36'),
+              (' Customizing widgets ', 2, None, '___sec37'),
+              (' Exercises ', 1, None, '___sec38'),
+              (' Exercise 2: Add two numbers ',
                2,
                'wf:exer:add2',
                'wf:exer:add2'),
-              (' Exercise 2: Extend the `vib3_flask` app ',
+              (' Exercise 3: Extend the `vib3_flask` app ',
                2,
                'wf:exer:vib3:demo',
                'wf:exer:vib3:demo'),
-              (' Exercise 3: Equip the `vib3_flask` app with more data types ',
+              (' Exercise 4: Equip the `vib3_flask` app with more data types ',
                2,
                'wf:exer:vib3:lists',
                'wf:exer:vib3:lists'),
-              (' Exercise 4: Auto-generate code from function signature ',
+              (' Exercise 5: Auto-generate code from function signature ',
                2,
                None,
-               '___sec37'),
-              (' Resources ', 1, None, '___sec38'),
-              (' Flask resources ', 2, None, '___sec39'),
-              (' Django resources ', 2, None, '___sec40'),
-              (' Remaining ', 1, None, '___sec41')]}
+               '___sec42'),
+              (' Resources ', 1, None, '___sec43'),
+              (' Flask resources ', 2, None, '___sec44'),
+              (' Django resources ', 2, None, '___sec45'),
+              (' Remaining ', 1, None, '___sec46')]}
 end of tocinfo -->
 
 <body>
@@ -196,193 +202,193 @@ MathJax.Hub.Config({
 <p>
 <!-- !split -->
 
-<h2>Custom validation <a name="wf:vib1:flask:validation"></a></h2>
-
-The <code>FloatField</code> objects can check that the input is compatible with
-a number, but what if we want to control that \( A>0 \), \( b>0 \), and
-\( T \) is not greater than 30 periods (otherwise the plot gets cluttered)?
-We can write functions for checking appropriate conditions and
-supply the function to the list of validator functions in the call to
-the <code>FloatField</code> constructor or other field constructors. The extra
-code is a part of the <code>model.py</code> and the presented extensions appear
-in the directory <a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/vib2" target="_self"><tt>vib2</tt></a>.
+<h2>Bootstrap HTML style  <a name="___sec20"></a></h2>
 
 <p>
-The simplest approach to validation is to use existing functionality
-in the web framework. Checking that \( A>0 \) can be done by
-the <code>NumberRange</code> validator which checks that the value is inside
-a prescribed interval:
+The <a href="http://getbootstrap.com/" target="_self">Bootstrap</a> framework for creating web pages
+has been very popular in recent years, both because of the design and
+the automatic support for responsive pages on all sorts of devices.
+Bootstrap can be used in combination with Flask. The template file
+<code>view_bootstrap.html</code> is identical to the former <code>view_table.html</code>,
+except that we load the Bootstrap CSS file and include in comments
+how to add the typical navigation bar found in many Bootstrap-based
+web pages. The template looks like
+
+<p>
+
+<!-- code=html (!bc htmlpro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #BC7A00">&lt;!DOCTYPE html&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;html</span> <span style="color: #7D9029">lang=</span><span style="color: #BA2121">&quot;en&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+
+    <span style="color: #008000; font-weight: bold">&lt;link</span> <span style="color: #7D9029">href=</span><span style="color: #BA2121">&quot;http://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css&quot;</span> <span style="color: #7D9029">rel=</span><span style="color: #BA2121">&quot;stylesheet&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+
+<span style="color: #008000; font-weight: bold">&lt;script </span><span style="color: #7D9029">type=</span><span style="color: #BA2121">&quot;text/x-mathjax-config&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+MathJax.Hub.Config({
+  TeX<span style="color: #666666">:</span> {
+     equationNumbers<span style="color: #666666">:</span> {  autoNumber<span style="color: #666666">:</span> <span style="color: #BA2121">&quot;AMS&quot;</span>  },
+     extensions<span style="color: #666666">:</span> [<span style="color: #BA2121">&quot;AMSmath.js&quot;</span>, <span style="color: #BA2121">&quot;AMSsymbols.js&quot;</span>, <span style="color: #BA2121">&quot;autobold.js&quot;</span>]
+  }
+});
+<span style="color: #008000; font-weight: bold">&lt;/script&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;script </span><span style="color: #7D9029">type=</span><span style="color: #BA2121">&quot;text/javascript&quot;</span>
+ <span style="color: #7D9029">src=</span><span style="color: #BA2121">&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/script&gt;</span>
+<span style="color: #408080; font-style: italic">&lt;!--</span>
+<span style="color: #408080; font-style: italic">&lt;nav class=&quot;navbar navbar-default&quot; role=&quot;navigation&quot;&gt;</span>
+<span style="color: #408080; font-style: italic">&lt;div class=&quot;collapse navbar-collapse&quot; id=&quot;bs-example-navbar-collapse-1&quot;&gt;</span>
+<span style="color: #408080; font-style: italic">    &lt;ul class=&quot;nav navbar-nav&quot;&gt;</span>
+<span style="color: #408080; font-style: italic">       {% for f in some_sequence %}</span>
+<span style="color: #408080; font-style: italic">       &lt;li&gt;&lt;a href=&quot;/{{f}}&quot;&gt;{{f}}&lt;/a&gt;&lt;/li&gt;</span>
+<span style="color: #408080; font-style: italic">       {% endfor %}</span>
+<span style="color: #408080; font-style: italic">       &lt;/ul&gt;</span>
+<span style="color: #408080; font-style: italic">&lt;/div&gt;</span>
+<span style="color: #408080; font-style: italic">&lt;/nav&gt;</span>
+<span style="color: #408080; font-style: italic">--&gt;</span>
+
+This web page visualizes the function \(
+u(t) = Ae^{-bt}\sin (w t), \hbox{ for } t\in [0,T]
+\).
+
+<span style="color: #408080; font-style: italic">&lt;!-- table with forms to the left and plot to the right --&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;form</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;navbar-form navbar-top&quot;</span> <span style="color: #7D9029">method=</span><span style="color: #BA2121">&quot;post&quot;</span> <span style="color: #7D9029">action=</span><span style="color: #BA2121">&quot;&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;table</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;table table-hover&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;tr&gt;&lt;td&gt;</span>
+  <span style="color: #008000; font-weight: bold">&lt;div</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;form-group&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+  {% for field in form %}
+    <span style="color: #008000; font-weight: bold">&lt;div</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;input-group&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+      <span style="color: #008000; font-weight: bold">&lt;span</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;input-group-addon&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span> \( {{ field.name }} \) <span style="color: #008000; font-weight: bold">&lt;/span&gt;</span>
+      {{field(class_=&quot;form-control&quot;)}}
+    <span style="color: #008000; font-weight: bold">&lt;/div&gt;</span>
+    {% if field.errors %}
+      <span style="color: #008000; font-weight: bold">&lt;table</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;table table-hover&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+      {% for error in field.errors %}
+        <span style="color: #008000; font-weight: bold">&lt;tr&gt;&lt;td</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;danger&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>{{ error }}<span style="color: #008000; font-weight: bold">&lt;/td&gt;&lt;/tr&gt;</span>
+      {% endfor %}
+      <span style="color: #008000; font-weight: bold">&lt;/table&gt;</span>
+    {% endif %}
+  {% endfor %}
+<span style="color: #008000; font-weight: bold">&lt;/td&gt;</span>
+
+<span style="color: #408080; font-style: italic">&lt;!-- 2nd column contains the plot --&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;td&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;p&gt;</span>
+{% if result != None %}
+<span style="color: #008000; font-weight: bold">&lt;img</span> <span style="color: #7D9029">src=</span><span style="color: #BA2121">&quot;{{ result }}&quot;</span> <span style="color: #7D9029">width=</span><span style="color: #BA2121">&quot;500&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+{% endif %}
+<span style="color: #008000; font-weight: bold">&lt;/p&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/td&gt;&lt;/tr&gt;</span>
+<span style="color: #408080; font-style: italic">&lt;!-- next row contains the Compute button --&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;tr&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;td&gt;&lt;p&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;input</span> <span style="color: #7D9029">type=</span><span style="color: #BA2121">&quot;submit&quot;</span> <span style="color: #7D9029">value=</span><span style="color: #BA2121">&quot;Compute&quot;</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;btn btn-default&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/td&gt;&lt;/tr&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/table&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/form&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/div&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/html&gt;</span>
+</pre></div>
+<p>
+The input fields and fonts now get the typical Bootstrap look and feel.
+
+<p>
+While <code>view_bootstrap.html</code> makes use of plain Bootstrap HTML code, there is
+also a higher-level framework, called <a href="http://pythonhosted.org/Flask-Bootstrap/" target="_self">Flask-Bootstrap</a> that combines Flask and Bootstrap. Installation of
+this extension is done by <code>sudo pip install flask-bootstrap</code>.
+
+<p>
+After <code>app = Flask(__name__)</code> we need to do
 
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">wtforms</span> <span style="color: #008000; font-weight: bold">import</span> Form, FloatField, validators
-
-<span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">InputForm</span>(Form):
-    A <span style="color: #666666">=</span> FloatField(
-        label<span style="color: #666666">=</span><span style="color: #BA2121">&#39;amplitude (m)&#39;</span>, default<span style="color: #666666">=1.0</span>,
-        validators<span style="color: #666666">=</span>[validators<span style="color: #666666">.</span>NumberRange(<span style="color: #666666">0</span>, <span style="color: #666666">1E+20</span>)])
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">flask_bootstrap</span> <span style="color: #008000; font-weight: bold">import</span> Bootstrap
+Bootstrap(app)
 </pre></div>
 <p>
-We can also easily provide our own more tailored validators.
-As an example, let us explain how we can check that \( T \) is less than 30 periods.
-One period is \( 2\pi /w \) so we need to check if \( T> 30\cdot 2\pi/w \)
-and raise an exception in that case.
-A validation function takes two arguments: the whole <code>form</code> and the
-specific <code>field</code> to test:
+The template employs new keywords <code>extends</code> and <code>block</code>:
 
 <p>
 
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">check_T</span>(form, field):
-    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Form validation: failure if T &gt; 30 periods.&quot;&quot;&quot;</span>
-    w <span style="color: #666666">=</span> form<span style="color: #666666">.</span>w<span style="color: #666666">.</span>data
-    T <span style="color: #666666">=</span> field<span style="color: #666666">.</span>data
-    period <span style="color: #666666">=</span> <span style="color: #666666">2*</span>pi<span style="color: #666666">/</span>w
-    <span style="color: #008000; font-weight: bold">if</span> T <span style="color: #666666">&gt;</span> <span style="color: #666666">30*</span>period:
-        num_periods <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #008000">round</span>(T<span style="color: #666666">/</span>period))
-        <span style="color: #008000; font-weight: bold">raise</span> validators<span style="color: #666666">.</span>ValidationError(
-            <span style="color: #BA2121">&#39;Cannot plot as much as </span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121"> periods! T&lt;</span><span style="color: #BB6688; font-weight: bold">%.2f</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span>
-            (num_periods, <span style="color: #666666">30*</span>period))
+<!-- code=html (!bc htmlpro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">{% extends &quot;bootstrap/base.html&quot; %}
+
+{% block styles %}
+{{super()}}
+<span style="color: #008000; font-weight: bold">&lt;style&gt;</span>
+    <span style="color: #0000FF; font-weight: bold">.appsize</span> { <span style="color: #008000; font-weight: bold">width</span><span style="color: #666666">:</span> <span style="color: #666666">500px</span> }
+<span style="color: #008000; font-weight: bold">&lt;/style&gt;</span>
+
+<span style="color: #008000; font-weight: bold">&lt;script </span><span style="color: #7D9029">type=</span><span style="color: #BA2121">&quot;text/x-mathjax-config&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+MathJax.Hub.Config({
+  TeX<span style="color: #666666">:</span> {
+     equationNumbers<span style="color: #666666">:</span> {  autoNumber<span style="color: #666666">:</span> <span style="color: #BA2121">&quot;AMS&quot;</span>  },
+     extensions<span style="color: #666666">:</span> [<span style="color: #BA2121">&quot;AMSmath.js&quot;</span>, <span style="color: #BA2121">&quot;AMSsymbols.js&quot;</span>, <span style="color: #BA2121">&quot;autobold.js&quot;</span>]
+  }
+});
+<span style="color: #008000; font-weight: bold">&lt;/script&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;script </span><span style="color: #7D9029">type=</span><span style="color: #BA2121">&quot;text/javascript&quot;</span>
+ <span style="color: #7D9029">src=</span><span style="color: #BA2121">&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/script&gt;</span>
+{% endblock %}
+
+<span style="color: #408080; font-style: italic">&lt;!--</span>
+<span style="color: #408080; font-style: italic">{% block navbar %}</span>
+<span style="color: #408080; font-style: italic">&lt;nav class=&quot;navbar navbar-default&quot; role=&quot;navigation&quot;&gt;</span>
+<span style="color: #408080; font-style: italic">&lt;div class=&quot;collapse navbar-collapse&quot; id=&quot;bs-example-navbar-collapse-1&quot;&gt;</span>
+<span style="color: #408080; font-style: italic">    &lt;ul class=&quot;nav navbar-nav&quot;&gt;</span>
+<span style="color: #408080; font-style: italic">       {% for f in some_sequence %}</span>
+<span style="color: #408080; font-style: italic">       &lt;li&gt;&lt;a href=&quot;/{{f}}&quot;&gt;{{f}}&lt;/a&gt;&lt;/li&gt;</span>
+<span style="color: #408080; font-style: italic">       {% endfor %}</span>
+<span style="color: #408080; font-style: italic">       &lt;/ul&gt;</span>
+<span style="color: #408080; font-style: italic">&lt;/div&gt;</span>
+<span style="color: #408080; font-style: italic">&lt;/nav&gt;</span>
+<span style="color: #408080; font-style: italic">{% endblock %}</span>
+<span style="color: #408080; font-style: italic">--&gt;</span>
+
+This web page visualizes the function \(
+u(t) = Ae^{-bt}\sin (w t), \hbox{ for } t\in [0,T]
+\).
+
+{% block content %}
+<span style="color: #408080; font-style: italic">&lt;!-- table with forms to the left and plot to the right --&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;form</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;navbar-form navbar-top&quot;</span> <span style="color: #7D9029">method=</span><span style="color: #BA2121">&quot;post&quot;</span> <span style="color: #7D9029">action=</span><span style="color: #BA2121">&quot;&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;table</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;table table-hover&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;tr&gt;&lt;td&gt;</span>
+  <span style="color: #008000; font-weight: bold">&lt;div</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;form-group&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+  {% for field in form %}
+    <span style="color: #008000; font-weight: bold">&lt;div</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;input-group&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+      <span style="color: #008000; font-weight: bold">&lt;span</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;input-group-addon&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span> \( {{ field.name }} \) <span style="color: #008000; font-weight: bold">&lt;/span&gt;</span>
+      {{field(class_=&quot;form-control&quot;)}}
+    <span style="color: #008000; font-weight: bold">&lt;/div&gt;</span>
+    {% if field.errors %}
+      <span style="color: #008000; font-weight: bold">&lt;table</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;table table-hover&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+      {% for error in field.errors %}
+        <span style="color: #008000; font-weight: bold">&lt;tr&gt;&lt;td</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;danger&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>{{ error }}<span style="color: #008000; font-weight: bold">&lt;/td&gt;&lt;/tr&gt;</span>
+      {% endfor %}
+      <span style="color: #008000; font-weight: bold">&lt;/table&gt;</span>
+    {% endif %}
+  {% endfor %}
+<span style="color: #008000; font-weight: bold">&lt;/td&gt;</span>
+
+<span style="color: #408080; font-style: italic">&lt;!-- 2nd column contains the plot --&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;td&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;p&gt;</span>
+{% if result != None %}
+<span style="color: #008000; font-weight: bold">&lt;img</span> <span style="color: #7D9029">src=</span><span style="color: #BA2121">&quot;{{ result }}&quot;</span> <span style="color: #7D9029">width=</span><span style="color: #BA2121">&quot;500&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+{% endif %}
+<span style="color: #008000; font-weight: bold">&lt;/p&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/td&gt;&lt;/tr&gt;</span>
+<span style="color: #408080; font-style: italic">&lt;!-- next row contains the Compute button --&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;tr&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;td&gt;&lt;p&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;input</span> <span style="color: #7D9029">type=</span><span style="color: #BA2121">&quot;submit&quot;</span> <span style="color: #7D9029">value=</span><span style="color: #BA2121">&quot;Compute&quot;</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;btn btn-default&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/td&gt;&lt;/tr&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/table&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/form&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/div&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/html&gt;</span>
+{% endblock %}
 </pre></div>
-<p>
-The appropriate exception is of type <code>validators.ValidationError</code>.
-Observe that through <code>form</code> we have in fact access to all the input
-data so we can easily use the value of \( w \) when checking the validity
-of the value of \( T \). The <code>check_T</code> function is easy to
-add to the list of validator functions in the call to the <code>FloatField</code>
-constructor for <code>T</code>:
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">InputForm</span>(Form):
-    <span style="color: #666666">...</span>
-    T <span style="color: #666666">=</span> FloatField(
-        label<span style="color: #666666">=</span><span style="color: #BA2121">&#39;time interval&#39;</span>, default<span style="color: #666666">=6*</span>pi,
-        validators<span style="color: #666666">=</span>[validators<span style="color: #666666">.</span>InputRequired(), check_T])
-</pre></div>
-<p>
-The validator
-objects are tested one by one as they appear in the list, and if
-one fails, the others are not invoked.
-We therefore add <code>check_T</code> after the check of input such that we know we
-have a value for all data when we run the computations and test
-in <code>check_T</code>.
-
-<p>
-Although there is already a <code>NumberRange</code> validator for checking
-whether a value is inside an interval, we can write our own
-version with some improved functionality for open intervals where
-the maximum or minimum value can be infinite.
-The infinite value can on input be represented by <code>None</code>.
-A general such function may take the form
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">check_interval</span>(form, field, min_value<span style="color: #666666">=</span><span style="color: #008000">None</span>, max_value<span style="color: #666666">=</span><span style="color: #008000">None</span>):
-    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;For validation: failure if value is outside an interval.&quot;&quot;&quot;</span>
-    failure <span style="color: #666666">=</span> <span style="color: #008000">False</span>
-    <span style="color: #008000; font-weight: bold">if</span> min_value <span style="color: #AA22FF; font-weight: bold">is</span> <span style="color: #AA22FF; font-weight: bold">not</span> <span style="color: #008000">None</span>:
-        <span style="color: #008000; font-weight: bold">if</span> field<span style="color: #666666">.</span>data <span style="color: #666666">&lt;</span> min_value:
-            failure <span style="color: #666666">=</span> <span style="color: #008000">True</span>
-    <span style="color: #008000; font-weight: bold">if</span> max_value <span style="color: #AA22FF; font-weight: bold">is</span> <span style="color: #AA22FF; font-weight: bold">not</span> <span style="color: #008000">None</span>:
-        <span style="color: #008000; font-weight: bold">if</span> field<span style="color: #666666">.</span>data <span style="color: #666666">&gt;</span> max_value:
-            failure <span style="color: #666666">=</span> <span style="color: #008000">True</span>
-    <span style="color: #008000; font-weight: bold">if</span> failure:
-        <span style="color: #008000; font-weight: bold">raise</span> validators<span style="color: #666666">.</span>ValidationError(
-            <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">=</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> not in [</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">, </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">]&#39;</span> <span style="color: #666666">%</span>
-            (field<span style="color: #666666">.</span>name, field<span style="color: #666666">.</span>data,
-             <span style="color: #BA2121">&#39;-infty&#39;</span> <span style="color: #008000; font-weight: bold">if</span> min_value <span style="color: #AA22FF; font-weight: bold">is</span> <span style="color: #008000">None</span> <span style="color: #008000; font-weight: bold">else</span> <span style="color: #008000">str</span>(min_value),
-             <span style="color: #BA2121">&#39;infty&#39;</span>  <span style="color: #008000; font-weight: bold">if</span> max_value <span style="color: #AA22FF; font-weight: bold">is</span> <span style="color: #008000">None</span> <span style="color: #008000; font-weight: bold">else</span> <span style="color: #008000">str</span>(max_value)))
-</pre></div>
-<p>
-The problem is that <code>check_interval</code> takes four arguments, not only
-the <code>form</code> and <code>field</code> arguments that a validator function in the
-Flask framework can accept.
-The way out of this difficulty is to use a Python tool <code>functools.partial</code>
-which allows us to call a function with some of the arguments set beforehand.
-Here, we want to create a new function that calls <code>check_interval</code>
-with some prescribed values of <code>min_value</code> and <code>max_value</code>.
-This function looks like it does not have these arguments, only
-<code>form</code> and <code>field</code>. The following function produces this function, which we
-can use as a valid Flask validator function:
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">functools</span>
-
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">interval</span>(min_value<span style="color: #666666">=</span><span style="color: #008000">None</span>, max_value<span style="color: #666666">=</span><span style="color: #008000">None</span>):
-    <span style="color: #008000; font-weight: bold">return</span> functools<span style="color: #666666">.</span>partial(
-        check_interval, min_value<span style="color: #666666">=</span>min_value, max_value<span style="color: #666666">=</span>max_value)
-</pre></div>
-<p>
-We can now in any field constructor just add
-<code>interval(a, b)</code> as a validator function, here checking that \( b\in [0,\infty) \):
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">InputForm</span>(Form):
-    <span style="color: #666666">...</span>
-    b <span style="color: #666666">=</span> FloatField(
-        label<span style="color: #666666">=</span><span style="color: #BA2121">&#39;damping factor (kg/s)&#39;</span>, default<span style="color: #666666">=0</span>,
-        validators<span style="color: #666666">=</span>[validators<span style="color: #666666">.</span>InputRequired(), interval(<span style="color: #666666">0</span>,<span style="color: #008000">None</span>)])
-</pre></div>
-<p>
-Let us test our tailored error checking. Run <code>python controller.py</code>
-in the <code>vib2</code> directory and fill in \( -1.0 \) in the \( b \) field.
-Pressing <em>Compute</em> invokes our <code>interval(0,None)</code> function, which
-is nothing but a call <code>check_interval(field, form, 0, None)</code>.
-Inside this function,
-the test <code>if field.data < min_value</code> becomes true, <code>failure</code>
-is set, and the exception is raised. The message in the exception
-is available in the <code>field.errors</code> attribute so our template
-will write it out in red, see Figure <a href="#wf:vib2:flask:fig:error1">12</a>.
-The template used in <code>vib2</code> is basically the same as <code>view3.html</code>
-in <code>vib1</code>, i.e., it feaures LaTeX mathematics and checking of
-<code>field.errors</code>.
-
-<p>
-<center> <!-- figure -->
-<hr class="figure">
-<center><p class="caption">Figure 12:  Triggering of a user-defined error check. <a name="wf:vib2:flask:fig:error1"></a> </p></center>
-<p><img src="fig-web4sa/vib2_flask_error1.png" align="bottom" width=500></p>
-</center>
-
-<p>
-Finally, we mention a detail in the <code>controller.py</code> file in the <code>vib2</code>
-app: instead of sending <code>form.var.data</code> to the <code>compute</code> function we
-may automatically generate a set of local variables such that the
-application of data from the web page, here in the <code>compute</code> call, looks nicer:
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">index</span>():
-    form <span style="color: #666666">=</span> InputForm(request<span style="color: #666666">.</span>form)
-    <span style="color: #008000; font-weight: bold">if</span> request<span style="color: #666666">.</span>method <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;POST&#39;</span> <span style="color: #AA22FF; font-weight: bold">and</span> form<span style="color: #666666">.</span>validate():
-        <span style="color: #008000; font-weight: bold">for</span> field <span style="color: #AA22FF; font-weight: bold">in</span> form:
-            <span style="color: #408080; font-style: italic"># Make local variable (name field.name)</span>
-            <span style="color: #008000; font-weight: bold">exec</span>(<span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> = </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (field<span style="color: #666666">.</span>name, field<span style="color: #666666">.</span>data))
-        result <span style="color: #666666">=</span> compute(A, b, w, T)
-    <span style="color: #008000; font-weight: bold">else</span>:
-        result <span style="color: #666666">=</span> <span style="color: #008000">None</span>
-
-    <span style="color: #008000; font-weight: bold">return</span> render_template(<span style="color: #BA2121">&#39;view.html&#39;</span>, form<span style="color: #666666">=</span>form, result<span style="color: #666666">=</span>result)
-
-<span style="color: #008000; font-weight: bold">if</span> __name__ <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;__main__&#39;</span>:
-    app<span style="color: #666666">.</span>run(debug<span style="color: #666666">=</span><span style="color: #008000">True</span>)
-</pre></div>
-<p>
-The idea is just to run <code>exec</code> on a declaration of a local variable
-with name <code>field.name</code> for each field in the form. This trick is often
-neat if web variables are buried in objects (<code>form.T.data</code>) and you want these
-variables in your
-code to look like they do in mathematical writing (<code>T</code> for \( T \)).
-
 <p>
 <p>
 <!-- begin bottom navigation -->

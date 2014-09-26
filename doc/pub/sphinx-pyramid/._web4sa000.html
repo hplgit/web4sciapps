@@ -7,14 +7,14 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Using Web Frameworks for Scientific Web Applications &mdash; Using Web Frameworks for Scientific Web Applications</title>
+    <title>Using Web Frameworks for Scientific Applications &mdash; Using Web Frameworks for Scientific Applications</title>
     
     <link rel="stylesheet" href="_static/pyramid.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     '1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -25,9 +25,27 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="Using Web Frameworks for Scientific Web Applications" href="index.html" />
+
+        <script src="http://sagecell.sagemath.org/static/jquery.min.js"></script>
+        <script src="http://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+
+        <script>sagecell.makeSagecell({inputLocation: ".sage"});</script>
+
+        <style type="text/css">
+                .sagecell .CodeMirror-scroll {
+                        overflow-y: hidden;
+                        overflow-x: auto;
+                }
+                .sagecell .CodeMirror {
+                        height: auto;
+                }
+        </style>
+
+    
+    <link rel="top" title="Using Web Frameworks for Scientific Applications" href="index.html" />
     <link rel="next" title="The MVC pattern" href="._web4sa001.html" />
-    <link rel="prev" title="Using Web Frameworks for Scientific Web Applications" href="index.html" />
+    <link rel="prev" title="Using Web Frameworks for Scientific Applications" href="index.html" />
+
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <!--[if lte IE 6]>
@@ -47,9 +65,9 @@
           <a href="._web4sa001.html" title="The MVC pattern"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="index.html" title="Using Web Frameworks for Scientific Web Applications"
+          <a href="index.html" title="Using Web Frameworks for Scientific Applications"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">Using Web Frameworks for Scientific Web Applications</a> &raquo;</li> 
+        <li><a href="index.html">Using Web Frameworks for Scientific Applications</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -58,15 +76,15 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="using-web-frameworks-for-scientific-web-applications">
-<h1>Using Web Frameworks for Scientific Web Applications<a class="headerlink" href="#using-web-frameworks-for-scientific-web-applications" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="using-web-frameworks-for-scientific-applications">
+<h1>Using Web Frameworks for Scientific Applications<a class="headerlink" href="#using-web-frameworks-for-scientific-applications" title="Permalink to this headline">¶</a></h1>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Authors:</th><td class="field-body">Hans Petter Langtangen, Anders E. Johansen</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Date:</th><td class="field-body">Aug 30, 2014</td>
+<tr class="field-even field"><th class="field-name">Date:</th><td class="field-body">Sep 26, 2014</td>
 </tr>
 </tbody>
 </table>
@@ -103,14 +121,11 @@ and a list of <a class="reference external" href="http://www.youtube.com/playlis
 <blockquote>
 <div><a class="reference external" href="http://flask.pocoo.org/">official web site</a> and the <a class="reference external" href="http://wtforms.simplecodes.com/docs/0.6/index.html">WTForms Documentation</a>. There is, unfortunately, hardly any examples on how Django or Flask can be used to enable typical scientific applications for the web, and that is why we have developed some targeted examples on this topic.</div></blockquote>
 <p>A basic question is, of course, whether you should apply Flask or
-Django for your web project. Googling for &#8220;flask vs django&#8221; gives a
+Django for your web project. Googling for <em>flask vs django</em> gives a
 lot of diverging opinions. The authors&#8217; viewpoint is that Flask is
 much easier to get started with than Django. You can grow your
 application to a really big one with both frameworks, but some
-advanced features is easier on one framework than the other. For
-example, if you want users to log into your account and store their
-work in databases, we found this to be much more straightforward in
-Django.</p>
+advanced features is easier in one framework than in the other.</p>
 <p>The problem for a computational scientist who wants to enable
 mathematical calculations through the web is that most of
 the introductory examples on utilizing a particular
@@ -143,7 +158,7 @@ of this repository.</p>
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Using Web Frameworks for Scientific Web Applications</a><ul>
+<li><a class="reference internal" href="#">Using Web Frameworks for Scientific Applications</a><ul>
 <li><a class="reference internal" href="#web-frameworks">Web frameworks</a></li>
 </ul>
 </li>
@@ -151,7 +166,7 @@ of this repository.</p>
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="index.html"
-                        title="previous chapter">Using Web Frameworks for Scientific Web Applications</a></p>
+                        title="previous chapter">Using Web Frameworks for Scientific Applications</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="._web4sa001.html"
                         title="next chapter">The MVC pattern</a></p>
@@ -182,14 +197,14 @@ of this repository.</p>
           <a href="._web4sa001.html" title="The MVC pattern"
              >next</a> |</li>
         <li class="right" >
-          <a href="index.html" title="Using Web Frameworks for Scientific Web Applications"
+          <a href="index.html" title="Using Web Frameworks for Scientific Applications"
              >previous</a> |</li>
-        <li><a href="index.html">Using Web Frameworks for Scientific Web Applications</a> &raquo;</li> 
+        <li><a href="index.html">Using Web Frameworks for Scientific Applications</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
         &copy; Copyright 2014, H. P. Langtangen and A. E. Johansen.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.
     </div>
   </body>
 </html>

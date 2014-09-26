@@ -26,7 +26,7 @@ we realize that wrong input implies ``result = None`` and no computations
 and no plot! Fortunately, each field object gets an attribute ``error``
 with information on errors that occur on input. We can write out
 this information on the web page, as exemplified in the template
-``view1.html``:
+``view_errcheck.html``:
 
 .. code-block:: html
 
@@ -48,7 +48,7 @@ this information on the web page, as exemplified in the template
         <p><input type=submit value=Compute></form></p>
         <p>
         {% if result != None %}
-        <img src="{{ result }}" width=500>
+        <img src="{{ result }}" width="500">
         {% endif %}
         </p>
 
@@ -74,5 +74,6 @@ see Figure :ref:`wf:vib1:flask:fig:error1`.
 
 It is possible to use the additional HTML5 fields for input in a Flask
 context. Instead of explaining how here, we recommend to use the
-``parampool`` package to automatically generate Flask files.
+`Parampool <https://github.com/hplgit/parampool>`__
+package to automatically generate Flask files with HTML5 fields.
 

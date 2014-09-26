@@ -6,10 +6,10 @@ Automatically generated HTML file from DocOnce source
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
-<meta name="description" content="Using Web Frameworks for Scientific Web Applications">
+<meta name="description" content="Using Web Frameworks for Scientific Applications">
 <meta name="keywords" content="web frameworks,MVC pattern,Flask installation,Flask input forms,Flask HTML templates,Flask MVC pattern,Flask troubleshooting,Django installation,Django making a project,Django making an application,Django input forms,Django HTML templates,Flask input forms,Flask error checking,Flask CSS style sheets,Flask LaTeX mathematics,Flask input validation,inline PNG image in HTML,base64 encoding of PNG images,inline SVG figure in HTML,Flask login,Flask database,Flask bootstrap style,Django input forms,Django input validation">
 
-<title>Using Web Frameworks for Scientific Web Applications</title>
+<title>Using Web Frameworks for Scientific Applications</title>
 
 
 <style type="text/css">
@@ -61,6 +61,7 @@ hr.figure { border: 0; width: 80%; border-bottom: 1px solid #aaa}
 div { text-align: justify; text-justify: inter-word; }
 </style>
 
+
 </head>
 
 <!-- tocinfo
@@ -105,14 +106,19 @@ div { text-align: justify; text-justify: inter-word; }
                '___sec16'),
               (' Using style sheets ', 2, None, '___sec17'),
               (' Using LaTeX mathematics ', 2, None, '___sec18'),
-              (' Rearringing the elements in the HTML template ',
+              (' Rearranging the elements in the HTML template ',
                2,
                None,
                '___sec19'),
+              (' Bootstrap HTML style ', 2, None, '___sec20'),
               (' Custom validation ',
                2,
                'wf:vib1:flask:validation',
                'wf:vib1:flask:validation'),
+              (' Using Flask validators ', 3, None, '___sec22'),
+              (' Tailored validation ', 3, None, '___sec23'),
+              (' Tailored validation of intervals ', 3, None, '___sec24'),
+              (' Demo ', 3, None, '___sec25'),
               (' Autogenerating the code ',
                2,
                'wf:vib3:flask:autogen',
@@ -121,46 +127,46 @@ div { text-align: justify; text-justify: inter-word; }
                2,
                'wf:vib3:flask:nofiles',
                'wf:vib3:flask:nofiles'),
-              (' PNG plots ', 3, None, '___sec23'),
-              (' SVG plots ', 3, None, '___sec24'),
+              (' PNG plots ', 3, None, '___sec28'),
+              (' SVG plots ', 3, None, '___sec29'),
               (' User login and storage of computed results ',
                2,
                'wf:vib1:flask:login',
                'wf:vib1:flask:login'),
-              (' Using Bootstrap styles ',
+              (' Project 1: Using Bootstrap styles ',
                2,
                'wf:vib1:flask:bootstrap',
                'wf:vib1:flask:bootstrap'),
-              (' Further work ', 1, None, '___sec27'),
-              (' Resources ', 3, None, '___sec28'),
+              (' Further work ', 1, None, '___sec32'),
+              (' Resources ', 3, None, '___sec33'),
               (' Handling multiple input variables in Django ',
                1,
                'wf:vib:django',
                'wf:vib:django'),
-              (' Programming the Django application ', 2, None, '___sec30'),
-              (' Custom validation ', 2, None, '___sec31'),
-              (' Customizing widgets ', 2, None, '___sec32'),
-              (' Exercises ', 1, None, '___sec33'),
-              (' Exercise 1: Add two numbers ',
+              (' Programming the Django application ', 2, None, '___sec35'),
+              (' Custom validation ', 2, None, '___sec36'),
+              (' Customizing widgets ', 2, None, '___sec37'),
+              (' Exercises ', 1, None, '___sec38'),
+              (' Exercise 2: Add two numbers ',
                2,
                'wf:exer:add2',
                'wf:exer:add2'),
-              (' Exercise 2: Extend the `vib3_flask` app ',
+              (' Exercise 3: Extend the `vib3_flask` app ',
                2,
                'wf:exer:vib3:demo',
                'wf:exer:vib3:demo'),
-              (' Exercise 3: Equip the `vib3_flask` app with more data types ',
+              (' Exercise 4: Equip the `vib3_flask` app with more data types ',
                2,
                'wf:exer:vib3:lists',
                'wf:exer:vib3:lists'),
-              (' Exercise 4: Auto-generate code from function signature ',
+              (' Exercise 5: Auto-generate code from function signature ',
                2,
                None,
-               '___sec37'),
-              (' Resources ', 1, None, '___sec38'),
-              (' Flask resources ', 2, None, '___sec39'),
-              (' Django resources ', 2, None, '___sec40'),
-              (' Remaining ', 1, None, '___sec41')]}
+               '___sec42'),
+              (' Resources ', 1, None, '___sec43'),
+              (' Flask resources ', 2, None, '___sec44'),
+              (' Django resources ', 2, None, '___sec45'),
+              (' Remaining ', 1, None, '___sec46')]}
 end of tocinfo -->
 
 <body>
@@ -198,8 +204,9 @@ MathJax.Hub.Config({
 
 <h1>Making a Django application  <a name="___sec9"></a></h1>
 
+<p>
 We recommend to
-download and istall the latest official version from
+download and istall the latest official version of Django from
 <a href="http://www.djangoproject.com/download/" target="_self"><tt>http://www.djangoproject.com/download/</tt></a>. Pack out the tarfile, go
 to the directory, and run <code>setup.py</code>:
 
@@ -216,6 +223,7 @@ follow these instructions.
 
 <h2>Setting up a Django project  <a name="___sec10"></a></h2>
 
+<p>
 Django applies two concepts: <em>project</em> and <em>application</em> (or <em>app</em>).
 The app is the program we want to run through a web interface. The
 project is a Python package containing common settings and
@@ -268,7 +276,7 @@ The server is started by running
 Validating models...
 
 0 errors found
-March 23, 2013 - 01:09:24
+March 34, 201x - 01:09:24
 Django version 1.5, using settings &#39;django_project.settings&#39;
 Development server is running at http://127.0.0.1:8000/
 Quit the server with CONTROL-C.
@@ -280,7 +288,8 @@ Load this URL into your browser to see a welcome message from Django,
 meaning that the server is working.
 
 <p>
-Despite the fact that our web applications do not need a database, you
+Despite the fact that our introductory
+web applications do not need a database, you
 have to register a database with any Django project. To this end,
 open the <code>django_project/settings.py</code> file in a text editor,
 locate the <code>DATABASES</code> dictionary and type in the following
@@ -294,7 +303,7 @@ code:
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">relative2absolute_path</span>(relative_path):
     <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Return the absolute path correspodning to relative_path.&quot;&quot;&quot;</span>
     dir_of_this_file <span style="color: #666666">=</span> os<span style="color: #666666">.</span>path<span style="color: #666666">.</span>dirname(os<span style="color: #666666">.</span>path<span style="color: #666666">.</span>abspath(__file__))
-    <span style="color: #008000; font-weight: bold">return</span> os<span style="color: #666666">.</span>path<span style="color: #666666">.</span>join(dir_of_this_file, relative_path)
+    <span style="color: #008000; font-weight: bold">return</span> dir_of_this_file <span style="color: #666666">+</span> <span style="color: #BA2121">&#39;/&#39;</span> <span style="color: #666666">+</span> relative_path
 
 DATABASES <span style="color: #666666">=</span> {
    <span style="color: #BA2121">&#39;default&#39;</span> : {
@@ -314,6 +323,7 @@ always applies the forward slash between directories, also on Windows.
 
 <h2>Setting up a Django application  <a name="___sec11"></a></h2>
 
+<p>
 The next step is to create a Django app for our scientific hello
 world program. We can place the app in any directory, but here we
 utilize the following organization.
@@ -412,7 +422,7 @@ Make a subdirectory <code>templates</code> under <code>hw1</code>,
 <p>
 
 <!-- code=text (!bc sys) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">mkdir templates
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; mkdir templates
 </pre></div>
 <p>
 and add the absolute path of this directory to the <code>TEMPLATE_DIRS</code> tuple:

@@ -40,10 +40,10 @@ h1, h2, h3, h4, h5, h6 {
           <!-- navigation toc: --> <li><a href="._web4sa_flask000.html#___sec0" style="font-size: 80%;">Web frameworks</a></li>
      <!-- navigation toc: --> <li><a href="._web4sa_flask004.html#___sec4" style="font-size: 80%;">Making a Flask application</a></li>
      <!-- navigation toc: --> <li><a href="._web4sa_flask006.html#wf:vib:flask" style="font-size: 80%;">Handling multiple input variables in Flask</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec22" style="font-size: 80%;">Further work</a></li>
-     <!-- navigation toc: --> <li><a href="._web4sa_flask015.html#___sec24" style="font-size: 80%;">Exercises</a></li>
-     <!-- navigation toc: --> <li><a href="._web4sa_flask015.html#___sec29" style="font-size: 80%;">Flask resources</a></li>
-     <!-- navigation toc: --> <li><a href="._web4sa_flask015.html#___sec30" style="font-size: 80%;">Remaining</a></li>
+     <!-- navigation toc: --> <li><a href="._web4sa_flask015.html#___sec27" style="font-size: 80%;">Further work</a></li>
+     <!-- navigation toc: --> <li><a href="._web4sa_flask016.html#___sec29" style="font-size: 80%;">Exercises</a></li>
+     <!-- navigation toc: --> <li><a href="._web4sa_flask016.html#___sec34" style="font-size: 80%;">Flask resources</a></li>
+     <!-- navigation toc: --> <li><a href="._web4sa_flask016.html#___sec35" style="font-size: 80%;">Remaining</a></li>
 
     </ul>
    </div>
@@ -86,14 +86,19 @@ h1, h2, h3, h4, h5, h6 {
                '___sec11'),
               (' Using style sheets ', 2, None, '___sec12'),
               (' Using LaTeX mathematics ', 2, None, '___sec13'),
-              (' Rearringing the elements in the HTML template ',
+              (' Rearranging the elements in the HTML template ',
                2,
                None,
                '___sec14'),
+              (' Bootstrap HTML style ', 2, None, '___sec15'),
               (' Custom validation ',
                2,
                'wf:vib1:flask:validation',
                'wf:vib1:flask:validation'),
+              (' Using Flask validators ', 3, None, '___sec17'),
+              (' Tailored validation ', 3, None, '___sec18'),
+              (' Tailored validation of intervals ', 3, None, '___sec19'),
+              (' Demo ', 3, None, '___sec20'),
               (' Autogenerating the code ',
                2,
                'wf:vib3:flask:autogen',
@@ -102,37 +107,37 @@ h1, h2, h3, h4, h5, h6 {
                2,
                'wf:vib3:flask:nofiles',
                'wf:vib3:flask:nofiles'),
-              (' PNG plots ', 3, None, '___sec18'),
-              (' SVG plots ', 3, None, '___sec19'),
+              (' PNG plots ', 3, None, '___sec23'),
+              (' SVG plots ', 3, None, '___sec24'),
               (' User login and storage of computed results ',
                2,
                'wf:vib1:flask:login',
                'wf:vib1:flask:login'),
-              (' Using Bootstrap styles ',
+              (' Project 1: Using Bootstrap styles ',
                2,
                'wf:vib1:flask:bootstrap',
                'wf:vib1:flask:bootstrap'),
-              (' Further work ', 1, None, '___sec22'),
-              (' Resources ', 3, None, '___sec23'),
-              (' Exercises ', 1, None, '___sec24'),
-              (' Exercise 1: Add two numbers ',
+              (' Further work ', 1, None, '___sec27'),
+              (' Resources ', 3, None, '___sec28'),
+              (' Exercises ', 1, None, '___sec29'),
+              (' Exercise 2: Add two numbers ',
                2,
                'wf:exer:add2',
                'wf:exer:add2'),
-              (' Exercise 2: Extend the `vib3_flask` app ',
+              (' Exercise 3: Extend the `vib3_flask` app ',
                2,
                'wf:exer:vib3:demo',
                'wf:exer:vib3:demo'),
-              (' Exercise 3: Equip the `vib3_flask` app with more data types ',
+              (' Exercise 4: Equip the `vib3_flask` app with more data types ',
                2,
                'wf:exer:vib3:lists',
                'wf:exer:vib3:lists'),
-              (' Exercise 4: Auto-generate code from function signature ',
+              (' Exercise 5: Auto-generate code from function signature ',
                2,
                None,
-               '___sec28'),
-              (' Flask resources ', 1, None, '___sec29'),
-              (' Remaining ', 1, None, '___sec30')]}
+               '___sec33'),
+              (' Flask resources ', 1, None, '___sec34'),
+              (' Remaining ', 1, None, '___sec35')]}
 end of tocinfo -->
 
 
@@ -156,29 +161,68 @@ MathJax.Hub.Config({
 <a name="part0014"></a>
 <!-- !split -->
 
-<h1 id="___sec22">Further work <a name="___sec22"></a></h1>
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="wf:vib1:flask:bootstrap">Project 1: Using Bootstrap styles<a name="wf:vib1:flask:bootstrap"></a></h2>
+
+<p>
+The design and layout of the graphical web interface is completely
+governed by template file. So far, we have used only basic HTML
+elements in this file. With CSS it is possible to improve the
+design, but why not adopt popular frameworks that offer an attractive
+look-and-feel and much nice functionality such as responsive pages
+across a wide range of devices? The <a href="http://getbootstrap.com/" target="_self">Bootstrap</a>
+framework is free and open software that gives developers a kick start
+with respect to web page design and functionality.
+Many designs are built on Bootstrap: "Bootswatch": "http:bootswatch.com",
+<a href="http://startbootstrap.com/" target="_self">Start Bootstrap</a>,
+<a href="http://bootstrapzero.com/" target="_self">Bootstrap Zero</a>, and <a href="http://www.prepbootstrap.com/" target="_self">PrepBootstrap</a>.
+
+<p>
+It would obviously be advantageous to create Flask templates that
+can utilize the Bootstrap technology. A package <a href="http://pythonhosted.org/Flask-Bootstrap/" target="_self">Flask-Bootstrap</a>
+is already supporting this idea.
+
+<p>
+<div class="alert alert-block alert-success alert-text-normal"><b>Project.</b>
 
 <ul>
- <li> Uploading of files: Just one button for a data file where we
-   compute mean and variance, see the average function but drop
-   the array argument.</li>
- <li> Log in and users. use a simple "compute" function to generate
-   code, just a textarea (string) that can be stored (diary).
-   This requires databases. Can generate a vib example via parampool to
-   display some more realistic code.</li>
- <li> Drawing in HTML5</li>
-</ul>
-
-<h3 id="___sec23">Resources <a name="___sec23"></a></h3>
+  <li> Test out the Flask-Bootstrap package by redoing a selection
+    of the previous examples with the Bootstrap design and functionality.</li>
+  <li> How easy is it to take advantage of various Bootstrap designs,
+    say the Bootswatch themes, in a template based on Flask-Bootstrap?</li>
+  <li> Make a new GUI <button type="button" class="btn btn-primary btn-xs" rel="tooltip" data-placement="top" title="The compute function can be very simple, e.g., just returning some HTML typesetting of the arguments. This subexercise is for test purposes only."><a name="link_footnote_1"><a><a href="#def_footnote_1" style="color: white">1</a></button> with different types of input fields and see how
+    the design looks like in Bootstrap-based themes:</li>
 
 <ul>
- <li> <a href="https://docs.djangoproject.com/en/dev/topics/auth/default/#user-objects" target="_self">Django: make user</a></li>
- <li> <a href="https://docs.djangoproject.com/en/dev/topics/db/queries/" target="_self">Django: read and write database</a></li>
- <li> Flask: read and write database:
-   <a href="http://pythonhosted.org/Flask-SQLAlchemy/quickstart.html" target="_self"><tt>http://pythonhosted.org/Flask-SQLAlchemy/quickstart.html</tt></a>,
-   <a href="http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-iv-database" target="_self"><tt>http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-iv-database</tt></a>, and <a href="https://flask-login.readthedocs.org/en/latest/" target="_self">the Flask login extension</a></li>
+     <li> one selection from a list (radio buttons, drop-down list)</li>
+     <li> multiple selections from a list (check buttons)</li>
+     <li> one-line text field</li>
+     <li> multi-line text field</li>
+     <li> floating-point number</li>
+     <li> integer</li>
 </ul>
 
+</ul>
+</div>
+
+
+<p><a name="def_footnote_1"></a><a href="#link_footnote_1"><b>1:</b></a> The compute function can be very simple, e.g., just returning some HTML
+typesetting of the arguments. This subexercise is for test purposes
+only.
+
+<p>
+<!-- <a href="http://pythonhosted.org/Flask-Bootstrap/basic-usage.html" target="_self"><tt>http://pythonhosted.org/Flask-Bootstrap/basic-usage.html</tt></a>. -->
+<!-- Not yet written. Must be based on -->
+
+<p>
+<!-- <a href="http://pythonhosted.org/Flask-Bootstrap/basic-usage.html" target="_self"><tt>http://pythonhosted.org/Flask-Bootstrap/basic-usage.html</tt></a> -->
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
 <p>
 <!-- navigation buttons at the bottom of the page -->
 <ul class="pager">

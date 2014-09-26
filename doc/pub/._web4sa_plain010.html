@@ -6,10 +6,10 @@ Automatically generated HTML file from DocOnce source
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
-<meta name="description" content="Using Web Frameworks for Scientific Web Applications">
+<meta name="description" content="Using Web Frameworks for Scientific Applications">
 <meta name="keywords" content="web frameworks,MVC pattern,Flask installation,Flask input forms,Flask HTML templates,Flask MVC pattern,Flask troubleshooting,Django installation,Django making a project,Django making an application,Django input forms,Django HTML templates,Flask input forms,Flask error checking,Flask CSS style sheets,Flask LaTeX mathematics,Flask input validation,inline PNG image in HTML,base64 encoding of PNG images,inline SVG figure in HTML,Flask login,Flask database,Flask bootstrap style,Django input forms,Django input validation">
 
-<title>Using Web Frameworks for Scientific Web Applications</title>
+<title>Using Web Frameworks for Scientific Applications</title>
 
 
 <style type="text/css">
@@ -61,6 +61,7 @@ hr.figure { border: 0; width: 80%; border-bottom: 1px solid #aaa}
 div { text-align: justify; text-justify: inter-word; }
 </style>
 
+
 </head>
 
 <!-- tocinfo
@@ -105,14 +106,19 @@ div { text-align: justify; text-justify: inter-word; }
                '___sec16'),
               (' Using style sheets ', 2, None, '___sec17'),
               (' Using LaTeX mathematics ', 2, None, '___sec18'),
-              (' Rearringing the elements in the HTML template ',
+              (' Rearranging the elements in the HTML template ',
                2,
                None,
                '___sec19'),
+              (' Bootstrap HTML style ', 2, None, '___sec20'),
               (' Custom validation ',
                2,
                'wf:vib1:flask:validation',
                'wf:vib1:flask:validation'),
+              (' Using Flask validators ', 3, None, '___sec22'),
+              (' Tailored validation ', 3, None, '___sec23'),
+              (' Tailored validation of intervals ', 3, None, '___sec24'),
+              (' Demo ', 3, None, '___sec25'),
               (' Autogenerating the code ',
                2,
                'wf:vib3:flask:autogen',
@@ -121,46 +127,46 @@ div { text-align: justify; text-justify: inter-word; }
                2,
                'wf:vib3:flask:nofiles',
                'wf:vib3:flask:nofiles'),
-              (' PNG plots ', 3, None, '___sec23'),
-              (' SVG plots ', 3, None, '___sec24'),
+              (' PNG plots ', 3, None, '___sec28'),
+              (' SVG plots ', 3, None, '___sec29'),
               (' User login and storage of computed results ',
                2,
                'wf:vib1:flask:login',
                'wf:vib1:flask:login'),
-              (' Using Bootstrap styles ',
+              (' Project 1: Using Bootstrap styles ',
                2,
                'wf:vib1:flask:bootstrap',
                'wf:vib1:flask:bootstrap'),
-              (' Further work ', 1, None, '___sec27'),
-              (' Resources ', 3, None, '___sec28'),
+              (' Further work ', 1, None, '___sec32'),
+              (' Resources ', 3, None, '___sec33'),
               (' Handling multiple input variables in Django ',
                1,
                'wf:vib:django',
                'wf:vib:django'),
-              (' Programming the Django application ', 2, None, '___sec30'),
-              (' Custom validation ', 2, None, '___sec31'),
-              (' Customizing widgets ', 2, None, '___sec32'),
-              (' Exercises ', 1, None, '___sec33'),
-              (' Exercise 1: Add two numbers ',
+              (' Programming the Django application ', 2, None, '___sec35'),
+              (' Custom validation ', 2, None, '___sec36'),
+              (' Customizing widgets ', 2, None, '___sec37'),
+              (' Exercises ', 1, None, '___sec38'),
+              (' Exercise 2: Add two numbers ',
                2,
                'wf:exer:add2',
                'wf:exer:add2'),
-              (' Exercise 2: Extend the `vib3_flask` app ',
+              (' Exercise 3: Extend the `vib3_flask` app ',
                2,
                'wf:exer:vib3:demo',
                'wf:exer:vib3:demo'),
-              (' Exercise 3: Equip the `vib3_flask` app with more data types ',
+              (' Exercise 4: Equip the `vib3_flask` app with more data types ',
                2,
                'wf:exer:vib3:lists',
                'wf:exer:vib3:lists'),
-              (' Exercise 4: Auto-generate code from function signature ',
+              (' Exercise 5: Auto-generate code from function signature ',
                2,
                None,
-               '___sec37'),
-              (' Resources ', 1, None, '___sec38'),
-              (' Flask resources ', 2, None, '___sec39'),
-              (' Django resources ', 2, None, '___sec40'),
-              (' Remaining ', 1, None, '___sec41')]}
+               '___sec42'),
+              (' Resources ', 1, None, '___sec43'),
+              (' Flask resources ', 2, None, '___sec44'),
+              (' Django resources ', 2, None, '___sec45'),
+              (' Remaining ', 1, None, '___sec46')]}
 end of tocinfo -->
 
 <body>
@@ -198,13 +204,15 @@ MathJax.Hub.Config({
 
 <h2>Using style sheets  <a name="___sec17"></a></h2>
 
+<p>
 Web developers make heavy use of CSS style sheets to control the look
 and feel of web pages. Templates can utilize style sheets as any other
 standard HTML code. Here is a very simple example where we introduce
 a class <code>name</code> for the HTML table's column with the field name and set the
 foreground color of the text in this column to blue.
 The style sheet is called <code>basic.css</code> and <em>must</em> reside in the
-<code>static</code> subdirectory of the Flask application directory:
+<code>static</code> subdirectory of the Flask application directory. The content
+of <code>basic.css</code> is just the line
 
 <p>
 
@@ -212,10 +220,10 @@ The style sheet is called <code>basic.css</code> and <em>must</em> reside in the
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">td.name { color: blue; }
 </pre></div>
 <p>
-The <code>view2.html</code> file using this style sheet features a <code>link</code> tag
+The <code>view_css.html</code> file using this style sheet features a <code>link</code> tag
 to the style sheet in the HTML header, and the column containing
 the field name has
-the HTML tag <code><td class="name"></code> to trigger the specification in
+the HTML tag <code>&lt;td class=&quot;name&quot;&gt;</code> to trigger the specification in
 the style sheet:
 
 <p>
@@ -236,11 +244,12 @@ the style sheet:
     <span style="color: #008000; font-weight: bold">&lt;td&gt;</span>{{ field.label }}<span style="color: #008000; font-weight: bold">&lt;/td&gt;</span>
 </pre></div>
 <p>
-Just run <code>python controller.py view2</code> to see that the names
+Just run <code>python controller.py view_css</code> to see that the names
 of the variables to set in the web page are blue.
 
 <h2>Using LaTeX mathematics  <a name="___sec18"></a></h2>
 
+<p>
 Scientific applications frequently have many input data that are
 defined through mathematics and where the typesetting on the
 web page should be as close as possible to the typesetting where
@@ -248,7 +257,7 @@ the mathematics is documented. In the present example we would like
 to typeset \( A \), \( b \), \( w \), and \( T \) with italic font as done
 in LaTeX. Fortunately, native LaTeX typesetting is available in
 HTML through the tool <a href="http://www.mathjax.org/" target="_self">MathJax</a>.
-Our template <code>view3.html</code> enables MathJax. Formulas are written
+Our template <code>view_tex.html</code> enables MathJax. Formulas are written
 with standard LaTeX inside <code>\(</code> and <code>\)</code>, while equations are surrounded
 by <code>$$</code>. Here we use formulas only:
 
@@ -289,8 +298,9 @@ LaTeX rendering looks like in the browser.
 <p><img src="fig-web4sa/vib1_flask_latex.png" align="bottom" width=650></p>
 </center>
 
-<h2>Rearringing the elements in the HTML template  <a name="___sec19"></a></h2>
+<h2>Rearranging the elements in the HTML template  <a name="___sec19"></a></h2>
 
+<p>
 Now we want to place the plot to the right of the input forms in
 the web page, see Figure <a href="#wf:vib1:flask:fig:sidebyside">11</a>. This can
 be accomplished by having an outer table with two rows. The first
@@ -306,7 +316,7 @@ the plot in the second column, while the second row features the
 </center>
 
 <p>
-The enabling template file is <code>view4.html</code>:
+The enabling template file is <code>view_table.html</code>:
 
 <p>
 
@@ -345,17 +355,19 @@ u(t) = Ae^{-bt}\sin (w t), \hbox{ for } t\in [0,T]
   {% endfor %}
 <span style="color: #008000; font-weight: bold">&lt;/table&gt;</span>
 <span style="color: #008000; font-weight: bold">&lt;/td&gt;</span>
+
 <span style="color: #008000; font-weight: bold">&lt;td&gt;</span>
 <span style="color: #008000; font-weight: bold">&lt;p&gt;</span>
 {% if result != None %}
-<span style="color: #008000; font-weight: bold">&lt;img</span> <span style="color: #7D9029">src=</span><span style="color: #BA2121">&quot;{{ result }}&quot;</span> <span style="color: #7D9029">width=</span><span style="color: #BA2121">500</span><span style="color: #008000; font-weight: bold">&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;img</span> <span style="color: #7D9029">src=</span><span style="color: #BA2121">&quot;{{ result }}&quot;</span> <span style="color: #7D9029">width=</span><span style="color: #BA2121">&quot;500&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
 {% endif %}
 <span style="color: #008000; font-weight: bold">&lt;/p&gt;</span>
 <span style="color: #008000; font-weight: bold">&lt;/td&gt;&lt;/tr&gt;</span>
 <span style="color: #008000; font-weight: bold">&lt;tr&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;td&gt;&lt;p&gt;&lt;input</span> <span style="color: #7D9029">type=</span><span style="color: #BA2121">submit</span> <span style="color: #7D9029">value=</span><span style="color: #BA2121">Compute</span><span style="color: #008000; font-weight: bold">&gt;&lt;/form&gt;&lt;/p&gt;&lt;/td&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;td&gt;&lt;p&gt;&lt;input</span> <span style="color: #7D9029">type=</span><span style="color: #BA2121">submit</span> <span style="color: #7D9029">value=</span><span style="color: #BA2121">Compute</span><span style="color: #008000; font-weight: bold">&gt;&lt;/p&gt;&lt;/td&gt;</span>
 <span style="color: #008000; font-weight: bold">&lt;/tr&gt;</span>
 <span style="color: #008000; font-weight: bold">&lt;/table&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/form&gt;</span>
 </pre></div>
 <p>
 <p>

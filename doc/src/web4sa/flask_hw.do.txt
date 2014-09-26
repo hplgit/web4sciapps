@@ -13,7 +13,7 @@ performed by
 Terminal> sudo pip install Flask
 Terminal> sudo pip install WTForms
 !ec
-You can add `--upgrade` to upgrade a previous installation.
+You must add `--upgrade` to upgrade a previous installation (`pip install --upgrade Flask`).
 
 ===== Programming the Flask application =====
 
@@ -57,17 +57,20 @@ in detail below.
 __Dissection.__
 The web application is the `app` object of class `Flask`, and initialized
 as shown. The model is a special Flask class derived from `Form`
-where the data are listed as static class attributes and initialized
-by various form field objects from the `wtforms` package.
-These form fields correspond to HTML forms in the input page.
+where the input variable in the app is listed as a
+static class attribute and initialized
+by a special form field object from the `wtforms` package.
+Such form field objects correspond to HTML forms in the input page.
 For the `r` variable we apply `FloatField` since it is a floating-point
 variable. A default validator, here checking that the user supplies
-a real number, is automatically included.
+a real number, is automatically included, but we add another validator,
+`InputRequired`, to force the user to provide input before clicking on
+the *equals* button.
 
 The view part of this Python code consists of
 a URL and a corresponding function to call when the URL is invoked.
-The function name is here chosen to be `index` (corresponding to the standard
-`index.html` page that is the main page of a URL). The
+The function name is here chosen to be `index` (inspired by the standard
+`index.html` page that is the main page of a web app). The
 decorator `@app.route('/hw1', ...)` maps the URL
 `http://127.0.0.1:5000/hw1` to a call to `index`.
 The `methods` argument must be as shown to allow the user to communicate
@@ -136,7 +139,7 @@ web application, which is a kind of calculator. Figure ref{wf:hw2:flask:fig:resu
 FIGURE: [fig-web4sa/hw2_flask_output, width=600] The modified result page. label{wf:hw2:flask:fig:result}
 
 To let the user stay within the same page, we create a new directory
-"`hw2`": "${github_path}/${app_path}".
+"`hw2`": "${github_path}/${app_path}"
 for this modified Flask app and copy the files from the previous
 `hw1` directory.  The idea now is to make use of just one
 template, in `templates/view.html`:
@@ -146,6 +149,7 @@ template, in `templates/view.html`:
 The form is identical to what we used in `view_input.html` in
 the `hw1` directory, and the only
 new thing is the output of `s` below the form.
+
 The template language supports some programming with Python objects
 inside `{%` and `%}` tags.
 Specifically in this file, we can test on the value of `s`:
@@ -205,11 +209,10 @@ directory
 "`hw3_flask`": "${github_path}/${app_path}"
 The contents
 in the files reflect the splitting introduced in the original
-scienticic hello world program in Section ref{wf:hw:mvc}.
+scientific hello world program in Section ref{wf:hw:mvc}.
 The `model.py` file now consists of the input form class:
 
 @@@CODE ${app_path}/model.py
-
 The file `templates/view.html` is as before, while `controller.py` contains
 
 @@@CODE ${app_path}/controller.py

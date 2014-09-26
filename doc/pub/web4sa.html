@@ -6,10 +6,10 @@ Automatically generated HTML file from DocOnce source
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
-<meta name="description" content="Using Web Frameworks for Scientific Web Applications">
+<meta name="description" content="Using Web Frameworks for Scientific Applications">
 <meta name="keywords" content="web frameworks,MVC pattern,Flask installation,Flask input forms,Flask HTML templates,Flask MVC pattern,Flask troubleshooting,Django installation,Django making a project,Django making an application,Django input forms,Django HTML templates,Flask input forms,Flask error checking,Flask CSS style sheets,Flask LaTeX mathematics,Flask input validation,inline PNG image in HTML,base64 encoding of PNG images,inline SVG figure in HTML,Flask login,Flask database,Flask bootstrap style,Django input forms,Django input validation">
 
-<title>Using Web Frameworks for Scientific Web Applications</title>
+<title>Using Web Frameworks for Scientific Applications</title>
 
 
 <style type="text/css">
@@ -61,6 +61,7 @@ hr.figure { border: 0; width: 80%; border-bottom: 1px solid #aaa}
 div { text-align: justify; text-justify: inter-word; }
 </style>
 
+
 </head>
 
 <!-- tocinfo
@@ -105,14 +106,19 @@ div { text-align: justify; text-justify: inter-word; }
                '___sec16'),
               (' Using style sheets ', 2, None, '___sec17'),
               (' Using LaTeX mathematics ', 2, None, '___sec18'),
-              (' Rearringing the elements in the HTML template ',
+              (' Rearranging the elements in the HTML template ',
                2,
                None,
                '___sec19'),
+              (' Bootstrap HTML style ', 2, None, '___sec20'),
               (' Custom validation ',
                2,
                'wf:vib1:flask:validation',
                'wf:vib1:flask:validation'),
+              (' Using Flask validators ', 3, None, '___sec22'),
+              (' Tailored validation ', 3, None, '___sec23'),
+              (' Tailored validation of intervals ', 3, None, '___sec24'),
+              (' Demo ', 3, None, '___sec25'),
               (' Autogenerating the code ',
                2,
                'wf:vib3:flask:autogen',
@@ -121,46 +127,46 @@ div { text-align: justify; text-justify: inter-word; }
                2,
                'wf:vib3:flask:nofiles',
                'wf:vib3:flask:nofiles'),
-              (' PNG plots ', 3, None, '___sec23'),
-              (' SVG plots ', 3, None, '___sec24'),
+              (' PNG plots ', 3, None, '___sec28'),
+              (' SVG plots ', 3, None, '___sec29'),
               (' User login and storage of computed results ',
                2,
                'wf:vib1:flask:login',
                'wf:vib1:flask:login'),
-              (' Using Bootstrap styles ',
+              (' Project 1: Using Bootstrap styles ',
                2,
                'wf:vib1:flask:bootstrap',
                'wf:vib1:flask:bootstrap'),
-              (' Further work ', 1, None, '___sec27'),
-              (' Resources ', 3, None, '___sec28'),
+              (' Further work ', 1, None, '___sec32'),
+              (' Resources ', 3, None, '___sec33'),
               (' Handling multiple input variables in Django ',
                1,
                'wf:vib:django',
                'wf:vib:django'),
-              (' Programming the Django application ', 2, None, '___sec30'),
-              (' Custom validation ', 2, None, '___sec31'),
-              (' Customizing widgets ', 2, None, '___sec32'),
-              (' Exercises ', 1, None, '___sec33'),
-              (' Exercise 1: Add two numbers ',
+              (' Programming the Django application ', 2, None, '___sec35'),
+              (' Custom validation ', 2, None, '___sec36'),
+              (' Customizing widgets ', 2, None, '___sec37'),
+              (' Exercises ', 1, None, '___sec38'),
+              (' Exercise 2: Add two numbers ',
                2,
                'wf:exer:add2',
                'wf:exer:add2'),
-              (' Exercise 2: Extend the `vib3_flask` app ',
+              (' Exercise 3: Extend the `vib3_flask` app ',
                2,
                'wf:exer:vib3:demo',
                'wf:exer:vib3:demo'),
-              (' Exercise 3: Equip the `vib3_flask` app with more data types ',
+              (' Exercise 4: Equip the `vib3_flask` app with more data types ',
                2,
                'wf:exer:vib3:lists',
                'wf:exer:vib3:lists'),
-              (' Exercise 4: Auto-generate code from function signature ',
+              (' Exercise 5: Auto-generate code from function signature ',
                2,
                None,
-               '___sec37'),
-              (' Resources ', 1, None, '___sec38'),
-              (' Flask resources ', 2, None, '___sec39'),
-              (' Django resources ', 2, None, '___sec40'),
-              (' Remaining ', 1, None, '___sec41')]}
+               '___sec42'),
+              (' Resources ', 1, None, '___sec43'),
+              (' Flask resources ', 2, None, '___sec44'),
+              (' Django resources ', 2, None, '___sec45'),
+              (' Remaining ', 1, None, '___sec46')]}
 end of tocinfo -->
 
 <body>
@@ -186,7 +192,7 @@ MathJax.Hub.Config({
 
 
 
-<center><h1>Using Web Frameworks for Scientific Web Applications</h1></center>  <!-- document title -->
+<center><h1>Using Web Frameworks for Scientific Applications</h1></center>  <!-- document title -->
 
 <p>
 <!-- author(s): Hans Petter Langtangen, and Anders E. Johansen -->
@@ -206,10 +212,11 @@ MathJax.Hub.Config({
 <center>[1] <b>Center for Biomedical Computing, Simula Research Laboratory</b></center>
 <center>[2] <b>Department of Informatics, University of Oslo</b></center>
 <p>
-<center><h4>Aug 30, 2014</h4></center> <!-- date -->
+<center><h4>Sep 26, 2014</h4></center> <!-- date -->
 
 <h2>Table of contents</h2>
 
+<p>
 <a href="#___sec0"> Web frameworks </a><br>
 &nbsp; &nbsp; &nbsp; <a href="#___sec1"> The MVC pattern </a><br>
 &nbsp; &nbsp; &nbsp; <a href="#___sec2"> A very simple application </a><br>
@@ -229,33 +236,39 @@ MathJax.Hub.Config({
 &nbsp; &nbsp; &nbsp; <a href="#___sec16"> Implementing error checking in the template </a><br>
 &nbsp; &nbsp; &nbsp; <a href="#___sec17"> Using style sheets </a><br>
 &nbsp; &nbsp; &nbsp; <a href="#___sec18"> Using LaTeX mathematics </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec19"> Rearringing the elements in the HTML template </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec19"> Rearranging the elements in the HTML template </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec20"> Bootstrap HTML style </a><br>
 &nbsp; &nbsp; &nbsp; <a href="#wf:vib1:flask:validation"> Custom validation </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="#___sec22"> Using Flask validators </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="#___sec23"> Tailored validation </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="#___sec24"> Tailored validation of intervals </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="#___sec25"> Demo </a><br>
 &nbsp; &nbsp; &nbsp; <a href="#wf:vib3:flask:autogen"> Autogenerating the code </a><br>
 &nbsp; &nbsp; &nbsp; <a href="#wf:vib3:flask:nofiles"> Avoiding plot files </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="#___sec23"> PNG plots </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="#___sec24"> SVG plots </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="#___sec28"> PNG plots </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="#___sec29"> SVG plots </a><br>
 &nbsp; &nbsp; &nbsp; <a href="#wf:vib1:flask:login"> User login and storage of computed results </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#wf:vib1:flask:bootstrap"> Using Bootstrap styles </a><br>
-<a href="#___sec27"> Further work </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="#___sec28"> Resources </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#wf:vib1:flask:bootstrap"> Project 1: Using Bootstrap styles </a><br>
+<a href="#___sec32"> Further work </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="#___sec33"> Resources </a><br>
 <a href="#wf:vib:django"> Handling multiple input variables in Django </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec30"> Programming the Django application </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec31"> Custom validation </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec32"> Customizing widgets </a><br>
-<a href="#___sec33"> Exercises </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#wf:exer:add2"> Exercise 1: Add two numbers </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#wf:exer:vib3:demo"> Exercise 2: Extend the <code>vib3_flask</code> app </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#wf:exer:vib3:lists"> Exercise 3: Equip the <code>vib3_flask</code> app with more data types </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec37"> Exercise 4: Auto-generate code from function signature </a><br>
-<a href="#___sec38"> Resources </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec39"> Flask resources </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec40"> Django resources </a><br>
-<a href="#___sec41"> Remaining </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec35"> Programming the Django application </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec36"> Custom validation </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec37"> Customizing widgets </a><br>
+<a href="#___sec38"> Exercises </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#wf:exer:add2"> Exercise 2: Add two numbers </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#wf:exer:vib3:demo"> Exercise 3: Extend the <code>vib3_flask</code> app </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#wf:exer:vib3:lists"> Exercise 4: Equip the <code>vib3_flask</code> app with more data types </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec42"> Exercise 5: Auto-generate code from function signature </a><br>
+<a href="#___sec43"> Resources </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec44"> Flask resources </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec45"> Django resources </a><br>
+<a href="#___sec46"> Remaining </a><br>
 </p>
 
 <h1>Web frameworks  <a name="___sec0"></a></h1>
 
+<p>
 Computational scientists may want to offer their applications through
 a web interface, thereby making a <em>web application</em>.
 Basically, this means that users can set input data
@@ -292,14 +305,11 @@ and a list of <a href="http://www.youtube.com/playlist?list=PL385A53B00B8B158E" 
 
 <p>
 A basic question is, of course, whether you should apply Flask or
-Django for your web project. Googling for "flask vs django" gives a
+Django for your web project. Googling for <em>flask vs django</em> gives a
 lot of diverging opinions. The authors' viewpoint is that Flask is
 much easier to get started with than Django. You can grow your
 application to a really big one with both frameworks, but some
-advanced features is easier on one framework than the other. For
-example, if you want users to log into your account and store their
-work in databases, we found this to be much more straightforward in
-Django.
+advanced features is easier in one framework than in the other.
 
 <p>
 The problem for a computational scientist who wants to enable
@@ -333,10 +343,11 @@ of this repository.
 
 <h2>The MVC pattern  <a name="___sec1"></a></h2>
 
+<p>
 The MVC pattern stands for Model-View-Controller and is a way of
 separating the user's interaction with an application from the inner
 workings of the application. In a scientific application this
-usually means separaring mathematical computations from the
+usually means separating mathematical computations from the
 user interface and visualization of results.
 The <a href="http://en.wikipedia.org/wiki/MVC_Pattern" target="_self">Wikipedia definition of the MVC pattern</a> gives a very high-level
 explanation of what the model, view, and controller do and mentions
@@ -360,9 +371,9 @@ between data (model), the way data is presented (view), the
 computations (compute), and the way these components communicate
 (controller). In a small program such a separation may look as
 overkill, but it pays off in more complicated applications. More
-importantly, the concepts of the MVC pattern are widely used in
-web frameworks so one should really adapt to the MVC way of
-thinking.
+importantly, the concepts of the MVC pattern are widely used in web
+frameworks and their documentation so one should really adapt to the
+MVC way of thinking.
 
 <p>
 Web frameworks often have their own way of interpreting the
@@ -382,7 +393,8 @@ which is compatible with what we need later on:
 </ul>
 
 The model will be a Python class with static attributes holding the data.
-The view consists of Python code processing the model's data and HTML
+The view consists of Python code processing the model's data, calling the
+compute component, and specifying HTML
 templates for the design of the web pages.
 
 <p>
@@ -407,6 +419,7 @@ split to meet the requirements of the MVC software design pattern.
 
 <h2>A very simple application  <a name="___sec2"></a></h2>
 
+<p>
 We shall start with the simplest possible application,
 a "scientific hello world program", where the
 task is to read a number and write out "Hello, World!" followed by
@@ -445,6 +458,7 @@ and write out a new web page with the resulting text.
 
 <h2>Application of the MVC pattern <a name="wf:hw:mvc"></a></h2>
 
+<p>
 Before thinking of a web application, we first <em>refactor</em> our program
 such that it fits with the classical MVC pattern and a compute component.
 The refactoring does not change the functionality of the code, it
@@ -539,6 +553,7 @@ shown above: "Hello, World! sin(r)=s".
 
 <h1>Making a Flask application  <a name="___sec4"></a></h1>
 
+<p>
 Not much code or configuration is needed to make a Flask application.
 Actually one short file is enough. For this file to work you need to
 install Flask and some corresponding packages. This is easiest
@@ -551,10 +566,11 @@ performed by
 Terminal&gt; sudo pip install WTForms
 </pre></div>
 <p>
-You can add <code>--upgrade</code> to upgrade a previous installation.
+You must add <code>--upgrade</code> to upgrade a previous installation (<code>pip install --upgrade Flask</code>).
 
 <h2>Programming the Flask application  <a name="___sec5"></a></h2>
 
+<p>
 <b>The user interaction.</b>
 We want our input page to feature a text field where the user can
 write the value of <code>r</code>, see Figure <a href="#wf:hw1:flask:fig:input">1</a>.
@@ -626,18 +642,21 @@ app <span style="color: #666666">=</span> Flask(__name__)
 <b>Dissection.</b>
 The web application is the <code>app</code> object of class <code>Flask</code>, and initialized
 as shown. The model is a special Flask class derived from <code>Form</code>
-where the data are listed as static class attributes and initialized
-by various form field objects from the <code>wtforms</code> package.
-These form fields correspond to HTML forms in the input page.
+where the input variable in the app is listed as a
+static class attribute and initialized
+by a special form field object from the <code>wtforms</code> package.
+Such form field objects correspond to HTML forms in the input page.
 For the <code>r</code> variable we apply <code>FloatField</code> since it is a floating-point
 variable. A default validator, here checking that the user supplies
-a real number, is automatically included.
+a real number, is automatically included, but we add another validator,
+<code>InputRequired</code>, to force the user to provide input before clicking on
+the <em>equals</em> button.
 
 <p>
 The view part of this Python code consists of
 a URL and a corresponding function to call when the URL is invoked.
-The function name is here chosen to be <code>index</code> (corresponding to the standard
-<code>index.html</code> page that is the main page of a URL). The
+The function name is here chosen to be <code>index</code> (inspired by the standard
+<code>index.html</code> page that is the main page of a web app). The
 decorator <code>@app.route('/hw1', ...)</code> maps the URL
 <code>http://127.0.0.1:5000/hw1</code> to a call to <code>index</code>.
 The <code>methods</code> argument must be as shown to allow the user to communicate
@@ -705,6 +724,7 @@ Open a new window or tab in your browser and type in the URL
 
 <h2>Equipping the input page with output results  <a name="___sec6"></a></h2>
 
+<p>
 Our application made two distinct pages for grabbing input from the
 user and presenting the result. It is often more natural to add
 the result to the input page. This is particularly the case in the present
@@ -719,7 +739,7 @@ web application, which is a kind of calculator. Figure <a href="#wf:hw2:flask:fi
 
 <p>
 To let the user stay within the same page, we create a new directory
-<a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/hw2" target="_self"><tt>hw2</tt></a>.
+<a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/hw2" target="_self"><tt>hw2</tt></a>
 for this modified Flask app and copy the files from the previous
 <code>hw1</code> directory.  The idea now is to make use of just one
 template, in <code>templates/view.html</code>:
@@ -740,6 +760,8 @@ template, in <code>templates/view.html</code>:
 The form is identical to what we used in <code>view_input.html</code> in
 the <code>hw1</code> directory, and the only
 new thing is the output of <code>s</code> below the form.
+
+<p>
 The template language supports some programming with Python objects
 inside <code>{%</code> and <code>%}</code> tags.
 Specifically in this file, we can test on the value of <code>s</code>:
@@ -800,6 +822,7 @@ sending it to <code>render_template</code>.
 
 <h2>Splitting the app into model, view, and controller files <a name="wf:hw3:flask"></a></h2>
 
+<p>
 In our previous two Flask apps we have had the view displayed for the
 user in a separate template file, and the computations as always in
 <code>compute.py</code>, but everything else was placed in one file <code>controller.py</code>.
@@ -811,7 +834,7 @@ directory
 <a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/hw3" target="_self"><tt>hw3_flask</tt></a>
 The contents
 in the files reflect the splitting introduced in the original
-scienticic hello world program in the section <a href="#wf:hw:mvc">Application of the MVC pattern</a>.
+scientific hello world program in the section <a href="#wf:hw:mvc">Application of the MVC pattern</a>.
 The <code>model.py</code> file now consists of the input form class:
 
 <p>
@@ -857,6 +880,7 @@ the organization of the statement in files differ.
 
 <h2>Troubleshooting  <a name="___sec8"></a></h2>
 
+<p>
 <b>Address already in use.</b>
 You can easily kill the Flask application and restart it, but sometimes
 you will get an error that the address is already in use.
@@ -881,8 +905,9 @@ You are now ready to restart a Flask application.
 
 <h1>Making a Django application  <a name="___sec9"></a></h1>
 
+<p>
 We recommend to
-download and istall the latest official version from
+download and istall the latest official version of Django from
 <a href="http://www.djangoproject.com/download/" target="_self"><tt>http://www.djangoproject.com/download/</tt></a>. Pack out the tarfile, go
 to the directory, and run <code>setup.py</code>:
 
@@ -899,6 +924,7 @@ follow these instructions.
 
 <h2>Setting up a Django project  <a name="___sec10"></a></h2>
 
+<p>
 Django applies two concepts: <em>project</em> and <em>application</em> (or <em>app</em>).
 The app is the program we want to run through a web interface. The
 project is a Python package containing common settings and
@@ -951,7 +977,7 @@ The server is started by running
 Validating models...
 
 0 errors found
-March 23, 2013 - 01:09:24
+March 34, 201x - 01:09:24
 Django version 1.5, using settings &#39;django_project.settings&#39;
 Development server is running at http://127.0.0.1:8000/
 Quit the server with CONTROL-C.
@@ -963,7 +989,8 @@ Load this URL into your browser to see a welcome message from Django,
 meaning that the server is working.
 
 <p>
-Despite the fact that our web applications do not need a database, you
+Despite the fact that our introductory
+web applications do not need a database, you
 have to register a database with any Django project. To this end,
 open the <code>django_project/settings.py</code> file in a text editor,
 locate the <code>DATABASES</code> dictionary and type in the following
@@ -977,7 +1004,7 @@ code:
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">relative2absolute_path</span>(relative_path):
     <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Return the absolute path correspodning to relative_path.&quot;&quot;&quot;</span>
     dir_of_this_file <span style="color: #666666">=</span> os<span style="color: #666666">.</span>path<span style="color: #666666">.</span>dirname(os<span style="color: #666666">.</span>path<span style="color: #666666">.</span>abspath(__file__))
-    <span style="color: #008000; font-weight: bold">return</span> os<span style="color: #666666">.</span>path<span style="color: #666666">.</span>join(dir_of_this_file, relative_path)
+    <span style="color: #008000; font-weight: bold">return</span> dir_of_this_file <span style="color: #666666">+</span> <span style="color: #BA2121">&#39;/&#39;</span> <span style="color: #666666">+</span> relative_path
 
 DATABASES <span style="color: #666666">=</span> {
    <span style="color: #BA2121">&#39;default&#39;</span> : {
@@ -997,6 +1024,7 @@ always applies the forward slash between directories, also on Windows.
 
 <h2>Setting up a Django application  <a name="___sec11"></a></h2>
 
+<p>
 The next step is to create a Django app for our scientific hello
 world program. We can place the app in any directory, but here we
 utilize the following organization.
@@ -1095,7 +1123,7 @@ Make a subdirectory <code>templates</code> under <code>hw1</code>,
 <p>
 
 <!-- code=text (!bc sys) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">mkdir templates
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; mkdir templates
 </pre></div>
 <p>
 and add the absolute path of this directory to the <code>TEMPLATE_DIRS</code> tuple:
@@ -1141,6 +1169,7 @@ with an URL, but any other name than <code>index</code> can be used.
 
 <h2>Programming the Django application  <a name="___sec12"></a></h2>
 
+<p>
 The Django application is about filling the files <code>views.py</code> and <code>models.py</code>
 with content. The mathematical computations are performed in <code>compute.py</code>
 so we copy this file from the <code>mvc</code> directory to the <code>hw1</code> directory
@@ -1347,6 +1376,7 @@ the "Hello" word now has a blue color.
 
 <h2>Equipping the input page with output results  <a name="___sec13"></a></h2>
 
+<p>
 Instead of making a separate output page with the result, we can
 simply add the sine value to the input page. This makes the user
 feel that she interacts with the same page, as when operating a calculator.
@@ -1462,10 +1492,11 @@ if-block must be explicitly ended by <code>{% endif %}</code>.
 
 <h1>Handling multiple input variables in Flask <a name="wf:vib:flask"></a></h1>
 
+<p>
 The scientific hello world example shows how to work with one input
 variable and one output variable. We can easily derive an extensible
 recipe for apps with a collection of input variables and some
-corresponding HTML code as result. Multiple input variables are listed
+associated HTML code as result. Multiple input variables are listed
 in the <code>InputForm</code> class using different types for different forms
 (text field, float field, integer field, check box field for boolean
 values, etc.).  The value of these variables will be available in a
@@ -1510,6 +1541,7 @@ We shall make a series of different versions of this app:
 
 <h2>Programming the Flask application <a name="wf:vib1:flask:app"></a></h2>
 
+<p>
 The forthcoming text explains the necessary steps to realize a
 Flask app that behaves as depicted in Figures <a href="#wf:vib1:flask:fig:input">7</a>
 and <a href="#wf:vib1:flask:fig:result">8</a>. We start with the
@@ -1525,7 +1557,8 @@ More specifically, inside <code>compute.py</code>, we have a function for
 evaluating \( u(t) \) and a <code>compute</code> function for making the plot. The
 return value of the latter is the name of the plot file, which should
 get a unique name every time the <code>compute</code> function is called such
-that the browser cannot reuse an already cached image. Flask
+that the browser cannot reuse an already cached image when displaying
+the plot. Flask
 applications must have all extra files (CSS, images, etc.) in a
 subdirectory <code>static</code>.
 
@@ -1561,6 +1594,21 @@ subdirectory <code>static</code>.
 <span style="color: #008000; font-weight: bold">if</span> __name__ <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;__main__&#39;</span>:
     <span style="color: #008000; font-weight: bold">print</span> compute(<span style="color: #666666">1</span>, <span style="color: #666666">0.1</span>, <span style="color: #666666">1</span>, <span style="color: #666666">20</span>)
 </pre></div>
+<p>
+<div class="alert alert-block alert-warning alert-text-normal">
+<b>Avoid file writing.</b>
+<p>
+It is in general not a good idea to write plots to file or let a
+web app write to file. If this app is deployed at some web site and
+multiple users are running the app, the <code>os.remove</code> statements may remove
+plots created by all other users. However, the app is useful as a
+graphical user interface run locally on a machine.
+Later, we shall avoid writing plot files and instead
+store plots in strings and embed the strings
+in the <code>img</code> tag in the HTML code.
+</div>
+
+
 <p>
 We organize the model, view, and controller as three separate
 files, as illustrated in
@@ -1619,9 +1667,13 @@ hello world app:
 <span style="color: #008000; font-weight: bold">try</span>:
     template_name <span style="color: #666666">=</span> sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>]
 <span style="color: #008000; font-weight: bold">except</span> <span style="color: #D2413A; font-weight: bold">IndexError</span>:
-    template_name <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;view0&#39;</span>
+    template_name <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;view_plain&#39;</span>
 
 app <span style="color: #666666">=</span> Flask(__name__)
+
+<span style="color: #008000; font-weight: bold">if</span> template_name <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;view_flask_bootstrap&#39;</span>:
+    <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">flask_bootstrap</span> <span style="color: #008000; font-weight: bold">import</span> Bootstrap
+    Bootstrap(app)
 
 <span style="color: #AA22FF">@app.route</span>(<span style="color: #BA2121">&#39;/vib1&#39;</span>, methods<span style="color: #666666">=</span>[<span style="color: #BA2121">&#39;GET&#39;</span>, <span style="color: #BA2121">&#39;POST&#39;</span>])
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">index</span>():
@@ -1632,6 +1684,7 @@ app <span style="color: #666666">=</span> Flask(__name__)
     <span style="color: #008000; font-weight: bold">else</span>:
         result <span style="color: #666666">=</span> <span style="color: #008000">None</span>
 
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;XXX&#39;</span>, result
     <span style="color: #008000; font-weight: bold">return</span> render_template(template_name <span style="color: #666666">+</span> <span style="color: #BA2121">&#39;.html&#39;</span>,
                            form<span style="color: #666666">=</span>form, result<span style="color: #666666">=</span>result)
 
@@ -1639,11 +1692,12 @@ app <span style="color: #666666">=</span> Flask(__name__)
     app<span style="color: #666666">.</span>run(debug<span style="color: #666666">=</span><span style="color: #008000">True</span>)
 </pre></div>
 <p>
+<b>The HTML template.</b>
 The details governing how the web page really looks like lie in the
 template file. Since we have several fields and want them nicely
 align in a tabular fashion, we place the field name, text areas,
 and labels inside an HTML table in our first attempt to write a
-template, <code>view0.html</code>:
+template, <code>view_plain.html</code>:
 
 <p>
 
@@ -1661,7 +1715,7 @@ template, <code>view0.html</code>:
 
 <span style="color: #008000; font-weight: bold">&lt;p&gt;</span>
 {% if result != None %}
-<span style="color: #008000; font-weight: bold">&lt;img</span> <span style="color: #7D9029">src=</span><span style="color: #BA2121">&quot;{{ result }}&quot;</span> <span style="color: #7D9029">width=</span><span style="color: #BA2121">500</span><span style="color: #008000; font-weight: bold">&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;img</span> <span style="color: #7D9029">src=</span><span style="color: #BA2121">&quot;{{ result }}&quot;</span> <span style="color: #7D9029">width=</span><span style="color: #BA2121">&quot;500&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
 {% endif %}
 <span style="color: #008000; font-weight: bold">&lt;/p&gt;</span>
 </pre></div>
@@ -1685,13 +1739,23 @@ any object in our application to the template. Debugging of the template
 is done by viewing the HTML source of the web page in the browser.
 
 <p>
-You are encouraged to run <code>python controller.py</code> and load <code>http://127.0.0.1:5000/vib1</code> into your web browser for testing.
+You are encouraged to go to the <code>vib</code> directory,
+run <code>python controller.py</code>, and load
+
+<p>
+
+<!-- code=text typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">`http://127.0.0.1:5000/vib1`
+</pre></div>
+<p>
+into your web browser for testing.
 
 <p>
 <!-- !split -->
 
 <h2>Implementing error checking in the template  <a name="___sec16"></a></h2>
 
+<p>
 What happens if the user gives wrong input, for instance the letters <code>asd</code>
 instead of a number? Actually nothing! The <code>FloatField</code> object
 checks that the input is compatible with a real number in the
@@ -1714,7 +1778,7 @@ we realize that wrong input implies <code>result = None</code> and no computatio
 and no plot! Fortunately, each field object gets an attribute <code>error</code>
 with information on errors that occur on input. We can write out
 this information on the web page, as exemplified in the template
-<code>view1.html</code>:
+<code>view_errcheck.html</code>:
 
 <p>
 
@@ -1737,7 +1801,7 @@ this information on the web page, as exemplified in the template
 <span style="color: #008000; font-weight: bold">&lt;p&gt;&lt;input</span> <span style="color: #7D9029">type=</span><span style="color: #BA2121">submit</span> <span style="color: #7D9029">value=</span><span style="color: #BA2121">Compute</span><span style="color: #008000; font-weight: bold">&gt;&lt;/form&gt;&lt;/p&gt;</span>
 <span style="color: #008000; font-weight: bold">&lt;p&gt;</span>
 {% if result != None %}
-<span style="color: #008000; font-weight: bold">&lt;img</span> <span style="color: #7D9029">src=</span><span style="color: #BA2121">&quot;{{ result }}&quot;</span> <span style="color: #7D9029">width=</span><span style="color: #BA2121">500</span><span style="color: #008000; font-weight: bold">&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;img</span> <span style="color: #7D9029">src=</span><span style="color: #BA2121">&quot;{{ result }}&quot;</span> <span style="color: #7D9029">width=</span><span style="color: #BA2121">&quot;500&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
 {% endif %}
 <span style="color: #008000; font-weight: bold">&lt;/p&gt;</span>
 </pre></div>
@@ -1766,20 +1830,23 @@ see Figure <a href="#wf:vib1:flask:fig:error1">9</a>.
 <p>
 It is possible to use the additional HTML5 fields for input in a Flask
 context. Instead of explaining how here, we recommend to use the
-<code>parampool</code> package to automatically generate Flask files.
+<a href="https://github.com/hplgit/parampool" target="_self">Parampool</a>
+package to automatically generate Flask files with HTML5 fields.
 
 <p>
 <!-- !split -->
 
 <h2>Using style sheets  <a name="___sec17"></a></h2>
 
+<p>
 Web developers make heavy use of CSS style sheets to control the look
 and feel of web pages. Templates can utilize style sheets as any other
 standard HTML code. Here is a very simple example where we introduce
 a class <code>name</code> for the HTML table's column with the field name and set the
 foreground color of the text in this column to blue.
 The style sheet is called <code>basic.css</code> and <em>must</em> reside in the
-<code>static</code> subdirectory of the Flask application directory:
+<code>static</code> subdirectory of the Flask application directory. The content
+of <code>basic.css</code> is just the line
 
 <p>
 
@@ -1787,10 +1854,10 @@ The style sheet is called <code>basic.css</code> and <em>must</em> reside in the
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">td.name { color: blue; }
 </pre></div>
 <p>
-The <code>view2.html</code> file using this style sheet features a <code>link</code> tag
+The <code>view_css.html</code> file using this style sheet features a <code>link</code> tag
 to the style sheet in the HTML header, and the column containing
 the field name has
-the HTML tag <code><td class="name"></code> to trigger the specification in
+the HTML tag <code>&lt;td class=&quot;name&quot;&gt;</code> to trigger the specification in
 the style sheet:
 
 <p>
@@ -1811,11 +1878,12 @@ the style sheet:
     <span style="color: #008000; font-weight: bold">&lt;td&gt;</span>{{ field.label }}<span style="color: #008000; font-weight: bold">&lt;/td&gt;</span>
 </pre></div>
 <p>
-Just run <code>python controller.py view2</code> to see that the names
+Just run <code>python controller.py view_css</code> to see that the names
 of the variables to set in the web page are blue.
 
 <h2>Using LaTeX mathematics  <a name="___sec18"></a></h2>
 
+<p>
 Scientific applications frequently have many input data that are
 defined through mathematics and where the typesetting on the
 web page should be as close as possible to the typesetting where
@@ -1823,7 +1891,7 @@ the mathematics is documented. In the present example we would like
 to typeset \( A \), \( b \), \( w \), and \( T \) with italic font as done
 in LaTeX. Fortunately, native LaTeX typesetting is available in
 HTML through the tool <a href="http://www.mathjax.org/" target="_self">MathJax</a>.
-Our template <code>view3.html</code> enables MathJax. Formulas are written
+Our template <code>view_tex.html</code> enables MathJax. Formulas are written
 with standard LaTeX inside <code>\(</code> and <code>\)</code>, while equations are surrounded
 by <code>$$</code>. Here we use formulas only:
 
@@ -1864,8 +1932,9 @@ LaTeX rendering looks like in the browser.
 <p><img src="fig-web4sa/vib1_flask_latex.png" align="bottom" width=650></p>
 </center>
 
-<h2>Rearringing the elements in the HTML template  <a name="___sec19"></a></h2>
+<h2>Rearranging the elements in the HTML template  <a name="___sec19"></a></h2>
 
+<p>
 Now we want to place the plot to the right of the input forms in
 the web page, see Figure <a href="#wf:vib1:flask:fig:sidebyside">11</a>. This can
 be accomplished by having an outer table with two rows. The first
@@ -1881,7 +1950,7 @@ the plot in the second column, while the second row features the
 </center>
 
 <p>
-The enabling template file is <code>view4.html</code>:
+The enabling template file is <code>view_table.html</code>:
 
 <p>
 
@@ -1920,23 +1989,216 @@ u(t) = Ae^{-bt}\sin (w t), \hbox{ for } t\in [0,T]
   {% endfor %}
 <span style="color: #008000; font-weight: bold">&lt;/table&gt;</span>
 <span style="color: #008000; font-weight: bold">&lt;/td&gt;</span>
+
 <span style="color: #008000; font-weight: bold">&lt;td&gt;</span>
 <span style="color: #008000; font-weight: bold">&lt;p&gt;</span>
 {% if result != None %}
-<span style="color: #008000; font-weight: bold">&lt;img</span> <span style="color: #7D9029">src=</span><span style="color: #BA2121">&quot;{{ result }}&quot;</span> <span style="color: #7D9029">width=</span><span style="color: #BA2121">500</span><span style="color: #008000; font-weight: bold">&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;img</span> <span style="color: #7D9029">src=</span><span style="color: #BA2121">&quot;{{ result }}&quot;</span> <span style="color: #7D9029">width=</span><span style="color: #BA2121">&quot;500&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
 {% endif %}
 <span style="color: #008000; font-weight: bold">&lt;/p&gt;</span>
 <span style="color: #008000; font-weight: bold">&lt;/td&gt;&lt;/tr&gt;</span>
 <span style="color: #008000; font-weight: bold">&lt;tr&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;td&gt;&lt;p&gt;&lt;input</span> <span style="color: #7D9029">type=</span><span style="color: #BA2121">submit</span> <span style="color: #7D9029">value=</span><span style="color: #BA2121">Compute</span><span style="color: #008000; font-weight: bold">&gt;&lt;/form&gt;&lt;/p&gt;&lt;/td&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;td&gt;&lt;p&gt;&lt;input</span> <span style="color: #7D9029">type=</span><span style="color: #BA2121">submit</span> <span style="color: #7D9029">value=</span><span style="color: #BA2121">Compute</span><span style="color: #008000; font-weight: bold">&gt;&lt;/p&gt;&lt;/td&gt;</span>
 <span style="color: #008000; font-weight: bold">&lt;/tr&gt;</span>
 <span style="color: #008000; font-weight: bold">&lt;/table&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/form&gt;</span>
+</pre></div>
+<p>
+<!-- !split -->
+
+<h2>Bootstrap HTML style  <a name="___sec20"></a></h2>
+
+<p>
+The <a href="http://getbootstrap.com/" target="_self">Bootstrap</a> framework for creating web pages
+has been very popular in recent years, both because of the design and
+the automatic support for responsive pages on all sorts of devices.
+Bootstrap can be used in combination with Flask. The template file
+<code>view_bootstrap.html</code> is identical to the former <code>view_table.html</code>,
+except that we load the Bootstrap CSS file and include in comments
+how to add the typical navigation bar found in many Bootstrap-based
+web pages. The template looks like
+
+<p>
+
+<!-- code=html (!bc htmlpro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #BC7A00">&lt;!DOCTYPE html&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;html</span> <span style="color: #7D9029">lang=</span><span style="color: #BA2121">&quot;en&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+
+    <span style="color: #008000; font-weight: bold">&lt;link</span> <span style="color: #7D9029">href=</span><span style="color: #BA2121">&quot;http://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css&quot;</span> <span style="color: #7D9029">rel=</span><span style="color: #BA2121">&quot;stylesheet&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+
+<span style="color: #008000; font-weight: bold">&lt;script </span><span style="color: #7D9029">type=</span><span style="color: #BA2121">&quot;text/x-mathjax-config&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+MathJax.Hub.Config({
+  TeX<span style="color: #666666">:</span> {
+     equationNumbers<span style="color: #666666">:</span> {  autoNumber<span style="color: #666666">:</span> <span style="color: #BA2121">&quot;AMS&quot;</span>  },
+     extensions<span style="color: #666666">:</span> [<span style="color: #BA2121">&quot;AMSmath.js&quot;</span>, <span style="color: #BA2121">&quot;AMSsymbols.js&quot;</span>, <span style="color: #BA2121">&quot;autobold.js&quot;</span>]
+  }
+});
+<span style="color: #008000; font-weight: bold">&lt;/script&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;script </span><span style="color: #7D9029">type=</span><span style="color: #BA2121">&quot;text/javascript&quot;</span>
+ <span style="color: #7D9029">src=</span><span style="color: #BA2121">&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/script&gt;</span>
+<span style="color: #408080; font-style: italic">&lt;!--</span>
+<span style="color: #408080; font-style: italic">&lt;nav class=&quot;navbar navbar-default&quot; role=&quot;navigation&quot;&gt;</span>
+<span style="color: #408080; font-style: italic">&lt;div class=&quot;collapse navbar-collapse&quot; id=&quot;bs-example-navbar-collapse-1&quot;&gt;</span>
+<span style="color: #408080; font-style: italic">    &lt;ul class=&quot;nav navbar-nav&quot;&gt;</span>
+<span style="color: #408080; font-style: italic">       {% for f in some_sequence %}</span>
+<span style="color: #408080; font-style: italic">       &lt;li&gt;&lt;a href=&quot;/{{f}}&quot;&gt;{{f}}&lt;/a&gt;&lt;/li&gt;</span>
+<span style="color: #408080; font-style: italic">       {% endfor %}</span>
+<span style="color: #408080; font-style: italic">       &lt;/ul&gt;</span>
+<span style="color: #408080; font-style: italic">&lt;/div&gt;</span>
+<span style="color: #408080; font-style: italic">&lt;/nav&gt;</span>
+<span style="color: #408080; font-style: italic">--&gt;</span>
+
+This web page visualizes the function \(
+u(t) = Ae^{-bt}\sin (w t), \hbox{ for } t\in [0,T]
+\).
+
+<span style="color: #408080; font-style: italic">&lt;!-- table with forms to the left and plot to the right --&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;form</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;navbar-form navbar-top&quot;</span> <span style="color: #7D9029">method=</span><span style="color: #BA2121">&quot;post&quot;</span> <span style="color: #7D9029">action=</span><span style="color: #BA2121">&quot;&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;table</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;table table-hover&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;tr&gt;&lt;td&gt;</span>
+  <span style="color: #008000; font-weight: bold">&lt;div</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;form-group&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+  {% for field in form %}
+    <span style="color: #008000; font-weight: bold">&lt;div</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;input-group&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+      <span style="color: #008000; font-weight: bold">&lt;span</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;input-group-addon&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span> \( {{ field.name }} \) <span style="color: #008000; font-weight: bold">&lt;/span&gt;</span>
+      {{field(class_=&quot;form-control&quot;)}}
+    <span style="color: #008000; font-weight: bold">&lt;/div&gt;</span>
+    {% if field.errors %}
+      <span style="color: #008000; font-weight: bold">&lt;table</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;table table-hover&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+      {% for error in field.errors %}
+        <span style="color: #008000; font-weight: bold">&lt;tr&gt;&lt;td</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;danger&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>{{ error }}<span style="color: #008000; font-weight: bold">&lt;/td&gt;&lt;/tr&gt;</span>
+      {% endfor %}
+      <span style="color: #008000; font-weight: bold">&lt;/table&gt;</span>
+    {% endif %}
+  {% endfor %}
+<span style="color: #008000; font-weight: bold">&lt;/td&gt;</span>
+
+<span style="color: #408080; font-style: italic">&lt;!-- 2nd column contains the plot --&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;td&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;p&gt;</span>
+{% if result != None %}
+<span style="color: #008000; font-weight: bold">&lt;img</span> <span style="color: #7D9029">src=</span><span style="color: #BA2121">&quot;{{ result }}&quot;</span> <span style="color: #7D9029">width=</span><span style="color: #BA2121">&quot;500&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+{% endif %}
+<span style="color: #008000; font-weight: bold">&lt;/p&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/td&gt;&lt;/tr&gt;</span>
+<span style="color: #408080; font-style: italic">&lt;!-- next row contains the Compute button --&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;tr&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;td&gt;&lt;p&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;input</span> <span style="color: #7D9029">type=</span><span style="color: #BA2121">&quot;submit&quot;</span> <span style="color: #7D9029">value=</span><span style="color: #BA2121">&quot;Compute&quot;</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;btn btn-default&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/td&gt;&lt;/tr&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/table&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/form&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/div&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/html&gt;</span>
+</pre></div>
+<p>
+The input fields and fonts now get the typical Bootstrap look and feel.
+
+<p>
+While <code>view_bootstrap.html</code> makes use of plain Bootstrap HTML code, there is
+also a higher-level framework, called <a href="http://pythonhosted.org/Flask-Bootstrap/" target="_self">Flask-Bootstrap</a> that combines Flask and Bootstrap. Installation of
+this extension is done by <code>sudo pip install flask-bootstrap</code>.
+
+<p>
+After <code>app = Flask(__name__)</code> we need to do
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">flask_bootstrap</span> <span style="color: #008000; font-weight: bold">import</span> Bootstrap
+Bootstrap(app)
+</pre></div>
+<p>
+The template employs new keywords <code>extends</code> and <code>block</code>:
+
+<p>
+
+<!-- code=html (!bc htmlpro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">{% extends &quot;bootstrap/base.html&quot; %}
+
+{% block styles %}
+{{super()}}
+<span style="color: #008000; font-weight: bold">&lt;style&gt;</span>
+    <span style="color: #0000FF; font-weight: bold">.appsize</span> { <span style="color: #008000; font-weight: bold">width</span><span style="color: #666666">:</span> <span style="color: #666666">500px</span> }
+<span style="color: #008000; font-weight: bold">&lt;/style&gt;</span>
+
+<span style="color: #008000; font-weight: bold">&lt;script </span><span style="color: #7D9029">type=</span><span style="color: #BA2121">&quot;text/x-mathjax-config&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+MathJax.Hub.Config({
+  TeX<span style="color: #666666">:</span> {
+     equationNumbers<span style="color: #666666">:</span> {  autoNumber<span style="color: #666666">:</span> <span style="color: #BA2121">&quot;AMS&quot;</span>  },
+     extensions<span style="color: #666666">:</span> [<span style="color: #BA2121">&quot;AMSmath.js&quot;</span>, <span style="color: #BA2121">&quot;AMSsymbols.js&quot;</span>, <span style="color: #BA2121">&quot;autobold.js&quot;</span>]
+  }
+});
+<span style="color: #008000; font-weight: bold">&lt;/script&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;script </span><span style="color: #7D9029">type=</span><span style="color: #BA2121">&quot;text/javascript&quot;</span>
+ <span style="color: #7D9029">src=</span><span style="color: #BA2121">&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/script&gt;</span>
+{% endblock %}
+
+<span style="color: #408080; font-style: italic">&lt;!--</span>
+<span style="color: #408080; font-style: italic">{% block navbar %}</span>
+<span style="color: #408080; font-style: italic">&lt;nav class=&quot;navbar navbar-default&quot; role=&quot;navigation&quot;&gt;</span>
+<span style="color: #408080; font-style: italic">&lt;div class=&quot;collapse navbar-collapse&quot; id=&quot;bs-example-navbar-collapse-1&quot;&gt;</span>
+<span style="color: #408080; font-style: italic">    &lt;ul class=&quot;nav navbar-nav&quot;&gt;</span>
+<span style="color: #408080; font-style: italic">       {% for f in some_sequence %}</span>
+<span style="color: #408080; font-style: italic">       &lt;li&gt;&lt;a href=&quot;/{{f}}&quot;&gt;{{f}}&lt;/a&gt;&lt;/li&gt;</span>
+<span style="color: #408080; font-style: italic">       {% endfor %}</span>
+<span style="color: #408080; font-style: italic">       &lt;/ul&gt;</span>
+<span style="color: #408080; font-style: italic">&lt;/div&gt;</span>
+<span style="color: #408080; font-style: italic">&lt;/nav&gt;</span>
+<span style="color: #408080; font-style: italic">{% endblock %}</span>
+<span style="color: #408080; font-style: italic">--&gt;</span>
+
+This web page visualizes the function \(
+u(t) = Ae^{-bt}\sin (w t), \hbox{ for } t\in [0,T]
+\).
+
+{% block content %}
+<span style="color: #408080; font-style: italic">&lt;!-- table with forms to the left and plot to the right --&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;form</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;navbar-form navbar-top&quot;</span> <span style="color: #7D9029">method=</span><span style="color: #BA2121">&quot;post&quot;</span> <span style="color: #7D9029">action=</span><span style="color: #BA2121">&quot;&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;table</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;table table-hover&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;tr&gt;&lt;td&gt;</span>
+  <span style="color: #008000; font-weight: bold">&lt;div</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;form-group&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+  {% for field in form %}
+    <span style="color: #008000; font-weight: bold">&lt;div</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;input-group&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+      <span style="color: #008000; font-weight: bold">&lt;span</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;input-group-addon&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span> \( {{ field.name }} \) <span style="color: #008000; font-weight: bold">&lt;/span&gt;</span>
+      {{field(class_=&quot;form-control&quot;)}}
+    <span style="color: #008000; font-weight: bold">&lt;/div&gt;</span>
+    {% if field.errors %}
+      <span style="color: #008000; font-weight: bold">&lt;table</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;table table-hover&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+      {% for error in field.errors %}
+        <span style="color: #008000; font-weight: bold">&lt;tr&gt;&lt;td</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;danger&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>{{ error }}<span style="color: #008000; font-weight: bold">&lt;/td&gt;&lt;/tr&gt;</span>
+      {% endfor %}
+      <span style="color: #008000; font-weight: bold">&lt;/table&gt;</span>
+    {% endif %}
+  {% endfor %}
+<span style="color: #008000; font-weight: bold">&lt;/td&gt;</span>
+
+<span style="color: #408080; font-style: italic">&lt;!-- 2nd column contains the plot --&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;td&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;p&gt;</span>
+{% if result != None %}
+<span style="color: #008000; font-weight: bold">&lt;img</span> <span style="color: #7D9029">src=</span><span style="color: #BA2121">&quot;{{ result }}&quot;</span> <span style="color: #7D9029">width=</span><span style="color: #BA2121">&quot;500&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+{% endif %}
+<span style="color: #008000; font-weight: bold">&lt;/p&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/td&gt;&lt;/tr&gt;</span>
+<span style="color: #408080; font-style: italic">&lt;!-- next row contains the Compute button --&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;tr&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;td&gt;&lt;p&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;input</span> <span style="color: #7D9029">type=</span><span style="color: #BA2121">&quot;submit&quot;</span> <span style="color: #7D9029">value=</span><span style="color: #BA2121">&quot;Compute&quot;</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;btn btn-default&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/td&gt;&lt;/tr&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/table&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/form&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/div&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/html&gt;</span>
+{% endblock %}
 </pre></div>
 <p>
 <!-- !split -->
 
 <h2>Custom validation <a name="wf:vib1:flask:validation"></a></h2>
 
+<p>
 The <code>FloatField</code> objects can check that the input is compatible with
 a number, but what if we want to control that \( A>0 \), \( b>0 \), and
 \( T \) is not greater than 30 periods (otherwise the plot gets cluttered)?
@@ -1945,6 +2207,8 @@ supply the function to the list of validator functions in the call to
 the <code>FloatField</code> constructor or other field constructors. The extra
 code is a part of the <code>model.py</code> and the presented extensions appear
 in the directory <a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/vib2" target="_self"><tt>vib2</tt></a>.
+
+<h3>Using Flask validators  <a name="___sec22"></a></h3>
 
 <p>
 The simplest approach to validation is to use existing functionality
@@ -1962,6 +2226,9 @@ a prescribed interval:
         label<span style="color: #666666">=</span><span style="color: #BA2121">&#39;amplitude (m)&#39;</span>, default<span style="color: #666666">=1.0</span>,
         validators<span style="color: #666666">=</span>[validators<span style="color: #666666">.</span>NumberRange(<span style="color: #666666">0</span>, <span style="color: #666666">1E+20</span>)])
 </pre></div>
+
+<h3>Tailored validation  <a name="___sec23"></a></h3>
+
 <p>
 We can also easily provide our own more tailored validators.
 As an example, let us explain how we can check that \( T \) is less than 30 periods.
@@ -2008,6 +2275,8 @@ one fails, the others are not invoked.
 We therefore add <code>check_T</code> after the check of input such that we know we
 have a value for all data when we run the computations and test
 in <code>check_T</code>.
+
+<h3>Tailored validation of intervals  <a name="___sec24"></a></h3>
 
 <p>
 Although there is already a <code>NumberRange</code> validator for checking
@@ -2070,17 +2339,21 @@ We can now in any field constructor just add
         label<span style="color: #666666">=</span><span style="color: #BA2121">&#39;damping factor (kg/s)&#39;</span>, default<span style="color: #666666">=0</span>,
         validators<span style="color: #666666">=</span>[validators<span style="color: #666666">.</span>InputRequired(), interval(<span style="color: #666666">0</span>,<span style="color: #008000">None</span>)])
 </pre></div>
+
+<h3>Demo  <a name="___sec25"></a></h3>
+
 <p>
 Let us test our tailored error checking. Run <code>python controller.py</code>
 in the <code>vib2</code> directory and fill in \( -1.0 \) in the \( b \) field.
 Pressing <em>Compute</em> invokes our <code>interval(0,None)</code> function, which
-is nothing but a call <code>check_interval(field, form, 0, None)</code>.
+is nothing but a call to <code>check_interval</code> with the
+arguments <code>field</code>, <code>form</code>, <code>0</code>, and <code>None</code>.
 Inside this function,
-the test <code>if field.data < min_value</code> becomes true, <code>failure</code>
+the test <code>if field.data &lt; min_value</code> becomes true, <code>failure</code>
 is set, and the exception is raised. The message in the exception
 is available in the <code>field.errors</code> attribute so our template
 will write it out in red, see Figure <a href="#wf:vib2:flask:fig:error1">12</a>.
-The template used in <code>vib2</code> is basically the same as <code>view3.html</code>
+The template used in <code>vib2</code> is basically the same as <code>view_tex.html</code>
 in <code>vib1</code>, i.e., it feaures LaTeX mathematics and checking of
 <code>field.errors</code>.
 
@@ -2127,6 +2400,7 @@ code to look like they do in mathematical writing (<code>T</code> for \( T \)).
 
 <h2>Autogenerating the code <a name="wf:vib3:flask:autogen"></a></h2>
 
+<p>
 We shall now present generic <code>model.py</code> and <code>controller.py</code>
 files that work with <em>any</em> <code>compute</code> function (!). This example will
 demonstrate some advanced, powerful features of Python. The source code
@@ -2328,9 +2602,9 @@ the keys in a Python dictionary is undetermined).
 <b>Generating the template.</b>
 It remains to generate the right HTML template. The HTML code depends
 on what the returned <code>result</code> object from <code>compute</code> contains. Only a
-human who has the read <code>compute</code> code knows the details of the returned
+human who has read the <code>compute</code> code knows the details of the returned
 result. Therefore, we leave it to a human to provide the part
-of the HTML template that renders the result. The file <code>templates/view_results.html</code> contains this human-provided code, while <code>templates/view_forms.html</code>
+of the HTML template that renders the result. The file <code>templates/view_results.html</code> contains this human-provided code, while <code>templates/view.html</code>
 is a completely generic template for the forms:
 
 <p>
@@ -2349,33 +2623,43 @@ is a completely generic template for the forms:
   {% endfor %}
 <span style="color: #008000; font-weight: bold">&lt;/table&gt;</span>
 <span style="color: #008000; font-weight: bold">&lt;p&gt;&lt;input</span> <span style="color: #7D9029">type=</span><span style="color: #BA2121">submit</span> <span style="color: #7D9029">value=</span><span style="color: #BA2121">Compute</span><span style="color: #008000; font-weight: bold">&gt;&lt;/form&gt;&lt;/p&gt;</span>
+
+{% if result != None %}
+{{ result|safe }}
+{% endif %}
 </pre></div>
 <p>
-A somewhat generic solution for rendering the results can be
-provided by default. In the file <code>templates/view_results_default.html</code> we
-offer a code that checks if <code>results</code> is a string ending in <code>'.png'</code>
-or other typical file extensions for HTML images, and then writes out
-the code for an image, and otherwise a string version of the <code>results</code>
-object is dumped to the web page:
+At the end of this code, an HTML text <code>result</code> (string) is to be
+inserted.  This text is typically generated by calling Flask's
+<code>render_template</code> function, which uses <code>templates/view_results.html</code>
+to turn the return object <code>result</code> from the compute function into the
+desired HTML code:
 
 <p>
 
-<!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&lt;</span>p<span style="color: #666666">&gt;</span>
-{<span style="color: #666666">%</span> <span style="color: #008000; font-weight: bold">if</span> result <span style="color: #666666">!=</span> <span style="color: #008000">None</span> <span style="color: #666666">%</span>}
-  {<span style="color: #666666">%</span> <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">type</span>(result) <span style="color: #666666">==</span> <span style="color: #008000">type</span>(<span style="color: #BA2121">&quot;&quot;</span>) <span style="color: #AA22FF; font-weight: bold">and</span>
-        result[:<span style="color: #666666">-4</span>] <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;.png&#39;</span> <span style="color: #AA22FF; font-weight: bold">or</span>  result[:<span style="color: #666666">-4</span>] <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;.gif&#39;</span> <span style="color: #AA22FF; font-weight: bold">or</span>
-        result[:<span style="color: #666666">-4</span>] <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;.jpg&#39;</span> <span style="color: #666666">%</span>}
-<span style="color: #666666">&lt;</span>img src<span style="color: #666666">=</span><span style="color: #BA2121">&quot;{{ result }}&quot;</span><span style="color: #666666">&gt;</span>
-  {<span style="color: #666666">%</span> <span style="color: #008000; font-weight: bold">else</span> <span style="color: #666666">%</span>}
-{{ <span style="color: #008000">str</span>(result) }}
-  {<span style="color: #666666">%</span> endif <span style="color: #666666">%</span>}
-{<span style="color: #666666">%</span> endif <span style="color: #666666">%</span>}
-<span style="color: #666666">&lt;/</span>p<span style="color: #666666">&gt;</span>
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">index</span>():
+    <span style="color: #666666">...</span>
+    <span style="color: #008000; font-weight: bold">if</span> result:
+        result <span style="color: #666666">=</span> render_template(<span style="color: #BA2121">&#39;view_results.html&#39;</span>, result<span style="color: #666666">=</span>result)
+        <span style="color: #408080; font-style: italic"># result is now rendered HTML text</span>
+    <span style="color: #008000; font-weight: bold">return</span> render_template(<span style="color: #BA2121">&#39;view.html&#39;</span>, form<span style="color: #666666">=</span>form, result<span style="color: #666666">=</span>result)
 </pre></div>
 <p>
-The <code>index</code> function must combine the two pieces of templates.
-The complete, generic form of this function is then
+<div class="alert alert-block alert-notice alert-text-normal">
+<b>Notice.</b>
+<p>
+A perhaps simpler alternative would be to have a generic
+<code>view_forms.html</code> file and a user-specific
+<code>view_results.html</code> and explicitly combining them into a new
+file. This requires file writing by the app, which one normally
+wants to avoid. Especially if the web app gets multiple users,
+the file writing may lead to corrupt files.
+</div>
+
+
+<p>
+The complete, generic form of the <code>index</code> function becomes
 
 <p>
 
@@ -2389,17 +2673,11 @@ The complete, generic form of this function is then
         result <span style="color: #666666">=</span> compute(<span style="color: #666666">**</span>kwargs)
     <span style="color: #008000; font-weight: bold">else</span>:
         result <span style="color: #666666">=</span> <span style="color: #008000">None</span>
-    <span style="color: #408080; font-style: italic"># Concatenate view_forms.html and view_results.html</span>
-    forms_html   <span style="color: #666666">=</span> os<span style="color: #666666">.</span>path<span style="color: #666666">.</span>join(<span style="color: #BA2121">&#39;templates&#39;</span>, <span style="color: #BA2121">&#39;view_forms.html&#39;</span>)
-    results_html <span style="color: #666666">=</span> os<span style="color: #666666">.</span>path<span style="color: #666666">.</span>join(<span style="color: #BA2121">&#39;templates&#39;</span>, <span style="color: #BA2121">&#39;view_results.html&#39;</span>)
-    view_html    <span style="color: #666666">=</span> os<span style="color: #666666">.</span>path<span style="color: #666666">.</span>join(<span style="color: #BA2121">&#39;templates&#39;</span>, <span style="color: #BA2121">&#39;view.html&#39;</span>)
-    f_forms <span style="color: #666666">=</span> <span style="color: #008000">open</span>(forms_html, <span style="color: #BA2121">&#39;r&#39;</span>)
-    f_res   <span style="color: #666666">=</span> <span style="color: #008000">open</span>(results_html, <span style="color: #BA2121">&#39;r&#39;</span>)
-    f_view  <span style="color: #666666">=</span> <span style="color: #008000">open</span>(view_html, <span style="color: #BA2121">&#39;w&#39;</span>)
-    f_view<span style="color: #666666">.</span>write(f_forms<span style="color: #666666">.</span>read() <span style="color: #666666">+</span> f_res<span style="color: #666666">.</span>read())
-    f_forms<span style="color: #666666">.</span>close();  f_res<span style="color: #666666">.</span>close();  f_view<span style="color: #666666">.</span>close()
-    <span style="color: #008000; font-weight: bold">return</span> render_template(os<span style="color: #666666">.</span>path<span style="color: #666666">.</span>basename(view_html),
-                           form<span style="color: #666666">=</span>form, result<span style="color: #666666">=</span>result)
+    <span style="color: #008000; font-weight: bold">if</span> result:
+        <span style="color: #408080; font-style: italic"># result must be transformed to HTML and inserted as a</span>
+        <span style="color: #408080; font-style: italic"># string in the generic view.html file</span>
+        result <span style="color: #666666">=</span> render_template(<span style="color: #BA2121">&#39;view_results.html&#39;</span>, result<span style="color: #666666">=</span>result)
+    <span style="color: #008000; font-weight: bold">return</span> render_template(<span style="color: #BA2121">&#39;view.html&#39;</span>, form<span style="color: #666666">=</span>form, result<span style="color: #666666">=</span>result)
 
 <span style="color: #008000; font-weight: bold">if</span> __name__ <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;__main__&#39;</span>:
     app<span style="color: #666666">.</span>run(debug<span style="color: #666666">=</span><span style="color: #008000">True</span>)
@@ -2475,7 +2753,7 @@ making a plot of \( g \) og \( G \) for \( x\in [0,7\sigma] \).
     plt<span style="color: #666666">.</span>plot(x, y)
     plt<span style="color: #666666">.</span>grid(<span style="color: #008000">True</span>)
     plt<span style="color: #666666">.</span>savefig(plotfile2)
-    <span style="color: #008000; font-weight: bold">return</span> plotfile1, plotfile2, mean, stdev
+    <span style="color: #008000; font-weight: bold">return</span> plotfile1, plotfile2, <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%.2f</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> mean, <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%.2f</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> stdev
 </pre></div>
 <p>
 The <code>compute_gamma</code> function returns a tuple of four values.
@@ -2494,20 +2772,20 @@ The design is realized in the file <code>view_results.html</code> shown below.
 <p>
 
 <!-- code=html (!bc htmlpro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">{% if result != None %}
-<span style="color: #008000; font-weight: bold">&lt;p&gt;</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">&lt;p&gt;</span>
 <span style="color: #008000; font-weight: bold">&lt;table&gt;</span>
 <span style="color: #008000; font-weight: bold">&lt;tr&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;td&gt;&lt;img</span> <span style="color: #7D9029">src=</span><span style="color: #BA2121">&quot;{{ result[0] }}&quot;</span> <span style="color: #7D9029">width=</span><span style="color: #BA2121">&quot;400&quot;</span><span style="color: #008000; font-weight: bold">&gt;&lt;/td&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;td&gt;&lt;img</span> <span style="color: #7D9029">src=</span><span style="color: #BA2121">&quot;{{ result[1] }}&quot;</span> <span style="color: #7D9029">width=</span><span style="color: #BA2121">&quot;400&quot;</span><span style="color: #008000; font-weight: bold">&gt;&lt;/td&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;/tr&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;td&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;img</span> <span style="color: #7D9029">src=</span><span style="color: #BA2121">&quot;{{ result[0] }}&quot;</span> <span style="color: #7D9029">width=</span><span style="color: #BA2121">&quot;400&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/td&gt;&lt;td&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;img</span> <span style="color: #7D9029">src=</span><span style="color: #BA2121">&quot;{{ result[1] }}&quot;</span> <span style="color: #7D9029">width=</span><span style="color: #BA2121">&quot;400&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/td&gt;&lt;/tr&gt;</span>
 <span style="color: #008000; font-weight: bold">&lt;tr&gt;&lt;td&gt;</span>
 Mean value: {{ result[2] }} <span style="color: #008000; font-weight: bold">&lt;br&gt;</span>
 Standard deviation value: {{ result[3] }}
 <span style="color: #008000; font-weight: bold">&lt;/td&gt;&lt;/tr&gt;</span>
 <span style="color: #008000; font-weight: bold">&lt;/table&gt;</span>
 <span style="color: #008000; font-weight: bold">&lt;/p&gt;</span>
-{% endif %}
 </pre></div>
 <p>
 To create the web application, we just copy the generic <code>controller.py</code>,
@@ -2531,6 +2809,7 @@ That's it! Running <code>controller.py</code> file starts the app.
 
 <h2>Avoiding plot files <a name="wf:vib3:flask:nofiles"></a></h2>
 
+<p>
 Files with plots are easy to deal with as long as they are in the
 <code>static</code> subdirectory of the Flask application directory. However,
 the less files a web app makes use of, the better. Also, the problem
@@ -2542,8 +2821,9 @@ and Python. The relevant code constitutes the
 <a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/vib4" target="_self"><tt>vib4</tt></a> app in the
 directory of the same name.
 
-<h3>PNG plots  <a name="___sec23"></a></h3>
+<h3>PNG plots  <a name="___sec28"></a></h3>
 
+<p>
 Python has the <code>StringIO</code> object that is a string buffer with the
 look and behavior of a file. The idea is to let Matplotlib write to
 a <code>StringIO</code> object and afterwards extract the string from this object:
@@ -2577,7 +2857,7 @@ Now we can embed the PNG data in HTML by
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># html is some file object for the HTML file</span>
 html<span style="color: #666666">.</span>write(<span style="color: #BA2121">&quot;&quot;&quot;</span>
-<span style="color: #BA2121">&lt;img src=&quot;data:image/png;base64,</span><span style="color: #BB6688; font-weight: bold">%(figdata_png)s</span><span style="color: #BA2121">&quot; width=500&gt;</span>
+<span style="color: #BA2121">&lt;img src=&quot;data:image/png;base64,</span><span style="color: #BB6688; font-weight: bold">%(figdata_png)s</span><span style="color: #BA2121">&quot; width=&quot;500&quot;&gt;</span>
 <span style="color: #BA2121">&quot;&quot;&quot;</span> <span style="color: #666666">%</span> <span style="color: #008000">vars</span>())
 </pre></div>
 <p>
@@ -2586,11 +2866,12 @@ The corresponding syntax in an HTML template is
 <p>
 
 <!-- code=html (!bc htmlcod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">&lt;img</span> <span style="color: #7D9029">src=</span><span style="color: #BA2121">&quot;data:image/png;base64,{{ figdata_png }}&quot;</span> <span style="color: #7D9029">width=</span><span style="color: #BA2121">500</span><span style="color: #008000; font-weight: bold">&gt;</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">&lt;img</span> <span style="color: #7D9029">src=</span><span style="color: #BA2121">&quot;data:image/png;base64,{{ figdata_png }}&quot;</span> <span style="color: #7D9029">width=</span><span style="color: #BA2121">&quot;500&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
 </pre></div>
 
-<h3>SVG plots  <a name="___sec24"></a></h3>
+<h3>SVG plots  <a name="___sec29"></a></h3>
 
+<p>
 Inline figures in HTML, instead of using files, are most often realized
 by XML code with the figure data in SVG format.
 Plot strings in the SVG format are created very similarly to the PNG
@@ -2646,8 +2927,7 @@ PNG data and one with SVG data. The template becomes
 <p>
 
 <!-- code=html (!bc htmlpro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">{% if result != None %}
-<span style="color: #008000; font-weight: bold">&lt;p&gt;</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">&lt;p&gt;</span>
 <span style="color: #008000; font-weight: bold">&lt;table&gt;</span>
 <span style="color: #008000; font-weight: bold">&lt;tr&gt;</span>
 <span style="color: #008000; font-weight: bold">&lt;td&gt;</span>
@@ -2665,11 +2945,10 @@ Standard deviation value: {{ result[5] }}
 <span style="color: #008000; font-weight: bold">&lt;/td&gt;&lt;/tr&gt;</span>
 <span style="color: #008000; font-weight: bold">&lt;/table&gt;</span>
 <span style="color: #008000; font-weight: bold">&lt;/p&gt;</span>
-{% endif %}
 </pre></div>
 <p>
-Special HTML characters like <code><</code>, <code>></code>,
-<code>&</code>, <code>"</code>, and <code>'</code> are escaped in a template string like <code>{{ str }}</code>
+Special HTML characters like <code>&lt;</code>, <code>&gt;</code>,
+<code>&</code>, <code>&quot;</code>, and <code>'</code> are escaped in a template string like <code>{{ str }}</code>
 (i.e., <code>&</code> is replaced by <code>&amp;</code> `<` is replaced by <code>&lt;</code>, etc.).
 We need to avoid this manipulation of the string content
 because <code>result[2]</code> and <code>result[3]</code> contain
@@ -2690,6 +2969,7 @@ just write the <code>width</code> specification in the image tag for the PNG plo
 
 <h2>User login and storage of computed results <a name="wf:vib1:flask:login"></a></h2>
 
+<p>
 We now want to make an app where the computed results can be stored in
 a database. To this end, each user must create an account and login to
 this account for archiving results and for browsing previous runs of
@@ -3070,8 +3350,12 @@ login_manager<span style="color: #666666">.</span>init_app(app)
 <p>
 <!-- !split -->
 
-<h2>Using Bootstrap styles <a name="wf:vib1:flask:bootstrap"></a></h2>
+<p>
+<!-- --- begin exercise --- -->
 
+<h2>Project 1: Using Bootstrap styles <a name="wf:vib1:flask:bootstrap"></a></h2>
+
+<p>
 The design and layout of the graphical web interface is completely
 governed by template file. So far, we have used only basic HTML
 elements in this file. With CSS it is possible to improve the
@@ -3120,16 +3404,19 @@ typesetting of the arguments. This subexercise is for test purposes
 only.
 
 <p>
+<!-- <a href="http://pythonhosted.org/Flask-Bootstrap/basic-usage.html" target="_self"><tt>http://pythonhosted.org/Flask-Bootstrap/basic-usage.html</tt></a>. -->
+<!-- Not yet written. Must be based on -->
+
+<p>
 <!-- <a href="http://pythonhosted.org/Flask-Bootstrap/basic-usage.html" target="_self"><tt>http://pythonhosted.org/Flask-Bootstrap/basic-usage.html</tt></a> -->
 
 <p>
-<!-- Not yet written. Must be based on -->
-<!-- <a href="http://pythonhosted.org/Flask-Bootstrap/basic-usage.html" target="_self"><tt>http://pythonhosted.org/Flask-Bootstrap/basic-usage.html</tt></a>. -->
+<!-- --- end exercise --- -->
 
 <p>
 <!-- !split -->
 
-<h1>Further work  <a name="___sec27"></a></h1>
+<h1>Further work  <a name="___sec32"></a></h1>
 
 <ul>
  <li> Uploading of files: Just one button for a data file where we
@@ -3142,7 +3429,7 @@ only.
  <li> Drawing in HTML5</li>
 </ul>
 
-<h3>Resources  <a name="___sec28"></a></h3>
+<h3>Resources  <a name="___sec33"></a></h3>
 
 <ul>
  <li> <a href="https://docs.djangoproject.com/en/dev/topics/auth/default/#user-objects" target="_self">Django: make user</a></li>
@@ -3156,6 +3443,7 @@ only.
 
 <h1>Handling multiple input variables in Django <a name="wf:vib:django"></a></h1>
 
+<p>
 We shall briefly how to work with multi-variable input in Django.
 The text is the Django counterpart to the section <a href="#wf:vib:flask">Handling multiple input variables in Flask</a>.
 There are four float input variables: \( A \), \( b \), \( w \), and \( T \).
@@ -3168,8 +3456,9 @@ the resulting plot,
 cf. Figures <a href="#wf:vib1:flask:fig:input">7</a>
 and <a href="#wf:vib1:flask:fig:result">8</a>.
 
-<h2>Programming the Django application  <a name="___sec30"></a></h2>
+<h2>Programming the Django application  <a name="___sec35"></a></h2>
 
+<p>
 <b>Adding the app to a project.</b>
 Any Django app needs a project, but here we reuse the project
 we set up for the scientific hello world examples. We go to
@@ -3314,8 +3603,9 @@ The template for rendering the page is listed next.
 The tricky part is the syntax for displaying <em>static content</em>, such as
 the plot file made in the <code>compute</code> function.
 
-<h2>Custom validation  <a name="___sec31"></a></h2>
+<h2>Custom validation  <a name="___sec36"></a></h2>
 
+<p>
 Django has a series of methods available for user-provided validation
 of form data. These are exemplified in the app <code>vib2</code>, which
 is an extension of the <code>vib1</code> app with additional code. (This other
@@ -3423,8 +3713,9 @@ We refer to the vast Django documentation for many other ways of
 validating forms. The reader is encouraged to run the <code>vib2</code>
 application and test out the validations we have implemented.
 
-<h2>Customizing widgets  <a name="___sec32"></a></h2>
+<h2>Customizing widgets  <a name="___sec37"></a></h2>
 
+<p>
 One will occasionally have full control of the layout of the individual
 elements in a web form. These are typeset inside <code>input</code> tags in
 HTML. Django associates the term <em>widget</em> with an HTML form field. To set
@@ -3461,12 +3752,14 @@ dictionary.
 <p>
 <!-- !split -->
 
-<h1>Exercises  <a name="___sec33"></a></h1>
+<h1>Exercises  <a name="___sec38"></a></h1>
 
+<p>
 <!-- --- begin exercise --- -->
 
-<h2>Exercise 1: Add two numbers <a name="wf:exer:add2"></a></h2>
+<h2>Exercise 2: Add two numbers <a name="wf:exer:add2"></a></h2>
 
+<p>
 Make a web application that reads two numbers from a web page,
 adds the numbers, and prints the sum in a new web page.
 Package the necessary files that constitute the application
@@ -3479,8 +3772,9 @@ Filename: <code>add2.tar.gz</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2>Exercise 2: Extend the <code>vib3_flask</code> app <a name="wf:exer:vib3:demo"></a></h2>
+<h2>Exercise 3: Extend the <code>vib3_flask</code> app <a name="wf:exer:vib3:demo"></a></h2>
 
+<p>
 Add a new argument <code>x_axis</code> to the <code>compute</code> function in the
 <a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/vib_flask3" target="_self"><tt>vib_flask3</tt></a> application from the section <a href="#wf:vib3:flask:autogen">Autogenerating the code</a>. The <code>x_axis</code> argument measures the extent
 of the \( x \) axis in the plots in terms of the number of standard
@@ -3493,8 +3787,9 @@ automatically adds the new argument and how the plots adapt!
 <p>
 <!-- --- begin exercise --- -->
 
-<h2>Exercise 3: Equip the <code>vib3_flask</code> app with more data types <a name="wf:exer:vib3:lists"></a></h2>
+<h2>Exercise 4: Equip the <code>vib3_flask</code> app with more data types <a name="wf:exer:vib3:lists"></a></h2>
 
+<p>
 In the <a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/vib_flask3" target="_self"><tt>vib_flask3</tt></a>
 application from the section <a href="#wf:vib3:flask:autogen">Autogenerating the code</a>,
 use the <code>label</code> argument in the form field objects to add an
@@ -3514,8 +3809,9 @@ Filename: <code>vib3_ext.tar.gz</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2>Exercise 4: Auto-generate code from function signature  <a name="___sec37"></a></h2>
+<h2>Exercise 5: Auto-generate code from function signature  <a name="___sec42"></a></h2>
 
+<p>
 Given a <code>compute</code> with a set of positional and keyword
 arguments, the purpose of this exercise is to <em>automatically</em> generate the
 Flask files <code>model.py</code> and <code>view.py</code>. Use the Python <code>inspect</code>
@@ -3535,9 +3831,9 @@ Filename: <code>generate_flask.py</code>.
 <p>
 <!-- --- end exercise --- -->
 
-<h1>Resources  <a name="___sec38"></a></h1>
+<h1>Resources  <a name="___sec43"></a></h1>
 
-<h2>Flask resources  <a name="___sec39"></a></h2>
+<h2>Flask resources  <a name="___sec44"></a></h2>
 
 <ul>
  <li> <a href="http://flask.pocoo.org/" target="_self">Flask website</a></li>
@@ -3547,7 +3843,7 @@ Filename: <code>generate_flask.py</code>.
  <li> <a href="http://werkzeug.pocoo.org/" target="_self">The Werkzeug library</a></li>
 </ul>
 
-<h2>Django resources  <a name="___sec40"></a></h2>
+<h2>Django resources  <a name="___sec45"></a></h2>
 
 <ul>
  <li> <a href="https://www.djangoproject.com/" target="_self">Django webpage</a></li>
@@ -3555,7 +3851,7 @@ Filename: <code>generate_flask.py</code>.
  <li> <a href="http://www.youtube.com/playlist?list=PL385A53B00B8B158E" target="_self">YouTube videos</a></li>
 </ul>
 
-<h1>Remaining  <a name="___sec41"></a></h1>
+<h1>Remaining  <a name="___sec46"></a></h1>
 
 <ul>
  <li> apply (generated apps) to simviz (make py simviz too and describe that)</li>

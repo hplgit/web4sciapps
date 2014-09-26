@@ -6,10 +6,10 @@ Automatically generated HTML file from DocOnce source
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
-<meta name="description" content="Using Web Frameworks for Scientific Web Applications">
+<meta name="description" content="Using Web Frameworks for Scientific Applications">
 <meta name="keywords" content="web frameworks,MVC pattern,Flask installation,Flask input forms,Flask HTML templates,Flask MVC pattern,Flask troubleshooting,Django installation,Django making a project,Django making an application,Django input forms,Django HTML templates,Flask input forms,Flask error checking,Flask CSS style sheets,Flask LaTeX mathematics,Flask input validation,inline PNG image in HTML,base64 encoding of PNG images,inline SVG figure in HTML,Flask login,Flask database,Flask bootstrap style,Django input forms,Django input validation">
 
-<title>Using Web Frameworks for Scientific Web Applications</title>
+<title>Using Web Frameworks for Scientific Applications</title>
 
 
 <style type="text/css">
@@ -61,6 +61,7 @@ hr.figure { border: 0; width: 80%; border-bottom: 1px solid #aaa}
 div { text-align: justify; text-justify: inter-word; }
 </style>
 
+
 </head>
 
 <!-- tocinfo
@@ -105,14 +106,19 @@ div { text-align: justify; text-justify: inter-word; }
                '___sec16'),
               (' Using style sheets ', 2, None, '___sec17'),
               (' Using LaTeX mathematics ', 2, None, '___sec18'),
-              (' Rearringing the elements in the HTML template ',
+              (' Rearranging the elements in the HTML template ',
                2,
                None,
                '___sec19'),
+              (' Bootstrap HTML style ', 2, None, '___sec20'),
               (' Custom validation ',
                2,
                'wf:vib1:flask:validation',
                'wf:vib1:flask:validation'),
+              (' Using Flask validators ', 3, None, '___sec22'),
+              (' Tailored validation ', 3, None, '___sec23'),
+              (' Tailored validation of intervals ', 3, None, '___sec24'),
+              (' Demo ', 3, None, '___sec25'),
               (' Autogenerating the code ',
                2,
                'wf:vib3:flask:autogen',
@@ -121,46 +127,46 @@ div { text-align: justify; text-justify: inter-word; }
                2,
                'wf:vib3:flask:nofiles',
                'wf:vib3:flask:nofiles'),
-              (' PNG plots ', 3, None, '___sec23'),
-              (' SVG plots ', 3, None, '___sec24'),
+              (' PNG plots ', 3, None, '___sec28'),
+              (' SVG plots ', 3, None, '___sec29'),
               (' User login and storage of computed results ',
                2,
                'wf:vib1:flask:login',
                'wf:vib1:flask:login'),
-              (' Using Bootstrap styles ',
+              (' Project 1: Using Bootstrap styles ',
                2,
                'wf:vib1:flask:bootstrap',
                'wf:vib1:flask:bootstrap'),
-              (' Further work ', 1, None, '___sec27'),
-              (' Resources ', 3, None, '___sec28'),
+              (' Further work ', 1, None, '___sec32'),
+              (' Resources ', 3, None, '___sec33'),
               (' Handling multiple input variables in Django ',
                1,
                'wf:vib:django',
                'wf:vib:django'),
-              (' Programming the Django application ', 2, None, '___sec30'),
-              (' Custom validation ', 2, None, '___sec31'),
-              (' Customizing widgets ', 2, None, '___sec32'),
-              (' Exercises ', 1, None, '___sec33'),
-              (' Exercise 1: Add two numbers ',
+              (' Programming the Django application ', 2, None, '___sec35'),
+              (' Custom validation ', 2, None, '___sec36'),
+              (' Customizing widgets ', 2, None, '___sec37'),
+              (' Exercises ', 1, None, '___sec38'),
+              (' Exercise 2: Add two numbers ',
                2,
                'wf:exer:add2',
                'wf:exer:add2'),
-              (' Exercise 2: Extend the `vib3_flask` app ',
+              (' Exercise 3: Extend the `vib3_flask` app ',
                2,
                'wf:exer:vib3:demo',
                'wf:exer:vib3:demo'),
-              (' Exercise 3: Equip the `vib3_flask` app with more data types ',
+              (' Exercise 4: Equip the `vib3_flask` app with more data types ',
                2,
                'wf:exer:vib3:lists',
                'wf:exer:vib3:lists'),
-              (' Exercise 4: Auto-generate code from function signature ',
+              (' Exercise 5: Auto-generate code from function signature ',
                2,
                None,
-               '___sec37'),
-              (' Resources ', 1, None, '___sec38'),
-              (' Flask resources ', 2, None, '___sec39'),
-              (' Django resources ', 2, None, '___sec40'),
-              (' Remaining ', 1, None, '___sec41')]}
+               '___sec42'),
+              (' Resources ', 1, None, '___sec43'),
+              (' Flask resources ', 2, None, '___sec44'),
+              (' Django resources ', 2, None, '___sec45'),
+              (' Remaining ', 1, None, '___sec46')]}
 end of tocinfo -->
 
 <body>
@@ -198,10 +204,11 @@ MathJax.Hub.Config({
 
 <h1>Handling multiple input variables in Flask <a name="wf:vib:flask"></a></h1>
 
+<p>
 The scientific hello world example shows how to work with one input
 variable and one output variable. We can easily derive an extensible
 recipe for apps with a collection of input variables and some
-corresponding HTML code as result. Multiple input variables are listed
+associated HTML code as result. Multiple input variables are listed
 in the <code>InputForm</code> class using different types for different forms
 (text field, float field, integer field, check box field for boolean
 values, etc.).  The value of these variables will be available in a
@@ -246,6 +253,7 @@ We shall make a series of different versions of this app:
 
 <h2>Programming the Flask application <a name="wf:vib1:flask:app"></a></h2>
 
+<p>
 The forthcoming text explains the necessary steps to realize a
 Flask app that behaves as depicted in Figures <a href="#wf:vib1:flask:fig:input">7</a>
 and <a href="#wf:vib1:flask:fig:result">8</a>. We start with the
@@ -261,7 +269,8 @@ More specifically, inside <code>compute.py</code>, we have a function for
 evaluating \( u(t) \) and a <code>compute</code> function for making the plot. The
 return value of the latter is the name of the plot file, which should
 get a unique name every time the <code>compute</code> function is called such
-that the browser cannot reuse an already cached image. Flask
+that the browser cannot reuse an already cached image when displaying
+the plot. Flask
 applications must have all extra files (CSS, images, etc.) in a
 subdirectory <code>static</code>.
 
@@ -297,6 +306,21 @@ subdirectory <code>static</code>.
 <span style="color: #008000; font-weight: bold">if</span> __name__ <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;__main__&#39;</span>:
     <span style="color: #008000; font-weight: bold">print</span> compute(<span style="color: #666666">1</span>, <span style="color: #666666">0.1</span>, <span style="color: #666666">1</span>, <span style="color: #666666">20</span>)
 </pre></div>
+<p>
+<div class="alert alert-block alert-warning alert-text-normal">
+<b>Avoid file writing.</b>
+<p>
+It is in general not a good idea to write plots to file or let a
+web app write to file. If this app is deployed at some web site and
+multiple users are running the app, the <code>os.remove</code> statements may remove
+plots created by all other users. However, the app is useful as a
+graphical user interface run locally on a machine.
+Later, we shall avoid writing plot files and instead
+store plots in strings and embed the strings
+in the <code>img</code> tag in the HTML code.
+</div>
+
+
 <p>
 We organize the model, view, and controller as three separate
 files, as illustrated in
@@ -355,9 +379,13 @@ hello world app:
 <span style="color: #008000; font-weight: bold">try</span>:
     template_name <span style="color: #666666">=</span> sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>]
 <span style="color: #008000; font-weight: bold">except</span> <span style="color: #D2413A; font-weight: bold">IndexError</span>:
-    template_name <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;view0&#39;</span>
+    template_name <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;view_plain&#39;</span>
 
 app <span style="color: #666666">=</span> Flask(__name__)
+
+<span style="color: #008000; font-weight: bold">if</span> template_name <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;view_flask_bootstrap&#39;</span>:
+    <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">flask_bootstrap</span> <span style="color: #008000; font-weight: bold">import</span> Bootstrap
+    Bootstrap(app)
 
 <span style="color: #AA22FF">@app.route</span>(<span style="color: #BA2121">&#39;/vib1&#39;</span>, methods<span style="color: #666666">=</span>[<span style="color: #BA2121">&#39;GET&#39;</span>, <span style="color: #BA2121">&#39;POST&#39;</span>])
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">index</span>():
@@ -368,6 +396,7 @@ app <span style="color: #666666">=</span> Flask(__name__)
     <span style="color: #008000; font-weight: bold">else</span>:
         result <span style="color: #666666">=</span> <span style="color: #008000">None</span>
 
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;XXX&#39;</span>, result
     <span style="color: #008000; font-weight: bold">return</span> render_template(template_name <span style="color: #666666">+</span> <span style="color: #BA2121">&#39;.html&#39;</span>,
                            form<span style="color: #666666">=</span>form, result<span style="color: #666666">=</span>result)
 
@@ -375,11 +404,12 @@ app <span style="color: #666666">=</span> Flask(__name__)
     app<span style="color: #666666">.</span>run(debug<span style="color: #666666">=</span><span style="color: #008000">True</span>)
 </pre></div>
 <p>
+<b>The HTML template.</b>
 The details governing how the web page really looks like lie in the
 template file. Since we have several fields and want them nicely
 align in a tabular fashion, we place the field name, text areas,
 and labels inside an HTML table in our first attempt to write a
-template, <code>view0.html</code>:
+template, <code>view_plain.html</code>:
 
 <p>
 
@@ -397,7 +427,7 @@ template, <code>view0.html</code>:
 
 <span style="color: #008000; font-weight: bold">&lt;p&gt;</span>
 {% if result != None %}
-<span style="color: #008000; font-weight: bold">&lt;img</span> <span style="color: #7D9029">src=</span><span style="color: #BA2121">&quot;{{ result }}&quot;</span> <span style="color: #7D9029">width=</span><span style="color: #BA2121">500</span><span style="color: #008000; font-weight: bold">&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;img</span> <span style="color: #7D9029">src=</span><span style="color: #BA2121">&quot;{{ result }}&quot;</span> <span style="color: #7D9029">width=</span><span style="color: #BA2121">&quot;500&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
 {% endif %}
 <span style="color: #008000; font-weight: bold">&lt;/p&gt;</span>
 </pre></div>
@@ -421,7 +451,16 @@ any object in our application to the template. Debugging of the template
 is done by viewing the HTML source of the web page in the browser.
 
 <p>
-You are encouraged to run <code>python controller.py</code> and load <code>http://127.0.0.1:5000/vib1</code> into your web browser for testing.
+You are encouraged to go to the <code>vib</code> directory,
+run <code>python controller.py</code>, and load
+
+<p>
+
+<!-- code=text typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">`http://127.0.0.1:5000/vib1`
+</pre></div>
+<p>
+into your web browser for testing.
 
 <p>
 <p>

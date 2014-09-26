@@ -12,13 +12,14 @@ standard HTML code. Here is a very simple example where we introduce
 a class ``name`` for the HTML table's column with the field name and set the
 foreground color of the text in this column to blue.
 The style sheet is called ``basic.css`` and *must* reside in the
-``static`` subdirectory of the Flask application directory:
+``static`` subdirectory of the Flask application directory. The content
+of ``basic.css`` is just the line
 
 .. code-block:: text
 
         td.name { color: blue; }
 
-The ``view2.html`` file using this style sheet features a ``link`` tag
+The ``view_css.html`` file using this style sheet features a ``link`` tag
 to the style sheet in the HTML header, and the column containing
 the field name has
 the HTML tag ``<td class="name">`` to trigger the specification in
@@ -40,7 +41,7 @@ the style sheet:
             <td>{{ field(size=12) }}</td>
             <td>{{ field.label }}</td>
 
-Just run ``python controller.py view2`` to see that the names
+Just run ``python controller.py view_css`` to see that the names
 of the variables to set in the web page are blue.
 
 Using LaTeX mathematics
@@ -56,7 +57,7 @@ the mathematics is documented. In the present example we would like
 to typeset :math:`A`, :math:`b`, :math:`w`, and :math:`T` with italic font as done
 in LaTeX. Fortunately, native LaTeX typesetting is available in
 HTML through the tool `MathJax <http://www.mathjax.org/>`__.
-Our template ``view3.html`` enables MathJax. Formulas are written
+Our template ``view_tex.html`` enables MathJax. Formulas are written
 with standard LaTeX inside ``\(`` and ``\)``, while equations are surrounded
 by ``$$``. Here we use formulas only:
 
@@ -95,7 +96,7 @@ LaTeX rendering looks like in the browser.
 
    *LaTeX typesetting of mathematical symbols*
 
-Rearringing the elements in the HTML template
+Rearranging the elements in the HTML template
 ---------------------------------------------
 
 Now we want to place the plot to the right of the input forms in
@@ -112,7 +113,7 @@ the plot in the second column, while the second row features the
 
    *New design with input and output side by side*
 
-The enabling template file is ``view4.html``:
+The enabling template file is ``view_table.html``:
 
 .. code-block:: html
 
@@ -150,15 +151,17 @@ The enabling template file is ``view4.html``:
           {% endfor %}
         </table>
         </td>
+        
         <td>
         <p>
         {% if result != None %}
-        <img src="{{ result }}" width=500>
+        <img src="{{ result }}" width="500">
         {% endif %}
         </p>
         </td></tr>
         <tr>
-        <td><p><input type=submit value=Compute></form></p></td>
+        <td><p><input type=submit value=Compute></p></td>
         </tr>
         </table>
+        </form>
 

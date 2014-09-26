@@ -9,7 +9,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Handling multiple input variables in Flask &mdash; Using Web Frameworks for Scientific Web Applications</title>
+    <title>Handling multiple input variables in Flask &mdash; Using Web Frameworks for Scientific Applications</title>
     
     <link rel="stylesheet" href="_static/redcloud.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -17,7 +17,7 @@
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     '1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -30,9 +30,27 @@
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="_static/jquery.cookie.js"></script>
     <script type="text/javascript" src="_static/toggle_sections.js"></script>
-    <link rel="top" title="Using Web Frameworks for Scientific Web Applications" href="index.html" />
+
+        <script src="http://sagecell.sagemath.org/static/jquery.min.js"></script>
+        <script src="http://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+
+        <script>sagecell.makeSagecell({inputLocation: ".sage"});</script>
+
+        <style type="text/css">
+                .sagecell .CodeMirror-scroll {
+                        overflow-y: hidden;
+                        overflow-x: auto;
+                }
+                .sagecell .CodeMirror {
+                        height: auto;
+                }
+        </style>
+
+    
+    <link rel="top" title="Using Web Frameworks for Scientific Applications" href="index.html" />
     <link rel="next" title="Implementing error checking in the template" href="._web4sa009.html" />
-    <link rel="prev" title="Programming the Django application (1)" href="._web4sa007.html" /> 
+    <link rel="prev" title="Programming the Django application (1)" href="._web4sa007.html" />
+ 
   </head>
   <body>
     <div class="relbar-top">
@@ -49,7 +67,7 @@
         <li class="right" >
           <a href="._web4sa007.html" title="Programming the Django application (1)"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="index.html">Using Web Frameworks for Scientific Web Applications</a> &raquo;</li>
+    <li><a href="index.html">Using Web Frameworks for Scientific Applications</a> &raquo;</li>
  
       </ul>
     </div>
@@ -66,7 +84,7 @@
 <p>The scientific hello world example shows how to work with one input
 variable and one output variable. We can easily derive an extensible
 recipe for apps with a collection of input variables and some
-corresponding HTML code as result. Multiple input variables are listed
+associated HTML code as result. Multiple input variables are listed
 in the <tt class="docutils literal"><span class="pre">InputForm</span></tt> class using different types for different forms
 (text field, float field, integer field, check box field for boolean
 values, etc.).  The value of these variables will be available in a
@@ -82,11 +100,11 @@ addresses the task of plotting the function <span class="math">\(u(t)=Ae^{-bt}\s
 i.e., a plot of <span class="math">\(u(t)\)</span> is added after the input fields and the <em>Compute</em>
 button.</p>
 <div class="figure" id="wf-vib1-flask-fig-input">
-<img alt="_images/vib1_flask_input.png" src="_images/vib1_flask_input.png" style="width: 500px;" />
+<a class="reference internal image-reference" href="_images/vib1_flask_input.png"><img alt="_images/vib1_flask_input.png" src="_images/vib1_flask_input.png" style="width: 500px;" /></a>
 <p class="caption"><em>The input page</em></p>
 </div>
 <div class="figure" id="wf-vib1-flask-fig-result">
-<img alt="_images/vib1_flask_output.png" src="_images/vib1_flask_output.png" style="width: 700px;" />
+<a class="reference internal image-reference" href="_images/vib1_flask_output.png"><img alt="_images/vib1_flask_output.png" src="_images/vib1_flask_output.png" style="width: 700px;" /></a>
 <p class="caption"><em>The result page</em></p>
 </div>
 <p>We shall make a series of different versions of this app:</p>
@@ -112,7 +130,8 @@ More specifically, inside <tt class="docutils literal"><span class="pre">compute
 evaluating <span class="math">\(u(t)\)</span> and a <tt class="docutils literal"><span class="pre">compute</span></tt> function for making the plot. The
 return value of the latter is the name of the plot file, which should
 get a unique name every time the <tt class="docutils literal"><span class="pre">compute</span></tt> function is called such
-that the browser cannot reuse an already cached image. Flask
+that the browser cannot reuse an already cached image when displaying
+the plot. Flask
 applications must have all extra files (CSS, images, etc.) in a
 subdirectory <tt class="docutils literal"><span class="pre">static</span></tt>.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">exp</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">linspace</span>
@@ -145,7 +164,18 @@ subdirectory <tt class="docutils literal"><span class="pre">static</span></tt>.<
     <span class="k">print</span> <span class="n">compute</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
 </pre></div>
 </div>
-<p id="index-0">We organize the model, view, and controller as three separate
+<div class="admonition-avoid-file-writing admonition" id="index-0">
+<p class="first admonition-title">Avoid file writing</p>
+<p class="last">It is in general not a good idea to write plots to file or let a
+web app write to file. If this app is deployed at some web site and
+multiple users are running the app, the <tt class="docutils literal"><span class="pre">os.remove</span></tt> statements may remove
+plots created by all other users. However, the app is useful as a
+graphical user interface run locally on a machine.
+Later, we shall avoid writing plot files and instead
+store plots in strings and embed the strings
+in the <tt class="docutils literal"><span class="pre">img</span></tt> tag in the HTML code.</p>
+</div>
+<p>We organize the model, view, and controller as three separate
 files, as illustrated in
 the section <a class="reference internal" href="._web4sa004.html#wf-hw3-flask"><em>Splitting the app into model, view, and controller files</em></a>. This more complicated app involves
 more code and especially the model will soon be handy to isolate in its own
@@ -190,9 +220,13 @@ hello world app:</p>
 <span class="k">try</span><span class="p">:</span>
     <span class="n">template_name</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
-    <span class="n">template_name</span> <span class="o">=</span> <span class="s">&#39;view0&#39;</span>
+    <span class="n">template_name</span> <span class="o">=</span> <span class="s">&#39;view_plain&#39;</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">template_name</span> <span class="o">==</span> <span class="s">&#39;view_flask_bootstrap&#39;</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">flask_bootstrap</span> <span class="kn">import</span> <span class="n">Bootstrap</span>
+    <span class="n">Bootstrap</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
 
 <span class="nd">@app.route</span><span class="p">(</span><span class="s">&#39;/vib1&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;GET&#39;</span><span class="p">,</span> <span class="s">&#39;POST&#39;</span><span class="p">])</span>
 <span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
@@ -203,6 +237,7 @@ hello world app:</p>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">result</span> <span class="o">=</span> <span class="bp">None</span>
 
+    <span class="k">print</span> <span class="s">&#39;XXX&#39;</span><span class="p">,</span> <span class="n">result</span>
     <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="n">template_name</span> <span class="o">+</span> <span class="s">&#39;.html&#39;</span><span class="p">,</span>
                            <span class="n">form</span><span class="o">=</span><span class="n">form</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="n">result</span><span class="p">)</span>
 
@@ -210,11 +245,12 @@ hello world app:</p>
     <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The details governing how the web page really looks like lie in the
+<p><strong>The HTML template.</strong>
+The details governing how the web page really looks like lie in the
 template file. Since we have several fields and want them nicely
 align in a tabular fashion, we place the field name, text areas,
 and labels inside an HTML table in our first attempt to write a
-template, <tt class="docutils literal"><span class="pre">view0.html</span></tt>:</p>
+template, <tt class="docutils literal"><span class="pre">view_plain.html</span></tt>:</p>
 <div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;form</span> <span class="na">method=</span><span class="s">post</span> <span class="na">action=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span>
 <span class="nt">&lt;table&gt;</span>
   {% for field in form %}
@@ -228,7 +264,7 @@ template, <tt class="docutils literal"><span class="pre">view0.html</span></tt>:
 
 <span class="nt">&lt;p&gt;</span>
 {% if result != None %}
-<span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;{{ result }}&quot;</span> <span class="na">width=</span><span class="s">500</span><span class="nt">&gt;</span>
+<span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;{{ result }}&quot;</span> <span class="na">width=</span><span class="s">&quot;500&quot;</span><span class="nt">&gt;</span>
 {% endif %}
 <span class="nt">&lt;/p&gt;</span>
 </pre></div>
@@ -248,7 +284,12 @@ in the present case, are transferred to the template via keyword
 arguments to the <tt class="docutils literal"><span class="pre">render_template</span></tt> function. We can easily pass on
 any object in our application to the template. Debugging of the template
 is done by viewing the HTML source of the web page in the browser.</p>
-<p>You are encouraged to run <tt class="docutils literal"><span class="pre">python</span> <span class="pre">controller.py</span></tt> and load <tt class="docutils literal"><span class="pre">http://127.0.0.1:5000/vib1</span></tt> into your web browser for testing.</p>
+<p>You are encouraged to go to the <tt class="docutils literal"><span class="pre">vib</span></tt> directory,
+run <tt class="docutils literal"><span class="pre">python</span> <span class="pre">controller.py</span></tt>, and load</p>
+<div class="highlight-text"><div class="highlight"><pre>`http://127.0.0.1:5000/vib1`
+</pre></div>
+</div>
+<p>into your web browser for testing.</p>
 </div>
 </div>
 
@@ -308,7 +349,7 @@ is done by viewing the HTML source of the web page in the browser.</p>
         <li class="right" >
           <a href="._web4sa007.html" title="Programming the Django application (1)"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="index.html">Using Web Frameworks for Scientific Web Applications</a> &raquo;</li>
+    <li><a href="index.html">Using Web Frameworks for Scientific Applications</a> &raquo;</li>
  
       </ul>
     </div>
@@ -316,7 +357,7 @@ is done by viewing the HTML source of the web page in the browser.</p>
 
     <div class="footer">
         &copy; Copyright 2014, H. P. Langtangen and A. E. Johansen.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.
     </div>
     <!-- cloud_sptheme 1.3 -->
   </body>
