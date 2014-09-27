@@ -1,22 +1,26 @@
 
 def formula2series2pyfunc(formula, N, x, x0=0):
     """
-    Convert a sympy expression in some independent_variable to
-    a series representation with N terms and create a Python
-    function for evaluating this series representation.
+    Convert a sympy expression formula in some independent
+    variable x to a series representation of degree N terms
+    and create a Python function for evaluating this series
+    representation. Return Python functions for the formula
+    and the series expansion, plus a LaTeX formula for the
+    series expansion.
     """
     import sympy as sp
-    series = formula.series(x, x0, N).removeO()
-    print formula
-    print series
+    series = formula.series(x, x0, N+1).removeO()
     series_pyfunc = sp.lambdify([x], series, modules='numpy')
     formula_pyfunc = sp.lambdify([x], formula, modules='numpy')
-    return formula_pyfunc, series_pyfunc
+    return formula_pyfunc, series_pyfunc, sp.latex(series)
 
-# Enable eval on strings to turn them into sympy expressions
-#from sympy import *
-
-def visualize(formula, independent_variable, N, xmin, xmax, ymin, ymax):
+def visualize_series(
+    formula,                  # string: formula
+    independent_variable,     # string: name of independent variable
+    N,                        # int: degree of polynomial approximation
+    xmin, xmax, ymin, ymax,   # strings: extent of axes
+    x0='0',                   # string: point of expansion
+    ):
     # Turn independent variable into sympy symbol, stored in x
     import sympy as sp
     exec('x = %s = sp.symbols("%s")' %
@@ -31,7 +35,7 @@ def visualize(formula, independent_variable, N, xmin, xmax, ymin, ymax):
     formula = eval(formula, namespace)
     # Turn x0 into sympy expression
     x0 = eval(x0, sp.__dict__)
-    f, s = formula2series2pyfunc(formula, N=N, x=x)
+    f, s, latex = formula2series2pyfunc(formula, N=N, x=x)
     # Make plot
     import numpy as np
     # Assume xmin, xmax, ymin, ymax are all strings and
@@ -48,6 +52,8 @@ def visualize(formula, independent_variable, N, xmin, xmax, ymin, ymax):
     plt.legend(['$%s$' % sp.latex(formula), 'series, N=%d' % N])
     plt.show()
 
-visualize('sin(t)', 't', N=12,
-          xmin='0', xmax='2*pi', ymin='-2', ymax='2',
-          x0='0')
+if __name__ == '__main__':
+    visualize_series(
+        'sin(t)', 't', N=12,
+        xmin='0', xmax='2*pi', ymin='-2', ymax='2',
+        x0='0')

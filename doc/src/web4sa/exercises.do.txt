@@ -10,6 +10,15 @@ adds the numbers, and prints the sum in a new web page.
 Package the necessary files that constitute the application
 in a tar file.
 
+===== Exercise: Plot a user-specified formula =====
+label{wf:exer:formula}
+file=plot_formula.tar.gz
+
+!bhint
+You may use the `vib1` app from Section ref{wf:vib1:flask:app}
+as starting point.
+!ehint
+
 ===== Exercise: Visualize Taylor polynomial approximations =====
 label{wf:exer:Taylor}
 file=Taylor_approx.tar.gz
@@ -18,6 +27,27 @@ Make a web application that reads two numbers from a web page,
 adds the numbers, and prints the sum in a new web page.
 Package the necessary files that constitute the application
 in a tar file.
+
+!bc pyshell
+>>> import compute
+>>> import sympy as sp
+>>> from sympy import *
+>>> t = symbols('t')
+>>> formula = exp(-2*t)
+>>> f, s, latex = compute.formula2series2pyfunc(formula, 3, t)
+>>> latex
+'- \\frac{4 t^{3}}{3} + 2 t^{2} - 2 t + 1'
+>>> imort matplotlib.pyplot as plot
+>>> import numpy as np
+>>> t = np.linspace(0, 2)
+>>> plt.plot(t, f(t), t, s(t))
+[<matplotlib.lines.Line2D at 0x7fc6c020f350>,
+ <matplotlib.lines.Line2D at 0x7fc6c020f5d0>]
+>>> plt.show()
+!ec
+The resulting plot is displayed below.
+
+FIGURE: [fig-web4sa/Taylor_approx_exp2t, width=500 frac=0.8]
 
 # #if TOPIC in ('Flask+Django', 'Flask')
 ===== Exercise: Extend the `vib3` app =====

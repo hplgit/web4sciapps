@@ -1,5 +1,5 @@
-from flask import Flask, render_template, request
 from model import InputForm
+from flask import Flask, render_template, request
 import sys
 # SVG or PNG plot?
 svg = False
@@ -25,10 +25,6 @@ def index():
             # Make local variable (name field.name)
             exec('%s = %s' % (field.name, field.data))
         result = compute(A, b, w, T)
-        import codecs
-        f = codecs.open('tmp.svg', 'w', 'utf-8')
-        f.write(result[1])
-        f.close()
     else:
         result = None
 

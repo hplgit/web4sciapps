@@ -43,10 +43,13 @@ u(t) = Ae^{-bt}\sin (w t), \hbox{ for } t\in [0,T]
 <table class="table table-hover">
 <tr><td>
   <div class="form-group">
+  <table>
   {% for field in form %}
+    <tr><td>
     <div class="input-group">
       <span class="input-group-addon"> \( {{ field.name }} \) </span>
       {{field(class_="form-control")}}
+      <span class="input-group-addon">{{ field.label.text }}</span>
     </div>
     {% if field.errors %}
       <table class="table table-hover">
@@ -55,7 +58,9 @@ u(t) = Ae^{-bt}\sin (w t), \hbox{ for } t\in [0,T]
       {% endfor %}
       </table>
     {% endif %}
+    </tr></td>
   {% endfor %}
+  </table>
 </td>
 
 <!-- 2nd column contains the plot -->

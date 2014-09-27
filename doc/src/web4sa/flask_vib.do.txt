@@ -30,10 +30,10 @@ FIGURE: [fig-web4sa/vib1_flask_output, width=700] The result page. label{wf:vib1
 We shall make a series of different versions of this app:
 
  * `vib1` for the basic set-up and illustration of tailoring the HTML code.
- * `vib2` for custom validation of input, governed by the programmer.
+ * `vib2` for custom validation of input, governed by the programmer,
+   and inlined graphics in the HTML code.
  * `vib3` for automatic generation of the Flask app (!).
- * `vib4` for inlining graphics in the HTML code.
- * `vib5` for storing computed results in user accounts.
+ * `vib4` for storing computed results in user accounts.
 
 ===== Programming the Flask application =====
 label{wf:vib1:flask:app}

@@ -23,7 +23,7 @@ def index():
     else:
         result = None
 
-    print 'XXX', result
+    print 'XXX',result, request.method, form.validate(), [field.errors for field in form]
     return render_template(template_name + '.html',
                            form=form, result=result)
 
