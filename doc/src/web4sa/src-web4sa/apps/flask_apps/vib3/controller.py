@@ -5,7 +5,7 @@ import sys, os, inspect
 
 app = Flask(__name__)
 
-@app.route('/vib3', methods=['GET', 'POST'])
+@app.route('/vib4', methods=['GET', 'POST'])
 def index():
     form = InputForm(request.form)
     if request.method == 'POST' and form.validate():

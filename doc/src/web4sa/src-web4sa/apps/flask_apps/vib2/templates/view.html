@@ -10,8 +10,8 @@ MathJax.Hub.Config({
   }
 });
 </script>
-<script type="text/javascript"
- src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src=
+"http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 
 This web page visualizes the function \(
@@ -38,7 +38,7 @@ u(t) = Ae^{-bt}\sin (w t), \hbox{ for } t\in [0,T]
 
 <p>
 {% if result != None %}
-<img src="{{ result }}">
+<img src="data:image/png;base64,{{ result }}" width="500">
 {% endif %}
 </p>
 </body>

@@ -1,30 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
+<link href=
+"http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"
+rel="stylesheet">
+
+<link href="https://raw.githubusercontent.com/bootflat/bootflat.github.io/master/bootflat/css/bootflat.css" rel="stylesheet">
+
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/cyborg/bootstrap.min.css" rel="stylesheet">
+
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   TeX: {
      equationNumbers: {  autoNumber: "AMS"  },
-     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js"]
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
   }
 });
 </script>
-<script type="text/javascript"
- src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src=
+"http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 <!--
 <nav class="navbar navbar-default" role="navigation">
 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav">
-       {% for f in some_sequence %}
-       <li><a href="/{{f}}">{{f}}</a></li>
+       {% for text, url in some_sequence %}
+       <li><a href="/{{url}}">{{ text }}</a></li>
        {% endfor %}
        </ul>
 </div>
 </nav>
 -->
+
+<h2>Damped sine wave</h2>
 
 This web page visualizes the function \(
 u(t) = Ae^{-bt}\sin (w t), \hbox{ for } t\in [0,T]
@@ -38,7 +47,7 @@ u(t) = Ae^{-bt}\sin (w t), \hbox{ for } t\in [0,T]
   {% for field in form %}
     <div class="input-group">
       <span class="input-group-addon"> \( {{ field.name }} \) </span>
-      {{field(class_="form-control")}}
+      {{ field(class_="form-control") }}
     </div>
     {% if field.errors %}
       <table class="table table-hover">

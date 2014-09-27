@@ -1,6 +1,19 @@
 from flask import Flask, render_template, request
 from model import InputForm
-from compute import compute
+import sys
+# SVG or PNG plot?
+svg = False
+try:
+    if sys.argv[1] == 'svg':
+        svg = True
+except IndexError:
+    pass
+if svg:
+    from compute import compute_png_svg as compute
+    template = 'view_svg.html'
+else:
+    from compute import compute
+    template = 'view.html'
 
 app = Flask(__name__)
 
@@ -12,10 +25,14 @@ def index():
             # Make local variable (name field.name)
             exec('%s = %s' % (field.name, field.data))
         result = compute(A, b, w, T)
+        import codecs
+        f = codecs.open('tmp.svg', 'w', 'utf-8')
+        f.write(result[1])
+        f.close()
     else:
         result = None
 
-    return render_template('view.html', form=form, result=result)
+    return render_template(template, form=form, result=result)
 
 if __name__ == '__main__':
     app.run(debug=True)

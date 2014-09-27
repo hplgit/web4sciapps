@@ -5,24 +5,27 @@ import os, time, glob, math
 def damped_vibrations(t, A, b, w):
     return A*exp(-b*t)*cos(w*t)
 
-def compute_vib(A=1, b=0.2, w=2*math.pi, T=5, resolution=500):
+def compute_vib(A, b, w, T, resolution=500):
     """Return filename of plot of the damped_vibration function."""
     t = linspace(0, T, resolution+1)
     y = damped_vibrations(t, A, b, w)
     plt.figure()  # needed to avoid adding curves in plot
     plt.plot(t, y)
     plt.title('A=%g, b=%g, w=%g' % (A, b, w))
-    if not os.path.isdir('static'):
-        os.mkdir('static')
-    else:
-        # Remove old plot files
-        for filename in glob.glob(os.path.join('static', '*.png')):
-            os.remove(filename)
-    # Use time since Jan 1, 1970 in filename in order make
-    # a unique filename that the browser has not chached
-    plotfile = os.path.join('static', str(time.time()) + '.png')
-    plt.savefig(plotfile)
-    return plotfile
+
+    # Make Matplotlib write to StringIO file object and grab
+    # return the object's string
+    from StringIO import StringIO
+    figfile = StringIO()
+    plt.savefig(figfile, format='png')
+    figfile.seek(0)  # rewind to beginning of file
+    import base64
+    figdata_png = base64.b64encode(figfile.buf)
+    figfile = StringIO()
+    plt.savefig(figfile, format='svg')
+    figfile.seek(0)
+    figdata_svg = '<svg' + figfile.buf.split('<svg')[1]
+    return figdata_png, unicode(figdata_svg,'utf-8')
 
 def gamma_density(x, a, h, A):
     # http://en.wikipedia.org/wiki/Gamma_distribution
@@ -49,24 +52,31 @@ def compute_gamma(a=0.5, h=2.0, A=math.sqrt(2), resolution=500):
     plt.figure()  # needed to avoid adding curves in plot
     plt.plot(x, y)
     plt.title('a=%g, h=%g, A=%g' % (a, h, A))
-    if not os.path.isdir('static'):
-        os.mkdir('static')
-    else:
-        # Remove old plot files
-        for filename in glob.glob(os.path.join('static', '*.png')):
-            os.remove(filename)
-    # Use time since Jan 1, 1970 in filename in order make
-    # a unique filename that the browser has not chached
-    t = str(time.time())
-    plotfile1 = os.path.join('static', 'density_%s.png' % t)
-    plotfile2 = os.path.join('static', 'cumulative_%s.png' % t)
-    plt.savefig(plotfile1)
+    # Make Matplotlib write to StringIO file object and grab
+    # return the object's string
+    from StringIO import StringIO
+    figfile = StringIO()
+    plt.savefig(figfile, format='png')
+    figfile.seek(0)  # rewind to beginning of file
+    import base64
+    figdata_density_png = base64.b64encode(figfile.buf)
+    figfile = StringIO()
+    plt.savefig(figfile, format='svg')
+    figfile.seek(0)
+    figdata_density_svg = '<svg' + figfile.buf.split('<svg')[1]
+
     y = gamma_cumulative(x, a, h, A)
     plt.figure()
     plt.plot(x, y)
     plt.grid(True)
-    plt.savefig(plotfile2)
-    return plotfile1, plotfile2, '%.2f' % mean, '%.2f' % stdev
-
-if __name__ == '__main__':
-    print compute_vib()
+    figfile = StringIO()
+    plt.savefig(figfile, format='png')
+    figfile.seek(0)
+    figdata_cumulative_png = base64.b64encode(figfile.buf)
+    figfile = StringIO()
+    plt.savefig(figfile, format='svg')
+    figfile.seek(0)
+    figdata_cumulative_svg = '<svg' + figfile.buf.split('<svg')[1]
+    return figdata_density_png, figdata_cumulative_png, \
+           figdata_density_svg, figdata_cumulative_svg, \
+           '%.2f' % mean, '%.2f' % stdev
