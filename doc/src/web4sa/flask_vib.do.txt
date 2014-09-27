@@ -822,6 +822,9 @@ the previous apps, and the files are located in the "`vib4`":
 `compute_gamma` function from the previous app (`vib3`) in Section
 ref{wf:vib3:flask:nofiles}.
 
+_The text is not yet written. The relevant files to be made are
+listed below._
+
 `db_models.py`:
 
 @@@CODE ${app_path}/db_models.py

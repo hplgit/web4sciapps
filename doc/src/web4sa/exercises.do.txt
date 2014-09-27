@@ -10,25 +10,33 @@ adds the numbers, and prints the sum in a new web page.
 Package the necessary files that constitute the application
 in a tar file.
 
+===== Exercise: Visualize Taylor polynomial approximations =====
+label{wf:exer:Taylor}
+file=Taylor_approx.tar.gz
 
+Make a web application that reads two numbers from a web page,
+adds the numbers, and prints the sum in a new web page.
+Package the necessary files that constitute the application
+in a tar file.
 
 # #if TOPIC in ('Flask+Django', 'Flask')
-===== Exercise: Extend the `vib3_flask` app =====
+===== Exercise: Extend the `vib3` app =====
 label{wf:exer:vib3:demo}
 
 Add a new argument `x_axis` to the `compute` function in the
-"`vib_flask3`": "${github_path}/vib_flask3" application from Section
+"`vib3`": "${github_path}/src-web4sa/apps/flask_apps/vib3"
+application from Section
 ref{wf:vib3:flask:autogen}. The `x_axis` argument measures the extent
 of the $x$ axis in the plots in terms of the number of standard
 deviations (default may be 7).  Observe how the web interface
 automatically adds the new argument and how the plots adapt!
 
 
-===== Exercise: Equip the `vib3_flask` app with more data types =====
+===== Exercise: Equip the `vib3` app with more data types =====
 label{wf:exer:vib3:lists}
 file=vib3_ext.tar.gz
 
-In the "`vib_flask3`": "${github_path}/vib_flask3"
+In the "`vib3`": "${github_path}/src-web4sa/apps/flask_apps/vib3"
 application from Section ref{wf:vib3:flask:autogen},
 use the `label` argument in the form field objects to add an
 information of the type of data that is to be supplied in the
@@ -46,16 +54,16 @@ file=generate_flask.py
 
 Given a `compute` with a set of positional and keyword
 arguments, the purpose of this exercise is to *automatically* generate the
-Flask files `model.py` and `view.py`. Use the Python `inspect`
+Flask files `model.py` and `controller.py`. Use the Python `inspect`
 module, see Section ref{wf:vib3:flask:autogen}, to extract
 the positional and keyword arguments in `compute`, and use this
-information to construct the relevant Python code. Assume as
+information to construct the relevant Python code in strings. Write
+the strings to `model.py` and `controller.py` files. Assume as
 in Section ref{wf:vib3:flask:autogen} that the user provides
 a file `view_results.html` for defining how the returned object
 from the `compute` function is to be rendered.
 
-Test the code generator on the `compute` function in the `vib1_flask`
+Test the code generator on the `compute` function in the `vib1`
 application to check that the generated
-`model.py` and `view.py` files are correct.
+`model.py` and `controller.py` files are correct.
 # #endif
-
