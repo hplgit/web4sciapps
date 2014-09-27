@@ -3,7 +3,7 @@
 {% block styles %}
 {{super()}}
 <style>
-    .appsize { width: 500px }
+    .appsize { width: 800px }
 </style>
 
 <script type="text/x-mathjax-config">
@@ -33,51 +33,46 @@ MathJax.Hub.Config({
 {% endblock %}
 -->
 
+{% block content %}
+
+<h2>Damped sine wave</h2>
+
 This web page visualizes the function \(
 u(t) = Ae^{-bt}\sin (w t), \hbox{ for } t\in [0,T]
 \).
 
-{% block content %}
-<!-- table with forms to the left and plot to the right -->
-<form class="navbar-form navbar-top" method="post" action="">
-<table class="table table-hover">
-<tr><td>
+<p>
+<form class="navbar-form navbar-top" method="post">
   <div class="form-group">
-  <table>
   {% for field in form %}
-    <tr><td>
-    <div class="input-group">
+    <div class="row">
+     <div class="input-group appsize">
+      <label class="col-sm-1 control-label">
       <span class="input-group-addon"> \( {{ field.name }} \) </span>
-      {{field(class_="form-control")}}
-      <span class="input-group-addon">{{ field.label.text }}</span>
+      </label>
+      <div class="col-sm-4">
+      {{ field(class_="form-control") }}
+      </div>
+      <div class="col-sm-4">
+        {{ field.label }}
+      </div>
+      {% if field.errors %}
+        {% for error in field.errors %}
+          <div class="col-sm-3">
+            <div style="color: red;">{{ error }}</div>
+          </div>
+        {% endfor %}
+      {% endif %}
+     </div>
     </div>
-    {% if field.errors %}
-      <table class="table table-hover">
-      {% for error in field.errors %}
-        <tr><td class="danger">{{ error }}</td></tr>
-      {% endfor %}
-      </table>
-    {% endif %}
-    </tr></td>
   {% endfor %}
-  </table>
-</td>
+<br/>
+<input type="submit" value="Compute" class="btn btn-default">
+</form>
 
-<!-- 2nd column contains the plot -->
-<td>
 <p>
 {% if result != None %}
 <img src="{{ result }}" width="500">
 {% endif %}
-</p>
-</td></tr>
-<!-- next row contains the Compute button -->
-<tr>
-<td><p>
-<input type="submit" value="Compute" class="btn btn-default">
-</td></tr>
-</table>
-</form>
-</div>
 </html>
 {% endblock %}

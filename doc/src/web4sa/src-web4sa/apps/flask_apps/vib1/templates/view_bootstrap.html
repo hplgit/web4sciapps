@@ -1,15 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <link href=
 "http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"
 rel="stylesheet">
-
-<!--
-<link href="https://raw.githubusercontent.com/bootflat/bootflat.github.io/master/bootflat/css/bootflat.css" rel="stylesheet">
-
-<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/cyborg/bootstrap.min.css" rel="stylesheet">
--->
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -40,38 +35,37 @@ This web page visualizes the function \(
 u(t) = Ae^{-bt}\sin (w t), \hbox{ for } t\in [0,T]
 \).
 
-<!-- table with forms to the left and plot to the right -->
 <p>
-<form class="form-horizontal" role="form">
+<form class="navbar-form navbar-top" method="post">
+  <div class="form-group">
   {% for field in form %}
-    <div class="form-group form-group-lg">
+    <div class="row">
+     <div class="input-group">
       <label class="col-sm-1 control-label">
-       \( {{ field.name }} \)
+      <span class="input-group-addon"> \( {{ field.name }} \) </span>
       </label>
-      <div class="col-sm-2">
-        {{ field(class_="form-control") }}
+      <div class="col-sm-3">
+      {{ field(class_="form-control") }}
       </div>
       <div class="col-sm-2">
         {{ field.label }}
       </div>
-    {% if field.errors %}
-      {% for error in field.errors %}
-        <div class="col-sm-3">
-          {{ error }}
-        </div>
-      {% endfor %}
-    {% endif %}
+      {% if field.errors %}
+        {% for error in field.errors %}
+          <div class="col-sm-3">
+            <div style="color: red;">{{ error }}</div>
+          </div>
+        {% endfor %}
+      {% endif %}
+     </div>
     </div>
   {% endfor %}
-</p>
-<p>
-<input type="submit" value="Compute" method="POST"
- class="btn btn-default">
-</p>
+<br/>
+<input type="submit" value="Compute" class="btn btn-default">
 </form>
 
+<p>
 {% if result != None %}
-<h2>Results</h1>
-<img src="{{ result }}" width="500">
+<img src="{{ result }}" width="400">
 {% endif %}
 </html>
