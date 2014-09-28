@@ -40,10 +40,9 @@ h1, h2, h3, h4, h5, h6 {
           <!-- navigation toc: --> <li><a href="._web4sa_flask000.html#___sec0" style="font-size: 80%;">Web frameworks</a></li>
      <!-- navigation toc: --> <li><a href="._web4sa_flask004.html#___sec4" style="font-size: 80%;">Making a Flask application</a></li>
      <!-- navigation toc: --> <li><a href="._web4sa_flask006.html#wf:vib:flask" style="font-size: 80%;">Handling multiple input variables in Flask</a></li>
-     <!-- navigation toc: --> <li><a href="._web4sa_flask015.html#___sec27" style="font-size: 80%;">Further work</a></li>
-     <!-- navigation toc: --> <li><a href="._web4sa_flask016.html#___sec29" style="font-size: 80%;">Exercises</a></li>
-     <!-- navigation toc: --> <li><a href="._web4sa_flask016.html#___sec34" style="font-size: 80%;">Flask resources</a></li>
-     <!-- navigation toc: --> <li><a href="._web4sa_flask016.html#___sec35" style="font-size: 80%;">Remaining</a></li>
+     <!-- navigation toc: --> <li><a href="._web4sa_flask016.html#___sec46" style="font-size: 80%;">Exercises</a></li>
+     <!-- navigation toc: --> <li><a href="._web4sa_flask016.html#___sec54" style="font-size: 80%;">Flask resources</a></li>
+     <!-- navigation toc: --> <li><a href="._web4sa_flask016.html#___sec55" style="font-size: 80%;">Remaining</a></li>
 
     </ul>
    </div>
@@ -63,15 +62,21 @@ h1, h2, h3, h4, h5, h6 {
                'wf:hw:mvc'),
               (' Making a Flask application ', 1, None, '___sec4'),
               (' Programming the Flask application ', 2, None, '___sec5'),
+              (' The user interaction ', 3, None, '___sec6'),
+              (' The Python code ', 3, None, '___sec7'),
+              (' Dissection ', 3, None, '___sec8'),
+              (' The template files ', 3, None, '___sec9'),
+              (' Testing the application ', 3, None, '___sec10'),
               (' Equipping the input page with output results ',
                2,
                None,
-               '___sec6'),
+               '___sec11'),
               (' Splitting the app into model, view, and controller files ',
                2,
                'wf:hw3:flask',
                'wf:hw3:flask'),
-              (' Troubleshooting ', 2, None, '___sec8'),
+              (' Troubleshooting ', 2, None, '___sec13'),
+              (' Address already in use ', 3, None, '___sec14'),
               (' Handling multiple input variables in Flask ',
                1,
                'wf:vib:flask',
@@ -80,64 +85,84 @@ h1, h2, h3, h4, h5, h6 {
                2,
                'wf:vib1:flask:app',
                'wf:vib1:flask:app'),
+              (' The compute part ', 3, None, '___sec17'),
+              (' The model ', 3, None, '___sec18'),
+              (' The view ', 3, None, '___sec19'),
+              (' The HTML template ', 3, None, '___sec20'),
               (' Implementing error checking in the template ',
                2,
                None,
-               '___sec11'),
-              (' Using style sheets ', 2, None, '___sec12'),
-              (' Using LaTeX mathematics ', 2, None, '___sec13'),
+               '___sec21'),
+              (' Using style sheets ', 2, None, '___sec22'),
+              (' Using LaTeX mathematics ', 2, None, '___sec23'),
               (' Rearranging the elements in the HTML template ',
                2,
                None,
-               '___sec14'),
-              (' Bootstrap HTML style ', 2, None, '___sec15'),
+               '___sec24'),
+              (' Bootstrap HTML style ', 2, None, '___sec25'),
               (' Custom validation ',
                2,
                'wf:vib1:flask:validation',
                'wf:vib1:flask:validation'),
-              (' Using Flask validators ', 3, None, '___sec17'),
-              (' Tailored validation ', 3, None, '___sec18'),
-              (' Tailored validation of intervals ', 3, None, '___sec19'),
-              (' Demo ', 3, None, '___sec20'),
-              (' Autogenerating the code ',
-               2,
-               'wf:vib3:flask:autogen',
-               'wf:vib3:flask:autogen'),
+              (' Using Flask validators ', 3, None, '___sec27'),
+              (' Tailored validation ', 3, None, '___sec28'),
+              (' Tailored validation of intervals ', 3, None, '___sec29'),
+              (' Demo ', 3, None, '___sec30'),
               (' Avoiding plot files ',
                2,
-               'wf:vib3:flask:nofiles',
-               'wf:vib3:flask:nofiles'),
-              (' PNG plots ', 3, None, '___sec23'),
-              (' SVG plots ', 3, None, '___sec24'),
+               'wf:vib2:flask:nofiles',
+               'wf:vib2:flask:nofiles'),
+              (' PNG plots ', 3, None, '___sec32'),
+              (' SVG plots ', 3, None, '___sec33'),
+              (' Autogenerating the code ',
+               2,
+               'wf:autogen:flask',
+               'wf:autogen:flask'),
+              (' Inspecting function signatures ', 3, None, '___sec35'),
+              (' Generating the model ', 3, None, '___sec36'),
+              (' Generating the view ', 3, None, '___sec37'),
+              (' Generating the template ', 3, None, '___sec38'),
+              (' Application ', 3, None, '___sec39'),
               (' User login and storage of computed results ',
                2,
-               'wf:vib1:flask:login',
-               'wf:vib1:flask:login'),
-              (' Project 1: Using Bootstrap styles ',
-               2,
-               'wf:vib1:flask:bootstrap',
-               'wf:vib1:flask:bootstrap'),
-              (' Further work ', 1, None, '___sec27'),
-              (' Resources ', 3, None, '___sec28'),
-              (' Exercises ', 1, None, '___sec29'),
-              (' Exercise 2: Add two numbers ',
+               'wf:flask:login',
+               'wf:flask:login'),
+              (' Required additional software ', 3, None, '___sec41'),
+              (' The compute part ', 3, None, '___sec42'),
+              (' The interfaces of the app ', 3, None, '___sec43'),
+              (' The source code ', 3, None, '___sec44'),
+              (' Resources ', 3, None, '___sec45'),
+              (' Exercises ', 1, None, '___sec46'),
+              (' Exercise 1: Add two numbers ',
                2,
                'wf:exer:add2',
                'wf:exer:add2'),
-              (' Exercise 3: Extend the `vib3_flask` app ',
+              (' Exercise 2: Upload data file and visualize curves ',
                2,
-               'wf:exer:vib3:demo',
-               'wf:exer:vib3:demo'),
-              (' Exercise 4: Equip the `vib3_flask` app with more data types ',
+               'wf:exer:upload',
+               'wf:exer:upload'),
+              (' Exercise 3: Plot a user-specified formula ',
                2,
-               'wf:exer:vib3:lists',
-               'wf:exer:vib3:lists'),
-              (' Exercise 5: Auto-generate code from function signature ',
+               'wf:exer:formula',
+               'wf:exer:formula'),
+              (' Exercise 4: Visualize Taylor polynomial approximations ',
+               2,
+               'wf:exer:Taylor',
+               'wf:exer:Taylor'),
+              (' Exercise 5: Extend the `gen` app ',
+               2,
+               'wf:exer:gen:demo',
+               'wf:exer:gen:demo'),
+              (' Exercise 6: Equip the `gen` app with more data types ',
+               2,
+               'wf:exer:gen:lists',
+               'wf:exer:gen:lists'),
+              (' Exercise 7: Auto-generate code from function signature ',
                2,
                None,
-               '___sec33'),
-              (' Flask resources ', 1, None, '___sec34'),
-              (' Remaining ', 1, None, '___sec35')]}
+               '___sec53'),
+              (' Flask resources ', 1, None, '___sec54'),
+              (' Remaining ', 1, None, '___sec55')]}
 end of tocinfo -->
 
 
@@ -161,10 +186,11 @@ MathJax.Hub.Config({
 <a name="part0005"></a>
 <!-- !split -->
 
-<h2 id="___sec8">Troubleshooting <a name="___sec8"></a></h2>
+<h2 id="___sec13">Troubleshooting <a name="___sec13"></a></h2>
+
+<h3 id="___sec14">Address already in use <a name="___sec14"></a></h3>
 
 <p>
-<b>Address already in use.</b>
 You can easily kill the Flask application and restart it, but sometimes
 you will get an error that the address is already in use.
 To recover from this problem, run the <code>lsof</code> program to see which program

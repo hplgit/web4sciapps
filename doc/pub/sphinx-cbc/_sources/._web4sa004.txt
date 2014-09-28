@@ -13,15 +13,18 @@ performed by
 
 .. code-block:: text
 
-        Terminal> sudo pip install Flask
-        Terminal> sudo pip install WTForms
+        Terminal> sudo pip install --upgrade Flask
+        Terminal> sudo pip install --upgrade Flask-WTF
 
-You must add ``--upgrade`` to upgrade a previous installation (``pip install --upgrade Flask``).
+The ``--upgrade`` option ensures that you upgrade to the latest version in
+case you already have these packages.
 
 Programming the Flask application  (1)
 --------------------------------------
 
-**The user interaction.**
+The user interaction  (1)
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
 We want our input page to feature a text field where the user can
 write the value of ``r``, see Figure :ref:`wf:hw1:flask:fig:input`.
 By clicking on the *equals* button
@@ -42,7 +45,9 @@ seen in Figure :ref:`wf:hw1:flask:fig:result`.
 
    *The output page*
 
-**The Python code.**
+The Python code
+~~~~~~~~~~~~~~~
+
 Flask does not require us to use the MVC pattern so there is actually
 no need to split the original program into model, view, controller,
 and compute files as already explained (but it will be
@@ -88,7 +93,9 @@ in detail below.
         if __name__ == '__main__':
             app.run(debug=True)
 
-**Dissection.**
+Dissection
+~~~~~~~~~~
+
 The web application is the ``app`` object of class ``Flask``, and initialized
 as shown. The model is a special Flask class derived from ``Form``
 where the input variable in the app is listed as a
@@ -126,7 +133,9 @@ Figure :ref:`wf:hw1:flask:fig:input`.
 .. index::
    single: Flask; HTML templates
 
-**The template files.**
+The template files
+~~~~~~~~~~~~~~~~~~
+
 Making a web page with Flask is conveniently done by an HTML
 template. Since the output page is simplest we display the
 ``view_output.html`` template first:
@@ -151,7 +160,9 @@ as we need to use an HTML form:
           <input type=submit value=equals>
         </form>
 
-**Testing the application.**
+Testing the application
+~~~~~~~~~~~~~~~~~~~~~~~
+
 We collect the files associated with a Flask application (often called
 just *app*) in a directory,
 here called `hw1 <https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/hw1>`__.

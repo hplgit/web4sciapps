@@ -1,380 +1,214 @@
 .. !split
 
-.. _wf:vib3:flask:autogen:
+Bootstrap HTML style
+--------------------
 
-Autogenerating the code
------------------------
-
-.. index:: getattr
-
-.. index:: setattr
-
-.. index:: hasattr
-
-We shall now present generic ``model.py`` and ``controller.py``
-files that work with *any* ``compute`` function (!). This example will
-demonstrate some advanced, powerful features of Python. The source code
-is found in the `vib3 <https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/vib3>`__
-directory.
-
-**Inspecting function signatures.**
-The basic idea is that the Python module ``inspect`` can be used to
-retrieve the names of the arguments and the default values of
-keyword arguments of *any* given ``compute`` function. Say we have some
-
-.. code-block:: python
-
-        def mycompute(A, m=0, s=1, w=1, x_range=[-3,3]):
-            ...
-            return result
-
-Running
-
-.. code-block:: python
-
-        import inspect
-        arg_names = inspect.getargspec(mycompute).args
-        defaults  = inspect.getargspec(mycompute).defaults
-
-leads to
-
-.. code-block:: python
-
-        arg_names = ['A', 'm', 's', 'w', 'x_range']
-        defaults = (0, 1, 1, [-3, 3])
-
-We have all the argument names in ``arg_names`` and
-``defaults[i]`` is the default value of keyword argument
-``arg_names[j]``, where ``j = len(arg_names) - len(defaults) + i``.
-
-**Generating the model.**
-Knowing the name ``name`` of some argument in the ``compute``
-function, we can make the corresponding class attribute
-in the ``InputForm`` class by
-
-.. code-block:: python
-
-        setattr(InputForm, name, FloatForm())
-
-For name equal to ``'A'`` this is the same as hardcoding
-
-.. code-block:: python
-
-        class InputForm:
-            A = FloatForm()
-
-Assuming that all arguments in ``compute`` are floats, we could
-do
-
-.. code-block:: python
-
-        class InputForm:
-            pass  # Empty class
-        
-        arg_names = inspect.getargspec(mycompute).args
-        for name in arg_names:
-            setattr(InputForm, name, FloatForm())
-
-However, we can do better than this: for
-keyword arguments the type of the default value can be used to
-select the appropriate form class. The complete ``model.py`` file
-then goes as follows:
-
-.. code-block:: python
-
-        """
-        Example on generic model.py file which inspects the arguments
-        of the compute function and automatically generates a relevant
-        InputForm class.
-        """
-        
-        import wtforms
-        from math import pi
-        
-        from compute import compute_gamma as compute
-        import inspect
-        arg_names = inspect.getargspec(compute).args
-        defaults  = inspect.getargspec(compute).defaults
-        
-        class InputForm(wtforms.Form):
-            pass
-        
-        # Augment defaults with None elements for the positional
-        # arguments
-        defaults = [None]*(len(arg_names)-len(defaults)) + list(defaults)
-        # Map type of default to right form field
-        type2form = {type(1.0): wtforms.FloatField,
-                     type(1):   wtforms.IntegerField,
-                     type(''):  wtforms.TextField,
-                     }
-        
-        for name, value in zip(arg_names, defaults):
-            if value is None:
-                setattr(InputForm, name, wtforms.FloatField(
-                    validators=[wtforms.validators.InputRequired()]))
-            else:
-                if type(value) in type2form:
-                    setattr(InputForm, name, type2form[type(value)](
-                        default=value,
-                        validators=[wtforms.validators.InputRequired()]))
-                else:
-                    raise TypeError('argument %s %s not supported' %
-                                    name, type(value))
-        
-        if __name__ == '__main__':
-            for item in dir(InputForm):
-                if item in arg_names:
-                    print item, getattr(InputForm, item)
-
-(The ``compute_gamma`` function imported from ``compute`` is the
-only application-specific statement in this code and will be explained later.)
-
-**Generating the view.**
-The call to ``compute`` in the ``controller.py`` file must also be expressed
-in a general way such that the call handles any type and number of
-parameters. This can be done in two ways, using either positional
-or keyword arguments.
-
-The technique with positional arguments
-is explained first. It consists of collecting all parameters in
-a list or tuple, called ``args``, and then calling ``compute(*args)``
-(which is equivalent to ``compute(args[0], args[1], ..., args[n])``
-if ``n`` is ``len(args)-1``). The elements of ``args`` are the values of the
-form variables. We know the name of a form variable as a string
-``name`` (from ``arg_names``), and if ``form`` is the form object,
-the construction ``getattr(form, name).data`` extracts the value
-that the user provided (``getattr(obj, attr)`` gets the attribute, with name
-available as a string in ``attr``, in the object ``obj``).
-For exampe, if ``name`` is ``'A'``, ``getattr(form, name).data`` is the same as
-``form.A.data``.
-Collecting all form variables, placing them in a list,
-and calling ``compute`` are done with
-
-.. code-block:: python
-
-        arg_names = inspect.getargspec(compute).args
-        args = [getattr(form, name).data for name in arg_names]
-        result = compute(*args)
-
-Our ``InputForm`` class guarantees that all arguments in ``compute``
-are present in the form, but to be absolutely safe we can
-test if ``name`` is present in the ``form`` object:
-
-.. code-block:: python
-
-        args = [getattr(form, name).data for name in arg_names
-                if hasattr(form, name)]
-
-A potential problem with the ``args`` list is that the values might
-be in wrong order. It appears, fortunately, that the order we
-assign attributes to the form class is preserved when iterating over
-the form. Nevertheless, using keyword arguments instead of positional
-arguments provides a completely safe solution to calling ``compute``
-with the correct arguments. Keyword arguments are placed in a
-dictionary ``kwargs`` and ``compute`` is called as ``compute(**kwargs)``.
-The generic solution is
-
-.. code-block:: python
-
-        kwargs = {name: getattr(form, name).data for name in arg_names
-                  if hasattr(form, name)}
-        result = compute(**kwargs)
-
-The ``compute(**kwargs)`` call is equivalent to ``compute(A=1, b=3, w=0.5)``
-in case ``kwargs = {'w'=0.5, 'A':1, 'b':3}`` (recall that the order of
-the keys in a Python dictionary is undetermined).
-
-**Generating the template.**
-It remains to generate the right HTML template. The HTML code depends
-on what the returned ``result`` object from ``compute`` contains. Only a
-human who has read the ``compute`` code knows the details of the returned
-result. Therefore, we leave it to a human to provide the part
-of the HTML template that renders the result. The file ``templates/view_results.html`` contains this human-provided code, while ``templates/view.html``
-is a completely generic template for the forms:
+The `Bootstrap <http://getbootstrap.com/>`__ framework for creating web pages
+has been very popular in recent years, both because of the design and
+the automatic support for responsive pages on all sorts of devices.
+Bootstrap can be used in combination with Flask. The template file
+``view_bootstrap.html`` is identical to the former ``view_table.html``,
+except that we load the Bootstrap CSS file and include in comments
+how to add the typical navigation bar found in many Bootstrap-based
+web pages. The template looks like
 
 .. code-block:: html
 
-        <form method=post action="">
-        <table>
-          {% for field in form %}
-            <tr><td>{{ field.name }}</td> <td>{{ field }}</td>
-            <td>{% if field.errors %}
-              <ul class=errors>
-              {% for error in field.errors %}
-                <li>{{ error }}</li>
-              {% endfor %}</ul>
-            {% endif %}</td></tr>
-          {% endfor %}
-        </table>
-        <p><input type=submit value=Compute></form></p>
+        <!DOCTYPE html>
+        <html lang="en">
         
-        {% if result != None %}
-        {{ result|safe }}
-        {% endif %}
-
-At the end of this code, an HTML text ``result`` (string) is to be
-inserted.  This text is typically generated by calling Flask's
-``render_template`` function, which uses ``templates/view_results.html``
-to turn the return object ``result`` from the compute function into the
-desired HTML code:
-
-.. code-block:: python
-
-        def index():
-            ...
-            if result:
-                result = render_template('view_results.html', result=result)
-                # result is now rendered HTML text
-            return render_template('view.html', form=form, result=result)
-
-
-.. note::
-   A perhaps simpler alternative would be to have a generic
-   ``view_forms.html`` file and a user-specific
-   ``view_results.html`` and explicitly combining them into a new
-   file. This requires file writing by the app, which one normally
-   wants to avoid. Especially if the web app gets multiple users,
-   the file writing may lead to corrupt files.
-
-
-
-
-The complete, generic form of the ``index`` function becomes
-
-.. code-block:: python
-
-        def index():
-            form = InputForm(request.form)
-            if request.method == 'POST' and form.validate():
-                arg_names = inspect.getargspec(compute).args
-                kwargs = {name: getattr(form, name).data
-                          for name in arg_names if hasattr(form, name)}
-                result = compute(**kwargs)
-            else:
-                result = None
-            if result:
-                # result must be transformed to HTML and inserted as a
-                # string in the generic view.html file
-                result = render_template('view_results.html', result=result)
-            return render_template('view.html', form=form, result=result)
         
-        if __name__ == '__main__':
-            app.run(debug=True)
-
-**Application.**
-Let us apply the files above to plot the gamma probability density function
-
-.. math::
-         g(x; a, h, A) = \frac{|h|}{\Gamma(a)A}\left(\frac{x}{A}\right)^{ah-1}
-        e^{-\left(\frac{x}{A}\right)^h},
+        <link href=
+        "http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"
+        rel="stylesheet">
         
-
-and its cumulative density
-
-.. math::
-         G(x; a, h, A) = \int_0^x g(\tau; a, h, A)d\tau,
-
-computed by numerically the Trapezoidal rule, for instance.
-We also want to compute and display
-the mean value :math:`A\Gamma(a + 1/h)/\Gamma(a)` and
-standard deviation
-
-.. math::
-         \sigma = \frac{A}{\Gamma(a)}\sqrt{\Gamma(a + 2/h)\Gamma(a) - \Gamma(a+1/h)^2}.
-
-Here, :math:`\Gamma(a)` is the gamma function, which can be computed
-by ``math.gamma(a)`` in Python.
-Below is a ``compute.py`` file with the
-relevant implementations of :math:`g(x;a,h,A)` (``gamma_density``),
-:math:`G(x; a, h, A)` (``gamma_cumulative``), and a function ``compute_gamma`` for
-making a plot of :math:`g` og :math:`G` for :math:`x\in [0,7\sigma]`.
-
-.. code-block:: python
-
-        def gamma_density(x, a, h, A):
-            # http://en.wikipedia.org/wiki/Gamma_distribution
-            xA = x/float(A)
-            return abs(h)/(math.gamma(a)*A)*(xA)**(a*h-1)*exp(-xA**h)
+        <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          TeX: {
+             equationNumbers: {  autoNumber: "AMS"  },
+             extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+          }
+        });
+        </script>
+        <script type="text/javascript" src=
+        "http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+        <!--
+        <nav class="navbar navbar-default" role="navigation">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+               {% for text, url in some_sequence %}
+               <li><a href="/{{url}}">{{ text }}</a></li>
+               {% endfor %}
+               </ul>
+        </div>
+        </nav>
+        -->
         
-        def gamma_cumulative(x, a, h, A):
-            # Integrate gamma_density using the Trapezoidal rule.
-            # Assume x is array.
-            g = gamma_density(x, a, h, A)
-            r = zeros_like(x)
-            for i in range(len(r)-1):
-                r[i+1] = r[i] + 0.5*(g[i] + g[i+1])*(x[i+1] - x[i])
-            return r
+        <h2>Damped sine wave</h2>
         
-        def compute_gamma(a=0.5, h=2.0, A=math.sqrt(2), resolution=500):
-            """Return plot and mean/st.dev. value of the gamma density."""
-            gah = math.gamma(a + 1./h)
-            mean = A*gah/math.gamma(a)
-            stdev = A/math.gamma(a)*math.sqrt(
-                math.gamma(a + 2./h)*math.gamma(a) - gah**2)
-            x = linspace(0, 7*stdev, resolution+1)
-            y = gamma_density(x, a, h, A)
-            plt.figure()  # needed to avoid adding curves in plot
-            plt.plot(x, y)
-            plt.title('a=%g, h=%g, A=%g' % (a, h, A))
-            if not os.path.isdir('static'):
-                os.mkdir('static')
-            else:
-                # Remove old plot files
-                for filename in glob.glob(os.path.join('static', '*.png')):
-                    os.remove(filename)
-            # Use time since Jan 1, 1970 in filename in order make
-            # a unique filename that the browser has not chached
-            t = str(time.time())
-            plotfile1 = os.path.join('static', 'density_%s.png' % t)
-            plotfile2 = os.path.join('static', 'cumulative_%s.png' % t)
-            plt.savefig(plotfile1)
-            y = gamma_cumulative(x, a, h, A)
-            plt.figure()
-            plt.plot(x, y)
-            plt.grid(True)
-            plt.savefig(plotfile2)
-            return plotfile1, plotfile2, '%.2f' % mean, '%.2f' % stdev
-
-The ``compute_gamma`` function returns a tuple of four values.
-We want output as displayed in Figure :ref:`wf:vib3:flask:fig:gamma`.
-
-.. _wf:vib3:flask:fig:gamma:
-
-.. figure:: vib3_flask_gamma.png
-   :width: 700
-
-   *Design of a web page illustrating the gamma probability functions*
-
-The design is realized in the file ``view_results.html`` shown below.
-
-.. code-block:: html
-
+        This web page visualizes the function \(
+        u(t) = Ae^{-bt}\sin (w t), \hbox{ for } t\in [0,T]
+        \).
+        
         <p>
-        <table>
-        <tr>
-        <td>
-        <img src="{{ result[0] }}" width="400">
-        </td><td>
-        <img src="{{ result[1] }}" width="400">
-        </td></tr>
-        <tr><td>
-        Mean value: {{ result[2] }} <br>
-        Standard deviation value: {{ result[3] }}
-        </td></tr>
-        </table>
-        </p>
+        <form class="navbar-form navbar-top" method="post" action="">
+          <div class="form-group">
+          {% for field in form %}
+            <div class="row">
+             <div class="input-group">
+              <label class="col-sm-1 control-label">
+              <span class="input-group-addon"> \( {{ field.name }} \) </span>
+              </label>
+              <div class="col-sm-3">
+              {{ field(class_="form-control") }}
+              </div>
+              <div class="col-sm-2">
+                {{ field.label }}
+              </div>
+              {% if field.errors %}
+                {% for error in field.errors %}
+                  <div class="col-sm-3">
+                    <div style="color: red;">{{ error }}</div>
+                  </div>
+                {% endfor %}
+              {% endif %}
+             </div>
+            </div>
+          {% endfor %}
+        <br/>
+        <input type="submit" value="Compute" class="btn btn-default">
+        </form>
+        
+        <p>
+        {% if result != None %}
+        <img src="{{ result }}" width="400">
+        {% endif %}
+        </html>
 
-To create the web application, we just copy the generic ``controller.py``,
-``model.py``,
-and ``templates/view_forms.html`` files, add the
-application-specific
-``compute.py`` and ``templates/view_results.html`` files given above,
-and *write one line* in
-``model.py``:
+The input fields and fonts now get the typical Bootstrap look and feel:
+
+.. figure:: vib1_flask_bootstrap.png
+   :width: 600
+
+The only special feature in this template is the need to pass a CSS
+class ``form-control`` to the field object in the part that defines
+the input field. We also use the standard ``input-group-addon`` style
+in the name part of the Bootstrap form. A heading *Damped sine wave* was
+added to demonstrate the Bootstrap fonts.
+
+It is easy to switch to other Bootstrap styles, e.g., those in the
+"Bootswatch family": "http:bootswatch.com":
+
+.. code-block:: html
+
+        <link href=
+        "http://netdna.bootstrapcdn.com/bootswatch/3.1.1/X/bootstrap.min.css"
+        rel="stylesheet">
+
+where ``X`` can be ``journal``, ``cosmo``, ``flatly``, and other legal
+Bootswatch styles. The journal style looks like this:
+
+.. figure:: vib1_flask_bootswatch_journal.png
+   :width: 600
+
+While ``view_bootstrap.html`` makes use of plain Bootstrap HTML code, there is
+also a higher-level framework, called `Flask-Bootstrap <http://pythonhosted.org/Flask-Bootstrap/>`__ that combines Flask and Bootstrap. Installation of
+this extension is done by ``sudo pip install flask-bootstrap``.
+
+After ``app = Flask(__name__)`` we need to do
 
 .. code-block:: python
 
-        from compute import compute_gamma as compute
+        from flask_bootstrap import Bootstrap
+        Bootstrap(app)
 
-That's it! Running ``controller.py`` file starts the app.
+The template employs new keywords ``extends`` and ``block``:
+
+.. code-block:: html
+
+        {% extends "bootstrap/base.html" %}
+        
+        {% block styles %}
+        {{super()}}
+        <style>
+            .appsize { width: 800px }
+        </style>
+        
+        <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          TeX: {
+             equationNumbers: {  autoNumber: "AMS"  },
+             extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+          }
+        });
+        </script>
+        <script type="text/javascript" src=
+        "http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+        {% endblock %}
+        
+        <!--
+        {% block navbar %}
+        <nav class="navbar navbar-default" role="navigation">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+               {% for f in some_sequence %}
+               <li><a href="/{{f}}">{{f}}</a></li>
+               {% endfor %}
+               </ul>
+        </div>
+        </nav>
+        {% endblock %}
+        -->
+        
+        {% block content %}
+        
+        <h2>Damped sine wave</h2>
+        
+        This web page visualizes the function \(
+        u(t) = Ae^{-bt}\sin (w t), \hbox{ for } t\in [0,T]
+        \).
+        
+        <p>
+        <form class="navbar-form navbar-top" method="post" action="">
+          <div class="form-group">
+          {% for field in form %}
+            <div class="row">
+             <div class="input-group appsize">
+              <label class="col-sm-1 control-label">
+              <span class="input-group-addon"> \( {{ field.name }} \) </span>
+              </label>
+              <div class="col-sm-4">
+              {{ field(class_="form-control") }}
+              </div>
+              <div class="col-sm-4">
+                {{ field.label }}
+              </div>
+              {% if field.errors %}
+                {% for error in field.errors %}
+                  <div class="col-sm-3">
+                    <div style="color: red;">{{ error }}</div>
+                  </div>
+                {% endfor %}
+              {% endif %}
+             </div>
+            </div>
+          {% endfor %}
+        <br/>
+        <input type="submit" value="Compute" class="btn btn-default">
+        </form>
+        
+        <p>
+        {% if result != None %}
+        <img src="{{ result }}" width="500">
+        {% endif %}
+        </html>
+        {% endblock %}
+
+It is important to have the MathJax script declaration and all styles within
+``{% block styles %}``.
+
+It seems easier to apply plain Bootstrap HTML code than the
+functionality in the Flask-Bootstrap layer.
 

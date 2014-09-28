@@ -1,0 +1,662 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Using Web Frameworks for Scientific Applications">
+<meta name="keywords" content="web frameworks,MVC pattern,Flask installation,Flask input forms,Flask HTML templates,Flask MVC pattern,Flask troubleshooting,Django installation,Django making a project,Django making an application,Django input forms,Django HTML templates,Flask input forms,Flask error checking,Flask CSS style sheets,Flask LaTeX mathematics,Flask input validation,inline PNG image in HTML,base64 encoding of PNG images,inline SVG figure in HTML,Flask login,Flask database,Django input forms,Django input validation">
+
+<title>Using Web Frameworks for Scientific Applications</title>
+
+
+<link href="https://raw.githubusercontent.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
+<script src="https://rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
+<style type="text/css">
+h1 {color: #b58900;}  /* yellow */
+/* h1 {color: #cb4b16;}  orange */
+/* h1 {color: #d33682;}  magenta, the original choice of thomasf */
+.alert-text-small   { font-size: 80%;  }
+.alert-text-large   { font-size: 130%; }
+.alert-text-normal  { font-size: 90%;  }
+.alert {
+  padding:8px 35px 8px 14px; margin-bottom:18px;
+  text-shadow:0 1px 0 rgba(255,255,255,0.5);
+  border:1px solid #93a1a1;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  color: #555;
+  background-color: #eee8d5;
+  background-position: 10px 5px;
+  background-repeat: no-repeat;
+  background-size: 38px;
+  padding-left: 55px;
+  width: 75%;
+ }
+.alert-block {padding-top:14px; padding-bottom:14px}
+.alert-block > p, .alert-block > ul {margin-bottom:1em}
+.alert li {margin-top: 1em}
+.alert-block p+p {margin-top:5px}
+.alert-notice { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_notice.png); }
+.alert-summary  { background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_summary.png); }
+.alert-warning { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_warning.png); }
+.alert-question {background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_question.png); }
+
+div { text-align: justify; text-justify: inter-word; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Web frameworks ', 1, None, '___sec0'),
+              (' The MVC pattern ', 2, None, '___sec1'),
+              (' A very simple application ', 2, None, '___sec2'),
+              (' Application of the MVC pattern ',
+               2,
+               'wf:hw:mvc',
+               'wf:hw:mvc'),
+              (' Making a Flask application ', 1, None, '___sec4'),
+              (' Programming the Flask application ', 2, None, '___sec5'),
+              (' The user interaction ', 3, None, '___sec6'),
+              (' The Python code ', 3, None, '___sec7'),
+              (' Dissection ', 3, None, '___sec8'),
+              (' The template files ', 3, None, '___sec9'),
+              (' Testing the application ', 3, None, '___sec10'),
+              (' Equipping the input page with output results ',
+               2,
+               None,
+               '___sec11'),
+              (' Splitting the app into model, view, and controller files ',
+               2,
+               'wf:hw3:flask',
+               'wf:hw3:flask'),
+              (' Troubleshooting ', 2, None, '___sec13'),
+              (' Address already in use ', 3, None, '___sec14'),
+              (' Making a Django application ', 1, None, '___sec15'),
+              (' Setting up a Django project ', 2, None, '___sec16'),
+              (' Setting up a Django application ', 2, None, '___sec17'),
+              (' Programming the Django application ', 2, None, '___sec18'),
+              (' The user interaction ', 3, None, '___sec19'),
+              (' The model ', 3, None, '___sec20'),
+              (' The view ', 3, None, '___sec21'),
+              (' Making the input page ', 3, None, '___sec22'),
+              (' Making the results page ', 3, None, '___sec23'),
+              (' Equipping the input page with output results ',
+               2,
+               None,
+               '___sec24'),
+              (' Handling multiple input variables in Flask ',
+               1,
+               'wf:vib:flask',
+               'wf:vib:flask'),
+              (' Programming the Flask application ',
+               2,
+               'wf:vib1:flask:app',
+               'wf:vib1:flask:app'),
+              (' The compute part ', 3, None, '___sec27'),
+              (' The model ', 3, None, '___sec28'),
+              (' The view ', 3, None, '___sec29'),
+              (' The HTML template ', 3, None, '___sec30'),
+              (' Implementing error checking in the template ',
+               2,
+               None,
+               '___sec31'),
+              (' Using style sheets ', 2, None, '___sec32'),
+              (' Using LaTeX mathematics ', 2, None, '___sec33'),
+              (' Rearranging the elements in the HTML template ',
+               2,
+               None,
+               '___sec34'),
+              (' Bootstrap HTML style ', 2, None, '___sec35'),
+              (' Custom validation ',
+               2,
+               'wf:vib1:flask:validation',
+               'wf:vib1:flask:validation'),
+              (' Using Flask validators ', 3, None, '___sec37'),
+              (' Tailored validation ', 3, None, '___sec38'),
+              (' Tailored validation of intervals ', 3, None, '___sec39'),
+              (' Demo ', 3, None, '___sec40'),
+              (' Avoiding plot files ',
+               2,
+               'wf:vib2:flask:nofiles',
+               'wf:vib2:flask:nofiles'),
+              (' PNG plots ', 3, None, '___sec42'),
+              (' SVG plots ', 3, None, '___sec43'),
+              (' Autogenerating the code ',
+               2,
+               'wf:autogen:flask',
+               'wf:autogen:flask'),
+              (' Inspecting function signatures ', 3, None, '___sec45'),
+              (' Generating the model ', 3, None, '___sec46'),
+              (' Generating the view ', 3, None, '___sec47'),
+              (' Generating the template ', 3, None, '___sec48'),
+              (' Application ', 3, None, '___sec49'),
+              (' User login and storage of computed results ',
+               2,
+               'wf:flask:login',
+               'wf:flask:login'),
+              (' Required additional software ', 3, None, '___sec51'),
+              (' The compute part ', 3, None, '___sec52'),
+              (' The interfaces of the app ', 3, None, '___sec53'),
+              (' The source code ', 3, None, '___sec54'),
+              (' Resources ', 3, None, '___sec55'),
+              (' Handling multiple input variables in Django ',
+               1,
+               'wf:vib:django',
+               'wf:vib:django'),
+              (' Programming the Django application ', 2, None, '___sec57'),
+              (' Adding the app to a project ', 3, None, '___sec58'),
+              (' The compute part ', 3, None, '___sec59'),
+              (' The model ', 3, None, '___sec60'),
+              (' The view ', 3, None, '___sec61'),
+              (' Custom validation ', 2, None, '___sec62'),
+              (' Customizing widgets ', 2, None, '___sec63'),
+              (' Resources ', 2, None, '___sec64'),
+              (' Exercises ', 1, None, '___sec65'),
+              (' Exercise 1: Add two numbers ',
+               2,
+               'wf:exer:add2',
+               'wf:exer:add2'),
+              (' Exercise 2: Upload data file and visualize curves ',
+               2,
+               'wf:exer:upload',
+               'wf:exer:upload'),
+              (' Exercise 3: Plot a user-specified formula ',
+               2,
+               'wf:exer:formula',
+               'wf:exer:formula'),
+              (' Exercise 4: Visualize Taylor polynomial approximations ',
+               2,
+               'wf:exer:Taylor',
+               'wf:exer:Taylor'),
+              (' Exercise 5: Extend the `gen` app ',
+               2,
+               'wf:exer:gen:demo',
+               'wf:exer:gen:demo'),
+              (' Exercise 6: Equip the `gen` app with more data types ',
+               2,
+               'wf:exer:gen:lists',
+               'wf:exer:gen:lists'),
+              (' Exercise 7: Auto-generate code from function signature ',
+               2,
+               None,
+               '___sec72'),
+              (' Resources ', 1, None, '___sec73'),
+              (' Flask resources ', 2, None, '___sec74'),
+              (' Django resources ', 2, None, '___sec75'),
+              (' Remaining ', 1, None, '___sec76')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+    
+<a name="part0016"></a>
+<p>
+<!-- begin top navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._web4sa_solarized015.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._web4sa_solarized017.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end top navigation -->
+</p>
+
+<p>
+<!-- !split -->
+
+<h2>Autogenerating the code <a name="wf:autogen:flask"></a></h2>
+
+<p>
+We shall now present generic <code>model.py</code> and <code>controller.py</code>
+files that work with <em>any</em> <code>compute</code> function (!). This example will
+demonstrate some advanced, powerful features of Python. The source code
+is found in the <a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/gen" target="_self"><tt>gen</tt></a>
+directory.
+
+<h3>Inspecting function signatures  <a name="___sec45"></a></h3>
+
+<p>
+The basic idea is that the Python module <code>inspect</code> can be used to
+retrieve the names of the arguments and the default values of
+keyword arguments of <em>any</em> given <code>compute</code> function. Say we have some
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def mycompute(A, m=0, s=1, w=1, x_range=[-3,3]):
+    ...
+    return result
+</code></pre>
+<!-- end verbatim block -->
+Running
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>import inspect
+arg_names = inspect.getargspec(mycompute).args
+defaults  = inspect.getargspec(mycompute).defaults
+</code></pre>
+<!-- end verbatim block -->
+leads to
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>arg_names = ['A', 'm', 's', 'w', 'x_range']
+defaults = (0, 1, 1, [-3, 3])
+</code></pre>
+<!-- end verbatim block -->
+We have all the argument names in <code>arg_names</code> and
+<code>defaults[i]</code> is the default value of keyword argument
+<code>arg_names[j]</code>, where <code>j = len(arg_names) - len(defaults) + i</code>.
+
+<h3>Generating the model  <a name="___sec46"></a></h3>
+
+<p>
+Knowing the name <code>name</code> of some argument in the <code>compute</code>
+function, we can make the corresponding class attribute
+in the <code>InputForm</code> class by
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>setattr(InputForm, name, FloatForm())
+</code></pre>
+<!-- end verbatim block -->
+For name equal to <code>'A'</code> this is the same as hardcoding
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>class InputForm:
+    A = FloatForm()
+</code></pre>
+<!-- end verbatim block -->
+Assuming that all arguments in <code>compute</code> are floats, we could
+do
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>class InputForm:
+    pass  # Empty class
+
+arg_names = inspect.getargspec(mycompute).args
+for name in arg_names:
+    setattr(InputForm, name, FloatForm())
+</code></pre>
+<!-- end verbatim block -->
+However, we can do better than this: for
+keyword arguments the type of the default value can be used to
+select the appropriate form class. The complete <code>model.py</code> file
+then goes as follows:
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>&quot;&quot;&quot;
+Example on generic model.py file which inspects the arguments
+of the compute function and automatically generates a relevant
+InputForm class.
+&quot;&quot;&quot;
+
+import wtforms
+from math import pi
+
+from compute import compute_gamma as compute
+import inspect
+arg_names = inspect.getargspec(compute).args
+defaults  = inspect.getargspec(compute).defaults
+
+class InputForm(wtforms.Form):
+    pass
+
+# Augment defaults with None elements for the positional
+# arguments
+defaults = [None]*(len(arg_names)-len(defaults)) + list(defaults)
+# Map type of default to right form field
+type2form = {type(1.0): wtforms.FloatField,
+             type(1):   wtforms.IntegerField,
+             type(''):  wtforms.TextField,
+             }
+
+for name, value in zip(arg_names, defaults):
+    if value is None:
+        setattr(InputForm, name, wtforms.FloatField(
+            validators=[wtforms.validators.InputRequired()]))
+    else:
+        if type(value) in type2form:
+            setattr(InputForm, name, type2form[type(value)](
+                default=value,
+                validators=[wtforms.validators.InputRequired()]))
+        else:
+            raise TypeError('argument %s %s not supported' %
+                            name, type(value))
+
+if __name__ == '__main__':
+    for item in dir(InputForm):
+        if item in arg_names:
+            print item, getattr(InputForm, item)
+</code></pre>
+<!-- end verbatim block -->
+(The <code>compute_gamma</code> function imported from <code>compute</code> is the
+only application-specific statement in this code and will be explained later.)
+
+<h3>Generating the view  <a name="___sec47"></a></h3>
+
+<p>
+The call to <code>compute</code> in the <code>controller.py</code> file must also be expressed
+in a general way such that the call handles any type and number of
+parameters. This can be done in two ways, using either positional
+or keyword arguments.
+
+<p>
+The technique with positional arguments
+is explained first. It consists of collecting all parameters in
+a list or tuple, called <code>args</code>, and then calling <code>compute(*args)</code>
+(which is equivalent to <code>compute(args[0], args[1], ..., args[n])</code>
+if <code>n</code> is <code>len(args)-1</code>). The elements of <code>args</code> are the values of the
+form variables. We know the name of a form variable as a string
+<code>name</code> (from <code>arg_names</code>), and if <code>form</code> is the form object,
+the construction <code>getattr(form, name).data</code> extracts the value
+that the user provided (<code>getattr(obj, attr)</code> gets the attribute, with name
+available as a string in <code>attr</code>, in the object <code>obj</code>).
+For exampe, if <code>name</code> is <code>'A'</code>, <code>getattr(form, name).data</code> is the same as
+<code>form.A.data</code>.
+Collecting all form variables, placing them in a list,
+and calling <code>compute</code> are done with
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>arg_names = inspect.getargspec(compute).args
+args = [getattr(form, name).data for name in arg_names]
+result = compute(*args)
+</code></pre>
+<!-- end verbatim block -->
+Our <code>InputForm</code> class guarantees that all arguments in <code>compute</code>
+are present in the form, but to be absolutely safe we can
+test if <code>name</code> is present in the <code>form</code> object:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>args = [getattr(form, name).data for name in arg_names
+        if hasattr(form, name)]
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+A potential problem with the <code>args</code> list is that the values might
+be in wrong order. It appears, fortunately, that the order we
+assign attributes to the form class is preserved when iterating over
+the form. Nevertheless, using keyword arguments instead of positional
+arguments provides a completely safe solution to calling <code>compute</code>
+with the correct arguments. Keyword arguments are placed in a
+dictionary <code>kwargs</code> and <code>compute</code> is called as <code>compute(**kwargs)</code>.
+The generic solution is
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>kwargs = {name: getattr(form, name).data for name in arg_names
+          if hasattr(form, name)}
+result = compute(**kwargs)
+</code></pre>
+<!-- end verbatim block -->
+The <code>compute(**kwargs)</code> call is equivalent to <code>compute(A=1, b=3, w=0.5)</code>
+in case <code>kwargs = {'w'=0.5, 'A':1, 'b':3}</code> (recall that the order of
+the keys in a Python dictionary is undetermined).
+
+<h3>Generating the template  <a name="___sec48"></a></h3>
+
+<p>
+It remains to generate the right HTML template. The HTML code depends
+on what the returned <code>result</code> object from <code>compute</code> contains. Only a
+human who has read the <code>compute</code> code knows the details of the returned
+result. Therefore, we leave it to a human to provide the part
+of the HTML template that renders the result. The file <code>templates/view_results.html</code> contains this human-provided code, while <code>templates/view.html</code>
+is a completely generic template for the forms:
+
+<p>
+<!-- begin verbatim block  htmlpro-->
+<pre><code>&lt;form method=post action=&quot;&quot;&gt;
+&lt;table&gt;
+  {% for field in form %}
+    &lt;tr&gt;&lt;td&gt;{{ field.name }}&lt;/td&gt; &lt;td&gt;{{ field }}&lt;/td&gt;
+    &lt;td&gt;{% if field.errors %}
+      &lt;ul class=errors&gt;
+      {% for error in field.errors %}
+        &lt;li&gt;{{ error }}&lt;/li&gt;
+      {% endfor %}&lt;/ul&gt;
+    {% endif %}&lt;/td&gt;&lt;/tr&gt;
+  {% endfor %}
+&lt;/table&gt;
+&lt;p&gt;&lt;input type=submit value=Compute&gt;&lt;/form&gt;&lt;/p&gt;
+
+{% if result != None %}
+{{ result|safe }}
+{% endif %}
+</code></pre>
+<!-- end verbatim block -->
+At the end of this code, an HTML text <code>result</code> (string) is to be
+inserted.  This text is typically generated by calling Flask's
+<code>render_template</code> function, which uses <code>templates/view_results.html</code>
+to turn the return object <code>result</code> from the compute function into the
+desired HTML code:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def index():
+    ...
+    if result:
+        result = render_template('view_results.html', result=result)
+        # result is now rendered HTML text
+    return render_template('view.html', form=form, result=result)
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<div class="alert alert-block alert-notice alert-text-normal">
+<b>Notice.</b>
+<p>
+A perhaps simpler alternative would be to have a generic
+<code>view_forms.html</code> file and a user-specific
+<code>view_results.html</code> and explicitly combining them into a new
+file. This requires file writing by the app, which one normally
+wants to avoid. Especially if the web app gets multiple users,
+the file writing may lead to corrupt files.
+</div>
+
+
+<p>
+The complete, generic form of the <code>index</code> function becomes
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def index():
+    form = InputForm(request.form)
+    if request.method == 'POST' and form.validate():
+        arg_names = inspect.getargspec(compute).args
+        kwargs = {name: getattr(form, name).data
+                  for name in arg_names if hasattr(form, name)}
+        result = compute(**kwargs)
+    else:
+        result = None
+    if result:
+        # result must be transformed to HTML and inserted as a
+        # string in the generic view.html file
+        result = render_template('view_results.html', result=result)
+    return render_template('view.html', form=form, result=result)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+</code></pre>
+<!-- end verbatim block -->
+
+<h3>Application  <a name="___sec49"></a></h3>
+
+<p>
+Let us apply the files above to plot the gamma probability density function
+
+$$ g(x; a, h, A) = \frac{|h|}{\Gamma(a)A}\left(\frac{x}{A}\right)^{ah-1}
+e^{-\left(\frac{x}{A}\right)^h},
+$$
+
+and its cumulative density
+
+$$ G(x; a, h, A) = \int_0^x g(\tau; a, h, A)d\tau,$$
+
+computed by numerically the Trapezoidal rule, for instance.
+We also want to compute and display
+the mean value \( A\Gamma(a + 1/h)/\Gamma(a) \) and
+standard deviation
+
+$$ \sigma = \frac{A}{\Gamma(a)}\sqrt{\Gamma(a + 2/h)\Gamma(a) - \Gamma(a+1/h)^2}.$$
+
+Here, \( \Gamma(a) \) is the gamma function, which can be computed
+by <code>math.gamma(a)</code> in Python.
+Below is a <code>compute.py</code> file with the
+relevant implementations of \( g(x;a,h,A) \) (<code>gamma_density</code>),
+\( G(x; a, h, A) \) (<code>gamma_cumulative</code>), and a function <code>compute_gamma</code> for
+making a plot of \( g \) og \( G \) for \( x\in [0,7\sigma] \).
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def gamma_density(x, a, h, A):
+    # http://en.wikipedia.org/wiki/Gamma_distribution
+    xA = x/float(A)
+    return abs(h)/(math.gamma(a)*A)*(xA)**(a*h-1)*exp(-xA**h)
+
+def gamma_cumulative(x, a, h, A):
+    # Integrate gamma_density using the Trapezoidal rule.
+    # Assume x is array.
+    g = gamma_density(x, a, h, A)
+    r = zeros_like(x)
+    for i in range(len(r)-1):
+        r[i+1] = r[i] + 0.5*(g[i] + g[i+1])*(x[i+1] - x[i])
+    return r
+
+def compute_gamma(a=0.5, h=2.0, A=math.sqrt(2), resolution=500):
+    &quot;&quot;&quot;Return plot and mean/st.dev. value of the gamma density.&quot;&quot;&quot;
+    gah = math.gamma(a + 1./h)
+    mean = A*gah/math.gamma(a)
+    stdev = A/math.gamma(a)*math.sqrt(
+        math.gamma(a + 2./h)*math.gamma(a) - gah**2)
+    x = linspace(0, 7*stdev, resolution+1)
+    y = gamma_density(x, a, h, A)
+    plt.figure()  # needed to avoid adding curves in plot
+    plt.plot(x, y)
+    plt.title('a=%g, h=%g, A=%g' % (a, h, A))
+    # Make Matplotlib write to StringIO file object and grab
+    # return the object's string
+    from StringIO import StringIO
+    figfile = StringIO()
+    plt.savefig(figfile, format='png')
+    figfile.seek(0)  # rewind to beginning of file
+    import base64
+    figdata_density_png = base64.b64encode(figfile.buf)
+    figfile = StringIO()
+    plt.savefig(figfile, format='svg')
+    figfile.seek(0)
+    figdata_density_svg = '&lt;svg' + figfile.buf.split('&lt;svg')[1]
+    figdata_density_svg = unicode(figdata_density_svg,'utf-8')
+
+    y = gamma_cumulative(x, a, h, A)
+    plt.figure()
+    plt.plot(x, y)
+    plt.grid(True)
+    figfile = StringIO()
+    plt.savefig(figfile, format='png')
+    figfile.seek(0)
+    figdata_cumulative_png = base64.b64encode(figfile.buf)
+    figfile = StringIO()
+    plt.savefig(figfile, format='svg')
+    figfile.seek(0)
+    figdata_cumulative_svg = '&lt;svg' + figfile.buf.split('&lt;svg')[1]
+    figdata_cumulative_svg = unicode(figdata_cumulative_svg,'utf-8')
+    return figdata_density_png, figdata_cumulative_png, \ 
+           figdata_density_svg, figdata_cumulative_svg, \ 
+           '%.2f' % mean, '%.2f' % stdev
+</code></pre>
+<!-- end verbatim block -->
+The <code>compute_gamma</code> function returns a tuple of six values.
+We want output as displayed in Figure <a href="#wf:gen:flask:fig:gamma">13</a>.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 13:  Design of a web page illustrating the gamma probability functions. <a name="wf:gen:flask:fig:gamma"></a> </p></center>
+<p><img src="fig-web4sa/gen_flask_gamma.png" align="bottom" width=700></p>
+</center>
+
+<p>
+The design is realized in the file <code>view_results.html</code> shown below.
+
+<p>
+<!-- begin verbatim block  htmlpro-->
+<pre><code>&lt;p&gt;
+&lt;table&gt;
+&lt;tr&gt;
+&lt;td&gt;
+&lt;img src=&quot;data:image/png;base64,{{ result[0] }}&quot; width=&quot;400&quot;&gt;
+&lt;/td&gt;&lt;td&gt;
+&lt;img src=&quot;data:image/png;base64,{{ result[1] }}&quot; width=&quot;400&quot;&gt;
+&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;{{ result[2]|safe }}&lt;/td&gt;
+&lt;td&gt;{{ result[3]|safe }}&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;
+Mean value: {{ result[4] }} &lt;br&gt;
+Standard deviation value: {{ result[5] }}
+&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/p&gt;
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+To create the web application, we just perform the following steps:
+
+<ol>
+<li> copy the generic <code>controller.py</code> and <code>model.py</code> files to a new directory</li>
+<li> write the compute function in a file <code>compute.py</code></li>
+<li> edit <code>controller.py</code> and <code>model.py</code> to use the right name of the
+   compute function (<code>from compute import name as compute</code>)</li>
+<li> add an appropriate <code>templates/view_forms.html</code> file that visualizes
+   the returned value <code>results</code> from the compute function</li>
+</ol>
+
+<p>
+<!-- begin bottom navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._web4sa_solarized015.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._web4sa_solarized017.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end bottom navigation -->
+</p>
+
+<!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

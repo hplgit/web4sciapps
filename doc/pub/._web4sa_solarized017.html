@@ -1,0 +1,938 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Using Web Frameworks for Scientific Applications">
+<meta name="keywords" content="web frameworks,MVC pattern,Flask installation,Flask input forms,Flask HTML templates,Flask MVC pattern,Flask troubleshooting,Django installation,Django making a project,Django making an application,Django input forms,Django HTML templates,Flask input forms,Flask error checking,Flask CSS style sheets,Flask LaTeX mathematics,Flask input validation,inline PNG image in HTML,base64 encoding of PNG images,inline SVG figure in HTML,Flask login,Flask database,Django input forms,Django input validation">
+
+<title>Using Web Frameworks for Scientific Applications</title>
+
+
+<link href="https://raw.githubusercontent.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
+<script src="https://rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
+<style type="text/css">
+h1 {color: #b58900;}  /* yellow */
+/* h1 {color: #cb4b16;}  orange */
+/* h1 {color: #d33682;}  magenta, the original choice of thomasf */
+.alert-text-small   { font-size: 80%;  }
+.alert-text-large   { font-size: 130%; }
+.alert-text-normal  { font-size: 90%;  }
+.alert {
+  padding:8px 35px 8px 14px; margin-bottom:18px;
+  text-shadow:0 1px 0 rgba(255,255,255,0.5);
+  border:1px solid #93a1a1;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  color: #555;
+  background-color: #eee8d5;
+  background-position: 10px 5px;
+  background-repeat: no-repeat;
+  background-size: 38px;
+  padding-left: 55px;
+  width: 75%;
+ }
+.alert-block {padding-top:14px; padding-bottom:14px}
+.alert-block > p, .alert-block > ul {margin-bottom:1em}
+.alert li {margin-top: 1em}
+.alert-block p+p {margin-top:5px}
+.alert-notice { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_notice.png); }
+.alert-summary  { background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_summary.png); }
+.alert-warning { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_warning.png); }
+.alert-question {background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_question.png); }
+
+div { text-align: justify; text-justify: inter-word; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Web frameworks ', 1, None, '___sec0'),
+              (' The MVC pattern ', 2, None, '___sec1'),
+              (' A very simple application ', 2, None, '___sec2'),
+              (' Application of the MVC pattern ',
+               2,
+               'wf:hw:mvc',
+               'wf:hw:mvc'),
+              (' Making a Flask application ', 1, None, '___sec4'),
+              (' Programming the Flask application ', 2, None, '___sec5'),
+              (' The user interaction ', 3, None, '___sec6'),
+              (' The Python code ', 3, None, '___sec7'),
+              (' Dissection ', 3, None, '___sec8'),
+              (' The template files ', 3, None, '___sec9'),
+              (' Testing the application ', 3, None, '___sec10'),
+              (' Equipping the input page with output results ',
+               2,
+               None,
+               '___sec11'),
+              (' Splitting the app into model, view, and controller files ',
+               2,
+               'wf:hw3:flask',
+               'wf:hw3:flask'),
+              (' Troubleshooting ', 2, None, '___sec13'),
+              (' Address already in use ', 3, None, '___sec14'),
+              (' Making a Django application ', 1, None, '___sec15'),
+              (' Setting up a Django project ', 2, None, '___sec16'),
+              (' Setting up a Django application ', 2, None, '___sec17'),
+              (' Programming the Django application ', 2, None, '___sec18'),
+              (' The user interaction ', 3, None, '___sec19'),
+              (' The model ', 3, None, '___sec20'),
+              (' The view ', 3, None, '___sec21'),
+              (' Making the input page ', 3, None, '___sec22'),
+              (' Making the results page ', 3, None, '___sec23'),
+              (' Equipping the input page with output results ',
+               2,
+               None,
+               '___sec24'),
+              (' Handling multiple input variables in Flask ',
+               1,
+               'wf:vib:flask',
+               'wf:vib:flask'),
+              (' Programming the Flask application ',
+               2,
+               'wf:vib1:flask:app',
+               'wf:vib1:flask:app'),
+              (' The compute part ', 3, None, '___sec27'),
+              (' The model ', 3, None, '___sec28'),
+              (' The view ', 3, None, '___sec29'),
+              (' The HTML template ', 3, None, '___sec30'),
+              (' Implementing error checking in the template ',
+               2,
+               None,
+               '___sec31'),
+              (' Using style sheets ', 2, None, '___sec32'),
+              (' Using LaTeX mathematics ', 2, None, '___sec33'),
+              (' Rearranging the elements in the HTML template ',
+               2,
+               None,
+               '___sec34'),
+              (' Bootstrap HTML style ', 2, None, '___sec35'),
+              (' Custom validation ',
+               2,
+               'wf:vib1:flask:validation',
+               'wf:vib1:flask:validation'),
+              (' Using Flask validators ', 3, None, '___sec37'),
+              (' Tailored validation ', 3, None, '___sec38'),
+              (' Tailored validation of intervals ', 3, None, '___sec39'),
+              (' Demo ', 3, None, '___sec40'),
+              (' Avoiding plot files ',
+               2,
+               'wf:vib2:flask:nofiles',
+               'wf:vib2:flask:nofiles'),
+              (' PNG plots ', 3, None, '___sec42'),
+              (' SVG plots ', 3, None, '___sec43'),
+              (' Autogenerating the code ',
+               2,
+               'wf:autogen:flask',
+               'wf:autogen:flask'),
+              (' Inspecting function signatures ', 3, None, '___sec45'),
+              (' Generating the model ', 3, None, '___sec46'),
+              (' Generating the view ', 3, None, '___sec47'),
+              (' Generating the template ', 3, None, '___sec48'),
+              (' Application ', 3, None, '___sec49'),
+              (' User login and storage of computed results ',
+               2,
+               'wf:flask:login',
+               'wf:flask:login'),
+              (' Required additional software ', 3, None, '___sec51'),
+              (' The compute part ', 3, None, '___sec52'),
+              (' The interfaces of the app ', 3, None, '___sec53'),
+              (' The source code ', 3, None, '___sec54'),
+              (' Resources ', 3, None, '___sec55'),
+              (' Handling multiple input variables in Django ',
+               1,
+               'wf:vib:django',
+               'wf:vib:django'),
+              (' Programming the Django application ', 2, None, '___sec57'),
+              (' Adding the app to a project ', 3, None, '___sec58'),
+              (' The compute part ', 3, None, '___sec59'),
+              (' The model ', 3, None, '___sec60'),
+              (' The view ', 3, None, '___sec61'),
+              (' Custom validation ', 2, None, '___sec62'),
+              (' Customizing widgets ', 2, None, '___sec63'),
+              (' Resources ', 2, None, '___sec64'),
+              (' Exercises ', 1, None, '___sec65'),
+              (' Exercise 1: Add two numbers ',
+               2,
+               'wf:exer:add2',
+               'wf:exer:add2'),
+              (' Exercise 2: Upload data file and visualize curves ',
+               2,
+               'wf:exer:upload',
+               'wf:exer:upload'),
+              (' Exercise 3: Plot a user-specified formula ',
+               2,
+               'wf:exer:formula',
+               'wf:exer:formula'),
+              (' Exercise 4: Visualize Taylor polynomial approximations ',
+               2,
+               'wf:exer:Taylor',
+               'wf:exer:Taylor'),
+              (' Exercise 5: Extend the `gen` app ',
+               2,
+               'wf:exer:gen:demo',
+               'wf:exer:gen:demo'),
+              (' Exercise 6: Equip the `gen` app with more data types ',
+               2,
+               'wf:exer:gen:lists',
+               'wf:exer:gen:lists'),
+              (' Exercise 7: Auto-generate code from function signature ',
+               2,
+               None,
+               '___sec72'),
+              (' Resources ', 1, None, '___sec73'),
+              (' Flask resources ', 2, None, '___sec74'),
+              (' Django resources ', 2, None, '___sec75'),
+              (' Remaining ', 1, None, '___sec76')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+    
+<a name="part0017"></a>
+<p>
+<!-- begin top navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._web4sa_solarized016.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._web4sa_solarized018.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end top navigation -->
+</p>
+
+<p>
+<!-- !split -->
+
+<h2>User login and storage of computed results <a name="wf:flask:login"></a></h2>
+
+<p>
+We now want to make an app where the computed results can be stored in
+a database. To this end, each user must create an account and login to
+this account for archiving results and for browsing previous runs of
+the application. More files are needed for this purpose, compared to
+the previous apps, and the files are located in the <a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/login" target="_self"><tt>login</tt></a> directory.
+
+<h3>Required additional software  <a name="___sec51"></a></h3>
+
+<p>
+Three more packages are needed for this more advanced application:
+
+<ul>
+ <li> <a href="https://flask-login.readthedocs.org/en/latest/" target="_self">Flask-Login</a></li>
+ <li> <a href="http://flask.pocoo.org/docs/0.10/patterns/sqlalchemy/" target="_self">Flask-SQLAlchemy</a></li>
+ <li> <a href="http://packages.python.org/Flask-Mail" target="_self">Flask-Mail</a></li>
+</ul>
+
+Installation is done by
+
+<p>
+<!-- begin verbatim block  sys-->
+<pre><code>sudo pip install --upgrade flask-login
+sudo pip install --upgrade flask-sqlalchemy
+sudo pip install --upgrade flask-mail
+</code></pre>
+<!-- end verbatim block -->
+
+<h3>The compute part  <a name="___sec52"></a></h3>
+
+<p>
+The <code>compute.py</code> file contains the <code>compute</code>
+function from the <code>vib2</code> app in the section <a href="._web4sa_solarized015.html#wf:vib2:flask:nofiles">Avoiding plot files</a>.
+
+<p>
+There is quite much Flask code required for user accounts and login.
+The files here were generated by the Parampool package and then
+edited and specialized to the present application. In general,
+it is not recommended to hack further on the example given here,
+but rather utilize Parampool to generate web apps with user accounts
+and login.
+
+<h3>The interfaces of the app  <a name="___sec53"></a></h3>
+
+<p>
+The first page after starting the app (<code>python controller.py</code>)
+shows input fields for the numerical parameters, but there are also
+links to the right for registering a new user or logging in to an
+existing account:
+
+<p>
+<center><p><img src="fig-web4sa/login_main.png" align="bottom" width=700></p></center>
+
+<p>
+Clicking on <em>Register</em> brings up a registration page:
+
+<p>
+<center><p><img src="fig-web4sa/login_register.png" align="bottom" width=700></p></center>
+
+<p>
+Already registered users can just log in:
+
+<p>
+<center><p><img src="fig-web4sa/login_login.png" align="bottom" width=700></p></center>
+
+<p>
+Then the fields with input parameters are shown again. After pressing
+<em>Compute</em> we are left with a combination of input and results, plus
+a field where the user can write a comment about this simulation:
+
+<p>
+<center><p><img src="fig-web4sa/login_results.png" align="bottom" width=700></p></center>
+
+<p>
+All simulations (input data, results, and comment) are stored in
+a database. Clicking on <em>Previous simulation</em> brings us to an
+overview of what is in the database:
+
+<p>
+<center><p><img src="fig-web4sa/login_old.png" align="bottom" width=500></p></center>
+
+<p>
+Here, one can browse previous results, remove entries, or erase the
+whole database.
+
+<h3>The source code  <a name="___sec54"></a></h3>
+
+<p>
+Rather than explaining everything about the source code
+in detail, we primarily list
+the various code files below. A starting point is the central <code>controller.py</code>
+file, which is now quite lengthy and involves four different
+URLs (the input page, the login page, the registration page, and the
+previous results page).
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>import os
+from compute import compute as compute_function
+
+from flask import Flask, render_template, request, redirect, url_for
+from forms import ComputeForm
+from db_models import db, User, Compute
+from flask.ext.login import LoginManager, current_user, \
+     login_user, logout_user, login_required
+from app import app
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+@login_manager.user_loader
+def load_user(user_id):
+    return db.session.query(User).get(user_id)
+
+# Path to the web application
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    result = None
+    user = current_user
+    form = ComputeForm(request.form)
+    if request.method == &quot;POST&quot;:
+        if form.validate():
+
+            result = compute_function(form.A.data, form.b.data,
+                                      form.w.data, form.T.data)
+            if user.is_authenticated():
+                object = Compute()
+                form.populate_obj(object)
+                object.result = result
+                object.user = user
+                db.session.add(object)
+                db.session.commit()
+
+                # Send email notification
+                if user.notify and user.email:
+                    send_email(user)
+    else:
+        if user.is_authenticated():
+            if user.Compute.count() &gt; 0:
+                instance = user.Compute.order_by('-id').first()
+                result = instance.result
+                form = populate_form_from_instance(instance)
+
+    return render_template(&quot;view.html&quot;, form=form,
+                           result=result, user=user)
+
+
+def populate_form_from_instance(instance):
+    &quot;&quot;&quot;Repopulate form with previous values&quot;&quot;&quot;
+    form = ComputeForm()
+    for field in form:
+        field.data = getattr(instance, field.name)
+    return form
+
+def send_email(user):
+    from flask.ext.mail import Mail, Message
+    mail = Mail(app)
+    msg = Message(&quot;Compute Computations Complete&quot;,
+                  recipients=[user.email])
+    msg.body = &quot;&quot;&quot;
+A simulation has been completed by the Flask Compute app.
+Please log in at
+
+http://localhost:5000/login
+
+to see the results.
+
+---
+If you don't want email notifications when a result is found,
+please register a new user and leave the 'notify' field
+unchecked.
+&quot;&quot;&quot;
+    mail.send(msg)
+
+@app.route('/reg', methods=['GET', 'POST'])
+def create_login():
+    from forms import register_form
+    form = register_form(request.form)
+    if request.method == 'POST' and form.validate():
+        user = User()
+        form.populate_obj(user)
+        user.set_password(form.password.data)
+
+        db.session.add(user)
+        db.session.commit()
+
+        login_user(user)
+        return redirect(url_for('index'))
+    return render_template(&quot;reg.html&quot;, form=form)
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    from forms import login_form
+    form = login_form(request.form)
+    if request.method == 'POST' and form.validate():
+        user = form.get_user()
+        login_user(user)
+        return redirect(url_for('index'))
+    return render_template(&quot;login.html&quot;, form=form)
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
+
+@app.route('/old')
+@login_required
+def old():
+    data = []
+    user = current_user
+    if user.is_authenticated():
+        instances = user.Compute.order_by('-id').all()
+        for instance in instances:
+            form = populate_form_from_instance(instance)
+
+            result = instance.result
+            if instance.comments:
+                comments = &quot;&lt;h3&gt;Comments&lt;/h3&gt;&quot; + instance.comments
+            else:
+                comments = ''
+            data.append(
+                {'form':form, 'result':result,
+                 'id':instance.id, 'comments': comments})
+
+    return render_template(&quot;old.html&quot;, data=data)
+
+@app.route('/add_comment', methods=['GET', 'POST'])
+@login_required
+def add_comment():
+    user = current_user
+    if request.method == 'POST' and user.is_authenticated():
+        instance = user.Compute.order_by('-id').first()
+        instance.comments = request.form.get(&quot;comments&quot;, None)
+        db.session.commit()
+    return redirect(url_for('index'))
+
+@app.route('/delete/&lt;id&gt;', methods=['GET', 'POST'])
+@login_required
+def delete_post(id):
+    id = int(id)
+    user = current_user
+    if user.is_authenticated():
+        if id == -1:
+            instances = user.Compute.delete()
+        else:
+            try:
+                instance = user.Compute.filter_by(id=id).first()
+                db.session.delete(instance)
+            except:
+                pass
+
+        db.session.commit()
+    return redirect(url_for('old'))
+
+
+if __name__ == '__main__':
+    if not os.path.isfile(os.path.join(
+        os.path.dirname(__file__), 'sqlite.db')):
+        db.create_all()
+    app.run(debug=True)
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<!-- We need to copy the app code since it contains the password to -->
+<!-- an existing gmail account. -->
+
+<p>
+Creation of the <code>app</code> object is put in a separate file <code>app.py</code>:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>import os
+from flask import Flask
+
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///sqlite.db'
+app.secret_key = os.urandom(24)
+
+# Email settings
+import base64
+app.config.update(
+        MAIL_SERVER='smtp.gmail.com',
+        MAIL_PORT=587,
+        MAIL_USE_TLS=True,
+        MAIL_USERNAME = 'cbcwebsolvermail@gmail.com',
+        MAIL_PASSWORD = base64.decodestring('WGlmZmljdox0UFch'),
+        MAIL_DEFAULT_SENDER = 'Some name &lt;name@gmail.com&gt;'
+        )
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+The forms for the compute function and for the login is
+stored in a file called <code>forms.py</code>:
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>import wtforms as wtf
+from math import pi
+
+class ComputeForm(wtf.Form):
+    A = wtf.FloatField(label='\( A \)', default=1.0,
+        validators=[wtf.validators.InputRequired()])
+    b = wtf.FloatField(label='\( b \)', default=0.0,
+        validators=[wtf.validators.InputRequired()])
+    w = wtf.FloatField(label='\( w \)', default=pi,
+        validators=[wtf.validators.InputRequired()])
+    T = wtf.FloatField(label='\( T \)', default=18,
+        validators=[wtf.validators.InputRequired()])
+    resolution = wtf.IntegerField(label='resolution', default=500,
+        validators=[wtf.validators.InputRequired()])
+
+from db_models import db, User
+import flask.ext.wtf.html5 as html5
+
+# Standard Forms
+class register_form(wtf.Form):
+    username = wtf.TextField(
+        label='Username', validators=[wtf.validators.Required()])
+    password = wtf.PasswordField(
+        label='Password', validators=[
+            wtf.validators.Required(),
+            wtf.validators.EqualTo(
+                'confirm', message='Passwords must match')])
+    confirm  = wtf.PasswordField(
+        label='Confirm Password',
+        validators=[wtf.validators.Required()])
+    email    = html5.EmailField(label='Email')
+    notify   = wtf.BooleanField(label='Email notifications')
+
+    def validate(self):
+        if not wtf.Form.validate(self):
+            return False
+
+        if self.notify.data and not self.email.data:
+            self.notify.errors.append(
+        'Cannot send notifications without a valid email address')
+            return False
+
+        if db.session.query(User).filter_by(
+            username=self.username.data).count() &gt; 0:
+            self.username.errors.append('User already exists')
+            return False
+
+        return True
+
+class login_form(wtf.Form):
+    username = wtf.TextField(
+        label='Username', validators=[wtf.validators.Required()])
+    password = wtf.PasswordField(
+        label='Password', validators=[wtf.validators.Required()])
+
+    def validate(self):
+        if not wtf.Form.validate(self):
+            return False
+
+        user = self.get_user()
+
+        if user is None:
+            self.username.errors.append('Unknown username')
+            return False
+
+        if not user.check_password(self.password.data):
+            self.password.errors.append('Invalid password')
+            return False
+
+        return True
+
+    def get_user(self):
+        return db.session.query(User).filter_by(
+            username=self.username.data).first()
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Database-related code for the SQLAlchemy database is collected in
+<code>db_models.py</code>:
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>from flask.ext.sqlalchemy import SQLAlchemy
+from werkzeug import generate_password_hash, check_password_hash
+from app import app
+
+db = SQLAlchemy(app)
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(50), unique=True)
+    pwhash = db.Column(db.String())
+    email = db.Column(db.String(120), nullable=True)
+    notify = db.Column(db.Boolean())
+
+    def __repr__(self):
+        return '&lt;User %r&gt;' % (self.username)
+
+    def check_password(self, pw):
+        return check_password_hash(self.pwhash, pw)
+
+    def set_password(self, pw):
+        self.pwhash = generate_password_hash(pw)
+
+    def is_authenticated(self):
+        return True
+
+    def is_active(self):
+        return True
+
+    def is_anonymous(self):
+        return False
+
+    def get_id(self):
+        return self.id
+
+class Compute(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+
+    A = db.Column(db.String())
+    b = db.Column(db.String())
+    w = db.Column(db.String())
+    T = db.Column(db.String())
+    resolution = db.Column(db.Integer)
+
+    result = db.Column(db.String())
+    comments = db.Column(db.String(), nullable=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship('User',
+           backref=db.backref('Compute', lazy='dynamic'))
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Finally, we need views. For the results of the computation we have
+a <code>view.html</code> file that is very similar to <code>view_table.html</code>
+in the <code>vib1</code> app:
+
+<p>
+<!-- begin verbatim block  htmlpro-->
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot; /&gt;
+    &lt;title&gt;Flask Vib app&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+
+&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: &quot;AMS&quot;  },
+     extensions: [&quot;AMSmath.js&quot;, &quot;AMSsymbols.js&quot;, &quot;autobold.js&quot;, &quot;color.js&quot;]
+  }
+});
+&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=
+&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;&gt;
+&lt;/script&gt;
+
+{% if user.is_anonymous() %}
+  &lt;p align=&quot;right&quot;&gt;&lt;a href=&quot;/login&quot;&gt;Login&lt;/a&gt;
+  / &lt;a href=&quot;/reg&quot;&gt;Register&lt;/a&gt;&lt;/p&gt;
+{% else %}
+  &lt;p align=&quot;right&quot;&gt;Logged in as {{user.username}}&lt;br&gt;
+    &lt;a href=&quot;/old&quot;&gt;Previous simulations&lt;a/&gt;&lt;br&gt;
+    &lt;a href=&quot;/logout&quot;&gt;Logout&lt;/a&gt;&lt;/p&gt;
+{% endif %}
+
+This web page visualizes the function \(
+u(t) = Ae^{-bt}\sin (w t), \hbox{ for } t\in [0,T]
+\).
+
+&lt;p&gt;
+&lt;!-- Input and Results are typeset as a two-column table --&gt;
+&lt;table&gt;
+&lt;tr&gt;
+&lt;td valign=&quot;top&quot;&gt;
+&lt;h2&gt;Input:&lt;/h2&gt;
+
+&lt;form method=post action=&quot;&quot; enctype=multipart/form-data&gt;
+&lt;table&gt;
+  {% for field in form %}
+    &lt;tr&gt;
+      &lt;td&gt;{{ field.label }}&lt;/td&gt;
+      &lt;td&gt;{{ field(size=20) }}&lt;/td&gt;
+      &lt;td&gt;
+      {% if field.errors %}
+        &lt;ul class=errors&gt;
+        {% for error in field.errors %}
+          &lt;li&gt;{{ error }}&lt;/li&gt;
+        {% endfor %}&lt;/ul&gt;
+      {% endif %}
+      &lt;/td&gt;&lt;/tr&gt;
+  {% endfor %}
+&lt;/table&gt;
+&lt;p&gt;
+&lt;input type=&quot;submit&quot; value=&quot;Compute&quot;&gt;
+&lt;/p&gt;
+&lt;/form&gt;
+&lt;/td&gt;
+
+&lt;td valign=&quot;top&quot;&gt;
+  {% if result != None %}
+    &lt;h2&gt;Results:&lt;/h2&gt;
+    &lt;img src=&quot;data:image/png;base64,{{ result|safe }}&quot; width=&quot;400&quot;&gt;
+    {% if not user.is_anonymous() %}
+      &lt;h3&gt;Comments:&lt;/h3&gt;
+      &lt;form method=&quot;post&quot; action=&quot;/add_comment&quot;&gt;
+          &lt;textarea name=&quot;comments&quot; rows=&quot;4&quot; cols=&quot;40&quot;&gt;&lt;/textarea&gt;
+          &lt;p&gt;&lt;input type=&quot;submit&quot; value=&quot;Add&quot;&gt;
+      &lt;/form&gt;
+      {% endif %}
+
+  {% endif %}
+&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+The <code>login.html</code> template for the login page takes the form
+
+<p>
+<!-- begin verbatim block  htmlpro-->
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot; /&gt;
+  &lt;title&gt;Flask Vib app&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h2&gt;Login:&lt;/h2&gt;
+&lt;form method=post action=&quot;&quot;&gt;
+  &lt;table&gt;
+    {% for field in form %}
+      &lt;tr&gt;&lt;td&gt;{{ field.label }}&lt;/td&gt;
+          &lt;td&gt;{{ field(size=20) }}&lt;/td&gt;
+          &lt;td&gt;
+            {% if field.errors %}
+              &lt;ul class=errors&gt;
+              {% for error in field.errors %}
+                &lt;li&gt;{{ error }}&lt;/li&gt;
+              {% endfor %}&lt;/ul&gt;
+            {% endif %}&lt;/td&gt;&lt;/tr&gt;
+    {% endfor %}
+  &lt;/table&gt;
+  &lt;p&gt;&lt;input type=&quot;submit&quot; value=&quot;Login&quot;&gt;
+&lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+The page for registering a new user has a simple template <code>reg.html</code>:
+
+<p>
+<!-- begin verbatim block  htmlpro-->
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot; /&gt;
+  &lt;title&gt;Flask Vib app&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h2&gt;Register:&lt;/h2&gt;
+&lt;form method=post action=&quot;&quot;&gt;
+&lt;table&gt;
+   {% for field in form %}
+     &lt;tr&gt;&lt;td&gt;{{ field.label }}&lt;/td&gt;
+         &lt;td&gt;{{ field(size=20) }}&lt;/td&gt;
+          &lt;td&gt;
+            {% if field.errors %}
+              &lt;ul class=errors&gt;
+              {% for error in field.errors %}
+                &lt;li&gt;{{ error }}&lt;/li&gt;
+              {% endfor %}&lt;/ul&gt;
+            {% endif %}&lt;/td&gt;&lt;/tr&gt;
+   {% endfor %}
+&lt;/table&gt;
+&lt;p&gt;&lt;input type=submit value=Register&gt;
+&lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+The final file is <code>old.html</code> for retrieving old simulations:
+
+<p>
+<!-- begin verbatim block  htmlpro-->
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot; /&gt;
+  &lt;title&gt;Flask Vib app&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: &quot;AMS&quot;  },
+     extensions: [&quot;AMSmath.js&quot;, &quot;AMSsymbols.js&quot;, &quot;autobold.js&quot;, &quot;color.js&quot;]
+  }
+});
+&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot;
+ src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;&gt;
+&lt;/script&gt;
+
+&lt;h2&gt;Previous simulations&lt;/h2&gt;
+&lt;p align=&quot;right&quot;&gt;&lt;a href=&quot;/&quot;&gt;Back to index&lt;/a&gt;&lt;/p&gt;
+{% if data %}
+  {% for post in data %}
+    &lt;hr&gt;
+    &lt;table&gt;
+    &lt;tr&gt;
+    &lt;td valign=&quot;top&quot; width=&quot;30%&quot;&gt;
+    &lt;h3&gt;Input&lt;/h3&gt;
+      &lt;table&gt;
+      {% for field in post.form %}
+        &lt;tr&gt;&lt;td&gt;{{ field.label }}:&amp;nbsp;&lt;/td&gt;
+            &lt;td&gt;{{ field.data }}&lt;/td&gt;&lt;/tr&gt;
+      {% endfor %}
+      &lt;/table&gt;
+    &lt;/td&gt;&lt;td valign=&quot;top&quot; width=&quot;60%&quot;&gt;
+    &lt;h3&gt;Results&lt;/h3&gt;
+    &lt;img src=&quot;data:image/png;base64,{{ post.result|safe }}&quot; width=&quot;400&quot;&gt;
+    {% if True %}
+      &lt;p&gt;
+      {{ comments }}
+    {% endif %}
+    &lt;/td&gt;&lt;td valign=&quot;top&quot; width=&quot;60%&quot;&gt;
+    &lt;p&gt;
+    &lt;form method=&quot;POST&quot; action=&quot;/delete/{{ post.id }}&quot;&gt;
+      &lt;input type=submit value=&quot;Delete&quot;
+       title=&quot;Delete this post from database&quot;&gt;
+    &lt;/form&gt;
+    &lt;/td&gt;&lt;/tr&gt;
+    &lt;/table&gt;
+   {% endfor %}
+   &lt;hr&gt;
+   &lt;center&gt;
+   &lt;form method=&quot;POST&quot; action=&quot;/delete/-1&quot;&gt;
+     &lt;input type=submit value=&quot;Delete all&quot;&gt;
+   &lt;/form&gt;
+   &lt;/center&gt;
+{% else %}
+  No previous simulations
+{% endif %}
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<div class="alert alert-block alert-warning alert-text-normal">
+<b>Warning.</b>
+<p>
+
+<ul>
+ <li> Sending email from the app does not work.</li>
+ <li> Storing comments does not work.</li>
+</ul>
+</div>
+
+
+<p>
+
+<!-- begin inline comment -->
+<font color="red">(<b>hpl 1</b>: Check if an autogenerated app from <code>_generate_app.py</code> can send mail and store comments. Need a <code>compute</code> function that returns full HTML text then.)</font>
+<!-- end inline comment -->
+
+<h3>Resources  <a name="___sec55"></a></h3>
+
+<p>
+Working with a database in Flask is described here:
+
+<ul>
+ <li> <a href="http://pythonhosted.org/Flask-SQLAlchemy/quickstart.html" target="_self"><tt>http://pythonhosted.org/Flask-SQLAlchemy/quickstart.html</tt></a>,</li>
+ <li> <a href="http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-iv-database" target="_self"><tt>http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-iv-database</tt></a>,</li>
+ <li> <a href="https://flask-login.readthedocs.org/en/latest/" target="_self">The Flask login extension</a></li>
+</ul>
+
+<p>
+<!-- begin bottom navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._web4sa_solarized016.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._web4sa_solarized018.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end bottom navigation -->
+</p>
+
+<!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

@@ -6,7 +6,9 @@ Troubleshooting
 .. index::
    single: Flask; troubleshooting
 
-**Address already in use.**
+Address already in use
+~~~~~~~~~~~~~~~~~~~~~~
+
 You can easily kill the Flask application and restart it, but sometimes
 you will get an error that the address is already in use.
 To recover from this problem, run the ``lsof`` program to see which program

@@ -40,10 +40,9 @@ h1, h2, h3, h4, h5, h6 {
           <!-- navigation toc: --> <li><a href="._web4sa_flask000.html#___sec0" style="font-size: 80%;">Web frameworks</a></li>
      <!-- navigation toc: --> <li><a href="._web4sa_flask004.html#___sec4" style="font-size: 80%;">Making a Flask application</a></li>
      <!-- navigation toc: --> <li><a href="._web4sa_flask006.html#wf:vib:flask" style="font-size: 80%;">Handling multiple input variables in Flask</a></li>
-     <!-- navigation toc: --> <li><a href="._web4sa_flask015.html#___sec27" style="font-size: 80%;">Further work</a></li>
-     <!-- navigation toc: --> <li><a href="._web4sa_flask016.html#___sec29" style="font-size: 80%;">Exercises</a></li>
-     <!-- navigation toc: --> <li><a href="._web4sa_flask016.html#___sec34" style="font-size: 80%;">Flask resources</a></li>
-     <!-- navigation toc: --> <li><a href="._web4sa_flask016.html#___sec35" style="font-size: 80%;">Remaining</a></li>
+     <!-- navigation toc: --> <li><a href="._web4sa_flask016.html#___sec46" style="font-size: 80%;">Exercises</a></li>
+     <!-- navigation toc: --> <li><a href="._web4sa_flask016.html#___sec54" style="font-size: 80%;">Flask resources</a></li>
+     <!-- navigation toc: --> <li><a href="._web4sa_flask016.html#___sec55" style="font-size: 80%;">Remaining</a></li>
 
     </ul>
    </div>
@@ -63,15 +62,21 @@ h1, h2, h3, h4, h5, h6 {
                'wf:hw:mvc'),
               (' Making a Flask application ', 1, None, '___sec4'),
               (' Programming the Flask application ', 2, None, '___sec5'),
+              (' The user interaction ', 3, None, '___sec6'),
+              (' The Python code ', 3, None, '___sec7'),
+              (' Dissection ', 3, None, '___sec8'),
+              (' The template files ', 3, None, '___sec9'),
+              (' Testing the application ', 3, None, '___sec10'),
               (' Equipping the input page with output results ',
                2,
                None,
-               '___sec6'),
+               '___sec11'),
               (' Splitting the app into model, view, and controller files ',
                2,
                'wf:hw3:flask',
                'wf:hw3:flask'),
-              (' Troubleshooting ', 2, None, '___sec8'),
+              (' Troubleshooting ', 2, None, '___sec13'),
+              (' Address already in use ', 3, None, '___sec14'),
               (' Handling multiple input variables in Flask ',
                1,
                'wf:vib:flask',
@@ -80,64 +85,84 @@ h1, h2, h3, h4, h5, h6 {
                2,
                'wf:vib1:flask:app',
                'wf:vib1:flask:app'),
+              (' The compute part ', 3, None, '___sec17'),
+              (' The model ', 3, None, '___sec18'),
+              (' The view ', 3, None, '___sec19'),
+              (' The HTML template ', 3, None, '___sec20'),
               (' Implementing error checking in the template ',
                2,
                None,
-               '___sec11'),
-              (' Using style sheets ', 2, None, '___sec12'),
-              (' Using LaTeX mathematics ', 2, None, '___sec13'),
+               '___sec21'),
+              (' Using style sheets ', 2, None, '___sec22'),
+              (' Using LaTeX mathematics ', 2, None, '___sec23'),
               (' Rearranging the elements in the HTML template ',
                2,
                None,
-               '___sec14'),
-              (' Bootstrap HTML style ', 2, None, '___sec15'),
+               '___sec24'),
+              (' Bootstrap HTML style ', 2, None, '___sec25'),
               (' Custom validation ',
                2,
                'wf:vib1:flask:validation',
                'wf:vib1:flask:validation'),
-              (' Using Flask validators ', 3, None, '___sec17'),
-              (' Tailored validation ', 3, None, '___sec18'),
-              (' Tailored validation of intervals ', 3, None, '___sec19'),
-              (' Demo ', 3, None, '___sec20'),
-              (' Autogenerating the code ',
-               2,
-               'wf:vib3:flask:autogen',
-               'wf:vib3:flask:autogen'),
+              (' Using Flask validators ', 3, None, '___sec27'),
+              (' Tailored validation ', 3, None, '___sec28'),
+              (' Tailored validation of intervals ', 3, None, '___sec29'),
+              (' Demo ', 3, None, '___sec30'),
               (' Avoiding plot files ',
                2,
-               'wf:vib3:flask:nofiles',
-               'wf:vib3:flask:nofiles'),
-              (' PNG plots ', 3, None, '___sec23'),
-              (' SVG plots ', 3, None, '___sec24'),
+               'wf:vib2:flask:nofiles',
+               'wf:vib2:flask:nofiles'),
+              (' PNG plots ', 3, None, '___sec32'),
+              (' SVG plots ', 3, None, '___sec33'),
+              (' Autogenerating the code ',
+               2,
+               'wf:autogen:flask',
+               'wf:autogen:flask'),
+              (' Inspecting function signatures ', 3, None, '___sec35'),
+              (' Generating the model ', 3, None, '___sec36'),
+              (' Generating the view ', 3, None, '___sec37'),
+              (' Generating the template ', 3, None, '___sec38'),
+              (' Application ', 3, None, '___sec39'),
               (' User login and storage of computed results ',
                2,
-               'wf:vib1:flask:login',
-               'wf:vib1:flask:login'),
-              (' Project 1: Using Bootstrap styles ',
-               2,
-               'wf:vib1:flask:bootstrap',
-               'wf:vib1:flask:bootstrap'),
-              (' Further work ', 1, None, '___sec27'),
-              (' Resources ', 3, None, '___sec28'),
-              (' Exercises ', 1, None, '___sec29'),
-              (' Exercise 2: Add two numbers ',
+               'wf:flask:login',
+               'wf:flask:login'),
+              (' Required additional software ', 3, None, '___sec41'),
+              (' The compute part ', 3, None, '___sec42'),
+              (' The interfaces of the app ', 3, None, '___sec43'),
+              (' The source code ', 3, None, '___sec44'),
+              (' Resources ', 3, None, '___sec45'),
+              (' Exercises ', 1, None, '___sec46'),
+              (' Exercise 1: Add two numbers ',
                2,
                'wf:exer:add2',
                'wf:exer:add2'),
-              (' Exercise 3: Extend the `vib3_flask` app ',
+              (' Exercise 2: Upload data file and visualize curves ',
                2,
-               'wf:exer:vib3:demo',
-               'wf:exer:vib3:demo'),
-              (' Exercise 4: Equip the `vib3_flask` app with more data types ',
+               'wf:exer:upload',
+               'wf:exer:upload'),
+              (' Exercise 3: Plot a user-specified formula ',
                2,
-               'wf:exer:vib3:lists',
-               'wf:exer:vib3:lists'),
-              (' Exercise 5: Auto-generate code from function signature ',
+               'wf:exer:formula',
+               'wf:exer:formula'),
+              (' Exercise 4: Visualize Taylor polynomial approximations ',
+               2,
+               'wf:exer:Taylor',
+               'wf:exer:Taylor'),
+              (' Exercise 5: Extend the `gen` app ',
+               2,
+               'wf:exer:gen:demo',
+               'wf:exer:gen:demo'),
+              (' Exercise 6: Equip the `gen` app with more data types ',
+               2,
+               'wf:exer:gen:lists',
+               'wf:exer:gen:lists'),
+              (' Exercise 7: Auto-generate code from function signature ',
                2,
                None,
-               '___sec33'),
-              (' Flask resources ', 1, None, '___sec34'),
-              (' Remaining ', 1, None, '___sec35')]}
+               '___sec53'),
+              (' Flask resources ', 1, None, '___sec54'),
+              (' Remaining ', 1, None, '___sec55')]}
 end of tocinfo -->
 
 
@@ -161,162 +186,204 @@ MathJax.Hub.Config({
 <a name="part0012"></a>
 <!-- !split -->
 
-<h2 id="wf:vib3:flask:nofiles">Avoiding plot files<a name="wf:vib3:flask:nofiles"></a></h2>
+<h2 id="wf:vib1:flask:validation">Custom validation<a name="wf:vib1:flask:validation"></a></h2>
 
 <p>
-Files with plots are easy to deal with as long as they are in the
-<code>static</code> subdirectory of the Flask application directory. However,
-the less files a web app makes use of, the better. Also, the problem
-with ensuring that new plots are really loaded into the browser
-required us to generate unique filenames. Therefore, it would be
-convenient to get the plot as a string and embed the string data
-directly into the HTML code. This is relatively easy with Matplotlib
-and Python. The relevant code constitutes the
-<a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/vib4" target="_self"><tt>vib4</tt></a> app in the
-directory of the same name.
+The <code>FloatField</code> objects can check that the input is compatible with
+a number, but what if we want to control that \( A>0 \), \( b>0 \), and
+\( T \) is not greater than 30 periods (otherwise the plot gets cluttered)?
+We can write functions for checking appropriate conditions and
+supply the function to the list of validator functions in the call to
+the <code>FloatField</code> constructor or other field constructors. The extra
+code is a part of the <code>model.py</code> and the presented extensions appear
+in the directory <a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/vib2" target="_self"><tt>vib2</tt></a>.
 
-<h3 id="___sec23">PNG plots <a name="___sec23"></a></h3>
+<h3 id="___sec27">Using Flask validators <a name="___sec27"></a></h3>
 
 <p>
-Python has the <code>StringIO</code> object that is a string buffer with the
-look and behavior of a file. The idea is to let Matplotlib write to
-a <code>StringIO</code> object and afterwards extract the string from this object:
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plot</span>
-<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">StringIO</span> <span style="color: #008000; font-weight: bold">import</span> StringIO
-<span style="color: #408080; font-style: italic"># run plt.plot, plt.title, etc.</span>
-figfile <span style="color: #666666">=</span> StringIO()
-plt<span style="color: #666666">.</span>savefig(figfile, format<span style="color: #666666">=</span><span style="color: #BA2121">&#39;png&#39;</span>)
-figfile<span style="color: #666666">.</span>seek(<span style="color: #666666">0</span>)  <span style="color: #408080; font-style: italic"># rewind to beginning of file</span>
-figdata_png <span style="color: #666666">=</span> figfile<span style="color: #666666">.</span>buf  <span style="color: #408080; font-style: italic"># extract string</span>
-</pre></div>
-<p>
-Before the PNG data can be embedded in HTML we need to convert the
-data to base64 format:
+The simplest approach to validation is to use existing functionality
+in the web framework. Checking that \( A>0 \) can be done by
+the <code>NumberRange</code> validator which checks that the value is inside
+a prescribed interval:
 
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">base64</span>
-figdata_png <span style="color: #666666">=</span> base64<span style="color: #666666">.</span>b64encode(figdata_png)
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">wtforms</span> <span style="color: #008000; font-weight: bold">import</span> Form, FloatField, validators
+
+<span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">InputForm</span>(Form):
+    A <span style="color: #666666">=</span> FloatField(
+        label<span style="color: #666666">=</span><span style="color: #BA2121">&#39;amplitude (m)&#39;</span>, default<span style="color: #666666">=1.0</span>,
+        validators<span style="color: #666666">=</span>[validators<span style="color: #666666">.</span>NumberRange(<span style="color: #666666">0</span>, <span style="color: #666666">1E+20</span>)])
 </pre></div>
+
+<h3 id="___sec28">Tailored validation <a name="___sec28"></a></h3>
+
 <p>
-Now we can embed the PNG data in HTML by
+We can also easily provide our own more tailored validators.
+As an example, let us explain how we can check that \( T \) is less than 30 periods.
+One period is \( 2\pi /w \) so we need to check if \( T> 30\cdot 2\pi/w \)
+and raise an exception in that case.
+A validation function takes two arguments: the whole <code>form</code> and the
+specific <code>field</code> to test:
 
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># html is some file object for the HTML file</span>
-html<span style="color: #666666">.</span>write(<span style="color: #BA2121">&quot;&quot;&quot;</span>
-<span style="color: #BA2121">&lt;img src=&quot;data:image/png;base64,</span><span style="color: #BB6688; font-weight: bold">%(figdata_png)s</span><span style="color: #BA2121">&quot; width=&quot;500&quot;&gt;</span>
-<span style="color: #BA2121">&quot;&quot;&quot;</span> <span style="color: #666666">%</span> <span style="color: #008000">vars</span>())
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">check_T</span>(form, field):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Form validation: failure if T &gt; 30 periods.&quot;&quot;&quot;</span>
+    w <span style="color: #666666">=</span> form<span style="color: #666666">.</span>w<span style="color: #666666">.</span>data
+    T <span style="color: #666666">=</span> field<span style="color: #666666">.</span>data
+    period <span style="color: #666666">=</span> <span style="color: #666666">2*</span>pi<span style="color: #666666">/</span>w
+    <span style="color: #008000; font-weight: bold">if</span> T <span style="color: #666666">&gt;</span> <span style="color: #666666">30*</span>period:
+        num_periods <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #008000">round</span>(T<span style="color: #666666">/</span>period))
+        <span style="color: #008000; font-weight: bold">raise</span> validators<span style="color: #666666">.</span>ValidationError(
+            <span style="color: #BA2121">&#39;Cannot plot as much as </span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121"> periods! T&lt;</span><span style="color: #BB6688; font-weight: bold">%.2f</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span>
+            (num_periods, <span style="color: #666666">30*</span>period))
 </pre></div>
 <p>
-The corresponding syntax in an HTML template is
-
-<p>
-
-<!-- code=html (!bc htmlcod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">&lt;img</span> <span style="color: #7D9029">src=</span><span style="color: #BA2121">&quot;data:image/png;base64,{{ figdata_png }}&quot;</span> <span style="color: #7D9029">width=</span><span style="color: #BA2121">&quot;500&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
-</pre></div>
-
-<h3 id="___sec24">SVG plots <a name="___sec24"></a></h3>
-
-<p>
-Inline figures in HTML, instead of using files, are most often realized
-by XML code with the figure data in SVG format.
-Plot strings in the SVG format are created very similarly to the PNG
-example:
+The appropriate exception is of type <code>validators.ValidationError</code>.
+Observe that through <code>form</code> we have in fact access to all the input
+data so we can easily use the value of \( w \) when checking the validity
+of the value of \( T \). The <code>check_T</code> function is easy to
+add to the list of validator functions in the call to the <code>FloatField</code>
+constructor for <code>T</code>:
 
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">figfile <span style="color: #666666">=</span> StringIO()
-plt<span style="color: #666666">.</span>savefig(figfile, format<span style="color: #666666">=</span><span style="color: #BA2121">&#39;svg&#39;</span>)
-figdata_svg <span style="color: #666666">=</span> figfile<span style="color: #666666">.</span>buf
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">InputForm</span>(Form):
+    <span style="color: #666666">...</span>
+    T <span style="color: #666666">=</span> FloatField(
+        label<span style="color: #666666">=</span><span style="color: #BA2121">&#39;time interval&#39;</span>, default<span style="color: #666666">=6*</span>pi,
+        validators<span style="color: #666666">=</span>[validators<span style="color: #666666">.</span>InputRequired(), check_T])
 </pre></div>
 <p>
-The <code>figdata_svg</code> string contains XML code text can almost
-be directly embedded in
-HTML5. However, the beginning of the text contains information before
-the <code>svg</code> tag that we want to remove:
+The validator
+objects are tested one by one as they appear in the list, and if
+one fails, the others are not invoked.
+We therefore add <code>check_T</code> after the check of input such that we know we
+have a value for all data when we run the computations and test
+in <code>check_T</code>.
+
+<h3 id="___sec29">Tailored validation of intervals <a name="___sec29"></a></h3>
 
 <p>
-
-<!-- code=text (!bc dat) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; standalone=&quot;no&quot;?&gt;
-&lt;!DOCTYPE svg PUBLIC &quot;-//W3C//DTD SVG 1.1//EN&quot;
-  &quot;http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd&quot;&gt;
-&lt;!-- Created with matplotlib (http://matplotlib.sourceforge.net/) --&gt;
-&lt;svg height=&quot;441pt&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 585 441&quot; ...
-</pre></div>
-<p>
-The removal is done with a little string manipulation:
+Although there is already a <code>NumberRange</code> validator for checking
+whether a value is inside an interval, we can write our own
+version with some improved functionality for open intervals where
+the maximum or minimum value can be infinite.
+The infinite value can on input be represented by <code>None</code>.
+A general such function may take the form
 
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">figdata_svg <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;&lt;svg&#39;</span> <span style="color: #666666">+</span> figfile<span style="color: #666666">.</span>buf<span style="color: #666666">.</span>split(<span style="color: #BA2121">&#39;&lt;svg&#39;</span>)[<span style="color: #666666">1</span>]
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">check_interval</span>(form, field, min_value<span style="color: #666666">=</span><span style="color: #008000">None</span>, max_value<span style="color: #666666">=</span><span style="color: #008000">None</span>):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;For validation: failure if value is outside an interval.&quot;&quot;&quot;</span>
+    failure <span style="color: #666666">=</span> <span style="color: #008000">False</span>
+    <span style="color: #008000; font-weight: bold">if</span> min_value <span style="color: #AA22FF; font-weight: bold">is</span> <span style="color: #AA22FF; font-weight: bold">not</span> <span style="color: #008000">None</span>:
+        <span style="color: #008000; font-weight: bold">if</span> field<span style="color: #666666">.</span>data <span style="color: #666666">&lt;</span> min_value:
+            failure <span style="color: #666666">=</span> <span style="color: #008000">True</span>
+    <span style="color: #008000; font-weight: bold">if</span> max_value <span style="color: #AA22FF; font-weight: bold">is</span> <span style="color: #AA22FF; font-weight: bold">not</span> <span style="color: #008000">None</span>:
+        <span style="color: #008000; font-weight: bold">if</span> field<span style="color: #666666">.</span>data <span style="color: #666666">&gt;</span> max_value:
+            failure <span style="color: #666666">=</span> <span style="color: #008000">True</span>
+    <span style="color: #008000; font-weight: bold">if</span> failure:
+        <span style="color: #008000; font-weight: bold">raise</span> validators<span style="color: #666666">.</span>ValidationError(
+            <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">=</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> not in [</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">, </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">]&#39;</span> <span style="color: #666666">%</span>
+            (field<span style="color: #666666">.</span>name, field<span style="color: #666666">.</span>data,
+             <span style="color: #BA2121">&#39;-infty&#39;</span> <span style="color: #008000; font-weight: bold">if</span> min_value <span style="color: #AA22FF; font-weight: bold">is</span> <span style="color: #008000">None</span> <span style="color: #008000; font-weight: bold">else</span> <span style="color: #008000">str</span>(min_value),
+             <span style="color: #BA2121">&#39;infty&#39;</span>  <span style="color: #008000; font-weight: bold">if</span> max_value <span style="color: #AA22FF; font-weight: bold">is</span> <span style="color: #008000">None</span> <span style="color: #008000; font-weight: bold">else</span> <span style="color: #008000">str</span>(max_value)))
 </pre></div>
 <p>
-Now, <code>figdata_svg</code> can be directly inserted in HTML code without
-any surrounding tags.
-The file <a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/vib4/compute.py" target="_self"><tt>compute.py</tt></a>
-in the <code>vib4</code> application directory contains all the details.
-
-<p>
-The <code>compute_gamma</code> function returns six values:
-the PNG data for the \( g \) plot, the PNG data for the \( G \) plot,
-the SVG XML code for the \( g \) plot, the SVG XML code for the \( G \) plot,
-the mean value, and the value of the standard deviation. We can
-keep the <code>controller.py</code> unchanged (except for the URL, which is now <code>vib4</code>)
-and adjust the <code>view_results.html</code>
-template only. The <code>result</code> object is now a tuple with 6 elements.
-For illustration purposes we make two rows with plots, one with
-PNG data and one with SVG data. The template becomes
+The problem is that <code>check_interval</code> takes four arguments, not only
+the <code>form</code> and <code>field</code> arguments that a validator function in the
+Flask framework can accept.
+The way out of this difficulty is to use a Python tool <code>functools.partial</code>
+which allows us to call a function with some of the arguments set beforehand.
+Here, we want to create a new function that calls <code>check_interval</code>
+with some prescribed values of <code>min_value</code> and <code>max_value</code>.
+This function looks like it does not have these arguments, only
+<code>form</code> and <code>field</code>. The following function produces this function, which we
+can use as a valid Flask validator function:
 
 <p>
 
-<!-- code=html (!bc htmlpro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">&lt;p&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;table&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;tr&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;td&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;img</span> <span style="color: #7D9029">src=</span><span style="color: #BA2121">&quot;data:image/png;base64,{{ result[0] }}&quot;</span> <span style="color: #7D9029">width=</span><span style="color: #BA2121">&quot;400&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;/td&gt;&lt;td&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;img</span> <span style="color: #7D9029">src=</span><span style="color: #BA2121">&quot;data:image/png;base64,{{ result[1] }}&quot;</span> <span style="color: #7D9029">width=</span><span style="color: #BA2121">&quot;400&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;/td&gt;&lt;/tr&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;tr&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;td&gt;</span>{{ result[2]|safe }}<span style="color: #008000; font-weight: bold">&lt;/td&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;td&gt;</span>{{ result[3]|safe }}<span style="color: #008000; font-weight: bold">&lt;/td&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;/tr&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;tr&gt;&lt;td&gt;</span>
-Mean value: {{ result[4] }} <span style="color: #008000; font-weight: bold">&lt;br&gt;</span>
-Standard deviation value: {{ result[5] }}
-<span style="color: #008000; font-weight: bold">&lt;/td&gt;&lt;/tr&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;/table&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;/p&gt;</span>
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">functools</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">interval</span>(min_value<span style="color: #666666">=</span><span style="color: #008000">None</span>, max_value<span style="color: #666666">=</span><span style="color: #008000">None</span>):
+    <span style="color: #008000; font-weight: bold">return</span> functools<span style="color: #666666">.</span>partial(
+        check_interval, min_value<span style="color: #666666">=</span>min_value, max_value<span style="color: #666666">=</span>max_value)
 </pre></div>
 <p>
-Special HTML characters like <code>&lt;</code>, <code>&gt;</code>,
-<code>&</code>, <code>&quot;</code>, and <code>'</code> are escaped in a template string like <code>{{ str }}</code>
-(i.e., <code>&</code> is replaced by <code>&amp;</code> `<` is replaced by <code>&lt;</code>, etc.).
-We need to avoid this manipulation of the string content
-because <code>result[2]</code> and <code>result[3]</code> contain
-XML code where the mentioned characters are essential part of the syntax.
-Writing <code>{{str|safe}}</code> ensures that the contents of the string <code>str</code>
-are not altered before being embedded in the HTML text.
+We can now in any field constructor just add
+<code>interval(a, b)</code> as a validator function, here checking that \( b\in [0,\infty) \):
 
 <p>
-Trying out the <code>vib4</code> application we see that the SVG plots are
-much bigger than the width-controlled PNG plots.
-The width and height of SVG plots are specified in the XML code and can
-of course be changed by proper string replacements for the
-<code>width</code>, <code>height</code>, and <code>viewBox</code> specifications. It is far easier to
-just write the <code>width</code> specification in the image tag for the PNG plot.
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">InputForm</span>(Form):
+    <span style="color: #666666">...</span>
+    b <span style="color: #666666">=</span> FloatField(
+        label<span style="color: #666666">=</span><span style="color: #BA2121">&#39;damping factor (kg/s)&#39;</span>, default<span style="color: #666666">=0</span>,
+        validators<span style="color: #666666">=</span>[validators<span style="color: #666666">.</span>InputRequired(), interval(<span style="color: #666666">0</span>,<span style="color: #008000">None</span>)])
+</pre></div>
+
+<h3 id="___sec30">Demo <a name="___sec30"></a></h3>
+
+<p>
+Let us test our tailored error checking. Run <code>python controller.py</code>
+in the <code>vib2</code> directory and fill in \( -1.0 \) in the \( b \) field.
+Pressing <em>Compute</em> invokes our <code>interval(0,None)</code> function, which
+is nothing but a call to <code>check_interval</code> with the
+arguments <code>field</code>, <code>form</code>, <code>0</code>, and <code>None</code>.
+Inside this function,
+the test <code>if field.data &lt; min_value</code> becomes true, <code>failure</code>
+is set, and the exception is raised. The message in the exception
+is available in the <code>field.errors</code> attribute so our template
+will write it out in red, see Figure <a href="#wf:vib2:flask:fig:error1">9</a>.
+The template used in <code>vib2</code> is basically the same as <code>view_tex.html</code>
+in <code>vib1</code>, i.e., it feaures LaTeX mathematics and checking of
+<code>field.errors</code>.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 9:  Triggering of a user-defined error check. <a name="wf:vib2:flask:fig:error1"></a> </p></center>
+<p><img src="fig-web4sa/vib2_flask_error1.png" align="bottom" width=500></p>
+</center>
+
+<p>
+Finally, we mention a detail in the <code>controller.py</code> file in the <code>vib2</code>
+app: instead of sending <code>form.var.data</code> to the <code>compute</code> function we
+may automatically generate a set of local variables such that the
+application of data from the web page, here in the <code>compute</code> call, looks nicer:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">index</span>():
+    form <span style="color: #666666">=</span> InputForm(request<span style="color: #666666">.</span>form)
+    <span style="color: #008000; font-weight: bold">if</span> request<span style="color: #666666">.</span>method <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;POST&#39;</span> <span style="color: #AA22FF; font-weight: bold">and</span> form<span style="color: #666666">.</span>validate():
+        <span style="color: #008000; font-weight: bold">for</span> field <span style="color: #AA22FF; font-weight: bold">in</span> form:
+            <span style="color: #408080; font-style: italic"># Make local variable (name field.name)</span>
+            <span style="color: #008000; font-weight: bold">exec</span>(<span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> = </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (field<span style="color: #666666">.</span>name, field<span style="color: #666666">.</span>data))
+        result <span style="color: #666666">=</span> compute(A, b, w, T)
+    <span style="color: #008000; font-weight: bold">else</span>:
+        result <span style="color: #666666">=</span> <span style="color: #008000">None</span>
+
+    <span style="color: #008000; font-weight: bold">return</span> render_template(template, form<span style="color: #666666">=</span>form, result<span style="color: #666666">=</span>result)
+
+<span style="color: #008000; font-weight: bold">if</span> __name__ <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;__main__&#39;</span>:
+    app<span style="color: #666666">.</span>run(debug<span style="color: #666666">=</span><span style="color: #008000">True</span>)
+</pre></div>
+<p>
+The idea is just to run <code>exec</code> on a declaration of a local variable
+with name <code>field.name</code> for each field in the form. This trick is often
+neat if web variables are buried in objects (<code>form.T.data</code>) and you want these
+variables in your
+code to look like they do in mathematical writing (<code>T</code> for \( T \)).
 
 <p>
 <p>

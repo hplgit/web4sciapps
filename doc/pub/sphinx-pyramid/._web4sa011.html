@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Bootstrap HTML style &mdash; Using Web Frameworks for Scientific Applications</title>
+    <title>Using LaTeX mathematics &mdash; Using Web Frameworks for Scientific Applications</title>
     
     <link rel="stylesheet" href="_static/pyramid.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -43,7 +43,7 @@
 
     
     <link rel="top" title="Using Web Frameworks for Scientific Applications" href="index.html" />
-    <link rel="next" title="Custom validation (1)" href="._web4sa012.html" />
+    <link rel="next" title="Rearranging the elements in the HTML template" href="._web4sa012.html" />
     <link rel="prev" title="Using style sheets" href="._web4sa010.html" />
 
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
@@ -62,7 +62,7 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="._web4sa012.html" title="Custom validation (1)"
+          <a href="._web4sa012.html" title="Rearranging the elements in the HTML template"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="._web4sa010.html" title="Using style sheets"
@@ -76,176 +76,47 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="bootstrap-html-style">
-<h1>Bootstrap HTML style<a class="headerlink" href="#bootstrap-html-style" title="Permalink to this headline">¶</a></h1>
-<p>The <a class="reference external" href="http://getbootstrap.com/">Bootstrap</a> framework for creating web pages
-has been very popular in recent years, both because of the design and
-the automatic support for responsive pages on all sorts of devices.
-Bootstrap can be used in combination with Flask. The template file
-<tt class="docutils literal"><span class="pre">view_bootstrap.html</span></tt> is identical to the former <tt class="docutils literal"><span class="pre">view_table.html</span></tt>,
-except that we load the Bootstrap CSS file and include in comments
-how to add the typical navigation bar found in many Bootstrap-based
-web pages. The template looks like</p>
-<div class="highlight-html"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">&quot;en&quot;</span><span class="nt">&gt;</span>
-
-    <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;http://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css&quot;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span><span class="nt">&gt;</span>
-
-<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/x-mathjax-config&quot;</span><span class="nt">&gt;</span>
+  <div class="section" id="using-latex-mathematics">
+<h1>Using LaTeX mathematics<a class="headerlink" href="#using-latex-mathematics" title="Permalink to this headline">¶</a></h1>
+<p id="index-0">Scientific applications frequently have many input data that are
+defined through mathematics and where the typesetting on the
+web page should be as close as possible to the typesetting where
+the mathematics is documented. In the present example we would like
+to typeset <span class="math">\(A\)</span>, <span class="math">\(b\)</span>, <span class="math">\(w\)</span>, and <span class="math">\(T\)</span> with italic font as done
+in LaTeX. Fortunately, native LaTeX typesetting is available in
+HTML through the tool <a class="reference external" href="http://www.mathjax.org/">MathJax</a>.
+Our template <tt class="docutils literal"><span class="pre">view_tex.html</span></tt> enables MathJax. Formulas are written
+with standard LaTeX inside <tt class="docutils literal"><span class="pre">\(</span></tt> and <tt class="docutils literal"><span class="pre">\)</span></tt>, while equations are surrounded
+by <tt class="docutils literal"><span class="pre">$$</span></tt>. Here we use formulas only:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/x-mathjax-config&quot;</span><span class="nt">&gt;</span>
 <span class="nx">MathJax</span><span class="p">.</span><span class="nx">Hub</span><span class="p">.</span><span class="nx">Config</span><span class="p">({</span>
   <span class="nx">TeX</span><span class="o">:</span> <span class="p">{</span>
      <span class="nx">equationNumbers</span><span class="o">:</span> <span class="p">{</span>  <span class="nx">autoNumber</span><span class="o">:</span> <span class="s2">&quot;AMS&quot;</span>  <span class="p">},</span>
-     <span class="nx">extensions</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;AMSmath.js&quot;</span><span class="p">,</span> <span class="s2">&quot;AMSsymbols.js&quot;</span><span class="p">,</span> <span class="s2">&quot;autobold.js&quot;</span><span class="p">]</span>
+     <span class="nx">extensions</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;AMSmath.js&quot;</span><span class="p">,</span> <span class="s2">&quot;AMSsymbols.js&quot;</span><span class="p">,</span> <span class="s2">&quot;autobold.js&quot;</span><span class="p">,</span> <span class="s2">&quot;color.js&quot;</span><span class="p">]</span>
   <span class="p">}</span>
 <span class="p">});</span>
 <span class="nt">&lt;/script&gt;</span>
 <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span>
  <span class="na">src=</span><span class="s">&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;</span><span class="nt">&gt;</span>
 <span class="nt">&lt;/script&gt;</span>
-<span class="c">&lt;!--</span>
-<span class="c">&lt;nav class=&quot;navbar navbar-default&quot; role=&quot;navigation&quot;&gt;</span>
-<span class="c">&lt;div class=&quot;collapse navbar-collapse&quot; id=&quot;bs-example-navbar-collapse-1&quot;&gt;</span>
-<span class="c">    &lt;ul class=&quot;nav navbar-nav&quot;&gt;</span>
-<span class="c">       {% for f in some_sequence %}</span>
-<span class="c">       &lt;li&gt;&lt;a href=&quot;/{{f}}&quot;&gt;{{f}}&lt;/a&gt;&lt;/li&gt;</span>
-<span class="c">       {% endfor %}</span>
-<span class="c">       &lt;/ul&gt;</span>
-<span class="c">&lt;/div&gt;</span>
-<span class="c">&lt;/nav&gt;</span>
-<span class="c">--&gt;</span>
 
 This web page visualizes the function \(
 u(t) = Ae^{-bt}\sin (w t), \hbox{ for } t\in [0,T]
 \).
 
-<span class="c">&lt;!-- table with forms to the left and plot to the right --&gt;</span>
-<span class="nt">&lt;form</span> <span class="na">class=</span><span class="s">&quot;navbar-form navbar-top&quot;</span> <span class="na">method=</span><span class="s">&quot;post&quot;</span> <span class="na">action=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span>
-<span class="nt">&lt;table</span> <span class="na">class=</span><span class="s">&quot;table table-hover&quot;</span><span class="nt">&gt;</span>
-<span class="nt">&lt;tr&gt;&lt;td&gt;</span>
-  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;form-group&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;form</span> <span class="na">method=</span><span class="s">post</span> <span class="na">action=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;table&gt;</span>
   {% for field in form %}
-    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;input-group&quot;</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;input-group-addon&quot;</span><span class="nt">&gt;</span> \( {{ field.name }} \) <span class="nt">&lt;/span&gt;</span>
-      {{field(class_=&quot;form-control&quot;)}}
-    <span class="nt">&lt;/div&gt;</span>
-    {% if field.errors %}
-      <span class="nt">&lt;table</span> <span class="na">class=</span><span class="s">&quot;table table-hover&quot;</span><span class="nt">&gt;</span>
-      {% for error in field.errors %}
-        <span class="nt">&lt;tr&gt;&lt;td</span> <span class="na">class=</span><span class="s">&quot;danger&quot;</span><span class="nt">&gt;</span>{{ error }}<span class="nt">&lt;/td&gt;&lt;/tr&gt;</span>
-      {% endfor %}
-      <span class="nt">&lt;/table&gt;</span>
-    {% endif %}
-  {% endfor %}
-<span class="nt">&lt;/td&gt;</span>
-
-<span class="c">&lt;!-- 2nd column contains the plot --&gt;</span>
-<span class="nt">&lt;td&gt;</span>
-<span class="nt">&lt;p&gt;</span>
-{% if result != None %}
-<span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;{{ result }}&quot;</span> <span class="na">width=</span><span class="s">&quot;500&quot;</span><span class="nt">&gt;</span>
-{% endif %}
-<span class="nt">&lt;/p&gt;</span>
-<span class="nt">&lt;/td&gt;&lt;/tr&gt;</span>
-<span class="c">&lt;!-- next row contains the Compute button --&gt;</span>
-<span class="nt">&lt;tr&gt;</span>
-<span class="nt">&lt;td&gt;&lt;p&gt;</span>
-<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">value=</span><span class="s">&quot;Compute&quot;</span> <span class="na">class=</span><span class="s">&quot;btn btn-default&quot;</span><span class="nt">&gt;</span>
-<span class="nt">&lt;/td&gt;&lt;/tr&gt;</span>
-<span class="nt">&lt;/table&gt;</span>
-<span class="nt">&lt;/form&gt;</span>
-<span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
+    <span class="nt">&lt;tr&gt;</span>
+    <span class="nt">&lt;td&gt;</span>\( {{ field.name }} \)<span class="nt">&lt;/td&gt;&lt;td&gt;</span>{{ field(size=12) }}<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>{{ field.label }}<span class="nt">&lt;/td&gt;</span>
 </pre></div>
 </div>
-<p>The input fields and fonts now get the typical Bootstrap look and feel.</p>
-<p>While <tt class="docutils literal"><span class="pre">view_bootstrap.html</span></tt> makes use of plain Bootstrap HTML code, there is
-also a higher-level framework, called <a class="reference external" href="http://pythonhosted.org/Flask-Bootstrap/">Flask-Bootstrap</a> that combines Flask and Bootstrap. Installation of
-this extension is done by <tt class="docutils literal"><span class="pre">sudo</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">flask-bootstrap</span></tt>.</p>
-<p>After <tt class="docutils literal"><span class="pre">app</span> <span class="pre">=</span> <span class="pre">Flask(__name__)</span></tt> we need to do</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">flask_bootstrap</span> <span class="kn">import</span> <span class="n">Bootstrap</span>
-<span class="n">Bootstrap</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>The template employs new keywords <tt class="docutils literal"><span class="pre">extends</span></tt> and <tt class="docutils literal"><span class="pre">block</span></tt>:</p>
-<div class="highlight-html"><div class="highlight"><pre>{% extends &quot;bootstrap/base.html&quot; %}
-
-{% block styles %}
-{{super()}}
-<span class="nt">&lt;style&gt;</span>
-    <span class="nc">.appsize</span> <span class="p">{</span> <span class="k">width</span><span class="o">:</span> <span class="m">500px</span> <span class="p">}</span>
-<span class="nt">&lt;/style&gt;</span>
-
-<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/x-mathjax-config&quot;</span><span class="nt">&gt;</span>
-<span class="nx">MathJax</span><span class="p">.</span><span class="nx">Hub</span><span class="p">.</span><span class="nx">Config</span><span class="p">({</span>
-  <span class="nx">TeX</span><span class="o">:</span> <span class="p">{</span>
-     <span class="nx">equationNumbers</span><span class="o">:</span> <span class="p">{</span>  <span class="nx">autoNumber</span><span class="o">:</span> <span class="s2">&quot;AMS&quot;</span>  <span class="p">},</span>
-     <span class="nx">extensions</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;AMSmath.js&quot;</span><span class="p">,</span> <span class="s2">&quot;AMSsymbols.js&quot;</span><span class="p">,</span> <span class="s2">&quot;autobold.js&quot;</span><span class="p">]</span>
-  <span class="p">}</span>
-<span class="p">});</span>
-<span class="nt">&lt;/script&gt;</span>
-<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span>
- <span class="na">src=</span><span class="s">&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;</span><span class="nt">&gt;</span>
-<span class="nt">&lt;/script&gt;</span>
-{% endblock %}
-
-<span class="c">&lt;!--</span>
-<span class="c">{% block navbar %}</span>
-<span class="c">&lt;nav class=&quot;navbar navbar-default&quot; role=&quot;navigation&quot;&gt;</span>
-<span class="c">&lt;div class=&quot;collapse navbar-collapse&quot; id=&quot;bs-example-navbar-collapse-1&quot;&gt;</span>
-<span class="c">    &lt;ul class=&quot;nav navbar-nav&quot;&gt;</span>
-<span class="c">       {% for f in some_sequence %}</span>
-<span class="c">       &lt;li&gt;&lt;a href=&quot;/{{f}}&quot;&gt;{{f}}&lt;/a&gt;&lt;/li&gt;</span>
-<span class="c">       {% endfor %}</span>
-<span class="c">       &lt;/ul&gt;</span>
-<span class="c">&lt;/div&gt;</span>
-<span class="c">&lt;/nav&gt;</span>
-<span class="c">{% endblock %}</span>
-<span class="c">--&gt;</span>
-
-This web page visualizes the function \(
-u(t) = Ae^{-bt}\sin (w t), \hbox{ for } t\in [0,T]
-\).
-
-{% block content %}
-<span class="c">&lt;!-- table with forms to the left and plot to the right --&gt;</span>
-<span class="nt">&lt;form</span> <span class="na">class=</span><span class="s">&quot;navbar-form navbar-top&quot;</span> <span class="na">method=</span><span class="s">&quot;post&quot;</span> <span class="na">action=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span>
-<span class="nt">&lt;table</span> <span class="na">class=</span><span class="s">&quot;table table-hover&quot;</span><span class="nt">&gt;</span>
-<span class="nt">&lt;tr&gt;&lt;td&gt;</span>
-  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;form-group&quot;</span><span class="nt">&gt;</span>
-  {% for field in form %}
-    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;input-group&quot;</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;input-group-addon&quot;</span><span class="nt">&gt;</span> \( {{ field.name }} \) <span class="nt">&lt;/span&gt;</span>
-      {{field(class_=&quot;form-control&quot;)}}
-    <span class="nt">&lt;/div&gt;</span>
-    {% if field.errors %}
-      <span class="nt">&lt;table</span> <span class="na">class=</span><span class="s">&quot;table table-hover&quot;</span><span class="nt">&gt;</span>
-      {% for error in field.errors %}
-        <span class="nt">&lt;tr&gt;&lt;td</span> <span class="na">class=</span><span class="s">&quot;danger&quot;</span><span class="nt">&gt;</span>{{ error }}<span class="nt">&lt;/td&gt;&lt;/tr&gt;</span>
-      {% endfor %}
-      <span class="nt">&lt;/table&gt;</span>
-    {% endif %}
-  {% endfor %}
-<span class="nt">&lt;/td&gt;</span>
-
-<span class="c">&lt;!-- 2nd column contains the plot --&gt;</span>
-<span class="nt">&lt;td&gt;</span>
-<span class="nt">&lt;p&gt;</span>
-{% if result != None %}
-<span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;{{ result }}&quot;</span> <span class="na">width=</span><span class="s">&quot;500&quot;</span><span class="nt">&gt;</span>
-{% endif %}
-<span class="nt">&lt;/p&gt;</span>
-<span class="nt">&lt;/td&gt;&lt;/tr&gt;</span>
-<span class="c">&lt;!-- next row contains the Compute button --&gt;</span>
-<span class="nt">&lt;tr&gt;</span>
-<span class="nt">&lt;td&gt;&lt;p&gt;</span>
-<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">value=</span><span class="s">&quot;Compute&quot;</span> <span class="na">class=</span><span class="s">&quot;btn btn-default&quot;</span><span class="nt">&gt;</span>
-<span class="nt">&lt;/td&gt;&lt;/tr&gt;</span>
-<span class="nt">&lt;/table&gt;</span>
-<span class="nt">&lt;/form&gt;</span>
-<span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-{% endblock %}
-</pre></div>
+<p>Figure <a class="reference internal" href="#wf-vib1-flask-fig-latex"><em>LaTeX typesetting of mathematical symbols</em></a> displays how the
+LaTeX rendering looks like in the browser.</p>
+<div class="figure" id="wf-vib1-flask-fig-latex">
+<a class="reference internal image-reference" href="_images/vib1_flask_latex.png"><img alt="_images/vib1_flask_latex.png" src="_images/vib1_flask_latex.png" style="width: 650px;" /></a>
+<p class="caption"><em>LaTeX typesetting of mathematical symbols</em></p>
 </div>
 </div>
 
@@ -260,7 +131,7 @@ u(t) = Ae^{-bt}\sin (w t), \hbox{ for } t\in [0,T]
                         title="previous chapter">Using style sheets</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="._web4sa012.html"
-                        title="next chapter">Custom validation  (1)</a></p>
+                        title="next chapter">Rearranging the elements in the HTML template</a></p>
 <div id="searchbox" style="display: none">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
@@ -285,7 +156,7 @@ u(t) = Ae^{-bt}\sin (w t), \hbox{ for } t\in [0,T]
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="._web4sa012.html" title="Custom validation (1)"
+          <a href="._web4sa012.html" title="Rearranging the elements in the HTML template"
              >next</a> |</li>
         <li class="right" >
           <a href="._web4sa010.html" title="Using style sheets"

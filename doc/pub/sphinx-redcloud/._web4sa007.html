@@ -86,8 +86,9 @@ with content. The mathematical computations are performed in <tt class="docutils
 so we copy this file from the <tt class="docutils literal"><span class="pre">mvc</span></tt> directory to the <tt class="docutils literal"><span class="pre">hw1</span></tt> directory
 for convenience (we could alternatively add <tt class="docutils literal"><span class="pre">../mvc</span></tt> to <tt class="docutils literal"><span class="pre">sys.path</span></tt> such that
 <tt class="docutils literal"><span class="pre">import</span> <span class="pre">compute</span></tt> would work from the <tt class="docutils literal"><span class="pre">hw1</span></tt> directory).</p>
-<p><strong>The user interaction.</strong>
-The web application offers a text field where the user can
+<div class="section" id="the-user-interaction-2">
+<h2>The user interaction  (2)<a class="headerlink" href="#the-user-interaction-2" title="Permalink to this headline">¶</a></h2>
+<p>The web application offers a text field where the user can
 write the value of <tt class="docutils literal"><span class="pre">r</span></tt>, see Figure <a class="reference internal" href="#wf-hw1-django-fig-input"><em>The input page</em></a>.
 After clicking on the <em>equals</em> button,
 the mathematics is performed and a new page as
@@ -100,8 +101,10 @@ seen in Figure <a class="reference internal" href="#wf-hw1-django-fig-result"><e
 <a class="reference internal image-reference" href="_images/hw1_django_output.png"><img alt="_images/hw1_django_output.png" src="_images/hw1_django_output.png" style="width: 600px;" /></a>
 <p class="caption"><em>The result page</em></p>
 </div>
-<span class="target" id="index-0"></span><p id="index-1"><strong>The model.</strong>
-The <tt class="docutils literal"><span class="pre">models.py</span></tt> file contains the model, which consists
+<span class="target" id="index-0"></span></div>
+<div class="section" id="the-model-1">
+<span id="index-1"></span><h2>The model  (1)<a class="headerlink" href="#the-model-1" title="Permalink to this headline">¶</a></h2>
+<p>The <tt class="docutils literal"><span class="pre">models.py</span></tt> file contains the model, which consists
 of the data we need in the application, stored in Django&#8217;s data types.
 Our data consists of one number, called <tt class="docutils literal"><span class="pre">r</span></tt>, and <tt class="docutils literal"><span class="pre">models.py</span></tt> then
 look like</p>
@@ -122,8 +125,10 @@ for different types of data, here we use <tt class="docutils literal"><span clas
 a floating-point number.
 The <tt class="docutils literal"><span class="pre">InputForm</span></tt> class has a the shown generic form across applications
 if we by convention apply the name <tt class="docutils literal"><span class="pre">Input</span></tt> for the class holding the data.</p>
-<span class="target" id="index-2"></span><p id="index-3"><strong>The view.</strong>
-The <tt class="docutils literal"><span class="pre">views.py</span></tt> file contains a function <tt class="docutils literal"><span class="pre">index</span></tt> which defines
+<span class="target" id="index-2"></span></div>
+<div class="section" id="the-view-1">
+<span id="index-3"></span><h2>The view  (1)<a class="headerlink" href="#the-view-1" title="Permalink to this headline">¶</a></h2>
+<p>The <tt class="docutils literal"><span class="pre">views.py</span></tt> file contains a function <tt class="docutils literal"><span class="pre">index</span></tt> which defines
 the actions we want to perform when invoking
 the URL ( here <tt class="docutils literal"><span class="pre">http://127.0.0.1:8000/hw1/</span></tt>).
 In addition, <tt class="docutils literal"><span class="pre">views.py</span></tt> has the <tt class="docutils literal"><span class="pre">present_output</span></tt> function from
@@ -157,8 +162,10 @@ argument, usually called <tt class="docutils literal"><span class="pre">request<
 the user has provided input on the web page, which means that
 <tt class="docutils literal"><span class="pre">request.method</span></tt> equals <tt class="docutils literal"><span class="pre">'POST'</span></tt>, or we show a new web page
 with which the user is supposed to interact.</p>
-<p id="index-4"><strong>Making the input page.</strong>
-The input consists of a web form with
+</div>
+<div class="section" id="making-the-input-page">
+<span id="index-4"></span><h2>Making the input page<a class="headerlink" href="#making-the-input-page" title="Permalink to this headline">¶</a></h2>
+<p>The input consists of a web form with
 one field where we can fill in our <tt class="docutils literal"><span class="pre">r</span></tt> variable. This page
 is realized by the two central statements</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="c"># Make info needed in the web form</span>
@@ -192,8 +199,10 @@ results in the HTML code</p>
 <span class="nt">&lt;/form&gt;</span>
 </pre></div>
 </div>
-<p><strong>Making the results page.</strong>
-When then user has filled in a value in the text field on the input
+</div>
+<div class="section" id="making-the-results-page">
+<h2>Making the results page<a class="headerlink" href="#making-the-results-page" title="Permalink to this headline">¶</a></h2>
+<p>When then user has filled in a value in the text field on the input
 page, the <tt class="docutils literal"><span class="pre">index</span></tt> function is called again and <tt class="docutils literal"><span class="pre">request.method</span></tt> equals
 <tt class="docutils literal"><span class="pre">'POST'</span></tt>. A new form object is made, this time with user info (<tt class="docutils literal"><span class="pre">request.POST</span></tt>).
 We can check that the form is valid and if so, proceed with
@@ -236,6 +245,7 @@ the <tt class="docutils literal"><span class="pre">present_output</span></tt> fu
 </div>
 <p>Go back to the input page, provide a new number, and observe how
 the &#8220;Hello&#8221; word now has a blue color.</p>
+</div>
 </div>
 <div class="section" id="equipping-the-input-page-with-output-results-2">
 <h1>Equipping the input page with output results  (2)<a class="headerlink" href="#equipping-the-input-page-with-output-results-2" title="Permalink to this headline">¶</a></h1>
@@ -337,7 +347,14 @@ if-block must be explicitly ended by <tt class="docutils literal"><span class="p
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Programming the Django application  (1)</a></li>
+<li><a class="reference internal" href="#">Programming the Django application  (1)</a><ul>
+<li><a class="reference internal" href="#the-user-interaction-2">The user interaction  (2)</a></li>
+<li><a class="reference internal" href="#the-model-1">The model  (1)</a></li>
+<li><a class="reference internal" href="#the-view-1">The view  (1)</a></li>
+<li><a class="reference internal" href="#making-the-input-page">Making the input page</a></li>
+<li><a class="reference internal" href="#making-the-results-page">Making the results page</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#equipping-the-input-page-with-output-results-2">Equipping the input page with output results  (2)</a></li>
 </ul>
 

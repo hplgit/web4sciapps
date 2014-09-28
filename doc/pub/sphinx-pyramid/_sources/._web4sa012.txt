@@ -1,193 +1,71 @@
 .. !split
 
-.. _wf:vib1:flask:validation:
+Rearranging the elements in the HTML template
+---------------------------------------------
 
-Custom validation  (1)
-----------------------
+Now we want to place the plot to the right of the input forms in
+the web page, see Figure :ref:`wf:vib1:flask:fig:sidebyside`. This can
+be accomplished by having an outer table with two rows. The first
+row contains the table with the input forms in the first column and
+the plot in the second column, while the second row features the
+*Compute* button in the first column.
 
-.. index::
-   single: Flask; input validation
+.. _wf:vib1:flask:fig:sidebyside:
 
-The ``FloatField`` objects can check that the input is compatible with
-a number, but what if we want to control that :math:`A>0`, :math:`b>0`, and
-:math:`T` is not greater than 30 periods (otherwise the plot gets cluttered)?
-We can write functions for checking appropriate conditions and
-supply the function to the list of validator functions in the call to
-the ``FloatField`` constructor or other field constructors. The extra
-code is a part of the ``model.py`` and the presented extensions appear
-in the directory `vib2 <https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/vib2>`__.
+.. figure:: vib1_flask_table2.png
+   :width: 700
 
-Using Flask validators
-~~~~~~~~~~~~~~~~~~~~~~
+   *New design with input and output side by side*
 
-The simplest approach to validation is to use existing functionality
-in the web framework. Checking that :math:`A>0` can be done by
-the ``NumberRange`` validator which checks that the value is inside
-a prescribed interval:
+The enabling template file is ``view_table.html``:
 
-.. code-block:: python
+.. code-block:: html
 
-        from wtforms import Form, FloatField, validators
+        <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          TeX: {
+             equationNumbers: {  autoNumber: "AMS"  },
+             extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js"]
+          }
+        });
+        </script>
+        <script type="text/javascript"
+         src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
         
-        class InputForm(Form):
-            A = FloatField(
-                label='amplitude (m)', default=1.0,
-                validators=[validators.NumberRange(0, 1E+20)])
-
-Tailored validation
-~~~~~~~~~~~~~~~~~~~
-
-We can also easily provide our own more tailored validators.
-As an example, let us explain how we can check that :math:`T` is less than 30 periods.
-One period is :math:`2\pi /w` so we need to check if :math:`T> 30\cdot 2\pi/w`
-and raise an exception in that case.
-A validation function takes two arguments: the whole ``form`` and the
-specific ``field`` to test:
-
-.. code-block:: python
-
-        def check_T(form, field):
-            """Form validation: failure if T > 30 periods."""
-            w = form.w.data
-            T = field.data
-            period = 2*pi/w
-            if T > 30*period:
-                num_periods = int(round(T/period))
-                raise validators.ValidationError(
-                    'Cannot plot as much as %d periods! T<%.2f' %
-                    (num_periods, 30*period))
-
-The appropriate exception is of type ``validators.ValidationError``.
-Observe that through ``form`` we have in fact access to all the input
-data so we can easily use the value of :math:`w` when checking the validity
-of the value of :math:`T`. The ``check_T`` function is easy to
-add to the list of validator functions in the call to the ``FloatField``
-constructor for ``T``:
-
-.. code-block:: python
-
-        class InputForm(Form):
-            ...
-            T = FloatField(
-                label='time interval', default=6*pi,
-                validators=[validators.InputRequired(), check_T])
-
-The validator
-objects are tested one by one as they appear in the list, and if
-one fails, the others are not invoked.
-We therefore add ``check_T`` after the check of input such that we know we
-have a value for all data when we run the computations and test
-in ``check_T``.
-
-Tailored validation of intervals
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Although there is already a ``NumberRange`` validator for checking
-whether a value is inside an interval, we can write our own
-version with some improved functionality for open intervals where
-the maximum or minimum value can be infinite.
-The infinite value can on input be represented by ``None``.
-A general such function may take the form
-
-.. code-block:: python
-
-        def check_interval(form, field, min_value=None, max_value=None):
-            """For validation: failure if value is outside an interval."""
-            failure = False
-            if min_value is not None:
-                if field.data < min_value:
-                    failure = True
-            if max_value is not None:
-                if field.data > max_value:
-                    failure = True
-            if failure:
-                raise validators.ValidationError(
-                    '%s=%s not in [%s, %s]' %
-                    (field.name, field.data,
-                     '-infty' if min_value is None else str(min_value),
-                     'infty'  if max_value is None else str(max_value)))
-
-.. index:: functools
-
-The problem is that ``check_interval`` takes four arguments, not only
-the ``form`` and ``field`` arguments that a validator function in the
-Flask framework can accept.
-The way out of this difficulty is to use a Python tool ``functools.partial``
-which allows us to call a function with some of the arguments set beforehand.
-Here, we want to create a new function that calls ``check_interval``
-with some prescribed values of ``min_value`` and ``max_value``.
-This function looks like it does not have these arguments, only
-``form`` and ``field``. The following function produces this function, which we
-can use as a valid Flask validator function:
-
-.. code-block:: python
-
-        import functools
+        This web page visualizes the function \(
+        u(t) = Ae^{-bt}\sin (w t), \hbox{ for } t\in [0,T]
+        \).
         
-        def interval(min_value=None, max_value=None):
-            return functools.partial(
-                check_interval, min_value=min_value, max_value=max_value)
-
-We can now in any field constructor just add
-``interval(a, b)`` as a validator function, here checking that :math:`b\in [0,\infty)`:
-
-.. code-block:: python
-
-        class InputForm(Form):
-            ...
-            b = FloatField(
-                label='damping factor (kg/s)', default=0,
-                validators=[validators.InputRequired(), interval(0,None)])
-
-Demo
-~~~~
-
-Let us test our tailored error checking. Run ``python controller.py``
-in the ``vib2`` directory and fill in :math:`-1.0` in the :math:`b` field.
-Pressing *Compute* invokes our ``interval(0,None)`` function, which
-is nothing but a call to ``check_interval`` with the
-arguments ``field``, ``form``, ``0``, and ``None``.
-Inside this function,
-the test ``if field.data < min_value`` becomes true, ``failure``
-is set, and the exception is raised. The message in the exception
-is available in the ``field.errors`` attribute so our template
-will write it out in red, see Figure :ref:`wf:vib2:flask:fig:error1`.
-The template used in ``vib2`` is basically the same as ``view_tex.html``
-in ``vib1``, i.e., it feaures LaTeX mathematics and checking of
-``field.errors``.
-
-.. _wf:vib2:flask:fig:error1:
-
-.. figure:: vib2_flask_error1.png
-   :width: 500
-
-   *Triggering of a user-defined error check*
-
-Finally, we mention a detail in the ``controller.py`` file in the ``vib2``
-app: instead of sending ``form.var.data`` to the ``compute`` function we
-may automatically generate a set of local variables such that the
-application of data from the web page, here in the ``compute`` call, looks nicer:
-
-.. code-block:: python
-
-        def index():
-            form = InputForm(request.form)
-            if request.method == 'POST' and form.validate():
-                for field in form:
-                    # Make local variable (name field.name)
-                    exec('%s = %s' % (field.name, field.data))
-                result = compute(A, b, w, T)
-            else:
-                result = None
+        <form method=post action="">
+        <table> <!-- table with forms to the left and plot to the right -->
+        <tr><td>
+        <table>
+          {% for field in form %}
+            <tr>
+            <td>\( {{ field.name }} \)</td><td>{{ field(size=12) }}</td>
+            <td>{{ field.label }}</td>
+            {% if field.errors %}
+              <td><ul class=errors>
+              {% for error in field.errors %}
+                <li><font color="red">{{ error }}</font></li>
+              {% endfor %}</ul></td>
+            {% endif %}
+            </tr>
+          {% endfor %}
+        </table>
+        </td>
         
-            return render_template('view.html', form=form, result=result)
-        
-        if __name__ == '__main__':
-            app.run(debug=True)
-
-The idea is just to run ``exec`` on a declaration of a local variable
-with name ``field.name`` for each field in the form. This trick is often
-neat if web variables are buried in objects (``form.T.data``) and you want these
-variables in your
-code to look like they do in mathematical writing (``T`` for :math:`T`).
+        <td>
+        <p>
+        {% if result != None %}
+        <img src="{{ result }}" width="500">
+        {% endif %}
+        </p>
+        </td></tr>
+        <tr>
+        <td><p><input type=submit value=Compute></p></td>
+        </tr>
+        </table>
+        </form>
 

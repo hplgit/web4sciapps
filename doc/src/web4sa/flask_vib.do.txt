@@ -52,7 +52,8 @@ and the making of the plot, without any interaction with Flask.
 The files associated with this app are found in the "`vib1`":
 "${github_path}/${app_path}" directory.
 
-__The compute part.__
+=== The compute part ===
+
 More specifically, inside `compute.py`, we have a function for
 evaluating $u(t)$ and a `compute` function for making the plot. The
 return value of the latter is the name of the plot file, which should
@@ -83,7 +84,9 @@ Section ref{wf:hw3:flask}. This more complicated app involves
 more code and especially the model will soon be handy to isolate in its own
 file.
 
-__The model.__ Our first version of `model.py` reads
+=== The model ===
+
+Our first version of `model.py` reads
 
 @@@CODE ${app_path}/model.py
 
@@ -97,7 +100,8 @@ fill in all values.
 idx{Flask!`index` function}
 
 
-__The view.__
+=== The view ===
+
 The view component will of course make use of templates, and we shall experiment
 with different templates. Therefore, we allow a command-line argument
 to this Flask app for choosing which template we want. The rest of
@@ -106,7 +110,8 @@ hello world app:
 
 @@@CODE ${app_path}/controller.py
 
-__The HTML template.__
+=== The HTML template ===
+
 The details governing how the web page really looks like lie in the
 template file. Since we have several fields and want them nicely
 align in a tabular fashion, we place the field name, text areas,
@@ -138,6 +143,10 @@ run `python controller.py`, and load
 `http://127.0.0.1:5000/vib1`
 !ec
 into your web browser for testing.
+
+## Note that this split at the subsection level gives a bit strange
+## toc in sphinx: the subsection headings become the highest level
+## in the parts and enters the toc as section headings...
 
 !split
 ===== Implementing error checking in the template =====
@@ -210,6 +219,7 @@ the style sheet:
 Just run `python controller.py view_css` to see that the names
 of the variables to set in the web page are blue.
 
+!split
 ===== Using LaTeX mathematics =====
 
 idx{Flask!LaTeX mathematics}
@@ -231,7 +241,7 @@ LaTeX rendering looks like in the browser.
 
 FIGURE: [fig-web4sa/vib1_flask_latex, width=650] LaTeX typesetting of mathematical symbols. label{wf:vib1:flask:fig:latex}
 
-
+!split
 ===== Rearranging the elements in the HTML template =====
 
 Now we want to place the plot to the right of the input forms in
@@ -282,9 +292,6 @@ where `X` can be `journal`, `cosmo`, `flatly`, and other legal
 Bootswatch styles. The journal style looks like this:
 
 FIGURE: [fig-web4sa/vib1_flask_bootswatch_journal, width=600 frac=0.9]
-
-test
-MAKE FIGS
 
 While `view_bootstrap.html` makes use of plain Bootstrap HTML code, there is
 also a higher-level framework, called "Flask-Bootstrap": "http://pythonhosted.org/Flask-Bootstrap/" that combines Flask and Bootstrap. Installation of
@@ -608,7 +615,8 @@ demonstrate some advanced, powerful features of Python. The source code
 is found in the "`gen`": "${github_path}/${app_path}"
 directory.
 
-__Inspecting function signatures.__
+=== Inspecting function signatures ===
+
 The basic idea is that the Python module `inspect` can be used to
 retrieve the names of the arguments and the default values of
 keyword arguments of *any* given `compute` function. Say we have some
@@ -635,7 +643,8 @@ We have all the argument names in `arg_names` and
 `defaults[i]` is the default value of keyword argument
 `arg_names[j]`, where `j = len(arg_names) - len(defaults) + i`.
 
-__Generating the model.__
+=== Generating the model ===
+
 Knowing the name `name` of some argument in the `compute`
 function, we can make the corresponding class attribute
 in the `InputForm` class by
@@ -669,7 +678,8 @@ then goes as follows:
 (The `compute_gamma` function imported from `compute` is the
 only application-specific statement in this code and will be explained later.)
 
-__Generating the view.__
+=== Generating the view ===
+
 The call to `compute` in the `controller.py` file must also be expressed
 in a general way such that the call handles any type and number of
 parameters. This can be done in two ways, using either positional
@@ -722,7 +732,8 @@ The `compute(**kwargs)` call is equivalent to `compute(A=1, b=3, w=0.5)`
 in case `kwargs = {'w'=0.5, 'A':1, 'b':3}` (recall that the order of
 the keys in a Python dictionary is undetermined).
 
-__Generating the template.__
+=== Generating the template ===
+
 It remains to generate the right HTML template. The HTML code depends
 on what the returned `result` object from `compute` contains. Only a
 human who has read the `compute` code knows the details of the returned
@@ -759,7 +770,8 @@ The complete, generic form of the `index` function becomes
 
 @@@CODE ${app_path}/controller.py fromto: def index@
 
-__Application.__
+=== Application ===
+
 Let us apply the files above to plot the gamma probability density function
 
 !bt
@@ -826,40 +838,102 @@ the application. More files are needed for this purpose, compared to
 the previous apps, and the files are located in the "`login`":
 "${github_path}/${app_path}" directory.
 
-Several packages are needed for this more advanced application:
+=== Required additional software ===
 
- * "Flask-Login": "https://flask-login.readthedocs.org/en/latest/:
+Three more packages are needed for this more advanced application:
+
+ * "Flask-Login": "https://flask-login.readthedocs.org/en/latest/"
  * "Flask-SQLAlchemy": "http://flask.pocoo.org/docs/0.10/patterns/sqlalchemy/"
+ * "Flask-Mail": "http://packages.python.org/Flask-Mail"
 
+Installation is done by
 
 !bc sys
 sudo pip install --upgrade flask-login
 sudo pip install --upgrade flask-sqlalchemy
+sudo pip install --upgrade flask-mail
 !ec
 
-The `compute.py` file contains the
-`compute_gamma` function from the previous app (`gen`) in Section
-ref{wf:autogen:flask}, see the code under the heading *Application*.
-Basically, this compute function creates two plots of two functions
-(the Gamma probability density function and the corresponding
-cumulative function). The compute function involves four parameters:
-`a`, `h`, `A`, and `resolution` (the former three are parameters
-governing the curves while the latter is the number of points
-used in the curves).
+=== The compute part ===
+
+The `compute.py` file contains the `compute`
+function from the `vib2` app in Section ref{wf:vib2:flask:nofiles}.
 
 There is quite much Flask code required for user accounts and login.
-Rather than explaining everything in detail, we primarily list
+The files here were generated by the Parampool package and then
+edited and specialized to the present application. In general,
+it is not recommended to hack further on the example given here,
+but rather utilize Parampool to generate web apps with user accounts
+and login.
+
+=== The interfaces of the app ===
+
+The first page after starting the app (`python controller.py`)
+shows input fields for the numerical parameters, but there are also
+links to the right for registering a new user or logging in to an
+existing account:
+
+FIGURE: [fig-web4sa/login_main, width=700 frac=1.0]
+
+Clicking on *Register* brings up a registration page:
+
+FIGURE: [fig-web4sa/login_register, width=700 frac=1.0]
+
+Already registered users can just log in:
+
+FIGURE: [fig-web4sa/login_login, width=700 frac=1.0]
+
+Then the fields with input parameters are shown again. After pressing
+*Compute* we are left with a combination of input and results, plus
+a field where the user can write a comment about this simulation:
+
+FIGURE: [fig-web4sa/login_results, width=700 frac=1.0]
+
+All simulations (input data, results, and comment) are stored in
+a database. Clicking on *Previous simulation* brings us to an
+overview of what is in the database:
+
+FIGURE: [fig-web4sa/login_old, width=500 frac=0.7]
+
+Here, one can browse previous results, remove entries, or erase the
+whole database.
+
+
+=== The source code ===
+
+Rather than explaining everything about the source code
+in detail, we primarily list
 the various code files below. A starting point is the central `controller.py`
 file, which is now quite lengthy and involves four different
-URLs:
-[[[
-  o one for computing results, containing input forms
+URLs (the input page, the login page, the registration page, and the
+previous results page).
 
 @@@CODE ${app_path}/controller.py
 
+# We need to copy the app code since it contains the password to
+# an existing gmail account.
+
 Creation of the `app` object is put in a separate file `app.py`:
 
-@@@CODE ${app_path}/app.py
+!bc pycod
+import os
+from flask import Flask
+
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///sqlite.db'
+app.secret_key = os.urandom(24)
+
+# Email settings
+import base64
+app.config.update(
+        MAIL_SERVER='smtp.gmail.com',
+        MAIL_PORT=587,
+        MAIL_USE_TLS=True,
+        MAIL_USERNAME = 'cbcwebsolvermail@gmail.com',
+        MAIL_PASSWORD = base64.decodestring('WGlmZmljdox0UFch'),
+        MAIL_DEFAULT_SENDER = 'Some name <name@gmail.com>'
+        )
+!ec
 
 The forms for the compute function and for the login is
 stored in a file called `forms.py`:
@@ -877,7 +951,7 @@ in the `vib1` app:
 
 @@@CODE ${app_path}/templates/view.html
 
-The `login.html` template for the login pages takes the form
+The `login.html` template for the login page takes the form
 
 @@@CODE ${app_path}/templates/login.html
 
@@ -889,7 +963,16 @@ The final file is `old.html` for retrieving old simulations:
 
 @@@CODE ${app_path}/templates/old.html
 
+!bwarning
+ * Sending email from the app does not work.
+ * Storing comments does not work.
+!ewarning
 
+[hpl: Check if an autogenerated app from `_generate_app.py` can send
+mail and store comments. Need a `compute` function that returns
+full HTML text then.]
+
+# #ifdef OLD
 !split
 ===== Project: Using Bootstrap styles =====
 label{wf:vib1:flask:bootstrap}
@@ -944,6 +1027,7 @@ only.
 #Not yet written. Must be based on
 #URL: "http://pythonhosted.org/Flask-Bootstrap/basic-usage.html".
 
+
 !split
 ======= Further work =======
 
@@ -955,12 +1039,13 @@ only.
    This requires databases. Can generate a vib example via parampool to
    display some more realistic code.
  * Drawing in HTML5
+# #endif
 
 
 === Resources ===
 
- * "Django: make user": "https://docs.djangoproject.com/en/dev/topics/auth/default/#user-objects"
- * "Django: read and write database": "https://docs.djangoproject.com/en/dev/topics/db/queries/"
- * Flask: read and write database:
-   URL: "http://pythonhosted.org/Flask-SQLAlchemy/quickstart.html",
-   URL: "http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-iv-database", and "the Flask login extension": "https://flask-login.readthedocs.org/en/latest/"
+Working with a database in Flask is described here:
+
+ * URL: "http://pythonhosted.org/Flask-SQLAlchemy/quickstart.html",
+ * URL: "http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-iv-database",
+ * "The Flask login extension": "https://flask-login.readthedocs.org/en/latest/"

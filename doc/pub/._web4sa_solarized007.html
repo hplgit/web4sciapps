@@ -1,0 +1,569 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Using Web Frameworks for Scientific Applications">
+<meta name="keywords" content="web frameworks,MVC pattern,Flask installation,Flask input forms,Flask HTML templates,Flask MVC pattern,Flask troubleshooting,Django installation,Django making a project,Django making an application,Django input forms,Django HTML templates,Flask input forms,Flask error checking,Flask CSS style sheets,Flask LaTeX mathematics,Flask input validation,inline PNG image in HTML,base64 encoding of PNG images,inline SVG figure in HTML,Flask login,Flask database,Django input forms,Django input validation">
+
+<title>Using Web Frameworks for Scientific Applications</title>
+
+
+<link href="https://raw.githubusercontent.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
+<script src="https://rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
+<style type="text/css">
+h1 {color: #b58900;}  /* yellow */
+/* h1 {color: #cb4b16;}  orange */
+/* h1 {color: #d33682;}  magenta, the original choice of thomasf */
+.alert-text-small   { font-size: 80%;  }
+.alert-text-large   { font-size: 130%; }
+.alert-text-normal  { font-size: 90%;  }
+.alert {
+  padding:8px 35px 8px 14px; margin-bottom:18px;
+  text-shadow:0 1px 0 rgba(255,255,255,0.5);
+  border:1px solid #93a1a1;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  color: #555;
+  background-color: #eee8d5;
+  background-position: 10px 5px;
+  background-repeat: no-repeat;
+  background-size: 38px;
+  padding-left: 55px;
+  width: 75%;
+ }
+.alert-block {padding-top:14px; padding-bottom:14px}
+.alert-block > p, .alert-block > ul {margin-bottom:1em}
+.alert li {margin-top: 1em}
+.alert-block p+p {margin-top:5px}
+.alert-notice { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_notice.png); }
+.alert-summary  { background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_summary.png); }
+.alert-warning { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_warning.png); }
+.alert-question {background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_question.png); }
+
+div { text-align: justify; text-justify: inter-word; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Web frameworks ', 1, None, '___sec0'),
+              (' The MVC pattern ', 2, None, '___sec1'),
+              (' A very simple application ', 2, None, '___sec2'),
+              (' Application of the MVC pattern ',
+               2,
+               'wf:hw:mvc',
+               'wf:hw:mvc'),
+              (' Making a Flask application ', 1, None, '___sec4'),
+              (' Programming the Flask application ', 2, None, '___sec5'),
+              (' The user interaction ', 3, None, '___sec6'),
+              (' The Python code ', 3, None, '___sec7'),
+              (' Dissection ', 3, None, '___sec8'),
+              (' The template files ', 3, None, '___sec9'),
+              (' Testing the application ', 3, None, '___sec10'),
+              (' Equipping the input page with output results ',
+               2,
+               None,
+               '___sec11'),
+              (' Splitting the app into model, view, and controller files ',
+               2,
+               'wf:hw3:flask',
+               'wf:hw3:flask'),
+              (' Troubleshooting ', 2, None, '___sec13'),
+              (' Address already in use ', 3, None, '___sec14'),
+              (' Making a Django application ', 1, None, '___sec15'),
+              (' Setting up a Django project ', 2, None, '___sec16'),
+              (' Setting up a Django application ', 2, None, '___sec17'),
+              (' Programming the Django application ', 2, None, '___sec18'),
+              (' The user interaction ', 3, None, '___sec19'),
+              (' The model ', 3, None, '___sec20'),
+              (' The view ', 3, None, '___sec21'),
+              (' Making the input page ', 3, None, '___sec22'),
+              (' Making the results page ', 3, None, '___sec23'),
+              (' Equipping the input page with output results ',
+               2,
+               None,
+               '___sec24'),
+              (' Handling multiple input variables in Flask ',
+               1,
+               'wf:vib:flask',
+               'wf:vib:flask'),
+              (' Programming the Flask application ',
+               2,
+               'wf:vib1:flask:app',
+               'wf:vib1:flask:app'),
+              (' The compute part ', 3, None, '___sec27'),
+              (' The model ', 3, None, '___sec28'),
+              (' The view ', 3, None, '___sec29'),
+              (' The HTML template ', 3, None, '___sec30'),
+              (' Implementing error checking in the template ',
+               2,
+               None,
+               '___sec31'),
+              (' Using style sheets ', 2, None, '___sec32'),
+              (' Using LaTeX mathematics ', 2, None, '___sec33'),
+              (' Rearranging the elements in the HTML template ',
+               2,
+               None,
+               '___sec34'),
+              (' Bootstrap HTML style ', 2, None, '___sec35'),
+              (' Custom validation ',
+               2,
+               'wf:vib1:flask:validation',
+               'wf:vib1:flask:validation'),
+              (' Using Flask validators ', 3, None, '___sec37'),
+              (' Tailored validation ', 3, None, '___sec38'),
+              (' Tailored validation of intervals ', 3, None, '___sec39'),
+              (' Demo ', 3, None, '___sec40'),
+              (' Avoiding plot files ',
+               2,
+               'wf:vib2:flask:nofiles',
+               'wf:vib2:flask:nofiles'),
+              (' PNG plots ', 3, None, '___sec42'),
+              (' SVG plots ', 3, None, '___sec43'),
+              (' Autogenerating the code ',
+               2,
+               'wf:autogen:flask',
+               'wf:autogen:flask'),
+              (' Inspecting function signatures ', 3, None, '___sec45'),
+              (' Generating the model ', 3, None, '___sec46'),
+              (' Generating the view ', 3, None, '___sec47'),
+              (' Generating the template ', 3, None, '___sec48'),
+              (' Application ', 3, None, '___sec49'),
+              (' User login and storage of computed results ',
+               2,
+               'wf:flask:login',
+               'wf:flask:login'),
+              (' Required additional software ', 3, None, '___sec51'),
+              (' The compute part ', 3, None, '___sec52'),
+              (' The interfaces of the app ', 3, None, '___sec53'),
+              (' The source code ', 3, None, '___sec54'),
+              (' Resources ', 3, None, '___sec55'),
+              (' Handling multiple input variables in Django ',
+               1,
+               'wf:vib:django',
+               'wf:vib:django'),
+              (' Programming the Django application ', 2, None, '___sec57'),
+              (' Adding the app to a project ', 3, None, '___sec58'),
+              (' The compute part ', 3, None, '___sec59'),
+              (' The model ', 3, None, '___sec60'),
+              (' The view ', 3, None, '___sec61'),
+              (' Custom validation ', 2, None, '___sec62'),
+              (' Customizing widgets ', 2, None, '___sec63'),
+              (' Resources ', 2, None, '___sec64'),
+              (' Exercises ', 1, None, '___sec65'),
+              (' Exercise 1: Add two numbers ',
+               2,
+               'wf:exer:add2',
+               'wf:exer:add2'),
+              (' Exercise 2: Upload data file and visualize curves ',
+               2,
+               'wf:exer:upload',
+               'wf:exer:upload'),
+              (' Exercise 3: Plot a user-specified formula ',
+               2,
+               'wf:exer:formula',
+               'wf:exer:formula'),
+              (' Exercise 4: Visualize Taylor polynomial approximations ',
+               2,
+               'wf:exer:Taylor',
+               'wf:exer:Taylor'),
+              (' Exercise 5: Extend the `gen` app ',
+               2,
+               'wf:exer:gen:demo',
+               'wf:exer:gen:demo'),
+              (' Exercise 6: Equip the `gen` app with more data types ',
+               2,
+               'wf:exer:gen:lists',
+               'wf:exer:gen:lists'),
+              (' Exercise 7: Auto-generate code from function signature ',
+               2,
+               None,
+               '___sec72'),
+              (' Resources ', 1, None, '___sec73'),
+              (' Flask resources ', 2, None, '___sec74'),
+              (' Django resources ', 2, None, '___sec75'),
+              (' Remaining ', 1, None, '___sec76')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+    
+<a name="part0007"></a>
+<p>
+<!-- begin top navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._web4sa_solarized006.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._web4sa_solarized008.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end top navigation -->
+</p>
+
+<p>
+<!-- !split -->
+
+<h2>Programming the Django application  <a name="___sec18"></a></h2>
+
+<p>
+The Django application is about filling the files <code>views.py</code> and <code>models.py</code>
+with content. The mathematical computations are performed in <code>compute.py</code>
+so we copy this file from the <code>mvc</code> directory to the <code>hw1</code> directory
+for convenience (we could alternatively add <code>../mvc</code> to <code>sys.path</code> such that
+<code>import compute</code> would work from the <code>hw1</code> directory).
+
+<h3>The user interaction  <a name="___sec19"></a></h3>
+
+<p>
+The web application offers a text field where the user can
+write the value of <code>r</code>, see Figure <a href="#wf:hw1:django:fig:input">4</a>.
+After clicking on the <em>equals</em> button,
+the mathematics is performed and a new page as
+seen in Figure <a href="#wf:hw1:django:fig:result">5</a> appears.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 4:  The input page. <a name="wf:hw1:django:fig:input"></a> </p></center>
+<p><img src="fig-web4sa/hw1_django_input.png" align="bottom" width=600></p>
+</center>
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 5:  The result page. <a name="wf:hw1:django:fig:result"></a> </p></center>
+<p><img src="fig-web4sa/hw1_django_output.png" align="bottom" width=600></p>
+</center>
+
+<h3>The model  <a name="___sec20"></a></h3>
+
+<p>
+The <code>models.py</code> file contains the model, which consists
+of the data we need in the application, stored in Django's data types.
+Our data consists of one number, called <code>r</code>, and <code>models.py</code> then
+look like
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>from django.db import models
+from django.forms import ModelForm
+
+class Input(models.Model):
+    r = models.FloatField()
+
+class InputForm(ModelForm):
+    class Meta:
+        model = Input
+</code></pre>
+<!-- end verbatim block -->
+The <code>Input</code> class lists variables representing data as static class
+attributes. The <code>django.db.models</code> module contains various classes
+for different types of data, here we use <code>FloatField</code> to represent
+a floating-point number.
+The <code>InputForm</code> class has a the shown generic form across applications
+if we by convention apply the name <code>Input</code> for the class holding the data.
+
+<h3>The view  <a name="___sec21"></a></h3>
+
+<p>
+The <code>views.py</code> file contains a function <code>index</code> which defines
+the actions we want to perform when invoking
+the URL ( here <code>http://127.0.0.1:8000/hw1/</code>).
+In addition, <code>views.py</code> has the <code>present_output</code> function from
+the <code>view.py</code> file in the <code>mvc</code> directory.
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>from django.shortcuts import render_to_response
+from django.template import RequestContext
+from django.http import HttpResponse
+from models import InputForm
+from compute import compute
+
+def index(request):
+    if request.method == 'POST':
+        form = InputForm(request.POST)
+        if form.is_valid():
+            form = form.save(commit=False)
+            return present_output(form)
+    else:
+        form = InputForm()
+
+    return render_to_response('hw1.html',
+            {'form': form}, context_instance=RequestContext(request))
+
+def present_output(form):
+    r = form.r
+    s = compute(r)
+    return HttpResponse('Hello, World! sin(%s)=%s' % (r, s))
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+The <code>index</code> function deserves some explanation. It must take one
+argument, usually called <code>request</code>. There are two modes in the function. Either
+the user has provided input on the web page, which means that
+<code>request.method</code> equals <code>'POST'</code>, or we show a new web page
+with which the user is supposed to interact.
+
+<h3>Making the input page  <a name="___sec22"></a></h3>
+
+<p>
+The input consists of a web form with
+one field where we can fill in our <code>r</code> variable. This page
+is realized by the two central statements
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code># Make info needed in the web form
+form = InputForm()
+# Make HTML code
+render_to_response('hw1.html',
+    {'form': form}, context_instance=RequestContext(request))
+</code></pre>
+<!-- end verbatim block -->
+The <code>hw1.html</code> file resides in the <code>templates</code> subdirectory and contains
+a template for the HTML code:
+
+<p>
+<!-- begin verbatim block  htmlpro-->
+<pre><code>&lt;form method=&quot;post&quot; action=&quot;&quot;&gt;{% csrf_token %}
+    Hello, World! The sine of {{ form.r }}
+    &lt;input type=&quot;submit&quot; value=&quot;equals&quot; /&gt;
+&lt;/form&gt;
+</code></pre>
+<!-- end verbatim block -->
+This is a <em>template file</em> because it contains instructions like
+<code>{% csrf_token %}</code> and variables like <code>{{ form.r }}</code>. Django will
+replace the former by some appropriate HTML statements, while the
+latter simply extracts the numerical value of the variable <code>r</code> in
+our form (specified in the <code>Input</code> class in <code>models.py</code>).
+Typically, this <code>hw1.html</code> file
+results in the HTML code
+
+<p>
+<!-- begin verbatim block  htmlpro-->
+<pre><code>&lt;form method=&quot;post&quot; action=&quot;&quot;&gt;
+&lt;div style='display:none'&gt;
+&lt;input type='hidden' name='csrfmiddlewaretoken'
+value='oPWMuuy1gLlXm9GvUZINv49eVUYnux5Q' /&gt;&lt;/div&gt;
+    Hello, World! The sine of &lt;input type=&quot;text&quot; name=&quot;r&quot; id=&quot;id_r&quot; /&gt;
+    &lt;input type=&quot;submit&quot; value=&quot;equals&quot; /&gt;
+&lt;/form&gt;
+</code></pre>
+<!-- end verbatim block -->
+
+<h3>Making the results page  <a name="___sec23"></a></h3>
+
+<p>
+When then user has filled in a value in the text field on the input
+page, the <code>index</code> function is called again and <code>request.method</code> equals
+<code>'POST'</code>. A new form object is made, this time with user info (<code>request.POST</code>).
+We can check that the form is valid and if so, proceed with
+computations followed by presenting the results in a
+new web page (see Figure <a href="#wf:hw1:django:fig:result">5</a>):
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def index(request):
+    if request.method == 'POST':
+        form = InputForm(request.POST)
+        if form.is_valid():
+            form = form.save(commit=False)
+            return present_output(form)
+
+def present_output(form):
+    r = form.r
+    s = compute(r)
+    return HttpResponse('Hello, World! sin(%s)=%s' % (r, s))
+</code></pre>
+<!-- end verbatim block -->
+The numerical value of <code>r</code> as given by the user is available as <code>form.r</code>.
+Instead of using a template for the output page, which is natural to
+do in more advanced cases, we here illustrate the possibility to
+send raw HTML to the output page by returning an <code>HttpResponse</code>
+object initialized by a string containing the desired HTML code.
+
+<p>
+Launch this application by filling in the address <code>http://127.0.0.1:8000/hw1/</code>
+in your web browser. Make sure the Django development server is running,
+and if not, restart it by
+
+<p>
+<!-- begin verbatim block  sys-->
+<pre><code>Terminal&gt; python ../../../django_project/manage.py runserver
+</code></pre>
+<!-- end verbatim block -->
+Fill
+in some number on the input page and view the output.
+To show how easy it is to change the application, invoke the <code>views.py</code>
+file in an editor and add some color to the output HTML code from
+the <code>present_output</code> function:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>    return HttpResponse(&quot;&quot;&quot;
+&lt;font color='blue'&gt;Hello&lt;/font&gt;, World!
+sin(%s)=%s
+&quot;&quot;&quot;% (r, s))
+</code></pre>
+<!-- end verbatim block -->
+Go back to the input page, provide a new number, and observe how
+the "Hello" word now has a blue color.
+
+<h2>Equipping the input page with output results  <a name="___sec24"></a></h2>
+
+<p>
+Instead of making a separate output page with the result, we can
+simply add the sine value to the input page. This makes the user
+feel that she interacts with the same page, as when operating a calculator.
+The output page should then look as shown in Figure <a href="#wf:hw2:django:fig:result">6</a>.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 6:  The modified result page. <a name="wf:hw2:django:fig:result"></a> </p></center>
+<p><img src="fig-web4sa/hw2_django_output.png" align="bottom" width=600></p>
+</center>
+
+<p>
+We need to make a new Django application, now called
+<a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/django_apps/hw2" target="_self"><tt>hw2</tt></a>.
+Instead of running the standard
+<code>manage.py startapp hw2</code> command,
+we can simply copy the <code>hw1</code>
+directory to <code>hw2</code>. We need, of course, to add information about this
+new application in <code>settings.py</code> and <code>urls.py</code>.
+In the former file we must have
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>TEMPLATE_DIRS = (
+    relative2absolute_path('../../apps/django_apps/hw1/templates'),
+    relative2absolute_path('../../apps/django_apps/hw2/templates'),
+)
+
+INSTALLED_APPS = (
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.sites',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    # Uncomment the next line to enable the admin:
+    # 'django.contrib.admin',
+    # Uncomment the next line to enable admin documentation:
+    # 'django.contrib.admindocs',
+    'hw1',
+    'hw2',
+)
+</code></pre>
+<!-- end verbatim block -->
+In <code>urls.py</code> we add the URL <code>hw2</code> which is to call our <code>index</code> function
+in the <code>views.py</code> file of the <code>hw2</code> app:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>urlpatterns = patterns('',
+    url(r'^hw1/', 'django_apps.hw1.views.index'),
+    url(r'^hw2/', 'django_apps.hw2.views.index'),
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+The <code>views.py</code> file changes a bit since we shall generate almost the same
+web page on input and output. This makes the <code>present_output</code> function
+unnatural, and everything is done within the <code>index</code> function:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def index(request):
+    s = None  # initial value of result
+    if request.method == 'POST':
+        form = InputForm(request.POST)
+        if form.is_valid():
+            form = form.save(commit=False)
+            r = form.r
+            s = compute(r)
+    else:
+        form = InputForm()
+
+    return render_to_response('hw2.html',
+            {'form': form,
+             's': '%.5f' % s if isinstance(s, float) else ''
+             }, context_instance=RequestContext(request))
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Note that the output variable <code>s</code> is computed within the <code>index</code>
+function and defaults to <code>None</code>. The template file <code>hw2.html</code>
+looks like
+
+<p>
+<!-- begin verbatim block  htmlpro-->
+<pre><code>&lt;form method=&quot;post&quot; action=&quot;&quot;&gt;{% csrf_token %}
+    Hello, World! The sine of {{ form.r }}
+    &lt;input type=&quot;submit&quot; value=&quot;equals&quot; /&gt;
+{% if s != '' %}
+{{ s }}
+{% endif %}
+&lt;/form&gt;
+</code></pre>
+<!-- end verbatim block -->
+The difference from <code>hw1.html</code> is that we right after the <em>equals</em>
+button write out the value of <code>s</code>. However, we make a test that
+the value is only written if it is computed, here recognized by
+being a non-empty string. The <code>s</code> in the template file
+is substituted by the value of the object
+corresponding to the key <code>'s'</code> in the
+dictionary we pass to the <code>render_to_response</code>. As seen,
+we pass a string where <code>s</code> is formatted with five digits if <code>s</code>
+is a float, i.e., if <code>s</code> is computed. Otherwise, <code>s</code> has the
+default value <code>None</code> and we send an empty string to the template.
+The template language allows tests using Python syntax, but the
+if-block must be explicitly ended by <code>{% endif %}</code>.
+
+<p>
+<p>
+<!-- begin bottom navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._web4sa_solarized006.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._web4sa_solarized008.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end bottom navigation -->
+</p>
+
+<!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

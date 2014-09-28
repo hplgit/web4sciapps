@@ -32,16 +32,17 @@ class User(db.Model):
     def get_id(self):
         return self.id
 
-class Gamma(db.Model):
-    id         = db.Column(db.Integer, primary_key=True)
+class Compute(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
 
-    a          = db.Column(db.Float)
-    h          = db.Column(db.Float)
-    A          = db.Column(db.Float)
+    A = db.Column(db.String())
+    b = db.Column(db.String())
+    w = db.Column(db.String())
+    T = db.Column(db.String())
     resolution = db.Column(db.Integer)
 
-    result   = db.Column(db.String())
+    result = db.Column(db.String())
     comments = db.Column(db.String(), nullable=True)
-    user_id  = db.Column(db.Integer, db.ForeignKey('user.id'))
-    user     = db.relationship('User',
-                backref=db.backref('Gamma', lazy='dynamic'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship('User',
+           backref=db.backref('Compute', lazy='dynamic'))

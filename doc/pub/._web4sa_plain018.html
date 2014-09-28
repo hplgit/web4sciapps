@@ -7,7 +7,7 @@ Automatically generated HTML file from DocOnce source
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Using Web Frameworks for Scientific Applications">
-<meta name="keywords" content="web frameworks,MVC pattern,Flask installation,Flask input forms,Flask HTML templates,Flask MVC pattern,Flask troubleshooting,Django installation,Django making a project,Django making an application,Django input forms,Django HTML templates,Flask input forms,Flask error checking,Flask CSS style sheets,Flask LaTeX mathematics,Flask input validation,inline PNG image in HTML,base64 encoding of PNG images,inline SVG figure in HTML,Flask login,Flask database,Flask bootstrap style,Django input forms,Django input validation">
+<meta name="keywords" content="web frameworks,MVC pattern,Flask installation,Flask input forms,Flask HTML templates,Flask MVC pattern,Flask troubleshooting,Django installation,Django making a project,Django making an application,Django input forms,Django HTML templates,Flask input forms,Flask error checking,Flask CSS style sheets,Flask LaTeX mathematics,Flask input validation,inline PNG image in HTML,base64 encoding of PNG images,inline SVG figure in HTML,Flask login,Flask database,Django input forms,Django input validation">
 
 <title>Using Web Frameworks for Scientific Applications</title>
 
@@ -75,23 +75,34 @@ div { text-align: justify; text-justify: inter-word; }
                'wf:hw:mvc'),
               (' Making a Flask application ', 1, None, '___sec4'),
               (' Programming the Flask application ', 2, None, '___sec5'),
+              (' The user interaction ', 3, None, '___sec6'),
+              (' The Python code ', 3, None, '___sec7'),
+              (' Dissection ', 3, None, '___sec8'),
+              (' The template files ', 3, None, '___sec9'),
+              (' Testing the application ', 3, None, '___sec10'),
               (' Equipping the input page with output results ',
                2,
                None,
-               '___sec6'),
+               '___sec11'),
               (' Splitting the app into model, view, and controller files ',
                2,
                'wf:hw3:flask',
                'wf:hw3:flask'),
-              (' Troubleshooting ', 2, None, '___sec8'),
-              (' Making a Django application ', 1, None, '___sec9'),
-              (' Setting up a Django project ', 2, None, '___sec10'),
-              (' Setting up a Django application ', 2, None, '___sec11'),
-              (' Programming the Django application ', 2, None, '___sec12'),
+              (' Troubleshooting ', 2, None, '___sec13'),
+              (' Address already in use ', 3, None, '___sec14'),
+              (' Making a Django application ', 1, None, '___sec15'),
+              (' Setting up a Django project ', 2, None, '___sec16'),
+              (' Setting up a Django application ', 2, None, '___sec17'),
+              (' Programming the Django application ', 2, None, '___sec18'),
+              (' The user interaction ', 3, None, '___sec19'),
+              (' The model ', 3, None, '___sec20'),
+              (' The view ', 3, None, '___sec21'),
+              (' Making the input page ', 3, None, '___sec22'),
+              (' Making the results page ', 3, None, '___sec23'),
               (' Equipping the input page with output results ',
                2,
                None,
-               '___sec13'),
+               '___sec24'),
               (' Handling multiple input variables in Flask ',
                1,
                'wf:vib:flask',
@@ -100,73 +111,98 @@ div { text-align: justify; text-justify: inter-word; }
                2,
                'wf:vib1:flask:app',
                'wf:vib1:flask:app'),
+              (' The compute part ', 3, None, '___sec27'),
+              (' The model ', 3, None, '___sec28'),
+              (' The view ', 3, None, '___sec29'),
+              (' The HTML template ', 3, None, '___sec30'),
               (' Implementing error checking in the template ',
                2,
                None,
-               '___sec16'),
-              (' Using style sheets ', 2, None, '___sec17'),
-              (' Using LaTeX mathematics ', 2, None, '___sec18'),
+               '___sec31'),
+              (' Using style sheets ', 2, None, '___sec32'),
+              (' Using LaTeX mathematics ', 2, None, '___sec33'),
               (' Rearranging the elements in the HTML template ',
                2,
                None,
-               '___sec19'),
-              (' Bootstrap HTML style ', 2, None, '___sec20'),
+               '___sec34'),
+              (' Bootstrap HTML style ', 2, None, '___sec35'),
               (' Custom validation ',
                2,
                'wf:vib1:flask:validation',
                'wf:vib1:flask:validation'),
-              (' Using Flask validators ', 3, None, '___sec22'),
-              (' Tailored validation ', 3, None, '___sec23'),
-              (' Tailored validation of intervals ', 3, None, '___sec24'),
-              (' Demo ', 3, None, '___sec25'),
-              (' Autogenerating the code ',
-               2,
-               'wf:vib3:flask:autogen',
-               'wf:vib3:flask:autogen'),
+              (' Using Flask validators ', 3, None, '___sec37'),
+              (' Tailored validation ', 3, None, '___sec38'),
+              (' Tailored validation of intervals ', 3, None, '___sec39'),
+              (' Demo ', 3, None, '___sec40'),
               (' Avoiding plot files ',
                2,
-               'wf:vib3:flask:nofiles',
-               'wf:vib3:flask:nofiles'),
-              (' PNG plots ', 3, None, '___sec28'),
-              (' SVG plots ', 3, None, '___sec29'),
+               'wf:vib2:flask:nofiles',
+               'wf:vib2:flask:nofiles'),
+              (' PNG plots ', 3, None, '___sec42'),
+              (' SVG plots ', 3, None, '___sec43'),
+              (' Autogenerating the code ',
+               2,
+               'wf:autogen:flask',
+               'wf:autogen:flask'),
+              (' Inspecting function signatures ', 3, None, '___sec45'),
+              (' Generating the model ', 3, None, '___sec46'),
+              (' Generating the view ', 3, None, '___sec47'),
+              (' Generating the template ', 3, None, '___sec48'),
+              (' Application ', 3, None, '___sec49'),
               (' User login and storage of computed results ',
                2,
-               'wf:vib1:flask:login',
-               'wf:vib1:flask:login'),
-              (' Project 1: Using Bootstrap styles ',
-               2,
-               'wf:vib1:flask:bootstrap',
-               'wf:vib1:flask:bootstrap'),
-              (' Further work ', 1, None, '___sec32'),
-              (' Resources ', 3, None, '___sec33'),
+               'wf:flask:login',
+               'wf:flask:login'),
+              (' Required additional software ', 3, None, '___sec51'),
+              (' The compute part ', 3, None, '___sec52'),
+              (' The interfaces of the app ', 3, None, '___sec53'),
+              (' The source code ', 3, None, '___sec54'),
+              (' Resources ', 3, None, '___sec55'),
               (' Handling multiple input variables in Django ',
                1,
                'wf:vib:django',
                'wf:vib:django'),
-              (' Programming the Django application ', 2, None, '___sec35'),
-              (' Custom validation ', 2, None, '___sec36'),
-              (' Customizing widgets ', 2, None, '___sec37'),
-              (' Exercises ', 1, None, '___sec38'),
-              (' Exercise 2: Add two numbers ',
+              (' Programming the Django application ', 2, None, '___sec57'),
+              (' Adding the app to a project ', 3, None, '___sec58'),
+              (' The compute part ', 3, None, '___sec59'),
+              (' The model ', 3, None, '___sec60'),
+              (' The view ', 3, None, '___sec61'),
+              (' Custom validation ', 2, None, '___sec62'),
+              (' Customizing widgets ', 2, None, '___sec63'),
+              (' Resources ', 2, None, '___sec64'),
+              (' Exercises ', 1, None, '___sec65'),
+              (' Exercise 1: Add two numbers ',
                2,
                'wf:exer:add2',
                'wf:exer:add2'),
-              (' Exercise 3: Extend the `vib3_flask` app ',
+              (' Exercise 2: Upload data file and visualize curves ',
                2,
-               'wf:exer:vib3:demo',
-               'wf:exer:vib3:demo'),
-              (' Exercise 4: Equip the `vib3_flask` app with more data types ',
+               'wf:exer:upload',
+               'wf:exer:upload'),
+              (' Exercise 3: Plot a user-specified formula ',
                2,
-               'wf:exer:vib3:lists',
-               'wf:exer:vib3:lists'),
-              (' Exercise 5: Auto-generate code from function signature ',
+               'wf:exer:formula',
+               'wf:exer:formula'),
+              (' Exercise 4: Visualize Taylor polynomial approximations ',
+               2,
+               'wf:exer:Taylor',
+               'wf:exer:Taylor'),
+              (' Exercise 5: Extend the `gen` app ',
+               2,
+               'wf:exer:gen:demo',
+               'wf:exer:gen:demo'),
+              (' Exercise 6: Equip the `gen` app with more data types ',
+               2,
+               'wf:exer:gen:lists',
+               'wf:exer:gen:lists'),
+              (' Exercise 7: Auto-generate code from function signature ',
                2,
                None,
-               '___sec42'),
-              (' Resources ', 1, None, '___sec43'),
-              (' Flask resources ', 2, None, '___sec44'),
-              (' Django resources ', 2, None, '___sec45'),
-              (' Remaining ', 1, None, '___sec46')]}
+               '___sec72'),
+              (' Resources ', 1, None, '___sec73'),
+              (' Flask resources ', 2, None, '___sec74'),
+              (' Django resources ', 2, None, '___sec75'),
+              (' Remaining ', 1, None, '___sec76')]}
 end of tocinfo -->
 
 <body>
@@ -192,9 +228,9 @@ MathJax.Hub.Config({
 <p>
 <!-- begin top navigation -->
 <table style="width: 100%"><tr><td>
-<div style="text-align: left;"><a href="._web4sa_plain017.html"><img src="http://hplgit.github.io/doconce/bundled/html_images/prev1.png" border=0 alt="&laquo; Previous"></a></div>
+<div style="text-align: left;"><a href="._web4sa_plain017.html">&laquo; Previous</a></div>
 </td><td>
-<div style="text-align: right;"><a href="._web4sa_plain019.html"><img src="http://hplgit.github.io/doconce/bundled/html_images/next1.png" border=0 alt="Next &raquo;"></a></div>
+<div style="text-align: right;"><a href="._web4sa_plain019.html">Next &raquo;</a></div>
 </td></tr></table>
 <!-- end top navigation -->
 </p>
@@ -217,10 +253,11 @@ the resulting plot,
 cf. Figures <a href="._web4sa_plain008.html#wf:vib1:flask:fig:input">7</a>
 and <a href="._web4sa_plain008.html#wf:vib1:flask:fig:result">8</a>.
 
-<h2>Programming the Django application  <a name="___sec35"></a></h2>
+<h2>Programming the Django application  <a name="___sec57"></a></h2>
+
+<h3>Adding the app to a project  <a name="___sec58"></a></h3>
 
 <p>
-<b>Adding the app to a project.</b>
 Any Django app needs a project, but here we reuse the project
 we set up for the scientific hello world examples. We go to
 the directory <code>apps/django_apps</code> and create the Django app <code>vib1</code>:
@@ -245,13 +282,15 @@ These steps ensure that Django can find our application as a module/package,
 that Django can find our templates associated with this application,
 and that the URL address applies the name <code>vib1</code> to reach the application.
 
+<h3>The compute part  <a name="___sec59"></a></h3>
+
 <p>
-<b>The compute part.</b>
 The computations in our application are put in a file <code>compute.py</code>
 and explained in detail in the section <a href="._web4sa_plain008.html#wf:vib1:flask:app">Programming the Flask application</a>.
 
+<h3>The model  <a name="___sec60"></a></h3>
+
 <p>
-<b>The model.</b>
 We can now write <code>models.py</code> and the <code>Input</code> class that defines
 the form fields for the four input variables:
 
@@ -287,8 +326,9 @@ We also provide a default
 value such that all fields have a value when the user sees
 the page.
 
+<h3>The view  <a name="___sec61"></a></h3>
+
 <p>
-<b>The view.</b>
 The <code>views.py</code> file looks as follows:
 
 <p>
@@ -364,7 +404,7 @@ The template for rendering the page is listed next.
 The tricky part is the syntax for displaying <em>static content</em>, such as
 the plot file made in the <code>compute</code> function.
 
-<h2>Custom validation  <a name="___sec36"></a></h2>
+<h2>Custom validation  <a name="___sec62"></a></h2>
 
 <p>
 Django has a series of methods available for user-provided validation
@@ -414,7 +454,7 @@ be implemented by
 However, this function takes more than the value as argument. We therefore
 need to wrap it by a function with <code>value</code> as the only argument. The following
 utility returns such a
-function (see the section <a href="._web4sa_plain012.html#wf:vib1:flask:validation">Custom validation</a> for more
+function (see the section <a href="._web4sa_plain014.html#wf:vib1:flask:validation">Custom validation</a> for more
 explanation):
 
 <p>
@@ -474,7 +514,7 @@ We refer to the vast Django documentation for many other ways of
 validating forms. The reader is encouraged to run the <code>vib2</code>
 application and test out the validations we have implemented.
 
-<h2>Customizing widgets  <a name="___sec37"></a></h2>
+<h2>Customizing widgets  <a name="___sec63"></a></h2>
 
 <p>
 One will occasionally have full control of the layout of the individual
@@ -514,9 +554,9 @@ dictionary.
 <p>
 <!-- begin bottom navigation -->
 <table style="width: 100%"><tr><td>
-<div style="text-align: left;"><a href="._web4sa_plain017.html"><img src="http://hplgit.github.io/doconce/bundled/html_images/prev1.png" border=0 alt="&laquo; Previous"></a></div>
+<div style="text-align: left;"><a href="._web4sa_plain017.html">&laquo; Previous</a></div>
 </td><td>
-<div style="text-align: right;"><a href="._web4sa_plain019.html"><img src="http://hplgit.github.io/doconce/bundled/html_images/next1.png" border=0 alt="Next &raquo;"></a></div>
+<div style="text-align: right;"><a href="._web4sa_plain019.html">Next &raquo;</a></div>
 </td></tr></table>
 <!-- end bottom navigation -->
 </p>

@@ -40,10 +40,9 @@ h1, h2, h3, h4, h5, h6 {
           <!-- navigation toc: --> <li><a href="._web4sa_flask000.html#___sec0" style="font-size: 80%;">Web frameworks</a></li>
      <!-- navigation toc: --> <li><a href="._web4sa_flask004.html#___sec4" style="font-size: 80%;">Making a Flask application</a></li>
      <!-- navigation toc: --> <li><a href="._web4sa_flask006.html#wf:vib:flask" style="font-size: 80%;">Handling multiple input variables in Flask</a></li>
-     <!-- navigation toc: --> <li><a href="._web4sa_flask015.html#___sec27" style="font-size: 80%;">Further work</a></li>
-     <!-- navigation toc: --> <li><a href="._web4sa_flask016.html#___sec29" style="font-size: 80%;">Exercises</a></li>
-     <!-- navigation toc: --> <li><a href="._web4sa_flask016.html#___sec34" style="font-size: 80%;">Flask resources</a></li>
-     <!-- navigation toc: --> <li><a href="._web4sa_flask016.html#___sec35" style="font-size: 80%;">Remaining</a></li>
+     <!-- navigation toc: --> <li><a href="._web4sa_flask016.html#___sec46" style="font-size: 80%;">Exercises</a></li>
+     <!-- navigation toc: --> <li><a href="._web4sa_flask016.html#___sec54" style="font-size: 80%;">Flask resources</a></li>
+     <!-- navigation toc: --> <li><a href="._web4sa_flask016.html#___sec55" style="font-size: 80%;">Remaining</a></li>
 
     </ul>
    </div>
@@ -63,15 +62,21 @@ h1, h2, h3, h4, h5, h6 {
                'wf:hw:mvc'),
               (' Making a Flask application ', 1, None, '___sec4'),
               (' Programming the Flask application ', 2, None, '___sec5'),
+              (' The user interaction ', 3, None, '___sec6'),
+              (' The Python code ', 3, None, '___sec7'),
+              (' Dissection ', 3, None, '___sec8'),
+              (' The template files ', 3, None, '___sec9'),
+              (' Testing the application ', 3, None, '___sec10'),
               (' Equipping the input page with output results ',
                2,
                None,
-               '___sec6'),
+               '___sec11'),
               (' Splitting the app into model, view, and controller files ',
                2,
                'wf:hw3:flask',
                'wf:hw3:flask'),
-              (' Troubleshooting ', 2, None, '___sec8'),
+              (' Troubleshooting ', 2, None, '___sec13'),
+              (' Address already in use ', 3, None, '___sec14'),
               (' Handling multiple input variables in Flask ',
                1,
                'wf:vib:flask',
@@ -80,64 +85,84 @@ h1, h2, h3, h4, h5, h6 {
                2,
                'wf:vib1:flask:app',
                'wf:vib1:flask:app'),
+              (' The compute part ', 3, None, '___sec17'),
+              (' The model ', 3, None, '___sec18'),
+              (' The view ', 3, None, '___sec19'),
+              (' The HTML template ', 3, None, '___sec20'),
               (' Implementing error checking in the template ',
                2,
                None,
-               '___sec11'),
-              (' Using style sheets ', 2, None, '___sec12'),
-              (' Using LaTeX mathematics ', 2, None, '___sec13'),
+               '___sec21'),
+              (' Using style sheets ', 2, None, '___sec22'),
+              (' Using LaTeX mathematics ', 2, None, '___sec23'),
               (' Rearranging the elements in the HTML template ',
                2,
                None,
-               '___sec14'),
-              (' Bootstrap HTML style ', 2, None, '___sec15'),
+               '___sec24'),
+              (' Bootstrap HTML style ', 2, None, '___sec25'),
               (' Custom validation ',
                2,
                'wf:vib1:flask:validation',
                'wf:vib1:flask:validation'),
-              (' Using Flask validators ', 3, None, '___sec17'),
-              (' Tailored validation ', 3, None, '___sec18'),
-              (' Tailored validation of intervals ', 3, None, '___sec19'),
-              (' Demo ', 3, None, '___sec20'),
-              (' Autogenerating the code ',
-               2,
-               'wf:vib3:flask:autogen',
-               'wf:vib3:flask:autogen'),
+              (' Using Flask validators ', 3, None, '___sec27'),
+              (' Tailored validation ', 3, None, '___sec28'),
+              (' Tailored validation of intervals ', 3, None, '___sec29'),
+              (' Demo ', 3, None, '___sec30'),
               (' Avoiding plot files ',
                2,
-               'wf:vib3:flask:nofiles',
-               'wf:vib3:flask:nofiles'),
-              (' PNG plots ', 3, None, '___sec23'),
-              (' SVG plots ', 3, None, '___sec24'),
+               'wf:vib2:flask:nofiles',
+               'wf:vib2:flask:nofiles'),
+              (' PNG plots ', 3, None, '___sec32'),
+              (' SVG plots ', 3, None, '___sec33'),
+              (' Autogenerating the code ',
+               2,
+               'wf:autogen:flask',
+               'wf:autogen:flask'),
+              (' Inspecting function signatures ', 3, None, '___sec35'),
+              (' Generating the model ', 3, None, '___sec36'),
+              (' Generating the view ', 3, None, '___sec37'),
+              (' Generating the template ', 3, None, '___sec38'),
+              (' Application ', 3, None, '___sec39'),
               (' User login and storage of computed results ',
                2,
-               'wf:vib1:flask:login',
-               'wf:vib1:flask:login'),
-              (' Project 1: Using Bootstrap styles ',
-               2,
-               'wf:vib1:flask:bootstrap',
-               'wf:vib1:flask:bootstrap'),
-              (' Further work ', 1, None, '___sec27'),
-              (' Resources ', 3, None, '___sec28'),
-              (' Exercises ', 1, None, '___sec29'),
-              (' Exercise 2: Add two numbers ',
+               'wf:flask:login',
+               'wf:flask:login'),
+              (' Required additional software ', 3, None, '___sec41'),
+              (' The compute part ', 3, None, '___sec42'),
+              (' The interfaces of the app ', 3, None, '___sec43'),
+              (' The source code ', 3, None, '___sec44'),
+              (' Resources ', 3, None, '___sec45'),
+              (' Exercises ', 1, None, '___sec46'),
+              (' Exercise 1: Add two numbers ',
                2,
                'wf:exer:add2',
                'wf:exer:add2'),
-              (' Exercise 3: Extend the `vib3_flask` app ',
+              (' Exercise 2: Upload data file and visualize curves ',
                2,
-               'wf:exer:vib3:demo',
-               'wf:exer:vib3:demo'),
-              (' Exercise 4: Equip the `vib3_flask` app with more data types ',
+               'wf:exer:upload',
+               'wf:exer:upload'),
+              (' Exercise 3: Plot a user-specified formula ',
                2,
-               'wf:exer:vib3:lists',
-               'wf:exer:vib3:lists'),
-              (' Exercise 5: Auto-generate code from function signature ',
+               'wf:exer:formula',
+               'wf:exer:formula'),
+              (' Exercise 4: Visualize Taylor polynomial approximations ',
+               2,
+               'wf:exer:Taylor',
+               'wf:exer:Taylor'),
+              (' Exercise 5: Extend the `gen` app ',
+               2,
+               'wf:exer:gen:demo',
+               'wf:exer:gen:demo'),
+              (' Exercise 6: Equip the `gen` app with more data types ',
+               2,
+               'wf:exer:gen:lists',
+               'wf:exer:gen:lists'),
+              (' Exercise 7: Auto-generate code from function signature ',
                2,
                None,
-               '___sec33'),
-              (' Flask resources ', 1, None, '___sec34'),
-              (' Remaining ', 1, None, '___sec35')]}
+               '___sec53'),
+              (' Flask resources ', 1, None, '___sec54'),
+              (' Remaining ', 1, None, '___sec55')]}
 end of tocinfo -->
 
 
@@ -161,193 +186,57 @@ MathJax.Hub.Config({
 <a name="part0009"></a>
 <!-- !split -->
 
-<h2 id="___sec15">Bootstrap HTML style <a name="___sec15"></a></h2>
+<h2 id="___sec23">Using LaTeX mathematics <a name="___sec23"></a></h2>
 
 <p>
-The <a href="http://getbootstrap.com/" target="_self">Bootstrap</a> framework for creating web pages
-has been very popular in recent years, both because of the design and
-the automatic support for responsive pages on all sorts of devices.
-Bootstrap can be used in combination with Flask. The template file
-<code>view_bootstrap.html</code> is identical to the former <code>view_table.html</code>,
-except that we load the Bootstrap CSS file and include in comments
-how to add the typical navigation bar found in many Bootstrap-based
-web pages. The template looks like
+Scientific applications frequently have many input data that are
+defined through mathematics and where the typesetting on the
+web page should be as close as possible to the typesetting where
+the mathematics is documented. In the present example we would like
+to typeset \( A \), \( b \), \( w \), and \( T \) with italic font as done
+in LaTeX. Fortunately, native LaTeX typesetting is available in
+HTML through the tool <a href="http://www.mathjax.org/" target="_self">MathJax</a>.
+Our template <code>view_tex.html</code> enables MathJax. Formulas are written
+with standard LaTeX inside <code>\(</code> and <code>\)</code>, while equations are surrounded
+by <code>$$</code>. Here we use formulas only:
 
 <p>
 
-<!-- code=html (!bc htmlpro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #BC7A00">&lt;!DOCTYPE html&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;html</span> <span style="color: #7D9029">lang=</span><span style="color: #BA2121">&quot;en&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
-
-    <span style="color: #008000; font-weight: bold">&lt;link</span> <span style="color: #7D9029">href=</span><span style="color: #BA2121">&quot;http://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css&quot;</span> <span style="color: #7D9029">rel=</span><span style="color: #BA2121">&quot;stylesheet&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
-
-<span style="color: #008000; font-weight: bold">&lt;script </span><span style="color: #7D9029">type=</span><span style="color: #BA2121">&quot;text/x-mathjax-config&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+<!-- code=html (!bc htmlcod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">&lt;script </span><span style="color: #7D9029">type=</span><span style="color: #BA2121">&quot;text/x-mathjax-config&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
 MathJax.Hub.Config({
   TeX<span style="color: #666666">:</span> {
      equationNumbers<span style="color: #666666">:</span> {  autoNumber<span style="color: #666666">:</span> <span style="color: #BA2121">&quot;AMS&quot;</span>  },
-     extensions<span style="color: #666666">:</span> [<span style="color: #BA2121">&quot;AMSmath.js&quot;</span>, <span style="color: #BA2121">&quot;AMSsymbols.js&quot;</span>, <span style="color: #BA2121">&quot;autobold.js&quot;</span>]
+     extensions<span style="color: #666666">:</span> [<span style="color: #BA2121">&quot;AMSmath.js&quot;</span>, <span style="color: #BA2121">&quot;AMSsymbols.js&quot;</span>, <span style="color: #BA2121">&quot;autobold.js&quot;</span>, <span style="color: #BA2121">&quot;color.js&quot;</span>]
   }
 });
 <span style="color: #008000; font-weight: bold">&lt;/script&gt;</span>
 <span style="color: #008000; font-weight: bold">&lt;script </span><span style="color: #7D9029">type=</span><span style="color: #BA2121">&quot;text/javascript&quot;</span>
  <span style="color: #7D9029">src=</span><span style="color: #BA2121">&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
 <span style="color: #008000; font-weight: bold">&lt;/script&gt;</span>
-<span style="color: #408080; font-style: italic">&lt;!--</span>
-<span style="color: #408080; font-style: italic">&lt;nav class=&quot;navbar navbar-default&quot; role=&quot;navigation&quot;&gt;</span>
-<span style="color: #408080; font-style: italic">&lt;div class=&quot;collapse navbar-collapse&quot; id=&quot;bs-example-navbar-collapse-1&quot;&gt;</span>
-<span style="color: #408080; font-style: italic">    &lt;ul class=&quot;nav navbar-nav&quot;&gt;</span>
-<span style="color: #408080; font-style: italic">       {% for f in some_sequence %}</span>
-<span style="color: #408080; font-style: italic">       &lt;li&gt;&lt;a href=&quot;/{{f}}&quot;&gt;{{f}}&lt;/a&gt;&lt;/li&gt;</span>
-<span style="color: #408080; font-style: italic">       {% endfor %}</span>
-<span style="color: #408080; font-style: italic">       &lt;/ul&gt;</span>
-<span style="color: #408080; font-style: italic">&lt;/div&gt;</span>
-<span style="color: #408080; font-style: italic">&lt;/nav&gt;</span>
-<span style="color: #408080; font-style: italic">--&gt;</span>
 
 This web page visualizes the function \(
 u(t) = Ae^{-bt}\sin (w t), \hbox{ for } t\in [0,T]
 \).
 
-<span style="color: #408080; font-style: italic">&lt;!-- table with forms to the left and plot to the right --&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;form</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;navbar-form navbar-top&quot;</span> <span style="color: #7D9029">method=</span><span style="color: #BA2121">&quot;post&quot;</span> <span style="color: #7D9029">action=</span><span style="color: #BA2121">&quot;&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;table</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;table table-hover&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;tr&gt;&lt;td&gt;</span>
-  <span style="color: #008000; font-weight: bold">&lt;div</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;form-group&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;form</span> <span style="color: #7D9029">method=</span><span style="color: #BA2121">post</span> <span style="color: #7D9029">action=</span><span style="color: #BA2121">&quot;&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;table&gt;</span>
   {% for field in form %}
-    <span style="color: #008000; font-weight: bold">&lt;div</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;input-group&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
-      <span style="color: #008000; font-weight: bold">&lt;span</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;input-group-addon&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span> \( {{ field.name }} \) <span style="color: #008000; font-weight: bold">&lt;/span&gt;</span>
-      {{field(class_=&quot;form-control&quot;)}}
-    <span style="color: #008000; font-weight: bold">&lt;/div&gt;</span>
-    {% if field.errors %}
-      <span style="color: #008000; font-weight: bold">&lt;table</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;table table-hover&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
-      {% for error in field.errors %}
-        <span style="color: #008000; font-weight: bold">&lt;tr&gt;&lt;td</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;danger&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>{{ error }}<span style="color: #008000; font-weight: bold">&lt;/td&gt;&lt;/tr&gt;</span>
-      {% endfor %}
-      <span style="color: #008000; font-weight: bold">&lt;/table&gt;</span>
-    {% endif %}
-  {% endfor %}
-<span style="color: #008000; font-weight: bold">&lt;/td&gt;</span>
-
-<span style="color: #408080; font-style: italic">&lt;!-- 2nd column contains the plot --&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;td&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;p&gt;</span>
-{% if result != None %}
-<span style="color: #008000; font-weight: bold">&lt;img</span> <span style="color: #7D9029">src=</span><span style="color: #BA2121">&quot;{{ result }}&quot;</span> <span style="color: #7D9029">width=</span><span style="color: #BA2121">&quot;500&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
-{% endif %}
-<span style="color: #008000; font-weight: bold">&lt;/p&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;/td&gt;&lt;/tr&gt;</span>
-<span style="color: #408080; font-style: italic">&lt;!-- next row contains the Compute button --&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;tr&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;td&gt;&lt;p&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;input</span> <span style="color: #7D9029">type=</span><span style="color: #BA2121">&quot;submit&quot;</span> <span style="color: #7D9029">value=</span><span style="color: #BA2121">&quot;Compute&quot;</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;btn btn-default&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;/td&gt;&lt;/tr&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;/table&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;/form&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;/div&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;/html&gt;</span>
+    <span style="color: #008000; font-weight: bold">&lt;tr&gt;</span>
+    <span style="color: #008000; font-weight: bold">&lt;td&gt;</span>\( {{ field.name }} \)<span style="color: #008000; font-weight: bold">&lt;/td&gt;&lt;td&gt;</span>{{ field(size=12) }}<span style="color: #008000; font-weight: bold">&lt;/td&gt;</span>
+    <span style="color: #008000; font-weight: bold">&lt;td&gt;</span>{{ field.label }}<span style="color: #008000; font-weight: bold">&lt;/td&gt;</span>
 </pre></div>
 <p>
-The input fields and fonts now get the typical Bootstrap look and feel.
+Figure <a href="#wf:vib1:flask:fig:latex">7</a> displays how the
+LaTeX rendering looks like in the browser.
 
 <p>
-While <code>view_bootstrap.html</code> makes use of plain Bootstrap HTML code, there is
-also a higher-level framework, called <a href="http://pythonhosted.org/Flask-Bootstrap/" target="_self">Flask-Bootstrap</a> that combines Flask and Bootstrap. Installation of
-this extension is done by <code>sudo pip install flask-bootstrap</code>.
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 7:  LaTeX typesetting of mathematical symbols. <a name="wf:vib1:flask:fig:latex"></a> </p></center>
+<p><img src="fig-web4sa/vib1_flask_latex.png" align="bottom" width=650></p>
+</center>
 
-<p>
-After <code>app = Flask(__name__)</code> we need to do
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">flask_bootstrap</span> <span style="color: #008000; font-weight: bold">import</span> Bootstrap
-Bootstrap(app)
-</pre></div>
-<p>
-The template employs new keywords <code>extends</code> and <code>block</code>:
-
-<p>
-
-<!-- code=html (!bc htmlpro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">{% extends &quot;bootstrap/base.html&quot; %}
-
-{% block styles %}
-{{super()}}
-<span style="color: #008000; font-weight: bold">&lt;style&gt;</span>
-    <span style="color: #0000FF; font-weight: bold">.appsize</span> { <span style="color: #008000; font-weight: bold">width</span><span style="color: #666666">:</span> <span style="color: #666666">500px</span> }
-<span style="color: #008000; font-weight: bold">&lt;/style&gt;</span>
-
-<span style="color: #008000; font-weight: bold">&lt;script </span><span style="color: #7D9029">type=</span><span style="color: #BA2121">&quot;text/x-mathjax-config&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
-MathJax.Hub.Config({
-  TeX<span style="color: #666666">:</span> {
-     equationNumbers<span style="color: #666666">:</span> {  autoNumber<span style="color: #666666">:</span> <span style="color: #BA2121">&quot;AMS&quot;</span>  },
-     extensions<span style="color: #666666">:</span> [<span style="color: #BA2121">&quot;AMSmath.js&quot;</span>, <span style="color: #BA2121">&quot;AMSsymbols.js&quot;</span>, <span style="color: #BA2121">&quot;autobold.js&quot;</span>]
-  }
-});
-<span style="color: #008000; font-weight: bold">&lt;/script&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;script </span><span style="color: #7D9029">type=</span><span style="color: #BA2121">&quot;text/javascript&quot;</span>
- <span style="color: #7D9029">src=</span><span style="color: #BA2121">&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;/script&gt;</span>
-{% endblock %}
-
-<span style="color: #408080; font-style: italic">&lt;!--</span>
-<span style="color: #408080; font-style: italic">{% block navbar %}</span>
-<span style="color: #408080; font-style: italic">&lt;nav class=&quot;navbar navbar-default&quot; role=&quot;navigation&quot;&gt;</span>
-<span style="color: #408080; font-style: italic">&lt;div class=&quot;collapse navbar-collapse&quot; id=&quot;bs-example-navbar-collapse-1&quot;&gt;</span>
-<span style="color: #408080; font-style: italic">    &lt;ul class=&quot;nav navbar-nav&quot;&gt;</span>
-<span style="color: #408080; font-style: italic">       {% for f in some_sequence %}</span>
-<span style="color: #408080; font-style: italic">       &lt;li&gt;&lt;a href=&quot;/{{f}}&quot;&gt;{{f}}&lt;/a&gt;&lt;/li&gt;</span>
-<span style="color: #408080; font-style: italic">       {% endfor %}</span>
-<span style="color: #408080; font-style: italic">       &lt;/ul&gt;</span>
-<span style="color: #408080; font-style: italic">&lt;/div&gt;</span>
-<span style="color: #408080; font-style: italic">&lt;/nav&gt;</span>
-<span style="color: #408080; font-style: italic">{% endblock %}</span>
-<span style="color: #408080; font-style: italic">--&gt;</span>
-
-This web page visualizes the function \(
-u(t) = Ae^{-bt}\sin (w t), \hbox{ for } t\in [0,T]
-\).
-
-{% block content %}
-<span style="color: #408080; font-style: italic">&lt;!-- table with forms to the left and plot to the right --&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;form</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;navbar-form navbar-top&quot;</span> <span style="color: #7D9029">method=</span><span style="color: #BA2121">&quot;post&quot;</span> <span style="color: #7D9029">action=</span><span style="color: #BA2121">&quot;&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;table</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;table table-hover&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;tr&gt;&lt;td&gt;</span>
-  <span style="color: #008000; font-weight: bold">&lt;div</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;form-group&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
-  {% for field in form %}
-    <span style="color: #008000; font-weight: bold">&lt;div</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;input-group&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
-      <span style="color: #008000; font-weight: bold">&lt;span</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;input-group-addon&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span> \( {{ field.name }} \) <span style="color: #008000; font-weight: bold">&lt;/span&gt;</span>
-      {{field(class_=&quot;form-control&quot;)}}
-    <span style="color: #008000; font-weight: bold">&lt;/div&gt;</span>
-    {% if field.errors %}
-      <span style="color: #008000; font-weight: bold">&lt;table</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;table table-hover&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
-      {% for error in field.errors %}
-        <span style="color: #008000; font-weight: bold">&lt;tr&gt;&lt;td</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;danger&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>{{ error }}<span style="color: #008000; font-weight: bold">&lt;/td&gt;&lt;/tr&gt;</span>
-      {% endfor %}
-      <span style="color: #008000; font-weight: bold">&lt;/table&gt;</span>
-    {% endif %}
-  {% endfor %}
-<span style="color: #008000; font-weight: bold">&lt;/td&gt;</span>
-
-<span style="color: #408080; font-style: italic">&lt;!-- 2nd column contains the plot --&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;td&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;p&gt;</span>
-{% if result != None %}
-<span style="color: #008000; font-weight: bold">&lt;img</span> <span style="color: #7D9029">src=</span><span style="color: #BA2121">&quot;{{ result }}&quot;</span> <span style="color: #7D9029">width=</span><span style="color: #BA2121">&quot;500&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
-{% endif %}
-<span style="color: #008000; font-weight: bold">&lt;/p&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;/td&gt;&lt;/tr&gt;</span>
-<span style="color: #408080; font-style: italic">&lt;!-- next row contains the Compute button --&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;tr&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;td&gt;&lt;p&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;input</span> <span style="color: #7D9029">type=</span><span style="color: #BA2121">&quot;submit&quot;</span> <span style="color: #7D9029">value=</span><span style="color: #BA2121">&quot;Compute&quot;</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;btn btn-default&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;/td&gt;&lt;/tr&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;/table&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;/form&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;/div&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;/html&gt;</span>
-{% endblock %}
-</pre></div>
 <p>
 <p>
 <!-- navigation buttons at the bottom of the page -->

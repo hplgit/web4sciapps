@@ -1,182 +1,54 @@
 .. !split
 
-Bootstrap HTML style
---------------------
+Using LaTeX mathematics
+-----------------------
 
-The `Bootstrap <http://getbootstrap.com/>`__ framework for creating web pages
-has been very popular in recent years, both because of the design and
-the automatic support for responsive pages on all sorts of devices.
-Bootstrap can be used in combination with Flask. The template file
-``view_bootstrap.html`` is identical to the former ``view_table.html``,
-except that we load the Bootstrap CSS file and include in comments
-how to add the typical navigation bar found in many Bootstrap-based
-web pages. The template looks like
+.. index::
+   single: Flask; LaTeX mathematics
+
+Scientific applications frequently have many input data that are
+defined through mathematics and where the typesetting on the
+web page should be as close as possible to the typesetting where
+the mathematics is documented. In the present example we would like
+to typeset :math:`A`, :math:`b`, :math:`w`, and :math:`T` with italic font as done
+in LaTeX. Fortunately, native LaTeX typesetting is available in
+HTML through the tool `MathJax <http://www.mathjax.org/>`__.
+Our template ``view_tex.html`` enables MathJax. Formulas are written
+with standard LaTeX inside ``\(`` and ``\)``, while equations are surrounded
+by ``$$``. Here we use formulas only:
 
 .. code-block:: html
 
-        <!DOCTYPE html>
-        <html lang="en">
-        
-            <link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
-        
         <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
           TeX: {
              equationNumbers: {  autoNumber: "AMS"  },
-             extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js"]
+             extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
           }
         });
         </script>
         <script type="text/javascript"
          src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
         </script>
-        <!--
-        <nav class="navbar navbar-default" role="navigation">
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-               {% for f in some_sequence %}
-               <li><a href="/{{f}}">{{f}}</a></li>
-               {% endfor %}
-               </ul>
-        </div>
-        </nav>
-        -->
         
         This web page visualizes the function \(
         u(t) = Ae^{-bt}\sin (w t), \hbox{ for } t\in [0,T]
         \).
         
-        <!-- table with forms to the left and plot to the right -->
-        <form class="navbar-form navbar-top" method="post" action="">
-        <table class="table table-hover">
-        <tr><td>
-          <div class="form-group">
+        <form method=post action="">
+        <table>
           {% for field in form %}
-            <div class="input-group">
-              <span class="input-group-addon"> \( {{ field.name }} \) </span>
-              {{field(class_="form-control")}}
-            </div>
-            {% if field.errors %}
-              <table class="table table-hover">
-              {% for error in field.errors %}
-                <tr><td class="danger">{{ error }}</td></tr>
-              {% endfor %}
-              </table>
-            {% endif %}
-          {% endfor %}
-        </td>
-        
-        <!-- 2nd column contains the plot -->
-        <td>
-        <p>
-        {% if result != None %}
-        <img src="{{ result }}" width="500">
-        {% endif %}
-        </p>
-        </td></tr>
-        <!-- next row contains the Compute button -->
-        <tr>
-        <td><p>
-        <input type="submit" value="Compute" class="btn btn-default">
-        </td></tr>
-        </table>
-        </form>
-        </div>
-        </html>
+            <tr>
+            <td>\( {{ field.name }} \)</td><td>{{ field(size=12) }}</td>
+            <td>{{ field.label }}</td>
 
-The input fields and fonts now get the typical Bootstrap look and feel.
+Figure :ref:`wf:vib1:flask:fig:latex` displays how the
+LaTeX rendering looks like in the browser.
 
-While ``view_bootstrap.html`` makes use of plain Bootstrap HTML code, there is
-also a higher-level framework, called `Flask-Bootstrap <http://pythonhosted.org/Flask-Bootstrap/>`__ that combines Flask and Bootstrap. Installation of
-this extension is done by ``sudo pip install flask-bootstrap``.
+.. _wf:vib1:flask:fig:latex:
 
-After ``app = Flask(__name__)`` we need to do
+.. figure:: vib1_flask_latex.png
+   :width: 650
 
-.. code-block:: python
-
-        from flask_bootstrap import Bootstrap
-        Bootstrap(app)
-
-The template employs new keywords ``extends`` and ``block``:
-
-.. code-block:: html
-
-        {% extends "bootstrap/base.html" %}
-        
-        {% block styles %}
-        {{super()}}
-        <style>
-            .appsize { width: 500px }
-        </style>
-        
-        <script type="text/x-mathjax-config">
-        MathJax.Hub.Config({
-          TeX: {
-             equationNumbers: {  autoNumber: "AMS"  },
-             extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js"]
-          }
-        });
-        </script>
-        <script type="text/javascript"
-         src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-        </script>
-        {% endblock %}
-        
-        <!--
-        {% block navbar %}
-        <nav class="navbar navbar-default" role="navigation">
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-               {% for f in some_sequence %}
-               <li><a href="/{{f}}">{{f}}</a></li>
-               {% endfor %}
-               </ul>
-        </div>
-        </nav>
-        {% endblock %}
-        -->
-        
-        This web page visualizes the function \(
-        u(t) = Ae^{-bt}\sin (w t), \hbox{ for } t\in [0,T]
-        \).
-        
-        {% block content %}
-        <!-- table with forms to the left and plot to the right -->
-        <form class="navbar-form navbar-top" method="post" action="">
-        <table class="table table-hover">
-        <tr><td>
-          <div class="form-group">
-          {% for field in form %}
-            <div class="input-group">
-              <span class="input-group-addon"> \( {{ field.name }} \) </span>
-              {{field(class_="form-control")}}
-            </div>
-            {% if field.errors %}
-              <table class="table table-hover">
-              {% for error in field.errors %}
-                <tr><td class="danger">{{ error }}</td></tr>
-              {% endfor %}
-              </table>
-            {% endif %}
-          {% endfor %}
-        </td>
-        
-        <!-- 2nd column contains the plot -->
-        <td>
-        <p>
-        {% if result != None %}
-        <img src="{{ result }}" width="500">
-        {% endif %}
-        </p>
-        </td></tr>
-        <!-- next row contains the Compute button -->
-        <tr>
-        <td><p>
-        <input type="submit" value="Compute" class="btn btn-default">
-        </td></tr>
-        </table>
-        </form>
-        </div>
-        </html>
-        {% endblock %}
+   *LaTeX typesetting of mathematical symbols*
 

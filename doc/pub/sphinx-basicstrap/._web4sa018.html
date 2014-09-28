@@ -77,8 +77,8 @@
 
     
     <link rel="top" title="Using Web Frameworks for Scientific Applications" href="index.html" />
-    <link rel="next" title="Exercises" href="._web4sa019.html" />
-    <link rel="prev" title="Further work" href="._web4sa017.html" />
+    <link rel="next" title="Resources (2)" href="._web4sa019.html" />
+    <link rel="prev" title="User login and storage of computed results" href="._web4sa017.html" />
  
   </head>
   <body>
@@ -98,10 +98,10 @@
                 <a href="genindex.html" title="General Index" accesskey="I">index</a>
                 </li>
                 <li>
-                <a href="._web4sa019.html" title="Exercises" accesskey="N">next</a>
+                <a href="._web4sa019.html" title="Resources (2)" accesskey="N">next</a>
                 </li>
                 <li>
-                <a href="._web4sa017.html" title="Further work" accesskey="P">previous</a>
+                <a href="._web4sa017.html" title="User login and storage of computed results" accesskey="P">previous</a>
                 </li>
               
             </ul>
@@ -124,7 +124,13 @@
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Handling multiple input variables in Django</a><ul>
-<li><a class="reference internal" href="#programming-the-django-application-2">Programming the Django application  (2)</a></li>
+<li><a class="reference internal" href="#programming-the-django-application-2">Programming the Django application  (2)</a><ul>
+<li><a class="reference internal" href="#adding-the-app-to-a-project">Adding the app to a project</a></li>
+<li><a class="reference internal" href="#the-compute-part-3">The compute part  (3)</a></li>
+<li><a class="reference internal" href="#the-model-3">The model  (3)</a></li>
+<li><a class="reference internal" href="#the-view-3">The view  (3)</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#custom-validation-2">Custom validation  (2)</a></li>
 <li><a class="reference internal" href="#customizing-widgets">Customizing widgets</a></li>
 </ul>
@@ -133,10 +139,10 @@
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="._web4sa017.html"
-                        title="previous chapter">Further work</a></p>
+                        title="previous chapter">User login and storage of computed results</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="._web4sa019.html"
-                        title="next chapter">Exercises</a></p>
+                        title="next chapter">Resources  (2)</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/._web4sa018.txt"
@@ -169,7 +175,13 @@
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Handling multiple input variables in Django</a><ul>
-<li><a class="reference internal" href="#programming-the-django-application-2">Programming the Django application  (2)</a></li>
+<li><a class="reference internal" href="#programming-the-django-application-2">Programming the Django application  (2)</a><ul>
+<li><a class="reference internal" href="#adding-the-app-to-a-project">Adding the app to a project</a></li>
+<li><a class="reference internal" href="#the-compute-part-3">The compute part  (3)</a></li>
+<li><a class="reference internal" href="#the-model-3">The model  (3)</a></li>
+<li><a class="reference internal" href="#the-view-3">The view  (3)</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#custom-validation-2">Custom validation  (2)</a></li>
 <li><a class="reference internal" href="#customizing-widgets">Customizing widgets</a></li>
 </ul>
@@ -178,10 +190,10 @@
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="._web4sa017.html"
-                        title="previous chapter">Further work</a></p>
+                        title="previous chapter">User login and storage of computed results</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="._web4sa019.html"
-                        title="next chapter">Exercises</a></p>
+                        title="next chapter">Resources  (2)</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/._web4sa018.txt"
@@ -226,8 +238,9 @@ cf. Figures <a class="reference internal" href="._web4sa008.html#wf-vib1-flask-f
 and <a class="reference internal" href="._web4sa008.html#wf-vib1-flask-fig-result"><em>The result page</em></a>.</p>
 <div class="section" id="programming-the-django-application-2">
 <h2>Programming the Django application  (2)<a class="headerlink" href="#programming-the-django-application-2" title="Permalink to this headline">¶</a></h2>
-<p><strong>Adding the app to a project.</strong>
-Any Django app needs a project, but here we reuse the project
+<div class="section" id="adding-the-app-to-a-project">
+<h3>Adding the app to a project<a class="headerlink" href="#adding-the-app-to-a-project" title="Permalink to this headline">¶</a></h3>
+<p>Any Django app needs a project, but here we reuse the project
 we set up for the scientific hello world examples. We go to
 the directory <tt class="docutils literal"><span class="pre">apps/django_apps</span></tt> and create the Django app <tt class="docutils literal"><span class="pre">vib1</span></tt>:</p>
 <div class="highlight-text"><div class="highlight"><pre>Terminal&gt; python ../../django_project/manage.py startapp vib1
@@ -244,11 +257,15 @@ call in <tt class="docutils literal"><span class="pre">urls.py</span></tt>.</li>
 <p>These steps ensure that Django can find our application as a module/package,
 that Django can find our templates associated with this application,
 and that the URL address applies the name <tt class="docutils literal"><span class="pre">vib1</span></tt> to reach the application.</p>
-<p><strong>The compute part.</strong>
-The computations in our application are put in a file <tt class="docutils literal"><span class="pre">compute.py</span></tt>
+</div>
+<div class="section" id="the-compute-part-3">
+<h3>The compute part  (3)<a class="headerlink" href="#the-compute-part-3" title="Permalink to this headline">¶</a></h3>
+<p>The computations in our application are put in a file <tt class="docutils literal"><span class="pre">compute.py</span></tt>
 and explained in detail in the section <a class="reference internal" href="._web4sa008.html#wf-vib1-flask-app"><em>Programming the Flask application  (2)</em></a>.</p>
-<p id="index-0"><strong>The model.</strong>
-We can now write <tt class="docutils literal"><span class="pre">models.py</span></tt> and the <tt class="docutils literal"><span class="pre">Input</span></tt> class that defines
+</div>
+<div class="section" id="the-model-3">
+<span id="index-0"></span><h3>The model  (3)<a class="headerlink" href="#the-model-3" title="Permalink to this headline">¶</a></h3>
+<p>We can now write <tt class="docutils literal"><span class="pre">models.py</span></tt> and the <tt class="docutils literal"><span class="pre">Input</span></tt> class that defines
 the form fields for the four input variables:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
 <span class="kn">from</span> <span class="nn">django.forms</span> <span class="kn">import</span> <span class="n">ModelForm</span>
@@ -278,8 +295,10 @@ one must start the text with a space, as we have demonstrated above.
 We also provide a default
 value such that all fields have a value when the user sees
 the page.</p>
-<p id="index-1"><strong>The view.</strong>
-The <tt class="docutils literal"><span class="pre">views.py</span></tt> file looks as follows:</p>
+</div>
+<div class="section" id="the-view-3">
+<span id="index-1"></span><h3>The view  (3)<a class="headerlink" href="#the-view-3" title="Permalink to this headline">¶</a></h3>
+<p>The <tt class="docutils literal"><span class="pre">views.py</span></tt> file looks as follows:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render_to_response</span>
 <span class="kn">from</span> <span class="nn">django.template</span> <span class="kn">import</span> <span class="n">RequestContext</span>
 <span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpResponse</span>
@@ -344,6 +363,7 @@ the <tt class="docutils literal"><span class="pre">static</span></tt> prefix in 
 <p>The tricky part is the syntax for displaying <em>static content</em>, such as
 the plot file made in the <tt class="docutils literal"><span class="pre">compute</span></tt> function.</p>
 </div>
+</div>
 <div class="section" id="custom-validation-2">
 <h2>Custom validation  (2)<a class="headerlink" href="#custom-validation-2" title="Permalink to this headline">¶</a></h2>
 <p>Django has a series of methods available for user-provided validation
@@ -383,7 +403,7 @@ be implemented by</p>
 <p>However, this function takes more than the value as argument. We therefore
 need to wrap it by a function with <tt class="docutils literal"><span class="pre">value</span></tt> as the only argument. The following
 utility returns such a
-function (see the section <a class="reference internal" href="._web4sa012.html#wf-vib1-flask-validation"><em>Custom validation  (1)</em></a> for more
+function (see the section <a class="reference internal" href="._web4sa014.html#wf-vib1-flask-validation"><em>Custom validation  (1)</em></a> for more
 explanation):</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">functools</span>
 
@@ -481,8 +501,8 @@ dictionary.</p>
     <ul class="nav pull-right">
       
         <li><a href="genindex.html" title="General Index" >index</a></li>
-        <li><a href="._web4sa019.html" title="Exercises" >next</a></li>
-        <li><a href="._web4sa017.html" title="Further work" >previous</a></li>
+        <li><a href="._web4sa019.html" title="Resources (2)" >next</a></li>
+        <li><a href="._web4sa017.html" title="User login and storage of computed results" >previous</a></li>
         <li><a href="index.html">Using Web Frameworks for Scientific Applications</a></li> 
       
     </ul>

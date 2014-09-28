@@ -9,7 +9,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>User login and storage of computed results &mdash; Using Web Frameworks for Scientific Applications</title>
+    <title>Avoiding plot files &mdash; Using Web Frameworks for Scientific Applications</title>
     
     <link rel="stylesheet" href="_static/redcloud.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -48,8 +48,8 @@
 
     
     <link rel="top" title="Using Web Frameworks for Scientific Applications" href="index.html" />
-    <link rel="next" title="Project 1: Using Bootstrap styles" href="._web4sa016.html" />
-    <link rel="prev" title="Avoiding plot files" href="._web4sa014.html" />
+    <link rel="next" title="Autogenerating the code" href="._web4sa016.html" />
+    <link rel="prev" title="Custom validation (1)" href="._web4sa014.html" />
  
   </head>
   <body>
@@ -62,10 +62,10 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="._web4sa016.html" title="Project 1: Using Bootstrap styles"
+          <a href="._web4sa016.html" title="Autogenerating the code"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="._web4sa014.html" title="Avoiding plot files"
+          <a href="._web4sa014.html" title="Custom validation (1)"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="index.html">Using Web Frameworks for Scientific Applications</a> &raquo;</li>
  
@@ -79,367 +79,149 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="user-login-and-storage-of-computed-results">
-<span id="wf-vib1-flask-login"></span><h1>User login and storage of computed results<a class="headerlink" href="#user-login-and-storage-of-computed-results" title="Permalink to this headline">¶</a></h1>
-<span class="target" id="index-0"></span><p id="index-1">We now want to make an app where the computed results can be stored in
-a database. To this end, each user must create an account and login to
-this account for archiving results and for browsing previous runs of
-the application. More files are needed for this purpose, compared to
-the previous apps, and the files are located in the <a class="reference external" href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/vib5">vib5</a>. The <tt class="docutils literal"><span class="pre">compute.py</span></tt> file contains the
-<tt class="docutils literal"><span class="pre">compute_gamma</span></tt> function from the previous app (<tt class="docutils literal"><span class="pre">vib4</span></tt>) in the section <a class="reference internal" href="._web4sa014.html#wf-vib3-flask-nofiles"><em>Avoiding plot files</em></a>.</p>
-<p><tt class="docutils literal"><span class="pre">db_models.py</span></tt>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">flask.ext.sqlalchemy</span> <span class="kn">import</span> <span class="n">SQLAlchemy</span>
-<span class="kn">from</span> <span class="nn">werkzeug</span> <span class="kn">import</span> <span class="n">generate_password_hash</span><span class="p">,</span> <span class="n">check_password_hash</span>
-<span class="kn">from</span> <span class="nn">app</span> <span class="kn">import</span> <span class="n">app</span>
-
-<span class="n">db</span> <span class="o">=</span> <span class="n">SQLAlchemy</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
-
-<span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-    <span class="n">username</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span> <span class="n">unique</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-    <span class="n">pwhash</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">())</span>
-    <span class="n">email</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">120</span><span class="p">),</span> <span class="n">nullable</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-    <span class="n">notify</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Boolean</span><span class="p">())</span>
-
-    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s">&#39;&lt;User </span><span class="si">%r</span><span class="s">&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">username</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">check_password</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pw</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">check_password_hash</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pwhash</span><span class="p">,</span> <span class="n">pw</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">set_password</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pw</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">pwhash</span> <span class="o">=</span> <span class="n">generate_password_hash</span><span class="p">(</span><span class="n">pw</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">is_authenticated</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">True</span>
-
-    <span class="k">def</span> <span class="nf">is_active</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">True</span>
-
-    <span class="k">def</span> <span class="nf">is_anonymous</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">False</span>
-
-    <span class="k">def</span> <span class="nf">get_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span>
-
-<span class="k">class</span> <span class="nc">Gamma</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-
-    <span class="n">a</span>          <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Float</span><span class="p">)</span>
-    <span class="n">h</span>          <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Float</span><span class="p">)</span>
-    <span class="n">A</span>          <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Float</span><span class="p">)</span>
-    <span class="n">resolution</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">)</span>
-
-    <span class="n">result</span>   <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">())</span>
-    <span class="n">comments</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(),</span> <span class="n">nullable</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-    <span class="n">user_id</span>  <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s">&#39;user.id&#39;</span><span class="p">))</span>
-    <span class="n">user</span>     <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">relationship</span><span class="p">(</span><span class="s">&#39;User&#39;</span><span class="p">,</span>
-                <span class="n">backref</span><span class="o">=</span><span class="n">db</span><span class="o">.</span><span class="n">backref</span><span class="p">(</span><span class="s">&#39;Gamma&#39;</span><span class="p">,</span> <span class="n">lazy</span><span class="o">=</span><span class="s">&#39;dynamic&#39;</span><span class="p">))</span>
+  <div class="section" id="avoiding-plot-files">
+<span id="wf-vib2-flask-nofiles"></span><h1>Avoiding plot files<a class="headerlink" href="#avoiding-plot-files" title="Permalink to this headline">¶</a></h1>
+<p>Files with plots are easy to deal with as long as they are in the
+<tt class="docutils literal"><span class="pre">static</span></tt> subdirectory of the Flask application directory. However,
+as already pointed out, the previous <tt class="docutils literal"><span class="pre">vib1</span></tt> app, which writes plot
+files, is not suited for multiple simultaneous users since every
+user will destroy <em>all</em> existing plot files before making a new
+one. Therefore, we need a robust solution for multiple users of
+the app.</p>
+<p>The idea is to not write plot files, but instead return the plot
+as a string and embed that string directly in the HTML code.
+This is relatively straightforward with Matplotlib
+and Python. The relevant code is found in the <tt class="docutils literal"><span class="pre">compute.py</span></tt> file
+of the <tt class="docutils literal"><span class="pre">vib2</span></tt> app.</p>
+<span class="target" id="index-0"></span><span class="target" id="index-1"></span><span class="target" id="index-2"></span><span class="target" id="index-3"></span><div class="section" id="png-plots">
+<span id="index-4"></span><h2>PNG plots<a class="headerlink" href="#png-plots" title="Permalink to this headline">¶</a></h2>
+<p>Python has the <tt class="docutils literal"><span class="pre">StringIO</span></tt> object that is a string buffer with the
+look and behavior of a file. The idea is to let Matplotlib write to
+a <tt class="docutils literal"><span class="pre">StringIO</span></tt> object and afterwards extract the string from this object:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plot</span>
+<span class="kn">from</span> <span class="nn">StringIO</span> <span class="kn">import</span> <span class="n">StringIO</span>
+<span class="c"># run plt.plot, plt.title, etc.</span>
+<span class="n">figfile</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">figfile</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s">&#39;png&#39;</span><span class="p">)</span>
+<span class="n">figfile</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c"># rewind to beginning of file</span>
+<span class="n">figdata_png</span> <span class="o">=</span> <span class="n">figfile</span><span class="o">.</span><span class="n">buf</span>  <span class="c"># extract string</span>
 </pre></div>
 </div>
-<p><tt class="docutils literal"><span class="pre">app.py</span></tt>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
-
-<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
-<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s">&#39;SQLALCHEMY_DATABASE_URI&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;sqlite:///sqlite.db&#39;</span>
-<span class="n">app</span><span class="o">.</span><span class="n">secret_key</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">urandom</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span>
-
-<span class="c"># Email settings</span>
-<span class="kn">import</span> <span class="nn">base64</span>
-<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
-        <span class="n">MAIL_SERVER</span><span class="o">=</span><span class="s">&#39;smtp.gmail.com&#39;</span><span class="p">,</span>
-        <span class="n">MAIL_PORT</span><span class="o">=</span><span class="mi">587</span><span class="p">,</span>
-        <span class="n">MAIL_USE_TLS</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
-        <span class="n">MAIL_USERNAME</span> <span class="o">=</span> <span class="s">&#39;cbcwebsolvermail@gmail.com&#39;</span><span class="p">,</span>
-        <span class="n">MAIL_PASSWORD</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">decodestring</span><span class="p">(</span><span class="s">&#39;RGlmZmljdWx0UFch&#39;</span><span class="p">),</span>
-        <span class="n">MAIL_DEFAULT_SENDER</span> <span class="o">=</span> <span class="s">&#39;Flask Gamma Email &lt;cbcwebsolvermail@gmail.com&gt;&#39;</span>
-        <span class="p">)</span>
+<p>Before the PNG data can be embedded in HTML we need to convert the
+data to base64 format:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">base64</span>
+<span class="n">figdata_png</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">figdata_png</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><tt class="docutils literal"><span class="pre">forms.py</span></tt>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">wtforms</span> <span class="kn">as</span> <span class="nn">wtf</span>
-<span class="kn">from</span> <span class="nn">parampool.html5.flask.fields</span> <span class="kn">import</span> <span class="n">HTML5FloatField</span>
-
-<span class="k">class</span> <span class="nc">GammaForm</span><span class="p">(</span><span class="n">wtf</span><span class="o">.</span><span class="n">Form</span><span class="p">):</span>
-    <span class="n">a</span>          <span class="o">=</span> <span class="n">HTML5FloatField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
-                             <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">wtf</span><span class="o">.</span><span class="n">validators</span><span class="o">.</span><span class="n">InputRequired</span><span class="p">()])</span>
-    <span class="n">h</span>          <span class="o">=</span> <span class="n">HTML5FloatField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span>
-                             <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">wtf</span><span class="o">.</span><span class="n">validators</span><span class="o">.</span><span class="n">InputRequired</span><span class="p">()])</span>
-    <span class="n">A</span>          <span class="o">=</span> <span class="n">HTML5FloatField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mf">1.41421356237</span><span class="p">,</span>
-                             <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">wtf</span><span class="o">.</span><span class="n">validators</span><span class="o">.</span><span class="n">InputRequired</span><span class="p">()])</span>
-    <span class="n">resolution</span> <span class="o">=</span> <span class="n">wtf</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
-                             <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">wtf</span><span class="o">.</span><span class="n">validators</span><span class="o">.</span><span class="n">InputRequired</span><span class="p">()])</span>
-
-<span class="kn">from</span> <span class="nn">db_models</span> <span class="kn">import</span> <span class="n">db</span><span class="p">,</span> <span class="n">User</span>
-<span class="kn">import</span> <span class="nn">flask.ext.wtf.html5</span> <span class="kn">as</span> <span class="nn">html5</span>
-
-<span class="c"># Standard Forms</span>
-<span class="k">class</span> <span class="nc">register_form</span><span class="p">(</span><span class="n">wtf</span><span class="o">.</span><span class="n">Form</span><span class="p">):</span>
-    <span class="n">username</span> <span class="o">=</span> <span class="n">wtf</span><span class="o">.</span><span class="n">TextField</span><span class="p">(</span>
-        <span class="s">&#39;Username&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">wtf</span><span class="o">.</span><span class="n">validators</span><span class="o">.</span><span class="n">Required</span><span class="p">()])</span>
-    <span class="n">password</span> <span class="o">=</span> <span class="n">wtf</span><span class="o">.</span><span class="n">PasswordField</span><span class="p">(</span>
-        <span class="s">&#39;Password&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">wtf</span><span class="o">.</span><span class="n">validators</span><span class="o">.</span><span class="n">Required</span><span class="p">(),</span>
-                     <span class="n">wtf</span><span class="o">.</span><span class="n">validators</span><span class="o">.</span><span class="n">EqualTo</span><span class="p">(</span>
-                         <span class="s">&#39;confirm&#39;</span><span class="p">,</span>
-                         <span class="n">message</span><span class="o">=</span><span class="s">&#39;Passwords must match&#39;</span><span class="p">)])</span>
-    <span class="n">confirm</span>  <span class="o">=</span> <span class="n">wtf</span><span class="o">.</span><span class="n">PasswordField</span><span class="p">(</span>
-        <span class="s">&#39;Confirm Password&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">wtf</span><span class="o">.</span><span class="n">validators</span><span class="o">.</span><span class="n">Required</span><span class="p">()])</span>
-    <span class="n">email</span>    <span class="o">=</span> <span class="n">html5</span><span class="o">.</span><span class="n">EmailField</span><span class="p">(</span><span class="s">&#39;Email&#39;</span><span class="p">)</span>
-    <span class="n">notify</span>   <span class="o">=</span> <span class="n">wtf</span><span class="o">.</span><span class="n">BooleanField</span><span class="p">(</span><span class="s">&#39;Email notifications&#39;</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">wtf</span><span class="o">.</span><span class="n">Form</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-            <span class="k">return</span> <span class="bp">False</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">notify</span><span class="o">.</span><span class="n">data</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">email</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">notify</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                <span class="s">&#39;Cannot send notifications without a valid email address&#39;</span><span class="p">)</span>
-            <span class="k">return</span> <span class="bp">False</span>
-
-        <span class="k">if</span> <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">User</span><span class="p">)</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span>
-            <span class="n">username</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">username</span><span class="o">.</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">username</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#39;User already exists&#39;</span><span class="p">)</span>
-            <span class="k">return</span> <span class="bp">False</span>
-
-        <span class="k">return</span> <span class="bp">True</span>
-
-<span class="k">class</span> <span class="nc">login_form</span><span class="p">(</span><span class="n">wtf</span><span class="o">.</span><span class="n">Form</span><span class="p">):</span>
-    <span class="n">username</span> <span class="o">=</span> <span class="n">wtf</span><span class="o">.</span><span class="n">TextField</span><span class="p">(</span>
-        <span class="s">&#39;Username&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">wtf</span><span class="o">.</span><span class="n">validators</span><span class="o">.</span><span class="n">Required</span><span class="p">()])</span>
-    <span class="n">password</span> <span class="o">=</span> <span class="n">wtf</span><span class="o">.</span><span class="n">PasswordField</span><span class="p">(</span>
-        <span class="s">&#39;Password&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">wtf</span><span class="o">.</span><span class="n">validators</span><span class="o">.</span><span class="n">Required</span><span class="p">()])</span>
-
-    <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">wtf</span><span class="o">.</span><span class="n">Form</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-            <span class="k">return</span> <span class="bp">False</span>
-
-        <span class="n">user</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_user</span><span class="p">()</span>
-
-        <span class="k">if</span> <span class="n">user</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">username</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#39;Unknown username&#39;</span><span class="p">)</span>
-            <span class="k">return</span> <span class="bp">False</span>
-
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">user</span><span class="o">.</span><span class="n">check_password</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">password</span><span class="o">.</span><span class="n">data</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">password</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#39;Invalid password&#39;</span><span class="p">)</span>
-            <span class="k">return</span> <span class="bp">False</span>
-
-        <span class="k">return</span> <span class="bp">True</span>
-
-    <span class="k">def</span> <span class="nf">get_user</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">User</span><span class="p">)</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span>
-            <span class="n">username</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">username</span><span class="o">.</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+<p>Now we can embed the PNG data in HTML by</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="o">&lt;</span><span class="n">img</span> <span class="n">src</span><span class="o">=</span><span class="s">&quot;data:image/png;base64,PLOTSTR&quot;</span> <span class="n">width</span><span class="o">=</span><span class="s">&quot;500&quot;</span><span class="o">&gt;</span>
 </pre></div>
 </div>
-<p><tt class="docutils literal"><span class="pre">controller.py</span></tt>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">from</span> <span class="nn">compute</span> <span class="kn">import</span> <span class="n">compute_gamma</span> <span class="k">as</span> <span class="n">compute_function</span>
+<p>where <tt class="docutils literal"><span class="pre">PLOTSTR</span></tt> is the content of the string <tt class="docutils literal"><span class="pre">figdata_png</span></tt>.</p>
+<p>The complete <tt class="docutils literal"><span class="pre">compute.py</span></tt> function takes the form</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">compute</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return filename of plot of the damped_vibration function.&quot;&quot;&quot;</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">resolution</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">damped_vibrations</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>  <span class="c"># needed to avoid adding curves in plot</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">&#39;A=</span><span class="si">%g</span><span class="s">, b=</span><span class="si">%g</span><span class="s">, w=</span><span class="si">%g</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">w</span><span class="p">))</span>
 
-<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">redirect</span><span class="p">,</span> <span class="n">url_for</span>
-<span class="kn">from</span> <span class="nn">forms</span> <span class="kn">import</span> <span class="n">GammaForm</span>
-<span class="kn">from</span> <span class="nn">db_models</span> <span class="kn">import</span> <span class="n">db</span><span class="p">,</span> <span class="n">User</span><span class="p">,</span> <span class="n">Gamma</span>
-<span class="kn">from</span> <span class="nn">flask.ext.login</span> <span class="kn">import</span> <span class="n">LoginManager</span><span class="p">,</span> <span class="n">current_user</span><span class="p">,</span> <span class="n">login_user</span><span class="p">,</span> <span class="n">logout_user</span><span class="p">,</span> <span class="n">login_required</span>
-<span class="kn">from</span> <span class="nn">app</span> <span class="kn">import</span> <span class="n">app</span>
-
-<span class="n">login_manager</span> <span class="o">=</span> <span class="n">LoginManager</span><span class="p">()</span>
-<span class="n">login_manager</span><span class="o">.</span><span class="n">init_app</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
-
-<span class="nd">@login_manager.user_loader</span>
-<span class="k">def</span> <span class="nf">load_user</span><span class="p">(</span><span class="n">user_id</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">User</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
-
-<span class="c"># Path to the web application</span>
-<span class="nd">@app.route</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;GET&#39;</span><span class="p">,</span> <span class="s">&#39;POST&#39;</span><span class="p">])</span>
-<span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="bp">None</span>
-    <span class="n">user</span> <span class="o">=</span> <span class="n">current_user</span>
-    <span class="n">form</span> <span class="o">=</span> <span class="n">GammaForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">&quot;POST&quot;</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">validate</span><span class="p">():</span>
-
-
-            <span class="n">result</span> <span class="o">=</span> <span class="n">compute</span><span class="p">(</span><span class="n">form</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">is_authenticated</span><span class="p">():</span>
-                <span class="nb">object</span> <span class="o">=</span> <span class="n">Gamma</span><span class="p">()</span>
-                <span class="n">form</span><span class="o">.</span><span class="n">populate_obj</span><span class="p">(</span><span class="nb">object</span><span class="p">)</span>
-                <span class="nb">object</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="n">result</span>
-                <span class="nb">object</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">user</span>
-                <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="nb">object</span><span class="p">)</span>
-                <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
-
-                <span class="c"># Send email notification</span>
-                <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">notify</span> <span class="ow">and</span> <span class="n">user</span><span class="o">.</span><span class="n">email</span><span class="p">:</span>
-                    <span class="n">send_email</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
-
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">is_authenticated</span><span class="p">():</span>
-            <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">Gamma</span><span class="o">.</span><span class="n">count</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">instance</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">Gamma</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s">&#39;-id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
-                <span class="n">result</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">result</span>
-                <span class="n">form</span> <span class="o">=</span> <span class="n">populate_form_from_instance</span><span class="p">(</span><span class="n">instance</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s">&quot;view.html&quot;</span><span class="p">,</span> <span class="n">form</span><span class="o">=</span><span class="n">form</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="n">result</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">compute</span><span class="p">(</span><span class="n">form</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Generic function for compute_function with arguments</span>
-<span class="sd">    taken from a form object (wtforms.Form subclass).</span>
-<span class="sd">    Return the output from the compute_function.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c"># Extract arguments to the compute function</span>
-    <span class="kn">import</span> <span class="nn">inspect</span>
-    <span class="n">arg_names</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getargspec</span><span class="p">(</span><span class="n">compute_function</span><span class="p">)</span><span class="o">.</span><span class="n">args</span>
-
-    <span class="c"># Extract values from form</span>
-    <span class="n">form_values</span> <span class="o">=</span> <span class="p">[</span><span class="nb">getattr</span><span class="p">(</span><span class="n">form</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">arg_names</span>
-                   <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">form</span><span class="p">,</span> <span class="n">name</span><span class="p">)]</span>
-
-    <span class="n">form_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span><span class="o">.</span><span class="n">data</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">form_values</span><span class="p">]</span>
-
-    <span class="n">defaults</span>  <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getargspec</span><span class="p">(</span><span class="n">compute_function</span><span class="p">)</span><span class="o">.</span><span class="n">defaults</span>
-
-    <span class="c"># Make defaults as long as arg_names so we can traverse both with zip</span>
-    <span class="k">if</span> <span class="n">defaults</span><span class="p">:</span>
-        <span class="n">defaults</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;none&quot;</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">arg_names</span><span class="p">)</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">defaults</span><span class="p">))</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">defaults</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">defaults</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;none&quot;</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">arg_names</span><span class="p">)</span>
-
-    <span class="c"># Convert form data to the right type:</span>
-    <span class="kn">import</span> <span class="nn">numpy</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">form_data</span><span class="p">)):</span>
-        <span class="k">if</span> <span class="n">defaults</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="s">&quot;none&quot;</span><span class="p">:</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">defaults</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span><span class="nb">bool</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">float</span><span class="p">)):</span>
-                <span class="k">pass</span>  <span class="c"># special widgets for these types do the conversion</span>
-            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">defaults</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
-                <span class="n">form_data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="n">form_data</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
-            <span class="k">elif</span> <span class="n">defaults</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">form_data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;None&#39;</span><span class="p">:</span>
-                    <span class="n">form_data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="k">try</span><span class="p">:</span>
-                        <span class="c"># Try eval if it succeeds...</span>
-                        <span class="n">form_data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">form_data</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-                    <span class="k">except</span><span class="p">:</span>
-                        <span class="k">pass</span> <span class="c"># Just keep the text</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="c"># Use eval to convert to right type (hopefully)</span>
-                <span class="k">try</span><span class="p">:</span>
-                    <span class="n">form_data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">form_data</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-                <span class="k">except</span><span class="p">:</span>
-                    <span class="k">print</span> <span class="s">&#39;Could not convert text </span><span class="si">%s</span><span class="s"> to </span><span class="si">%s</span><span class="s"> for argument </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">form_data</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="nb">type</span><span class="p">(</span><span class="n">defaults</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span> <span class="n">arg_names</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-                    <span class="k">print</span> <span class="s">&#39;when calling the compute function...&#39;</span>
-
-    <span class="c"># Run computations</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">compute_function</span><span class="p">(</span><span class="o">*</span><span class="n">form_data</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">result</span>
-
-<span class="k">def</span> <span class="nf">populate_form_from_instance</span><span class="p">(</span><span class="n">instance</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Repopulate form with previous values&quot;&quot;&quot;</span>
-    <span class="n">form</span> <span class="o">=</span> <span class="n">GammaForm</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">form</span><span class="p">:</span>
-        <span class="n">field</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">field</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">form</span>
-
-<span class="k">def</span> <span class="nf">send_email</span><span class="p">(</span><span class="n">user</span><span class="p">):</span>
-    <span class="kn">from</span> <span class="nn">flask.ext.mail</span> <span class="kn">import</span> <span class="n">Mail</span><span class="p">,</span> <span class="n">Message</span>
-    <span class="n">mail</span> <span class="o">=</span> <span class="n">Mail</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
-    <span class="n">msg</span> <span class="o">=</span> <span class="n">Message</span><span class="p">(</span><span class="s">&quot;Gamma Computations Complete&quot;</span><span class="p">,</span>
-                  <span class="n">recipients</span><span class="o">=</span><span class="p">[</span><span class="n">user</span><span class="o">.</span><span class="n">email</span><span class="p">])</span>
-    <span class="n">msg</span><span class="o">.</span><span class="n">body</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;A simulation has been completed by the Flask Gamma app. Please log in at</span>
-
-<span class="s">http://localhost:5000/login</span>
-
-<span class="s">to see the results.</span>
-
-<span class="s">---</span>
-<span class="s">This email has been automatically generated by the Gamma app created by</span>
-<span class="s">Parampool. If you don&#39;t want email notifications when a result is found, please</span>
-<span class="s">register a new user and leave the &#39;notify&#39; field unchecked.&quot;&quot;&quot;</span>
-    <span class="n">mail</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-
-<span class="nd">@app.route</span><span class="p">(</span><span class="s">&#39;/reg&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;GET&#39;</span><span class="p">,</span> <span class="s">&#39;POST&#39;</span><span class="p">])</span>
-<span class="k">def</span> <span class="nf">create_login</span><span class="p">():</span>
-    <span class="kn">from</span> <span class="nn">forms</span> <span class="kn">import</span> <span class="n">register_form</span>
-    <span class="n">form</span> <span class="o">=</span> <span class="n">register_form</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">&#39;POST&#39;</span> <span class="ow">and</span> <span class="n">form</span><span class="o">.</span><span class="n">validate</span><span class="p">():</span>
-        <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">()</span>
-        <span class="n">form</span><span class="o">.</span><span class="n">populate_obj</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
-        <span class="n">user</span><span class="o">.</span><span class="n">set_password</span><span class="p">(</span><span class="n">form</span><span class="o">.</span><span class="n">password</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
-
-        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
-        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
-
-        <span class="n">login_user</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s">&#39;index&#39;</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s">&quot;reg.html&quot;</span><span class="p">,</span> <span class="n">form</span><span class="o">=</span><span class="n">form</span><span class="p">)</span>
-
-<span class="nd">@app.route</span><span class="p">(</span><span class="s">&#39;/login&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;GET&#39;</span><span class="p">,</span> <span class="s">&#39;POST&#39;</span><span class="p">])</span>
-<span class="k">def</span> <span class="nf">login</span><span class="p">():</span>
-    <span class="kn">from</span> <span class="nn">forms</span> <span class="kn">import</span> <span class="n">login_form</span>
-    <span class="n">form</span> <span class="o">=</span> <span class="n">login_form</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">&#39;POST&#39;</span> <span class="ow">and</span> <span class="n">form</span><span class="o">.</span><span class="n">validate</span><span class="p">():</span>
-        <span class="n">user</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">get_user</span><span class="p">()</span>
-        <span class="n">login_user</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s">&#39;index&#39;</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s">&quot;login.html&quot;</span><span class="p">,</span> <span class="n">form</span><span class="o">=</span><span class="n">form</span><span class="p">)</span>
-
-<span class="nd">@app.route</span><span class="p">(</span><span class="s">&#39;/logout&#39;</span><span class="p">)</span>
-<span class="nd">@login_required</span>
-<span class="k">def</span> <span class="nf">logout</span><span class="p">():</span>
-    <span class="n">logout_user</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s">&#39;index&#39;</span><span class="p">))</span>
-
-<span class="nd">@app.route</span><span class="p">(</span><span class="s">&#39;/old&#39;</span><span class="p">)</span>
-<span class="nd">@login_required</span>
-<span class="k">def</span> <span class="nf">old</span><span class="p">():</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">user</span> <span class="o">=</span> <span class="n">current_user</span>
-    <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">is_authenticated</span><span class="p">():</span>
-        <span class="n">instances</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">Gamma</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s">&#39;-id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">instance</span> <span class="ow">in</span> <span class="n">instances</span><span class="p">:</span>
-            <span class="n">form</span> <span class="o">=</span> <span class="n">populate_form_from_instance</span><span class="p">(</span><span class="n">instance</span><span class="p">)</span>
-
-            <span class="n">result</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">result</span>
-            <span class="k">if</span> <span class="n">instance</span><span class="o">.</span><span class="n">comments</span><span class="p">:</span>
-                <span class="n">result</span> <span class="o">+=</span> <span class="s">&quot;&lt;h3&gt;Comments&lt;/h3&gt;&quot;</span> <span class="o">+</span> <span class="n">instance</span><span class="o">.</span><span class="n">comments</span>
-            <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s">&#39;form&#39;</span><span class="p">:</span><span class="n">form</span><span class="p">,</span> <span class="s">&#39;result&#39;</span><span class="p">:</span><span class="n">result</span><span class="p">,</span> <span class="s">&#39;id&#39;</span><span class="p">:</span><span class="n">instance</span><span class="o">.</span><span class="n">id</span><span class="p">})</span>
-
-    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s">&quot;old.html&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
-
-<span class="nd">@app.route</span><span class="p">(</span><span class="s">&#39;/add_comment&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;GET&#39;</span><span class="p">,</span> <span class="s">&#39;POST&#39;</span><span class="p">])</span>
-<span class="nd">@login_required</span>
-<span class="k">def</span> <span class="nf">add_comment</span><span class="p">():</span>
-    <span class="n">user</span> <span class="o">=</span> <span class="n">current_user</span>
-    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">&#39;POST&#39;</span> <span class="ow">and</span> <span class="n">user</span><span class="o">.</span><span class="n">is_authenticated</span><span class="p">():</span>
-        <span class="n">instance</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">Gamma</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s">&#39;-id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
-        <span class="n">instance</span><span class="o">.</span><span class="n">comments</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;comments&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
-        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s">&#39;index&#39;</span><span class="p">))</span>
-
-<span class="nd">@app.route</span><span class="p">(</span><span class="s">&#39;/delete/&lt;id&gt;&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;GET&#39;</span><span class="p">,</span> <span class="s">&#39;POST&#39;</span><span class="p">])</span>
-<span class="nd">@login_required</span>
-<span class="k">def</span> <span class="nf">delete_post</span><span class="p">(</span><span class="nb">id</span><span class="p">):</span>
-    <span class="nb">id</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
-    <span class="n">user</span> <span class="o">=</span> <span class="n">current_user</span>
-    <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">is_authenticated</span><span class="p">():</span>
-        <span class="k">if</span> <span class="nb">id</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-            <span class="n">instances</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">Gamma</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">instance</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">Gamma</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
-                <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">instance</span><span class="p">)</span>
-            <span class="k">except</span><span class="p">:</span>
-                <span class="k">pass</span>
-
-        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s">&#39;old&#39;</span><span class="p">))</span>
-
-
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">),</span> <span class="s">&#39;sqlite.db&#39;</span><span class="p">)):</span>
-        <span class="n">db</span><span class="o">.</span><span class="n">create_all</span><span class="p">()</span>
-    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="c"># Make Matplotlib write to StringIO file object and grab</span>
+    <span class="c"># return the object&#39;s string</span>
+    <span class="kn">from</span> <span class="nn">StringIO</span> <span class="kn">import</span> <span class="n">StringIO</span>
+    <span class="n">figfile</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">figfile</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s">&#39;png&#39;</span><span class="p">)</span>
+    <span class="n">figfile</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c"># rewind to beginning of file</span>
+    <span class="kn">import</span> <span class="nn">base64</span>
+    <span class="n">figdata_png</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">figfile</span><span class="o">.</span><span class="n">buf</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">figdata_png</span>
 </pre></div>
+</div>
+<p>The relevant syntax in an HTML template is</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;data:image/png;base64,{{ results }}&quot;</span> <span class="na">width=</span><span class="s">&quot;500&quot;</span><span class="nt">&gt;</span>
+</pre></div>
+</div>
+<p>if <tt class="docutils literal"><span class="pre">results</span></tt> holds the returned object from the <tt class="docutils literal"><span class="pre">compute</span></tt> function above.</p>
+</div>
+<div class="section" id="svg-plots">
+<span id="index-5"></span><h2>SVG plots<a class="headerlink" href="#svg-plots" title="Permalink to this headline">¶</a></h2>
+<p>Inline figures in HTML, instead of using files, are most often realized
+by XML code with the figure data in SVG format.
+Plot strings in the SVG format are created very similarly to the PNG
+example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">figfile</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">figfile</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s">&#39;svg&#39;</span><span class="p">)</span>
+<span class="n">figdata_svg</span> <span class="o">=</span> <span class="n">figfile</span><span class="o">.</span><span class="n">buf</span>
+</pre></div>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">figdata_svg</span></tt> string contains XML code text can almost
+be directly embedded in
+HTML5. However, the beginning of the text contains information before
+the <tt class="docutils literal"><span class="pre">svg</span></tt> tag that we want to remove:</p>
+<div class="highlight-text"><div class="highlight"><pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; standalone=&quot;no&quot;?&gt;
+&lt;!DOCTYPE svg PUBLIC &quot;-//W3C//DTD SVG 1.1//EN&quot;
+  &quot;http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd&quot;&gt;
+&lt;!-- Created with matplotlib (http://matplotlib.sourceforge.net/) --&gt;
+&lt;svg height=&quot;441pt&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 585 441&quot; ...
+</pre></div>
+</div>
+<p>The removal is done with a little string manipulation:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">figdata_svg</span> <span class="o">=</span> <span class="s">&#39;&lt;svg&#39;</span> <span class="o">+</span> <span class="n">figfile</span><span class="o">.</span><span class="n">buf</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;&lt;svg&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Now, <tt class="docutils literal"><span class="pre">figdata_svg</span></tt> can be directly inserted in HTML code without
+any surrounding tags (because it is perfectly valid HTML code in itself).</p>
+<p>The SVG code generated by Matplotlib may contain UTF-8 characters
+so it is necessary to make a unicode string out of the text:
+<tt class="docutils literal"><span class="pre">unicode(figdata_svg,</span> <span class="pre">'utf-8')</span></tt>, otherwise the HTML template will
+lead to an encoding exception.</p>
+<p>We have made an alternative compute function <tt class="docutils literal"><span class="pre">compute_png_svg</span></tt>
+that returns both a PNG and an SVG plot:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">compute_png_svg</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
+    <span class="o">...</span>
+    <span class="n">figfile</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">figfile</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s">&#39;svg&#39;</span><span class="p">)</span>
+    <span class="n">figfile</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">figdata_svg</span> <span class="o">=</span> <span class="s">&#39;&lt;svg&#39;</span> <span class="o">+</span> <span class="n">figfile</span><span class="o">.</span><span class="n">buf</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;&lt;svg&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">figdata_svg</span> <span class="o">=</span> <span class="nb">unicode</span><span class="p">(</span><span class="n">figdata_svg</span><span class="p">,</span><span class="s">&#39;utf-8&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">figdata_png</span><span class="p">,</span> <span class="n">figdata_svg</span>
+</pre></div>
+</div>
+<p id="index-6">The relevant syntax for inserting an SVG plot in the HTML template is now</p>
+<div class="highlight-html"><div class="highlight"><pre>{{ result[1]|safe }}
+</pre></div>
+</div>
+<p>The use of <tt class="docutils literal"><span class="pre">safe</span></tt> is essential here.</p>
+<div class="admonition-important-use-safe-for-verbatim-html-code admonition">
+<p class="first admonition-title">Important: use <tt class="docutils literal"><span class="pre">safe</span></tt> for verbatim HTML code</p>
+<p class="last">Special HTML characters like <tt class="docutils literal"><span class="pre">&lt;</span></tt>, <tt class="docutils literal"><span class="pre">&gt;</span></tt>,
+<tt class="docutils literal"><span class="pre">&amp;</span></tt>, <tt class="docutils literal"><span class="pre">&quot;</span></tt>, and <tt class="docutils literal"><span class="pre">'</span></tt> are escaped in a template string like <tt class="docutils literal"><span class="pre">{{</span> <span class="pre">str</span> <span class="pre">}}</span></tt>
+(i.e., <tt class="docutils literal"><span class="pre">&amp;</span></tt> is replaced by <tt class="docutils literal"><span class="pre">&amp;amp;</span></tt> <cite>&lt;</cite> is replaced by <tt class="docutils literal"><span class="pre">&amp;lt;</span></tt>, etc.).
+We need to avoid this manipulation of the string content
+because <tt class="docutils literal"><span class="pre">result[1]</span></tt> contains
+XML code where the mentioned characters are essential part of the syntax.
+Writing <tt class="docutils literal"><span class="pre">{{str|safe}}</span></tt> ensures that the contents of the string <tt class="docutils literal"><span class="pre">str</span></tt>
+are not altered before being embedded in the HTML text.</p>
+</div>
+<p>An alternative template, <tt class="docutils literal"><span class="pre">view_svg.html</span></tt> applies the SVG plot instead
+of the PNG plot. We use the command-line argument <tt class="docutils literal"><span class="pre">svg</span></tt> for indicating
+that we want an SVG instead of a PNG plot:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># SVG or PNG plot?</span>
+<span class="n">svg</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;svg&#39;</span><span class="p">:</span>
+        <span class="n">svg</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+    <span class="k">pass</span>
+<span class="k">if</span> <span class="n">svg</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">compute</span> <span class="kn">import</span> <span class="n">compute_png_svg</span> <span class="k">as</span> <span class="n">compute</span>
+    <span class="n">template</span> <span class="o">=</span> <span class="s">&#39;view_svg.html&#39;</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">compute</span> <span class="kn">import</span> <span class="n">compute</span>
+    <span class="n">template</span> <span class="o">=</span> <span class="s">&#39;view.html&#39;</span>
+</pre></div>
+</div>
 </div>
 </div>
 
@@ -449,12 +231,21 @@ the previous apps, and the files are located in the <a class="reference external
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Avoiding plot files</a><ul>
+<li><a class="reference internal" href="#png-plots">PNG plots</a></li>
+<li><a class="reference internal" href="#svg-plots">SVG plots</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
   <p class="topless"><a href="._web4sa014.html"
-                        title="previous chapter">Avoiding plot files</a></p>
+                        title="previous chapter">Custom validation  (1)</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="._web4sa016.html"
-                        title="next chapter">Project 1: Using Bootstrap styles</a></p>
+                        title="next chapter">Autogenerating the code</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/._web4sa015.txt"
@@ -486,10 +277,10 @@ the previous apps, and the files are located in the <a class="reference external
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="._web4sa016.html" title="Project 1: Using Bootstrap styles"
+          <a href="._web4sa016.html" title="Autogenerating the code"
              >next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="._web4sa014.html" title="Avoiding plot files"
+          <a href="._web4sa014.html" title="Custom validation (1)"
              >previous</a> &nbsp; &nbsp;</li>
     <li><a href="index.html">Using Web Frameworks for Scientific Applications</a> &raquo;</li>
  

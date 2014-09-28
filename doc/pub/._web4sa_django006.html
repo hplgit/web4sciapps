@@ -38,23 +38,12 @@ h1, h2, h3, h4, h5, h6 {
  <div class="span3 Module sidebar">
   <div class="well" style="padding: 8px 0px;">
    <ul class="nav nav-list">
-          <!-- navigation toc: --> <li><a href="._web4sa_django000.html#___sec0" style="font-size: 80%;"><b>Web frameworks</b></a></li>
-     <!-- navigation toc: --> <li><a href="._web4sa_django001.html#___sec1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The MVC pattern</a></li>
-     <!-- navigation toc: --> <li><a href="._web4sa_django002.html#___sec2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;A very simple application</a></li>
-     <!-- navigation toc: --> <li><a href="._web4sa_django003.html#wf:hw:mvc" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Application of the MVC pattern</a></li>
-     <!-- navigation toc: --> <li><a href="._web4sa_django004.html#___sec4" style="font-size: 80%;"><b>Making a Django application</b></a></li>
-     <!-- navigation toc: --> <li><a href="._web4sa_django004.html#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Setting up a Django project</a></li>
-     <!-- navigation toc: --> <li><a href="._web4sa_django004.html#___sec6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Setting up a Django application</a></li>
-     <!-- navigation toc: --> <li><a href="._web4sa_django005.html#___sec7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Programming the Django application</a></li>
-     <!-- navigation toc: --> <li><a href="._web4sa_django005.html#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Equipping the input page with output results</a></li>
-     <!-- navigation toc: --> <li><a href="#wf:vib:django" style="font-size: 80%;"><b>Handling multiple input variables in Django</b></a></li>
-     <!-- navigation toc: --> <li><a href="#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Programming the Django application</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Custom validation</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Customizing widgets</a></li>
-     <!-- navigation toc: --> <li><a href="._web4sa_django007.html#___sec13" style="font-size: 80%;"><b>Exercises</b></a></li>
-     <!-- navigation toc: --> <li><a href="._web4sa_django007.html#wf:exer:add2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 1: Add two numbers</a></li>
-     <!-- navigation toc: --> <li><a href="._web4sa_django007.html#___sec15" style="font-size: 80%;"><b>Django resources</b></a></li>
-     <!-- navigation toc: --> <li><a href="._web4sa_django007.html#___sec16" style="font-size: 80%;"><b>Remaining</b></a></li>
+          <!-- navigation toc: --> <li><a href="._web4sa_django000.html#___sec0" style="font-size: 80%;">Web frameworks</a></li>
+     <!-- navigation toc: --> <li><a href="._web4sa_django004.html#___sec4" style="font-size: 80%;">Making a Django application</a></li>
+     <!-- navigation toc: --> <li><a href="#wf:vib:django" style="font-size: 80%;">Handling multiple input variables in Django</a></li>
+     <!-- navigation toc: --> <li><a href="._web4sa_django008.html#___sec23" style="font-size: 80%;">Exercises</a></li>
+     <!-- navigation toc: --> <li><a href="._web4sa_django008.html#___sec28" style="font-size: 80%;">Django resources</a></li>
+     <!-- navigation toc: --> <li><a href="._web4sa_django008.html#___sec29" style="font-size: 80%;">Remaining</a></li>
 
     </ul>
    </div>
@@ -76,24 +65,46 @@ h1, h2, h3, h4, h5, h6 {
               (' Setting up a Django project ', 2, None, '___sec5'),
               (' Setting up a Django application ', 2, None, '___sec6'),
               (' Programming the Django application ', 2, None, '___sec7'),
+              (' The user interaction ', 3, None, '___sec8'),
+              (' The model ', 3, None, '___sec9'),
+              (' The view ', 3, None, '___sec10'),
+              (' Making the input page ', 3, None, '___sec11'),
+              (' Making the results page ', 3, None, '___sec12'),
               (' Equipping the input page with output results ',
                2,
                None,
-               '___sec8'),
+               '___sec13'),
               (' Handling multiple input variables in Django ',
                1,
                'wf:vib:django',
                'wf:vib:django'),
-              (' Programming the Django application ', 2, None, '___sec10'),
-              (' Custom validation ', 2, None, '___sec11'),
-              (' Customizing widgets ', 2, None, '___sec12'),
-              (' Exercises ', 1, None, '___sec13'),
+              (' Programming the Django application ', 2, None, '___sec15'),
+              (' Adding the app to a project ', 3, None, '___sec16'),
+              (' The compute part ', 3, None, '___sec17'),
+              (' The model ', 3, None, '___sec18'),
+              (' The view ', 3, None, '___sec19'),
+              (' Custom validation ', 2, None, '___sec20'),
+              (' Customizing widgets ', 2, None, '___sec21'),
+              (' Resources ', 2, None, '___sec22'),
+              (' Exercises ', 1, None, '___sec23'),
               (' Exercise 1: Add two numbers ',
                2,
                'wf:exer:add2',
                'wf:exer:add2'),
-              (' Django resources ', 1, None, '___sec15'),
-              (' Remaining ', 1, None, '___sec16')]}
+              (' Exercise 2: Upload data file and visualize curves ',
+               2,
+               'wf:exer:upload',
+               'wf:exer:upload'),
+              (' Exercise 3: Plot a user-specified formula ',
+               2,
+               'wf:exer:formula',
+               'wf:exer:formula'),
+              (' Exercise 4: Visualize Taylor polynomial approximations ',
+               2,
+               'wf:exer:Taylor',
+               'wf:exer:Taylor'),
+              (' Django resources ', 1, None, '___sec28'),
+              (' Remaining ', 1, None, '___sec29')]}
 end of tocinfo -->
 
 
@@ -145,10 +156,11 @@ and <a href="#wf:vib1:flask:fig:result">5</a>.
 <p><img src="fig-web4sa/vib1_flask_output.png" align="bottom" width=700></p>
 </center>
 
-<h2 id="___sec10">Programming the Django application <a name="___sec10"></a></h2>
+<h2 id="___sec15">Programming the Django application <a name="___sec15"></a></h2>
+
+<h3 id="___sec16">Adding the app to a project <a name="___sec16"></a></h3>
 
 <p>
-<b>Adding the app to a project.</b>
 Any Django app needs a project, but here we reuse the project
 we set up for the scientific hello world examples. We go to
 the directory <code>apps/django_apps</code> and create the Django app <code>vib1</code>:
@@ -173,8 +185,9 @@ These steps ensure that Django can find our application as a module/package,
 that Django can find our templates associated with this application,
 and that the URL address applies the name <code>vib1</code> to reach the application.
 
+<h3 id="___sec17">The compute part <a name="___sec17"></a></h3>
+
 <p>
-<b>The compute part.</b>
 The computations in our application are put in a file <code>compute.py</code>
 
 <p>
@@ -210,8 +223,10 @@ The computations in our application are put in a file <code>compute.py</code>
 <span style="color: #008000; font-weight: bold">if</span> __name__ <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;__main__&#39;</span>:
     <span style="color: #008000; font-weight: bold">print</span> compute(<span style="color: #666666">1</span>, <span style="color: #666666">0.1</span>, <span style="color: #666666">1</span>, <span style="color: #666666">20</span>)
 </pre></div>
+
+<h3 id="___sec18">The model <a name="___sec18"></a></h3>
+
 <p>
-<b>The model.</b>
 We can now write <code>models.py</code> and the <code>Input</code> class that defines
 the form fields for the four input variables:
 
@@ -247,8 +262,9 @@ We also provide a default
 value such that all fields have a value when the user sees
 the page.
 
+<h3 id="___sec19">The view <a name="___sec19"></a></h3>
+
 <p>
-<b>The view.</b>
 The <code>views.py</code> file looks as follows:
 
 <p>
@@ -324,7 +340,7 @@ The template for rendering the page is listed next.
 The tricky part is the syntax for displaying <em>static content</em>, such as
 the plot file made in the <code>compute</code> function.
 
-<h2 id="___sec11">Custom validation <a name="___sec11"></a></h2>
+<h2 id="___sec20">Custom validation <a name="___sec20"></a></h2>
 
 <p>
 Django has a series of methods available for user-provided validation
@@ -433,7 +449,7 @@ We refer to the vast Django documentation for many other ways of
 validating forms. The reader is encouraged to run the <code>vib2</code>
 application and test out the validations we have implemented.
 
-<h2 id="___sec12">Customizing widgets <a name="___sec12"></a></h2>
+<h2 id="___sec21">Customizing widgets <a name="___sec21"></a></h2>
 
 <p>
 One will occasionally have full control of the layout of the individual

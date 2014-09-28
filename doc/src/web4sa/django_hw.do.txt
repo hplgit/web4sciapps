@@ -234,7 +234,8 @@ so we copy this file from the `mvc` directory to the `hw1` directory
 for convenience (we could alternatively add `../mvc` to `sys.path` such that
 `import compute` would work from the `hw1` directory).
 
-__The user interaction.__
+=== The user interaction ===
+
 The web application offers a text field where the user can
 write the value of `r`, see Figure ref{wf:hw1:django:fig:input}.
 After clicking on the *equals* button,
@@ -248,7 +249,9 @@ FIGURE: [fig-web4sa/hw1_django_output, width=600] The result page. label{wf:hw1:
 idx{Django!input forms}
 idx{Django!`models.py`}
 
-__The model.__ The `models.py` file contains the model, which consists
+=== The model ===
+
+The `models.py` file contains the model, which consists
 of the data we need in the application, stored in Django's data types.
 Our data consists of one number, called `r`, and `models.py` then
 look like
@@ -264,7 +267,9 @@ if we by convention apply the name `Input` for the class holding the data.
 idx{Django!`index` function}
 idx{Django!`views.py`}
 
-__The view.__ The `views.py` file contains a function `index` which defines
+=== The view ===
+
+The `views.py` file contains a function `index` which defines
 the actions we want to perform when invoking
 the URL ( here `http://127.0.0.1:8000/hw1/`).
 In addition, `views.py` has the `present_output` function from
@@ -280,7 +285,9 @@ with which the user is supposed to interact.
 
 idx{Django!HTML templates}
 
-__Making the input page.__ The input consists of a web form with
+=== Making the input page ===
+
+The input consists of a web form with
 one field where we can fill in our `r` variable. This page
 is realized by the two central statements
 
@@ -313,7 +320,8 @@ value='oPWMuuy1gLlXm9GvUZINv49eVUYnux5Q' /></div>
 </form>
 !ec
 
-__Making the results page.__
+=== Making the results page ===
+
 When then user has filled in a value in the text field on the input
 page, the `index` function is called again and `request.method` equals
 `'POST'`. A new form object is made, this time with user info (`request.POST`).

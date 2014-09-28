@@ -1,0 +1,579 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Using Web Frameworks for Scientific Applications">
+<meta name="keywords" content="web frameworks,MVC pattern,Flask installation,Flask input forms,Flask HTML templates,Flask MVC pattern,Flask troubleshooting,Django installation,Django making a project,Django making an application,Django input forms,Django HTML templates,Flask input forms,Flask error checking,Flask CSS style sheets,Flask LaTeX mathematics,Flask input validation,inline PNG image in HTML,base64 encoding of PNG images,inline SVG figure in HTML,Flask login,Flask database,Django input forms,Django input validation">
+
+<title>Using Web Frameworks for Scientific Applications</title>
+
+
+<link href="https://raw.githubusercontent.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
+<script src="https://rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
+<style type="text/css">
+h1 {color: #b58900;}  /* yellow */
+/* h1 {color: #cb4b16;}  orange */
+/* h1 {color: #d33682;}  magenta, the original choice of thomasf */
+.alert-text-small   { font-size: 80%;  }
+.alert-text-large   { font-size: 130%; }
+.alert-text-normal  { font-size: 90%;  }
+.alert {
+  padding:8px 35px 8px 14px; margin-bottom:18px;
+  text-shadow:0 1px 0 rgba(255,255,255,0.5);
+  border:1px solid #93a1a1;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  color: #555;
+  background-color: #eee8d5;
+  background-position: 10px 5px;
+  background-repeat: no-repeat;
+  background-size: 38px;
+  padding-left: 55px;
+  width: 75%;
+ }
+.alert-block {padding-top:14px; padding-bottom:14px}
+.alert-block > p, .alert-block > ul {margin-bottom:1em}
+.alert li {margin-top: 1em}
+.alert-block p+p {margin-top:5px}
+.alert-notice { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_notice.png); }
+.alert-summary  { background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_summary.png); }
+.alert-warning { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_warning.png); }
+.alert-question {background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_question.png); }
+
+div { text-align: justify; text-justify: inter-word; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Web frameworks ', 1, None, '___sec0'),
+              (' The MVC pattern ', 2, None, '___sec1'),
+              (' A very simple application ', 2, None, '___sec2'),
+              (' Application of the MVC pattern ',
+               2,
+               'wf:hw:mvc',
+               'wf:hw:mvc'),
+              (' Making a Flask application ', 1, None, '___sec4'),
+              (' Programming the Flask application ', 2, None, '___sec5'),
+              (' The user interaction ', 3, None, '___sec6'),
+              (' The Python code ', 3, None, '___sec7'),
+              (' Dissection ', 3, None, '___sec8'),
+              (' The template files ', 3, None, '___sec9'),
+              (' Testing the application ', 3, None, '___sec10'),
+              (' Equipping the input page with output results ',
+               2,
+               None,
+               '___sec11'),
+              (' Splitting the app into model, view, and controller files ',
+               2,
+               'wf:hw3:flask',
+               'wf:hw3:flask'),
+              (' Troubleshooting ', 2, None, '___sec13'),
+              (' Address already in use ', 3, None, '___sec14'),
+              (' Making a Django application ', 1, None, '___sec15'),
+              (' Setting up a Django project ', 2, None, '___sec16'),
+              (' Setting up a Django application ', 2, None, '___sec17'),
+              (' Programming the Django application ', 2, None, '___sec18'),
+              (' The user interaction ', 3, None, '___sec19'),
+              (' The model ', 3, None, '___sec20'),
+              (' The view ', 3, None, '___sec21'),
+              (' Making the input page ', 3, None, '___sec22'),
+              (' Making the results page ', 3, None, '___sec23'),
+              (' Equipping the input page with output results ',
+               2,
+               None,
+               '___sec24'),
+              (' Handling multiple input variables in Flask ',
+               1,
+               'wf:vib:flask',
+               'wf:vib:flask'),
+              (' Programming the Flask application ',
+               2,
+               'wf:vib1:flask:app',
+               'wf:vib1:flask:app'),
+              (' The compute part ', 3, None, '___sec27'),
+              (' The model ', 3, None, '___sec28'),
+              (' The view ', 3, None, '___sec29'),
+              (' The HTML template ', 3, None, '___sec30'),
+              (' Implementing error checking in the template ',
+               2,
+               None,
+               '___sec31'),
+              (' Using style sheets ', 2, None, '___sec32'),
+              (' Using LaTeX mathematics ', 2, None, '___sec33'),
+              (' Rearranging the elements in the HTML template ',
+               2,
+               None,
+               '___sec34'),
+              (' Bootstrap HTML style ', 2, None, '___sec35'),
+              (' Custom validation ',
+               2,
+               'wf:vib1:flask:validation',
+               'wf:vib1:flask:validation'),
+              (' Using Flask validators ', 3, None, '___sec37'),
+              (' Tailored validation ', 3, None, '___sec38'),
+              (' Tailored validation of intervals ', 3, None, '___sec39'),
+              (' Demo ', 3, None, '___sec40'),
+              (' Avoiding plot files ',
+               2,
+               'wf:vib2:flask:nofiles',
+               'wf:vib2:flask:nofiles'),
+              (' PNG plots ', 3, None, '___sec42'),
+              (' SVG plots ', 3, None, '___sec43'),
+              (' Autogenerating the code ',
+               2,
+               'wf:autogen:flask',
+               'wf:autogen:flask'),
+              (' Inspecting function signatures ', 3, None, '___sec45'),
+              (' Generating the model ', 3, None, '___sec46'),
+              (' Generating the view ', 3, None, '___sec47'),
+              (' Generating the template ', 3, None, '___sec48'),
+              (' Application ', 3, None, '___sec49'),
+              (' User login and storage of computed results ',
+               2,
+               'wf:flask:login',
+               'wf:flask:login'),
+              (' Required additional software ', 3, None, '___sec51'),
+              (' The compute part ', 3, None, '___sec52'),
+              (' The interfaces of the app ', 3, None, '___sec53'),
+              (' The source code ', 3, None, '___sec54'),
+              (' Resources ', 3, None, '___sec55'),
+              (' Handling multiple input variables in Django ',
+               1,
+               'wf:vib:django',
+               'wf:vib:django'),
+              (' Programming the Django application ', 2, None, '___sec57'),
+              (' Adding the app to a project ', 3, None, '___sec58'),
+              (' The compute part ', 3, None, '___sec59'),
+              (' The model ', 3, None, '___sec60'),
+              (' The view ', 3, None, '___sec61'),
+              (' Custom validation ', 2, None, '___sec62'),
+              (' Customizing widgets ', 2, None, '___sec63'),
+              (' Resources ', 2, None, '___sec64'),
+              (' Exercises ', 1, None, '___sec65'),
+              (' Exercise 1: Add two numbers ',
+               2,
+               'wf:exer:add2',
+               'wf:exer:add2'),
+              (' Exercise 2: Upload data file and visualize curves ',
+               2,
+               'wf:exer:upload',
+               'wf:exer:upload'),
+              (' Exercise 3: Plot a user-specified formula ',
+               2,
+               'wf:exer:formula',
+               'wf:exer:formula'),
+              (' Exercise 4: Visualize Taylor polynomial approximations ',
+               2,
+               'wf:exer:Taylor',
+               'wf:exer:Taylor'),
+              (' Exercise 5: Extend the `gen` app ',
+               2,
+               'wf:exer:gen:demo',
+               'wf:exer:gen:demo'),
+              (' Exercise 6: Equip the `gen` app with more data types ',
+               2,
+               'wf:exer:gen:lists',
+               'wf:exer:gen:lists'),
+              (' Exercise 7: Auto-generate code from function signature ',
+               2,
+               None,
+               '___sec72'),
+              (' Resources ', 1, None, '___sec73'),
+              (' Flask resources ', 2, None, '___sec74'),
+              (' Django resources ', 2, None, '___sec75'),
+              (' Remaining ', 1, None, '___sec76')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+    
+<a name="part0004"></a>
+<p>
+<!-- begin top navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._web4sa_solarized003.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._web4sa_solarized005.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end top navigation -->
+</p>
+
+<p>
+<!-- !split -->
+
+<h1>Making a Flask application  <a name="___sec4"></a></h1>
+
+<p>
+Not much code or configuration is needed to make a Flask application.
+Actually one short file is enough. For this file to work you need to
+install Flask and some corresponding packages. This is easiest
+performed by
+
+<p>
+<!-- begin verbatim block  sys-->
+<pre><code>Terminal&gt; sudo pip install --upgrade Flask
+Terminal&gt; sudo pip install --upgrade Flask-WTF
+</code></pre>
+<!-- end verbatim block -->
+The <code>--upgrade</code> option ensures that you upgrade to the latest version in
+case you already have these packages.
+
+<h2>Programming the Flask application  <a name="___sec5"></a></h2>
+
+<h3>The user interaction  <a name="___sec6"></a></h3>
+
+<p>
+We want our input page to feature a text field where the user can
+write the value of <code>r</code>, see Figure <a href="#wf:hw1:flask:fig:input">1</a>.
+By clicking on the <em>equals</em> button
+the corresponding <code>s</code> value is computed and written out the result page
+seen in Figure <a href="#wf:hw1:flask:fig:result">2</a>.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 1:  The input page. <a name="wf:hw1:flask:fig:input"></a> </p></center>
+<p><img src="fig-web4sa/hw1_flask_input.png" align="bottom" width=600></p>
+</center>
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 2:  The output page. <a name="wf:hw1:flask:fig:result"></a> </p></center>
+<p><img src="fig-web4sa/hw1_flask_output.png" align="bottom" width=600></p>
+</center>
+
+<h3>The Python code  <a name="___sec7"></a></h3>
+
+<p>
+Flask does not require us to use the MVC pattern so there is actually
+no need to split the original program into model, view, controller,
+and compute files as already explained (but it will be
+done later).  First we make a <code>controller.py</code> file where the view, the
+model, and the controller parts appear within the same file.
+The <code>compute</code> component is always in a separate file as
+we like to encapsulate the computations completely from user
+interfaces.
+
+<p>
+The view that the user sees is determined by
+HTML templates in a subdirectory <code>templates</code>, and consequently
+we name the template files <code>view*.html</code>.
+The model and other parts of the view concept are just parts of
+the <code>controller.py</code> file. The complete file is short and explained
+in detail below.
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>from flask import Flask, render_template, request
+from wtforms import Form, FloatField, validators
+from compute import compute
+
+app = Flask(__name__)
+
+# Model
+class InputForm(Form):
+    r = FloatField(validators=[validators.InputRequired()])
+
+# View
+@app.route('/hw1', methods=['GET', 'POST'])
+def index():
+    form = InputForm(request.form)
+    if request.method == 'POST' and form.validate():
+        r = form.r.data
+        s = compute(r)
+        return render_template(&quot;view_output.html&quot;, form=form, s=s)
+    else:
+        return render_template(&quot;view_input.html&quot;, form=form)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+</code></pre>
+<!-- end verbatim block -->
+
+<h3>Dissection  <a name="___sec8"></a></h3>
+
+<p>
+The web application is the <code>app</code> object of class <code>Flask</code>, and initialized
+as shown. The model is a special Flask class derived from <code>Form</code>
+where the input variable in the app is listed as a
+static class attribute and initialized
+by a special form field object from the <code>wtforms</code> package.
+Such form field objects correspond to HTML forms in the input page.
+For the <code>r</code> variable we apply <code>FloatField</code> since it is a floating-point
+variable. A default validator, here checking that the user supplies
+a real number, is automatically included, but we add another validator,
+<code>InputRequired</code>, to force the user to provide input before clicking on
+the <em>equals</em> button.
+
+<p>
+The view part of this Python code consists of
+a URL and a corresponding function to call when the URL is invoked.
+The function name is here chosen to be <code>index</code> (inspired by the standard
+<code>index.html</code> page that is the main page of a web app). The
+decorator <code>@app.route('/hw1', ...)</code> maps the URL
+<code>http://127.0.0.1:5000/hw1</code> to a call to <code>index</code>.
+The <code>methods</code> argument must be as shown to allow the user to communicate
+with the web page.
+
+<p>
+The <code>index</code> function first makes a form object based on the data in
+the model, here class <code>InputForm</code>. Then there are two possibilities:
+either the user has provided data in the HTML form or the user is
+to be offered an input form. In the former case, <code>request.method</code>
+equals <code>'POST'</code> and we can extract the numerical value of <code>r</code>
+from the <code>form</code> object, using <code>form.r.data</code>, call up our mathematical
+computations, and make a web page with the result.
+In the latter case, we make an input page as displayed in
+Figure <a href="#wf:hw1:flask:fig:input">1</a>.
+
+<h3>The template files  <a name="___sec9"></a></h3>
+
+<p>
+Making a web page with Flask is conveniently done by an HTML
+template. Since the output page is simplest we display the
+<code>view_output.html</code> template first:
+
+<p>
+<!-- begin verbatim block  htmlpro-->
+<pre><code>Hello, World! sin({{ form.r.data }})={{s}}.
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Keyword arguments sent to <code>render_template</code> are available in the
+HTML template. Here we have <code>form</code> and <code>s</code>.
+With the <code>form</code> object we extract the value of
+<code>r</code> in the HTML code by <code>{{ form.r.data }}</code>. Similarly, the value of <code>s</code>
+is simply <code>{{ s }}</code>.
+
+<p>
+The HTML template for the input page is slightly more complicated
+as we need to use an HTML form:
+
+<p>
+<!-- begin verbatim block  htmlpro-->
+<pre><code>&lt;form method=post action=&quot;&quot;&gt;
+  Hello, World! The sine of {{ form.r }}
+  &lt;input type=submit value=equals&gt;
+&lt;/form&gt;
+</code></pre>
+<!-- end verbatim block -->
+
+<h3>Testing the application  <a name="___sec10"></a></h3>
+
+<p>
+We collect the files associated with a Flask application (often called
+just <em>app</em>) in a directory,
+here called <a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/hw1" target="_self"><tt>hw1</tt></a>.
+All you have to do in order to run this web application is to find
+this directory and run
+
+<p>
+<!-- begin verbatim block  sys-->
+<pre><code>Terminal&gt; python controller.py
+ * Running on http://127.0.0.1:5000/
+ * Restarting with reloader
+</code></pre>
+<!-- end verbatim block -->
+Open a new window or tab in your browser and type in the URL
+<code>http://127.0.0.1:5000/hw1</code>.
+
+<h2>Equipping the input page with output results  <a name="___sec11"></a></h2>
+
+<p>
+Our application made two distinct pages for grabbing input from the
+user and presenting the result. It is often more natural to add
+the result to the input page. This is particularly the case in the present
+web application, which is a kind of calculator. Figure <a href="#wf:hw2:flask:fig:result">3</a> shows what the user sees after clicking the <em>equals</em> button.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 3:  The modified result page. <a name="wf:hw2:flask:fig:result"></a> </p></center>
+<p><img src="fig-web4sa/hw2_flask_output.png" align="bottom" width=600></p>
+</center>
+
+<p>
+To let the user stay within the same page, we create a new directory
+<a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/hw2" target="_self"><tt>hw2</tt></a>
+for this modified Flask app and copy the files from the previous
+<code>hw1</code> directory.  The idea now is to make use of just one
+template, in <code>templates/view.html</code>:
+
+<p>
+<!-- begin verbatim block  htmlpro-->
+<pre><code>&lt;form method=post action=&quot;&quot;&gt;
+  Hello, World! The sine of
+  {{( form.r )}}
+  &lt;input type=submit value=equals&gt;
+{% if s != None %}
+{{s}}
+{% endif %}
+&lt;/form&gt;
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+The form is identical to what we used in <code>view_input.html</code> in
+the <code>hw1</code> directory, and the only
+new thing is the output of <code>s</code> below the form.
+
+<p>
+The template language supports some programming with Python objects
+inside <code>{%</code> and <code>%}</code> tags.
+Specifically in this file, we can test on the value of <code>s</code>:
+if it is <code>None</code>, we know that the computations are not performed and
+<code>s</code> should not appear on the page, otherwise <code>s</code> holds the sine
+value and we can write it out. Note that, contrary to plain Python,
+the template language does not rely on indentation of blocks and
+therefore needs an explicit end statement <code>{% endif %}</code> to finish
+the if-test.
+The generated HTML code from this template file reads
+
+<p>
+<!-- begin verbatim block  htmlpro-->
+<pre><code>&lt;form method=post action=&quot;&quot;&gt;
+  Hello, World! The sine of
+  &lt;input id=&quot;r&quot; name=&quot;r&quot; type=&quot;text&quot; value=&quot;1.2&quot;&gt;
+  &lt;input type=submit value=equals&gt;
+
+0.932039085967
+
+&lt;/form&gt;
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+The <code>index</code> function of our modified application
+needs adjustments since we use the same
+template for the input and the output page:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code># View
+@app.route('/hw2', methods=['GET', 'POST'])
+def index():
+    form = InputForm(request.form)
+    if request.method == 'POST' and form.validate():
+        r = form.r.data
+        s = compute(r)
+    else:
+        s = None
+
+    return render_template(&quot;view.html&quot;, form=form, s=s)
+</code></pre>
+<!-- end verbatim block -->
+It is seen that if the user has given data, <code>s</code> is a <code>float</code>, otherwise
+<code>s</code> is <code>None</code>. You are encouraged to test the app by running
+
+<p>
+<!-- begin verbatim block  sys-->
+<pre><code>Terminal&gt; python controller.py
+</code></pre>
+<!-- end verbatim block -->
+and loading <code>http://127.0.0.1:5000/hw2</code> into your browser.
+A nice little exercise is to control the formatting of the result <code>s</code>.
+To this end, you can simply transform <code>s</code> to a string: <code>s = '%.5f' % s</code> before
+sending it to <code>render_template</code>.
+
+<h2>Splitting the app into model, view, and controller files <a name="wf:hw3:flask"></a></h2>
+
+<p>
+In our previous two Flask apps we have had the view displayed for the
+user in a separate template file, and the computations as always in
+<code>compute.py</code>, but everything else was placed in one file <code>controller.py</code>.
+For illustration of the MVC concept we
+may split the <code>controller.py</code> into two files: <code>model.py</code> and
+<code>controller.py</code>. The view is in <code>templates/view.html</code>.
+These new files are located in a
+directory
+<a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/hw3" target="_self"><tt>hw3_flask</tt></a>
+The contents
+in the files reflect the splitting introduced in the original
+scientific hello world program in the section <a href="._web4sa_solarized003.html#wf:hw:mvc">Application of the MVC pattern</a>.
+The <code>model.py</code> file now consists of the input form class:
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>from wtforms import Form, FloatField, validators
+
+class InputForm(Form):
+    r = FloatField(validators=[validators.InputRequired()])
+</code></pre>
+<!-- end verbatim block -->
+The file <code>templates/view.html</code> is as before, while <code>controller.py</code> contains
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>from flask import Flask, render_template, request
+from compute import compute
+
+app = Flask(__name__)
+
+@app.route('/hw3', methods=['GET', 'POST'])
+def index():
+    form = InputForm(request.form)
+    if request.method == 'POST' and form.validate():
+        r = form.r.data
+        s = compute(r)
+    else:
+        s = None
+
+    return render_template(&quot;view.html&quot;, form=form, s=s)
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+The statements are indentical to those in the <code>hw2</code> app, only
+the organization of the statement in files differ.
+
+<p>
+<p>
+<!-- begin bottom navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._web4sa_solarized003.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._web4sa_solarized005.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end bottom navigation -->
+</p>
+
+<!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

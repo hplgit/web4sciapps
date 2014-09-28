@@ -28,7 +28,8 @@ FIGURE: [fig-web4sa/vib1_flask_output, width=700] The result page. label{wf:vib1
 app_path = src_path + 'django_apps/vib1'
 %>
 
-__Adding the app to a project.__
+=== Adding the app to a project ===
+
 Any Django app needs a project, but here we reuse the project
 we set up for the scientific hello world examples. We go to
 the directory `apps/django_apps` and create the Django app `vib1`:
@@ -48,7 +49,8 @@ These steps ensure that Django can find our application as a module/package,
 that Django can find our templates associated with this application,
 and that the URL address applies the name `vib1` to reach the application.
 
-__The compute part.__
+=== The compute part ===
+
 The computations in our application are put in a file `compute.py`
 # #if TOPIC == 'Django'
 
@@ -59,7 +61,8 @@ and explained in detail in Section ref{wf:vib1:flask:app}.
 
 idx{Django!input forms}
 
-__The model.__
+=== The model ===
+
 We can now write `models.py` and the `Input` class that defines
 the form fields for the four input variables:
 
@@ -76,7 +79,8 @@ the page.
 
 idx{Django!`index` function}
 
-__The view.__
+=== The view ===
+
 The `views.py` file looks as follows:
 
 @@@CODE ${app_path}/views.py
@@ -222,11 +226,15 @@ then one can view the form class in the `models.py` file for how
 HTML5 widgets can be used in the definition of the `widgets`
 dictionary.
 
-# #ifdef COMING
-!split
-======= Djano and Bootstrap =======
 
+!split
+===== Resources =====
+
+Below are some resources for accounts and login with Django as well as
+utilization of Bootstrap styles in the views.
+
+ * "Django: make user": "https://docs.djangoproject.com/en/dev/topics/auth/default/#user-objects"
+ * "Django: read and write database": "https://docs.djangoproject.com/en/dev/topics/db/queries/"
  * URL: "http://stackoverflow.com/questions/11821116/django-and-bootstrap-what-app-is-recommended"
  * URL: "https://github.com/dyve/django-bootstrap3"
  * URL: "https://www.youtube.com/watch?v=3Bwl5CYa5Uc"
-# #endif

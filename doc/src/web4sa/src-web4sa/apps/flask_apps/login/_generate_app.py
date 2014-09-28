@@ -7,6 +7,6 @@ point for the files in this directory, but the files have been
 edited (and simplified) afterwards.
 """
 from parampool.generator.flask import generate
-from compute import compute_gamma
+from compute import compute
 
-generate(compute_gamma, default_field='FloatField', enable_login=True)
+generate(compute, default_field='FloatField', enable_login=True)

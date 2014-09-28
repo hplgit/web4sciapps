@@ -1,0 +1,471 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Using Web Frameworks for Scientific Applications">
+<meta name="keywords" content="web frameworks,MVC pattern,Flask installation,Flask input forms,Flask HTML templates,Flask MVC pattern,Flask troubleshooting,Django installation,Django making a project,Django making an application,Django input forms,Django HTML templates,Flask input forms,Flask error checking,Flask CSS style sheets,Flask LaTeX mathematics,Flask input validation,inline PNG image in HTML,base64 encoding of PNG images,inline SVG figure in HTML,Flask login,Flask database,Django input forms,Django input validation">
+
+<title>Using Web Frameworks for Scientific Applications</title>
+
+
+<link href="https://raw.githubusercontent.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
+<script src="https://rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
+<style type="text/css">
+h1 {color: #b58900;}  /* yellow */
+/* h1 {color: #cb4b16;}  orange */
+/* h1 {color: #d33682;}  magenta, the original choice of thomasf */
+.alert-text-small   { font-size: 80%;  }
+.alert-text-large   { font-size: 130%; }
+.alert-text-normal  { font-size: 90%;  }
+.alert {
+  padding:8px 35px 8px 14px; margin-bottom:18px;
+  text-shadow:0 1px 0 rgba(255,255,255,0.5);
+  border:1px solid #93a1a1;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  color: #555;
+  background-color: #eee8d5;
+  background-position: 10px 5px;
+  background-repeat: no-repeat;
+  background-size: 38px;
+  padding-left: 55px;
+  width: 75%;
+ }
+.alert-block {padding-top:14px; padding-bottom:14px}
+.alert-block > p, .alert-block > ul {margin-bottom:1em}
+.alert li {margin-top: 1em}
+.alert-block p+p {margin-top:5px}
+.alert-notice { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_notice.png); }
+.alert-summary  { background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_summary.png); }
+.alert-warning { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_warning.png); }
+.alert-question {background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_question.png); }
+
+div { text-align: justify; text-justify: inter-word; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Web frameworks ', 1, None, '___sec0'),
+              (' The MVC pattern ', 2, None, '___sec1'),
+              (' A very simple application ', 2, None, '___sec2'),
+              (' Application of the MVC pattern ',
+               2,
+               'wf:hw:mvc',
+               'wf:hw:mvc'),
+              (' Making a Flask application ', 1, None, '___sec4'),
+              (' Programming the Flask application ', 2, None, '___sec5'),
+              (' The user interaction ', 3, None, '___sec6'),
+              (' The Python code ', 3, None, '___sec7'),
+              (' Dissection ', 3, None, '___sec8'),
+              (' The template files ', 3, None, '___sec9'),
+              (' Testing the application ', 3, None, '___sec10'),
+              (' Equipping the input page with output results ',
+               2,
+               None,
+               '___sec11'),
+              (' Splitting the app into model, view, and controller files ',
+               2,
+               'wf:hw3:flask',
+               'wf:hw3:flask'),
+              (' Troubleshooting ', 2, None, '___sec13'),
+              (' Address already in use ', 3, None, '___sec14'),
+              (' Making a Django application ', 1, None, '___sec15'),
+              (' Setting up a Django project ', 2, None, '___sec16'),
+              (' Setting up a Django application ', 2, None, '___sec17'),
+              (' Programming the Django application ', 2, None, '___sec18'),
+              (' The user interaction ', 3, None, '___sec19'),
+              (' The model ', 3, None, '___sec20'),
+              (' The view ', 3, None, '___sec21'),
+              (' Making the input page ', 3, None, '___sec22'),
+              (' Making the results page ', 3, None, '___sec23'),
+              (' Equipping the input page with output results ',
+               2,
+               None,
+               '___sec24'),
+              (' Handling multiple input variables in Flask ',
+               1,
+               'wf:vib:flask',
+               'wf:vib:flask'),
+              (' Programming the Flask application ',
+               2,
+               'wf:vib1:flask:app',
+               'wf:vib1:flask:app'),
+              (' The compute part ', 3, None, '___sec27'),
+              (' The model ', 3, None, '___sec28'),
+              (' The view ', 3, None, '___sec29'),
+              (' The HTML template ', 3, None, '___sec30'),
+              (' Implementing error checking in the template ',
+               2,
+               None,
+               '___sec31'),
+              (' Using style sheets ', 2, None, '___sec32'),
+              (' Using LaTeX mathematics ', 2, None, '___sec33'),
+              (' Rearranging the elements in the HTML template ',
+               2,
+               None,
+               '___sec34'),
+              (' Bootstrap HTML style ', 2, None, '___sec35'),
+              (' Custom validation ',
+               2,
+               'wf:vib1:flask:validation',
+               'wf:vib1:flask:validation'),
+              (' Using Flask validators ', 3, None, '___sec37'),
+              (' Tailored validation ', 3, None, '___sec38'),
+              (' Tailored validation of intervals ', 3, None, '___sec39'),
+              (' Demo ', 3, None, '___sec40'),
+              (' Avoiding plot files ',
+               2,
+               'wf:vib2:flask:nofiles',
+               'wf:vib2:flask:nofiles'),
+              (' PNG plots ', 3, None, '___sec42'),
+              (' SVG plots ', 3, None, '___sec43'),
+              (' Autogenerating the code ',
+               2,
+               'wf:autogen:flask',
+               'wf:autogen:flask'),
+              (' Inspecting function signatures ', 3, None, '___sec45'),
+              (' Generating the model ', 3, None, '___sec46'),
+              (' Generating the view ', 3, None, '___sec47'),
+              (' Generating the template ', 3, None, '___sec48'),
+              (' Application ', 3, None, '___sec49'),
+              (' User login and storage of computed results ',
+               2,
+               'wf:flask:login',
+               'wf:flask:login'),
+              (' Required additional software ', 3, None, '___sec51'),
+              (' The compute part ', 3, None, '___sec52'),
+              (' The interfaces of the app ', 3, None, '___sec53'),
+              (' The source code ', 3, None, '___sec54'),
+              (' Resources ', 3, None, '___sec55'),
+              (' Handling multiple input variables in Django ',
+               1,
+               'wf:vib:django',
+               'wf:vib:django'),
+              (' Programming the Django application ', 2, None, '___sec57'),
+              (' Adding the app to a project ', 3, None, '___sec58'),
+              (' The compute part ', 3, None, '___sec59'),
+              (' The model ', 3, None, '___sec60'),
+              (' The view ', 3, None, '___sec61'),
+              (' Custom validation ', 2, None, '___sec62'),
+              (' Customizing widgets ', 2, None, '___sec63'),
+              (' Resources ', 2, None, '___sec64'),
+              (' Exercises ', 1, None, '___sec65'),
+              (' Exercise 1: Add two numbers ',
+               2,
+               'wf:exer:add2',
+               'wf:exer:add2'),
+              (' Exercise 2: Upload data file and visualize curves ',
+               2,
+               'wf:exer:upload',
+               'wf:exer:upload'),
+              (' Exercise 3: Plot a user-specified formula ',
+               2,
+               'wf:exer:formula',
+               'wf:exer:formula'),
+              (' Exercise 4: Visualize Taylor polynomial approximations ',
+               2,
+               'wf:exer:Taylor',
+               'wf:exer:Taylor'),
+              (' Exercise 5: Extend the `gen` app ',
+               2,
+               'wf:exer:gen:demo',
+               'wf:exer:gen:demo'),
+              (' Exercise 6: Equip the `gen` app with more data types ',
+               2,
+               'wf:exer:gen:lists',
+               'wf:exer:gen:lists'),
+              (' Exercise 7: Auto-generate code from function signature ',
+               2,
+               None,
+               '___sec72'),
+              (' Resources ', 1, None, '___sec73'),
+              (' Flask resources ', 2, None, '___sec74'),
+              (' Django resources ', 2, None, '___sec75'),
+              (' Remaining ', 1, None, '___sec76')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+    
+<a name="part0013"></a>
+<p>
+<!-- begin top navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._web4sa_solarized012.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._web4sa_solarized014.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end top navigation -->
+</p>
+
+<p>
+<!-- !split -->
+
+<h2>Bootstrap HTML style  <a name="___sec35"></a></h2>
+
+<p>
+The <a href="http://getbootstrap.com/" target="_self">Bootstrap</a> framework for creating web pages
+has been very popular in recent years, both because of the design and
+the automatic support for responsive pages on all sorts of devices.
+Bootstrap can be used in combination with Flask. The template file
+<code>view_bootstrap.html</code> is identical to the former <code>view_table.html</code>,
+except that we load the Bootstrap CSS file and include in comments
+how to add the typical navigation bar found in many Bootstrap-based
+web pages. The template looks like
+
+<p>
+<!-- begin verbatim block  htmlpro-->
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+
+
+&lt;link href=
+&quot;http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css&quot;
+rel=&quot;stylesheet&quot;&gt;
+
+&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: &quot;AMS&quot;  },
+     extensions: [&quot;AMSmath.js&quot;, &quot;AMSsymbols.js&quot;, &quot;autobold.js&quot;, &quot;color.js&quot;]
+  }
+});
+&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=
+&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;&gt;
+&lt;/script&gt;
+&lt;!--
+&lt;nav class=&quot;navbar navbar-default&quot; role=&quot;navigation&quot;&gt;
+&lt;div class=&quot;collapse navbar-collapse&quot; id=&quot;bs-example-navbar-collapse-1&quot;&gt;
+    &lt;ul class=&quot;nav navbar-nav&quot;&gt;
+       {% for text, url in some_sequence %}
+       &lt;li&gt;&lt;a href=&quot;/{{url}}&quot;&gt;{{ text }}&lt;/a&gt;&lt;/li&gt;
+       {% endfor %}
+       &lt;/ul&gt;
+&lt;/div&gt;
+&lt;/nav&gt;
+--&gt;
+
+&lt;h2&gt;Damped sine wave&lt;/h2&gt;
+
+This web page visualizes the function \(
+u(t) = Ae^{-bt}\sin (w t), \hbox{ for } t\in [0,T]
+\).
+
+&lt;p&gt;
+&lt;form class=&quot;navbar-form navbar-top&quot; method=&quot;post&quot; action=&quot;&quot;&gt;
+  &lt;div class=&quot;form-group&quot;&gt;
+  {% for field in form %}
+    &lt;div class=&quot;row&quot;&gt;
+     &lt;div class=&quot;input-group&quot;&gt;
+      &lt;label class=&quot;col-sm-1 control-label&quot;&gt;
+      &lt;span class=&quot;input-group-addon&quot;&gt; \( {{ field.name }} \) &lt;/span&gt;
+      &lt;/label&gt;
+      &lt;div class=&quot;col-sm-3&quot;&gt;
+      {{ field(class_=&quot;form-control&quot;) }}
+      &lt;/div&gt;
+      &lt;div class=&quot;col-sm-2&quot;&gt;
+        {{ field.label }}
+      &lt;/div&gt;
+      {% if field.errors %}
+        {% for error in field.errors %}
+          &lt;div class=&quot;col-sm-3&quot;&gt;
+            &lt;div style=&quot;color: red;&quot;&gt;{{ error }}&lt;/div&gt;
+          &lt;/div&gt;
+        {% endfor %}
+      {% endif %}
+     &lt;/div&gt;
+    &lt;/div&gt;
+  {% endfor %}
+&lt;br/&gt;
+&lt;input type=&quot;submit&quot; value=&quot;Compute&quot; class=&quot;btn btn-default&quot;&gt;
+&lt;/form&gt;
+
+&lt;p&gt;
+{% if result != None %}
+&lt;img src=&quot;{{ result }}&quot; width=&quot;400&quot;&gt;
+{% endif %}
+&lt;/html&gt;
+</code></pre>
+<!-- end verbatim block -->
+The input fields and fonts now get the typical Bootstrap look and feel:
+
+<p>
+<center><p><img src="fig-web4sa/vib1_flask_bootstrap.png" align="bottom" width=600></p></center>
+
+<p>
+The only special feature in this template is the need to pass a CSS
+class <code>form-control</code> to the field object in the part that defines
+the input field. We also use the standard <code>input-group-addon</code> style
+in the name part of the Bootstrap form. A heading <em>Damped sine wave</em> was
+added to demonstrate the Bootstrap fonts.
+
+<p>
+It is easy to switch to other Bootstrap styles, e.g., those in the
+"Bootswatch family": "http:bootswatch.com":
+
+<p>
+<!-- begin verbatim block  htmlcod-->
+<pre><code>&lt;link href=
+&quot;http://netdna.bootstrapcdn.com/bootswatch/3.1.1/X/bootstrap.min.css&quot;
+rel=&quot;stylesheet&quot;&gt;
+</code></pre>
+<!-- end verbatim block -->
+where <code>X</code> can be <code>journal</code>, <code>cosmo</code>, <code>flatly</code>, and other legal
+Bootswatch styles. The journal style looks like this:
+
+<p>
+<center><p><img src="fig-web4sa/vib1_flask_bootswatch_journal.png" align="bottom" width=600></p></center>
+
+<p>
+While <code>view_bootstrap.html</code> makes use of plain Bootstrap HTML code, there is
+also a higher-level framework, called <a href="http://pythonhosted.org/Flask-Bootstrap/" target="_self">Flask-Bootstrap</a> that combines Flask and Bootstrap. Installation of
+this extension is done by <code>sudo pip install flask-bootstrap</code>.
+
+<p>
+After <code>app = Flask(__name__)</code> we need to do
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>from flask_bootstrap import Bootstrap
+Bootstrap(app)
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+The template employs new keywords <code>extends</code> and <code>block</code>:
+
+<p>
+<!-- begin verbatim block  htmlpro-->
+<pre><code>{% extends &quot;bootstrap/base.html&quot; %}
+
+{% block styles %}
+{{super()}}
+&lt;style&gt;
+    .appsize { width: 800px }
+&lt;/style&gt;
+
+&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: &quot;AMS&quot;  },
+     extensions: [&quot;AMSmath.js&quot;, &quot;AMSsymbols.js&quot;, &quot;autobold.js&quot;, &quot;color.js&quot;]
+  }
+});
+&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=
+&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;&gt;
+&lt;/script&gt;
+{% endblock %}
+
+&lt;!--
+{% block navbar %}
+&lt;nav class=&quot;navbar navbar-default&quot; role=&quot;navigation&quot;&gt;
+&lt;div class=&quot;collapse navbar-collapse&quot; id=&quot;bs-example-navbar-collapse-1&quot;&gt;
+    &lt;ul class=&quot;nav navbar-nav&quot;&gt;
+       {% for f in some_sequence %}
+       &lt;li&gt;&lt;a href=&quot;/{{f}}&quot;&gt;{{f}}&lt;/a&gt;&lt;/li&gt;
+       {% endfor %}
+       &lt;/ul&gt;
+&lt;/div&gt;
+&lt;/nav&gt;
+{% endblock %}
+--&gt;
+
+{% block content %}
+
+&lt;h2&gt;Damped sine wave&lt;/h2&gt;
+
+This web page visualizes the function \(
+u(t) = Ae^{-bt}\sin (w t), \hbox{ for } t\in [0,T]
+\).
+
+&lt;p&gt;
+&lt;form class=&quot;navbar-form navbar-top&quot; method=&quot;post&quot; action=&quot;&quot;&gt;
+  &lt;div class=&quot;form-group&quot;&gt;
+  {% for field in form %}
+    &lt;div class=&quot;row&quot;&gt;
+     &lt;div class=&quot;input-group appsize&quot;&gt;
+      &lt;label class=&quot;col-sm-1 control-label&quot;&gt;
+      &lt;span class=&quot;input-group-addon&quot;&gt; \( {{ field.name }} \) &lt;/span&gt;
+      &lt;/label&gt;
+      &lt;div class=&quot;col-sm-4&quot;&gt;
+      {{ field(class_=&quot;form-control&quot;) }}
+      &lt;/div&gt;
+      &lt;div class=&quot;col-sm-4&quot;&gt;
+        {{ field.label }}
+      &lt;/div&gt;
+      {% if field.errors %}
+        {% for error in field.errors %}
+          &lt;div class=&quot;col-sm-3&quot;&gt;
+            &lt;div style=&quot;color: red;&quot;&gt;{{ error }}&lt;/div&gt;
+          &lt;/div&gt;
+        {% endfor %}
+      {% endif %}
+     &lt;/div&gt;
+    &lt;/div&gt;
+  {% endfor %}
+&lt;br/&gt;
+&lt;input type=&quot;submit&quot; value=&quot;Compute&quot; class=&quot;btn btn-default&quot;&gt;
+&lt;/form&gt;
+
+&lt;p&gt;
+{% if result != None %}
+&lt;img src=&quot;{{ result }}&quot; width=&quot;500&quot;&gt;
+{% endif %}
+&lt;/html&gt;
+{% endblock %}
+</code></pre>
+<!-- end verbatim block -->
+It is important to have the MathJax script declaration and all styles within
+<code>{% block styles %}</code>.
+
+<p>
+It seems easier to apply plain Bootstrap HTML code than the
+functionality in the Flask-Bootstrap layer.
+
+<p>
+<p>
+<!-- begin bottom navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._web4sa_solarized012.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._web4sa_solarized014.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end bottom navigation -->
+</p>
+
+<!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

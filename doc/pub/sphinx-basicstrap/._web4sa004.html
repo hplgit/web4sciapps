@@ -124,7 +124,14 @@
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Making a Flask application</a><ul>
-<li><a class="reference internal" href="#programming-the-flask-application-1">Programming the Flask application  (1)</a></li>
+<li><a class="reference internal" href="#programming-the-flask-application-1">Programming the Flask application  (1)</a><ul>
+<li><a class="reference internal" href="#the-user-interaction-1">The user interaction  (1)</a></li>
+<li><a class="reference internal" href="#the-python-code">The Python code</a></li>
+<li><a class="reference internal" href="#dissection">Dissection</a></li>
+<li><a class="reference internal" href="#the-template-files">The template files</a></li>
+<li><a class="reference internal" href="#testing-the-application">Testing the application</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#equipping-the-input-page-with-output-results-1">Equipping the input page with output results  (1)</a></li>
 <li><a class="reference internal" href="#splitting-the-app-into-model-view-and-controller-files">Splitting the app into model, view, and controller files</a></li>
 </ul>
@@ -169,7 +176,14 @@
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Making a Flask application</a><ul>
-<li><a class="reference internal" href="#programming-the-flask-application-1">Programming the Flask application  (1)</a></li>
+<li><a class="reference internal" href="#programming-the-flask-application-1">Programming the Flask application  (1)</a><ul>
+<li><a class="reference internal" href="#the-user-interaction-1">The user interaction  (1)</a></li>
+<li><a class="reference internal" href="#the-python-code">The Python code</a></li>
+<li><a class="reference internal" href="#dissection">Dissection</a></li>
+<li><a class="reference internal" href="#the-template-files">The template files</a></li>
+<li><a class="reference internal" href="#testing-the-application">Testing the application</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#equipping-the-input-page-with-output-results-1">Equipping the input page with output results  (1)</a></li>
 <li><a class="reference internal" href="#splitting-the-app-into-model-view-and-controller-files">Splitting the app into model, view, and controller files</a></li>
 </ul>
@@ -217,15 +231,17 @@
 Actually one short file is enough. For this file to work you need to
 install Flask and some corresponding packages. This is easiest
 performed by</p>
-<div class="highlight-text"><div class="highlight"><pre>Terminal&gt; sudo pip install Flask
-Terminal&gt; sudo pip install WTForms
+<div class="highlight-text"><div class="highlight"><pre>Terminal&gt; sudo pip install --upgrade Flask
+Terminal&gt; sudo pip install --upgrade Flask-WTF
 </pre></div>
 </div>
-<p>You must add <tt class="docutils literal"><span class="pre">--upgrade</span></tt> to upgrade a previous installation (<tt class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">--upgrade</span> <span class="pre">Flask</span></tt>).</p>
+<p>The <tt class="docutils literal"><span class="pre">--upgrade</span></tt> option ensures that you upgrade to the latest version in
+case you already have these packages.</p>
 <div class="section" id="programming-the-flask-application-1">
 <h2>Programming the Flask application  (1)<a class="headerlink" href="#programming-the-flask-application-1" title="Permalink to this headline">¶</a></h2>
-<p><strong>The user interaction.</strong>
-We want our input page to feature a text field where the user can
+<div class="section" id="the-user-interaction-1">
+<h3>The user interaction  (1)<a class="headerlink" href="#the-user-interaction-1" title="Permalink to this headline">¶</a></h3>
+<p>We want our input page to feature a text field where the user can
 write the value of <tt class="docutils literal"><span class="pre">r</span></tt>, see Figure <a class="reference internal" href="#wf-hw1-flask-fig-input"><em>The input page</em></a>.
 By clicking on the <em>equals</em> button
 the corresponding <tt class="docutils literal"><span class="pre">s</span></tt> value is computed and written out the result page
@@ -238,8 +254,10 @@ seen in Figure <a class="reference internal" href="#wf-hw1-flask-fig-result"><em
 <a class="reference internal image-reference" href="_images/hw1_flask_output.png"><img alt="_images/hw1_flask_output.png" src="_images/hw1_flask_output.png" style="width: 600px;" /></a>
 <p class="caption"><em>The output page</em></p>
 </div>
-<p><strong>The Python code.</strong>
-Flask does not require us to use the MVC pattern so there is actually
+</div>
+<div class="section" id="the-python-code">
+<h3>The Python code<a class="headerlink" href="#the-python-code" title="Permalink to this headline">¶</a></h3>
+<p>Flask does not require us to use the MVC pattern so there is actually
 no need to split the original program into model, view, controller,
 and compute files as already explained (but it will be
 done later).  First we make a <tt class="docutils literal"><span class="pre">controller.py</span></tt> file where the view, the
@@ -278,8 +296,10 @@ in detail below.</p>
     <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><strong>Dissection.</strong>
-The web application is the <tt class="docutils literal"><span class="pre">app</span></tt> object of class <tt class="docutils literal"><span class="pre">Flask</span></tt>, and initialized
+</div>
+<div class="section" id="dissection">
+<h3>Dissection<a class="headerlink" href="#dissection" title="Permalink to this headline">¶</a></h3>
+<p>The web application is the <tt class="docutils literal"><span class="pre">app</span></tt> object of class <tt class="docutils literal"><span class="pre">Flask</span></tt>, and initialized
 as shown. The model is a special Flask class derived from <tt class="docutils literal"><span class="pre">Form</span></tt>
 where the input variable in the app is listed as a
 static class attribute and initialized
@@ -307,8 +327,10 @@ from the <tt class="docutils literal"><span class="pre">form</span></tt> object,
 computations, and make a web page with the result.
 In the latter case, we make an input page as displayed in
 Figure <a class="reference internal" href="#wf-hw1-flask-fig-input"><em>The input page</em></a>.</p>
-<p id="index-3"><strong>The template files.</strong>
-Making a web page with Flask is conveniently done by an HTML
+</div>
+<div class="section" id="the-template-files">
+<span id="index-3"></span><h3>The template files<a class="headerlink" href="#the-template-files" title="Permalink to this headline">¶</a></h3>
+<p>Making a web page with Flask is conveniently done by an HTML
 template. Since the output page is simplest we display the
 <tt class="docutils literal"><span class="pre">view_output.html</span></tt> template first:</p>
 <div class="highlight-html"><div class="highlight"><pre>Hello, World! sin({{ form.r.data }})={{s}}.
@@ -327,8 +349,10 @@ as we need to use an HTML form:</p>
 <span class="nt">&lt;/form&gt;</span>
 </pre></div>
 </div>
-<p><strong>Testing the application.</strong>
-We collect the files associated with a Flask application (often called
+</div>
+<div class="section" id="testing-the-application">
+<h3>Testing the application<a class="headerlink" href="#testing-the-application" title="Permalink to this headline">¶</a></h3>
+<p>We collect the files associated with a Flask application (often called
 just <em>app</em>) in a directory,
 here called <a class="reference external" href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/hw1">hw1</a>.
 All you have to do in order to run this web application is to find
@@ -340,6 +364,7 @@ this directory and run</p>
 </div>
 <p>Open a new window or tab in your browser and type in the URL
 <tt class="docutils literal"><span class="pre">http://127.0.0.1:5000/hw1</span></tt>.</p>
+</div>
 </div>
 <div class="section" id="equipping-the-input-page-with-output-results-1">
 <h2>Equipping the input page with output results  (1)<a class="headerlink" href="#equipping-the-input-page-with-output-results-1" title="Permalink to this headline">¶</a></h2>

@@ -1,0 +1,424 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Using Web Frameworks for Scientific Applications">
+<meta name="keywords" content="web frameworks,MVC pattern,Flask installation,Flask input forms,Flask HTML templates,Flask MVC pattern,Flask troubleshooting,Django installation,Django making a project,Django making an application,Django input forms,Django HTML templates,Flask input forms,Flask error checking,Flask CSS style sheets,Flask LaTeX mathematics,Flask input validation,inline PNG image in HTML,base64 encoding of PNG images,inline SVG figure in HTML,Flask login,Flask database,Django input forms,Django input validation">
+
+<title>Using Web Frameworks for Scientific Applications</title>
+
+
+<link href="https://raw.githubusercontent.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
+<script src="https://rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
+<style type="text/css">
+h1 {color: #b58900;}  /* yellow */
+/* h1 {color: #cb4b16;}  orange */
+/* h1 {color: #d33682;}  magenta, the original choice of thomasf */
+.alert-text-small   { font-size: 80%;  }
+.alert-text-large   { font-size: 130%; }
+.alert-text-normal  { font-size: 90%;  }
+.alert {
+  padding:8px 35px 8px 14px; margin-bottom:18px;
+  text-shadow:0 1px 0 rgba(255,255,255,0.5);
+  border:1px solid #93a1a1;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  color: #555;
+  background-color: #eee8d5;
+  background-position: 10px 5px;
+  background-repeat: no-repeat;
+  background-size: 38px;
+  padding-left: 55px;
+  width: 75%;
+ }
+.alert-block {padding-top:14px; padding-bottom:14px}
+.alert-block > p, .alert-block > ul {margin-bottom:1em}
+.alert li {margin-top: 1em}
+.alert-block p+p {margin-top:5px}
+.alert-notice { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_notice.png); }
+.alert-summary  { background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_summary.png); }
+.alert-warning { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_warning.png); }
+.alert-question {background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_question.png); }
+
+div { text-align: justify; text-justify: inter-word; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Web frameworks ', 1, None, '___sec0'),
+              (' The MVC pattern ', 2, None, '___sec1'),
+              (' A very simple application ', 2, None, '___sec2'),
+              (' Application of the MVC pattern ',
+               2,
+               'wf:hw:mvc',
+               'wf:hw:mvc'),
+              (' Making a Flask application ', 1, None, '___sec4'),
+              (' Programming the Flask application ', 2, None, '___sec5'),
+              (' The user interaction ', 3, None, '___sec6'),
+              (' The Python code ', 3, None, '___sec7'),
+              (' Dissection ', 3, None, '___sec8'),
+              (' The template files ', 3, None, '___sec9'),
+              (' Testing the application ', 3, None, '___sec10'),
+              (' Equipping the input page with output results ',
+               2,
+               None,
+               '___sec11'),
+              (' Splitting the app into model, view, and controller files ',
+               2,
+               'wf:hw3:flask',
+               'wf:hw3:flask'),
+              (' Troubleshooting ', 2, None, '___sec13'),
+              (' Address already in use ', 3, None, '___sec14'),
+              (' Making a Django application ', 1, None, '___sec15'),
+              (' Setting up a Django project ', 2, None, '___sec16'),
+              (' Setting up a Django application ', 2, None, '___sec17'),
+              (' Programming the Django application ', 2, None, '___sec18'),
+              (' The user interaction ', 3, None, '___sec19'),
+              (' The model ', 3, None, '___sec20'),
+              (' The view ', 3, None, '___sec21'),
+              (' Making the input page ', 3, None, '___sec22'),
+              (' Making the results page ', 3, None, '___sec23'),
+              (' Equipping the input page with output results ',
+               2,
+               None,
+               '___sec24'),
+              (' Handling multiple input variables in Flask ',
+               1,
+               'wf:vib:flask',
+               'wf:vib:flask'),
+              (' Programming the Flask application ',
+               2,
+               'wf:vib1:flask:app',
+               'wf:vib1:flask:app'),
+              (' The compute part ', 3, None, '___sec27'),
+              (' The model ', 3, None, '___sec28'),
+              (' The view ', 3, None, '___sec29'),
+              (' The HTML template ', 3, None, '___sec30'),
+              (' Implementing error checking in the template ',
+               2,
+               None,
+               '___sec31'),
+              (' Using style sheets ', 2, None, '___sec32'),
+              (' Using LaTeX mathematics ', 2, None, '___sec33'),
+              (' Rearranging the elements in the HTML template ',
+               2,
+               None,
+               '___sec34'),
+              (' Bootstrap HTML style ', 2, None, '___sec35'),
+              (' Custom validation ',
+               2,
+               'wf:vib1:flask:validation',
+               'wf:vib1:flask:validation'),
+              (' Using Flask validators ', 3, None, '___sec37'),
+              (' Tailored validation ', 3, None, '___sec38'),
+              (' Tailored validation of intervals ', 3, None, '___sec39'),
+              (' Demo ', 3, None, '___sec40'),
+              (' Avoiding plot files ',
+               2,
+               'wf:vib2:flask:nofiles',
+               'wf:vib2:flask:nofiles'),
+              (' PNG plots ', 3, None, '___sec42'),
+              (' SVG plots ', 3, None, '___sec43'),
+              (' Autogenerating the code ',
+               2,
+               'wf:autogen:flask',
+               'wf:autogen:flask'),
+              (' Inspecting function signatures ', 3, None, '___sec45'),
+              (' Generating the model ', 3, None, '___sec46'),
+              (' Generating the view ', 3, None, '___sec47'),
+              (' Generating the template ', 3, None, '___sec48'),
+              (' Application ', 3, None, '___sec49'),
+              (' User login and storage of computed results ',
+               2,
+               'wf:flask:login',
+               'wf:flask:login'),
+              (' Required additional software ', 3, None, '___sec51'),
+              (' The compute part ', 3, None, '___sec52'),
+              (' The interfaces of the app ', 3, None, '___sec53'),
+              (' The source code ', 3, None, '___sec54'),
+              (' Resources ', 3, None, '___sec55'),
+              (' Handling multiple input variables in Django ',
+               1,
+               'wf:vib:django',
+               'wf:vib:django'),
+              (' Programming the Django application ', 2, None, '___sec57'),
+              (' Adding the app to a project ', 3, None, '___sec58'),
+              (' The compute part ', 3, None, '___sec59'),
+              (' The model ', 3, None, '___sec60'),
+              (' The view ', 3, None, '___sec61'),
+              (' Custom validation ', 2, None, '___sec62'),
+              (' Customizing widgets ', 2, None, '___sec63'),
+              (' Resources ', 2, None, '___sec64'),
+              (' Exercises ', 1, None, '___sec65'),
+              (' Exercise 1: Add two numbers ',
+               2,
+               'wf:exer:add2',
+               'wf:exer:add2'),
+              (' Exercise 2: Upload data file and visualize curves ',
+               2,
+               'wf:exer:upload',
+               'wf:exer:upload'),
+              (' Exercise 3: Plot a user-specified formula ',
+               2,
+               'wf:exer:formula',
+               'wf:exer:formula'),
+              (' Exercise 4: Visualize Taylor polynomial approximations ',
+               2,
+               'wf:exer:Taylor',
+               'wf:exer:Taylor'),
+              (' Exercise 5: Extend the `gen` app ',
+               2,
+               'wf:exer:gen:demo',
+               'wf:exer:gen:demo'),
+              (' Exercise 6: Equip the `gen` app with more data types ',
+               2,
+               'wf:exer:gen:lists',
+               'wf:exer:gen:lists'),
+              (' Exercise 7: Auto-generate code from function signature ',
+               2,
+               None,
+               '___sec72'),
+              (' Resources ', 1, None, '___sec73'),
+              (' Flask resources ', 2, None, '___sec74'),
+              (' Django resources ', 2, None, '___sec75'),
+              (' Remaining ', 1, None, '___sec76')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+    
+<a name="part0000"></a>
+<p>
+<!-- begin top navigation -->
+<table style="width: 100%"><tr><td>
+</td><td>
+<div style="text-align: right;"><a href="._web4sa_solarized001.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end top navigation -->
+</p>
+
+<p>
+<!-- ------------------- main content ---------------------- -->
+
+
+
+<center><h1>Using Web Frameworks for Scientific Applications</h1></center>  <!-- document title -->
+
+<p>
+<!-- author(s): Hans Petter Langtangen, and Anders E. Johansen -->
+
+<center>
+<b>Hans Petter Langtangen</b> [1, 2]
+</center>
+
+<center>
+<b>Anders E. Johansen</b> [1]
+</center>
+
+
+<p>
+<!-- institution(s) -->
+
+<center>[1] <b>Center for Biomedical Computing, Simula Research Laboratory</b></center>
+<center>[2] <b>Department of Informatics, University of Oslo</b></center>
+<p>
+<center><h4>Sep 28, 2014</h4></center> <!-- date -->
+
+<h2>Table of contents</h2>
+
+<p>
+<a href="#___sec0"> Web frameworks </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized001.html#___sec1"> The MVC pattern </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized002.html#___sec2"> A very simple application </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized003.html#wf:hw:mvc"> Application of the MVC pattern </a><br>
+<a href="._web4sa_solarized004.html#___sec4"> Making a Flask application </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized004.html#___sec5"> Programming the Flask application </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized004.html#___sec6"> The user interaction </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized004.html#___sec7"> The Python code </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized004.html#___sec8"> Dissection </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized004.html#___sec9"> The template files </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized004.html#___sec10"> Testing the application </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized004.html#___sec11"> Equipping the input page with output results </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized004.html#wf:hw3:flask"> Splitting the app into model, view, and controller files </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized005.html#___sec13"> Troubleshooting </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized005.html#___sec14"> Address already in use </a><br>
+<a href="._web4sa_solarized006.html#___sec15"> Making a Django application </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized006.html#___sec16"> Setting up a Django project </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized006.html#___sec17"> Setting up a Django application </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized007.html#___sec18"> Programming the Django application </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized007.html#___sec19"> The user interaction </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized007.html#___sec20"> The model </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized007.html#___sec21"> The view </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized007.html#___sec22"> Making the input page </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized007.html#___sec23"> Making the results page </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized007.html#___sec24"> Equipping the input page with output results </a><br>
+<a href="._web4sa_solarized008.html#wf:vib:flask"> Handling multiple input variables in Flask </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized008.html#wf:vib1:flask:app"> Programming the Flask application </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized008.html#___sec27"> The compute part </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized008.html#___sec28"> The model </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized008.html#___sec29"> The view </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized008.html#___sec30"> The HTML template </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized009.html#___sec31"> Implementing error checking in the template </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized010.html#___sec32"> Using style sheets </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized011.html#___sec33"> Using LaTeX mathematics </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized012.html#___sec34"> Rearranging the elements in the HTML template </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized013.html#___sec35"> Bootstrap HTML style </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized014.html#wf:vib1:flask:validation"> Custom validation </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized014.html#___sec37"> Using Flask validators </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized014.html#___sec38"> Tailored validation </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized014.html#___sec39"> Tailored validation of intervals </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized014.html#___sec40"> Demo </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized015.html#wf:vib2:flask:nofiles"> Avoiding plot files </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized015.html#___sec42"> PNG plots </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized015.html#___sec43"> SVG plots </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized016.html#wf:autogen:flask"> Autogenerating the code </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized016.html#___sec45"> Inspecting function signatures </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized016.html#___sec46"> Generating the model </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized016.html#___sec47"> Generating the view </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized016.html#___sec48"> Generating the template </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized016.html#___sec49"> Application </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized017.html#wf:flask:login"> User login and storage of computed results </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized017.html#___sec51"> Required additional software </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized017.html#___sec52"> The compute part </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized017.html#___sec53"> The interfaces of the app </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized017.html#___sec54"> The source code </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized017.html#___sec55"> Resources </a><br>
+<a href="._web4sa_solarized018.html#wf:vib:django"> Handling multiple input variables in Django </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized018.html#___sec57"> Programming the Django application </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized018.html#___sec58"> Adding the app to a project </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized018.html#___sec59"> The compute part </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized018.html#___sec60"> The model </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized018.html#___sec61"> The view </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized018.html#___sec62"> Custom validation </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized018.html#___sec63"> Customizing widgets </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized019.html#___sec64"> Resources </a><br>
+<a href="._web4sa_solarized020.html#___sec65"> Exercises </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized020.html#wf:exer:add2"> Exercise 1: Add two numbers </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized020.html#wf:exer:upload"> Exercise 2: Upload data file and visualize curves </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized020.html#wf:exer:formula"> Exercise 3: Plot a user-specified formula </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized020.html#wf:exer:Taylor"> Exercise 4: Visualize Taylor polynomial approximations </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized020.html#wf:exer:gen:demo"> Exercise 5: Extend the <code>gen</code> app </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized020.html#wf:exer:gen:lists"> Exercise 6: Equip the <code>gen</code> app with more data types </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized020.html#___sec72"> Exercise 7: Auto-generate code from function signature </a><br>
+<a href="._web4sa_solarized020.html#___sec73"> Resources </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized020.html#___sec74"> Flask resources </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_solarized020.html#___sec75"> Django resources </a><br>
+<a href="._web4sa_solarized020.html#___sec76"> Remaining </a><br>
+</p>
+
+<h1>Web frameworks  <a name="___sec0"></a></h1>
+
+<p>
+Computational scientists may want to offer their applications through
+a web interface, thereby making a <em>web application</em>.
+Basically, this means that users can set input data
+to the application on a web page, then click on some <em>Compute</em> button,
+and back comes a new web page with the results of the computations.
+The web interface can either be used as a GUI locally on the
+scientist's computer, or the interface can be depolyed to
+a server and made available to the whole world.
+
+<p>
+Web applications of the mentioned type can be created from scratch
+using CGI scripts in (e.g.) Python, but the code quickly gets longer
+and more involved as the complexity of the web interface
+grows. Nowadays, most web applications are created with the aid of
+<em>web frameworks</em>, which are software packages that simplify the
+programming tasks of offering services through the Internet. The
+downside of web frameworks is that there is a significant amount of
+steps and details to learn before your first simple demo application
+works.  The upside is that advanced applications are within reach,
+without an overwhelming amount of programming, as soon as you have
+understood the basic demos.
+
+<p>
+We shall explore two web frameworks: the very popular <a href="https://www.djangoproject.com/" target="_self">Django framework</a> and the more high-level and easy-to-use framework
+<a href="http://flask.pocoo.org/" target="_self">Flask</a>. Our introductory examples were also
+implemented in the <a href="http://www.web2py.com/" target="_self">web2py</a> framework, but according
+to our experience, Flask and Django are easier to explain to scientists.
+The primary advantage of Django
+over other web frameworks is the rich set of documentation and
+examples. Googling for "Django tutorials" gives lots of hits including
+a  list of <a href="https://code.djangoproject.com/wiki/Tutorials" target="_self">web tutorials</a>
+and a list of <a href="http://www.youtube.com/playlist?list=PL385A53B00B8B158E" target="_self">YouTube videos</a>. There is also an electronic <a href="http://www.djangobook.com/en/2.0/" target="_self">Django book</a>. At the time of this writing, the Flask documentation is not comparable. The two most important resources are the
+ <a href="http://flask.pocoo.org/" target="_self">official web site</a> and the <a href="http://wtforms.simplecodes.com/docs/0.6/index.html" target="_self">WTForms Documentation</a>. There is, unfortunately, hardly any examples on how Django or Flask can be used to enable typical scientific applications for the web, and that is why we have developed some targeted examples on this topic.
+
+<p>
+A basic question is, of course, whether you should apply Flask or
+Django for your web project. Googling for <em>flask vs django</em> gives a
+lot of diverging opinions. The authors' viewpoint is that Flask is
+much easier to get started with than Django. You can grow your
+application to a really big one with both frameworks, but some
+advanced features is easier in one framework than in the other.
+
+<p>
+The problem for a computational scientist who wants to enable
+mathematical calculations through the web is that most of
+the introductory examples on utilizing a particular
+web framework address web applications
+of very different nature, e.g., blogs and polls. Therefore, we have made an
+alternative introduction which explains, in the simplest possible way,
+how web frameworks can be used to
+
+<ol>
+<li> generate a web page with input data to your application,</li>
+<li> run the application to perform mathematical computations, and</li>
+<li> generate a web page with the results of the computations.</li>
+</ol>
+
+To work with Django, you need to know about Python packages and modules
+as well as Python classes. With Flask it is enough to be familiar with
+functions and modules, though knowledge of classes and a bit of
+decorators might be an advantage.
+
+<p>
+All the files associated with this document are available in a
+<a href="https://github.com/hplgit/web4sciapps/" target="_self">GitHub repository</a>.
+The relevant files for the web applications are located
+in a subtree <a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/" target="_self"><tt>doc/src/web4sa/src-web4sa/apps</tt></a>
+of this repository.
+
+<p>
+<p>
+<!-- begin bottom navigation -->
+<table style="width: 100%"><tr><td>
+</td><td>
+<div style="text-align: right;"><a href="._web4sa_solarized001.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end bottom navigation -->
+</p>
+
+<!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

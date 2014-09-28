@@ -9,7 +9,9 @@ so we copy this file from the ``mvc`` directory to the ``hw1`` directory
 for convenience (we could alternatively add ``../mvc`` to ``sys.path`` such that
 ``import compute`` would work from the ``hw1`` directory).
 
-**The user interaction.**
+The user interaction  (2)
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
 The web application offers a text field where the user can
 write the value of ``r``, see Figure :ref:`wf:hw1:django:fig:input`.
 After clicking on the *equals* button,
@@ -36,7 +38,9 @@ seen in Figure :ref:`wf:hw1:django:fig:result` appears.
 .. index::
    single: Django; models.py
 
-**The model.**
+The model  (1)
+~~~~~~~~~~~~~~
+
 The ``models.py`` file contains the model, which consists
 of the data we need in the application, stored in Django's data types.
 Our data consists of one number, called ``r``, and ``models.py`` then
@@ -67,7 +71,9 @@ if we by convention apply the name ``Input`` for the class holding the data.
 .. index::
    single: Django; views.py
 
-**The view.**
+The view  (1)
+~~~~~~~~~~~~~
+
 The ``views.py`` file contains a function ``index`` which defines
 the actions we want to perform when invoking
 the URL ( here ``http://127.0.0.1:8000/hw1/``).
@@ -108,7 +114,9 @@ with which the user is supposed to interact.
 .. index::
    single: Django; HTML templates
 
-**Making the input page.**
+Making the input page
+~~~~~~~~~~~~~~~~~~~~~
+
 The input consists of a web form with
 one field where we can fill in our ``r`` variable. This page
 is realized by the two central statements
@@ -149,7 +157,9 @@ results in the HTML code
             <input type="submit" value="equals" />
         </form>
 
-**Making the results page.**
+Making the results page
+~~~~~~~~~~~~~~~~~~~~~~~
+
 When then user has filled in a value in the text field on the input
 page, the ``index`` function is called again and ``request.method`` equals
 ``'POST'``. A new form object is made, this time with user info (``request.POST``).

@@ -7,7 +7,7 @@ Automatically generated HTML file from DocOnce source
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Using Web Frameworks for Scientific Applications">
-<meta name="keywords" content="web frameworks,MVC pattern,Flask installation,Flask input forms,Flask HTML templates,Flask MVC pattern,Flask troubleshooting,Django installation,Django making a project,Django making an application,Django input forms,Django HTML templates,Flask input forms,Flask error checking,Flask CSS style sheets,Flask LaTeX mathematics,Flask input validation,inline PNG image in HTML,base64 encoding of PNG images,inline SVG figure in HTML,Flask login,Flask database,Flask bootstrap style,Django input forms,Django input validation">
+<meta name="keywords" content="web frameworks,MVC pattern,Flask installation,Flask input forms,Flask HTML templates,Flask MVC pattern,Flask troubleshooting,Django installation,Django making a project,Django making an application,Django input forms,Django HTML templates,Flask input forms,Flask error checking,Flask CSS style sheets,Flask LaTeX mathematics,Flask input validation,inline PNG image in HTML,base64 encoding of PNG images,inline SVG figure in HTML,Flask login,Flask database,Django input forms,Django input validation">
 
 <title>Using Web Frameworks for Scientific Applications</title>
 
@@ -75,23 +75,34 @@ div { text-align: justify; text-justify: inter-word; }
                'wf:hw:mvc'),
               (' Making a Flask application ', 1, None, '___sec4'),
               (' Programming the Flask application ', 2, None, '___sec5'),
+              (' The user interaction ', 3, None, '___sec6'),
+              (' The Python code ', 3, None, '___sec7'),
+              (' Dissection ', 3, None, '___sec8'),
+              (' The template files ', 3, None, '___sec9'),
+              (' Testing the application ', 3, None, '___sec10'),
               (' Equipping the input page with output results ',
                2,
                None,
-               '___sec6'),
+               '___sec11'),
               (' Splitting the app into model, view, and controller files ',
                2,
                'wf:hw3:flask',
                'wf:hw3:flask'),
-              (' Troubleshooting ', 2, None, '___sec8'),
-              (' Making a Django application ', 1, None, '___sec9'),
-              (' Setting up a Django project ', 2, None, '___sec10'),
-              (' Setting up a Django application ', 2, None, '___sec11'),
-              (' Programming the Django application ', 2, None, '___sec12'),
+              (' Troubleshooting ', 2, None, '___sec13'),
+              (' Address already in use ', 3, None, '___sec14'),
+              (' Making a Django application ', 1, None, '___sec15'),
+              (' Setting up a Django project ', 2, None, '___sec16'),
+              (' Setting up a Django application ', 2, None, '___sec17'),
+              (' Programming the Django application ', 2, None, '___sec18'),
+              (' The user interaction ', 3, None, '___sec19'),
+              (' The model ', 3, None, '___sec20'),
+              (' The view ', 3, None, '___sec21'),
+              (' Making the input page ', 3, None, '___sec22'),
+              (' Making the results page ', 3, None, '___sec23'),
               (' Equipping the input page with output results ',
                2,
                None,
-               '___sec13'),
+               '___sec24'),
               (' Handling multiple input variables in Flask ',
                1,
                'wf:vib:flask',
@@ -100,73 +111,98 @@ div { text-align: justify; text-justify: inter-word; }
                2,
                'wf:vib1:flask:app',
                'wf:vib1:flask:app'),
+              (' The compute part ', 3, None, '___sec27'),
+              (' The model ', 3, None, '___sec28'),
+              (' The view ', 3, None, '___sec29'),
+              (' The HTML template ', 3, None, '___sec30'),
               (' Implementing error checking in the template ',
                2,
                None,
-               '___sec16'),
-              (' Using style sheets ', 2, None, '___sec17'),
-              (' Using LaTeX mathematics ', 2, None, '___sec18'),
+               '___sec31'),
+              (' Using style sheets ', 2, None, '___sec32'),
+              (' Using LaTeX mathematics ', 2, None, '___sec33'),
               (' Rearranging the elements in the HTML template ',
                2,
                None,
-               '___sec19'),
-              (' Bootstrap HTML style ', 2, None, '___sec20'),
+               '___sec34'),
+              (' Bootstrap HTML style ', 2, None, '___sec35'),
               (' Custom validation ',
                2,
                'wf:vib1:flask:validation',
                'wf:vib1:flask:validation'),
-              (' Using Flask validators ', 3, None, '___sec22'),
-              (' Tailored validation ', 3, None, '___sec23'),
-              (' Tailored validation of intervals ', 3, None, '___sec24'),
-              (' Demo ', 3, None, '___sec25'),
-              (' Autogenerating the code ',
-               2,
-               'wf:vib3:flask:autogen',
-               'wf:vib3:flask:autogen'),
+              (' Using Flask validators ', 3, None, '___sec37'),
+              (' Tailored validation ', 3, None, '___sec38'),
+              (' Tailored validation of intervals ', 3, None, '___sec39'),
+              (' Demo ', 3, None, '___sec40'),
               (' Avoiding plot files ',
                2,
-               'wf:vib3:flask:nofiles',
-               'wf:vib3:flask:nofiles'),
-              (' PNG plots ', 3, None, '___sec28'),
-              (' SVG plots ', 3, None, '___sec29'),
+               'wf:vib2:flask:nofiles',
+               'wf:vib2:flask:nofiles'),
+              (' PNG plots ', 3, None, '___sec42'),
+              (' SVG plots ', 3, None, '___sec43'),
+              (' Autogenerating the code ',
+               2,
+               'wf:autogen:flask',
+               'wf:autogen:flask'),
+              (' Inspecting function signatures ', 3, None, '___sec45'),
+              (' Generating the model ', 3, None, '___sec46'),
+              (' Generating the view ', 3, None, '___sec47'),
+              (' Generating the template ', 3, None, '___sec48'),
+              (' Application ', 3, None, '___sec49'),
               (' User login and storage of computed results ',
                2,
-               'wf:vib1:flask:login',
-               'wf:vib1:flask:login'),
-              (' Project 1: Using Bootstrap styles ',
-               2,
-               'wf:vib1:flask:bootstrap',
-               'wf:vib1:flask:bootstrap'),
-              (' Further work ', 1, None, '___sec32'),
-              (' Resources ', 3, None, '___sec33'),
+               'wf:flask:login',
+               'wf:flask:login'),
+              (' Required additional software ', 3, None, '___sec51'),
+              (' The compute part ', 3, None, '___sec52'),
+              (' The interfaces of the app ', 3, None, '___sec53'),
+              (' The source code ', 3, None, '___sec54'),
+              (' Resources ', 3, None, '___sec55'),
               (' Handling multiple input variables in Django ',
                1,
                'wf:vib:django',
                'wf:vib:django'),
-              (' Programming the Django application ', 2, None, '___sec35'),
-              (' Custom validation ', 2, None, '___sec36'),
-              (' Customizing widgets ', 2, None, '___sec37'),
-              (' Exercises ', 1, None, '___sec38'),
-              (' Exercise 2: Add two numbers ',
+              (' Programming the Django application ', 2, None, '___sec57'),
+              (' Adding the app to a project ', 3, None, '___sec58'),
+              (' The compute part ', 3, None, '___sec59'),
+              (' The model ', 3, None, '___sec60'),
+              (' The view ', 3, None, '___sec61'),
+              (' Custom validation ', 2, None, '___sec62'),
+              (' Customizing widgets ', 2, None, '___sec63'),
+              (' Resources ', 2, None, '___sec64'),
+              (' Exercises ', 1, None, '___sec65'),
+              (' Exercise 1: Add two numbers ',
                2,
                'wf:exer:add2',
                'wf:exer:add2'),
-              (' Exercise 3: Extend the `vib3_flask` app ',
+              (' Exercise 2: Upload data file and visualize curves ',
                2,
-               'wf:exer:vib3:demo',
-               'wf:exer:vib3:demo'),
-              (' Exercise 4: Equip the `vib3_flask` app with more data types ',
+               'wf:exer:upload',
+               'wf:exer:upload'),
+              (' Exercise 3: Plot a user-specified formula ',
                2,
-               'wf:exer:vib3:lists',
-               'wf:exer:vib3:lists'),
-              (' Exercise 5: Auto-generate code from function signature ',
+               'wf:exer:formula',
+               'wf:exer:formula'),
+              (' Exercise 4: Visualize Taylor polynomial approximations ',
+               2,
+               'wf:exer:Taylor',
+               'wf:exer:Taylor'),
+              (' Exercise 5: Extend the `gen` app ',
+               2,
+               'wf:exer:gen:demo',
+               'wf:exer:gen:demo'),
+              (' Exercise 6: Equip the `gen` app with more data types ',
+               2,
+               'wf:exer:gen:lists',
+               'wf:exer:gen:lists'),
+              (' Exercise 7: Auto-generate code from function signature ',
                2,
                None,
-               '___sec42'),
-              (' Resources ', 1, None, '___sec43'),
-              (' Flask resources ', 2, None, '___sec44'),
-              (' Django resources ', 2, None, '___sec45'),
-              (' Remaining ', 1, None, '___sec46')]}
+               '___sec72'),
+              (' Resources ', 1, None, '___sec73'),
+              (' Flask resources ', 2, None, '___sec74'),
+              (' Django resources ', 2, None, '___sec75'),
+              (' Remaining ', 1, None, '___sec76')]}
 end of tocinfo -->
 
 <body>
@@ -192,9 +228,9 @@ MathJax.Hub.Config({
 <p>
 <!-- begin top navigation -->
 <table style="width: 100%"><tr><td>
-<div style="text-align: left;"><a href="._web4sa_plain015.html"><img src="http://hplgit.github.io/doconce/bundled/html_images/prev1.png" border=0 alt="&laquo; Previous"></a></div>
+<div style="text-align: left;"><a href="._web4sa_plain015.html">&laquo; Previous</a></div>
 </td><td>
-<div style="text-align: right;"><a href="._web4sa_plain017.html"><img src="http://hplgit.github.io/doconce/bundled/html_images/next1.png" border=0 alt="Next &raquo;"></a></div>
+<div style="text-align: right;"><a href="._web4sa_plain017.html">Next &raquo;</a></div>
 </td></tr></table>
 <!-- end top navigation -->
 </p>
@@ -202,76 +238,435 @@ MathJax.Hub.Config({
 <p>
 <!-- !split -->
 
-<p>
-<!-- --- begin exercise --- -->
-
-<h2>Project 1: Using Bootstrap styles <a name="wf:vib1:flask:bootstrap"></a></h2>
+<h2>Autogenerating the code <a name="wf:autogen:flask"></a></h2>
 
 <p>
-The design and layout of the graphical web interface is completely
-governed by template file. So far, we have used only basic HTML
-elements in this file. With CSS it is possible to improve the
-design, but why not adopt popular frameworks that offer an attractive
-look-and-feel and much nice functionality such as responsive pages
-across a wide range of devices? The <a href="http://getbootstrap.com/" target="_self">Bootstrap</a>
-framework is free and open software that gives developers a kick start
-with respect to web page design and functionality.
-Many designs are built on Bootstrap: "Bootswatch": "http:bootswatch.com",
-<a href="http://startbootstrap.com/" target="_self">Start Bootstrap</a>,
-<a href="http://bootstrapzero.com/" target="_self">Bootstrap Zero</a>, and <a href="http://www.prepbootstrap.com/" target="_self">PrepBootstrap</a>.
+We shall now present generic <code>model.py</code> and <code>controller.py</code>
+files that work with <em>any</em> <code>compute</code> function (!). This example will
+demonstrate some advanced, powerful features of Python. The source code
+is found in the <a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/gen" target="_self"><tt>gen</tt></a>
+directory.
+
+<h3>Inspecting function signatures  <a name="___sec45"></a></h3>
 
 <p>
-It would obviously be advantageous to create Flask templates that
-can utilize the Bootstrap technology. A package <a href="http://pythonhosted.org/Flask-Bootstrap/" target="_self">Flask-Bootstrap</a>
-is already supporting this idea.
+The basic idea is that the Python module <code>inspect</code> can be used to
+retrieve the names of the arguments and the default values of
+keyword arguments of <em>any</em> given <code>compute</code> function. Say we have some
 
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">mycompute</span>(A, m<span style="color: #666666">=0</span>, s<span style="color: #666666">=1</span>, w<span style="color: #666666">=1</span>, x_range<span style="color: #666666">=</span>[<span style="color: #666666">-3</span>,<span style="color: #666666">3</span>]):
+    <span style="color: #666666">...</span>
+    <span style="color: #008000; font-weight: bold">return</span> result
+</pre></div>
+<p>
+Running
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">inspect</span>
+arg_names <span style="color: #666666">=</span> inspect<span style="color: #666666">.</span>getargspec(mycompute)<span style="color: #666666">.</span>args
+defaults  <span style="color: #666666">=</span> inspect<span style="color: #666666">.</span>getargspec(mycompute)<span style="color: #666666">.</span>defaults
+</pre></div>
+<p>
+leads to
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">arg_names <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;A&#39;</span>, <span style="color: #BA2121">&#39;m&#39;</span>, <span style="color: #BA2121">&#39;s&#39;</span>, <span style="color: #BA2121">&#39;w&#39;</span>, <span style="color: #BA2121">&#39;x_range&#39;</span>]
+defaults <span style="color: #666666">=</span> (<span style="color: #666666">0</span>, <span style="color: #666666">1</span>, <span style="color: #666666">1</span>, [<span style="color: #666666">-3</span>, <span style="color: #666666">3</span>])
+</pre></div>
+<p>
+We have all the argument names in <code>arg_names</code> and
+<code>defaults[i]</code> is the default value of keyword argument
+<code>arg_names[j]</code>, where <code>j = len(arg_names) - len(defaults) + i</code>.
+
+<h3>Generating the model  <a name="___sec46"></a></h3>
+
+<p>
+Knowing the name <code>name</code> of some argument in the <code>compute</code>
+function, we can make the corresponding class attribute
+in the <code>InputForm</code> class by
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000">setattr</span>(InputForm, name, FloatForm())
+</pre></div>
+<p>
+For name equal to <code>'A'</code> this is the same as hardcoding
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">InputForm</span>:
+    A <span style="color: #666666">=</span> FloatForm()
+</pre></div>
+<p>
+Assuming that all arguments in <code>compute</code> are floats, we could
+do
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">InputForm</span>:
+    <span style="color: #008000; font-weight: bold">pass</span>  <span style="color: #408080; font-style: italic"># Empty class</span>
+
+arg_names <span style="color: #666666">=</span> inspect<span style="color: #666666">.</span>getargspec(mycompute)<span style="color: #666666">.</span>args
+<span style="color: #008000; font-weight: bold">for</span> name <span style="color: #AA22FF; font-weight: bold">in</span> arg_names:
+    <span style="color: #008000">setattr</span>(InputForm, name, FloatForm())
+</pre></div>
+<p>
+However, we can do better than this: for
+keyword arguments the type of the default value can be used to
+select the appropriate form class. The complete <code>model.py</code> file
+then goes as follows:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">Example on generic model.py file which inspects the arguments</span>
+<span style="color: #BA2121; font-style: italic">of the compute function and automatically generates a relevant</span>
+<span style="color: #BA2121; font-style: italic">InputForm class.</span>
+<span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">wtforms</span>
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> pi
+
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">compute</span> <span style="color: #008000; font-weight: bold">import</span> compute_gamma <span style="color: #008000; font-weight: bold">as</span> compute
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">inspect</span>
+arg_names <span style="color: #666666">=</span> inspect<span style="color: #666666">.</span>getargspec(compute)<span style="color: #666666">.</span>args
+defaults  <span style="color: #666666">=</span> inspect<span style="color: #666666">.</span>getargspec(compute)<span style="color: #666666">.</span>defaults
+
+<span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">InputForm</span>(wtforms<span style="color: #666666">.</span>Form):
+    <span style="color: #008000; font-weight: bold">pass</span>
+
+<span style="color: #408080; font-style: italic"># Augment defaults with None elements for the positional</span>
+<span style="color: #408080; font-style: italic"># arguments</span>
+defaults <span style="color: #666666">=</span> [<span style="color: #008000">None</span>]<span style="color: #666666">*</span>(<span style="color: #008000">len</span>(arg_names)<span style="color: #666666">-</span><span style="color: #008000">len</span>(defaults)) <span style="color: #666666">+</span> <span style="color: #008000">list</span>(defaults)
+<span style="color: #408080; font-style: italic"># Map type of default to right form field</span>
+type2form <span style="color: #666666">=</span> {<span style="color: #008000">type</span>(<span style="color: #666666">1.0</span>): wtforms<span style="color: #666666">.</span>FloatField,
+             <span style="color: #008000">type</span>(<span style="color: #666666">1</span>):   wtforms<span style="color: #666666">.</span>IntegerField,
+             <span style="color: #008000">type</span>(<span style="color: #BA2121">&#39;&#39;</span>):  wtforms<span style="color: #666666">.</span>TextField,
+             }
+
+<span style="color: #008000; font-weight: bold">for</span> name, value <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">zip</span>(arg_names, defaults):
+    <span style="color: #008000; font-weight: bold">if</span> value <span style="color: #AA22FF; font-weight: bold">is</span> <span style="color: #008000">None</span>:
+        <span style="color: #008000">setattr</span>(InputForm, name, wtforms<span style="color: #666666">.</span>FloatField(
+            validators<span style="color: #666666">=</span>[wtforms<span style="color: #666666">.</span>validators<span style="color: #666666">.</span>InputRequired()]))
+    <span style="color: #008000; font-weight: bold">else</span>:
+        <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">type</span>(value) <span style="color: #AA22FF; font-weight: bold">in</span> type2form:
+            <span style="color: #008000">setattr</span>(InputForm, name, type2form[<span style="color: #008000">type</span>(value)](
+                default<span style="color: #666666">=</span>value,
+                validators<span style="color: #666666">=</span>[wtforms<span style="color: #666666">.</span>validators<span style="color: #666666">.</span>InputRequired()]))
+        <span style="color: #008000; font-weight: bold">else</span>:
+            <span style="color: #008000; font-weight: bold">raise</span> <span style="color: #D2413A; font-weight: bold">TypeError</span>(<span style="color: #BA2121">&#39;argument </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> not supported&#39;</span> <span style="color: #666666">%</span>
+                            name, <span style="color: #008000">type</span>(value))
+
+<span style="color: #008000; font-weight: bold">if</span> __name__ <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;__main__&#39;</span>:
+    <span style="color: #008000; font-weight: bold">for</span> item <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">dir</span>(InputForm):
+        <span style="color: #008000; font-weight: bold">if</span> item <span style="color: #AA22FF; font-weight: bold">in</span> arg_names:
+            <span style="color: #008000; font-weight: bold">print</span> item, <span style="color: #008000">getattr</span>(InputForm, item)
+</pre></div>
+<p>
+(The <code>compute_gamma</code> function imported from <code>compute</code> is the
+only application-specific statement in this code and will be explained later.)
+
+<h3>Generating the view  <a name="___sec47"></a></h3>
+
+<p>
+The call to <code>compute</code> in the <code>controller.py</code> file must also be expressed
+in a general way such that the call handles any type and number of
+parameters. This can be done in two ways, using either positional
+or keyword arguments.
+
+<p>
+The technique with positional arguments
+is explained first. It consists of collecting all parameters in
+a list or tuple, called <code>args</code>, and then calling <code>compute(*args)</code>
+(which is equivalent to <code>compute(args[0], args[1], ..., args[n])</code>
+if <code>n</code> is <code>len(args)-1</code>). The elements of <code>args</code> are the values of the
+form variables. We know the name of a form variable as a string
+<code>name</code> (from <code>arg_names</code>), and if <code>form</code> is the form object,
+the construction <code>getattr(form, name).data</code> extracts the value
+that the user provided (<code>getattr(obj, attr)</code> gets the attribute, with name
+available as a string in <code>attr</code>, in the object <code>obj</code>).
+For exampe, if <code>name</code> is <code>'A'</code>, <code>getattr(form, name).data</code> is the same as
+<code>form.A.data</code>.
+Collecting all form variables, placing them in a list,
+and calling <code>compute</code> are done with
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">arg_names <span style="color: #666666">=</span> inspect<span style="color: #666666">.</span>getargspec(compute)<span style="color: #666666">.</span>args
+args <span style="color: #666666">=</span> [<span style="color: #008000">getattr</span>(form, name)<span style="color: #666666">.</span>data <span style="color: #008000; font-weight: bold">for</span> name <span style="color: #AA22FF; font-weight: bold">in</span> arg_names]
+result <span style="color: #666666">=</span> compute(<span style="color: #666666">*</span>args)
+</pre></div>
+<p>
+Our <code>InputForm</code> class guarantees that all arguments in <code>compute</code>
+are present in the form, but to be absolutely safe we can
+test if <code>name</code> is present in the <code>form</code> object:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">args <span style="color: #666666">=</span> [<span style="color: #008000">getattr</span>(form, name)<span style="color: #666666">.</span>data <span style="color: #008000; font-weight: bold">for</span> name <span style="color: #AA22FF; font-weight: bold">in</span> arg_names
+        <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">hasattr</span>(form, name)]
+</pre></div>
+<p>
+A potential problem with the <code>args</code> list is that the values might
+be in wrong order. It appears, fortunately, that the order we
+assign attributes to the form class is preserved when iterating over
+the form. Nevertheless, using keyword arguments instead of positional
+arguments provides a completely safe solution to calling <code>compute</code>
+with the correct arguments. Keyword arguments are placed in a
+dictionary <code>kwargs</code> and <code>compute</code> is called as <code>compute(**kwargs)</code>.
+The generic solution is
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">kwargs <span style="color: #666666">=</span> {name: <span style="color: #008000">getattr</span>(form, name)<span style="color: #666666">.</span>data <span style="color: #008000; font-weight: bold">for</span> name <span style="color: #AA22FF; font-weight: bold">in</span> arg_names
+          <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">hasattr</span>(form, name)}
+result <span style="color: #666666">=</span> compute(<span style="color: #666666">**</span>kwargs)
+</pre></div>
+<p>
+The <code>compute(**kwargs)</code> call is equivalent to <code>compute(A=1, b=3, w=0.5)</code>
+in case <code>kwargs = {'w'=0.5, 'A':1, 'b':3}</code> (recall that the order of
+the keys in a Python dictionary is undetermined).
+
+<h3>Generating the template  <a name="___sec48"></a></h3>
+
+<p>
+It remains to generate the right HTML template. The HTML code depends
+on what the returned <code>result</code> object from <code>compute</code> contains. Only a
+human who has read the <code>compute</code> code knows the details of the returned
+result. Therefore, we leave it to a human to provide the part
+of the HTML template that renders the result. The file <code>templates/view_results.html</code> contains this human-provided code, while <code>templates/view.html</code>
+is a completely generic template for the forms:
+
+<p>
+
+<!-- code=html (!bc htmlpro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">&lt;form</span> <span style="color: #7D9029">method=</span><span style="color: #BA2121">post</span> <span style="color: #7D9029">action=</span><span style="color: #BA2121">&quot;&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;table&gt;</span>
+  {% for field in form %}
+    <span style="color: #008000; font-weight: bold">&lt;tr&gt;&lt;td&gt;</span>{{ field.name }}<span style="color: #008000; font-weight: bold">&lt;/td&gt;</span> <span style="color: #008000; font-weight: bold">&lt;td&gt;</span>{{ field }}<span style="color: #008000; font-weight: bold">&lt;/td&gt;</span>
+    <span style="color: #008000; font-weight: bold">&lt;td&gt;</span>{% if field.errors %}
+      <span style="color: #008000; font-weight: bold">&lt;ul</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">errors</span><span style="color: #008000; font-weight: bold">&gt;</span>
+      {% for error in field.errors %}
+        <span style="color: #008000; font-weight: bold">&lt;li&gt;</span>{{ error }}<span style="color: #008000; font-weight: bold">&lt;/li&gt;</span>
+      {% endfor %}<span style="color: #008000; font-weight: bold">&lt;/ul&gt;</span>
+    {% endif %}<span style="color: #008000; font-weight: bold">&lt;/td&gt;&lt;/tr&gt;</span>
+  {% endfor %}
+<span style="color: #008000; font-weight: bold">&lt;/table&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;p&gt;&lt;input</span> <span style="color: #7D9029">type=</span><span style="color: #BA2121">submit</span> <span style="color: #7D9029">value=</span><span style="color: #BA2121">Compute</span><span style="color: #008000; font-weight: bold">&gt;&lt;/form&gt;&lt;/p&gt;</span>
+
+{% if result != None %}
+{{ result|safe }}
+{% endif %}
+</pre></div>
+<p>
+At the end of this code, an HTML text <code>result</code> (string) is to be
+inserted.  This text is typically generated by calling Flask's
+<code>render_template</code> function, which uses <code>templates/view_results.html</code>
+to turn the return object <code>result</code> from the compute function into the
+desired HTML code:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">index</span>():
+    <span style="color: #666666">...</span>
+    <span style="color: #008000; font-weight: bold">if</span> result:
+        result <span style="color: #666666">=</span> render_template(<span style="color: #BA2121">&#39;view_results.html&#39;</span>, result<span style="color: #666666">=</span>result)
+        <span style="color: #408080; font-style: italic"># result is now rendered HTML text</span>
+    <span style="color: #008000; font-weight: bold">return</span> render_template(<span style="color: #BA2121">&#39;view.html&#39;</span>, form<span style="color: #666666">=</span>form, result<span style="color: #666666">=</span>result)
+</pre></div>
 <p>
 <div class="alert alert-block alert-notice alert-text-normal">
-<b>Project.</b>
+<b>Notice.</b>
 <p>
-
-<ul>
-  <li> Test out the Flask-Bootstrap package by redoing a selection
-    of the previous examples with the Bootstrap design and functionality.</li>
-  <li> How easy is it to take advantage of various Bootstrap designs,
-    say the Bootswatch themes, in a template based on Flask-Bootstrap?</li>
-  <li> Make a new GUI [<a name="link_footnote_1"><a><a href="#def_footnote_1">1</a>] with different types of input fields and see how
-    the design looks like in Bootstrap-based themes:</li>
-
-<ul>
-     <li> one selection from a list (radio buttons, drop-down list)</li>
-     <li> multiple selections from a list (check buttons)</li>
-     <li> one-line text field</li>
-     <li> multi-line text field</li>
-     <li> floating-point number</li>
-     <li> integer</li>
-</ul>
-
-</ul>
+A perhaps simpler alternative would be to have a generic
+<code>view_forms.html</code> file and a user-specific
+<code>view_results.html</code> and explicitly combining them into a new
+file. This requires file writing by the app, which one normally
+wants to avoid. Especially if the web app gets multiple users,
+the file writing may lead to corrupt files.
 </div>
 
 
-<p><a name="def_footnote_1"></a><a href="#link_footnote_1"><b>1:</b></a> The compute function can be very simple, e.g., just returning some HTML
-typesetting of the arguments. This subexercise is for test purposes
-only.
+<p>
+The complete, generic form of the <code>index</code> function becomes
 
 <p>
-<!-- <a href="http://pythonhosted.org/Flask-Bootstrap/basic-usage.html" target="_self"><tt>http://pythonhosted.org/Flask-Bootstrap/basic-usage.html</tt></a>. -->
-<!-- Not yet written. Must be based on -->
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">index</span>():
+    form <span style="color: #666666">=</span> InputForm(request<span style="color: #666666">.</span>form)
+    <span style="color: #008000; font-weight: bold">if</span> request<span style="color: #666666">.</span>method <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;POST&#39;</span> <span style="color: #AA22FF; font-weight: bold">and</span> form<span style="color: #666666">.</span>validate():
+        arg_names <span style="color: #666666">=</span> inspect<span style="color: #666666">.</span>getargspec(compute)<span style="color: #666666">.</span>args
+        kwargs <span style="color: #666666">=</span> {name: <span style="color: #008000">getattr</span>(form, name)<span style="color: #666666">.</span>data
+                  <span style="color: #008000; font-weight: bold">for</span> name <span style="color: #AA22FF; font-weight: bold">in</span> arg_names <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">hasattr</span>(form, name)}
+        result <span style="color: #666666">=</span> compute(<span style="color: #666666">**</span>kwargs)
+    <span style="color: #008000; font-weight: bold">else</span>:
+        result <span style="color: #666666">=</span> <span style="color: #008000">None</span>
+    <span style="color: #008000; font-weight: bold">if</span> result:
+        <span style="color: #408080; font-style: italic"># result must be transformed to HTML and inserted as a</span>
+        <span style="color: #408080; font-style: italic"># string in the generic view.html file</span>
+        result <span style="color: #666666">=</span> render_template(<span style="color: #BA2121">&#39;view_results.html&#39;</span>, result<span style="color: #666666">=</span>result)
+    <span style="color: #008000; font-weight: bold">return</span> render_template(<span style="color: #BA2121">&#39;view.html&#39;</span>, form<span style="color: #666666">=</span>form, result<span style="color: #666666">=</span>result)
+
+<span style="color: #008000; font-weight: bold">if</span> __name__ <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;__main__&#39;</span>:
+    app<span style="color: #666666">.</span>run(debug<span style="color: #666666">=</span><span style="color: #008000">True</span>)
+</pre></div>
+
+<h3>Application  <a name="___sec49"></a></h3>
 
 <p>
-<!-- <a href="http://pythonhosted.org/Flask-Bootstrap/basic-usage.html" target="_self"><tt>http://pythonhosted.org/Flask-Bootstrap/basic-usage.html</tt></a> -->
+Let us apply the files above to plot the gamma probability density function
+
+$$ g(x; a, h, A) = \frac{|h|}{\Gamma(a)A}\left(\frac{x}{A}\right)^{ah-1}
+e^{-\left(\frac{x}{A}\right)^h},
+$$
+
+and its cumulative density
+
+$$ G(x; a, h, A) = \int_0^x g(\tau; a, h, A)d\tau,$$
+
+computed by numerically the Trapezoidal rule, for instance.
+We also want to compute and display
+the mean value \( A\Gamma(a + 1/h)/\Gamma(a) \) and
+standard deviation
+
+$$ \sigma = \frac{A}{\Gamma(a)}\sqrt{\Gamma(a + 2/h)\Gamma(a) - \Gamma(a+1/h)^2}.$$
+
+Here, \( \Gamma(a) \) is the gamma function, which can be computed
+by <code>math.gamma(a)</code> in Python.
+Below is a <code>compute.py</code> file with the
+relevant implementations of \( g(x;a,h,A) \) (<code>gamma_density</code>),
+\( G(x; a, h, A) \) (<code>gamma_cumulative</code>), and a function <code>compute_gamma</code> for
+making a plot of \( g \) og \( G \) for \( x\in [0,7\sigma] \).
 
 <p>
-<!-- --- end exercise --- -->
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">gamma_density</span>(x, a, h, A):
+    <span style="color: #408080; font-style: italic"># http://en.wikipedia.org/wiki/Gamma_distribution</span>
+    xA <span style="color: #666666">=</span> x<span style="color: #666666">/</span><span style="color: #008000">float</span>(A)
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">abs</span>(h)<span style="color: #666666">/</span>(math<span style="color: #666666">.</span>gamma(a)<span style="color: #666666">*</span>A)<span style="color: #666666">*</span>(xA)<span style="color: #666666">**</span>(a<span style="color: #666666">*</span>h<span style="color: #666666">-1</span>)<span style="color: #666666">*</span>exp(<span style="color: #666666">-</span>xA<span style="color: #666666">**</span>h)
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">gamma_cumulative</span>(x, a, h, A):
+    <span style="color: #408080; font-style: italic"># Integrate gamma_density using the Trapezoidal rule.</span>
+    <span style="color: #408080; font-style: italic"># Assume x is array.</span>
+    g <span style="color: #666666">=</span> gamma_density(x, a, h, A)
+    r <span style="color: #666666">=</span> zeros_like(x)
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(r)<span style="color: #666666">-1</span>):
+        r[i<span style="color: #666666">+1</span>] <span style="color: #666666">=</span> r[i] <span style="color: #666666">+</span> <span style="color: #666666">0.5*</span>(g[i] <span style="color: #666666">+</span> g[i<span style="color: #666666">+1</span>])<span style="color: #666666">*</span>(x[i<span style="color: #666666">+1</span>] <span style="color: #666666">-</span> x[i])
+    <span style="color: #008000; font-weight: bold">return</span> r
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">compute_gamma</span>(a<span style="color: #666666">=0.5</span>, h<span style="color: #666666">=2.0</span>, A<span style="color: #666666">=</span>math<span style="color: #666666">.</span>sqrt(<span style="color: #666666">2</span>), resolution<span style="color: #666666">=500</span>):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Return plot and mean/st.dev. value of the gamma density.&quot;&quot;&quot;</span>
+    gah <span style="color: #666666">=</span> math<span style="color: #666666">.</span>gamma(a <span style="color: #666666">+</span> <span style="color: #666666">1./</span>h)
+    mean <span style="color: #666666">=</span> A<span style="color: #666666">*</span>gah<span style="color: #666666">/</span>math<span style="color: #666666">.</span>gamma(a)
+    stdev <span style="color: #666666">=</span> A<span style="color: #666666">/</span>math<span style="color: #666666">.</span>gamma(a)<span style="color: #666666">*</span>math<span style="color: #666666">.</span>sqrt(
+        math<span style="color: #666666">.</span>gamma(a <span style="color: #666666">+</span> <span style="color: #666666">2./</span>h)<span style="color: #666666">*</span>math<span style="color: #666666">.</span>gamma(a) <span style="color: #666666">-</span> gah<span style="color: #666666">**2</span>)
+    x <span style="color: #666666">=</span> linspace(<span style="color: #666666">0</span>, <span style="color: #666666">7*</span>stdev, resolution<span style="color: #666666">+1</span>)
+    y <span style="color: #666666">=</span> gamma_density(x, a, h, A)
+    plt<span style="color: #666666">.</span>figure()  <span style="color: #408080; font-style: italic"># needed to avoid adding curves in plot</span>
+    plt<span style="color: #666666">.</span>plot(x, y)
+    plt<span style="color: #666666">.</span>title(<span style="color: #BA2121">&#39;a=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">, h=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">, A=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (a, h, A))
+    <span style="color: #408080; font-style: italic"># Make Matplotlib write to StringIO file object and grab</span>
+    <span style="color: #408080; font-style: italic"># return the object&#39;s string</span>
+    <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">StringIO</span> <span style="color: #008000; font-weight: bold">import</span> StringIO
+    figfile <span style="color: #666666">=</span> StringIO()
+    plt<span style="color: #666666">.</span>savefig(figfile, format<span style="color: #666666">=</span><span style="color: #BA2121">&#39;png&#39;</span>)
+    figfile<span style="color: #666666">.</span>seek(<span style="color: #666666">0</span>)  <span style="color: #408080; font-style: italic"># rewind to beginning of file</span>
+    <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">base64</span>
+    figdata_density_png <span style="color: #666666">=</span> base64<span style="color: #666666">.</span>b64encode(figfile<span style="color: #666666">.</span>buf)
+    figfile <span style="color: #666666">=</span> StringIO()
+    plt<span style="color: #666666">.</span>savefig(figfile, format<span style="color: #666666">=</span><span style="color: #BA2121">&#39;svg&#39;</span>)
+    figfile<span style="color: #666666">.</span>seek(<span style="color: #666666">0</span>)
+    figdata_density_svg <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;&lt;svg&#39;</span> <span style="color: #666666">+</span> figfile<span style="color: #666666">.</span>buf<span style="color: #666666">.</span>split(<span style="color: #BA2121">&#39;&lt;svg&#39;</span>)[<span style="color: #666666">1</span>]
+    figdata_density_svg <span style="color: #666666">=</span> <span style="color: #008000">unicode</span>(figdata_density_svg,<span style="color: #BA2121">&#39;utf-8&#39;</span>)
+
+    y <span style="color: #666666">=</span> gamma_cumulative(x, a, h, A)
+    plt<span style="color: #666666">.</span>figure()
+    plt<span style="color: #666666">.</span>plot(x, y)
+    plt<span style="color: #666666">.</span>grid(<span style="color: #008000">True</span>)
+    figfile <span style="color: #666666">=</span> StringIO()
+    plt<span style="color: #666666">.</span>savefig(figfile, format<span style="color: #666666">=</span><span style="color: #BA2121">&#39;png&#39;</span>)
+    figfile<span style="color: #666666">.</span>seek(<span style="color: #666666">0</span>)
+    figdata_cumulative_png <span style="color: #666666">=</span> base64<span style="color: #666666">.</span>b64encode(figfile<span style="color: #666666">.</span>buf)
+    figfile <span style="color: #666666">=</span> StringIO()
+    plt<span style="color: #666666">.</span>savefig(figfile, format<span style="color: #666666">=</span><span style="color: #BA2121">&#39;svg&#39;</span>)
+    figfile<span style="color: #666666">.</span>seek(<span style="color: #666666">0</span>)
+    figdata_cumulative_svg <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;&lt;svg&#39;</span> <span style="color: #666666">+</span> figfile<span style="color: #666666">.</span>buf<span style="color: #666666">.</span>split(<span style="color: #BA2121">&#39;&lt;svg&#39;</span>)[<span style="color: #666666">1</span>]
+    figdata_cumulative_svg <span style="color: #666666">=</span> <span style="color: #008000">unicode</span>(figdata_cumulative_svg,<span style="color: #BA2121">&#39;utf-8&#39;</span>)
+    <span style="color: #008000; font-weight: bold">return</span> figdata_density_png, figdata_cumulative_png, \ 
+           figdata_density_svg, figdata_cumulative_svg, \ 
+           <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%.2f</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> mean, <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%.2f</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> stdev
+</pre></div>
+<p>
+The <code>compute_gamma</code> function returns a tuple of six values.
+We want output as displayed in Figure <a href="#wf:gen:flask:fig:gamma">13</a>.
 
 <p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 13:  Design of a web page illustrating the gamma probability functions. <a name="wf:gen:flask:fig:gamma"></a> </p></center>
+<p><img src="fig-web4sa/gen_flask_gamma.png" align="bottom" width=700></p>
+</center>
+
+<p>
+The design is realized in the file <code>view_results.html</code> shown below.
+
+<p>
+
+<!-- code=html (!bc htmlpro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">&lt;p&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;table&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;tr&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;td&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;img</span> <span style="color: #7D9029">src=</span><span style="color: #BA2121">&quot;data:image/png;base64,{{ result[0] }}&quot;</span> <span style="color: #7D9029">width=</span><span style="color: #BA2121">&quot;400&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/td&gt;&lt;td&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;img</span> <span style="color: #7D9029">src=</span><span style="color: #BA2121">&quot;data:image/png;base64,{{ result[1] }}&quot;</span> <span style="color: #7D9029">width=</span><span style="color: #BA2121">&quot;400&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/td&gt;&lt;/tr&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;tr&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;td&gt;</span>{{ result[2]|safe }}<span style="color: #008000; font-weight: bold">&lt;/td&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;td&gt;</span>{{ result[3]|safe }}<span style="color: #008000; font-weight: bold">&lt;/td&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/tr&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;tr&gt;&lt;td&gt;</span>
+Mean value: {{ result[4] }} <span style="color: #008000; font-weight: bold">&lt;br&gt;</span>
+Standard deviation value: {{ result[5] }}
+<span style="color: #008000; font-weight: bold">&lt;/td&gt;&lt;/tr&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/table&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/p&gt;</span>
+</pre></div>
+<p>
+To create the web application, we just perform the following steps:
+
+<ol>
+<li> copy the generic <code>controller.py</code> and <code>model.py</code> files to a new directory</li>
+<li> write the compute function in a file <code>compute.py</code></li>
+<li> edit <code>controller.py</code> and <code>model.py</code> to use the right name of the
+   compute function (<code>from compute import name as compute</code>)</li>
+<li> add an appropriate <code>templates/view_forms.html</code> file that visualizes
+   the returned value <code>results</code> from the compute function</li>
+</ol>
+
 <p>
 <!-- begin bottom navigation -->
 <table style="width: 100%"><tr><td>
-<div style="text-align: left;"><a href="._web4sa_plain015.html"><img src="http://hplgit.github.io/doconce/bundled/html_images/prev1.png" border=0 alt="&laquo; Previous"></a></div>
+<div style="text-align: left;"><a href="._web4sa_plain015.html">&laquo; Previous</a></div>
 </td><td>
-<div style="text-align: right;"><a href="._web4sa_plain017.html"><img src="http://hplgit.github.io/doconce/bundled/html_images/next1.png" border=0 alt="Next &raquo;"></a></div>
+<div style="text-align: right;"><a href="._web4sa_plain017.html">Next &raquo;</a></div>
 </td></tr></table>
 <!-- end bottom navigation -->
 </p>

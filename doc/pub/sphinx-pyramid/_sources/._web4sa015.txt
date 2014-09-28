@@ -1,382 +1,197 @@
 .. !split
 
-.. _wf:vib1:flask:login:
+.. _wf:vib2:flask:nofiles:
 
-User login and storage of computed results
-------------------------------------------
+Avoiding plot files
+-------------------
 
-.. index::
-   single: Flask; login
+Files with plots are easy to deal with as long as they are in the
+``static`` subdirectory of the Flask application directory. However,
+as already pointed out, the previous ``vib1`` app, which writes plot
+files, is not suited for multiple simultaneous users since every
+user will destroy *all* existing plot files before making a new
+one. Therefore, we need a robust solution for multiple users of
+the app.
 
-.. index::
-   single: Flask; database
+The idea is to not write plot files, but instead return the plot
+as a string and embed that string directly in the HTML code.
+This is relatively straightforward with Matplotlib
+and Python. The relevant code is found in the ``compute.py`` file
+of the ``vib2`` app.
 
-We now want to make an app where the computed results can be stored in
-a database. To this end, each user must create an account and login to
-this account for archiving results and for browsing previous runs of
-the application. More files are needed for this purpose, compared to
-the previous apps, and the files are located in the `vib5 <https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/vib5>`__. The ``compute.py`` file contains the
-``compute_gamma`` function from the previous app (``vib4``) in the section :ref:`wf:vib3:flask:nofiles`.
+.. index:: inline PNG image in HTML
 
-``db_models.py``:
+.. index:: StringIO objects
 
-.. code-block:: python
+.. index:: file-like string objects (StringIO)
 
-        from flask.ext.sqlalchemy import SQLAlchemy
-        from werkzeug import generate_password_hash, check_password_hash
-        from app import app
-        
-        db = SQLAlchemy(app)
-        
-        class User(db.Model):
-            id = db.Column(db.Integer, primary_key=True)
-            username = db.Column(db.String(50), unique=True)
-            pwhash = db.Column(db.String())
-            email = db.Column(db.String(120), nullable=True)
-            notify = db.Column(db.Boolean())
-        
-            def __repr__(self):
-                return '<User %r>' % (self.username)
-        
-            def check_password(self, pw):
-                return check_password_hash(self.pwhash, pw)
-        
-            def set_password(self, pw):
-                self.pwhash = generate_password_hash(pw)
-        
-            def is_authenticated(self):
-                return True
-        
-            def is_active(self):
-                return True
-        
-            def is_anonymous(self):
-                return False
-        
-            def get_id(self):
-                return self.id
-        
-        class Gamma(db.Model):
-            id = db.Column(db.Integer, primary_key=True)
-        
-            a          = db.Column(db.Float)
-            h          = db.Column(db.Float)
-            A          = db.Column(db.Float)
-            resolution = db.Column(db.Integer)
-        
-            result   = db.Column(db.String())
-            comments = db.Column(db.String(), nullable=True)
-            user_id  = db.Column(db.Integer, db.ForeignKey('user.id'))
-            user     = db.relationship('User',
-                        backref=db.backref('Gamma', lazy='dynamic'))
+.. index:: strings as files (StringIO)
 
-``app.py``:
+.. index:: base64 encoding of PNG images
+
+PNG plots
+~~~~~~~~~
+
+Python has the ``StringIO`` object that is a string buffer with the
+look and behavior of a file. The idea is to let Matplotlib write to
+a ``StringIO`` object and afterwards extract the string from this object:
 
 .. code-block:: python
 
-        import os
-        from flask import Flask
-        
-        app = Flask(__name__)
-        app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///sqlite.db'
-        app.secret_key = os.urandom(24)
-        
-        # Email settings
+        import matplotlib.pyplot as plot
+        from StringIO import StringIO
+        # run plt.plot, plt.title, etc.
+        figfile = StringIO()
+        plt.savefig(figfile, format='png')
+        figfile.seek(0)  # rewind to beginning of file
+        figdata_png = figfile.buf  # extract string
+
+Before the PNG data can be embedded in HTML we need to convert the
+data to base64 format:
+
+.. code-block:: python
+
         import base64
-        app.config.update(
-                MAIL_SERVER='smtp.gmail.com',
-                MAIL_PORT=587,
-                MAIL_USE_TLS=True,
-                MAIL_USERNAME = 'cbcwebsolvermail@gmail.com',
-                MAIL_PASSWORD = base64.decodestring('RGlmZmljdWx0UFch'),
-                MAIL_DEFAULT_SENDER = 'Flask Gamma Email <cbcwebsolvermail@gmail.com>'
-                )
+        figdata_png = base64.b64encode(figdata_png)
 
-``forms.py``:
+Now we can embed the PNG data in HTML by
 
 .. code-block:: python
 
-        import wtforms as wtf
-        from parampool.html5.flask.fields import HTML5FloatField
-        
-        class GammaForm(wtf.Form):
-            a          = HTML5FloatField(default=0.5,
-                                     validators=[wtf.validators.InputRequired()])
-            h          = HTML5FloatField(default=2.0,
-                                     validators=[wtf.validators.InputRequired()])
-            A          = HTML5FloatField(default=1.41421356237,
-                                     validators=[wtf.validators.InputRequired()])
-            resolution = wtf.IntegerField(default=500,
-                                     validators=[wtf.validators.InputRequired()])
-        
-        from db_models import db, User
-        import flask.ext.wtf.html5 as html5
-        
-        # Standard Forms
-        class register_form(wtf.Form):
-            username = wtf.TextField(
-                'Username', [wtf.validators.Required()])
-            password = wtf.PasswordField(
-                'Password', [wtf.validators.Required(),
-                             wtf.validators.EqualTo(
-                                 'confirm',
-                                 message='Passwords must match')])
-            confirm  = wtf.PasswordField(
-                'Confirm Password', [wtf.validators.Required()])
-            email    = html5.EmailField('Email')
-            notify   = wtf.BooleanField('Email notifications')
-        
-            def validate(self):
-                if not wtf.Form.validate(self):
-                    return False
-        
-                if self.notify.data and not self.email.data:
-                    self.notify.errors.append(
-                        'Cannot send notifications without a valid email address')
-                    return False
-        
-                if db.session.query(User).filter_by(
-                    username=self.username.data).count() > 0:
-                    self.username.errors.append('User already exists')
-                    return False
-        
-                return True
-        
-        class login_form(wtf.Form):
-            username = wtf.TextField(
-                'Username', [wtf.validators.Required()])
-            password = wtf.PasswordField(
-                'Password', [wtf.validators.Required()])
-        
-            def validate(self):
-                if not wtf.Form.validate(self):
-                    return False
-        
-                user = self.get_user()
-        
-                if user is None:
-                    self.username.errors.append('Unknown username')
-                    return False
-        
-                if not user.check_password(self.password.data):
-                    self.password.errors.append('Invalid password')
-                    return False
-        
-                return True
-        
-            def get_user(self):
-                return db.session.query(User).filter_by(
-                    username=self.username.data).first()
+        <img src="data:image/png;base64,PLOTSTR" width="500">
 
-``controller.py``:
+where ``PLOTSTR`` is the content of the string ``figdata_png``.
+
+The complete ``compute.py`` function takes the form
 
 .. code-block:: python
 
-        import os
-        from compute import compute_gamma as compute_function
+        def compute(A, b, w, T, resolution=500):
+            """Return filename of plot of the damped_vibration function."""
+            t = linspace(0, T, resolution+1)
+            y = damped_vibrations(t, A, b, w)
+            plt.figure()  # needed to avoid adding curves in plot
+            plt.plot(t, y)
+            plt.title('A=%g, b=%g, w=%g' % (A, b, w))
         
-        from flask import Flask, render_template, request, redirect, url_for
-        from forms import GammaForm
-        from db_models import db, User, Gamma
-        from flask.ext.login import LoginManager, current_user, login_user, logout_user, login_required
-        from app import app
-        
-        login_manager = LoginManager()
-        login_manager.init_app(app)
-        
-        @login_manager.user_loader
-        def load_user(user_id):
-            return db.session.query(User).get(user_id)
-        
-        # Path to the web application
-        @app.route('/', methods=['GET', 'POST'])
-        def index():
-            result = None
-            user = current_user
-            form = GammaForm(request.form)
-            if request.method == "POST":
-                if form.validate():
-        
-        
-                    result = compute(form)
-                    if user.is_authenticated():
-                        object = Gamma()
-                        form.populate_obj(object)
-                        object.result = result
-                        object.user = user
-                        db.session.add(object)
-                        db.session.commit()
-        
-                        # Send email notification
-                        if user.notify and user.email:
-                            send_email(user)
-        
-            else:
-                if user.is_authenticated():
-                    if user.Gamma.count() > 0:
-                        instance = user.Gamma.order_by('-id').first()
-                        result = instance.result
-                        form = populate_form_from_instance(instance)
-        
-            return render_template("view.html", form=form, result=result, user=user)
-        
-        def compute(form):
-            """
-            Generic function for compute_function with arguments
-            taken from a form object (wtforms.Form subclass).
-            Return the output from the compute_function.
-            """
-            # Extract arguments to the compute function
-            import inspect
-            arg_names = inspect.getargspec(compute_function).args
-        
-            # Extract values from form
-            form_values = [getattr(form, name) for name in arg_names
-                           if hasattr(form, name)]
-        
-            form_data = [value.data for value in form_values]
-        
-            defaults  = inspect.getargspec(compute_function).defaults
-        
-            # Make defaults as long as arg_names so we can traverse both with zip
-            if defaults:
-                defaults = ["none"]*(len(arg_names)-len(defaults)) + list(defaults)
-            else:
-                defaults = ["none"]*len(arg_names)
-        
-            # Convert form data to the right type:
-            import numpy
-            for i in range(len(form_data)):
-                if defaults[i] != "none":
-                    if isinstance(defaults[i], (str,bool,int,float)):
-                        pass  # special widgets for these types do the conversion
-                    elif isinstance(defaults[i], numpy.ndarray):
-                        form_data[i] = numpy.array(eval(form_data[i]))
-                    elif defaults[i] is None:
-                        if form_data[i] == 'None':
-                            form_data[i] = None
-                        else:
-                            try:
-                                # Try eval if it succeeds...
-                                form_data[i] = eval(form_data[i])
-                            except:
-                                pass # Just keep the text
-                    else:
-                        # Use eval to convert to right type (hopefully)
-                        try:
-                            form_data[i] = eval(form_data[i])
-                        except:
-                            print 'Could not convert text %s to %s for argument %s' % (form_data[i], type(defaults[i]), arg_names[i])
-                            print 'when calling the compute function...'
-        
-            # Run computations
-            result = compute_function(*form_data)
-            return result
-        
-        def populate_form_from_instance(instance):
-            """Repopulate form with previous values"""
-            form = GammaForm()
-            for field in form:
-                field.data = getattr(instance, field.name)
-            return form
-        
-        def send_email(user):
-            from flask.ext.mail import Mail, Message
-            mail = Mail(app)
-            msg = Message("Gamma Computations Complete",
-                          recipients=[user.email])
-            msg.body = """A simulation has been completed by the Flask Gamma app. Please log in at
-        
-        http://localhost:5000/login
-        
-        to see the results.
-        
-        ---
-        This email has been automatically generated by the Gamma app created by
-        Parampool. If you don't want email notifications when a result is found, please
-        register a new user and leave the 'notify' field unchecked."""
-            mail.send(msg)
-        
-        @app.route('/reg', methods=['GET', 'POST'])
-        def create_login():
-            from forms import register_form
-            form = register_form(request.form)
-            if request.method == 'POST' and form.validate():
-                user = User()
-                form.populate_obj(user)
-                user.set_password(form.password.data)
-        
-                db.session.add(user)
-                db.session.commit()
-        
-                login_user(user)
-                return redirect(url_for('index'))
-            return render_template("reg.html", form=form)
-        
-        @app.route('/login', methods=['GET', 'POST'])
-        def login():
-            from forms import login_form
-            form = login_form(request.form)
-            if request.method == 'POST' and form.validate():
-                user = form.get_user()
-                login_user(user)
-                return redirect(url_for('index'))
-            return render_template("login.html", form=form)
-        
-        @app.route('/logout')
-        @login_required
-        def logout():
-            logout_user()
-            return redirect(url_for('index'))
-        
-        @app.route('/old')
-        @login_required
-        def old():
-            data = []
-            user = current_user
-            if user.is_authenticated():
-                instances = user.Gamma.order_by('-id').all()
-                for instance in instances:
-                    form = populate_form_from_instance(instance)
-        
-                    result = instance.result
-                    if instance.comments:
-                        result += "<h3>Comments</h3>" + instance.comments
-                    data.append({'form':form, 'result':result, 'id':instance.id})
-        
-            return render_template("old.html", data=data)
-        
-        @app.route('/add_comment', methods=['GET', 'POST'])
-        @login_required
-        def add_comment():
-            user = current_user
-            if request.method == 'POST' and user.is_authenticated():
-                instance = user.Gamma.order_by('-id').first()
-                instance.comments = request.form.get("comments", None)
-                db.session.commit()
-            return redirect(url_for('index'))
-        
-        @app.route('/delete/<id>', methods=['GET', 'POST'])
-        @login_required
-        def delete_post(id):
-            id = int(id)
-            user = current_user
-            if user.is_authenticated():
-                if id == -1:
-                    instances = user.Gamma.delete()
-                else:
-                    try:
-                        instance = user.Gamma.filter_by(id=id).first()
-                        db.session.delete(instance)
-                    except:
-                        pass
-        
-                db.session.commit()
-            return redirect(url_for('old'))
-        
-        
-        if __name__ == '__main__':
-            if not os.path.isfile(os.path.join(os.path.dirname(__file__), 'sqlite.db')):
-                db.create_all()
-            app.run(debug=True)
+            # Make Matplotlib write to StringIO file object and grab
+            # return the object's string
+            from StringIO import StringIO
+            figfile = StringIO()
+            plt.savefig(figfile, format='png')
+            figfile.seek(0)  # rewind to beginning of file
+            import base64
+            figdata_png = base64.b64encode(figfile.buf)
+            return figdata_png
+
+The relevant syntax in an HTML template is
+
+.. code-block:: html
+
+        <img src="data:image/png;base64,{{ results }}" width="500">
+
+if ``results`` holds the returned object from the ``compute`` function above.
+
+.. index:: inline SVG figure in HTML
+
+SVG plots
+~~~~~~~~~
+
+Inline figures in HTML, instead of using files, are most often realized
+by XML code with the figure data in SVG format.
+Plot strings in the SVG format are created very similarly to the PNG
+example:
+
+.. code-block:: python
+
+        figfile = StringIO()
+        plt.savefig(figfile, format='svg')
+        figdata_svg = figfile.buf
+
+The ``figdata_svg`` string contains XML code text can almost
+be directly embedded in
+HTML5. However, the beginning of the text contains information before
+the ``svg`` tag that we want to remove:
+
+.. code-block:: text
+
+        <?xml version="1.0" encoding="utf-8" standalone="no"?>
+        <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+          "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+        <!-- Created with matplotlib (http://matplotlib.sourceforge.net/) -->
+        <svg height="441pt" version="1.1" viewBox="0 0 585 441" ...
+
+The removal is done with a little string manipulation:
+
+.. code-block:: python
+
+        figdata_svg = '<svg' + figfile.buf.split('<svg')[1]
+
+Now, ``figdata_svg`` can be directly inserted in HTML code without
+any surrounding tags (because it is perfectly valid HTML code in itself).
+
+The SVG code generated by Matplotlib may contain UTF-8 characters
+so it is necessary to make a unicode string out of the text:
+``unicode(figdata_svg, 'utf-8')``, otherwise the HTML template will
+lead to an encoding exception.
+
+We have made an alternative compute function ``compute_png_svg``
+that returns both a PNG and an SVG plot:
+
+.. code-block:: python
+
+        def compute_png_svg(A, b, w, T, resolution=500):
+            ...
+            figfile = StringIO()
+            plt.savefig(figfile, format='svg')
+            figfile.seek(0)
+            figdata_svg = '<svg' + figfile.buf.split('<svg')[1]
+            figdata_svg = unicode(figdata_svg,'utf-8')
+            return figdata_png, figdata_svg
+
+.. index::
+   single: safe, as in object|safe
+
+The relevant syntax for inserting an SVG plot in the HTML template is now
+
+.. code-block:: html
+
+        {{ result[1]|safe }}
+
+The use of ``safe`` is essential here.
+
+
+.. admonition:: Important: use ``safe`` for verbatim HTML code
+
+   Special HTML characters like ``<``, ``>``,
+   ``&``, ``"``, and ``'`` are escaped in a template string like ``{{ str }}``
+   (i.e., ``&`` is replaced by ``&amp;`` `<` is replaced by ``&lt;``, etc.).
+   We need to avoid this manipulation of the string content
+   because ``result[1]`` contains
+   XML code where the mentioned characters are essential part of the syntax.
+   Writing ``{{str|safe}}`` ensures that the contents of the string ``str``
+   are not altered before being embedded in the HTML text.
+
+
+
+
+An alternative template, ``view_svg.html`` applies the SVG plot instead
+of the PNG plot. We use the command-line argument ``svg`` for indicating
+that we want an SVG instead of a PNG plot:
+
+.. code-block:: python
+
+        # SVG or PNG plot?
+        svg = False
+        try:
+            if sys.argv[1] == 'svg':
+                svg = True
+        except IndexError:
+            pass
+        if svg:
+            from compute import compute_png_svg as compute
+            template = 'view_svg.html'
+        else:
+            from compute import compute
+            template = 'view.html'
 

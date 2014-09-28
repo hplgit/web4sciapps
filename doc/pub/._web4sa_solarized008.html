@@ -1,0 +1,513 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Using Web Frameworks for Scientific Applications">
+<meta name="keywords" content="web frameworks,MVC pattern,Flask installation,Flask input forms,Flask HTML templates,Flask MVC pattern,Flask troubleshooting,Django installation,Django making a project,Django making an application,Django input forms,Django HTML templates,Flask input forms,Flask error checking,Flask CSS style sheets,Flask LaTeX mathematics,Flask input validation,inline PNG image in HTML,base64 encoding of PNG images,inline SVG figure in HTML,Flask login,Flask database,Django input forms,Django input validation">
+
+<title>Using Web Frameworks for Scientific Applications</title>
+
+
+<link href="https://raw.githubusercontent.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
+<script src="https://rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
+<style type="text/css">
+h1 {color: #b58900;}  /* yellow */
+/* h1 {color: #cb4b16;}  orange */
+/* h1 {color: #d33682;}  magenta, the original choice of thomasf */
+.alert-text-small   { font-size: 80%;  }
+.alert-text-large   { font-size: 130%; }
+.alert-text-normal  { font-size: 90%;  }
+.alert {
+  padding:8px 35px 8px 14px; margin-bottom:18px;
+  text-shadow:0 1px 0 rgba(255,255,255,0.5);
+  border:1px solid #93a1a1;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  color: #555;
+  background-color: #eee8d5;
+  background-position: 10px 5px;
+  background-repeat: no-repeat;
+  background-size: 38px;
+  padding-left: 55px;
+  width: 75%;
+ }
+.alert-block {padding-top:14px; padding-bottom:14px}
+.alert-block > p, .alert-block > ul {margin-bottom:1em}
+.alert li {margin-top: 1em}
+.alert-block p+p {margin-top:5px}
+.alert-notice { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_notice.png); }
+.alert-summary  { background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_summary.png); }
+.alert-warning { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_warning.png); }
+.alert-question {background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_question.png); }
+
+div { text-align: justify; text-justify: inter-word; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Web frameworks ', 1, None, '___sec0'),
+              (' The MVC pattern ', 2, None, '___sec1'),
+              (' A very simple application ', 2, None, '___sec2'),
+              (' Application of the MVC pattern ',
+               2,
+               'wf:hw:mvc',
+               'wf:hw:mvc'),
+              (' Making a Flask application ', 1, None, '___sec4'),
+              (' Programming the Flask application ', 2, None, '___sec5'),
+              (' The user interaction ', 3, None, '___sec6'),
+              (' The Python code ', 3, None, '___sec7'),
+              (' Dissection ', 3, None, '___sec8'),
+              (' The template files ', 3, None, '___sec9'),
+              (' Testing the application ', 3, None, '___sec10'),
+              (' Equipping the input page with output results ',
+               2,
+               None,
+               '___sec11'),
+              (' Splitting the app into model, view, and controller files ',
+               2,
+               'wf:hw3:flask',
+               'wf:hw3:flask'),
+              (' Troubleshooting ', 2, None, '___sec13'),
+              (' Address already in use ', 3, None, '___sec14'),
+              (' Making a Django application ', 1, None, '___sec15'),
+              (' Setting up a Django project ', 2, None, '___sec16'),
+              (' Setting up a Django application ', 2, None, '___sec17'),
+              (' Programming the Django application ', 2, None, '___sec18'),
+              (' The user interaction ', 3, None, '___sec19'),
+              (' The model ', 3, None, '___sec20'),
+              (' The view ', 3, None, '___sec21'),
+              (' Making the input page ', 3, None, '___sec22'),
+              (' Making the results page ', 3, None, '___sec23'),
+              (' Equipping the input page with output results ',
+               2,
+               None,
+               '___sec24'),
+              (' Handling multiple input variables in Flask ',
+               1,
+               'wf:vib:flask',
+               'wf:vib:flask'),
+              (' Programming the Flask application ',
+               2,
+               'wf:vib1:flask:app',
+               'wf:vib1:flask:app'),
+              (' The compute part ', 3, None, '___sec27'),
+              (' The model ', 3, None, '___sec28'),
+              (' The view ', 3, None, '___sec29'),
+              (' The HTML template ', 3, None, '___sec30'),
+              (' Implementing error checking in the template ',
+               2,
+               None,
+               '___sec31'),
+              (' Using style sheets ', 2, None, '___sec32'),
+              (' Using LaTeX mathematics ', 2, None, '___sec33'),
+              (' Rearranging the elements in the HTML template ',
+               2,
+               None,
+               '___sec34'),
+              (' Bootstrap HTML style ', 2, None, '___sec35'),
+              (' Custom validation ',
+               2,
+               'wf:vib1:flask:validation',
+               'wf:vib1:flask:validation'),
+              (' Using Flask validators ', 3, None, '___sec37'),
+              (' Tailored validation ', 3, None, '___sec38'),
+              (' Tailored validation of intervals ', 3, None, '___sec39'),
+              (' Demo ', 3, None, '___sec40'),
+              (' Avoiding plot files ',
+               2,
+               'wf:vib2:flask:nofiles',
+               'wf:vib2:flask:nofiles'),
+              (' PNG plots ', 3, None, '___sec42'),
+              (' SVG plots ', 3, None, '___sec43'),
+              (' Autogenerating the code ',
+               2,
+               'wf:autogen:flask',
+               'wf:autogen:flask'),
+              (' Inspecting function signatures ', 3, None, '___sec45'),
+              (' Generating the model ', 3, None, '___sec46'),
+              (' Generating the view ', 3, None, '___sec47'),
+              (' Generating the template ', 3, None, '___sec48'),
+              (' Application ', 3, None, '___sec49'),
+              (' User login and storage of computed results ',
+               2,
+               'wf:flask:login',
+               'wf:flask:login'),
+              (' Required additional software ', 3, None, '___sec51'),
+              (' The compute part ', 3, None, '___sec52'),
+              (' The interfaces of the app ', 3, None, '___sec53'),
+              (' The source code ', 3, None, '___sec54'),
+              (' Resources ', 3, None, '___sec55'),
+              (' Handling multiple input variables in Django ',
+               1,
+               'wf:vib:django',
+               'wf:vib:django'),
+              (' Programming the Django application ', 2, None, '___sec57'),
+              (' Adding the app to a project ', 3, None, '___sec58'),
+              (' The compute part ', 3, None, '___sec59'),
+              (' The model ', 3, None, '___sec60'),
+              (' The view ', 3, None, '___sec61'),
+              (' Custom validation ', 2, None, '___sec62'),
+              (' Customizing widgets ', 2, None, '___sec63'),
+              (' Resources ', 2, None, '___sec64'),
+              (' Exercises ', 1, None, '___sec65'),
+              (' Exercise 1: Add two numbers ',
+               2,
+               'wf:exer:add2',
+               'wf:exer:add2'),
+              (' Exercise 2: Upload data file and visualize curves ',
+               2,
+               'wf:exer:upload',
+               'wf:exer:upload'),
+              (' Exercise 3: Plot a user-specified formula ',
+               2,
+               'wf:exer:formula',
+               'wf:exer:formula'),
+              (' Exercise 4: Visualize Taylor polynomial approximations ',
+               2,
+               'wf:exer:Taylor',
+               'wf:exer:Taylor'),
+              (' Exercise 5: Extend the `gen` app ',
+               2,
+               'wf:exer:gen:demo',
+               'wf:exer:gen:demo'),
+              (' Exercise 6: Equip the `gen` app with more data types ',
+               2,
+               'wf:exer:gen:lists',
+               'wf:exer:gen:lists'),
+              (' Exercise 7: Auto-generate code from function signature ',
+               2,
+               None,
+               '___sec72'),
+              (' Resources ', 1, None, '___sec73'),
+              (' Flask resources ', 2, None, '___sec74'),
+              (' Django resources ', 2, None, '___sec75'),
+              (' Remaining ', 1, None, '___sec76')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+    
+<a name="part0008"></a>
+<p>
+<!-- begin top navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._web4sa_solarized007.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._web4sa_solarized009.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end top navigation -->
+</p>
+
+<p>
+<!-- !split -->
+
+<h1>Handling multiple input variables in Flask <a name="wf:vib:flask"></a></h1>
+
+<p>
+The scientific hello world example shows how to work with one input
+variable and one output variable. We can easily derive an extensible
+recipe for apps with a collection of input variables and some
+associated HTML code as result. Multiple input variables are listed
+in the <code>InputForm</code> class using different types for different forms
+(text field, float field, integer field, check box field for boolean
+values, etc.).  The value of these variables will be available in a
+<code>form</code> object for computation. It is then a matter of setting
+up a template code where the various variables if the <code>form</code> object
+are formatted in HTML code as desired.
+
+<p>
+Our sample web application
+addresses the task of plotting the function \( u(t)=Ae^{-bt}\sin (wt) \) for
+\( t\in [0,T] \). The web application must have fields for the numbers \( A \),
+\( b \), \( w \), and \( T \), and a <em>Compute</em> button, as shown in Figure
+<a href="#wf:vib1:flask:fig:input">7</a>. Filling in values, say \( 0.1 \) for \( b \) and
+\( 20 \) for \( T \), results in what we see in Figure <a href="#wf:vib1:flask:fig:result">8</a>,
+i.e., a plot of \( u(t) \) is added after the input fields and the <em>Compute</em>
+button.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 7:  The input page. <a name="wf:vib1:flask:fig:input"></a> </p></center>
+<p><img src="fig-web4sa/vib1_flask_input.png" align="bottom" width=500></p>
+</center>
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 8:  The result page. <a name="wf:vib1:flask:fig:result"></a> </p></center>
+<p><img src="fig-web4sa/vib1_flask_output.png" align="bottom" width=700></p>
+</center>
+
+<p>
+We shall make a series of different versions of this app:
+
+<ol>
+<li> <code>vib1</code> for the basic set-up and illustration of tailoring the HTML code.</li>
+<li> <code>vib2</code> for custom validation of input, governed by the programmer,
+   and inlined graphics in the HTML code.</li>
+<li> <code>gen</code> for automatic generation of the Flask app (!).</li>
+<li> <code>login</code> for storing computed results in user accounts.</li>
+</ol>
+
+<h2>Programming the Flask application <a name="wf:vib1:flask:app"></a></h2>
+
+<p>
+The forthcoming text explains the necessary steps to realize a
+Flask app that behaves as depicted in Figures <a href="#wf:vib1:flask:fig:input">7</a>
+and <a href="#wf:vib1:flask:fig:result">8</a>. We start with the
+<code>compute.py</code> module since it contains only the computation of \( u(t) \)
+and the making of the plot, without any interaction with Flask.
+
+<p>
+The files associated with this app are found in the <a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/vib1" target="_self"><tt>vib1</tt></a> directory.
+
+<h3>The compute part  <a name="___sec27"></a></h3>
+
+<p>
+More specifically, inside <code>compute.py</code>, we have a function for
+evaluating \( u(t) \) and a <code>compute</code> function for making the plot. The
+return value of the latter is the name of the plot file, which should
+get a unique name every time the <code>compute</code> function is called such
+that the browser cannot reuse an already cached image when displaying
+the plot. Flask
+applications must have all extra files (CSS, images, etc.) in a
+subdirectory <code>static</code>.
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>from numpy import exp, cos, linspace
+import matplotlib.pyplot as plt
+import os, time, glob
+
+def damped_vibrations(t, A, b, w):
+    return A*exp(-b*t)*cos(w*t)
+
+def compute(A, b, w, T, resolution=500):
+    &quot;&quot;&quot;Return filename of plot of the damped_vibration function.&quot;&quot;&quot;
+    t = linspace(0, T, resolution+1)
+    y = damped_vibrations(t, A, b, w)
+    plt.figure()  # needed to avoid adding curves in plot
+    plt.plot(t, y)
+    plt.title('A=%g, b=%g, w=%g' % (A, b, w))
+    if not os.path.isdir('static'):
+        os.mkdir('static')
+    else:
+        # Remove old plot files
+        for filename in glob.glob(os.path.join('static', '*.png')):
+            os.remove(filename)
+    # Use time since Jan 1, 1970 in filename in order make
+    # a unique filename that the browser has not chached
+    plotfile = os.path.join('static', str(time.time()) + '.png')
+    plt.savefig(plotfile)
+    return plotfile
+
+if __name__ == '__main__':
+    print compute(1, 0.1, 1, 20)
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<div class="alert alert-block alert-warning alert-text-normal">
+<b>Avoid file writing.</b>
+<p>
+It is in general not a good idea to write plots to file or let a
+web app write to file. If this app is deployed at some web site and
+multiple users are running the app, the <code>os.remove</code> statements may remove
+plots created by all other users. However, the app is useful as a
+graphical user interface run locally on a machine.
+Later, we shall avoid writing plot files and instead
+store plots in strings and embed the strings
+in the <code>img</code> tag in the HTML code.
+</div>
+
+
+<p>
+We organize the model, view, and controller as three separate
+files, as illustrated in
+the section <a href="._web4sa_solarized004.html#wf:hw3:flask">Splitting the app into model, view, and controller files</a>. This more complicated app involves
+more code and especially the model will soon be handy to isolate in its own
+file.
+
+<h3>The model  <a name="___sec28"></a></h3>
+
+<p>
+Our first version of <code>model.py</code> reads
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>from wtforms import Form, FloatField, validators
+from math import pi
+
+class InputForm(Form):
+    A = FloatField(
+        label='amplitude (m)', default=1.0,
+        validators=[validators.InputRequired()])
+    b = FloatField(
+        label='damping factor (kg/s)', default=0,
+        validators=[validators.InputRequired()])
+    w = FloatField(
+        label='frequency (1/s)', default=2*pi,
+        validators=[validators.InputRequired()])
+    T = FloatField(
+        label='time interval (s)', default=18,
+        validators=[validators.InputRequired()])
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+As seen, the field classes can take a <code>label</code> argument for a longer
+description, here also including the units in which the variable is
+measured. It is also possible to add a <code>description</code> argument with
+some help message. Furthermore, we include a <code>default</code> value, which
+will appear in the text field such that the user does not need to
+fill in all values.
+
+<h3>The view  <a name="___sec29"></a></h3>
+
+<p>
+The view component will of course make use of templates, and we shall experiment
+with different templates. Therefore, we allow a command-line argument
+to this Flask app for choosing which template we want. The rest of
+the <code>controller.py</code> file follows much the same set up as for the scientific
+hello world app:
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>from model import InputForm
+from flask import Flask, render_template, request
+from compute import compute
+import sys
+
+try:
+    template_name = sys.argv[1]
+except IndexError:
+    template_name = 'view_plain'
+
+app = Flask(__name__)
+
+if template_name == 'view_flask_bootstrap':
+    from flask_bootstrap import Bootstrap
+    Bootstrap(app)
+
+@app.route('/vib1', methods=['GET', 'POST'])
+def index():
+    form = InputForm(request.form)
+    if request.method == 'POST' and form.validate():
+        result = compute(form.A.data, form.b.data,
+                         form.w.data, form.T.data)
+    else:
+        result = None
+
+    print 'XXX',result, request.method, [field.errors for field in form]
+    return render_template(template_name + '.html',
+                           form=form, result=result)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+</code></pre>
+<!-- end verbatim block -->
+
+<h3>The HTML template  <a name="___sec30"></a></h3>
+
+<p>
+The details governing how the web page really looks like lie in the
+template file. Since we have several fields and want them nicely
+align in a tabular fashion, we place the field name, text areas,
+and labels inside an HTML table in our first attempt to write a
+template, <code>view_plain.html</code>:
+
+<p>
+<!-- begin verbatim block  htmlpro-->
+<pre><code>&lt;form method=post action=&quot;&quot;&gt;
+&lt;table&gt;
+  {% for field in form %}
+    &lt;tr&gt;
+    &lt;td&gt;{{ field.name }}&lt;/td&gt;&lt;td&gt;{{ field }}&lt;/td&gt;
+    &lt;td&gt;{{ field.label }}&lt;/td&gt;
+    &lt;/tr&gt;
+  {% endfor %}
+&lt;/table&gt;
+&lt;p&gt;&lt;input type=submit value=Compute&gt;&lt;/form&gt;&lt;/p&gt;
+
+&lt;p&gt;
+{% if result != None %}
+&lt;img src=&quot;{{ result }}&quot; width=&quot;500&quot;&gt;
+{% endif %}
+&lt;/p&gt;
+</code></pre>
+<!-- end verbatim block -->
+Observe how easy it is to iterate over the <code>form</code> object and grab data
+for each field: <code>field.name</code> is the name of the variable in the
+<code>InputForm</code> class, <code>field.label</code> is the full name with units as given
+through the <code>label</code> keyword when constructing the field object, and
+writing the field object itself generates the text area for
+input (i.e., the HTML input form). The control statements we can
+use in the template are part of the <a href="http://jinja.pocoo.org/docs/" target="_self">Jinja2</a>
+templating language. For now, the if-test, for-loop and
+output of values (<code>{{ object }}</code>) are enough to generate the HTML
+code we want.
+
+<p>
+Recall that the objects we need in the template, like <code>result</code> and <code>form</code>
+in the present case, are transferred to the template via keyword
+arguments to the <code>render_template</code> function. We can easily pass on
+any object in our application to the template. Debugging of the template
+is done by viewing the HTML source of the web page in the browser.
+
+<p>
+You are encouraged to go to the <code>vib</code> directory,
+run <code>python controller.py</code>, and load
+
+<p>
+<!-- begin verbatim block -->
+<pre><code>`http://127.0.0.1:5000/vib1`
+</code></pre>
+<!-- end verbatim block -->
+into your web browser for testing.
+
+<p>
+<p>
+<!-- begin bottom navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._web4sa_solarized007.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._web4sa_solarized009.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end bottom navigation -->
+</p>
+
+<!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

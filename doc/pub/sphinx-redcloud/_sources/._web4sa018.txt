@@ -20,7 +20,9 @@ and :ref:`wf:vib1:flask:fig:result`.
 Programming the Django application  (2)
 ---------------------------------------
 
-**Adding the app to a project.**
+Adding the app to a project
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 Any Django app needs a project, but here we reuse the project
 we set up for the scientific hello world examples. We go to
 the directory ``apps/django_apps`` and create the Django app ``vib1``:
@@ -43,14 +45,18 @@ These steps ensure that Django can find our application as a module/package,
 that Django can find our templates associated with this application,
 and that the URL address applies the name ``vib1`` to reach the application.
 
-**The compute part.**
+The compute part  (3)
+~~~~~~~~~~~~~~~~~~~~~
+
 The computations in our application are put in a file ``compute.py``
 and explained in detail in the section :ref:`wf:vib1:flask:app`.
 
 .. index::
    single: Django; input forms
 
-**The model.**
+The model  (3)
+~~~~~~~~~~~~~~
+
 We can now write ``models.py`` and the ``Input`` class that defines
 the form fields for the four input variables:
 
@@ -87,7 +93,9 @@ the page.
 .. index::
    single: Django; index function
 
-**The view.**
+The view  (3)
+~~~~~~~~~~~~~
+
 The ``views.py`` file looks as follows:
 
 .. code-block:: python

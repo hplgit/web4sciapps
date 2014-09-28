@@ -16,12 +16,12 @@ file=upload.tar.gz
 
 Suppose you have tabular data in a file:
 
-!bt dat
+!bc dat
 #  t        y       error
 0.0000    1.2345   1.4E-4
 1.0000    0.9871  -4.9E-3
 1.2300    0.5545   8.2E-3
-!et
+!ec
 That is, there is a comment line with headings for the various
 columns, and then floating-point values are listed with an
 arbitrary number of columns and rows. You want to upload such
@@ -97,7 +97,7 @@ domain = eval(domain, numpy.__dict__)
 
 The evaluation of the formula is slightly more complicated if `eval`
 is to be run with the `numpy` namespace. One first needs
-to create $$ coordinates:
+to create $x$ coordinates:
 
 !bc pycod
 x = numpy.linspace(domain[0], domain[1], 10001)

@@ -1,32 +1,35 @@
 import wtforms as wtf
+from math import pi
 
-# Application data
-class GammaForm(wtf.Form):
-    a = wtf.FloatField(default=0.5,
+class ComputeForm(wtf.Form):
+    A = wtf.FloatField(label='\( A \)', default=1.0,
         validators=[wtf.validators.InputRequired()])
-    h = wtf.FloatField(default=2.0,
+    b = wtf.FloatField(label='\( b \)', default=0.0,
         validators=[wtf.validators.InputRequired()])
-    A = wtf.FloatField(default=1.41421356237,
+    w = wtf.FloatField(label='\( w \)', default=pi,
         validators=[wtf.validators.InputRequired()])
-    resolution = wtf.IntegerField(default=500,
+    T = wtf.FloatField(label='\( T \)', default=18,
+        validators=[wtf.validators.InputRequired()])
+    resolution = wtf.IntegerField(label='resolution', default=500,
         validators=[wtf.validators.InputRequired()])
 
 from db_models import db, User
 import flask.ext.wtf.html5 as html5
 
-# Standard forms for login
+# Standard Forms
 class register_form(wtf.Form):
     username = wtf.TextField(
-        'Username', [wtf.validators.Required()])
+        label='Username', validators=[wtf.validators.Required()])
     password = wtf.PasswordField(
-        'Password', [wtf.validators.Required(),
-                     wtf.validators.EqualTo(
-                         'confirm',
-                         message='Passwords must match')])
+        label='Password', validators=[
+            wtf.validators.Required(),
+            wtf.validators.EqualTo(
+                'confirm', message='Passwords must match')])
     confirm  = wtf.PasswordField(
-        'Confirm Password', [wtf.validators.Required()])
-    email    = html5.EmailField('Email')
-    notify   = wtf.BooleanField('Email notifications')
+        label='Confirm Password',
+        validators=[wtf.validators.Required()])
+    email    = html5.EmailField(label='Email')
+    notify   = wtf.BooleanField(label='Email notifications')
 
     def validate(self):
         if not wtf.Form.validate(self):
@@ -34,7 +37,7 @@ class register_form(wtf.Form):
 
         if self.notify.data and not self.email.data:
             self.notify.errors.append(
-                'Cannot send notifications without a valid email address')
+        'Cannot send notifications without a valid email address')
             return False
 
         if db.session.query(User).filter_by(
@@ -46,9 +49,9 @@ class register_form(wtf.Form):
 
 class login_form(wtf.Form):
     username = wtf.TextField(
-        'Username', [wtf.validators.Required()])
+        label='Username', validators=[wtf.validators.Required()])
     password = wtf.PasswordField(
-        'Password', [wtf.validators.Required()])
+        label='Password', validators=[wtf.validators.Required()])
 
     def validate(self):
         if not wtf.Form.validate(self):
