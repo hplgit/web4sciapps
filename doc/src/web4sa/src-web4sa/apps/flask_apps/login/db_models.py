@@ -33,7 +33,7 @@ class User(db.Model):
         return self.id
 
 class Gamma(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id         = db.Column(db.Integer, primary_key=True)
 
     a          = db.Column(db.Float)
     h          = db.Column(db.Float)

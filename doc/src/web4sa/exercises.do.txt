@@ -10,6 +10,30 @@ adds the numbers, and prints the sum in a new web page.
 Package the necessary files that constitute the application
 in a tar file.
 
+===== Exercise: Upload data file and visualize curves =====
+label{wf:exer:upload}
+file=upload.tar.gz
+
+Suppose you have tabular data in a file:
+
+!bt dat
+#  t        y       error
+0.0000    1.2345   1.4E-4
+1.0000    0.9871  -4.9E-3
+1.2300    0.5545   8.2E-3
+!et
+That is, there is a comment line with headings for the various
+columns, and then floating-point values are listed with an
+arbitrary number of columns and rows. You want to upload such
+a data file to a web application and have the each column, from
+the second one, plotted against the the values in the first column.
+In the particular example, `y` and `error` should be plotted against
+`t`, yielding two curves.
+
+The web application may have one field: the name of the file to upload.
+Search for constructions on how to upload a files and write this
+application. Generate a suitable data file for testing purposes.
+
 ===== Exercise: Plot a user-specified formula =====
 label{wf:exer:formula}
 file=plot_formula.tar.gz
@@ -37,8 +61,8 @@ new one.
 !bhint
 You may use the `vib1` app from Section ref{wf:vib1:flask:app}
 with the `view_errcheck.html` template as starting point.
-Preferably, let plots be created as strings, as in the `vib2`
-app.
+Preferably, let plots be created as strings, as explained for the `vib2`
+app in Section ref{wf:vib2:flask:nofiles}.
 
 The *Formula* and *Domain* fields need to be `TextField` objects,
 and the compute function must perform an `eval` on the user's input.
@@ -247,6 +271,9 @@ import sympy as sp
 exec('x = %s = sp.symbols("%s")' %
      (independent_variable, independent_variable))
 !ec
+!ehint
+
+!bhint
 Evaluating `formula` in the namespace of `sympy` (so that all the `sin`,
 `exp`, `pi`, and similar symbols are defined properly as `sympy`
 objects) needs a merge of the `sympy` namespace and the variable for
@@ -260,7 +287,9 @@ namespace.update(local)
 formula = eval(formula, namespace)
 !ec
 Turning `x0` into a valid `sympy` expression is easier: `x0 = eval(x0, sp.__dict__)`.
+!ehint
 
+!bhint
 Note that in the web interface, the minimum and maximum values on the axis
 can be mathematical expressions such as `2*pi`. This means that these
 quantities must be strings that are evaluated in the `numpy` namespace, e.g.,
@@ -269,31 +298,61 @@ quantities must be strings that are evaluated in the `numpy` namespace, e.g.,
 import numpy as np
 xmin = eval(xmin, np.__dict__)
 !ec
-
-legends....
 !ehint
+
+!bhint
+Getting the legends right when plotting multiple curves in the same
+plot is a bit tricky. One solution is to have a global variable `legends`
+that is initialized to `[]` and do the following inside the compute function:
+
+!bc pycod
+import matplotlib.pyplot as plt
+global legends
+if erase == 'yes':   # Start new figure?
+    plt.figure()
+    legends = []
+if not legends:
+    # We come here every time the figure is empty so
+    # we need to draw the formula
+    legends.append('$%s$' % sp.latex(formula))
+    plt.plot(x, f(x))
+!ec
+Here, `f` is the Python function for computing the `numpy` variant
+of the expression in `formula`.
+!ehint
+
+!bhint
+Use the test block in the file to call the compute function several
+times with different values of the `erase` parameter to test that
+the erase functionality is correct.
+!ehint
+!esubex
+
+!bsubex
+Write the remaining files. These have straightforward content if
+Exercise ref{wf:exer:formula} is done and understood.
 !esubex
 
 
 # #if TOPIC in ('Flask+Django', 'Flask')
-===== Exercise: Extend the `vib3` app =====
-label{wf:exer:vib3:demo}
+===== Exercise: Extend the `gen` app =====
+label{wf:exer:gen:demo}
 
 Add a new argument `x_axis` to the `compute` function in the
-"`vib3`": "${github_path}/src-web4sa/apps/flask_apps/vib3"
+"`gen`": "${github_path}/src-web4sa/apps/flask_apps/gen"
 application from Section
-ref{wf:vib3:flask:autogen}. The `x_axis` argument measures the extent
+ref{wf:autogen:flask}. The `x_axis` argument measures the extent
 of the $x$ axis in the plots in terms of the number of standard
 deviations (default may be 7).  Observe how the web interface
 automatically adds the new argument and how the plots adapt!
 
 
-===== Exercise: Equip the `vib3` app with more data types =====
-label{wf:exer:vib3:lists}
-file=vib3_ext.tar.gz
+===== Exercise: Equip the `gen` app with more data types =====
+label{wf:exer:gen:lists}
+file=gen_ext.tar.gz
 
-In the "`vib3`": "${github_path}/src-web4sa/apps/flask_apps/vib3"
-application from Section ref{wf:vib3:flask:autogen},
+In the "`gen`": "${github_path}/src-web4sa/apps/flask_apps/gen"
+application from Section ref{wf:autogen:flask},
 use the `label` argument in the form field objects to add an
 information of the type of data that is to be supplied in the
 text field. Extend the `model.py` file to also handle
@@ -311,11 +370,11 @@ file=generate_flask.py
 Given a `compute` with a set of positional and keyword
 arguments, the purpose of this exercise is to *automatically* generate the
 Flask files `model.py` and `controller.py`. Use the Python `inspect`
-module, see Section ref{wf:vib3:flask:autogen}, to extract
+module, see Section ref{wf:autogen:flask}, to extract
 the positional and keyword arguments in `compute`, and use this
 information to construct the relevant Python code in strings. Write
 the strings to `model.py` and `controller.py` files. Assume as
-in Section ref{wf:vib3:flask:autogen} that the user provides
+in Section ref{wf:autogen:flask} that the user provides
 a file `view_results.html` for defining how the returned object
 from the `compute` function is to be rendered.
 

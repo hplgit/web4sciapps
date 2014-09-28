@@ -10,10 +10,11 @@ install Flask and some corresponding packages. This is easiest
 performed by
 
 !bc sys
-Terminal> sudo pip install Flask
-Terminal> sudo pip install WTForms
+Terminal> sudo pip install --upgrade Flask
+Terminal> sudo pip install --upgrade Flask-WTF
 !ec
-You must add `--upgrade` to upgrade a previous installation (`pip install --upgrade Flask`).
+The `--upgrade` option ensures that you upgrade to the latest version in
+case you already have these packages.
 
 ===== Programming the Flask application =====
 

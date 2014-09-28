@@ -1,20 +1,20 @@
 import wtforms as wtf
-from parampool.html5.flask.fields import HTML5FloatField
 
+# Application data
 class GammaForm(wtf.Form):
-    a          = HTML5FloatField(default=0.5,
-                             validators=[wtf.validators.InputRequired()])
-    h          = HTML5FloatField(default=2.0,
-                             validators=[wtf.validators.InputRequired()])
-    A          = HTML5FloatField(default=1.41421356237,
-                             validators=[wtf.validators.InputRequired()])
+    a = wtf.FloatField(default=0.5,
+        validators=[wtf.validators.InputRequired()])
+    h = wtf.FloatField(default=2.0,
+        validators=[wtf.validators.InputRequired()])
+    A = wtf.FloatField(default=1.41421356237,
+        validators=[wtf.validators.InputRequired()])
     resolution = wtf.IntegerField(default=500,
-                             validators=[wtf.validators.InputRequired()])
+        validators=[wtf.validators.InputRequired()])
 
 from db_models import db, User
 import flask.ext.wtf.html5 as html5
 
-# Standard Forms
+# Standard forms for login
 class register_form(wtf.Form):
     username = wtf.TextField(
         'Username', [wtf.validators.Required()])

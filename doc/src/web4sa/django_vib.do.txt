@@ -93,7 +93,6 @@ Some remarks are necessary:
    URL applies tools to find this `static` directory and then
    the `static` prefix in the `result` filename must be removed.
 
-
 The template for rendering the page is listed next.
 
 @@@CODE ${app_path}/templates/vib1.html
@@ -222,6 +221,7 @@ Django files, and
 then one can view the form class in the `models.py` file for how
 HTML5 widgets can be used in the definition of the `widgets`
 dictionary.
+
 # #ifdef COMING
 !split
 ======= Djano and Bootstrap =======

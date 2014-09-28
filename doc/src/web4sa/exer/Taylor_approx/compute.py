@@ -53,10 +53,12 @@ def visualize_series(
     x = np.linspace(xmin, xmax, 1001)
     import matplotlib.pyplot as plt
     global legends
-    if erase == 'yes':
+    if erase == 'yes':   # Start new figure?
         plt.figure()
         legends = []
     if not legends:
+        # We come here every time the figure is empty so
+        # we need to draw the formula
         legends.append('$%s$' % sp.latex(formula))
         plt.plot(x, f(x))
     plt.plot(x, s(x))

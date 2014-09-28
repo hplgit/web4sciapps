@@ -29,11 +29,11 @@ FIGURE: [fig-web4sa/vib1_flask_output, width=700] The result page. label{wf:vib1
 
 We shall make a series of different versions of this app:
 
- * `vib1` for the basic set-up and illustration of tailoring the HTML code.
- * `vib2` for custom validation of input, governed by the programmer,
+ o `vib1` for the basic set-up and illustration of tailoring the HTML code.
+ o `vib2` for custom validation of input, governed by the programmer,
    and inlined graphics in the HTML code.
- * `vib3` for automatic generation of the Flask app (!).
- * `vib4` for storing computed results in user accounts.
+ o `gen` for automatic generation of the Flask app (!).
+ o `login` for storing computed results in user accounts.
 
 ===== Programming the Flask application =====
 label{wf:vib1:flask:app}
@@ -449,7 +449,7 @@ code to look like they do in mathematical writing (`T` for $T$).
 
 !split
 ===== Avoiding plot files =====
-label{wf:vib3:flask:nofiles}
+label{wf:vib2:flask:nofiles}
 
 Files with plots are easy to deal with as long as they are in the
 `static` subdirectory of the Flask application directory. However,
@@ -593,11 +593,11 @@ that we want an SVG instead of a PNG plot:
 
 !split
 ===== Autogenerating the code =====
-label{wf:vib3:flask:autogen}
+label{wf:autogen:flask}
 
 ## Define Mako variable for path to source code
 <%
-app_path = src_path + 'flask_apps/vib3'
+app_path = src_path + 'flask_apps/gen'
 %>
 
 idx{`getattr`} idx{`setattr`} idx{`hasattr`}
@@ -605,7 +605,7 @@ idx{`getattr`} idx{`setattr`} idx{`hasattr`}
 We shall now present generic `model.py` and `controller.py`
 files that work with *any* `compute` function (!). This example will
 demonstrate some advanced, powerful features of Python. The source code
-is found in the "`vib3`": "${github_path}/${app_path}"
+is found in the "`gen`": "${github_path}/${app_path}"
 directory.
 
 __Inspecting function signatures.__
@@ -789,9 +789,9 @@ making a plot of $g$ og $G$ for $x\in [0,7\sigma]$.
 
 @@@CODE ${app_path}/compute.py fromto: def gamma_density@
 The `compute_gamma` function returns a tuple of six values.
-We want output as displayed in Figure ref{wf:vib3:flask:fig:gamma}.
+We want output as displayed in Figure ref{wf:gen:flask:fig:gamma}.
 
-FIGURE: [fig-web4sa/vib3_flask_gamma, width=700] Design of a web page illustrating the gamma probability functions. label{wf:vib3:flask:fig:gamma}
+FIGURE: [fig-web4sa/gen_flask_gamma, width=700] Design of a web page illustrating the gamma probability functions. label{wf:gen:flask:fig:gamma}
 
 The design is realized in the file `view_results.html` shown below.
 
@@ -809,11 +809,11 @@ To create the web application, we just perform the following steps:
 
 !split
 ===== User login and storage of computed results =====
-label{wf:vib1:flask:login}
+label{wf:flask:login}
 
 ## Define Mako variable for path to source code
 <%
-app_path = src_path + 'flask_apps/vib4'
+app_path = src_path + 'flask_apps/login'
 %>
 
 idx{Flask!login}
@@ -823,29 +823,71 @@ We now want to make an app where the computed results can be stored in
 a database. To this end, each user must create an account and login to
 this account for archiving results and for browsing previous runs of
 the application. More files are needed for this purpose, compared to
-the previous apps, and the files are located in the "`vib4`":
-"${github_path}/${app_path}". The `compute.py` file contains the
-`compute_gamma` function from the previous app (`vib3`) in Section
-ref{wf:vib3:flask:nofiles}.
+the previous apps, and the files are located in the "`login`":
+"${github_path}/${app_path}" directory.
 
-_The text is not yet written. The relevant files to be made are
-listed below._
+Several packages are needed for this more advanced application:
 
+ * "Flask-Login": "https://flask-login.readthedocs.org/en/latest/:
+ * "Flask-SQLAlchemy": "http://flask.pocoo.org/docs/0.10/patterns/sqlalchemy/"
+
+
+!bc sys
+sudo pip install --upgrade flask-login
+sudo pip install --upgrade flask-sqlalchemy
+!ec
+
+The `compute.py` file contains the
+`compute_gamma` function from the previous app (`gen`) in Section
+ref{wf:autogen:flask}, see the code under the heading *Application*.
+Basically, this compute function creates two plots of two functions
+(the Gamma probability density function and the corresponding
+cumulative function). The compute function involves four parameters:
+`a`, `h`, `A`, and `resolution` (the former three are parameters
+governing the curves while the latter is the number of points
+used in the curves).
+
+There is quite much Flask code required for user accounts and login.
+Rather than explaining everything in detail, we primarily list
+the various code files below. A starting point is the central `controller.py`
+file, which is now quite lengthy and involves four different
+URLs:
+[[[
+  o one for computing results, containing input forms
+
+@@@CODE ${app_path}/controller.py
+
+Creation of the `app` object is put in a separate file `app.py`:
+
+@@@CODE ${app_path}/app.py
+
+The forms for the compute function and for the login is
+stored in a file called `forms.py`:
+
+@@@CODE ${app_path}/forms.py
+
+Database-related code for the SQLAlchemy database is collected in
 `db_models.py`:
 
 @@@CODE ${app_path}/db_models.py
 
-`app.py`:
+Finally, we need views. For the results of the computation we have
+a `view.html` file that is very similar to `view_table.html`
+in the `vib1` app:
 
-@@@CODE ${app_path}/app.py
+@@@CODE ${app_path}/templates/view.html
 
-`forms.py`:
+The `login.html` template for the login pages takes the form
 
-@@@CODE ${app_path}/forms.py
+@@@CODE ${app_path}/templates/login.html
 
-`controller.py`:
+The page for registering a new user has a simple template `reg.html`:
 
-@@@CODE ${app_path}/controller.py
+@@@CODE ${app_path}/templates/reg.html
+
+The final file is `old.html` for retrieving old simulations:
+
+@@@CODE ${app_path}/templates/old.html
 
 
 !split
