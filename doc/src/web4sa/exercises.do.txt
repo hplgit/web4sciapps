@@ -14,19 +14,166 @@ in a tar file.
 label{wf:exer:formula}
 file=plot_formula.tar.gz
 
+The purpose of this exercise is to write a web application that
+can visualize any user-given formula. For example, in the interface below,
+
+FIGURE: [fig-web4sa/plot_formula, width=600 frac=0.8]
+
+the user has
+
+ * specified a curve $\sin (x)$ (`sin(x)`) to be plotted
+ * specified the $x$ interval to be $[0,2\pi]$ (`[0, 2*pi]`)
+ * clicked *Compute* to get a blue line with the sine curve
+ * specified a new formula $\sin(x)e^{-x}$ (`sin(x)*exp(-x)`)
+ * chosen *No* as the answer to *Erase all curves?*
+ * clicked *Compute* to have the  $\sin(x)e^{-x}$ drawn
+   with green line without erasing the previous curve
+
+That is, the user can fill in any expression in $x$, specify the
+domain for plotting, and choose whether new curves should be added
+to the plot or if all curves should be erased prior to drawing a
+new one.
+
 !bhint
 You may use the `vib1` app from Section ref{wf:vib1:flask:app}
-as starting point.
+with the `view_errcheck.html` template as starting point.
+Preferably, let plots be created as strings, as in the `vib2`
+app.
+
+The *Formula* and *Domain* fields need to be `TextField` objects,
+and the compute function must perform an `eval` on the user's input.
+The *Erase* field is a `SelectField` object with selections *Yes* and
+*No*. The former means that the compute function calls the `figure`
+function in Matplotlib before creating a new plot. If this is not
+done, a new formula will be plotting in the same figure as the last one.
+With the Yes/No selection, it is possible either plot individual curves
+or compare curves in the same plot.
+!ehint
+
+!bhint
+Performing `eval` on the user's input requires that names like
+`sin`, `exp`, and `pi` are defined. The simplest approach is to
+do a
+
+!bc pycod
+from numpy import *
+!ec
+in the top of the file containing the compute function. All the names
+from `numpy` are then available as global variables and one can simply
+do `domain = eval(domain)` to turn the string `domain` coming from
+the *Domain* text field into a Python list with two elements.
+
+A better approach is not to rely on global variables, but run `eval`
+in the `numpy` namespace:
+
+!bc pycod
+import numpy
+domain = eval(domain, numpy.__dict__)
+!ec
+
+The evaluation of the formula is slightly more complicated if `eval`
+is to be run with the `numpy` namespace. One first needs
+to create $$ coordinates:
+
+!bc pycod
+x = numpy.linspace(domain[0], domain[1], 10001)
+!ec
+Now, `eval(formula, numpy.__dict__)` will not work because a formula
+like `sin(x)` needs both `sin` and `x` in the namespace. The latter
+is not in the namespace and must be explicitly included. A new namespace
+can be made:
+
+!bc pycod
+namespace = numpy.__dict__.copy()
+namespace.update({'x': x})
+formula = eval(formula, namespace)
+!ec
+!ehint
+
+!bhint
+You should add tests when evaluating and using the strings from input
+as these may have wrong syntax.
 !ehint
 
 ===== Exercise: Visualize Taylor polynomial approximations =====
 label{wf:exer:Taylor}
 file=Taylor_approx.tar.gz
 
-Make a web application that reads two numbers from a web page,
-adds the numbers, and prints the sum in a new web page.
-Package the necessary files that constitute the application
-in a tar file.
+This exercise develops a web application that can plot Taylor polynomial
+approximations of *any* degree
+to *any* user-given formula. You should do
+Exercise ref{wf:exer:formula} first as many of the techniques there
+must be used and even further developed in the present exercise.
+
+The figure below shows an example of what one can do in the
+web app:
+
+FIGURE: [fig-web4sa/Taylor_approx, width=600 frac=0.8]
+
+Here, the user has
+
+ * filled in the formula $\sin(x)$ (`sin(x)`)
+ * specified *N* to be 3
+ * clicked *Compute* to get the formula $\sin(x)$ plotted together with
+   the Taylor polynomial approximation of degree 3, expanded around $x=0$
+ * changed *N* to 5
+ * chosen *No* for the question *Erase all curves?*
+ * clicked *Compute* to have the series expansion of degree 5 plotted
+   in the same plot
+ * changed *N* to 10
+ * clicked *Compute* to have the series expansion of degree 10 plotted
+   in the same plot
+
+We can use `sympy` to produce Taylor polynomial expansions of arbitrary
+expressions. Here is a session demonstrating how to obtain the
+series expansion of $e^{-x}\sin (\pi x)$ to 2nd degree.
+
+!bc pycod
+>>> import sympy as sp
+>>> x = sp.symbols('x')
+>>> f = sp.exp(-x)*sp.sin(sp.pi*x)
+>>> f.series(x, 0, 3)
+pi*x - pi*x**2 + O(x**3)
+>>> sp.latex(f.series(x, 0, 3))
+'\\pi x - \\pi x^{2} + \\mathcal{O}\\left(x^{3}\\right)'
+>>> fs = f.series(x, 0, 3).removeO()  # get rid of O() term
+>>> fs
+-pi*x**2 + pi*x
+>>> f_func = sp.lambdify([x], fs)     # make Python function
+>>> f_func(1)
+0.0
+>>> f_func(2)
+-6.283185307179586
+!ec
+
+Basically, the steps above must be carried out to create a Python
+function for the series expansion such that it can be plotted.
+A similar `sp.lambdify` call on the original formula is also necessary
+to plot that one.
+
+However, the challenge is that the formula is
+available only as a string, and it may contain an independent variable
+whose name is also only available through a string from the web interface.
+That is, we may give formulas like `exp(-t)` if `t` is chosen as
+independent variable.
+Also, the expression does not contain function names prefixed with `sympy` or
+`sp`, just plain names like `sin`, `cos`, `exp`, etc.
+An example on `formula` is `cos(pi*x) + log(x)`.
+
+!bsubex
+Write a function
+
+!bc pycod
+def formula2series2pyfunc(formula, N, x, x0=0):
+!ec
+that takes a `sympy` formula, and integer `N`, a `sympy` symbol `x`
+and another `sympy` symbol `x0` and returns
+1) a Python function for `formula`, 2) a Python function for the
+series expansion of degree `N` of the formula around `x0`, and
+3) a LaTeX string containing the formula for the series expansion.
+
+Put the function in a file `compute.py`. You should thereafter be able to run
+the following session:
 
 !bc pyshell
 >>> import compute
@@ -48,6 +195,85 @@ in a tar file.
 The resulting plot is displayed below.
 
 FIGURE: [fig-web4sa/Taylor_approx_exp2t, width=500 frac=0.8]
+
+!bhint
+The series expansion is obtained by `formula.series(x, x0, N)`,
+but the output contains an `O()` term which makes it impossible to
+convert the expression to a Python function via `sympy.lambify`.
+Use
+
+!bc pycod
+series = formula.series(x, x0, N+1).removeO()
+!ec
+to get an expression that can be used as argument to `sympy.lambdify`.
+We use `N+1` since `N` in the `series` function refers to the degree
+of the `O()` term, which is now removed.
+
+For the LaTeX expression it is natural to have the `O()` term:
+!bc pycod
+latex = sympy.latex(formula.series(x, x0, N+1))
+!ec
+because then the terms start with the lowest order (and not the highest
+order as is the case when `removeO()` is used).
+!ehint
+!esubex
+
+!bsubex
+Write the compute function:
+
+!bc pycod
+def visualize_series(
+    formula,                  # string: formula
+    independent_variable,     # string: name of independent var.
+    N,                        # int: degree of polynomial approx.
+    xmin, xmax, ymin, ymax,   # strings: extent of axes
+    legend_loc,               # string: upper left, etc.
+    x0='0',                   # string: point of expansion
+    erase='yes',              # string: 'yes' or 'no'
+    ):
+!ec
+
+!bhint
+Converting the string `formula` to a valid `sympy` expression is
+challenging. First, create a local variable for a `sympy` symbol
+with the content of
+`independent_variable` as name, since such a variable is needed
+with performing `eval` on `formula`. Also introduce a variable `x`
+to point to the same `sympy` symbol. Relevant code is
+
+!bc pycod
+# Turn independent variable into sympy symbol, stored in x
+import sympy as sp
+exec('x = %s = sp.symbols("%s")' %
+     (independent_variable, independent_variable))
+!ec
+Evaluating `formula` in the namespace of `sympy` (so that all the `sin`,
+`exp`, `pi`, and similar symbols are defined properly as `sympy`
+objects) needs a merge of the `sympy` namespace and the variable for
+the `sympy` symbol representing the independent variable:
+
+!bc pycod
+namespace = sp.__dict__.copy()
+local = {}
+local[independent_variable] = x
+namespace.update(local)
+formula = eval(formula, namespace)
+!ec
+Turning `x0` into a valid `sympy` expression is easier: `x0 = eval(x0, sp.__dict__)`.
+
+Note that in the web interface, the minimum and maximum values on the axis
+can be mathematical expressions such as `2*pi`. This means that these
+quantities must be strings that are evaluated in the `numpy` namespace, e.g.,
+
+!bc pycod
+import numpy as np
+xmin = eval(xmin, np.__dict__)
+!ec
+
+legends....
+!ehint
+!esubex
+
 
 # #if TOPIC in ('Flask+Django', 'Flask')
 ===== Exercise: Extend the `vib3` app =====

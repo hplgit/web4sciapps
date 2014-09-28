@@ -12,14 +12,20 @@ def formula2series2pyfunc(formula, N, x, x0=0):
     series = formula.series(x, x0, N+1).removeO()
     series_pyfunc = sp.lambdify([x], series, modules='numpy')
     formula_pyfunc = sp.lambdify([x], formula, modules='numpy')
-    return formula_pyfunc, series_pyfunc, sp.latex(series)
+    # Return latex code with O() term since it starts with the lowest
+    # order term and therefore looks better
+    return formula_pyfunc, series_pyfunc, sp.latex(formula.series(x, x0, N+1))
+
+legends = []  # Store previous legends if not erase
 
 def visualize_series(
     formula,                  # string: formula
     independent_variable,     # string: name of independent variable
     N,                        # int: degree of polynomial approximation
     xmin, xmax, ymin, ymax,   # strings: extent of axes
+    legend_loc,               # string: upper left, etc.
     x0='0',                   # string: point of expansion
+    erase='yes',              # string: 'yes' or 'no'
     ):
     # Turn independent variable into sympy symbol, stored in x
     import sympy as sp
@@ -46,11 +52,25 @@ def visualize_series(
     ymax = eval(ymax, np.__dict__)
     x = np.linspace(xmin, xmax, 1001)
     import matplotlib.pyplot as plt
-    plt.plot(x, f(x), x, s(x))
+    global legends
+    if erase == 'yes':
+        plt.figure()
+        legends = []
+    if not legends:
+        legends.append('$%s$' % sp.latex(formula))
+        plt.plot(x, f(x))
+    plt.plot(x, s(x))
     plt.xlabel(independent_variable)
     plt.axis([xmin, xmax, ymin, ymax])
-    plt.legend(['$%s$' % sp.latex(formula), 'series, N=%d' % N])
-    plt.show()
+    legends.append('series, N=%d' % N)
+    plt.legend(legends, loc=legend_loc)
+    from StringIO import StringIO
+    figfile = StringIO()
+    plt.savefig(figfile, format='png')
+    figfile.seek(0)  # rewind to beginning of file
+    import base64
+    figdata_png = base64.b64encode(figfile.buf)
+    return figdata_png, latex
 
 if __name__ == '__main__':
     visualize_series(

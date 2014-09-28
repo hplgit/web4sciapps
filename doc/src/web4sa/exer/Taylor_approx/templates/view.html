@@ -2,7 +2,7 @@
 MathJax.Hub.Config({
   TeX: {
      equationNumbers: {  autoNumber: "AMS"  },
-     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js"]
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
   }
 });
 </script>
@@ -10,18 +10,19 @@ MathJax.Hub.Config({
  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 
-This web page visualizes the function \(
-u(t) = Ae^{-bt}\sin (w t), \hbox{ for } t\in [0,T]
-\).
-
-<form method=post action="">
-<table> <!-- table with forms to the left and plot to the right -->
+<table>
 <tr><td>
+<form method=post action="">
 <table>
   {% for field in form %}
     <tr>
-    <td>\( {{ field.name }} \)</td><td>{{ field(size=12) }}</td>
     <td>{{ field.label }}</td>
+    {% if field.name != 'Erase' %}
+      <td>{{ field(size=12) }}</td>
+    {% else %}
+      <!-- The SelectField cannot have size=12 as it gives 12 rows -->
+      <td>{{ field }}</td>
+    {% endif %}
     {% if field.errors %}
       <td><ul class=errors>
       {% for error in field.errors %}
@@ -31,15 +32,21 @@ u(t) = Ae^{-bt}\sin (w t), \hbox{ for } t\in [0,T]
     </tr>
   {% endfor %}
 </table>
+<p><input type="submit" value="Compute"></form></p>
 </td>
+
+{% if result != None %}
 <td>
 <p>
-{% if result != None %}
-<img src="{{ result }}" width="500">
-{% endif %}
+<img src="data:image/png;base64,{{ result[0] }}" width="500">
 </p>
-</td></tr>
-<tr>
-<td><p><input type=submit value=Compute></form></p></td>
+<p>
+<center>
+Series expansion of the formula:
+$$ {{ result[1] }} $$
+</center>
+</p>
+</td>
+{% endif %}
 </tr>
 </table>

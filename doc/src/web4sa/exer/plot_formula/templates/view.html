@@ -1,16 +1,14 @@
-<html>
-<head>
-<link rel="stylesheet" href="static/basic.css" type="text/css">
-</head>
-<body>
-
 <form method=post action="">
 <table>
   {% for field in form %}
     <tr>
-    <td class="name">{{ field.name }}</td>
-    <td>{{ field(size=12) }}</td>
     <td>{{ field.label }}</td>
+    {% if field.name != 'Erase' %}
+      <td>{{ field(size=12) }}</td>
+    {% else %}
+      <!-- The SelectField cannot have size=12 as it gives 12 rows -->
+      <td>{{ field }}</td>
+    {% endif %}
     {% if field.errors %}
       <td><ul class=errors>
       {% for error in field.errors %}
@@ -20,12 +18,10 @@
     </tr>
   {% endfor %}
 </table>
-<p><input type=submit value=Compute></form></p>
+<p><input type="submit" value="Compute"></form></p>
 
-<p>
 {% if result != None %}
-<img src="{{ result }}" width="500">
-{% endif %}
+<p>
+<img src="data:image/png;base64,{{ result }}" width="500">
 </p>
-</body>
-</html>
+{% endif %}

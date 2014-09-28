@@ -25,7 +25,8 @@ def compute_vib(A, b, w, T, resolution=500):
     plt.savefig(figfile, format='svg')
     figfile.seek(0)
     figdata_svg = '<svg' + figfile.buf.split('<svg')[1]
-    return figdata_png, unicode(figdata_svg,'utf-8')
+    figdata_svg = unicode(figdata_svg,'utf-8')
+    return figdata_png, figdata_svg
 
 def gamma_density(x, a, h, A):
     # http://en.wikipedia.org/wiki/Gamma_distribution
@@ -64,6 +65,7 @@ def compute_gamma(a=0.5, h=2.0, A=math.sqrt(2), resolution=500):
     plt.savefig(figfile, format='svg')
     figfile.seek(0)
     figdata_density_svg = '<svg' + figfile.buf.split('<svg')[1]
+    figdata_density_svg = unicode(figdata_density_svg,'utf-8')
 
     y = gamma_cumulative(x, a, h, A)
     plt.figure()
@@ -77,6 +79,7 @@ def compute_gamma(a=0.5, h=2.0, A=math.sqrt(2), resolution=500):
     plt.savefig(figfile, format='svg')
     figfile.seek(0)
     figdata_cumulative_svg = '<svg' + figfile.buf.split('<svg')[1]
+    figdata_cumulative_svg = unicode(figdata_cumulative_svg,'utf-8')
     return figdata_density_png, figdata_cumulative_png, \
            figdata_density_svg, figdata_cumulative_svg, \
            '%.2f' % mean, '%.2f' % stdev
