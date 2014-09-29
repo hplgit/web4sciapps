@@ -20,7 +20,7 @@ cp $name.html ${name}_plain_all.html
 cp $name.html ${name}_plain.html
 system doconce split_html ${name}_plain --nav_button=text
 
-system doconce format html $name -DTOPIC=Flask+Django --html_style=solarized2
+system doconce format html $name -DTOPIC=Flask+Django --html_style=solarized3
 cp $name.html ${name}_solarized.html
 system doconce split_html ${name}_solarized --nav_button=text
 
