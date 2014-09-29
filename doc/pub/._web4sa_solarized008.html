@@ -18,9 +18,7 @@ Automatically generated HTML file from DocOnce source
 
 <link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
 <style type="text/css">
-h1 {color: #b58900;}  /* yellow */
-/* h1 {color: #cb4b16;}  orange */
-/* h1 {color: #d33682;}  magenta, the original choice of thomasf */
+h1, h2, h3, h4 { color:#839496; font-weight: bold; } /* gray */
 .alert-text-small   { font-size: 80%;  }
 .alert-text-large   { font-size: 130%; }
 .alert-text-normal  { font-size: 90%;  }
@@ -426,7 +424,6 @@ def index():
     else:
         result = None
 
-    print 'XXX',result, request.method, [field.errors for field in form]
     return render_template(template_name + '.html',
                            form=form, result=result)
 

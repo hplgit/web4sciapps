@@ -18,9 +18,7 @@ Automatically generated HTML file from DocOnce source
 
 <link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
 <style type="text/css">
-h1 {color: #b58900;}  /* yellow */
-/* h1 {color: #cb4b16;}  orange */
-/* h1 {color: #d33682;}  magenta, the original choice of thomasf */
+h1, h2, h3, h4 { color:#839496; font-weight: bold; } /* gray */
 .alert-text-small   { font-size: 80%;  }
 .alert-text-large   { font-size: 130%; }
 .alert-text-normal  { font-size: 90%;  }
@@ -238,7 +236,7 @@ MathJax.Hub.Config({
 <center>[1] <b>Center for Biomedical Computing, Simula Research Laboratory</b></center>
 <center>[2] <b>Department of Informatics, University of Oslo</b></center>
 <p>
-<center><h4>Sep 28, 2014</h4></center> <!-- date -->
+<center><h4>Sep 29, 2014</h4></center> <!-- date -->
 
 <h2>Table of contents</h2>
 
@@ -1740,7 +1738,6 @@ def index():
     else:
         result = None
 
-    print 'XXX',result, request.method, [field.errors for field in form]
     return render_template(template_name + '.html',
                            form=form, result=result)
 
@@ -2071,11 +2068,16 @@ u(t) = Ae^{-bt}\sin (w t), \hbox{ for } t\in [0,T]
 The <a href="http://getbootstrap.com/" target="_self">Bootstrap</a> framework for creating web pages
 has been very popular in recent years, both because of the design and
 the automatic support for responsive pages on all sorts of devices.
-Bootstrap can be used in combination with Flask. The template file
+Bootstrap can easily be used in combination with Flask. The template file
 <code>view_bootstrap.html</code> is identical to the former <code>view_table.html</code>,
 except that we load the Bootstrap CSS file and include in comments
 how to add the typical navigation bar found in many Bootstrap-based
-web pages. The template looks like
+web pages. Moreover, we use the grid layout functionality of Bootstrap
+to control the placement of elements (name, input field, label,
+and error message) in the input form.
+
+<p>
+The template looks like
 
 <p>
 <!-- begin verbatim block  htmlpro-->
@@ -2122,18 +2124,18 @@ u(t) = Ae^{-bt}\sin (w t), \hbox{ for } t\in [0,T]
   {% for field in form %}
     &lt;div class=&quot;row&quot;&gt;
      &lt;div class=&quot;input-group&quot;&gt;
-      &lt;label class=&quot;col-sm-1 control-label&quot;&gt;
+      &lt;label class=&quot;col-xs-1 control-label&quot;&gt;
       &lt;span class=&quot;input-group-addon&quot;&gt; \( {{ field.name }} \) &lt;/span&gt;
       &lt;/label&gt;
-      &lt;div class=&quot;col-sm-3&quot;&gt;
+      &lt;div class=&quot;col-xs-2&quot;&gt;
       {{ field(class_=&quot;form-control&quot;) }}
       &lt;/div&gt;
-      &lt;div class=&quot;col-sm-2&quot;&gt;
+      &lt;div class=&quot;col-xs-3&quot;&gt;
         {{ field.label }}
       &lt;/div&gt;
       {% if field.errors %}
         {% for error in field.errors %}
-          &lt;div class=&quot;col-sm-3&quot;&gt;
+          &lt;div class=&quot;col-xs-3&quot;&gt;
             &lt;div style=&quot;color: red;&quot;&gt;{{ error }}&lt;/div&gt;
           &lt;/div&gt;
         {% endfor %}

@@ -263,16 +263,20 @@ The enabling template file is `view_table.html`:
 The "Bootstrap": "http://getbootstrap.com/" framework for creating web pages
 has been very popular in recent years, both because of the design and
 the automatic support for responsive pages on all sorts of devices.
-Bootstrap can be used in combination with Flask. The template file
+Bootstrap can easily be used in combination with Flask. The template file
 `view_bootstrap.html` is identical to the former `view_table.html`,
 except that we load the Bootstrap CSS file and include in comments
 how to add the typical navigation bar found in many Bootstrap-based
-web pages. The template looks like
+web pages. Moreover, we use the grid layout functionality of Bootstrap
+to control the placement of elements (name, input field, label,
+and error message) in the input form.
+
+The template looks like
 
 @@@CODE ${app_path}/templates/view_bootstrap.html
 The input fields and fonts now get the typical Bootstrap look and feel:
 
-FIGURE: [fig-web4sa/vib1_flask_bootstrap, width=600 frac=0.9]
+FIGURE: [fig-web4sa/vib1_flask_bootstrap, width=800 frac=0.9]
 
 The only special feature in this template is the need to pass a CSS
 class `form-control` to the field object in the part that defines
@@ -291,7 +295,7 @@ rel="stylesheet">
 where `X` can be `journal`, `cosmo`, `flatly`, and other legal
 Bootswatch styles. The journal style looks like this:
 
-FIGURE: [fig-web4sa/vib1_flask_bootswatch_journal, width=600 frac=0.9]
+FIGURE: [fig-web4sa/vib1_flask_bootswatch_journal, width=800 frac=0.9]
 
 While `view_bootstrap.html` makes use of plain Bootstrap HTML code, there is
 also a higher-level framework, called "Flask-Bootstrap": "http://pythonhosted.org/Flask-Bootstrap/" that combines Flask and Bootstrap. Installation of

@@ -232,7 +232,6 @@ hello world app:</p>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">result</span> <span class="o">=</span> <span class="bp">None</span>
 
-    <span class="k">print</span> <span class="s">&#39;XXX&#39;</span><span class="p">,</span><span class="n">result</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span><span class="p">,</span> <span class="p">[</span><span class="n">field</span><span class="o">.</span><span class="n">errors</span> <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">form</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="n">template_name</span> <span class="o">+</span> <span class="s">&#39;.html&#39;</span><span class="p">,</span>
                            <span class="n">form</span><span class="o">=</span><span class="n">form</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="n">result</span><span class="p">)</span>
 

@@ -41,18 +41,18 @@ u(t) = Ae^{-bt}\sin (w t), \hbox{ for } t\in [0,T]
   {% for field in form %}
     <div class="row">
      <div class="input-group">
-      <label class="col-sm-1 control-label">
+      <label class="col-xs-1 control-label">
       <span class="input-group-addon"> \( {{ field.name }} \) </span>
       </label>
-      <div class="col-sm-3">
+      <div class="col-xs-2">
       {{ field(class_="form-control") }}
       </div>
-      <div class="col-sm-2">
+      <div class="col-xs-3">
         {{ field.label }}
       </div>
       {% if field.errors %}
         {% for error in field.errors %}
-          <div class="col-sm-3">
+          <div class="col-xs-3">
             <div style="color: red;">{{ error }}</div>
           </div>
         {% endfor %}

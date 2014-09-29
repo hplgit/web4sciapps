@@ -381,7 +381,6 @@ app <span style="color: #666666">=</span> Flask(__name__)
     <span style="color: #008000; font-weight: bold">else</span>:
         result <span style="color: #666666">=</span> <span style="color: #008000">None</span>
 
-    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;XXX&#39;</span>,result, request<span style="color: #666666">.</span>method, [field<span style="color: #666666">.</span>errors <span style="color: #008000; font-weight: bold">for</span> field <span style="color: #AA22FF; font-weight: bold">in</span> form]
     <span style="color: #008000; font-weight: bold">return</span> render_template(template_name <span style="color: #666666">+</span> <span style="color: #BA2121">&#39;.html&#39;</span>,
                            form<span style="color: #666666">=</span>form, result<span style="color: #666666">=</span>result)
 

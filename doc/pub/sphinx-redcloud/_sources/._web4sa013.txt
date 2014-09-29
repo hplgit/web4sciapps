@@ -6,11 +6,15 @@ Bootstrap HTML style
 The `Bootstrap <http://getbootstrap.com/>`__ framework for creating web pages
 has been very popular in recent years, both because of the design and
 the automatic support for responsive pages on all sorts of devices.
-Bootstrap can be used in combination with Flask. The template file
+Bootstrap can easily be used in combination with Flask. The template file
 ``view_bootstrap.html`` is identical to the former ``view_table.html``,
 except that we load the Bootstrap CSS file and include in comments
 how to add the typical navigation bar found in many Bootstrap-based
-web pages. The template looks like
+web pages. Moreover, we use the grid layout functionality of Bootstrap
+to control the placement of elements (name, input field, label,
+and error message) in the input form.
+
+The template looks like
 
 .. code-block:: html
 
@@ -57,18 +61,18 @@ web pages. The template looks like
           {% for field in form %}
             <div class="row">
              <div class="input-group">
-              <label class="col-sm-1 control-label">
+              <label class="col-xs-1 control-label">
               <span class="input-group-addon"> \( {{ field.name }} \) </span>
               </label>
-              <div class="col-sm-3">
+              <div class="col-xs-2">
               {{ field(class_="form-control") }}
               </div>
-              <div class="col-sm-2">
+              <div class="col-xs-3">
                 {{ field.label }}
               </div>
               {% if field.errors %}
                 {% for error in field.errors %}
-                  <div class="col-sm-3">
+                  <div class="col-xs-3">
                     <div style="color: red;">{{ error }}</div>
                   </div>
                 {% endfor %}
