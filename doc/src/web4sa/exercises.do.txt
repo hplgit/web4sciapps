@@ -208,7 +208,7 @@ the following session:
 >>> f, s, latex = compute.formula2series2pyfunc(formula, 3, t)
 >>> latex
 '- \\frac{4 t^{3}}{3} + 2 t^{2} - 2 t + 1'
->>> imort matplotlib.pyplot as plot
+>>> import matplotlib.pyplot as plt
 >>> import numpy as np
 >>> t = np.linspace(0, 2)
 >>> plt.plot(t, f(t), t, s(t))

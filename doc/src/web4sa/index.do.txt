@@ -1,4 +1,4 @@
-TITLE: Using Web Frameworks for Scientific Web Applications
+TITLE: Using Web Frameworks for Scientific Applications
 AUTHOR: Hans Petter Langtangen at Center for Biomedical Computing, Simula Research Laboratory and Department of Informatics, University of Oslo
 AUTHOR: Anders Johansen at Center for Biomedical Computing, Simula Research Laboratory
 DATE: today
@@ -12,7 +12,7 @@ sphinx_styles = ', '.join(['"%s style": "%s/index.html"' % (n[7:], n)
                            if n != 'sphinx-rootdir'])
 %>
 
-======= Tutorials on web frameworks for scientific applications =======
+#======= Tutorials on web frameworks for scientific applications =======
 
  * "Flask and Django tutorial in one big HTML file": "${name}_plain_all.html"
  * "Flask and Django tutorial in HTML": "${name}_solarized.html"

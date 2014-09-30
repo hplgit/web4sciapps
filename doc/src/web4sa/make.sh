@@ -35,9 +35,10 @@ system doconce split_rst $name
 system doconce sphinx_dir author='H. P. Langtangen and A. E. Johansen' $name theme=basicstrap
 system python automake_sphinx.py
 cd sphinx-rootdir
-sh make_themes.sh cbc bootstrap basicstrap pyramid redcloud
+sh make_themes.sh cbc basicstrap redcloud
 cd ..
 mv sphinx-rootdir/sphinx-* .
+
 
 system doconce format pdflatex $name -DTOPIC=Flask+Django
 system doconce ptex2tex $name envir=minted
@@ -54,3 +55,4 @@ rm -rf $dest/sphinx-rootdir $dest/sphinx-*
 rm -rf sphinx-rootdir
 cp -r ${name}*.html .*${name}*.html $name.pdf sphinx-* $dest
 cp -r fig-$name/* $dest/fig-$name/
+cp index.html $dest
