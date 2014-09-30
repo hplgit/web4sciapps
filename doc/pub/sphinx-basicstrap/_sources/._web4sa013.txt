@@ -93,7 +93,7 @@ The template looks like
 The input fields and fonts now get the typical Bootstrap look and feel:
 
 .. figure:: vib1_flask_bootstrap.png
-   :width: 600
+   :width: 800
 
 The only special feature in this template is the need to pass a CSS
 class ``form-control`` to the field object in the part that defines
@@ -114,7 +114,7 @@ where ``X`` can be ``journal``, ``cosmo``, ``flatly``, and other legal
 Bootswatch styles. The journal style looks like this:
 
 .. figure:: vib1_flask_bootswatch_journal.png
-   :width: 600
+   :width: 800
 
 While ``view_bootstrap.html`` makes use of plain Bootstrap HTML code, there is
 also a higher-level framework, called `Flask-Bootstrap <http://pythonhosted.org/Flask-Bootstrap/>`__ that combines Flask and Bootstrap. Installation of
