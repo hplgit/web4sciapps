@@ -207,18 +207,30 @@ purpose is to compute the mean and standard deviation of the numbers.
 The first user interface just has the <em>Choose File</em> and <em>Compute</em> buttons:
 
 <p>
-<center><p><img src="fig-web4sa/upload1.png" align="bottom" width=400></p></center>
+<center><p><img src="fig-web4sa/upload1.png" align="bottom" width=550></p></center>
 
 <p>
 Clicking on <em>Choose File</em> brings up a file browser where the user can
 choose the file to uploaded to the application. Say this is a file
-<code>testfile.dat</code>. Pressing thereafter <em>Compute</em> leads to storage of
-the <code>testfile.dat</code> on the server in a subdirectory <code>uploads</code> and
+<code>testfile.dat</code>. The interface now looks like
+
+<p>
+<center><p><img src="fig-web4sa/upload1.png" align="bottom" width=550></p></center>
+
+<p>
+Pressing thereafter <em>Compute</em> leads to storage of
+<code>testfile.dat</code> on the server in a subdirectory <code>uploads</code> and
 computation of basic statistics of the numbers in the file.
 The resulting output looks like
 
 <p>
-<center><p><img src="fig-web4sa/upload3.png" align="bottom" width=400></p></center>
+<center><p><img src="fig-web4sa/upload3.png" align="bottom" width=550></p></center>
+
+<p>
+The text &quot;No file chosen&quot; is automatically displayed by the
+widget object used for file upload and indicates that a new
+file can be chosen. Below we shall present all parts of the code
+needed to create this interactive application.
 
 <h3 id="___sec48">The model class <a name="___sec48"></a></h3>
 
@@ -371,6 +383,9 @@ compute function is presented to the right. Such a template looks like
   <span style="color: #008000; font-weight: bold">&lt;/body&gt;</span>
 <span style="color: #008000; font-weight: bold">&lt;/html&gt;</span>
 </pre></div>
+<p>
+The complete set of files is found in the <a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/upload" target="_self"><tt>upload</tt></a> directory.
+
 <p>
 <p>
 <!-- navigation buttons at the bottom of the page -->

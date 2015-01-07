@@ -1076,16 +1076,25 @@ As example we use a file with a series of numbers, and the application's
 purpose is to compute the mean and standard deviation of the numbers.
 The first user interface just has the *Choose File* and *Compute* buttons:
 
-FIGURE: [fig-web4sa/upload1, width=400 frac=0.7]
+FIGURE: [fig-web4sa/upload1, width=550 frac=0.7]
 
 Clicking on *Choose File* brings up a file browser where the user can
 choose the file to uploaded to the application. Say this is a file
-`testfile.dat`. Pressing thereafter *Compute* leads to storage of
-the `testfile.dat` on the server in a subdirectory `uploads` and
+`testfile.dat`. The interface now looks like
+
+FIGURE: [fig-web4sa/upload1, width=550 frac=0.7]
+
+Pressing thereafter *Compute* leads to storage of
+`testfile.dat` on the server in a subdirectory `uploads` and
 computation of basic statistics of the numbers in the file.
 The resulting output looks like
 
-FIGURE: [fig-web4sa/upload3, width=400 frac=0.7]
+FIGURE: [fig-web4sa/upload3, width=550 frac=0.7]
+
+The text ``No file chosen'' is automatically displayed by the
+widget object used for file upload and indicates that a new
+file can be chosen. Below we shall present all parts of the code
+needed to create this interactive application.
 
 === The model class ===
 
@@ -1125,3 +1134,6 @@ where the input variables are listed to the left and the output of the
 compute function is presented to the right. Such a template looks like
 
 @@@CODE ${app_path}/templates/view.html
+
+The complete set of files is found in the "`upload`":
+"${github_path}/${app_path}" directory.

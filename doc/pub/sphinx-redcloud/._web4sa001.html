@@ -2944,17 +2944,25 @@ As example we use a file with a series of numbers, and the application&#8217;s
 purpose is to compute the mean and standard deviation of the numbers.
 The first user interface just has the <em>Choose File</em> and <em>Compute</em> buttons:</p>
 <div class="figure">
-<a class="reference internal image-reference" href="_images/upload1.png"><img alt="_images/upload1.png" src="_images/upload1.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="_images/upload1.png"><img alt="_images/upload1.png" src="_images/upload1.png" style="width: 550px;" /></a>
 </div>
 <p>Clicking on <em>Choose File</em> brings up a file browser where the user can
 choose the file to uploaded to the application. Say this is a file
-<tt class="docutils literal"><span class="pre">testfile.dat</span></tt>. Pressing thereafter <em>Compute</em> leads to storage of
-the <tt class="docutils literal"><span class="pre">testfile.dat</span></tt> on the server in a subdirectory <tt class="docutils literal"><span class="pre">uploads</span></tt> and
+<tt class="docutils literal"><span class="pre">testfile.dat</span></tt>. The interface now looks like</p>
+<div class="figure">
+<a class="reference internal image-reference" href="_images/upload1.png"><img alt="_images/upload1.png" src="_images/upload1.png" style="width: 550px;" /></a>
+</div>
+<p>Pressing thereafter <em>Compute</em> leads to storage of
+<tt class="docutils literal"><span class="pre">testfile.dat</span></tt> on the server in a subdirectory <tt class="docutils literal"><span class="pre">uploads</span></tt> and
 computation of basic statistics of the numbers in the file.
 The resulting output looks like</p>
 <div class="figure">
-<a class="reference internal image-reference" href="_images/upload3.png"><img alt="_images/upload3.png" src="_images/upload3.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="_images/upload3.png"><img alt="_images/upload3.png" src="_images/upload3.png" style="width: 550px;" /></a>
 </div>
+<p>The text &#8220;No file chosen&#8221; is automatically displayed by the
+widget object used for file upload and indicates that a new
+file can be chosen. Below we shall present all parts of the code
+needed to create this interactive application.</p>
 </div>
 <div class="section" id="the-model-class">
 <h4>The model class<a class="headerlink" href="#the-model-class" title="Permalink to this headline">¶</a></h4>
@@ -3087,6 +3095,7 @@ compute function is presented to the right. Such a template looks like</p>
 <span class="nt">&lt;/html&gt;</span>
 </pre></div>
 </div>
+<p>The complete set of files is found in the <a class="reference external" href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/upload">upload</a> directory.</p>
 </div>
 </div>
 </div>

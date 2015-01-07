@@ -3354,17 +3354,27 @@ purpose is to compute the mean and standard deviation of the numbers.
 The first user interface just has the *Choose File* and *Compute* buttons:
 
 .. figure:: upload1.png
-   :width: 400
+   :width: 550
 
 Clicking on *Choose File* brings up a file browser where the user can
 choose the file to uploaded to the application. Say this is a file
-``testfile.dat``. Pressing thereafter *Compute* leads to storage of
-the ``testfile.dat`` on the server in a subdirectory ``uploads`` and
+``testfile.dat``. The interface now looks like
+
+.. figure:: upload1.png
+   :width: 550
+
+Pressing thereafter *Compute* leads to storage of
+``testfile.dat`` on the server in a subdirectory ``uploads`` and
 computation of basic statistics of the numbers in the file.
 The resulting output looks like
 
 .. figure:: upload3.png
-   :width: 400
+   :width: 550
+
+The text "No file chosen" is automatically displayed by the
+widget object used for file upload and indicates that a new
+file can be chosen. Below we shall present all parts of the code
+needed to create this interactive application.
 
 The model class
 ~~~~~~~~~~~~~~~
@@ -3507,6 +3517,8 @@ compute function is presented to the right. Such a template looks like
           </table>
           </body>
         </html>
+
+The complete set of files is found in the `upload <https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/upload>`__ directory.
 
 .. _wf:vib:django:
 
