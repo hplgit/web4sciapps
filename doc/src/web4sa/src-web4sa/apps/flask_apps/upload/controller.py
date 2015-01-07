@@ -1,4 +1,4 @@
-from compute import compute_average as compute_function
+from compute import compute_mean_std as compute_function
 
 from flask import Flask, render_template, request
 from model import Average

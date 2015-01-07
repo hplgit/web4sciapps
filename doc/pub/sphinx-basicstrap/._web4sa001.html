@@ -3387,7 +3387,7 @@ an HTML table.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">os</span>
 
-<span class="k">def</span> <span class="nf">compute_average</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">compute_mean_std</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s">&#39;uploads&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="p">))</span>
     <span class="k">return</span> <span class="s">&quot;&quot;&quot;</span>
 <span class="s">Data from file &lt;tt&gt;</span><span class="si">%s</span><span class="s">&lt;/tt&gt;:</span>

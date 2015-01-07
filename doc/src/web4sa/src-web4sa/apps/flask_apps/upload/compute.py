@@ -1,7 +1,7 @@
 import numpy as np
 import os
 
-def compute_average(filename=None):
+def compute_mean_std(filename=None):
     data = np.loadtxt(os.path.join('uploads', filename))
     return """
 Data from file <tt>%s</tt>:
