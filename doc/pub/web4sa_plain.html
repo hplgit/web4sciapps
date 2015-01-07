@@ -7,7 +7,7 @@ Automatically generated HTML file from DocOnce source
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Using Web Frameworks for Scientific Applications">
-<meta name="keywords" content="web frameworks,MVC pattern,Flask installation,Flask input forms,Flask HTML templates,Flask MVC pattern,Flask troubleshooting,Django installation,Django making a project,Django making an application,Django input forms,Django HTML templates,Flask input forms,Flask error checking,Flask CSS style sheets,Flask LaTeX mathematics,Flask input validation,inline PNG image in HTML,base64 encoding of PNG images,inline SVG figure in HTML,Flask login,Flask database,Django input forms,Django input validation">
+<meta name="keywords" content="web frameworks,MVC pattern,Flask installation,Flask input forms,Flask HTML templates,Flask MVC pattern,Flask troubleshooting,Django installation,Django making a project,Django making an application,Django input forms,Django HTML templates,Flask input forms,Flask error checking,Flask CSS style sheets,Flask LaTeX mathematics,Flask input validation,inline PNG image in HTML,base64 encoding of PNG images,inline SVG figure in HTML,Flask login,Flask database,Flask uploading of files,Flask file upload,Django input forms,Django input validation">
 
 <title>Using Web Frameworks for Scientific Applications</title>
 
@@ -26,7 +26,7 @@ h3 { font-size: 1.4em;  color: #8A0808; }
 h4 { color: #8A0808; }
 a { color: #8A0808; text-decoration:none; }
 tt { font-family: "Courier New", Courier; }
-
+/* pre style removed because it will interfer with pygments */
 p { text-indent: 0px; }
 hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
 p.caption { width: 80%; font-style: normal; text-align: left; }
@@ -53,10 +53,10 @@ hr.figure { border: 0; width: 80%; border-bottom: 1px solid #aaa}
 .alert-block > p, .alert-block > ul {margin-bottom:1em}
 .alert li {margin-top: 1em}
 .alert-block p+p {margin-top:5px}
-.alert-notice { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_gray_notice.png); }
-.alert-summary  { background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_gray_summary.png); }
-.alert-warning { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_gray_warning.png); }
-.alert-question {background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_gray_question.png); }
+.alert-notice { background-image: url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_gray_notice.png); }
+.alert-summary  { background-image:url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_gray_summary.png); }
+.alert-warning { background-image: url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_gray_warning.png); }
+.alert-question {background-image:url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_gray_question.png); }
 
 div { text-align: justify; text-justify: inter-word; }
 </style>
@@ -158,19 +158,28 @@ div { text-align: justify; text-justify: inter-word; }
               (' The interfaces of the app ', 3, None, '___sec53'),
               (' The source code ', 3, None, '___sec54'),
               (' Resources ', 3, None, '___sec55'),
+              (' Uploading of files ',
+               2,
+               'wf:flask:upload',
+               'wf:flask:upload'),
+              (' Overview of the application ', 3, None, '___sec57'),
+              (' The model class ', 3, None, '___sec58'),
+              (' The controller file ', 3, None, '___sec59'),
+              (' The compute function ', 3, None, '___sec60'),
+              (' The HTML template ', 3, None, '___sec61'),
               (' Handling multiple input variables in Django ',
                1,
                'wf:vib:django',
                'wf:vib:django'),
-              (' Programming the Django application ', 2, None, '___sec57'),
-              (' Adding the app to a project ', 3, None, '___sec58'),
-              (' The compute part ', 3, None, '___sec59'),
-              (' The model ', 3, None, '___sec60'),
-              (' The view ', 3, None, '___sec61'),
-              (' Custom validation ', 2, None, '___sec62'),
-              (' Customizing widgets ', 2, None, '___sec63'),
-              (' Resources ', 2, None, '___sec64'),
-              (' Exercises ', 1, None, '___sec65'),
+              (' Programming the Django application ', 2, None, '___sec63'),
+              (' Adding the app to a project ', 3, None, '___sec64'),
+              (' The compute part ', 3, None, '___sec65'),
+              (' The model ', 3, None, '___sec66'),
+              (' The view ', 3, None, '___sec67'),
+              (' Custom validation ', 2, None, '___sec68'),
+              (' Customizing widgets ', 2, None, '___sec69'),
+              (' Resources ', 2, None, '___sec70'),
+              (' Exercises ', 1, None, '___sec71'),
               (' Exercise 1: Add two numbers ',
                2,
                'wf:exer:add2',
@@ -198,11 +207,11 @@ div { text-align: justify; text-justify: inter-word; }
               (' Exercise 7: Auto-generate code from function signature ',
                2,
                None,
-               '___sec72'),
-              (' Resources ', 1, None, '___sec73'),
-              (' Flask resources ', 2, None, '___sec74'),
-              (' Django resources ', 2, None, '___sec75'),
-              (' Remaining ', 1, None, '___sec76')]}
+               '___sec78'),
+              (' Resources ', 1, None, '___sec79'),
+              (' Flask resources ', 2, None, '___sec80'),
+              (' Django resources ', 2, None, '___sec81'),
+              (' Remaining ', 1, None, '___sec82')]}
 end of tocinfo -->
 
 <body>
@@ -259,7 +268,7 @@ MathJax.Hub.Config({
 <center>[1] <b>Center for Biomedical Computing, Simula Research Laboratory</b></center>
 <center>[2] <b>Department of Informatics, University of Oslo</b></center>
 <p>
-<center><h4>Sep 30, 2014</h4></center> <!-- date -->
+<center><h4>Jan 7, 2015</h4></center> <!-- date -->
 
 <h2>Table of contents</h2>
 
@@ -320,27 +329,33 @@ MathJax.Hub.Config({
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_plain017.html#___sec53"> The interfaces of the app </a><br>
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_plain017.html#___sec54"> The source code </a><br>
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_plain017.html#___sec55"> Resources </a><br>
-<a href="._web4sa_plain018.html#wf:vib:django"> Handling multiple input variables in Django </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain018.html#___sec57"> Programming the Django application </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_plain018.html#___sec58"> Adding the app to a project </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_plain018.html#___sec59"> The compute part </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_plain018.html#___sec60"> The model </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_plain018.html#___sec61"> The view </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain018.html#___sec62"> Custom validation </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain018.html#___sec63"> Customizing widgets </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain019.html#___sec64"> Resources </a><br>
-<a href="._web4sa_plain020.html#___sec65"> Exercises </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain020.html#wf:exer:add2"> Exercise 1: Add two numbers </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain020.html#wf:exer:upload"> Exercise 2: Upload data file and visualize curves </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain020.html#wf:exer:formula"> Exercise 3: Plot a user-specified formula </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain020.html#wf:exer:Taylor"> Exercise 4: Visualize Taylor polynomial approximations </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain020.html#wf:exer:gen:demo"> Exercise 5: Extend the <code>gen</code> app </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain020.html#wf:exer:gen:lists"> Exercise 6: Equip the <code>gen</code> app with more data types </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain020.html#___sec72"> Exercise 7: Auto-generate code from function signature </a><br>
-<a href="._web4sa_plain020.html#___sec73"> Resources </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain020.html#___sec74"> Flask resources </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain020.html#___sec75"> Django resources </a><br>
-<a href="._web4sa_plain020.html#___sec76"> Remaining </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain018.html#wf:flask:upload"> Uploading of files </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_plain018.html#___sec57"> Overview of the application </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_plain018.html#___sec58"> The model class </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_plain018.html#___sec59"> The controller file </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_plain018.html#___sec60"> The compute function </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_plain018.html#___sec61"> The HTML template </a><br>
+<a href="._web4sa_plain019.html#wf:vib:django"> Handling multiple input variables in Django </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain019.html#___sec63"> Programming the Django application </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_plain019.html#___sec64"> Adding the app to a project </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_plain019.html#___sec65"> The compute part </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_plain019.html#___sec66"> The model </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._web4sa_plain019.html#___sec67"> The view </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain019.html#___sec68"> Custom validation </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain019.html#___sec69"> Customizing widgets </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain020.html#___sec70"> Resources </a><br>
+<a href="._web4sa_plain021.html#___sec71"> Exercises </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain021.html#wf:exer:add2"> Exercise 1: Add two numbers </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain021.html#wf:exer:upload"> Exercise 2: Upload data file and visualize curves </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain021.html#wf:exer:formula"> Exercise 3: Plot a user-specified formula </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain021.html#wf:exer:Taylor"> Exercise 4: Visualize Taylor polynomial approximations </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain021.html#wf:exer:gen:demo"> Exercise 5: Extend the <code>gen</code> app </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain021.html#wf:exer:gen:lists"> Exercise 6: Equip the <code>gen</code> app with more data types </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain021.html#___sec78"> Exercise 7: Auto-generate code from function signature </a><br>
+<a href="._web4sa_plain021.html#___sec79"> Resources </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain021.html#___sec80"> Flask resources </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain021.html#___sec81"> Django resources </a><br>
+<a href="._web4sa_plain021.html#___sec82"> Remaining </a><br>
 </p>
 
 <h1>Web frameworks  <a name="___sec0"></a></h1>

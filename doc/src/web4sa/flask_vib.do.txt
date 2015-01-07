@@ -976,6 +976,16 @@ The final file is `old.html` for retrieving old simulations:
 mail and store comments. Need a `compute` function that returns
 full HTML text then.]
 
+
+=== Resources ===
+
+Working with a database in Flask is described here:
+
+ * URL: "http://pythonhosted.org/Flask-SQLAlchemy/quickstart.html",
+ * URL: "http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-iv-database",
+ * "The Flask login extension": "https://flask-login.readthedocs.org/en/latest/"
+
+
 # #ifdef OLD
 !split
 ===== Project: Using Bootstrap styles =====
@@ -1046,10 +1056,72 @@ only.
 # #endif
 
 
-=== Resources ===
+!split
+===== Uploading of files =====
+label{wf:flask:upload}
 
-Working with a database in Flask is described here:
+## Define Mako variable for path to source code
+<%
+app_path = src_path + 'flask_apps/upload'
+%>
 
- * URL: "http://pythonhosted.org/Flask-SQLAlchemy/quickstart.html",
- * URL: "http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-iv-database",
- * "The Flask login extension": "https://flask-login.readthedocs.org/en/latest/"
+idx{Flask!uploading of files}
+idx{Flask!file upload}
+
+=== Overview of the application ===
+
+Many user interfaces need the user to provide data files. A minimalistic
+application is to have a button for uploading a single file.
+As example we use a file with a series of numbers, and the application's
+purpose is to compute the mean and standard deviation of the numbers.
+The first user interface just has the *Choose File* and *Compute* buttons:
+
+FIGURE: [fig-web4sa/upload1, width=400 frac=0.7]
+
+Clicking on *Choose File* brings up a file browser where the user can
+choose the file to uploaded to the application. Say this is a file
+`testfile.dat`. Pressing thereafter *Compute* leads to storage of
+the `testfile.dat` on the server in a subdirectory `uploads` and
+computation of basic statistics of the numbers in the file.
+The resulting output looks like
+
+FIGURE: [fig-web4sa/upload3, width=400 frac=0.7]
+
+=== The model class ===
+
+The widget `FieldField` is used for an input field with a *Choose File*
+button:
+
+@@@CODE ${app_path}/model.py
+
+=== The controller file ===
+
+The controller file needs some special code to specify a directory
+to store uploaded files. We also include some code to check that
+the file has a name with the right extension.
+
+@@@CODE ${app_path}/controller.py fromto: # Relative path of@# Path to the web
+
+The `index` function must have code for saving the file, and as usual,
+calling the compute function and rendering a new page:
+
+@@@CODE ${app_path}/controller.py fromto: def index@if __name
+
+=== The compute function ===
+
+We assume that the uploaded file is available in the `uploads`
+subdirectory, so the compute function needs to open this file, read
+the numbers, and compute statistics. The file reading and computations
+are easily done by `numpy` functions. The results are presented in
+an HTML table.
+
+@@@CODE ${app_path}/compute.py
+
+=== The HTML template ===
+
+Although the present minimalistic application only needs a very simple
+HTML template, we reuse a quite generic template known from previous examples,
+where the input variables are listed to the left and the output of the
+compute function is presented to the right. Such a template looks like
+
+@@@CODE ${app_path}/templates/view.html

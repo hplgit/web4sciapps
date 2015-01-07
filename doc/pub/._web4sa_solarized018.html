@@ -7,13 +7,13 @@ Automatically generated HTML file from DocOnce source
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Using Web Frameworks for Scientific Applications">
-<meta name="keywords" content="web frameworks,MVC pattern,Flask installation,Flask input forms,Flask HTML templates,Flask MVC pattern,Flask troubleshooting,Django installation,Django making a project,Django making an application,Django input forms,Django HTML templates,Flask input forms,Flask error checking,Flask CSS style sheets,Flask LaTeX mathematics,Flask input validation,inline PNG image in HTML,base64 encoding of PNG images,inline SVG figure in HTML,Flask login,Flask database,Django input forms,Django input validation">
+<meta name="keywords" content="web frameworks,MVC pattern,Flask installation,Flask input forms,Flask HTML templates,Flask MVC pattern,Flask troubleshooting,Django installation,Django making a project,Django making an application,Django input forms,Django HTML templates,Flask input forms,Flask error checking,Flask CSS style sheets,Flask LaTeX mathematics,Flask input validation,inline PNG image in HTML,base64 encoding of PNG images,inline SVG figure in HTML,Flask login,Flask database,Flask uploading of files,Flask file upload,Django input forms,Django input validation">
 
 <title>Using Web Frameworks for Scientific Applications</title>
 
 
-<link href="https://raw.githubusercontent.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
-<script src="https://rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/js/highlight.pack.js"></script>
+<link href="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
+<script src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/js/highlight.pack.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 
 <link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
@@ -21,6 +21,11 @@ Automatically generated HTML file from DocOnce source
 h1 {color: #b58900;}  /* yellow */
 /* h1 {color: #cb4b16;}  orange */
 /* h1 {color: #d33682;}  magenta, the original choice of thomasf */
+code { padding: 0px; background-color: inherit; }
+pre {
+  border: 0pt solid #93a1a1;
+  box-shadow: none;
+}
 .alert-text-small   { font-size: 80%;  }
 .alert-text-large   { font-size: 130%; }
 .alert-text-normal  { font-size: 90%;  }
@@ -43,10 +48,10 @@ h1 {color: #b58900;}  /* yellow */
 .alert-block > p, .alert-block > ul {margin-bottom:1em}
 .alert li {margin-top: 1em}
 .alert-block p+p {margin-top:5px}
-.alert-notice { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_notice.png); }
-.alert-summary  { background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_summary.png); }
-.alert-warning { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_warning.png); }
-.alert-question {background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_question.png); }
+.alert-notice { background-image: url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_notice.png); }
+.alert-summary  { background-image:url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_summary.png); }
+.alert-warning { background-image: url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_warning.png); }
+.alert-question {background-image:url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_question.png); }
 
 div { text-align: justify; text-justify: inter-word; }
 </style>
@@ -148,19 +153,28 @@ div { text-align: justify; text-justify: inter-word; }
               (' The interfaces of the app ', 3, None, '___sec53'),
               (' The source code ', 3, None, '___sec54'),
               (' Resources ', 3, None, '___sec55'),
+              (' Uploading of files ',
+               2,
+               'wf:flask:upload',
+               'wf:flask:upload'),
+              (' Overview of the application ', 3, None, '___sec57'),
+              (' The model class ', 3, None, '___sec58'),
+              (' The controller file ', 3, None, '___sec59'),
+              (' The compute function ', 3, None, '___sec60'),
+              (' The HTML template ', 3, None, '___sec61'),
               (' Handling multiple input variables in Django ',
                1,
                'wf:vib:django',
                'wf:vib:django'),
-              (' Programming the Django application ', 2, None, '___sec57'),
-              (' Adding the app to a project ', 3, None, '___sec58'),
-              (' The compute part ', 3, None, '___sec59'),
-              (' The model ', 3, None, '___sec60'),
-              (' The view ', 3, None, '___sec61'),
-              (' Custom validation ', 2, None, '___sec62'),
-              (' Customizing widgets ', 2, None, '___sec63'),
-              (' Resources ', 2, None, '___sec64'),
-              (' Exercises ', 1, None, '___sec65'),
+              (' Programming the Django application ', 2, None, '___sec63'),
+              (' Adding the app to a project ', 3, None, '___sec64'),
+              (' The compute part ', 3, None, '___sec65'),
+              (' The model ', 3, None, '___sec66'),
+              (' The view ', 3, None, '___sec67'),
+              (' Custom validation ', 2, None, '___sec68'),
+              (' Customizing widgets ', 2, None, '___sec69'),
+              (' Resources ', 2, None, '___sec70'),
+              (' Exercises ', 1, None, '___sec71'),
               (' Exercise 1: Add two numbers ',
                2,
                'wf:exer:add2',
@@ -188,11 +202,11 @@ div { text-align: justify; text-justify: inter-word; }
               (' Exercise 7: Auto-generate code from function signature ',
                2,
                None,
-               '___sec72'),
-              (' Resources ', 1, None, '___sec73'),
-              (' Flask resources ', 2, None, '___sec74'),
-              (' Django resources ', 2, None, '___sec75'),
-              (' Remaining ', 1, None, '___sec76')]}
+               '___sec78'),
+              (' Resources ', 1, None, '___sec79'),
+              (' Flask resources ', 2, None, '___sec80'),
+              (' Django resources ', 2, None, '___sec81'),
+              (' Remaining ', 1, None, '___sec82')]}
 end of tocinfo -->
 
 <body>
@@ -228,313 +242,183 @@ MathJax.Hub.Config({
 <p>
 <!-- !split -->
 
-<h1>Handling multiple input variables in Django <a name="wf:vib:django"></a></h1>
+<h2>Uploading of files <a name="wf:flask:upload"></a></h2>
+
+<h3>Overview of the application  <a name="___sec57"></a></h3>
 
 <p>
-We shall briefly how to work with multi-variable input in Django.
-The text is the Django counterpart to the section <a href="._web4sa_solarized008.html#wf:vib:flask">Handling multiple input variables in Flask</a>.
-There are four float input variables: \( A \), \( b \), \( w \), and \( T \).
-A function <code>compute</code> in the file <code>compute.py</code> makes
-a plot of the function \( u(t)=Ae^{-bt}\sin (wt) \)
-depending on these four parameters and returns
-the name of the plot file. Our task is to define four input fields,
-execute the <code>compute</code> function and show the input fields together with
-the resulting plot,
-cf. Figures <a href="._web4sa_solarized008.html#wf:vib1:flask:fig:input">7</a>
-and <a href="._web4sa_solarized008.html#wf:vib1:flask:fig:result">8</a>.
-
-<h2>Programming the Django application  <a name="___sec57"></a></h2>
-
-<h3>Adding the app to a project  <a name="___sec58"></a></h3>
+Many user interfaces need the user to provide data files. A minimalistic
+application is to have a button for uploading a single file.
+As example we use a file with a series of numbers, and the application's
+purpose is to compute the mean and standard deviation of the numbers.
+The first user interface just has the <em>Choose File</em> and <em>Compute</em> buttons:
 
 <p>
-Any Django app needs a project, but here we reuse the project
-we set up for the scientific hello world examples. We go to
-the directory <code>apps/django_apps</code> and create the Django app <code>vib1</code>:
+<center><p><img src="fig-web4sa/upload1.png" align="bottom" width=400></p></center>
 
 <p>
-<!-- begin verbatim block  sys-->
-<pre><code>Terminal&gt; python ../../django_project/manage.py startapp vib1
-</code></pre>
-<!-- end verbatim block -->
-Then we
-
-<ol>
-<li> add <code>relative2absolute_path('../../apps/django_apps/vib1/templates'),</code>
-   to the <code>TEMPLATE_DIRS</code> tuple in <code>settings.py</code>,</li>
-<li> add <code>vib1</code> to the <code>INSTALLED_APPS</code> tuple, and</li>
-<li> add <code>url(r'^vib1/', 'django_apps.vib1.views.index')</code> to the <code>patterns</code>
-   call in <code>urls.py</code>.</li>
-</ol>
-
-These steps ensure that Django can find our application as a module/package,
-that Django can find our templates associated with this application,
-and that the URL address applies the name <code>vib1</code> to reach the application.
-
-<h3>The compute part  <a name="___sec59"></a></h3>
+Clicking on <em>Choose File</em> brings up a file browser where the user can
+choose the file to uploaded to the application. Say this is a file
+<code>testfile.dat</code>. Pressing thereafter <em>Compute</em> leads to storage of
+the <code>testfile.dat</code> on the server in a subdirectory <code>uploads</code> and
+computation of basic statistics of the numbers in the file.
+The resulting output looks like
 
 <p>
-The computations in our application are put in a file <code>compute.py</code>
-and explained in detail in the section <a href="._web4sa_solarized008.html#wf:vib1:flask:app">Programming the Flask application</a>.
+<center><p><img src="fig-web4sa/upload3.png" align="bottom" width=400></p></center>
 
-<h3>The model  <a name="___sec60"></a></h3>
+<h3>The model class  <a name="___sec58"></a></h3>
 
 <p>
-We can now write <code>models.py</code> and the <code>Input</code> class that defines
-the form fields for the four input variables:
+The widget <code>FieldField</code> is used for an input field with a <em>Choose File</em>
+button:
 
 <p>
 <!-- begin verbatim block  pypro-->
-<pre><code>from django.db import models
-from django.forms import ModelForm
-from math import pi
+<pre><code>import wtforms as wtf
 
-class Input(models.Model):
-    A = models.FloatField(
-        verbose_name=' amplitude (m)', default=1.0)
-    b = models.FloatField(
-        verbose_name=' damping coefficient (kg/s)', default=0.0)
-    w = models.FloatField(
-        verbose_name=' frequency (1/s)', default=2*pi)
-    T = models.FloatField(
-        verbose_name=' time interval (s)', default=18)
-
-class InputForm(ModelForm):
-    class Meta:
-        model = Input
+class Average(wtf.Form):
+    filename   = wtf.FileField(validators=
+                               [wtf.validators.InputRequired()])
 </code></pre>
 <!-- end verbatim block -->
-Note here that we can provide a more explanatory name than just
-the variable name, e.g., <code>' amplitude (m)'</code> for <code>A</code>. However,
-Django will always capitalize these descriptions, so if one really
-needs lower case names (e.g., to be compatible with a mathematical notation
-or when just listing the unit),
-one must start the text with a space, as we have demonstrated above.
-We also provide a default
-value such that all fields have a value when the user sees
-the page.
 
-<h3>The view  <a name="___sec61"></a></h3>
+<h3>The controller file  <a name="___sec59"></a></h3>
 
 <p>
-The <code>views.py</code> file looks as follows:
+The controller file needs some special code to specify a directory
+to store uploaded files. We also include some code to check that
+the file has a name with the right extension.
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code># Relative path of directory for uploaded files
+UPLOAD_DIR = 'uploads/'
+
+app.config['UPLOAD_FOLDER'] = UPLOAD_DIR
+app.secret_key = 'MySecretKey'
+
+if not os.path.isdir(UPLOAD_DIR):
+    os.mkdir(UPLOAD_DIR)
+
+# Allowed file types for file upload
+ALLOWED_EXTENSIONS = set(['txt', 'dat', 'npy'])
+
+def allowed_file(filename):
+    &quot;&quot;&quot;Does filename have the right extension?&quot;&quot;&quot;
+    return '.' in filename and \ 
+           filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+The <code>index</code> function must have code for saving the file, and as usual,
+calling the compute function and rendering a new page:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def index():
+    form = Average(request.form)
+    filename = None  # default
+    if request.method == 'POST':
+
+        # Save uploaded file on server if it exists and is valid
+        if request.files:
+            file = request.files[form.filename.name]
+            if file and allowed_file(file.filename):
+                # Make a valid version of filename for any file ystem
+                filename = secure_filename(file.filename)
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'],
+                                       filename))
+
+        result = compute_function(filename)
+    else:
+        result = None
+
+    return render_template(&quot;view.html&quot;, form=form, result=result)
+</code></pre>
+<!-- end verbatim block -->
+
+<h3>The compute function  <a name="___sec60"></a></h3>
+
+<p>
+We assume that the uploaded file is available in the <code>uploads</code>
+subdirectory, so the compute function needs to open this file, read
+the numbers, and compute statistics. The file reading and computations
+are easily done by <code>numpy</code> functions. The results are presented in
+an HTML table.
 
 <p>
 <!-- begin verbatim block  pypro-->
-<pre><code>from django.shortcuts import render_to_response
-from django.template import RequestContext
-from django.http import HttpResponse
-from models import InputForm
-from compute import compute
+<pre><code>import numpy as np
 import os
 
-def index(request):
-    os.chdir(os.path.dirname(__file__))
-    result = None
-    if request.method == 'POST':
-        form = InputForm(request.POST)
-        if form.is_valid():
-            form2 = form.save(commit=False)
-            result = compute(form2.A, form2.b, form2.w, form2.T)
-            result = result.replace('static/', '')
-    else:
-        form = InputForm()
-
-    return render_to_response('vib1.html',
-            {'form': form,
-             'result': result,
-             }, context_instance=RequestContext(request))
+def compute_average(filename=None):
+    data = np.loadtxt(os.path.join('uploads', filename))
+    return &quot;&quot;&quot;
+Data from file &lt;tt&gt;%s&lt;/tt&gt;:
+&lt;p&gt;
+&lt;table border=1&gt;
+&lt;tr&gt;&lt;td&gt; mean    &lt;/td&gt;&lt;td&gt; %.3g &lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt; st.dev. &lt;/td&gt;&lt;td&gt; %.3g &lt;/td&gt;&lt;/tr&gt;
+&quot;&quot;&quot; % (filename, np.mean(data), np.std(data))
 </code></pre>
 <!-- end verbatim block -->
-Some remarks are necessary:
 
-<ol>
-<li> Doing an <code>os.chdir</code> to the current working directory is necessary
-   as Django may be left back in another working directory if you have
-   tested other apps.</li>
-<li> The <code>form2</code> object from <code>form.save</code> is the object we extract
-   data from and send to <code>compute</code>, but the original <code>form</code>
-   object is needed when making the HTML page through the template.</li>
-<li> Images, media files, style sheets, javascript files, etc. must
-   reside in a subdirectory <code>static</code>. The specifications of the
-   URL applies tools to find this <code>static</code> directory and then
-   the <code>static</code> prefix in the <code>result</code> filename must be removed.</li>
-</ol>
+<h3>The HTML template  <a name="___sec61"></a></h3>
 
-The template for rendering the page is listed next.
+<p>
+Although the present minimalistic application only needs a very simple
+HTML template, we reuse a quite generic template known from previous examples,
+where the input variables are listed to the left and the output of the
+compute function is presented to the right. Such a template looks like
 
 <p>
 <!-- begin verbatim block  htmlpro-->
-<pre><code>&lt;form method=post action=&quot;&quot;&gt;{% csrf_token %}
-&lt;table&gt;
-  {% for field in form %}
-    &lt;tr&gt;
-    &lt;td&gt;{{ field.name }}&lt;/td&gt;
-    &lt;td&gt;{{ field }}&lt;/td&gt;
-    &lt;td&gt;{{ field.label }}&lt;/td&gt;
-    &lt;td&gt;{{ field.errors }}&lt;/td&gt;
-    &lt;td&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-  {% endfor %}
-&lt;/table&gt;
-&lt;p&gt;&lt;input type=submit value=Compute&gt;&lt;/form&gt;&lt;/p&gt;
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot; /&gt;
+    &lt;title&gt;Flask Average app&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
 
-&lt;p&gt;
-{% if result != None %}
-{% load static %}
-&lt;img src=&quot;{% get_static_prefix %}{{ result }}&quot; width=500&gt;
-{% endif %}
-&lt;/p&gt;
+  &lt;!-- Input and Results are typeset as a two-column table --&gt;
+  &lt;table&gt;
+  &lt;tr&gt;
+  &lt;td valign=&quot;top&quot;&gt;
+    &lt;h2&gt;Input:&lt;/h2&gt;
+
+      &lt;form method=post action=&quot;&quot; enctype=&quot;multipart/form-data&quot;&gt;
+        &lt;table&gt;
+          {% for field in form %}
+            &lt;tr&gt;&lt;td&gt;{{ field.name }}&lt;/td&gt;
+                &lt;td&gt;{{ field(size=20) }}&lt;/td&gt;
+                &lt;td&gt;{% if field.errors %}
+                  &lt;ul class=errors&gt;
+                  {% for error in field.errors %}
+                    &lt;li&gt;{{ error }}&lt;/li&gt;
+                  {% endfor %}&lt;/ul&gt;
+                {% endif %}&lt;/td&gt;&lt;/tr&gt;
+          {% endfor %}
+        &lt;/table&gt;
+        &lt;p&gt;&lt;input type=&quot;submit&quot; value=&quot;Compute&quot;&gt;
+    &lt;/form&gt;&lt;/p&gt;
+  &lt;/td&gt;
+
+  &lt;td valign=&quot;top&quot;&gt;
+    {% if result != None %}
+      &lt;h2&gt;Results:&lt;/h2&gt;
+        {{ result|safe }}
+
+    {% endif %}
+  &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;/table&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
 </code></pre>
 <!-- end verbatim block -->
-The tricky part is the syntax for displaying <em>static content</em>, such as
-the plot file made in the <code>compute</code> function.
-
-<h2>Custom validation  <a name="___sec62"></a></h2>
-
-<p>
-Django has a series of methods available for user-provided validation
-of form data. These are exemplified in the app <code>vib2</code>, which
-is an extension of the <code>vib1</code> app with additional code. (This other
-app needs of course registrations in <code>settings.py</code> and <code>urls.py</code>, similar
-to what we did for the <code>vib1</code> app.)
-
-<p>
-Making sure that \( A>0 \) is easiest done with a built-in Django
-validator for minimum value checking:
-
-<p>
-<!-- begin verbatim block  pycod-->
-<pre><code>class Input(models.Model):
-    A = models.FloatField(
-        verbose_name=' amplitude (m)', default=1.0,
-        validators=[MinValueValidator(0)])
-</code></pre>
-<!-- end verbatim block -->
-
-<p>
-We can write our own validators, which are functions taking the value
-is the only argument and raising a <code>ValidationError</code> exception if the
-value is wrong. Checking that a value is inside an interval can first
-be implemented by
-
-<p>
-<!-- begin verbatim block  pycod-->
-<pre><code>def check_interval(value, min_value=None, max_value=None):
-    &quot;&quot;&quot;Validate that a value is inside an interval.&quot;&quot;&quot;
-    failure = False
-    if min_value is not None:
-        if value &lt; min_value:
-            failure = True
-    if max_value is not None:
-        if value &gt; max_value:
-            failure = True
-    if failure:
-        raise ValidationError(
-            'value=%s not in [%s, %s]' %
-            (value,
-             '-infty' if min_value is None else str(min_value),
-             'infty' if max_value is None else str(max_value)))
-</code></pre>
-<!-- end verbatim block -->
-However, this function takes more than the value as argument. We therefore
-need to wrap it by a function with <code>value</code> as the only argument. The following
-utility returns such a
-function (see the section <a href="._web4sa_solarized014.html#wf:vib1:flask:validation">Custom validation</a> for more
-explanation):
-
-<p>
-<!-- begin verbatim block  pycod-->
-<pre><code>import functools
-
-def interval(min_value=None, max_value=None):
-    &quot;&quot;&quot;Django-compatible interface to check_interval.&quot;&quot;&quot;
-    return functools.partial(
-        check_interval, min_value=min_value, max_value=max_value)
-</code></pre>
-<!-- end verbatim block -->
-Now, <code>interval(0, 1)</code> returns a function that takes <code>value</code> as its
-only argument and checks if it is inside \( [0,1] \).
-Such a function can be inserted in the <code>validators</code> list in
-the field constructor, here to tell that \( b \) must be in \( [0,\infty) \):
-
-<p>
-<!-- begin verbatim block  pycod-->
-<pre><code>class Input(models.Model):
-    ...
-    b = models.FloatField(
-        verbose_name=' damping coefficient (kg/s)', default=0.0,
-        validators=[interval(0,None)])
-</code></pre>
-<!-- end verbatim block -->
-
-<p>
-A final example on custom validation is to avoid plotting more
-than 30 periods of the oscillating function \( u \). This translates
-to checking that \( T \) is geater
-than 30 periods, i.e., \( T>30\cdot 2\pi/w \). The task is done in
-the <code>InputForm</code> class, where any method <code>clean_name</code> can do
-validation and adjustment of the field name <code>name</code>. The code for
-a <code>clean_T</code> method goes as follows:
-
-<p>
-<!-- begin verbatim block  pycod-->
-<pre><code>class InputForm(ModelForm):
-    class Meta:
-        model = Input
-
-    def clean_T(self):
-        T = self.cleaned_data['T']
-        w = self.cleaned_data['w']
-        period = 2*pi/w
-        if T &gt; 30*period:
-            num_periods = int(round(T/period))
-            raise ValidationError(
-                'Cannot plot as much as %d periods! T &lt; %.2f' %
-                (num_periods, 30*period))
-        return T
-</code></pre>
-<!-- end verbatim block -->
-We refer to the vast Django documentation for many other ways of
-validating forms. The reader is encouraged to run the <code>vib2</code>
-application and test out the validations we have implemented.
-
-<h2>Customizing widgets  <a name="___sec63"></a></h2>
-
-<p>
-One will occasionally have full control of the layout of the individual
-elements in a web form. These are typeset inside <code>input</code> tags in
-HTML. Django associates the term <em>widget</em> with an HTML form field. To set
-the size (width) of the field and other properties, one must in
-Django specify a <code>widgets</code> dictionary in the form class. The key
-is the name of the parameter in the model class, while the value
-is a widget class name. Standard input fields for numbers and
-text apply the <code>TextInput</code> widget. An example
-on setting the size of the <code>T</code> field to a width of 10 characters goes
-like
-
-<p>
-<!-- begin verbatim block  pycod-->
-<pre><code>from django.forms import TextInput
-
-class InputForm(ModelForm):
-    class Meta:
-        model = Input
-        widgets = {
-            'T': TextInput(attrs={'size': 10}),
-        }
-</code></pre>
-<!-- end verbatim block -->
-
-<p>
-At the time of this writing, Django does not yet support the many
-additional HTML5 input fields. Nevertheless, the <code>parampool</code> package
-gives access to HTML5 widgets in a Django context.
-We recommend to use <code>parampool</code> to automatically generate the necessary
-Django files, and
-then one can view the form class in the <code>models.py</code> file for how
-HTML5 widgets can be used in the definition of the <code>widgets</code>
-dictionary.
 
 <p>
 <p>

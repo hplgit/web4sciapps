@@ -7,7 +7,7 @@ Automatically generated HTML file from DocOnce source
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Using Web Frameworks for Scientific Applications">
-<meta name="keywords" content="web frameworks,MVC pattern,Flask installation,Flask input forms,Flask HTML templates,Flask MVC pattern,Flask troubleshooting,Django installation,Django making a project,Django making an application,Django input forms,Django HTML templates,Flask input forms,Flask error checking,Flask CSS style sheets,Flask LaTeX mathematics,Flask input validation,inline PNG image in HTML,base64 encoding of PNG images,inline SVG figure in HTML,Flask login,Flask database,Django input forms,Django input validation">
+<meta name="keywords" content="web frameworks,MVC pattern,Flask installation,Flask input forms,Flask HTML templates,Flask MVC pattern,Flask troubleshooting,Django installation,Django making a project,Django making an application,Django input forms,Django HTML templates,Flask input forms,Flask error checking,Flask CSS style sheets,Flask LaTeX mathematics,Flask input validation,inline PNG image in HTML,base64 encoding of PNG images,inline SVG figure in HTML,Flask login,Flask database,Flask uploading of files,Flask file upload,Django input forms,Django input validation">
 
 <title>Using Web Frameworks for Scientific Applications</title>
 
@@ -26,7 +26,7 @@ h3 { font-size: 1.4em;  color: #8A0808; }
 h4 { color: #8A0808; }
 a { color: #8A0808; text-decoration:none; }
 tt { font-family: "Courier New", Courier; }
-
+/* pre style removed because it will interfer with pygments */
 p { text-indent: 0px; }
 hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
 p.caption { width: 80%; font-style: normal; text-align: left; }
@@ -53,10 +53,10 @@ hr.figure { border: 0; width: 80%; border-bottom: 1px solid #aaa}
 .alert-block > p, .alert-block > ul {margin-bottom:1em}
 .alert li {margin-top: 1em}
 .alert-block p+p {margin-top:5px}
-.alert-notice { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_gray_notice.png); }
-.alert-summary  { background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_gray_summary.png); }
-.alert-warning { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_gray_warning.png); }
-.alert-question {background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_gray_question.png); }
+.alert-notice { background-image: url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_gray_notice.png); }
+.alert-summary  { background-image:url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_gray_summary.png); }
+.alert-warning { background-image: url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_gray_warning.png); }
+.alert-question {background-image:url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_gray_question.png); }
 
 div { text-align: justify; text-justify: inter-word; }
 </style>
@@ -158,19 +158,28 @@ div { text-align: justify; text-justify: inter-word; }
               (' The interfaces of the app ', 3, None, '___sec53'),
               (' The source code ', 3, None, '___sec54'),
               (' Resources ', 3, None, '___sec55'),
+              (' Uploading of files ',
+               2,
+               'wf:flask:upload',
+               'wf:flask:upload'),
+              (' Overview of the application ', 3, None, '___sec57'),
+              (' The model class ', 3, None, '___sec58'),
+              (' The controller file ', 3, None, '___sec59'),
+              (' The compute function ', 3, None, '___sec60'),
+              (' The HTML template ', 3, None, '___sec61'),
               (' Handling multiple input variables in Django ',
                1,
                'wf:vib:django',
                'wf:vib:django'),
-              (' Programming the Django application ', 2, None, '___sec57'),
-              (' Adding the app to a project ', 3, None, '___sec58'),
-              (' The compute part ', 3, None, '___sec59'),
-              (' The model ', 3, None, '___sec60'),
-              (' The view ', 3, None, '___sec61'),
-              (' Custom validation ', 2, None, '___sec62'),
-              (' Customizing widgets ', 2, None, '___sec63'),
-              (' Resources ', 2, None, '___sec64'),
-              (' Exercises ', 1, None, '___sec65'),
+              (' Programming the Django application ', 2, None, '___sec63'),
+              (' Adding the app to a project ', 3, None, '___sec64'),
+              (' The compute part ', 3, None, '___sec65'),
+              (' The model ', 3, None, '___sec66'),
+              (' The view ', 3, None, '___sec67'),
+              (' Custom validation ', 2, None, '___sec68'),
+              (' Customizing widgets ', 2, None, '___sec69'),
+              (' Resources ', 2, None, '___sec70'),
+              (' Exercises ', 1, None, '___sec71'),
               (' Exercise 1: Add two numbers ',
                2,
                'wf:exer:add2',
@@ -198,11 +207,11 @@ div { text-align: justify; text-justify: inter-word; }
               (' Exercise 7: Auto-generate code from function signature ',
                2,
                None,
-               '___sec72'),
-              (' Resources ', 1, None, '___sec73'),
-              (' Flask resources ', 2, None, '___sec74'),
-              (' Django resources ', 2, None, '___sec75'),
-              (' Remaining ', 1, None, '___sec76')]}
+               '___sec78'),
+              (' Resources ', 1, None, '___sec79'),
+              (' Flask resources ', 2, None, '___sec80'),
+              (' Django resources ', 2, None, '___sec81'),
+              (' Remaining ', 1, None, '___sec82')]}
 end of tocinfo -->
 
 <body>

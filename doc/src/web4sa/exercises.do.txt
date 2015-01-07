@@ -58,6 +58,7 @@ domain for plotting, and choose whether new curves should be added
 to the plot or if all curves should be erased prior to drawing a
 new one.
 
+# #if TOPIC in ('Flask+Django', 'Flask')
 !bhint
 You may use the `vib1` app from Section ref{wf:vib1:flask:app}
 with the `view_errcheck.html` template as starting point.
@@ -73,6 +74,7 @@ done, a new formula will be plotting in the same figure as the last one.
 With the Yes/No selection, it is possible either plot individual curves
 or compare curves in the same plot.
 !ehint
+# #endif
 
 !bhint
 Performing `eval` on the user's input requires that names like
