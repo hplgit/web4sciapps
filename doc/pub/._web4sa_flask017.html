@@ -1,0 +1,770 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Doconce: http://code.google.com/p/doconce/" />
+
+<link rel="stylesheet" href="https://raw.githubusercontent.com/hplgit/doconce/master/bundled/html_styles/style_vagrant/css/twitter_bootstrap.css">
+<link rel="stylesheet" href="https://raw.githubusercontent.com/hplgit/doconce/master/bundled/html_styles/style_vagrant/css/vagrant.css">
+<!-- Define color of headings here (last definition counts) -->
+<style type="text/css">
+h1, h2, h3, h4, h5, h6 {
+  color: #000;     /* black */
+  color: #999;     /* gray */
+  color: #005580;  /* dark blue */
+  color: #08c;     /* characteristic blue */
+</style>
+</head>
+<body>
+
+<title>Using Flask for Scientific Web Applications</title>
+
+<div class="container">
+ <div class="row Header with-border">
+  <div class="span3 Module logo">
+   <h1><a href="/">Flask<span class="subtitle">4scientists</span></a></h1>
+  </div>
+  <div class="span9">
+   <div class="Module navigation">
+    <ul>
+     <li> <a href="http://flask.pocoo.org/">Flask</a></li>
+    </ul>
+   </div>
+  </div>
+ </div>
+</div>
+
+<div class="row">
+ <div class="span3 Module sidebar">
+  <div class="well" style="padding: 8px 0px;">
+   <ul class="nav nav-list">
+          <!-- navigation toc: --> <li><a href="._web4sa_flask000.html#___sec0" style="font-size: 80%;">Web frameworks</a></li>
+     <!-- navigation toc: --> <li><a href="._web4sa_flask004.html#___sec4" style="font-size: 80%;">Making a Flask application</a></li>
+     <!-- navigation toc: --> <li><a href="._web4sa_flask006.html#wf:vib:flask" style="font-size: 80%;">Handling multiple input variables in Flask</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec52" style="font-size: 80%;">Exercises</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec60" style="font-size: 80%;">Flask resources</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec61" style="font-size: 80%;">Remaining</a></li>
+
+    </ul>
+   </div>
+  </div>
+
+  <div class="span9">
+
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Web frameworks ', 1, None, '___sec0'),
+              (' The MVC pattern ', 2, None, '___sec1'),
+              (' A very simple application ', 2, None, '___sec2'),
+              (' Application of the MVC pattern ',
+               2,
+               'wf:hw:mvc',
+               'wf:hw:mvc'),
+              (' Making a Flask application ', 1, None, '___sec4'),
+              (' Programming the Flask application ', 2, None, '___sec5'),
+              (' The user interaction ', 3, None, '___sec6'),
+              (' The Python code ', 3, None, '___sec7'),
+              (' Dissection ', 3, None, '___sec8'),
+              (' The template files ', 3, None, '___sec9'),
+              (' Testing the application ', 3, None, '___sec10'),
+              (' Equipping the input page with output results ',
+               2,
+               None,
+               '___sec11'),
+              (' Splitting the app into model, view, and controller files ',
+               2,
+               'wf:hw3:flask',
+               'wf:hw3:flask'),
+              (' Troubleshooting ', 2, None, '___sec13'),
+              (' Address already in use ', 3, None, '___sec14'),
+              (' Handling multiple input variables in Flask ',
+               1,
+               'wf:vib:flask',
+               'wf:vib:flask'),
+              (' Programming the Flask application ',
+               2,
+               'wf:vib1:flask:app',
+               'wf:vib1:flask:app'),
+              (' The compute part ', 3, None, '___sec17'),
+              (' The model ', 3, None, '___sec18'),
+              (' The view ', 3, None, '___sec19'),
+              (' The HTML template ', 3, None, '___sec20'),
+              (' Implementing error checking in the template ',
+               2,
+               None,
+               '___sec21'),
+              (' Using style sheets ', 2, None, '___sec22'),
+              (' Using LaTeX mathematics ', 2, None, '___sec23'),
+              (' Rearranging the elements in the HTML template ',
+               2,
+               None,
+               '___sec24'),
+              (' Bootstrap HTML style ', 2, None, '___sec25'),
+              (' Custom validation ',
+               2,
+               'wf:vib1:flask:validation',
+               'wf:vib1:flask:validation'),
+              (' Using Flask validators ', 3, None, '___sec27'),
+              (' Tailored validation ', 3, None, '___sec28'),
+              (' Tailored validation of intervals ', 3, None, '___sec29'),
+              (' Demo ', 3, None, '___sec30'),
+              (' Avoiding plot files ',
+               2,
+               'wf:vib2:flask:nofiles',
+               'wf:vib2:flask:nofiles'),
+              (' PNG plots ', 3, None, '___sec32'),
+              (' SVG plots ', 3, None, '___sec33'),
+              (' Autogenerating the code ',
+               2,
+               'wf:autogen:flask',
+               'wf:autogen:flask'),
+              (' Inspecting function signatures ', 3, None, '___sec35'),
+              (' Generating the model ', 3, None, '___sec36'),
+              (' Generating the view ', 3, None, '___sec37'),
+              (' Generating the template ', 3, None, '___sec38'),
+              (' Application ', 3, None, '___sec39'),
+              (' User login and storage of computed results ',
+               2,
+               'wf:flask:login',
+               'wf:flask:login'),
+              (' Required additional software ', 3, None, '___sec41'),
+              (' The compute part ', 3, None, '___sec42'),
+              (' The interfaces of the app ', 3, None, '___sec43'),
+              (' The source code ', 3, None, '___sec44'),
+              (' Resources ', 3, None, '___sec45'),
+              (' Uploading of files ',
+               2,
+               'wf:flask:upload',
+               'wf:flask:upload'),
+              (' Overview of the application ', 3, None, '___sec47'),
+              (' The model class ', 3, None, '___sec48'),
+              (' The controller file ', 3, None, '___sec49'),
+              (' The compute function ', 3, None, '___sec50'),
+              (' The HTML template ', 3, None, '___sec51'),
+              (' Exercises ', 1, None, '___sec52'),
+              (' Exercise 1: Add two numbers ',
+               2,
+               'wf:exer:add2',
+               'wf:exer:add2'),
+              (' Exercise 2: Upload data file and visualize curves ',
+               2,
+               'wf:exer:upload',
+               'wf:exer:upload'),
+              (' Exercise 3: Plot a user-specified formula ',
+               2,
+               'wf:exer:formula',
+               'wf:exer:formula'),
+              (' Exercise 4: Visualize Taylor polynomial approximations ',
+               2,
+               'wf:exer:Taylor',
+               'wf:exer:Taylor'),
+              (' Exercise 5: Extend the `gen` app ',
+               2,
+               'wf:exer:gen:demo',
+               'wf:exer:gen:demo'),
+              (' Exercise 6: Equip the `gen` app with more data types ',
+               2,
+               'wf:exer:gen:lists',
+               'wf:exer:gen:lists'),
+              (' Exercise 7: Auto-generate code from function signature ',
+               2,
+               None,
+               '___sec59'),
+              (' Flask resources ', 1, None, '___sec60'),
+              (' Remaining ', 1, None, '___sec61')]}
+end of tocinfo -->
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<a name="part0017"></a>
+<!-- !split -->
+
+<h1 id="___sec52">Exercises <a name="___sec52"></a></h1>
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="wf:exer:add2">Exercise 1: Add two numbers<a name="wf:exer:add2"></a></h2>
+
+<p>
+Make a web application that reads two numbers from a web page,
+adds the numbers, and prints the sum in a new web page.
+Package the necessary files that constitute the application
+in a tar file.
+Filename: <code>add2.tar.gz</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="wf:exer:upload">Exercise 2: Upload data file and visualize curves<a name="wf:exer:upload"></a></h2>
+
+<p>
+Suppose you have tabular data in a file:
+
+<p>
+
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">#  t        y       error
+0.0000    1.2345   1.4E-4
+1.0000    0.9871  -4.9E-3
+1.2300    0.5545   8.2E-3
+</pre></div>
+<p>
+That is, there is a comment line with headings for the various
+columns, and then floating-point values are listed with an
+arbitrary number of columns and rows. You want to upload such
+a data file to a web application and have the each column, from
+the second one, plotted against the the values in the first column.
+In the particular example, <code>y</code> and <code>error</code> should be plotted against
+<code>t</code>, yielding two curves.
+
+<p>
+The web application may have one field: the name of the file to upload.
+Search for constructions on how to upload a files and write this
+application. Generate a suitable data file for testing purposes.
+Filename: <code>upload.tar.gz</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="wf:exer:formula">Exercise 3: Plot a user-specified formula<a name="wf:exer:formula"></a></h2>
+
+<p>
+The purpose of this exercise is to write a web application that
+can visualize any user-given formula. For example, in the interface below,
+
+<p>
+<center><p><img src="fig-web4sa/plot_formula.png" align="bottom" width=600></p></center>
+
+<p>
+the user has
+
+<ul>
+ <li> specified a curve \( \sin (x) \) (<code>sin(x)</code>) to be plotted</li>
+ <li> specified the \( x \) interval to be \( [0,2\pi] \) (<code>[0, 2*pi]</code>)</li>
+ <li> clicked <em>Compute</em> to get a blue line with the sine curve</li>
+ <li> specified a new formula \( \sin(x)e^{-x} \) (<code>sin(x)*exp(-x)</code>)</li>
+ <li> chosen <em>No</em> as the answer to <em>Erase all curves?</em></li>
+ <li> clicked <em>Compute</em> to have the  \( \sin(x)e^{-x} \) drawn
+   with green line without erasing the previous curve</li>
+</ul>
+
+That is, the user can fill in any expression in \( x \), specify the
+domain for plotting, and choose whether new curves should be added
+to the plot or if all curves should be erased prior to drawing a
+new one.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint 1.</b>
+You may use the <code>vib1</code> app from the section <a href="._web4sa_flask006.html#wf:vib1:flask:app">Programming the Flask application</a>
+with the <code>view_errcheck.html</code> template as starting point.
+Preferably, let plots be created as strings, as explained for the <code>vib2</code>
+app in the section <a href="._web4sa_flask013.html#wf:vib2:flask:nofiles">Avoiding plot files</a>.
+
+<p>
+The <em>Formula</em> and <em>Domain</em> fields need to be <code>TextField</code> objects,
+and the compute function must perform an <code>eval</code> on the user's input.
+The <em>Erase</em> field is a <code>SelectField</code> object with selections <em>Yes</em> and
+<em>No</em>. The former means that the compute function calls the <code>figure</code>
+function in Matplotlib before creating a new plot. If this is not
+done, a new formula will be plotting in the same figure as the last one.
+With the Yes/No selection, it is possible either plot individual curves
+or compare curves in the same plot.
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint 2.</b>
+Performing <code>eval</code> on the user's input requires that names like
+<code>sin</code>, <code>exp</code>, and <code>pi</code> are defined. The simplest approach is to
+do a
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+</pre></div>
+<p>
+in the top of the file containing the compute function. All the names
+from <code>numpy</code> are then available as global variables and one can simply
+do <code>domain = eval(domain)</code> to turn the string <code>domain</code> coming from
+the <em>Domain</em> text field into a Python list with two elements.
+
+<p>
+A better approach is not to rely on global variables, but run <code>eval</code>
+in the <code>numpy</code> namespace:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span>
+domain <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(domain, numpy<span style="color: #666666">.</span>__dict__)
+</pre></div>
+<p>
+The evaluation of the formula is slightly more complicated if <code>eval</code>
+is to be run with the <code>numpy</code> namespace. One first needs
+to create \( x \) coordinates:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">x <span style="color: #666666">=</span> numpy<span style="color: #666666">.</span>linspace(domain[<span style="color: #666666">0</span>], domain[<span style="color: #666666">1</span>], <span style="color: #666666">10001</span>)
+</pre></div>
+<p>
+Now, <code>eval(formula, numpy.__dict__)</code> will not work because a formula
+like <code>sin(x)</code> needs both <code>sin</code> and <code>x</code> in the namespace. The latter
+is not in the namespace and must be explicitly included. A new namespace
+can be made:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">namespace <span style="color: #666666">=</span> numpy<span style="color: #666666">.</span>__dict__<span style="color: #666666">.</span>copy()
+namespace<span style="color: #666666">.</span>update({<span style="color: #BA2121">&#39;x&#39;</span>: x})
+formula <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(formula, namespace)
+</pre></div>
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint 3.</b>
+You should add tests when evaluating and using the strings from input
+as these may have wrong syntax.
+
+<p>
+<!-- --- end hint in exercise --- -->
+Filename: <code>plot_formula.tar.gz</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="wf:exer:Taylor">Exercise 4: Visualize Taylor polynomial approximations<a name="wf:exer:Taylor"></a></h2>
+
+<p>
+This exercise develops a web application that can plot Taylor polynomial
+approximations of <em>any</em> degree
+to <em>any</em> user-given formula. You should do
+<a href="#wf:exer:formula">Exercise 3: Plot a user-specified formula</a> first as many of the techniques there
+must be used and even further developed in the present exercise.
+
+<p>
+The figure below shows an example of what one can do in the
+web app:
+
+<p>
+<center><p><img src="fig-web4sa/Taylor_approx.png" align="bottom" width=600></p></center>
+
+<p>
+Here, the user has
+
+<ul>
+ <li> filled in the formula \( \sin(x) \) (<code>sin(x)</code>)</li>
+ <li> specified <em>N</em> to be 3</li>
+ <li> clicked <em>Compute</em> to get the formula \( \sin(x) \) plotted together with
+   the Taylor polynomial approximation of degree 3, expanded around \( x=0 \)</li>
+ <li> changed <em>N</em> to 5</li>
+ <li> chosen <em>No</em> for the question <em>Erase all curves?</em></li>
+ <li> clicked <em>Compute</em> to have the series expansion of degree 5 plotted
+   in the same plot</li>
+ <li> changed <em>N</em> to 10</li>
+ <li> clicked <em>Compute</em> to have the series expansion of degree 10 plotted
+   in the same plot</li>
+</ul>
+
+We can use <code>sympy</code> to produce Taylor polynomial expansions of arbitrary
+expressions. Here is a session demonstrating how to obtain the
+series expansion of \( e^{-x}\sin (\pi x) \) to 2nd degree.
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sympy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">sp</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> x <span style="color: #666666">=</span> sp<span style="color: #666666">.</span>symbols(<span style="color: #BA2121">&#39;x&#39;</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> f <span style="color: #666666">=</span> sp<span style="color: #666666">.</span>exp(<span style="color: #666666">-</span>x)<span style="color: #666666">*</span>sp<span style="color: #666666">.</span>sin(sp<span style="color: #666666">.</span>pi<span style="color: #666666">*</span>x)
+<span style="color: #666666">&gt;&gt;&gt;</span> f<span style="color: #666666">.</span>series(x, <span style="color: #666666">0</span>, <span style="color: #666666">3</span>)
+pi<span style="color: #666666">*</span>x <span style="color: #666666">-</span> pi<span style="color: #666666">*</span>x<span style="color: #666666">**2</span> <span style="color: #666666">+</span> O(x<span style="color: #666666">**3</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> sp<span style="color: #666666">.</span>latex(f<span style="color: #666666">.</span>series(x, <span style="color: #666666">0</span>, <span style="color: #666666">3</span>))
+<span style="color: #BA2121">&#39;</span><span style="color: #BB6622; font-weight: bold">\\</span><span style="color: #BA2121">pi x - </span><span style="color: #BB6622; font-weight: bold">\\</span><span style="color: #BA2121">pi x^{2} + </span><span style="color: #BB6622; font-weight: bold">\\</span><span style="color: #BA2121">mathcal{O}</span><span style="color: #BB6622; font-weight: bold">\\</span><span style="color: #BA2121">left(x^{3}</span><span style="color: #BB6622; font-weight: bold">\\</span><span style="color: #BA2121">right)&#39;</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> fs <span style="color: #666666">=</span> f<span style="color: #666666">.</span>series(x, <span style="color: #666666">0</span>, <span style="color: #666666">3</span>)<span style="color: #666666">.</span>removeO()  <span style="color: #408080; font-style: italic"># get rid of O() term</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> fs
+<span style="color: #666666">-</span>pi<span style="color: #666666">*</span>x<span style="color: #666666">**2</span> <span style="color: #666666">+</span> pi<span style="color: #666666">*</span>x
+<span style="color: #666666">&gt;&gt;&gt;</span> f_func <span style="color: #666666">=</span> sp<span style="color: #666666">.</span>lambdify([x], fs)     <span style="color: #408080; font-style: italic"># make Python function</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> f_func(<span style="color: #666666">1</span>)
+<span style="color: #666666">0.0</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> f_func(<span style="color: #666666">2</span>)
+<span style="color: #666666">-6.283185307179586</span>
+</pre></div>
+<p>
+Basically, the steps above must be carried out to create a Python
+function for the series expansion such that it can be plotted.
+A similar <code>sp.lambdify</code> call on the original formula is also necessary
+to plot that one.
+
+<p>
+However, the challenge is that the formula is
+available only as a string, and it may contain an independent variable
+whose name is also only available through a string from the web interface.
+That is, we may give formulas like <code>exp(-t)</code> if <code>t</code> is chosen as
+independent variable.
+Also, the expression does not contain function names prefixed with <code>sympy</code> or
+<code>sp</code>, just plain names like <code>sin</code>, <code>cos</code>, <code>exp</code>, etc.
+An example on <code>formula</code> is <code>cos(pi*x) + log(x)</code>.
+
+<p>
+<b>a)</b>
+Write a function
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">formula2series2pyfunc</span>(formula, N, x, x0<span style="color: #666666">=0</span>):
+</pre></div>
+<p>
+that takes a <code>sympy</code> formula, and integer <code>N</code>, a <code>sympy</code> symbol <code>x</code>
+and another <code>sympy</code> symbol <code>x0</code> and returns
+1) a Python function for <code>formula</code>, 2) a Python function for the
+series expansion of degree <code>N</code> of the formula around <code>x0</code>, and
+3) a LaTeX string containing the formula for the series expansion.
+
+<p>
+Put the function in a file <code>compute.py</code>. You should thereafter be able to run
+the following session:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">compute</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sympy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">sp</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">sympy</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> t <span style="color: #666666">=</span> symbols(<span style="color: #BA2121">&#39;t&#39;</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> formula <span style="color: #666666">=</span> exp(<span style="color: #666666">-2*</span>t)
+<span style="color: #666666">&gt;&gt;&gt;</span> f, s, latex <span style="color: #666666">=</span> compute<span style="color: #666666">.</span>formula2series2pyfunc(formula, <span style="color: #666666">3</span>, t)
+<span style="color: #666666">&gt;&gt;&gt;</span> latex
+<span style="color: #BA2121">&#39;- </span><span style="color: #BB6622; font-weight: bold">\\</span><span style="color: #BA2121">frac{4 t^{3}}{3} + 2 t^{2} - 2 t + 1&#39;</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plt</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> t <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, <span style="color: #666666">2</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> plt<span style="color: #666666">.</span>plot(t, f(t), t, s(t))
+[<span style="color: #666666">&lt;</span>matplotlib<span style="color: #666666">.</span>lines<span style="color: #666666">.</span>Line2D at <span style="color: #666666">0x7fc6c020f350&gt;</span>,
+ <span style="color: #666666">&lt;</span>matplotlib<span style="color: #666666">.</span>lines<span style="color: #666666">.</span>Line2D at <span style="color: #666666">0x7fc6c020f5d0&gt;</span>]
+<span style="color: #666666">&gt;&gt;&gt;</span> plt<span style="color: #666666">.</span>show()
+</pre></div>
+<p>
+The resulting plot is displayed below.
+
+<p>
+<center><p><img src="fig-web4sa/Taylor_approx_exp2t.png" align="bottom" width=500></p></center>
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+The series expansion is obtained by <code>formula.series(x, x0, N)</code>,
+but the output contains an <code>O()</code> term which makes it impossible to
+convert the expression to a Python function via <code>sympy.lambify</code>.
+Use
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">series <span style="color: #666666">=</span> formula<span style="color: #666666">.</span>series(x, x0, N<span style="color: #666666">+1</span>)<span style="color: #666666">.</span>removeO()
+</pre></div>
+<p>
+to get an expression that can be used as argument to <code>sympy.lambdify</code>.
+We use <code>N+1</code> since <code>N</code> in the <code>series</code> function refers to the degree
+of the <code>O()</code> term, which is now removed.
+
+<p>
+For the LaTeX expression it is natural to have the <code>O()</code> term:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">latex <span style="color: #666666">=</span> sympy<span style="color: #666666">.</span>latex(formula<span style="color: #666666">.</span>series(x, x0, N<span style="color: #666666">+1</span>))
+</pre></div>
+<p>
+because then the terms start with the lowest order (and not the highest
+order as is the case when <code>removeO()</code> is used).
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<b>b)</b>
+Write the compute function:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">visualize_series</span>(
+    formula,                  <span style="color: #408080; font-style: italic"># string: formula</span>
+    independent_variable,     <span style="color: #408080; font-style: italic"># string: name of independent var.</span>
+    N,                        <span style="color: #408080; font-style: italic"># int: degree of polynomial approx.</span>
+    xmin, xmax, ymin, ymax,   <span style="color: #408080; font-style: italic"># strings: extent of axes</span>
+    legend_loc,               <span style="color: #408080; font-style: italic"># string: upper left, etc.</span>
+    x0<span style="color: #666666">=</span><span style="color: #BA2121">&#39;0&#39;</span>,                   <span style="color: #408080; font-style: italic"># string: point of expansion</span>
+    erase<span style="color: #666666">=</span><span style="color: #BA2121">&#39;yes&#39;</span>,              <span style="color: #408080; font-style: italic"># string: &#39;yes&#39; or &#39;no&#39;</span>
+    ):
+</pre></div>
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint 1.</b>
+Converting the string <code>formula</code> to a valid <code>sympy</code> expression is
+challenging. First, create a local variable for a <code>sympy</code> symbol
+with the content of
+<code>independent_variable</code> as name, since such a variable is needed
+with performing <code>eval</code> on <code>formula</code>. Also introduce a variable <code>x</code>
+to point to the same <code>sympy</code> symbol. Relevant code is
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># Turn independent variable into sympy symbol, stored in x</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sympy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">sp</span>
+<span style="color: #008000; font-weight: bold">exec</span>(<span style="color: #BA2121">&#39;x = </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> = sp.symbols(&quot;</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">&quot;)&#39;</span> <span style="color: #666666">%</span>
+     (independent_variable, independent_variable))
+</pre></div>
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint 2.</b>
+Evaluating <code>formula</code> in the namespace of <code>sympy</code> (so that all the <code>sin</code>,
+<code>exp</code>, <code>pi</code>, and similar symbols are defined properly as <code>sympy</code>
+objects) needs a merge of the <code>sympy</code> namespace and the variable for
+the <code>sympy</code> symbol representing the independent variable:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">namespace <span style="color: #666666">=</span> sp<span style="color: #666666">.</span>__dict__<span style="color: #666666">.</span>copy()
+local <span style="color: #666666">=</span> {}
+local[independent_variable] <span style="color: #666666">=</span> x
+namespace<span style="color: #666666">.</span>update(local)
+formula <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(formula, namespace)
+</pre></div>
+<p>
+Turning <code>x0</code> into a valid <code>sympy</code> expression is easier: <code>x0 = eval(x0, sp.__dict__)</code>.
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint 3.</b>
+Note that in the web interface, the minimum and maximum values on the axis
+can be mathematical expressions such as <code>2*pi</code>. This means that these
+quantities must be strings that are evaluated in the <code>numpy</code> namespace, e.g.,
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+xmin <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(xmin, np<span style="color: #666666">.</span>__dict__)
+</pre></div>
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint 4.</b>
+Getting the legends right when plotting multiple curves in the same
+plot is a bit tricky. One solution is to have a global variable <code>legends</code>
+that is initialized to <code>[]</code> and do the following inside the compute function:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plt</span>
+<span style="color: #008000; font-weight: bold">global</span> legends
+<span style="color: #008000; font-weight: bold">if</span> erase <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;yes&#39;</span>:   <span style="color: #408080; font-style: italic"># Start new figure?</span>
+    plt<span style="color: #666666">.</span>figure()
+    legends <span style="color: #666666">=</span> []
+<span style="color: #008000; font-weight: bold">if</span> <span style="color: #AA22FF; font-weight: bold">not</span> legends:
+    <span style="color: #408080; font-style: italic"># We come here every time the figure is empty so</span>
+    <span style="color: #408080; font-style: italic"># we need to draw the formula</span>
+    legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;$</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">$&#39;</span> <span style="color: #666666">%</span> sp<span style="color: #666666">.</span>latex(formula))
+    plt<span style="color: #666666">.</span>plot(x, f(x))
+</pre></div>
+<p>
+Here, <code>f</code> is the Python function for computing the <code>numpy</code> variant
+of the expression in <code>formula</code>.
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint 5.</b>
+Use the test block in the file to call the compute function several
+times with different values of the <code>erase</code> parameter to test that
+the erase functionality is correct.
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<b>c)</b>
+Write the remaining files. These have straightforward content if
+<a href="#wf:exer:formula">Exercise 3: Plot a user-specified formula</a> is done and understood.
+
+<p>
+Filename: <code>Taylor_approx.tar.gz</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="wf:exer:gen:demo">Exercise 5: Extend the <code>gen</code> app<a name="wf:exer:gen:demo"></a></h2>
+
+<p>
+Add a new argument <code>x_axis</code> to the <code>compute</code> function in the
+<a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/gen" target="_self"><tt>gen</tt></a>
+application from the section <a href="._web4sa_flask014.html#wf:autogen:flask">Autogenerating the code</a>. The <code>x_axis</code> argument measures the extent
+of the \( x \) axis in the plots in terms of the number of standard
+deviations (default may be 7).  Observe how the web interface
+automatically adds the new argument and how the plots adapt!
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="wf:exer:gen:lists">Exercise 6: Equip the <code>gen</code> app with more data types<a name="wf:exer:gen:lists"></a></h2>
+
+<p>
+In the <a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/gen" target="_self"><tt>gen</tt></a>
+application from the section <a href="._web4sa_flask014.html#wf:autogen:flask">Autogenerating the code</a>,
+use the <code>label</code> argument in the form field objects to add an
+information of the type of data that is to be supplied in the
+text field. Extend the <code>model.py</code> file to also handle
+lists, tuples, and Numerical Python arrays. For these three
+new data types, use a <code>TextField</code> object and run <code>eval</code>
+on the text in the <code>view.py</code> file.
+A simple test is to extend the <code>compute</code> function with an
+argument <code>x_range</code> for the range of the \( x \) axis, specified as
+an interval (2-list or 2-tuple).
+Filename: <code>gen_ext.tar.gz</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="___sec59">Exercise 7: Auto-generate code from function signature <a name="___sec59"></a></h2>
+
+<p>
+Given a <code>compute</code> with a set of positional and keyword
+arguments, the purpose of this exercise is to <em>automatically</em> generate the
+Flask files <code>model.py</code> and <code>controller.py</code>. Use the Python <code>inspect</code>
+module, see the section <a href="._web4sa_flask014.html#wf:autogen:flask">Autogenerating the code</a>, to extract
+the positional and keyword arguments in <code>compute</code>, and use this
+information to construct the relevant Python code in strings. Write
+the strings to <code>model.py</code> and <code>controller.py</code> files. Assume as
+in the section <a href="._web4sa_flask014.html#wf:autogen:flask">Autogenerating the code</a> that the user provides
+a file <code>view_results.html</code> for defining how the returned object
+from the <code>compute</code> function is to be rendered.
+
+<p>
+Test the code generator on the <code>compute</code> function in the <code>vib1</code>
+application to check that the generated
+<code>model.py</code> and <code>controller.py</code> files are correct.
+Filename: <code>generate_flask.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<h1 id="___sec60">Flask resources <a name="___sec60"></a></h1>
+
+<ul>
+ <li> <a href="http://flask.pocoo.org/" target="_self">Flask website</a></li>
+ <li> <a href="http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world" target="_self">The Flask Mega-Tutorial</a> by Miguel Grinberg</li>
+ <li> <a href="http://wtforms.simplecodes.com/docs/0.6/index.html" target="_self">WTForms Documentation</a></li>
+ <li> <a href="http://jinja.pocoo.org/docs/" target="_self">The Jinja2 templating language</a></li>
+ <li> <a href="http://werkzeug.pocoo.org/" target="_self">The Werkzeug library</a></li>
+</ul>
+
+<h1 id="___sec61">Remaining <a name="___sec61"></a></h1>
+
+<ul>
+ <li> apply (generated apps) to simviz (make py simviz too and describe that)</li>
+ <li> store data in database</li>
+ <li> discuss list values read as text and use of eval, perhaps exercise</li>
+ <li> avoid Flask or Django in exercises, just do not specify and have
+   common exercises at the very end</li>
+ <li> app: username, TextAreaField, store in database and retrieve for admin</li>
+</ul>
+
+
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._web4sa_flask016.html">&larr; Prev</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+
+ </div>
+
+ <div class="row Footer">
+  <div class="span12">
+  &copy 2013; Hans Petter Langtangen and Anders E. Johansen.
+  Last update: .
+  </div>
+ </div>
+</div>
+</body>
+</html>
+

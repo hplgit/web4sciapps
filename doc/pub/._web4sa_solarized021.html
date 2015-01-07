@@ -1,0 +1,816 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Using Web Frameworks for Scientific Applications">
+<meta name="keywords" content="web frameworks,MVC pattern,Flask installation,Flask input forms,Flask HTML templates,Flask MVC pattern,Flask troubleshooting,Django installation,Django making a project,Django making an application,Django input forms,Django HTML templates,Flask input forms,Flask error checking,Flask CSS style sheets,Flask LaTeX mathematics,Flask input validation,inline PNG image in HTML,base64 encoding of PNG images,inline SVG figure in HTML,Flask login,Flask database,Flask uploading of files,Flask file upload,Django input forms,Django input validation">
+
+<title>Using Web Frameworks for Scientific Applications</title>
+
+
+<link href="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
+<script src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
+<style type="text/css">
+h1 {color: #b58900;}  /* yellow */
+/* h1 {color: #cb4b16;}  orange */
+/* h1 {color: #d33682;}  magenta, the original choice of thomasf */
+code { padding: 0px; background-color: inherit; }
+pre {
+  border: 0pt solid #93a1a1;
+  box-shadow: none;
+}
+.alert-text-small   { font-size: 80%;  }
+.alert-text-large   { font-size: 130%; }
+.alert-text-normal  { font-size: 90%;  }
+.alert {
+  padding:8px 35px 8px 14px; margin-bottom:18px;
+  text-shadow:0 1px 0 rgba(255,255,255,0.5);
+  border:1px solid #93a1a1;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  color: #555;
+  background-color: #eee8d5;
+  background-position: 10px 5px;
+  background-repeat: no-repeat;
+  background-size: 38px;
+  padding-left: 55px;
+  width: 75%;
+ }
+.alert-block {padding-top:14px; padding-bottom:14px}
+.alert-block > p, .alert-block > ul {margin-bottom:1em}
+.alert li {margin-top: 1em}
+.alert-block p+p {margin-top:5px}
+.alert-notice { background-image: url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_notice.png); }
+.alert-summary  { background-image:url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_summary.png); }
+.alert-warning { background-image: url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_warning.png); }
+.alert-question {background-image:url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_question.png); }
+
+div { text-align: justify; text-justify: inter-word; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Web frameworks ', 1, None, '___sec0'),
+              (' The MVC pattern ', 2, None, '___sec1'),
+              (' A very simple application ', 2, None, '___sec2'),
+              (' Application of the MVC pattern ',
+               2,
+               'wf:hw:mvc',
+               'wf:hw:mvc'),
+              (' Making a Flask application ', 1, None, '___sec4'),
+              (' Programming the Flask application ', 2, None, '___sec5'),
+              (' The user interaction ', 3, None, '___sec6'),
+              (' The Python code ', 3, None, '___sec7'),
+              (' Dissection ', 3, None, '___sec8'),
+              (' The template files ', 3, None, '___sec9'),
+              (' Testing the application ', 3, None, '___sec10'),
+              (' Equipping the input page with output results ',
+               2,
+               None,
+               '___sec11'),
+              (' Splitting the app into model, view, and controller files ',
+               2,
+               'wf:hw3:flask',
+               'wf:hw3:flask'),
+              (' Troubleshooting ', 2, None, '___sec13'),
+              (' Address already in use ', 3, None, '___sec14'),
+              (' Making a Django application ', 1, None, '___sec15'),
+              (' Setting up a Django project ', 2, None, '___sec16'),
+              (' Setting up a Django application ', 2, None, '___sec17'),
+              (' Programming the Django application ', 2, None, '___sec18'),
+              (' The user interaction ', 3, None, '___sec19'),
+              (' The model ', 3, None, '___sec20'),
+              (' The view ', 3, None, '___sec21'),
+              (' Making the input page ', 3, None, '___sec22'),
+              (' Making the results page ', 3, None, '___sec23'),
+              (' Equipping the input page with output results ',
+               2,
+               None,
+               '___sec24'),
+              (' Handling multiple input variables in Flask ',
+               1,
+               'wf:vib:flask',
+               'wf:vib:flask'),
+              (' Programming the Flask application ',
+               2,
+               'wf:vib1:flask:app',
+               'wf:vib1:flask:app'),
+              (' The compute part ', 3, None, '___sec27'),
+              (' The model ', 3, None, '___sec28'),
+              (' The view ', 3, None, '___sec29'),
+              (' The HTML template ', 3, None, '___sec30'),
+              (' Implementing error checking in the template ',
+               2,
+               None,
+               '___sec31'),
+              (' Using style sheets ', 2, None, '___sec32'),
+              (' Using LaTeX mathematics ', 2, None, '___sec33'),
+              (' Rearranging the elements in the HTML template ',
+               2,
+               None,
+               '___sec34'),
+              (' Bootstrap HTML style ', 2, None, '___sec35'),
+              (' Custom validation ',
+               2,
+               'wf:vib1:flask:validation',
+               'wf:vib1:flask:validation'),
+              (' Using Flask validators ', 3, None, '___sec37'),
+              (' Tailored validation ', 3, None, '___sec38'),
+              (' Tailored validation of intervals ', 3, None, '___sec39'),
+              (' Demo ', 3, None, '___sec40'),
+              (' Avoiding plot files ',
+               2,
+               'wf:vib2:flask:nofiles',
+               'wf:vib2:flask:nofiles'),
+              (' PNG plots ', 3, None, '___sec42'),
+              (' SVG plots ', 3, None, '___sec43'),
+              (' Autogenerating the code ',
+               2,
+               'wf:autogen:flask',
+               'wf:autogen:flask'),
+              (' Inspecting function signatures ', 3, None, '___sec45'),
+              (' Generating the model ', 3, None, '___sec46'),
+              (' Generating the view ', 3, None, '___sec47'),
+              (' Generating the template ', 3, None, '___sec48'),
+              (' Application ', 3, None, '___sec49'),
+              (' User login and storage of computed results ',
+               2,
+               'wf:flask:login',
+               'wf:flask:login'),
+              (' Required additional software ', 3, None, '___sec51'),
+              (' The compute part ', 3, None, '___sec52'),
+              (' The interfaces of the app ', 3, None, '___sec53'),
+              (' The source code ', 3, None, '___sec54'),
+              (' Resources ', 3, None, '___sec55'),
+              (' Uploading of files ',
+               2,
+               'wf:flask:upload',
+               'wf:flask:upload'),
+              (' Overview of the application ', 3, None, '___sec57'),
+              (' The model class ', 3, None, '___sec58'),
+              (' The controller file ', 3, None, '___sec59'),
+              (' The compute function ', 3, None, '___sec60'),
+              (' The HTML template ', 3, None, '___sec61'),
+              (' Handling multiple input variables in Django ',
+               1,
+               'wf:vib:django',
+               'wf:vib:django'),
+              (' Programming the Django application ', 2, None, '___sec63'),
+              (' Adding the app to a project ', 3, None, '___sec64'),
+              (' The compute part ', 3, None, '___sec65'),
+              (' The model ', 3, None, '___sec66'),
+              (' The view ', 3, None, '___sec67'),
+              (' Custom validation ', 2, None, '___sec68'),
+              (' Customizing widgets ', 2, None, '___sec69'),
+              (' Resources ', 2, None, '___sec70'),
+              (' Exercises ', 1, None, '___sec71'),
+              (' Exercise 1: Add two numbers ',
+               2,
+               'wf:exer:add2',
+               'wf:exer:add2'),
+              (' Exercise 2: Upload data file and visualize curves ',
+               2,
+               'wf:exer:upload',
+               'wf:exer:upload'),
+              (' Exercise 3: Plot a user-specified formula ',
+               2,
+               'wf:exer:formula',
+               'wf:exer:formula'),
+              (' Exercise 4: Visualize Taylor polynomial approximations ',
+               2,
+               'wf:exer:Taylor',
+               'wf:exer:Taylor'),
+              (' Exercise 5: Extend the `gen` app ',
+               2,
+               'wf:exer:gen:demo',
+               'wf:exer:gen:demo'),
+              (' Exercise 6: Equip the `gen` app with more data types ',
+               2,
+               'wf:exer:gen:lists',
+               'wf:exer:gen:lists'),
+              (' Exercise 7: Auto-generate code from function signature ',
+               2,
+               None,
+               '___sec78'),
+              (' Resources ', 1, None, '___sec79'),
+              (' Flask resources ', 2, None, '___sec80'),
+              (' Django resources ', 2, None, '___sec81'),
+              (' Remaining ', 1, None, '___sec82')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+    
+<a name="part0021"></a>
+<p>
+<!-- begin top navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._web4sa_solarized020.html">&laquo; Previous</a></div>
+</td><td>
+</td></tr></table>
+<!-- end top navigation -->
+</p>
+
+<p>
+<!-- !split -->
+
+<h1>Exercises  <a name="___sec71"></a></h1>
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 1: Add two numbers <a name="wf:exer:add2"></a></h2>
+
+<p>
+Make a web application that reads two numbers from a web page,
+adds the numbers, and prints the sum in a new web page.
+Package the necessary files that constitute the application
+in a tar file.
+Filename: <code>add2.tar.gz</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 2: Upload data file and visualize curves <a name="wf:exer:upload"></a></h2>
+
+<p>
+Suppose you have tabular data in a file:
+
+<p>
+<!-- begin verbatim block  dat-->
+<pre><code>#  t        y       error
+0.0000    1.2345   1.4E-4
+1.0000    0.9871  -4.9E-3
+1.2300    0.5545   8.2E-3
+</code></pre>
+<!-- end verbatim block -->
+That is, there is a comment line with headings for the various
+columns, and then floating-point values are listed with an
+arbitrary number of columns and rows. You want to upload such
+a data file to a web application and have the each column, from
+the second one, plotted against the the values in the first column.
+In the particular example, <code>y</code> and <code>error</code> should be plotted against
+<code>t</code>, yielding two curves.
+
+<p>
+The web application may have one field: the name of the file to upload.
+Search for constructions on how to upload a files and write this
+application. Generate a suitable data file for testing purposes.
+Filename: <code>upload.tar.gz</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 3: Plot a user-specified formula <a name="wf:exer:formula"></a></h2>
+
+<p>
+The purpose of this exercise is to write a web application that
+can visualize any user-given formula. For example, in the interface below,
+
+<p>
+<center><p><img src="fig-web4sa/plot_formula.png" align="bottom" width=600></p></center>
+
+<p>
+the user has
+
+<ul>
+ <li> specified a curve \( \sin (x) \) (<code>sin(x)</code>) to be plotted</li>
+ <li> specified the \( x \) interval to be \( [0,2\pi] \) (<code>[0, 2*pi]</code>)</li>
+ <li> clicked <em>Compute</em> to get a blue line with the sine curve</li>
+ <li> specified a new formula \( \sin(x)e^{-x} \) (<code>sin(x)*exp(-x)</code>)</li>
+ <li> chosen <em>No</em> as the answer to <em>Erase all curves?</em></li>
+ <li> clicked <em>Compute</em> to have the  \( \sin(x)e^{-x} \) drawn
+   with green line without erasing the previous curve</li>
+</ul>
+
+That is, the user can fill in any expression in \( x \), specify the
+domain for plotting, and choose whether new curves should be added
+to the plot or if all curves should be erased prior to drawing a
+new one.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint 1.</b>
+You may use the <code>vib1</code> app from the section <a href="._web4sa_solarized008.html#wf:vib1:flask:app">Programming the Flask application</a>
+with the <code>view_errcheck.html</code> template as starting point.
+Preferably, let plots be created as strings, as explained for the <code>vib2</code>
+app in the section <a href="._web4sa_solarized015.html#wf:vib2:flask:nofiles">Avoiding plot files</a>.
+
+<p>
+The <em>Formula</em> and <em>Domain</em> fields need to be <code>TextField</code> objects,
+and the compute function must perform an <code>eval</code> on the user's input.
+The <em>Erase</em> field is a <code>SelectField</code> object with selections <em>Yes</em> and
+<em>No</em>. The former means that the compute function calls the <code>figure</code>
+function in Matplotlib before creating a new plot. If this is not
+done, a new formula will be plotting in the same figure as the last one.
+With the Yes/No selection, it is possible either plot individual curves
+or compare curves in the same plot.
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint 2.</b>
+Performing <code>eval</code> on the user's input requires that names like
+<code>sin</code>, <code>exp</code>, and <code>pi</code> are defined. The simplest approach is to
+do a
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>from numpy import *
+</code></pre>
+<!-- end verbatim block -->
+in the top of the file containing the compute function. All the names
+from <code>numpy</code> are then available as global variables and one can simply
+do <code>domain = eval(domain)</code> to turn the string <code>domain</code> coming from
+the <em>Domain</em> text field into a Python list with two elements.
+
+<p>
+A better approach is not to rely on global variables, but run <code>eval</code>
+in the <code>numpy</code> namespace:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>import numpy
+domain = eval(domain, numpy.__dict__)
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+The evaluation of the formula is slightly more complicated if <code>eval</code>
+is to be run with the <code>numpy</code> namespace. One first needs
+to create \( x \) coordinates:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>x = numpy.linspace(domain[0], domain[1], 10001)
+</code></pre>
+<!-- end verbatim block -->
+Now, <code>eval(formula, numpy.__dict__)</code> will not work because a formula
+like <code>sin(x)</code> needs both <code>sin</code> and <code>x</code> in the namespace. The latter
+is not in the namespace and must be explicitly included. A new namespace
+can be made:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>namespace = numpy.__dict__.copy()
+namespace.update({'x': x})
+formula = eval(formula, namespace)
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint 3.</b>
+You should add tests when evaluating and using the strings from input
+as these may have wrong syntax.
+
+<p>
+<!-- --- end hint in exercise --- -->
+Filename: <code>plot_formula.tar.gz</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 4: Visualize Taylor polynomial approximations <a name="wf:exer:Taylor"></a></h2>
+
+<p>
+This exercise develops a web application that can plot Taylor polynomial
+approximations of <em>any</em> degree
+to <em>any</em> user-given formula. You should do
+<a href="#wf:exer:formula">Exercise 3: Plot a user-specified formula</a> first as many of the techniques there
+must be used and even further developed in the present exercise.
+
+<p>
+The figure below shows an example of what one can do in the
+web app:
+
+<p>
+<center><p><img src="fig-web4sa/Taylor_approx.png" align="bottom" width=600></p></center>
+
+<p>
+Here, the user has
+
+<ul>
+ <li> filled in the formula \( \sin(x) \) (<code>sin(x)</code>)</li>
+ <li> specified <em>N</em> to be 3</li>
+ <li> clicked <em>Compute</em> to get the formula \( \sin(x) \) plotted together with
+   the Taylor polynomial approximation of degree 3, expanded around \( x=0 \)</li>
+ <li> changed <em>N</em> to 5</li>
+ <li> chosen <em>No</em> for the question <em>Erase all curves?</em></li>
+ <li> clicked <em>Compute</em> to have the series expansion of degree 5 plotted
+   in the same plot</li>
+ <li> changed <em>N</em> to 10</li>
+ <li> clicked <em>Compute</em> to have the series expansion of degree 10 plotted
+   in the same plot</li>
+</ul>
+
+We can use <code>sympy</code> to produce Taylor polynomial expansions of arbitrary
+expressions. Here is a session demonstrating how to obtain the
+series expansion of \( e^{-x}\sin (\pi x) \) to 2nd degree.
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>&gt;&gt;&gt; import sympy as sp
+&gt;&gt;&gt; x = sp.symbols('x')
+&gt;&gt;&gt; f = sp.exp(-x)*sp.sin(sp.pi*x)
+&gt;&gt;&gt; f.series(x, 0, 3)
+pi*x - pi*x**2 + O(x**3)
+&gt;&gt;&gt; sp.latex(f.series(x, 0, 3))
+'\\pi x - \\pi x^{2} + \\mathcal{O}\\left(x^{3}\\right)'
+&gt;&gt;&gt; fs = f.series(x, 0, 3).removeO()  # get rid of O() term
+&gt;&gt;&gt; fs
+-pi*x**2 + pi*x
+&gt;&gt;&gt; f_func = sp.lambdify([x], fs)     # make Python function
+&gt;&gt;&gt; f_func(1)
+0.0
+&gt;&gt;&gt; f_func(2)
+-6.283185307179586
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Basically, the steps above must be carried out to create a Python
+function for the series expansion such that it can be plotted.
+A similar <code>sp.lambdify</code> call on the original formula is also necessary
+to plot that one.
+
+<p>
+However, the challenge is that the formula is
+available only as a string, and it may contain an independent variable
+whose name is also only available through a string from the web interface.
+That is, we may give formulas like <code>exp(-t)</code> if <code>t</code> is chosen as
+independent variable.
+Also, the expression does not contain function names prefixed with <code>sympy</code> or
+<code>sp</code>, just plain names like <code>sin</code>, <code>cos</code>, <code>exp</code>, etc.
+An example on <code>formula</code> is <code>cos(pi*x) + log(x)</code>.
+
+<p>
+<b>a)</b>
+Write a function
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def formula2series2pyfunc(formula, N, x, x0=0):
+</code></pre>
+<!-- end verbatim block -->
+that takes a <code>sympy</code> formula, and integer <code>N</code>, a <code>sympy</code> symbol <code>x</code>
+and another <code>sympy</code> symbol <code>x0</code> and returns
+1) a Python function for <code>formula</code>, 2) a Python function for the
+series expansion of degree <code>N</code> of the formula around <code>x0</code>, and
+3) a LaTeX string containing the formula for the series expansion.
+
+<p>
+Put the function in a file <code>compute.py</code>. You should thereafter be able to run
+the following session:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; import compute
+&gt;&gt;&gt; import sympy as sp
+&gt;&gt;&gt; from sympy import *
+&gt;&gt;&gt; t = symbols('t')
+&gt;&gt;&gt; formula = exp(-2*t)
+&gt;&gt;&gt; f, s, latex = compute.formula2series2pyfunc(formula, 3, t)
+&gt;&gt;&gt; latex
+'- \\frac{4 t^{3}}{3} + 2 t^{2} - 2 t + 1'
+&gt;&gt;&gt; import matplotlib.pyplot as plt
+&gt;&gt;&gt; import numpy as np
+&gt;&gt;&gt; t = np.linspace(0, 2)
+&gt;&gt;&gt; plt.plot(t, f(t), t, s(t))
+[&lt;matplotlib.lines.Line2D at 0x7fc6c020f350&gt;,
+ &lt;matplotlib.lines.Line2D at 0x7fc6c020f5d0&gt;]
+&gt;&gt;&gt; plt.show()
+</code></pre>
+<!-- end verbatim block -->
+The resulting plot is displayed below.
+
+<p>
+<center><p><img src="fig-web4sa/Taylor_approx_exp2t.png" align="bottom" width=500></p></center>
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+The series expansion is obtained by <code>formula.series(x, x0, N)</code>,
+but the output contains an <code>O()</code> term which makes it impossible to
+convert the expression to a Python function via <code>sympy.lambify</code>.
+Use
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>series = formula.series(x, x0, N+1).removeO()
+</code></pre>
+<!-- end verbatim block -->
+to get an expression that can be used as argument to <code>sympy.lambdify</code>.
+We use <code>N+1</code> since <code>N</code> in the <code>series</code> function refers to the degree
+of the <code>O()</code> term, which is now removed.
+
+<p>
+For the LaTeX expression it is natural to have the <code>O()</code> term:
+<!-- begin verbatim block  pycod-->
+<pre><code>latex = sympy.latex(formula.series(x, x0, N+1))
+</code></pre>
+<!-- end verbatim block -->
+because then the terms start with the lowest order (and not the highest
+order as is the case when <code>removeO()</code> is used).
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<b>b)</b>
+Write the compute function:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def visualize_series(
+    formula,                  # string: formula
+    independent_variable,     # string: name of independent var.
+    N,                        # int: degree of polynomial approx.
+    xmin, xmax, ymin, ymax,   # strings: extent of axes
+    legend_loc,               # string: upper left, etc.
+    x0='0',                   # string: point of expansion
+    erase='yes',              # string: 'yes' or 'no'
+    ):
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint 1.</b>
+Converting the string <code>formula</code> to a valid <code>sympy</code> expression is
+challenging. First, create a local variable for a <code>sympy</code> symbol
+with the content of
+<code>independent_variable</code> as name, since such a variable is needed
+with performing <code>eval</code> on <code>formula</code>. Also introduce a variable <code>x</code>
+to point to the same <code>sympy</code> symbol. Relevant code is
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code># Turn independent variable into sympy symbol, stored in x
+import sympy as sp
+exec('x = %s = sp.symbols(&quot;%s&quot;)' %
+     (independent_variable, independent_variable))
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint 2.</b>
+Evaluating <code>formula</code> in the namespace of <code>sympy</code> (so that all the <code>sin</code>,
+<code>exp</code>, <code>pi</code>, and similar symbols are defined properly as <code>sympy</code>
+objects) needs a merge of the <code>sympy</code> namespace and the variable for
+the <code>sympy</code> symbol representing the independent variable:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>namespace = sp.__dict__.copy()
+local = {}
+local[independent_variable] = x
+namespace.update(local)
+formula = eval(formula, namespace)
+</code></pre>
+<!-- end verbatim block -->
+Turning <code>x0</code> into a valid <code>sympy</code> expression is easier: <code>x0 = eval(x0, sp.__dict__)</code>.
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint 3.</b>
+Note that in the web interface, the minimum and maximum values on the axis
+can be mathematical expressions such as <code>2*pi</code>. This means that these
+quantities must be strings that are evaluated in the <code>numpy</code> namespace, e.g.,
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>import numpy as np
+xmin = eval(xmin, np.__dict__)
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint 4.</b>
+Getting the legends right when plotting multiple curves in the same
+plot is a bit tricky. One solution is to have a global variable <code>legends</code>
+that is initialized to <code>[]</code> and do the following inside the compute function:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>import matplotlib.pyplot as plt
+global legends
+if erase == 'yes':   # Start new figure?
+    plt.figure()
+    legends = []
+if not legends:
+    # We come here every time the figure is empty so
+    # we need to draw the formula
+    legends.append('$%s$' % sp.latex(formula))
+    plt.plot(x, f(x))
+</code></pre>
+<!-- end verbatim block -->
+Here, <code>f</code> is the Python function for computing the <code>numpy</code> variant
+of the expression in <code>formula</code>.
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint 5.</b>
+Use the test block in the file to call the compute function several
+times with different values of the <code>erase</code> parameter to test that
+the erase functionality is correct.
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<b>c)</b>
+Write the remaining files. These have straightforward content if
+<a href="#wf:exer:formula">Exercise 3: Plot a user-specified formula</a> is done and understood.
+
+<p>
+Filename: <code>Taylor_approx.tar.gz</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 5: Extend the <code>gen</code> app <a name="wf:exer:gen:demo"></a></h2>
+
+<p>
+Add a new argument <code>x_axis</code> to the <code>compute</code> function in the
+<a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/gen" target="_self"><tt>gen</tt></a>
+application from the section <a href="._web4sa_solarized016.html#wf:autogen:flask">Autogenerating the code</a>. The <code>x_axis</code> argument measures the extent
+of the \( x \) axis in the plots in terms of the number of standard
+deviations (default may be 7).  Observe how the web interface
+automatically adds the new argument and how the plots adapt!
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 6: Equip the <code>gen</code> app with more data types <a name="wf:exer:gen:lists"></a></h2>
+
+<p>
+In the <a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/gen" target="_self"><tt>gen</tt></a>
+application from the section <a href="._web4sa_solarized016.html#wf:autogen:flask">Autogenerating the code</a>,
+use the <code>label</code> argument in the form field objects to add an
+information of the type of data that is to be supplied in the
+text field. Extend the <code>model.py</code> file to also handle
+lists, tuples, and Numerical Python arrays. For these three
+new data types, use a <code>TextField</code> object and run <code>eval</code>
+on the text in the <code>view.py</code> file.
+A simple test is to extend the <code>compute</code> function with an
+argument <code>x_range</code> for the range of the \( x \) axis, specified as
+an interval (2-list or 2-tuple).
+Filename: <code>gen_ext.tar.gz</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2>Exercise 7: Auto-generate code from function signature  <a name="___sec78"></a></h2>
+
+<p>
+Given a <code>compute</code> with a set of positional and keyword
+arguments, the purpose of this exercise is to <em>automatically</em> generate the
+Flask files <code>model.py</code> and <code>controller.py</code>. Use the Python <code>inspect</code>
+module, see the section <a href="._web4sa_solarized016.html#wf:autogen:flask">Autogenerating the code</a>, to extract
+the positional and keyword arguments in <code>compute</code>, and use this
+information to construct the relevant Python code in strings. Write
+the strings to <code>model.py</code> and <code>controller.py</code> files. Assume as
+in the section <a href="._web4sa_solarized016.html#wf:autogen:flask">Autogenerating the code</a> that the user provides
+a file <code>view_results.html</code> for defining how the returned object
+from the <code>compute</code> function is to be rendered.
+
+<p>
+Test the code generator on the <code>compute</code> function in the <code>vib1</code>
+application to check that the generated
+<code>model.py</code> and <code>controller.py</code> files are correct.
+Filename: <code>generate_flask.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<h1>Resources  <a name="___sec79"></a></h1>
+
+<h2>Flask resources  <a name="___sec80"></a></h2>
+
+<ul>
+ <li> <a href="http://flask.pocoo.org/" target="_self">Flask website</a></li>
+ <li> <a href="http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world" target="_self">The Flask Mega-Tutorial</a> by Miguel Grinberg</li>
+ <li> <a href="http://wtforms.simplecodes.com/docs/0.6/index.html" target="_self">WTForms Documentation</a></li>
+ <li> <a href="http://jinja.pocoo.org/docs/" target="_self">The Jinja2 templating language</a></li>
+ <li> <a href="http://werkzeug.pocoo.org/" target="_self">The Werkzeug library</a></li>
+</ul>
+
+<h2>Django resources  <a name="___sec81"></a></h2>
+
+<ul>
+ <li> <a href="https://www.djangoproject.com/" target="_self">Django webpage</a></li>
+ <li> <a href="https://code.djangoproject.com/wiki/Tutorials" target="_self">Web tutorials</a></li>
+ <li> <a href="http://www.youtube.com/playlist?list=PL385A53B00B8B158E" target="_self">YouTube videos</a></li>
+</ul>
+
+<h1>Remaining  <a name="___sec82"></a></h1>
+
+<ul>
+ <li> apply (generated apps) to simviz (make py simviz too and describe that)</li>
+ <li> store data in database</li>
+ <li> discuss list values read as text and use of eval, perhaps exercise</li>
+ <li> avoid Flask or Django in exercises, just do not specify and have
+   common exercises at the very end</li>
+ <li> app: username, TextAreaField, store in database and retrieve for admin</li>
+</ul>
+
+
+<p>
+<!-- begin bottom navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._web4sa_solarized020.html">&laquo; Previous</a></div>
+</td><td>
+</td></tr></table>
+<!-- end bottom navigation -->
+</p>
+
+<!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

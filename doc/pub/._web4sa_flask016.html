@@ -1,0 +1,399 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Doconce: http://code.google.com/p/doconce/" />
+
+<link rel="stylesheet" href="https://raw.githubusercontent.com/hplgit/doconce/master/bundled/html_styles/style_vagrant/css/twitter_bootstrap.css">
+<link rel="stylesheet" href="https://raw.githubusercontent.com/hplgit/doconce/master/bundled/html_styles/style_vagrant/css/vagrant.css">
+<!-- Define color of headings here (last definition counts) -->
+<style type="text/css">
+h1, h2, h3, h4, h5, h6 {
+  color: #000;     /* black */
+  color: #999;     /* gray */
+  color: #005580;  /* dark blue */
+  color: #08c;     /* characteristic blue */
+</style>
+</head>
+<body>
+
+<title>Using Flask for Scientific Web Applications</title>
+
+<div class="container">
+ <div class="row Header with-border">
+  <div class="span3 Module logo">
+   <h1><a href="/">Flask<span class="subtitle">4scientists</span></a></h1>
+  </div>
+  <div class="span9">
+   <div class="Module navigation">
+    <ul>
+     <li> <a href="http://flask.pocoo.org/">Flask</a></li>
+    </ul>
+   </div>
+  </div>
+ </div>
+</div>
+
+<div class="row">
+ <div class="span3 Module sidebar">
+  <div class="well" style="padding: 8px 0px;">
+   <ul class="nav nav-list">
+          <!-- navigation toc: --> <li><a href="._web4sa_flask000.html#___sec0" style="font-size: 80%;">Web frameworks</a></li>
+     <!-- navigation toc: --> <li><a href="._web4sa_flask004.html#___sec4" style="font-size: 80%;">Making a Flask application</a></li>
+     <!-- navigation toc: --> <li><a href="._web4sa_flask006.html#wf:vib:flask" style="font-size: 80%;">Handling multiple input variables in Flask</a></li>
+     <!-- navigation toc: --> <li><a href="._web4sa_flask017.html#___sec52" style="font-size: 80%;">Exercises</a></li>
+     <!-- navigation toc: --> <li><a href="._web4sa_flask017.html#___sec60" style="font-size: 80%;">Flask resources</a></li>
+     <!-- navigation toc: --> <li><a href="._web4sa_flask017.html#___sec61" style="font-size: 80%;">Remaining</a></li>
+
+    </ul>
+   </div>
+  </div>
+
+  <div class="span9">
+
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Web frameworks ', 1, None, '___sec0'),
+              (' The MVC pattern ', 2, None, '___sec1'),
+              (' A very simple application ', 2, None, '___sec2'),
+              (' Application of the MVC pattern ',
+               2,
+               'wf:hw:mvc',
+               'wf:hw:mvc'),
+              (' Making a Flask application ', 1, None, '___sec4'),
+              (' Programming the Flask application ', 2, None, '___sec5'),
+              (' The user interaction ', 3, None, '___sec6'),
+              (' The Python code ', 3, None, '___sec7'),
+              (' Dissection ', 3, None, '___sec8'),
+              (' The template files ', 3, None, '___sec9'),
+              (' Testing the application ', 3, None, '___sec10'),
+              (' Equipping the input page with output results ',
+               2,
+               None,
+               '___sec11'),
+              (' Splitting the app into model, view, and controller files ',
+               2,
+               'wf:hw3:flask',
+               'wf:hw3:flask'),
+              (' Troubleshooting ', 2, None, '___sec13'),
+              (' Address already in use ', 3, None, '___sec14'),
+              (' Handling multiple input variables in Flask ',
+               1,
+               'wf:vib:flask',
+               'wf:vib:flask'),
+              (' Programming the Flask application ',
+               2,
+               'wf:vib1:flask:app',
+               'wf:vib1:flask:app'),
+              (' The compute part ', 3, None, '___sec17'),
+              (' The model ', 3, None, '___sec18'),
+              (' The view ', 3, None, '___sec19'),
+              (' The HTML template ', 3, None, '___sec20'),
+              (' Implementing error checking in the template ',
+               2,
+               None,
+               '___sec21'),
+              (' Using style sheets ', 2, None, '___sec22'),
+              (' Using LaTeX mathematics ', 2, None, '___sec23'),
+              (' Rearranging the elements in the HTML template ',
+               2,
+               None,
+               '___sec24'),
+              (' Bootstrap HTML style ', 2, None, '___sec25'),
+              (' Custom validation ',
+               2,
+               'wf:vib1:flask:validation',
+               'wf:vib1:flask:validation'),
+              (' Using Flask validators ', 3, None, '___sec27'),
+              (' Tailored validation ', 3, None, '___sec28'),
+              (' Tailored validation of intervals ', 3, None, '___sec29'),
+              (' Demo ', 3, None, '___sec30'),
+              (' Avoiding plot files ',
+               2,
+               'wf:vib2:flask:nofiles',
+               'wf:vib2:flask:nofiles'),
+              (' PNG plots ', 3, None, '___sec32'),
+              (' SVG plots ', 3, None, '___sec33'),
+              (' Autogenerating the code ',
+               2,
+               'wf:autogen:flask',
+               'wf:autogen:flask'),
+              (' Inspecting function signatures ', 3, None, '___sec35'),
+              (' Generating the model ', 3, None, '___sec36'),
+              (' Generating the view ', 3, None, '___sec37'),
+              (' Generating the template ', 3, None, '___sec38'),
+              (' Application ', 3, None, '___sec39'),
+              (' User login and storage of computed results ',
+               2,
+               'wf:flask:login',
+               'wf:flask:login'),
+              (' Required additional software ', 3, None, '___sec41'),
+              (' The compute part ', 3, None, '___sec42'),
+              (' The interfaces of the app ', 3, None, '___sec43'),
+              (' The source code ', 3, None, '___sec44'),
+              (' Resources ', 3, None, '___sec45'),
+              (' Uploading of files ',
+               2,
+               'wf:flask:upload',
+               'wf:flask:upload'),
+              (' Overview of the application ', 3, None, '___sec47'),
+              (' The model class ', 3, None, '___sec48'),
+              (' The controller file ', 3, None, '___sec49'),
+              (' The compute function ', 3, None, '___sec50'),
+              (' The HTML template ', 3, None, '___sec51'),
+              (' Exercises ', 1, None, '___sec52'),
+              (' Exercise 1: Add two numbers ',
+               2,
+               'wf:exer:add2',
+               'wf:exer:add2'),
+              (' Exercise 2: Upload data file and visualize curves ',
+               2,
+               'wf:exer:upload',
+               'wf:exer:upload'),
+              (' Exercise 3: Plot a user-specified formula ',
+               2,
+               'wf:exer:formula',
+               'wf:exer:formula'),
+              (' Exercise 4: Visualize Taylor polynomial approximations ',
+               2,
+               'wf:exer:Taylor',
+               'wf:exer:Taylor'),
+              (' Exercise 5: Extend the `gen` app ',
+               2,
+               'wf:exer:gen:demo',
+               'wf:exer:gen:demo'),
+              (' Exercise 6: Equip the `gen` app with more data types ',
+               2,
+               'wf:exer:gen:lists',
+               'wf:exer:gen:lists'),
+              (' Exercise 7: Auto-generate code from function signature ',
+               2,
+               None,
+               '___sec59'),
+              (' Flask resources ', 1, None, '___sec60'),
+              (' Remaining ', 1, None, '___sec61')]}
+end of tocinfo -->
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<a name="part0016"></a>
+<!-- !split -->
+
+<h2 id="wf:flask:upload">Uploading of files<a name="wf:flask:upload"></a></h2>
+
+<h3 id="___sec47">Overview of the application <a name="___sec47"></a></h3>
+
+<p>
+Many user interfaces need the user to provide data files. A minimalistic
+application is to have a button for uploading a single file.
+As example we use a file with a series of numbers, and the application's
+purpose is to compute the mean and standard deviation of the numbers.
+The first user interface just has the <em>Choose File</em> and <em>Compute</em> buttons:
+
+<p>
+<center><p><img src="fig-web4sa/upload1.png" align="bottom" width=400></p></center>
+
+<p>
+Clicking on <em>Choose File</em> brings up a file browser where the user can
+choose the file to uploaded to the application. Say this is a file
+<code>testfile.dat</code>. Pressing thereafter <em>Compute</em> leads to storage of
+the <code>testfile.dat</code> on the server in a subdirectory <code>uploads</code> and
+computation of basic statistics of the numbers in the file.
+The resulting output looks like
+
+<p>
+<center><p><img src="fig-web4sa/upload3.png" align="bottom" width=400></p></center>
+
+<h3 id="___sec48">The model class <a name="___sec48"></a></h3>
+
+<p>
+The widget <code>FieldField</code> is used for an input field with a <em>Choose File</em>
+button:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">wtforms</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">wtf</span>
+
+<span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Average</span>(wtf<span style="color: #666666">.</span>Form):
+    filename   <span style="color: #666666">=</span> wtf<span style="color: #666666">.</span>FileField(validators<span style="color: #666666">=</span>
+                               [wtf<span style="color: #666666">.</span>validators<span style="color: #666666">.</span>InputRequired()])
+</pre></div>
+
+<h3 id="___sec49">The controller file <a name="___sec49"></a></h3>
+
+<p>
+The controller file needs some special code to specify a directory
+to store uploaded files. We also include some code to check that
+the file has a name with the right extension.
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># Relative path of directory for uploaded files</span>
+UPLOAD_DIR <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;uploads/&#39;</span>
+
+app<span style="color: #666666">.</span>config[<span style="color: #BA2121">&#39;UPLOAD_FOLDER&#39;</span>] <span style="color: #666666">=</span> UPLOAD_DIR
+app<span style="color: #666666">.</span>secret_key <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;MySecretKey&#39;</span>
+
+<span style="color: #008000; font-weight: bold">if</span> <span style="color: #AA22FF; font-weight: bold">not</span> os<span style="color: #666666">.</span>path<span style="color: #666666">.</span>isdir(UPLOAD_DIR):
+    os<span style="color: #666666">.</span>mkdir(UPLOAD_DIR)
+
+<span style="color: #408080; font-style: italic"># Allowed file types for file upload</span>
+ALLOWED_EXTENSIONS <span style="color: #666666">=</span> <span style="color: #008000">set</span>([<span style="color: #BA2121">&#39;txt&#39;</span>, <span style="color: #BA2121">&#39;dat&#39;</span>, <span style="color: #BA2121">&#39;npy&#39;</span>])
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">allowed_file</span>(filename):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Does filename have the right extension?&quot;&quot;&quot;</span>
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #BA2121">&#39;.&#39;</span> <span style="color: #AA22FF; font-weight: bold">in</span> filename <span style="color: #AA22FF; font-weight: bold">and</span> \ 
+           filename<span style="color: #666666">.</span>rsplit(<span style="color: #BA2121">&#39;.&#39;</span>, <span style="color: #666666">1</span>)[<span style="color: #666666">1</span>] <span style="color: #AA22FF; font-weight: bold">in</span> ALLOWED_EXTENSIONS
+</pre></div>
+<p>
+The <code>index</code> function must have code for saving the file, and as usual,
+calling the compute function and rendering a new page:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">index</span>():
+    form <span style="color: #666666">=</span> Average(request<span style="color: #666666">.</span>form)
+    filename <span style="color: #666666">=</span> <span style="color: #008000">None</span>  <span style="color: #408080; font-style: italic"># default</span>
+    <span style="color: #008000; font-weight: bold">if</span> request<span style="color: #666666">.</span>method <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;POST&#39;</span>:
+
+        <span style="color: #408080; font-style: italic"># Save uploaded file on server if it exists and is valid</span>
+        <span style="color: #008000; font-weight: bold">if</span> request<span style="color: #666666">.</span>files:
+            <span style="color: #008000">file</span> <span style="color: #666666">=</span> request<span style="color: #666666">.</span>files[form<span style="color: #666666">.</span>filename<span style="color: #666666">.</span>name]
+            <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">file</span> <span style="color: #AA22FF; font-weight: bold">and</span> allowed_file(<span style="color: #008000">file</span><span style="color: #666666">.</span>filename):
+                <span style="color: #408080; font-style: italic"># Make a valid version of filename for any file ystem</span>
+                filename <span style="color: #666666">=</span> secure_filename(<span style="color: #008000">file</span><span style="color: #666666">.</span>filename)
+                <span style="color: #008000">file</span><span style="color: #666666">.</span>save(os<span style="color: #666666">.</span>path<span style="color: #666666">.</span>join(app<span style="color: #666666">.</span>config[<span style="color: #BA2121">&#39;UPLOAD_FOLDER&#39;</span>],
+                                       filename))
+
+        result <span style="color: #666666">=</span> compute_function(filename)
+    <span style="color: #008000; font-weight: bold">else</span>:
+        result <span style="color: #666666">=</span> <span style="color: #008000">None</span>
+
+    <span style="color: #008000; font-weight: bold">return</span> render_template(<span style="color: #BA2121">&quot;view.html&quot;</span>, form<span style="color: #666666">=</span>form, result<span style="color: #666666">=</span>result)
+</pre></div>
+
+<h3 id="___sec50">The compute function <a name="___sec50"></a></h3>
+
+<p>
+We assume that the uploaded file is available in the <code>uploads</code>
+subdirectory, so the compute function needs to open this file, read
+the numbers, and compute statistics. The file reading and computations
+are easily done by <code>numpy</code> functions. The results are presented in
+an HTML table.
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">os</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">compute_average</span>(filename<span style="color: #666666">=</span><span style="color: #008000">None</span>):
+    data <span style="color: #666666">=</span> np<span style="color: #666666">.</span>loadtxt(os<span style="color: #666666">.</span>path<span style="color: #666666">.</span>join(<span style="color: #BA2121">&#39;uploads&#39;</span>, filename))
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #BA2121">&quot;&quot;&quot;</span>
+<span style="color: #BA2121">Data from file &lt;tt&gt;</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">&lt;/tt&gt;:</span>
+<span style="color: #BA2121">&lt;p&gt;</span>
+<span style="color: #BA2121">&lt;table border=1&gt;</span>
+<span style="color: #BA2121">&lt;tr&gt;&lt;td&gt; mean    &lt;/td&gt;&lt;td&gt; </span><span style="color: #BB6688; font-weight: bold">%.3g</span><span style="color: #BA2121"> &lt;/td&gt;&lt;/tr&gt;</span>
+<span style="color: #BA2121">&lt;tr&gt;&lt;td&gt; st.dev. &lt;/td&gt;&lt;td&gt; </span><span style="color: #BB6688; font-weight: bold">%.3g</span><span style="color: #BA2121"> &lt;/td&gt;&lt;/tr&gt;</span>
+<span style="color: #BA2121">&quot;&quot;&quot;</span> <span style="color: #666666">%</span> (filename, np<span style="color: #666666">.</span>mean(data), np<span style="color: #666666">.</span>std(data))
+</pre></div>
+
+<h3 id="___sec51">The HTML template <a name="___sec51"></a></h3>
+
+<p>
+Although the present minimalistic application only needs a very simple
+HTML template, we reuse a quite generic template known from previous examples,
+where the input variables are listed to the left and the output of the
+compute function is presented to the right. Such a template looks like
+
+<p>
+
+<!-- code=html (!bc htmlpro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #BC7A00">&lt;!DOCTYPE html&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;html&gt;</span>
+  <span style="color: #008000; font-weight: bold">&lt;head&gt;</span>
+    <span style="color: #008000; font-weight: bold">&lt;meta</span> <span style="color: #7D9029">charset=</span><span style="color: #BA2121">&quot;utf-8&quot;</span> <span style="color: #008000; font-weight: bold">/&gt;</span>
+    <span style="color: #008000; font-weight: bold">&lt;title&gt;</span>Flask Average app<span style="color: #008000; font-weight: bold">&lt;/title&gt;</span>
+  <span style="color: #008000; font-weight: bold">&lt;/head&gt;</span>
+  <span style="color: #008000; font-weight: bold">&lt;body&gt;</span>
+
+  <span style="color: #408080; font-style: italic">&lt;!-- Input and Results are typeset as a two-column table --&gt;</span>
+  <span style="color: #008000; font-weight: bold">&lt;table&gt;</span>
+  <span style="color: #008000; font-weight: bold">&lt;tr&gt;</span>
+  <span style="color: #008000; font-weight: bold">&lt;td</span> <span style="color: #7D9029">valign=</span><span style="color: #BA2121">&quot;top&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+    <span style="color: #008000; font-weight: bold">&lt;h2&gt;</span>Input:<span style="color: #008000; font-weight: bold">&lt;/h2&gt;</span>
+
+      <span style="color: #008000; font-weight: bold">&lt;form</span> <span style="color: #7D9029">method=</span><span style="color: #BA2121">post</span> <span style="color: #7D9029">action=</span><span style="color: #BA2121">&quot;&quot;</span> <span style="color: #7D9029">enctype=</span><span style="color: #BA2121">&quot;multipart/form-data&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+        <span style="color: #008000; font-weight: bold">&lt;table&gt;</span>
+          {% for field in form %}
+            <span style="color: #008000; font-weight: bold">&lt;tr&gt;&lt;td&gt;</span>{{ field.name }}<span style="color: #008000; font-weight: bold">&lt;/td&gt;</span>
+                <span style="color: #008000; font-weight: bold">&lt;td&gt;</span>{{ field(size=20) }}<span style="color: #008000; font-weight: bold">&lt;/td&gt;</span>
+                <span style="color: #008000; font-weight: bold">&lt;td&gt;</span>{% if field.errors %}
+                  <span style="color: #008000; font-weight: bold">&lt;ul</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">errors</span><span style="color: #008000; font-weight: bold">&gt;</span>
+                  {% for error in field.errors %}
+                    <span style="color: #008000; font-weight: bold">&lt;li&gt;</span>{{ error }}<span style="color: #008000; font-weight: bold">&lt;/li&gt;</span>
+                  {% endfor %}<span style="color: #008000; font-weight: bold">&lt;/ul&gt;</span>
+                {% endif %}<span style="color: #008000; font-weight: bold">&lt;/td&gt;&lt;/tr&gt;</span>
+          {% endfor %}
+        <span style="color: #008000; font-weight: bold">&lt;/table&gt;</span>
+        <span style="color: #008000; font-weight: bold">&lt;p&gt;&lt;input</span> <span style="color: #7D9029">type=</span><span style="color: #BA2121">&quot;submit&quot;</span> <span style="color: #7D9029">value=</span><span style="color: #BA2121">&quot;Compute&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+    <span style="color: #008000; font-weight: bold">&lt;/form&gt;&lt;/p&gt;</span>
+  <span style="color: #008000; font-weight: bold">&lt;/td&gt;</span>
+
+  <span style="color: #008000; font-weight: bold">&lt;td</span> <span style="color: #7D9029">valign=</span><span style="color: #BA2121">&quot;top&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+    {% if result != None %}
+      <span style="color: #008000; font-weight: bold">&lt;h2&gt;</span>Results:<span style="color: #008000; font-weight: bold">&lt;/h2&gt;</span>
+        {{ result|safe }}
+
+    {% endif %}
+  <span style="color: #008000; font-weight: bold">&lt;/td&gt;</span>
+  <span style="color: #008000; font-weight: bold">&lt;/tr&gt;</span>
+  <span style="color: #008000; font-weight: bold">&lt;/table&gt;</span>
+  <span style="color: #008000; font-weight: bold">&lt;/body&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/html&gt;</span>
+</pre></div>
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._web4sa_flask015.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="._web4sa_flask017.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+
+ </div>
+
+ <div class="row Footer">
+  <div class="span12">
+  &copy 2013; Hans Petter Langtangen and Anders E. Johansen.
+  Last update: .
+  </div>
+ </div>
+</div>
+</body>
+</html>
+
