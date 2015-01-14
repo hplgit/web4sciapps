@@ -1082,7 +1082,7 @@ Clicking on *Choose File* brings up a file browser where the user can
 choose the file to uploaded to the application. Say this is a file
 `testfile.dat`. The interface now looks like
 
-FIGURE: [fig-web4sa/upload1, width=550 frac=0.7]
+FIGURE: [fig-web4sa/upload2, width=550 frac=0.7]
 
 Pressing thereafter *Compute* leads to storage of
 `testfile.dat` on the server in a subdirectory `uploads` and

@@ -4,7 +4,7 @@ Using Web Frameworks for Scientific Applications
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 :Authors: Hans Petter Langtangen, Anders E. Johansen
-:Date: Jan 7, 2015
+:Date: Jan 14, 2015
 
 Web frameworks
 ==============
@@ -3360,7 +3360,7 @@ Clicking on *Choose File* brings up a file browser where the user can
 choose the file to uploaded to the application. Say this is a file
 ``testfile.dat``. The interface now looks like
 
-.. figure:: upload1.png
+.. figure:: upload2.png
    :width: 550
 
 Pressing thereafter *Compute* leads to storage of

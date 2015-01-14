@@ -242,7 +242,7 @@ MathJax.Hub.Config({
 <p>
 <!-- !split -->
 
-<h2>Autogenerating the code <a name="wf:autogen:flask"></a></h2>
+<h2 id="wf:autogen:flask">Autogenerating the code</h2>
 
 <p>
 We shall now present generic <code>model.py</code> and <code>controller.py</code>
@@ -251,7 +251,7 @@ demonstrate some advanced, powerful features of Python. The source code
 is found in the <a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/gen" target="_self"><tt>gen</tt></a>
 directory.
 
-<h3>Inspecting function signatures  <a name="___sec45"></a></h3>
+<h3 id="___sec45">Inspecting function signatures </h3>
 
 <p>
 The basic idea is that the Python module <code>inspect</code> can be used to
@@ -286,7 +286,7 @@ We have all the argument names in <code>arg_names</code> and
 <code>defaults[i]</code> is the default value of keyword argument
 <code>arg_names[j]</code>, where <code>j = len(arg_names) - len(defaults) + i</code>.
 
-<h3>Generating the model  <a name="___sec46"></a></h3>
+<h3 id="___sec46">Generating the model </h3>
 
 <p>
 Knowing the name <code>name</code> of some argument in the <code>compute</code>
@@ -374,7 +374,7 @@ if __name__ == '__main__':
 (The <code>compute_gamma</code> function imported from <code>compute</code> is the
 only application-specific statement in this code and will be explained later.)
 
-<h3>Generating the view  <a name="___sec47"></a></h3>
+<h3 id="___sec47">Generating the view </h3>
 
 <p>
 The call to <code>compute</code> in the <code>controller.py</code> file must also be expressed
@@ -437,7 +437,7 @@ The <code>compute(**kwargs)</code> call is equivalent to <code>compute(A=1, b=3,
 in case <code>kwargs = {'w'=0.5, 'A':1, 'b':3}</code> (recall that the order of
 the keys in a Python dictionary is undetermined).
 
-<h3>Generating the template  <a name="___sec48"></a></h3>
+<h3 id="___sec48">Generating the template </h3>
 
 <p>
 It remains to generate the right HTML template. The HTML code depends
@@ -523,7 +523,7 @@ if __name__ == '__main__':
 </code></pre>
 <!-- end verbatim block -->
 
-<h3>Application  <a name="___sec49"></a></h3>
+<h3 id="___sec49">Application </h3>
 
 <p>
 Let us apply the files above to plot the gamma probability density function
@@ -615,7 +615,7 @@ We want output as displayed in Figure <a href="#wf:gen:flask:fig:gamma">13</a>.
 <p>
 <center> <!-- figure -->
 <hr class="figure">
-<center><p class="caption">Figure 13:  Design of a web page illustrating the gamma probability functions. <a name="wf:gen:flask:fig:gamma"></a> </p></center>
+<center><p class="caption">Figure 13:  Design of a web page illustrating the gamma probability functions. <div id="wf:gen:flask:fig:gamma"></div> </p></center>
 <p><img src="fig-web4sa/gen_flask_gamma.png" align="bottom" width=700></p>
 </center>
 

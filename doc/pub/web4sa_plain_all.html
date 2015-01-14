@@ -257,7 +257,7 @@ MathJax.Hub.Config({
 <center>[1] <b>Center for Biomedical Computing, Simula Research Laboratory</b></center>
 <center>[2] <b>Department of Informatics, University of Oslo</b></center>
 <p>
-<center><h4>Jan 7, 2015</h4></center> <!-- date -->
+<center><h4>Jan 14, 2015</h4></center> <!-- date -->
 
 <h2>Table of contents</h2>
 
@@ -347,7 +347,7 @@ MathJax.Hub.Config({
 <a href="#___sec82"> Remaining </a><br>
 </p>
 
-<h1>Web frameworks  <a name="___sec0"></a></h1>
+<h1 id="___sec0">Web frameworks </h1>
 
 <p>
 Computational scientists may want to offer their applications through
@@ -422,7 +422,7 @@ of this repository.
 <p>
 <!-- !split -->
 
-<h2>The MVC pattern  <a name="___sec1"></a></h2>
+<h2 id="___sec1">The MVC pattern </h2>
 
 <p>
 The MVC pattern stands for Model-View-Controller and is a way of
@@ -498,7 +498,7 @@ split to meet the requirements of the MVC software design pattern.
 <p>
 <!-- !split -->
 
-<h2>A very simple application  <a name="___sec2"></a></h2>
+<h2 id="___sec2">A very simple application </h2>
 
 <p>
 We shall start with the simplest possible application,
@@ -537,7 +537,7 @@ and write out a new web page with the resulting text.
 <p>
 <!-- !split -->
 
-<h2>Application of the MVC pattern <a name="wf:hw:mvc"></a></h2>
+<h2 id="wf:hw:mvc">Application of the MVC pattern</h2>
 
 <p>
 Before thinking of a web application, we first <em>refactor</em> our program
@@ -632,7 +632,7 @@ shown above: "Hello, World! sin(r)=s".
 <p>
 <!-- !split -->
 
-<h1>Making a Flask application  <a name="___sec4"></a></h1>
+<h1 id="___sec4">Making a Flask application </h1>
 
 <p>
 Not much code or configuration is needed to make a Flask application.
@@ -650,9 +650,9 @@ Terminal&gt; sudo pip install --upgrade Flask-WTF
 The <code>--upgrade</code> option ensures that you upgrade to the latest version in
 case you already have these packages.
 
-<h2>Programming the Flask application  <a name="___sec5"></a></h2>
+<h2 id="___sec5">Programming the Flask application </h2>
 
-<h3>The user interaction  <a name="___sec6"></a></h3>
+<h3 id="___sec6">The user interaction </h3>
 
 <p>
 We want our input page to feature a text field where the user can
@@ -664,18 +664,18 @@ seen in Figure <a href="#wf:hw1:flask:fig:result">2</a>.
 <p>
 <center> <!-- figure -->
 <hr class="figure">
-<center><p class="caption">Figure 1:  The input page. <a name="wf:hw1:flask:fig:input"></a> </p></center>
+<center><p class="caption">Figure 1:  The input page. <div id="wf:hw1:flask:fig:input"></div> </p></center>
 <p><img src="fig-web4sa/hw1_flask_input.png" align="bottom" width=600></p>
 </center>
 
 <p>
 <center> <!-- figure -->
 <hr class="figure">
-<center><p class="caption">Figure 2:  The output page. <a name="wf:hw1:flask:fig:result"></a> </p></center>
+<center><p class="caption">Figure 2:  The output page. <div id="wf:hw1:flask:fig:result"></div> </p></center>
 <p><img src="fig-web4sa/hw1_flask_output.png" align="bottom" width=600></p>
 </center>
 
-<h3>The Python code  <a name="___sec7"></a></h3>
+<h3 id="___sec7">The Python code </h3>
 
 <p>
 Flask does not require us to use the MVC pattern so there is actually
@@ -723,7 +723,7 @@ app <span style="color: #666666">=</span> Flask(__name__)
     app<span style="color: #666666">.</span>run(debug<span style="color: #666666">=</span><span style="color: #008000">True</span>)
 </pre></div>
 
-<h3>Dissection  <a name="___sec8"></a></h3>
+<h3 id="___sec8">Dissection </h3>
 
 <p>
 The web application is the <code>app</code> object of class <code>Flask</code>, and initialized
@@ -759,7 +759,7 @@ computations, and make a web page with the result.
 In the latter case, we make an input page as displayed in
 Figure <a href="#wf:hw1:flask:fig:input">1</a>.
 
-<h3>The template files  <a name="___sec9"></a></h3>
+<h3 id="___sec9">The template files </h3>
 
 <p>
 Making a web page with Flask is conveniently done by an HTML
@@ -791,7 +791,7 @@ as we need to use an HTML form:
 <span style="color: #008000; font-weight: bold">&lt;/form&gt;</span>
 </pre></div>
 
-<h3>Testing the application  <a name="___sec10"></a></h3>
+<h3 id="___sec10">Testing the application </h3>
 
 <p>
 We collect the files associated with a Flask application (often called
@@ -811,7 +811,7 @@ this directory and run
 Open a new window or tab in your browser and type in the URL
 <code>http://127.0.0.1:5000/hw1</code>.
 
-<h2>Equipping the input page with output results  <a name="___sec11"></a></h2>
+<h2 id="___sec11">Equipping the input page with output results </h2>
 
 <p>
 Our application made two distinct pages for grabbing input from the
@@ -822,7 +822,7 @@ web application, which is a kind of calculator. Figure <a href="#wf:hw2:flask:fi
 <p>
 <center> <!-- figure -->
 <hr class="figure">
-<center><p class="caption">Figure 3:  The modified result page. <a name="wf:hw2:flask:fig:result"></a> </p></center>
+<center><p class="caption">Figure 3:  The modified result page. <div id="wf:hw2:flask:fig:result"></div> </p></center>
 <p><img src="fig-web4sa/hw2_flask_output.png" align="bottom" width=600></p>
 </center>
 
@@ -909,7 +909,7 @@ A nice little exercise is to control the formatting of the result <code>s</code>
 To this end, you can simply transform <code>s</code> to a string: <code>s = '%.5f' % s</code> before
 sending it to <code>render_template</code>.
 
-<h2>Splitting the app into model, view, and controller files <a name="wf:hw3:flask"></a></h2>
+<h2 id="wf:hw3:flask">Splitting the app into model, view, and controller files</h2>
 
 <p>
 In our previous two Flask apps we have had the view displayed for the
@@ -967,9 +967,9 @@ the organization of the statement in files differ.
 <p>
 <!-- !split -->
 
-<h2>Troubleshooting  <a name="___sec13"></a></h2>
+<h2 id="___sec13">Troubleshooting </h2>
 
-<h3>Address already in use  <a name="___sec14"></a></h3>
+<h3 id="___sec14">Address already in use </h3>
 
 <p>
 You can easily kill the Flask application and restart it, but sometimes
@@ -993,7 +993,7 @@ You are now ready to restart a Flask application.
 <p>
 <!-- !split -->
 
-<h1>Making a Django application  <a name="___sec15"></a></h1>
+<h1 id="___sec15">Making a Django application </h1>
 
 <p>
 We recommend to
@@ -1012,7 +1012,7 @@ Terminal&gt; sudo python setup.py install
 The version in this example, 1.5, may be different at the time you
 follow these instructions.
 
-<h2>Setting up a Django project  <a name="___sec16"></a></h2>
+<h2 id="___sec16">Setting up a Django project </h2>
 
 <p>
 Django applies two concepts: <em>project</em> and <em>application</em> (or <em>app</em>).
@@ -1112,7 +1112,7 @@ The location and name of the database file can be chosen as desired.
 Note that one should <em>not</em> use <code>os.path.join</code> to create paths as Django
 always applies the forward slash between directories, also on Windows.
 
-<h2>Setting up a Django application  <a name="___sec17"></a></h2>
+<h2 id="___sec17">Setting up a Django application </h2>
 
 <p>
 The next step is to create a Django app for our scientific hello
@@ -1257,7 +1257,7 @@ with an URL, but any other name than <code>index</code> can be used.
 <p>
 <!-- !split -->
 
-<h2>Programming the Django application  <a name="___sec18"></a></h2>
+<h2 id="___sec18">Programming the Django application </h2>
 
 <p>
 The Django application is about filling the files <code>views.py</code> and <code>models.py</code>
@@ -1266,7 +1266,7 @@ so we copy this file from the <code>mvc</code> directory to the <code>hw1</code>
 for convenience (we could alternatively add <code>../mvc</code> to <code>sys.path</code> such that
 <code>import compute</code> would work from the <code>hw1</code> directory).
 
-<h3>The user interaction  <a name="___sec19"></a></h3>
+<h3 id="___sec19">The user interaction </h3>
 
 <p>
 The web application offers a text field where the user can
@@ -1278,18 +1278,18 @@ seen in Figure <a href="#wf:hw1:django:fig:result">5</a> appears.
 <p>
 <center> <!-- figure -->
 <hr class="figure">
-<center><p class="caption">Figure 4:  The input page. <a name="wf:hw1:django:fig:input"></a> </p></center>
+<center><p class="caption">Figure 4:  The input page. <div id="wf:hw1:django:fig:input"></div> </p></center>
 <p><img src="fig-web4sa/hw1_django_input.png" align="bottom" width=600></p>
 </center>
 
 <p>
 <center> <!-- figure -->
 <hr class="figure">
-<center><p class="caption">Figure 5:  The result page. <a name="wf:hw1:django:fig:result"></a> </p></center>
+<center><p class="caption">Figure 5:  The result page. <div id="wf:hw1:django:fig:result"></div> </p></center>
 <p><img src="fig-web4sa/hw1_django_output.png" align="bottom" width=600></p>
 </center>
 
-<h3>The model  <a name="___sec20"></a></h3>
+<h3 id="___sec20">The model </h3>
 
 <p>
 The <code>models.py</code> file contains the model, which consists
@@ -1318,7 +1318,7 @@ a floating-point number.
 The <code>InputForm</code> class has a the shown generic form across applications
 if we by convention apply the name <code>Input</code> for the class holding the data.
 
-<h3>The view  <a name="___sec21"></a></h3>
+<h3 id="___sec21">The view </h3>
 
 <p>
 The <code>views.py</code> file contains a function <code>index</code> which defines
@@ -1360,7 +1360,7 @@ the user has provided input on the web page, which means that
 <code>request.method</code> equals <code>'POST'</code>, or we show a new web page
 with which the user is supposed to interact.
 
-<h3>Making the input page  <a name="___sec22"></a></h3>
+<h3 id="___sec22">Making the input page </h3>
 
 <p>
 The input consists of a web form with
@@ -1409,7 +1409,7 @@ results in the HTML code
 <span style="color: #008000; font-weight: bold">&lt;/form&gt;</span>
 </pre></div>
 
-<h3>Making the results page  <a name="___sec23"></a></h3>
+<h3 id="___sec23">Making the results page </h3>
 
 <p>
 When then user has filled in a value in the text field on the input
@@ -1470,7 +1470,7 @@ the <code>present_output</code> function:
 Go back to the input page, provide a new number, and observe how
 the "Hello" word now has a blue color.
 
-<h2>Equipping the input page with output results  <a name="___sec24"></a></h2>
+<h2 id="___sec24">Equipping the input page with output results </h2>
 
 <p>
 Instead of making a separate output page with the result, we can
@@ -1481,7 +1481,7 @@ The output page should then look as shown in Figure <a href="#wf:hw2:django:fig:
 <p>
 <center> <!-- figure -->
 <hr class="figure">
-<center><p class="caption">Figure 6:  The modified result page. <a name="wf:hw2:django:fig:result"></a> </p></center>
+<center><p class="caption">Figure 6:  The modified result page. <div id="wf:hw2:django:fig:result"></div> </p></center>
 <p><img src="fig-web4sa/hw2_django_output.png" align="bottom" width=600></p>
 </center>
 
@@ -1586,7 +1586,7 @@ if-block must be explicitly ended by <code>{% endif %}</code>.
 <p>
 <!-- !split -->
 
-<h1>Handling multiple input variables in Flask <a name="wf:vib:flask"></a></h1>
+<h1 id="wf:vib:flask">Handling multiple input variables in Flask</h1>
 
 <p>
 The scientific hello world example shows how to work with one input
@@ -1613,14 +1613,14 @@ button.
 <p>
 <center> <!-- figure -->
 <hr class="figure">
-<center><p class="caption">Figure 7:  The input page. <a name="wf:vib1:flask:fig:input"></a> </p></center>
+<center><p class="caption">Figure 7:  The input page. <div id="wf:vib1:flask:fig:input"></div> </p></center>
 <p><img src="fig-web4sa/vib1_flask_input.png" align="bottom" width=500></p>
 </center>
 
 <p>
 <center> <!-- figure -->
 <hr class="figure">
-<center><p class="caption">Figure 8:  The result page. <a name="wf:vib1:flask:fig:result"></a> </p></center>
+<center><p class="caption">Figure 8:  The result page. <div id="wf:vib1:flask:fig:result"></div> </p></center>
 <p><img src="fig-web4sa/vib1_flask_output.png" align="bottom" width=700></p>
 </center>
 
@@ -1635,7 +1635,7 @@ We shall make a series of different versions of this app:
 <li> <code>login</code> for storing computed results in user accounts.</li>
 </ol>
 
-<h2>Programming the Flask application <a name="wf:vib1:flask:app"></a></h2>
+<h2 id="wf:vib1:flask:app">Programming the Flask application</h2>
 
 <p>
 The forthcoming text explains the necessary steps to realize a
@@ -1647,7 +1647,7 @@ and the making of the plot, without any interaction with Flask.
 <p>
 The files associated with this app are found in the <a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/vib1" target="_self"><tt>vib1</tt></a> directory.
 
-<h3>The compute part  <a name="___sec27"></a></h3>
+<h3 id="___sec27">The compute part </h3>
 
 <p>
 More specifically, inside <code>compute.py</code>, we have a function for
@@ -1713,7 +1713,7 @@ the section <a href="#wf:hw3:flask">Splitting the app into model, view, and cont
 more code and especially the model will soon be handy to isolate in its own
 file.
 
-<h3>The model  <a name="___sec28"></a></h3>
+<h3 id="___sec28">The model </h3>
 
 <p>
 Our first version of <code>model.py</code> reads
@@ -1746,7 +1746,7 @@ some help message. Furthermore, we include a <code>default</code> value, which
 will appear in the text field such that the user does not need to
 fill in all values.
 
-<h3>The view  <a name="___sec29"></a></h3>
+<h3 id="___sec29">The view </h3>
 
 <p>
 The view component will of course make use of templates, and we shall experiment
@@ -1790,7 +1790,7 @@ app <span style="color: #666666">=</span> Flask(__name__)
     app<span style="color: #666666">.</span>run(debug<span style="color: #666666">=</span><span style="color: #008000">True</span>)
 </pre></div>
 
-<h3>The HTML template  <a name="___sec30"></a></h3>
+<h3 id="___sec30">The HTML template </h3>
 
 <p>
 The details governing how the web page really looks like lie in the
@@ -1853,7 +1853,7 @@ into your web browser for testing.
 <p>
 <!-- !split -->
 
-<h2>Implementing error checking in the template  <a name="___sec31"></a></h2>
+<h2 id="___sec31">Implementing error checking in the template </h2>
 
 <p>
 What happens if the user gives wrong input, for instance the letters <code>asd</code>
@@ -1923,7 +1923,7 @@ see Figure <a href="#wf:vib1:flask:fig:error1">9</a>.
 <p>
 <center> <!-- figure -->
 <hr class="figure">
-<center><p class="caption">Figure 9:  Error message because of wrong input. <a name="wf:vib1:flask:fig:error1"></a> </p></center>
+<center><p class="caption">Figure 9:  Error message because of wrong input. <div id="wf:vib1:flask:fig:error1"></div> </p></center>
 <p><img src="fig-web4sa/vib1_flask_error1.png" align="bottom" width=500></p>
 </center>
 
@@ -1936,7 +1936,7 @@ package to automatically generate Flask files with HTML5 fields.
 <p>
 <!-- !split -->
 
-<h2>Using style sheets  <a name="___sec32"></a></h2>
+<h2 id="___sec32">Using style sheets </h2>
 
 <p>
 Web developers make heavy use of CSS style sheets to control the look
@@ -1984,7 +1984,7 @@ of the variables to set in the web page are blue.
 <p>
 <!-- !split -->
 
-<h2>Using LaTeX mathematics  <a name="___sec33"></a></h2>
+<h2 id="___sec33">Using LaTeX mathematics </h2>
 
 <p>
 Scientific applications frequently have many input data that are
@@ -2031,14 +2031,14 @@ LaTeX rendering looks like in the browser.
 <p>
 <center> <!-- figure -->
 <hr class="figure">
-<center><p class="caption">Figure 10:  LaTeX typesetting of mathematical symbols. <a name="wf:vib1:flask:fig:latex"></a> </p></center>
+<center><p class="caption">Figure 10:  LaTeX typesetting of mathematical symbols. <div id="wf:vib1:flask:fig:latex"></div> </p></center>
 <p><img src="fig-web4sa/vib1_flask_latex.png" align="bottom" width=650></p>
 </center>
 
 <p>
 <!-- !split -->
 
-<h2>Rearranging the elements in the HTML template  <a name="___sec34"></a></h2>
+<h2 id="___sec34">Rearranging the elements in the HTML template </h2>
 
 <p>
 Now we want to place the plot to the right of the input forms in
@@ -2051,7 +2051,7 @@ the plot in the second column, while the second row features the
 <p>
 <center> <!-- figure -->
 <hr class="figure">
-<center><p class="caption">Figure 11:  New design with input and output side by side. <a name="wf:vib1:flask:fig:sidebyside"></a> </p></center>
+<center><p class="caption">Figure 11:  New design with input and output side by side. <div id="wf:vib1:flask:fig:sidebyside"></div> </p></center>
 <p><img src="fig-web4sa/vib1_flask_table2.png" align="bottom" width=700></p>
 </center>
 
@@ -2112,7 +2112,7 @@ u(t) = Ae^{-bt}\sin (w t), \hbox{ for } t\in [0,T]
 <p>
 <!-- !split -->
 
-<h2>Bootstrap HTML style  <a name="___sec35"></a></h2>
+<h2 id="___sec35">Bootstrap HTML style </h2>
 
 <p>
 The <a href="http://getbootstrap.com/" target="_self">Bootstrap</a> framework for creating web pages
@@ -2345,7 +2345,7 @@ functionality in the Flask-Bootstrap layer.
 <p>
 <!-- !split -->
 
-<h2>Custom validation <a name="wf:vib1:flask:validation"></a></h2>
+<h2 id="wf:vib1:flask:validation">Custom validation</h2>
 
 <p>
 The <code>FloatField</code> objects can check that the input is compatible with
@@ -2357,7 +2357,7 @@ the <code>FloatField</code> constructor or other field constructors. The extra
 code is a part of the <code>model.py</code> and the presented extensions appear
 in the directory <a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/vib2" target="_self"><tt>vib2</tt></a>.
 
-<h3>Using Flask validators  <a name="___sec37"></a></h3>
+<h3 id="___sec37">Using Flask validators </h3>
 
 <p>
 The simplest approach to validation is to use existing functionality
@@ -2376,7 +2376,7 @@ a prescribed interval:
         validators<span style="color: #666666">=</span>[validators<span style="color: #666666">.</span>NumberRange(<span style="color: #666666">0</span>, <span style="color: #666666">1E+20</span>)])
 </pre></div>
 
-<h3>Tailored validation  <a name="___sec38"></a></h3>
+<h3 id="___sec38">Tailored validation </h3>
 
 <p>
 We can also easily provide our own more tailored validators.
@@ -2425,7 +2425,7 @@ We therefore add <code>check_T</code> after the check of input such that we know
 have a value for all data when we run the computations and test
 in <code>check_T</code>.
 
-<h3>Tailored validation of intervals  <a name="___sec39"></a></h3>
+<h3 id="___sec39">Tailored validation of intervals </h3>
 
 <p>
 Although there is already a <code>NumberRange</code> validator for checking
@@ -2489,7 +2489,7 @@ We can now in any field constructor just add
         validators<span style="color: #666666">=</span>[validators<span style="color: #666666">.</span>InputRequired(), interval(<span style="color: #666666">0</span>,<span style="color: #008000">None</span>)])
 </pre></div>
 
-<h3>Demo  <a name="___sec40"></a></h3>
+<h3 id="___sec40">Demo </h3>
 
 <p>
 Let us test our tailored error checking. Run <code>python controller.py</code>
@@ -2509,7 +2509,7 @@ in <code>vib1</code>, i.e., it feaures LaTeX mathematics and checking of
 <p>
 <center> <!-- figure -->
 <hr class="figure">
-<center><p class="caption">Figure 12:  Triggering of a user-defined error check. <a name="wf:vib2:flask:fig:error1"></a> </p></center>
+<center><p class="caption">Figure 12:  Triggering of a user-defined error check. <div id="wf:vib2:flask:fig:error1"></div> </p></center>
 <p><img src="fig-web4sa/vib2_flask_error1.png" align="bottom" width=500></p>
 </center>
 
@@ -2547,7 +2547,7 @@ code to look like they do in mathematical writing (<code>T</code> for \( T \)).
 <p>
 <!-- !split -->
 
-<h2>Avoiding plot files <a name="wf:vib2:flask:nofiles"></a></h2>
+<h2 id="wf:vib2:flask:nofiles">Avoiding plot files</h2>
 
 <p>
 Files with plots are easy to deal with as long as they are in the
@@ -2565,7 +2565,7 @@ This is relatively straightforward with Matplotlib
 and Python. The relevant code is found in the <code>compute.py</code> file
 of the <code>vib2</code> app.
 
-<h3>PNG plots  <a name="___sec42"></a></h3>
+<h3 id="___sec42">PNG plots </h3>
 
 <p>
 Python has the <code>StringIO</code> object that is a string buffer with the
@@ -2639,7 +2639,7 @@ The relevant syntax in an HTML template is
 <p>
 if <code>results</code> holds the returned object from the <code>compute</code> function above.
 
-<h3>SVG plots  <a name="___sec43"></a></h3>
+<h3 id="___sec43">SVG plots </h3>
 
 <p>
 Inline figures in HTML, instead of using files, are most often realized
@@ -2754,7 +2754,7 @@ svg <span style="color: #666666">=</span> <span style="color: #008000">False</sp
 <p>
 <!-- !split -->
 
-<h2>Autogenerating the code <a name="wf:autogen:flask"></a></h2>
+<h2 id="wf:autogen:flask">Autogenerating the code</h2>
 
 <p>
 We shall now present generic <code>model.py</code> and <code>controller.py</code>
@@ -2763,7 +2763,7 @@ demonstrate some advanced, powerful features of Python. The source code
 is found in the <a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/gen" target="_self"><tt>gen</tt></a>
 directory.
 
-<h3>Inspecting function signatures  <a name="___sec45"></a></h3>
+<h3 id="___sec45">Inspecting function signatures </h3>
 
 <p>
 The basic idea is that the Python module <code>inspect</code> can be used to
@@ -2801,7 +2801,7 @@ We have all the argument names in <code>arg_names</code> and
 <code>defaults[i]</code> is the default value of keyword argument
 <code>arg_names[j]</code>, where <code>j = len(arg_names) - len(defaults) + i</code>.
 
-<h3>Generating the model  <a name="___sec46"></a></h3>
+<h3 id="___sec46">Generating the model </h3>
 
 <p>
 Knowing the name <code>name</code> of some argument in the <code>compute</code>
@@ -2893,7 +2893,7 @@ type2form <span style="color: #666666">=</span> {<span style="color: #008000">ty
 (The <code>compute_gamma</code> function imported from <code>compute</code> is the
 only application-specific statement in this code and will be explained later.)
 
-<h3>Generating the view  <a name="___sec47"></a></h3>
+<h3 id="___sec47">Generating the view </h3>
 
 <p>
 The call to <code>compute</code> in the <code>controller.py</code> file must also be expressed
@@ -2957,7 +2957,7 @@ The <code>compute(**kwargs)</code> call is equivalent to <code>compute(A=1, b=3,
 in case <code>kwargs = {'w'=0.5, 'A':1, 'b':3}</code> (recall that the order of
 the keys in a Python dictionary is undetermined).
 
-<h3>Generating the template  <a name="___sec48"></a></h3>
+<h3 id="___sec48">Generating the template </h3>
 
 <p>
 It remains to generate the right HTML template. The HTML code depends
@@ -3043,7 +3043,7 @@ The complete, generic form of the <code>index</code> function becomes
     app<span style="color: #666666">.</span>run(debug<span style="color: #666666">=</span><span style="color: #008000">True</span>)
 </pre></div>
 
-<h3>Application  <a name="___sec49"></a></h3>
+<h3 id="___sec49">Application </h3>
 
 <p>
 Let us apply the files above to plot the gamma probability density function
@@ -3136,7 +3136,7 @@ We want output as displayed in Figure <a href="#wf:gen:flask:fig:gamma">13</a>.
 <p>
 <center> <!-- figure -->
 <hr class="figure">
-<center><p class="caption">Figure 13:  Design of a web page illustrating the gamma probability functions. <a name="wf:gen:flask:fig:gamma"></a> </p></center>
+<center><p class="caption">Figure 13:  Design of a web page illustrating the gamma probability functions. <div id="wf:gen:flask:fig:gamma"></div> </p></center>
 <p><img src="fig-web4sa/gen_flask_gamma.png" align="bottom" width=700></p>
 </center>
 
@@ -3179,7 +3179,7 @@ To create the web application, we just perform the following steps:
 
 <!-- !split -->
 
-<h2>User login and storage of computed results <a name="wf:flask:login"></a></h2>
+<h2 id="wf:flask:login">User login and storage of computed results</h2>
 
 <p>
 We now want to make an app where the computed results can be stored in
@@ -3188,7 +3188,7 @@ this account for archiving results and for browsing previous runs of
 the application. More files are needed for this purpose, compared to
 the previous apps, and the files are located in the <a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/login" target="_self"><tt>login</tt></a> directory.
 
-<h3>Required additional software  <a name="___sec51"></a></h3>
+<h3 id="___sec51">Required additional software </h3>
 
 <p>
 Three more packages are needed for this more advanced application:
@@ -3209,7 +3209,7 @@ sudo pip install --upgrade flask-sqlalchemy
 sudo pip install --upgrade flask-mail
 </pre></div>
 
-<h3>The compute part  <a name="___sec52"></a></h3>
+<h3 id="___sec52">The compute part </h3>
 
 <p>
 The <code>compute.py</code> file contains the <code>compute</code>
@@ -3223,7 +3223,7 @@ it is not recommended to hack further on the example given here,
 but rather utilize Parampool to generate web apps with user accounts
 and login.
 
-<h3>The interfaces of the app  <a name="___sec53"></a></h3>
+<h3 id="___sec53">The interfaces of the app </h3>
 
 <p>
 The first page after starting the app (<code>python controller.py</code>)
@@ -3266,7 +3266,7 @@ overview of what is in the database:
 Here, one can browse previous results, remove entries, or erase the
 whole database.
 
-<h3>The source code  <a name="___sec54"></a></h3>
+<h3 id="___sec54">The source code </h3>
 
 <p>
 Rather than explaining everything about the source code
@@ -3851,7 +3851,7 @@ MathJax.Hub.Config({
 <font color="red">(<b>hpl 1</b>: Check if an autogenerated app from <code>_generate_app.py</code> can send mail and store comments. Need a <code>compute</code> function that returns full HTML text then.)</font>
 <!-- end inline comment -->
 
-<h3>Resources  <a name="___sec55"></a></h3>
+<h3 id="___sec55">Resources </h3>
 
 <p>
 Working with a database in Flask is described here:
@@ -3864,9 +3864,9 @@ Working with a database in Flask is described here:
 
 <!-- !split -->
 
-<h2>Uploading of files <a name="wf:flask:upload"></a></h2>
+<h2 id="wf:flask:upload">Uploading of files</h2>
 
-<h3>Overview of the application  <a name="___sec57"></a></h3>
+<h3 id="___sec57">Overview of the application </h3>
 
 <p>
 Many user interfaces need the user to provide data files. A minimalistic
@@ -3884,7 +3884,7 @@ choose the file to uploaded to the application. Say this is a file
 <code>testfile.dat</code>. The interface now looks like
 
 <p>
-<center><p><img src="fig-web4sa/upload1.png" align="bottom" width=550></p></center>
+<center><p><img src="fig-web4sa/upload2.png" align="bottom" width=550></p></center>
 
 <p>
 Pressing thereafter <em>Compute</em> leads to storage of
@@ -3901,7 +3901,7 @@ widget object used for file upload and indicates that a new
 file can be chosen. Below we shall present all parts of the code
 needed to create this interactive application.
 
-<h3>The model class  <a name="___sec58"></a></h3>
+<h3 id="___sec58">The model class </h3>
 
 <p>
 The widget <code>FieldField</code> is used for an input field with a <em>Choose File</em>
@@ -3917,7 +3917,7 @@ button:
                                [wtf<span style="color: #666666">.</span>validators<span style="color: #666666">.</span>InputRequired()])
 </pre></div>
 
-<h3>The controller file  <a name="___sec59"></a></h3>
+<h3 id="___sec59">The controller file </h3>
 
 <p>
 The controller file needs some special code to specify a directory
@@ -3972,7 +3972,7 @@ calling the compute function and rendering a new page:
     <span style="color: #008000; font-weight: bold">return</span> render_template(<span style="color: #BA2121">&quot;view.html&quot;</span>, form<span style="color: #666666">=</span>form, result<span style="color: #666666">=</span>result)
 </pre></div>
 
-<h3>The compute function  <a name="___sec60"></a></h3>
+<h3 id="___sec60">The compute function </h3>
 
 <p>
 We assume that the uploaded file is available in the <code>uploads</code>
@@ -3998,7 +3998,7 @@ an HTML table.
 <span style="color: #BA2121">&quot;&quot;&quot;</span> <span style="color: #666666">%</span> (filename, np<span style="color: #666666">.</span>mean(data), np<span style="color: #666666">.</span>std(data))
 </pre></div>
 
-<h3>The HTML template  <a name="___sec61"></a></h3>
+<h3 id="___sec61">The HTML template </h3>
 
 <p>
 Although the present minimalistic application only needs a very simple
@@ -4054,9 +4054,11 @@ compute function is presented to the right. Such a template looks like
 </pre></div>
 <p>
 The complete set of files is found in the <a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/upload" target="_self"><tt>upload</tt></a> directory.
+
+<p>
 <!-- !split -->
 
-<h1>Handling multiple input variables in Django <a name="wf:vib:django"></a></h1>
+<h1 id="wf:vib:django">Handling multiple input variables in Django</h1>
 
 <p>
 We shall briefly how to work with multi-variable input in Django.
@@ -4071,9 +4073,9 @@ the resulting plot,
 cf. Figures <a href="#wf:vib1:flask:fig:input">7</a>
 and <a href="#wf:vib1:flask:fig:result">8</a>.
 
-<h2>Programming the Django application  <a name="___sec63"></a></h2>
+<h2 id="___sec63">Programming the Django application </h2>
 
-<h3>Adding the app to a project  <a name="___sec64"></a></h3>
+<h3 id="___sec64">Adding the app to a project </h3>
 
 <p>
 Any Django app needs a project, but here we reuse the project
@@ -4100,13 +4102,13 @@ These steps ensure that Django can find our application as a module/package,
 that Django can find our templates associated with this application,
 and that the URL address applies the name <code>vib1</code> to reach the application.
 
-<h3>The compute part  <a name="___sec65"></a></h3>
+<h3 id="___sec65">The compute part </h3>
 
 <p>
 The computations in our application are put in a file <code>compute.py</code>
 and explained in detail in the section <a href="#wf:vib1:flask:app">Programming the Flask application</a>.
 
-<h3>The model  <a name="___sec66"></a></h3>
+<h3 id="___sec66">The model </h3>
 
 <p>
 We can now write <code>models.py</code> and the <code>Input</code> class that defines
@@ -4144,7 +4146,7 @@ We also provide a default
 value such that all fields have a value when the user sees
 the page.
 
-<h3>The view  <a name="___sec67"></a></h3>
+<h3 id="___sec67">The view </h3>
 
 <p>
 The <code>views.py</code> file looks as follows:
@@ -4222,7 +4224,7 @@ The template for rendering the page is listed next.
 The tricky part is the syntax for displaying <em>static content</em>, such as
 the plot file made in the <code>compute</code> function.
 
-<h2>Custom validation  <a name="___sec68"></a></h2>
+<h2 id="___sec68">Custom validation </h2>
 
 <p>
 Django has a series of methods available for user-provided validation
@@ -4332,7 +4334,7 @@ We refer to the vast Django documentation for many other ways of
 validating forms. The reader is encouraged to run the <code>vib2</code>
 application and test out the validations we have implemented.
 
-<h2>Customizing widgets  <a name="___sec69"></a></h2>
+<h2 id="___sec69">Customizing widgets </h2>
 
 <p>
 One will occasionally have full control of the layout of the individual
@@ -4371,7 +4373,7 @@ dictionary.
 <p>
 <!-- !split -->
 
-<h2>Resources  <a name="___sec70"></a></h2>
+<h2 id="___sec70">Resources </h2>
 
 <p>
 Below are some resources for accounts and login with Django as well as
@@ -4387,12 +4389,12 @@ utilization of Bootstrap styles in the views.
 
 <!-- !split -->
 
-<h1>Exercises  <a name="___sec71"></a></h1>
+<h1 id="___sec71">Exercises </h1>
 
 <p>
 <!-- --- begin exercise --- -->
 
-<h2>Exercise 1: Add two numbers <a name="wf:exer:add2"></a></h2>
+<h2 id="wf:exer:add2">Exercise 1: Add two numbers</h2>
 
 <p>
 Make a web application that reads two numbers from a web page,
@@ -4407,7 +4409,7 @@ Filename: <code>add2.tar.gz</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2>Exercise 2: Upload data file and visualize curves <a name="wf:exer:upload"></a></h2>
+<h2 id="wf:exer:upload">Exercise 2: Upload data file and visualize curves</h2>
 
 <p>
 Suppose you have tabular data in a file:
@@ -4441,7 +4443,7 @@ Filename: <code>upload.tar.gz</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2>Exercise 3: Plot a user-specified formula <a name="wf:exer:formula"></a></h2>
+<h2 id="wf:exer:formula">Exercise 3: Plot a user-specified formula</h2>
 
 <p>
 The purpose of this exercise is to write a web application that
@@ -4565,7 +4567,7 @@ Filename: <code>plot_formula.tar.gz</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2>Exercise 4: Visualize Taylor polynomial approximations <a name="wf:exer:Taylor"></a></h2>
+<h2 id="wf:exer:Taylor">Exercise 4: Visualize Taylor polynomial approximations</h2>
 
 <p>
 This exercise develops a web application that can plot Taylor polynomial
@@ -4855,7 +4857,7 @@ Filename: <code>Taylor_approx.tar.gz</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2>Exercise 5: Extend the <code>gen</code> app <a name="wf:exer:gen:demo"></a></h2>
+<h2 id="wf:exer:gen:demo">Exercise 5: Extend the <code>gen</code> app</h2>
 
 <p>
 Add a new argument <code>x_axis</code> to the <code>compute</code> function in the
@@ -4871,7 +4873,7 @@ automatically adds the new argument and how the plots adapt!
 <p>
 <!-- --- begin exercise --- -->
 
-<h2>Exercise 6: Equip the <code>gen</code> app with more data types <a name="wf:exer:gen:lists"></a></h2>
+<h2 id="wf:exer:gen:lists">Exercise 6: Equip the <code>gen</code> app with more data types</h2>
 
 <p>
 In the <a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/gen" target="_self"><tt>gen</tt></a>
@@ -4893,7 +4895,7 @@ Filename: <code>gen_ext.tar.gz</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2>Exercise 7: Auto-generate code from function signature  <a name="___sec78"></a></h2>
+<h2 id="___sec78">Exercise 7: Auto-generate code from function signature </h2>
 
 <p>
 Given a <code>compute</code> with a set of positional and keyword
@@ -4916,9 +4918,9 @@ Filename: <code>generate_flask.py</code>.
 <p>
 <!-- --- end exercise --- -->
 
-<h1>Resources  <a name="___sec79"></a></h1>
+<h1 id="___sec79">Resources </h1>
 
-<h2>Flask resources  <a name="___sec80"></a></h2>
+<h2 id="___sec80">Flask resources </h2>
 
 <ul>
  <li> <a href="http://flask.pocoo.org/" target="_self">Flask website</a></li>
@@ -4928,7 +4930,7 @@ Filename: <code>generate_flask.py</code>.
  <li> <a href="http://werkzeug.pocoo.org/" target="_self">The Werkzeug library</a></li>
 </ul>
 
-<h2>Django resources  <a name="___sec81"></a></h2>
+<h2 id="___sec81">Django resources </h2>
 
 <ul>
  <li> <a href="https://www.djangoproject.com/" target="_self">Django webpage</a></li>
@@ -4936,7 +4938,7 @@ Filename: <code>generate_flask.py</code>.
  <li> <a href="http://www.youtube.com/playlist?list=PL385A53B00B8B158E" target="_self">YouTube videos</a></li>
 </ul>
 
-<h1>Remaining  <a name="___sec82"></a></h1>
+<h1 id="___sec82">Remaining </h1>
 
 <ul>
  <li> apply (generated apps) to simviz (make py simviz too and describe that)</li>

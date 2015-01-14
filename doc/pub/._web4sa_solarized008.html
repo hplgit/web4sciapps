@@ -242,7 +242,7 @@ MathJax.Hub.Config({
 <p>
 <!-- !split -->
 
-<h1>Handling multiple input variables in Flask <a name="wf:vib:flask"></a></h1>
+<h1 id="wf:vib:flask">Handling multiple input variables in Flask</h1>
 
 <p>
 The scientific hello world example shows how to work with one input
@@ -269,14 +269,14 @@ button.
 <p>
 <center> <!-- figure -->
 <hr class="figure">
-<center><p class="caption">Figure 7:  The input page. <a name="wf:vib1:flask:fig:input"></a> </p></center>
+<center><p class="caption">Figure 7:  The input page. <div id="wf:vib1:flask:fig:input"></div> </p></center>
 <p><img src="fig-web4sa/vib1_flask_input.png" align="bottom" width=500></p>
 </center>
 
 <p>
 <center> <!-- figure -->
 <hr class="figure">
-<center><p class="caption">Figure 8:  The result page. <a name="wf:vib1:flask:fig:result"></a> </p></center>
+<center><p class="caption">Figure 8:  The result page. <div id="wf:vib1:flask:fig:result"></div> </p></center>
 <p><img src="fig-web4sa/vib1_flask_output.png" align="bottom" width=700></p>
 </center>
 
@@ -291,7 +291,7 @@ We shall make a series of different versions of this app:
 <li> <code>login</code> for storing computed results in user accounts.</li>
 </ol>
 
-<h2>Programming the Flask application <a name="wf:vib1:flask:app"></a></h2>
+<h2 id="wf:vib1:flask:app">Programming the Flask application</h2>
 
 <p>
 The forthcoming text explains the necessary steps to realize a
@@ -303,7 +303,7 @@ and the making of the plot, without any interaction with Flask.
 <p>
 The files associated with this app are found in the <a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/vib1" target="_self"><tt>vib1</tt></a> directory.
 
-<h3>The compute part  <a name="___sec27"></a></h3>
+<h3 id="___sec27">The compute part </h3>
 
 <p>
 More specifically, inside <code>compute.py</code>, we have a function for
@@ -370,7 +370,7 @@ the section <a href="._web4sa_solarized004.html#wf:hw3:flask">Splitting the app 
 more code and especially the model will soon be handy to isolate in its own
 file.
 
-<h3>The model  <a name="___sec28"></a></h3>
+<h3 id="___sec28">The model </h3>
 
 <p>
 Our first version of <code>model.py</code> reads
@@ -404,7 +404,7 @@ some help message. Furthermore, we include a <code>default</code> value, which
 will appear in the text field such that the user does not need to
 fill in all values.
 
-<h3>The view  <a name="___sec29"></a></h3>
+<h3 id="___sec29">The view </h3>
 
 <p>
 The view component will of course make use of templates, and we shall experiment
@@ -448,7 +448,7 @@ if __name__ == '__main__':
 </code></pre>
 <!-- end verbatim block -->
 
-<h3>The HTML template  <a name="___sec30"></a></h3>
+<h3 id="___sec30">The HTML template </h3>
 
 <p>
 The details governing how the web page really looks like lie in the

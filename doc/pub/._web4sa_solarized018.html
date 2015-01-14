@@ -242,9 +242,9 @@ MathJax.Hub.Config({
 <p>
 <!-- !split -->
 
-<h2>Uploading of files <a name="wf:flask:upload"></a></h2>
+<h2 id="wf:flask:upload">Uploading of files</h2>
 
-<h3>Overview of the application  <a name="___sec57"></a></h3>
+<h3 id="___sec57">Overview of the application </h3>
 
 <p>
 Many user interfaces need the user to provide data files. A minimalistic
@@ -262,7 +262,7 @@ choose the file to uploaded to the application. Say this is a file
 <code>testfile.dat</code>. The interface now looks like
 
 <p>
-<center><p><img src="fig-web4sa/upload1.png" align="bottom" width=550></p></center>
+<center><p><img src="fig-web4sa/upload2.png" align="bottom" width=550></p></center>
 
 <p>
 Pressing thereafter <em>Compute</em> leads to storage of
@@ -279,7 +279,7 @@ widget object used for file upload and indicates that a new
 file can be chosen. Below we shall present all parts of the code
 needed to create this interactive application.
 
-<h3>The model class  <a name="___sec58"></a></h3>
+<h3 id="___sec58">The model class </h3>
 
 <p>
 The widget <code>FieldField</code> is used for an input field with a <em>Choose File</em>
@@ -295,7 +295,7 @@ class Average(wtf.Form):
 </code></pre>
 <!-- end verbatim block -->
 
-<h3>The controller file  <a name="___sec59"></a></h3>
+<h3 id="___sec59">The controller file </h3>
 
 <p>
 The controller file needs some special code to specify a directory
@@ -351,7 +351,7 @@ calling the compute function and rendering a new page:
 </code></pre>
 <!-- end verbatim block -->
 
-<h3>The compute function  <a name="___sec60"></a></h3>
+<h3 id="___sec60">The compute function </h3>
 
 <p>
 We assume that the uploaded file is available in the <code>uploads</code>
@@ -377,7 +377,7 @@ Data from file &lt;tt&gt;%s&lt;/tt&gt;:
 </code></pre>
 <!-- end verbatim block -->
 
-<h3>The HTML template  <a name="___sec61"></a></h3>
+<h3 id="___sec61">The HTML template </h3>
 
 <p>
 Although the present minimalistic application only needs a very simple
@@ -434,6 +434,8 @@ compute function is presented to the right. Such a template looks like
 
 <p>
 The complete set of files is found in the <a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/upload" target="_self"><tt>upload</tt></a> directory.
+
+<p>
 <p>
 <!-- begin bottom navigation -->
 <table style="width: 100%"><tr><td>

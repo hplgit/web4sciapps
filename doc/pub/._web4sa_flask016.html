@@ -195,9 +195,9 @@ MathJax.Hub.Config({
 <a name="part0016"></a>
 <!-- !split -->
 
-<h2 id="wf:flask:upload">Uploading of files<a name="wf:flask:upload"></a></h2>
+<h2 id="wf:flask:upload">Uploading of files</h2>
 
-<h3 id="___sec47">Overview of the application <a name="___sec47"></a></h3>
+<h3 id="___sec47">Overview of the application </h3>
 
 <p>
 Many user interfaces need the user to provide data files. A minimalistic
@@ -215,7 +215,7 @@ choose the file to uploaded to the application. Say this is a file
 <code>testfile.dat</code>. The interface now looks like
 
 <p>
-<center><p><img src="fig-web4sa/upload1.png" align="bottom" width=550></p></center>
+<center><p><img src="fig-web4sa/upload2.png" align="bottom" width=550></p></center>
 
 <p>
 Pressing thereafter <em>Compute</em> leads to storage of
@@ -232,7 +232,7 @@ widget object used for file upload and indicates that a new
 file can be chosen. Below we shall present all parts of the code
 needed to create this interactive application.
 
-<h3 id="___sec48">The model class <a name="___sec48"></a></h3>
+<h3 id="___sec48">The model class </h3>
 
 <p>
 The widget <code>FieldField</code> is used for an input field with a <em>Choose File</em>
@@ -248,7 +248,7 @@ button:
                                [wtf<span style="color: #666666">.</span>validators<span style="color: #666666">.</span>InputRequired()])
 </pre></div>
 
-<h3 id="___sec49">The controller file <a name="___sec49"></a></h3>
+<h3 id="___sec49">The controller file </h3>
 
 <p>
 The controller file needs some special code to specify a directory
@@ -303,7 +303,7 @@ calling the compute function and rendering a new page:
     <span style="color: #008000; font-weight: bold">return</span> render_template(<span style="color: #BA2121">&quot;view.html&quot;</span>, form<span style="color: #666666">=</span>form, result<span style="color: #666666">=</span>result)
 </pre></div>
 
-<h3 id="___sec50">The compute function <a name="___sec50"></a></h3>
+<h3 id="___sec50">The compute function </h3>
 
 <p>
 We assume that the uploaded file is available in the <code>uploads</code>
@@ -329,7 +329,7 @@ an HTML table.
 <span style="color: #BA2121">&quot;&quot;&quot;</span> <span style="color: #666666">%</span> (filename, np<span style="color: #666666">.</span>mean(data), np<span style="color: #666666">.</span>std(data))
 </pre></div>
 
-<h3 id="___sec51">The HTML template <a name="___sec51"></a></h3>
+<h3 id="___sec51">The HTML template </h3>
 
 <p>
 Although the present minimalistic application only needs a very simple

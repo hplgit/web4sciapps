@@ -195,7 +195,7 @@ MathJax.Hub.Config({
 <a name="part0012"></a>
 <!-- !split -->
 
-<h2 id="wf:vib1:flask:validation">Custom validation<a name="wf:vib1:flask:validation"></a></h2>
+<h2 id="wf:vib1:flask:validation">Custom validation</h2>
 
 <p>
 The <code>FloatField</code> objects can check that the input is compatible with
@@ -207,7 +207,7 @@ the <code>FloatField</code> constructor or other field constructors. The extra
 code is a part of the <code>model.py</code> and the presented extensions appear
 in the directory <a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/vib2" target="_self"><tt>vib2</tt></a>.
 
-<h3 id="___sec27">Using Flask validators <a name="___sec27"></a></h3>
+<h3 id="___sec27">Using Flask validators </h3>
 
 <p>
 The simplest approach to validation is to use existing functionality
@@ -226,7 +226,7 @@ a prescribed interval:
         validators<span style="color: #666666">=</span>[validators<span style="color: #666666">.</span>NumberRange(<span style="color: #666666">0</span>, <span style="color: #666666">1E+20</span>)])
 </pre></div>
 
-<h3 id="___sec28">Tailored validation <a name="___sec28"></a></h3>
+<h3 id="___sec28">Tailored validation </h3>
 
 <p>
 We can also easily provide our own more tailored validators.
@@ -275,7 +275,7 @@ We therefore add <code>check_T</code> after the check of input such that we know
 have a value for all data when we run the computations and test
 in <code>check_T</code>.
 
-<h3 id="___sec29">Tailored validation of intervals <a name="___sec29"></a></h3>
+<h3 id="___sec29">Tailored validation of intervals </h3>
 
 <p>
 Although there is already a <code>NumberRange</code> validator for checking
@@ -339,7 +339,7 @@ We can now in any field constructor just add
         validators<span style="color: #666666">=</span>[validators<span style="color: #666666">.</span>InputRequired(), interval(<span style="color: #666666">0</span>,<span style="color: #008000">None</span>)])
 </pre></div>
 
-<h3 id="___sec30">Demo <a name="___sec30"></a></h3>
+<h3 id="___sec30">Demo </h3>
 
 <p>
 Let us test our tailored error checking. Run <code>python controller.py</code>
@@ -359,7 +359,7 @@ in <code>vib1</code>, i.e., it feaures LaTeX mathematics and checking of
 <p>
 <center> <!-- figure -->
 <hr class="figure">
-<center><p class="caption">Figure 9:  Triggering of a user-defined error check. <a name="wf:vib2:flask:fig:error1"></a> </p></center>
+<center><p class="caption">Figure 9:  Triggering of a user-defined error check. <div id="wf:vib2:flask:fig:error1"></div> </p></center>
 <p><img src="fig-web4sa/vib2_flask_error1.png" align="bottom" width=500></p>
 </center>
 

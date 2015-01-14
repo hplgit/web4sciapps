@@ -128,7 +128,7 @@ MathJax.Hub.Config({
 <a name="part0005"></a>
 <!-- !split -->
 
-<h2 id="___sec7">Programming the Django application <a name="___sec7"></a></h2>
+<h2 id="___sec7">Programming the Django application </h2>
 
 <p>
 The Django application is about filling the files <code>views.py</code> and <code>models.py</code>
@@ -137,7 +137,7 @@ so we copy this file from the <code>mvc</code> directory to the <code>hw1</code>
 for convenience (we could alternatively add <code>../mvc</code> to <code>sys.path</code> such that
 <code>import compute</code> would work from the <code>hw1</code> directory).
 
-<h3 id="___sec8">The user interaction <a name="___sec8"></a></h3>
+<h3 id="___sec8">The user interaction </h3>
 
 <p>
 The web application offers a text field where the user can
@@ -149,18 +149,18 @@ seen in Figure <a href="#wf:hw1:django:fig:result">2</a> appears.
 <p>
 <center> <!-- figure -->
 <hr class="figure">
-<center><p class="caption">Figure 1:  The input page. <a name="wf:hw1:django:fig:input"></a> </p></center>
+<center><p class="caption">Figure 1:  The input page. <div id="wf:hw1:django:fig:input"></div> </p></center>
 <p><img src="fig-web4sa/hw1_django_input.png" align="bottom" width=600></p>
 </center>
 
 <p>
 <center> <!-- figure -->
 <hr class="figure">
-<center><p class="caption">Figure 2:  The result page. <a name="wf:hw1:django:fig:result"></a> </p></center>
+<center><p class="caption">Figure 2:  The result page. <div id="wf:hw1:django:fig:result"></div> </p></center>
 <p><img src="fig-web4sa/hw1_django_output.png" align="bottom" width=600></p>
 </center>
 
-<h3 id="___sec9">The model <a name="___sec9"></a></h3>
+<h3 id="___sec9">The model </h3>
 
 <p>
 The <code>models.py</code> file contains the model, which consists
@@ -189,7 +189,7 @@ a floating-point number.
 The <code>InputForm</code> class has a the shown generic form across applications
 if we by convention apply the name <code>Input</code> for the class holding the data.
 
-<h3 id="___sec10">The view <a name="___sec10"></a></h3>
+<h3 id="___sec10">The view </h3>
 
 <p>
 The <code>views.py</code> file contains a function <code>index</code> which defines
@@ -231,7 +231,7 @@ the user has provided input on the web page, which means that
 <code>request.method</code> equals <code>'POST'</code>, or we show a new web page
 with which the user is supposed to interact.
 
-<h3 id="___sec11">Making the input page <a name="___sec11"></a></h3>
+<h3 id="___sec11">Making the input page </h3>
 
 <p>
 The input consists of a web form with
@@ -280,7 +280,7 @@ results in the HTML code
 <span style="color: #008000; font-weight: bold">&lt;/form&gt;</span>
 </pre></div>
 
-<h3 id="___sec12">Making the results page <a name="___sec12"></a></h3>
+<h3 id="___sec12">Making the results page </h3>
 
 <p>
 When then user has filled in a value in the text field on the input
@@ -341,7 +341,7 @@ the <code>present_output</code> function:
 Go back to the input page, provide a new number, and observe how
 the "Hello" word now has a blue color.
 
-<h2 id="___sec13">Equipping the input page with output results <a name="___sec13"></a></h2>
+<h2 id="___sec13">Equipping the input page with output results </h2>
 
 <p>
 Instead of making a separate output page with the result, we can
@@ -352,7 +352,7 @@ The output page should then look as shown in Figure <a href="#wf:hw2:django:fig:
 <p>
 <center> <!-- figure -->
 <hr class="figure">
-<center><p class="caption">Figure 3:  The modified result page. <a name="wf:hw2:django:fig:result"></a> </p></center>
+<center><p class="caption">Figure 3:  The modified result page. <div id="wf:hw2:django:fig:result"></div> </p></center>
 <p><img src="fig-web4sa/hw2_django_output.png" align="bottom" width=600></p>
 </center>
 

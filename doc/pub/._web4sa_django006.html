@@ -128,7 +128,7 @@ MathJax.Hub.Config({
 <a name="part0006"></a>
 <!-- !split -->
 
-<h1 id="wf:vib:django">Handling multiple input variables in Django<a name="wf:vib:django"></a></h1>
+<h1 id="wf:vib:django">Handling multiple input variables in Django</h1>
 
 <p>
 We shall briefly how to work with multi-variable input in Django.
@@ -145,20 +145,20 @@ and <a href="#wf:vib1:flask:fig:result">5</a>.
 <p>
 <center> <!-- figure -->
 <hr class="figure">
-<center><p class="caption">Figure 4:  The input page. <a name="wf:vib1:flask:fig:input"></a> </p></center>
+<center><p class="caption">Figure 4:  The input page. <div id="wf:vib1:flask:fig:input"></div> </p></center>
 <p><img src="fig-web4sa/vib1_flask_input.png" align="bottom" width=500></p>
 </center>
 
 <p>
 <center> <!-- figure -->
 <hr class="figure">
-<center><p class="caption">Figure 5:  The result page. <a name="wf:vib1:flask:fig:result"></a> </p></center>
+<center><p class="caption">Figure 5:  The result page. <div id="wf:vib1:flask:fig:result"></div> </p></center>
 <p><img src="fig-web4sa/vib1_flask_output.png" align="bottom" width=700></p>
 </center>
 
-<h2 id="___sec15">Programming the Django application <a name="___sec15"></a></h2>
+<h2 id="___sec15">Programming the Django application </h2>
 
-<h3 id="___sec16">Adding the app to a project <a name="___sec16"></a></h3>
+<h3 id="___sec16">Adding the app to a project </h3>
 
 <p>
 Any Django app needs a project, but here we reuse the project
@@ -185,7 +185,7 @@ These steps ensure that Django can find our application as a module/package,
 that Django can find our templates associated with this application,
 and that the URL address applies the name <code>vib1</code> to reach the application.
 
-<h3 id="___sec17">The compute part <a name="___sec17"></a></h3>
+<h3 id="___sec17">The compute part </h3>
 
 <p>
 The computations in our application are put in a file <code>compute.py</code>
@@ -224,7 +224,7 @@ The computations in our application are put in a file <code>compute.py</code>
     <span style="color: #008000; font-weight: bold">print</span> compute(<span style="color: #666666">1</span>, <span style="color: #666666">0.1</span>, <span style="color: #666666">1</span>, <span style="color: #666666">20</span>)
 </pre></div>
 
-<h3 id="___sec18">The model <a name="___sec18"></a></h3>
+<h3 id="___sec18">The model </h3>
 
 <p>
 We can now write <code>models.py</code> and the <code>Input</code> class that defines
@@ -262,7 +262,7 @@ We also provide a default
 value such that all fields have a value when the user sees
 the page.
 
-<h3 id="___sec19">The view <a name="___sec19"></a></h3>
+<h3 id="___sec19">The view </h3>
 
 <p>
 The <code>views.py</code> file looks as follows:
@@ -340,7 +340,7 @@ The template for rendering the page is listed next.
 The tricky part is the syntax for displaying <em>static content</em>, such as
 the plot file made in the <code>compute</code> function.
 
-<h2 id="___sec20">Custom validation <a name="___sec20"></a></h2>
+<h2 id="___sec20">Custom validation </h2>
 
 <p>
 Django has a series of methods available for user-provided validation
@@ -449,7 +449,7 @@ We refer to the vast Django documentation for many other ways of
 validating forms. The reader is encouraged to run the <code>vib2</code>
 application and test out the validations we have implemented.
 
-<h2 id="___sec21">Customizing widgets <a name="___sec21"></a></h2>
+<h2 id="___sec21">Customizing widgets </h2>
 
 <p>
 One will occasionally have full control of the layout of the individual
