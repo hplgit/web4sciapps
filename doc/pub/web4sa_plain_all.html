@@ -257,7 +257,7 @@ MathJax.Hub.Config({
 <center>[1] <b>Center for Biomedical Computing, Simula Research Laboratory</b></center>
 <center>[2] <b>Department of Informatics, University of Oslo</b></center>
 <p>
-<center><h4>Jan 14, 2015</h4></center> <!-- date -->
+<center><h4>Feb 26, 2015</h4></center> <!-- date -->
 
 <h2>Table of contents</h2>
 
@@ -2137,8 +2137,8 @@ The template looks like
 
 
 <span style="color: #008000; font-weight: bold">&lt;link</span> <span style="color: #7D9029">href=</span>
-&quot;http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css&quot;
-rel=&quot;stylesheet&quot;&gt;
+<span style="color: #BA2121">&quot;http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css&quot;</span>
+<span style="color: #7D9029">rel=</span><span style="color: #BA2121">&quot;stylesheet&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
 
 <span style="color: #008000; font-weight: bold">&lt;script </span><span style="color: #7D9029">type=</span><span style="color: #BA2121">&quot;text/x-mathjax-config&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
 MathJax.Hub.Config({
@@ -2149,7 +2149,7 @@ MathJax.Hub.Config({
 });
 <span style="color: #008000; font-weight: bold">&lt;/script&gt;</span>
 <span style="color: #008000; font-weight: bold">&lt;script </span><span style="color: #7D9029">type=</span><span style="color: #BA2121">&quot;text/javascript&quot;</span> <span style="color: #7D9029">src=</span>
-&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;&gt;
+<span style="color: #BA2121">&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
 <span style="color: #008000; font-weight: bold">&lt;/script&gt;</span>
 <span style="color: #408080; font-style: italic">&lt;!--</span>
 <span style="color: #408080; font-style: italic">&lt;nav class=&quot;navbar navbar-default&quot; role=&quot;navigation&quot;&gt;</span>
@@ -2225,8 +2225,8 @@ It is easy to switch to other Bootstrap styles, e.g., those in the
 
 <!-- code=html (!bc htmlcod) typeset with pygments style "default" -->
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">&lt;link</span> <span style="color: #7D9029">href=</span>
-&quot;http://netdna.bootstrapcdn.com/bootswatch/3.1.1/X/bootstrap.min.css&quot;
-rel=&quot;stylesheet&quot;&gt;
+<span style="color: #BA2121">&quot;http://netdna.bootstrapcdn.com/bootswatch/3.1.1/X/bootstrap.min.css&quot;</span>
+<span style="color: #7D9029">rel=</span><span style="color: #BA2121">&quot;stylesheet&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
 </pre></div>
 <p>
 where <code>X</code> can be <code>journal</code>, <code>cosmo</code>, <code>flatly</code>, and other legal
@@ -2272,7 +2272,7 @@ MathJax.Hub.Config({
 });
 <span style="color: #008000; font-weight: bold">&lt;/script&gt;</span>
 <span style="color: #008000; font-weight: bold">&lt;script </span><span style="color: #7D9029">type=</span><span style="color: #BA2121">&quot;text/javascript&quot;</span> <span style="color: #7D9029">src=</span>
-&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;&gt;
+<span style="color: #BA2121">&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
 <span style="color: #008000; font-weight: bold">&lt;/script&gt;</span>
 {% endblock %}
 
@@ -2568,20 +2568,30 @@ of the <code>vib2</code> app.
 <h3 id="___sec42">PNG plots </h3>
 
 <p>
-Python has the <code>StringIO</code> object that is a string buffer with the
-look and behavior of a file. The idea is to let Matplotlib write to
-a <code>StringIO</code> object and afterwards extract the string from this object:
+Python has the <code>io.StringIO</code> object for writing text to a
+string buffer with the same syntax as used for writing text to
+files. For binary streams, such as PNG files, one can use
+a similar object, <code>io.BytesIO</code>, to hold the stream (i.e., the plot file)
+in memory. The idea is to let Matplotlib write to
+a <code>io.BytesIO</code> object and afterwards extract the
+series of bytes in the plot file from this object and embed it in
+the HTML file directly. This approach avoids storing plots in separate
+files, at the cost of bigger HTML files.
+
+<p>
+The first step is to let Matplotlib write the PNG data to
+the <code>BytesIO</code> buffer:
 
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plot</span>
-<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">StringIO</span> <span style="color: #008000; font-weight: bold">import</span> StringIO
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">io</span> <span style="color: #008000; font-weight: bold">import</span> BytesIO
 <span style="color: #408080; font-style: italic"># run plt.plot, plt.title, etc.</span>
-figfile <span style="color: #666666">=</span> StringIO()
+figfile <span style="color: #666666">=</span> BytesIO()
 plt<span style="color: #666666">.</span>savefig(figfile, format<span style="color: #666666">=</span><span style="color: #BA2121">&#39;png&#39;</span>)
 figfile<span style="color: #666666">.</span>seek(<span style="color: #666666">0</span>)  <span style="color: #408080; font-style: italic"># rewind to beginning of file</span>
-figdata_png <span style="color: #666666">=</span> figfile<span style="color: #666666">.</span>buf  <span style="color: #408080; font-style: italic"># extract string</span>
+figdata_png <span style="color: #666666">=</span> figfile<span style="color: #666666">.</span>getvalue()  <span style="color: #408080; font-style: italic"># extract string (stream of bytes)</span>
 </pre></div>
 <p>
 Before the PNG data can be embedded in HTML we need to convert the
@@ -2618,14 +2628,14 @@ The complete <code>compute.py</code> function takes the form
     plt<span style="color: #666666">.</span>plot(t, y)
     plt<span style="color: #666666">.</span>title(<span style="color: #BA2121">&#39;A=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">, b=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">, w=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (A, b, w))
 
-    <span style="color: #408080; font-style: italic"># Make Matplotlib write to StringIO file object and grab</span>
+    <span style="color: #408080; font-style: italic"># Make Matplotlib write to BytesIO file object and grab</span>
     <span style="color: #408080; font-style: italic"># return the object&#39;s string</span>
-    <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">StringIO</span> <span style="color: #008000; font-weight: bold">import</span> StringIO
-    figfile <span style="color: #666666">=</span> StringIO()
+    <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">io</span> <span style="color: #008000; font-weight: bold">import</span> BytesIO
+    figfile <span style="color: #666666">=</span> BytesIO()
     plt<span style="color: #666666">.</span>savefig(figfile, format<span style="color: #666666">=</span><span style="color: #BA2121">&#39;png&#39;</span>)
     figfile<span style="color: #666666">.</span>seek(<span style="color: #666666">0</span>)  <span style="color: #408080; font-style: italic"># rewind to beginning of file</span>
     <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">base64</span>
-    figdata_png <span style="color: #666666">=</span> base64<span style="color: #666666">.</span>b64encode(figfile<span style="color: #666666">.</span>buf)
+    figdata_png <span style="color: #666666">=</span> base64<span style="color: #666666">.</span>b64encode(figfile<span style="color: #666666">.</span>getvalue())
     <span style="color: #008000; font-weight: bold">return</span> figdata_png
 </pre></div>
 <p>
@@ -2650,9 +2660,9 @@ example:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">figfile <span style="color: #666666">=</span> StringIO()
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">figfile <span style="color: #666666">=</span> BytesIO()
 plt<span style="color: #666666">.</span>savefig(figfile, format<span style="color: #666666">=</span><span style="color: #BA2121">&#39;svg&#39;</span>)
-figdata_svg <span style="color: #666666">=</span> figfile<span style="color: #666666">.</span>buf
+figdata_svg <span style="color: #666666">=</span> figfile<span style="color: #666666">.</span>getvalue()
 </pre></div>
 <p>
 The <code>figdata_svg</code> string contains XML code text can almost
@@ -2675,7 +2685,7 @@ The removal is done with a little string manipulation:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">figdata_svg <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;&lt;svg&#39;</span> <span style="color: #666666">+</span> figfile<span style="color: #666666">.</span>buf<span style="color: #666666">.</span>split(<span style="color: #BA2121">&#39;&lt;svg&#39;</span>)[<span style="color: #666666">1</span>]
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">figdata_svg <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;&lt;svg&#39;</span> <span style="color: #666666">+</span> figfile<span style="color: #666666">.</span>getvalue()<span style="color: #666666">.</span>split(<span style="color: #BA2121">&#39;&lt;svg&#39;</span>)[<span style="color: #666666">1</span>]
 </pre></div>
 <p>
 Now, <code>figdata_svg</code> can be directly inserted in HTML code without
@@ -2696,10 +2706,10 @@ that returns both a PNG and an SVG plot:
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">compute_png_svg</span>(A, b, w, T, resolution<span style="color: #666666">=500</span>):
     <span style="color: #666666">...</span>
-    figfile <span style="color: #666666">=</span> StringIO()
+    figfile <span style="color: #666666">=</span> BytesIO()
     plt<span style="color: #666666">.</span>savefig(figfile, format<span style="color: #666666">=</span><span style="color: #BA2121">&#39;svg&#39;</span>)
     figfile<span style="color: #666666">.</span>seek(<span style="color: #666666">0</span>)
-    figdata_svg <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;&lt;svg&#39;</span> <span style="color: #666666">+</span> figfile<span style="color: #666666">.</span>buf<span style="color: #666666">.</span>split(<span style="color: #BA2121">&#39;&lt;svg&#39;</span>)[<span style="color: #666666">1</span>]
+    figdata_svg <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;&lt;svg&#39;</span> <span style="color: #666666">+</span> figfile<span style="color: #666666">.</span>getvalue()<span style="color: #666666">.</span>split(<span style="color: #BA2121">&#39;&lt;svg&#39;</span>)[<span style="color: #666666">1</span>]
     figdata_svg <span style="color: #666666">=</span> <span style="color: #008000">unicode</span>(figdata_svg,<span style="color: #BA2121">&#39;utf-8&#39;</span>)
     <span style="color: #008000; font-weight: bold">return</span> figdata_png, figdata_svg
 </pre></div>
@@ -3098,32 +3108,32 @@ making a plot of \( g \) og \( G \) for \( x\in [0,7\sigma] \).
     plt<span style="color: #666666">.</span>figure()  <span style="color: #408080; font-style: italic"># needed to avoid adding curves in plot</span>
     plt<span style="color: #666666">.</span>plot(x, y)
     plt<span style="color: #666666">.</span>title(<span style="color: #BA2121">&#39;a=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">, h=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">, A=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (a, h, A))
-    <span style="color: #408080; font-style: italic"># Make Matplotlib write to StringIO file object and grab</span>
+    <span style="color: #408080; font-style: italic"># Make Matplotlib write to BytesIO file object and grab</span>
     <span style="color: #408080; font-style: italic"># return the object&#39;s string</span>
-    <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">StringIO</span> <span style="color: #008000; font-weight: bold">import</span> StringIO
-    figfile <span style="color: #666666">=</span> StringIO()
+    <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">io</span> <span style="color: #008000; font-weight: bold">import</span> BytesIO
+    figfile <span style="color: #666666">=</span> BytesIO()
     plt<span style="color: #666666">.</span>savefig(figfile, format<span style="color: #666666">=</span><span style="color: #BA2121">&#39;png&#39;</span>)
     figfile<span style="color: #666666">.</span>seek(<span style="color: #666666">0</span>)  <span style="color: #408080; font-style: italic"># rewind to beginning of file</span>
     <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">base64</span>
-    figdata_density_png <span style="color: #666666">=</span> base64<span style="color: #666666">.</span>b64encode(figfile<span style="color: #666666">.</span>buf)
-    figfile <span style="color: #666666">=</span> StringIO()
+    figdata_density_png <span style="color: #666666">=</span> base64<span style="color: #666666">.</span>b64encode(figfile<span style="color: #666666">.</span>getvalue())
+    figfile <span style="color: #666666">=</span> BytesIO()
     plt<span style="color: #666666">.</span>savefig(figfile, format<span style="color: #666666">=</span><span style="color: #BA2121">&#39;svg&#39;</span>)
     figfile<span style="color: #666666">.</span>seek(<span style="color: #666666">0</span>)
-    figdata_density_svg <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;&lt;svg&#39;</span> <span style="color: #666666">+</span> figfile<span style="color: #666666">.</span>buf<span style="color: #666666">.</span>split(<span style="color: #BA2121">&#39;&lt;svg&#39;</span>)[<span style="color: #666666">1</span>]
+    figdata_density_svg <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;&lt;svg&#39;</span> <span style="color: #666666">+</span> figfile<span style="color: #666666">.</span>getvalue()<span style="color: #666666">.</span>split(<span style="color: #BA2121">&#39;&lt;svg&#39;</span>)[<span style="color: #666666">1</span>]
     figdata_density_svg <span style="color: #666666">=</span> <span style="color: #008000">unicode</span>(figdata_density_svg,<span style="color: #BA2121">&#39;utf-8&#39;</span>)
 
     y <span style="color: #666666">=</span> gamma_cumulative(x, a, h, A)
     plt<span style="color: #666666">.</span>figure()
     plt<span style="color: #666666">.</span>plot(x, y)
     plt<span style="color: #666666">.</span>grid(<span style="color: #008000">True</span>)
-    figfile <span style="color: #666666">=</span> StringIO()
+    figfile <span style="color: #666666">=</span> BytesIO()
     plt<span style="color: #666666">.</span>savefig(figfile, format<span style="color: #666666">=</span><span style="color: #BA2121">&#39;png&#39;</span>)
     figfile<span style="color: #666666">.</span>seek(<span style="color: #666666">0</span>)
-    figdata_cumulative_png <span style="color: #666666">=</span> base64<span style="color: #666666">.</span>b64encode(figfile<span style="color: #666666">.</span>buf)
-    figfile <span style="color: #666666">=</span> StringIO()
+    figdata_cumulative_png <span style="color: #666666">=</span> base64<span style="color: #666666">.</span>b64encode(figfile<span style="color: #666666">.</span>getvalue())
+    figfile <span style="color: #666666">=</span> BytesIO()
     plt<span style="color: #666666">.</span>savefig(figfile, format<span style="color: #666666">=</span><span style="color: #BA2121">&#39;svg&#39;</span>)
     figfile<span style="color: #666666">.</span>seek(<span style="color: #666666">0</span>)
-    figdata_cumulative_svg <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;&lt;svg&#39;</span> <span style="color: #666666">+</span> figfile<span style="color: #666666">.</span>buf<span style="color: #666666">.</span>split(<span style="color: #BA2121">&#39;&lt;svg&#39;</span>)[<span style="color: #666666">1</span>]
+    figdata_cumulative_svg <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;&lt;svg&#39;</span> <span style="color: #666666">+</span> figfile<span style="color: #666666">.</span>getvalue()<span style="color: #666666">.</span>split(<span style="color: #BA2121">&#39;&lt;svg&#39;</span>)[<span style="color: #666666">1</span>]
     figdata_cumulative_svg <span style="color: #666666">=</span> <span style="color: #008000">unicode</span>(figdata_cumulative_svg,<span style="color: #BA2121">&#39;utf-8&#39;</span>)
     <span style="color: #008000; font-weight: bold">return</span> figdata_density_png, figdata_cumulative_png, \ 
            figdata_density_svg, figdata_cumulative_svg, \ 
@@ -3635,7 +3645,7 @@ MathJax.Hub.Config({
 });
 <span style="color: #008000; font-weight: bold">&lt;/script&gt;</span>
 <span style="color: #008000; font-weight: bold">&lt;script </span><span style="color: #7D9029">type=</span><span style="color: #BA2121">&quot;text/javascript&quot;</span> <span style="color: #7D9029">src=</span>
-&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;&gt;
+<span style="color: #BA2121">&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
 <span style="color: #008000; font-weight: bold">&lt;/script&gt;</span>
 
 {% if user.is_anonymous() %}

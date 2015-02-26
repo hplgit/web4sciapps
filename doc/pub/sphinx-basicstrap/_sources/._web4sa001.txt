@@ -4,7 +4,7 @@ Using Web Frameworks for Scientific Applications
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 :Authors: Hans Petter Langtangen, Anders E. Johansen
-:Date: Jan 14, 2015
+:Date: Feb 26, 2015
 
 Web frameworks
 ==============
@@ -2096,30 +2096,39 @@ of the ``vib2`` app.
 
 .. index:: inline PNG image in HTML
 
-.. index:: StringIO objects
+.. index:: BytesIO objects
 
-.. index:: file-like string objects (StringIO)
+.. index:: file-like string objects (BytesIO)
 
-.. index:: strings as files (StringIO)
+.. index:: strings as files (BytesIO)
 
 .. index:: base64 encoding of PNG images
 
 PNG plots
 ~~~~~~~~~
 
-Python has the ``StringIO`` object that is a string buffer with the
-look and behavior of a file. The idea is to let Matplotlib write to
-a ``StringIO`` object and afterwards extract the string from this object:
+Python has the ``io.StringIO`` object for writing text to a
+string buffer with the same syntax as used for writing text to
+files. For binary streams, such as PNG files, one can use
+a similar object, ``io.BytesIO``, to hold the stream (i.e., the plot file)
+in memory. The idea is to let Matplotlib write to
+a ``io.BytesIO`` object and afterwards extract the
+series of bytes in the plot file from this object and embed it in
+the HTML file directly. This approach avoids storing plots in separate
+files, at the cost of bigger HTML files.
+
+The first step is to let Matplotlib write the PNG data to
+the ``BytesIO`` buffer:
 
 .. code-block:: python
 
         import matplotlib.pyplot as plot
-        from StringIO import StringIO
+        from io import BytesIO
         # run plt.plot, plt.title, etc.
-        figfile = StringIO()
+        figfile = BytesIO()
         plt.savefig(figfile, format='png')
         figfile.seek(0)  # rewind to beginning of file
-        figdata_png = figfile.buf  # extract string
+        figdata_png = figfile.getvalue()  # extract string (stream of bytes)
 
 Before the PNG data can be embedded in HTML we need to convert the
 data to base64 format:
@@ -2149,14 +2158,14 @@ The complete ``compute.py`` function takes the form
             plt.plot(t, y)
             plt.title('A=%g, b=%g, w=%g' % (A, b, w))
         
-            # Make Matplotlib write to StringIO file object and grab
+            # Make Matplotlib write to BytesIO file object and grab
             # return the object's string
-            from StringIO import StringIO
-            figfile = StringIO()
+            from io import BytesIO
+            figfile = BytesIO()
             plt.savefig(figfile, format='png')
             figfile.seek(0)  # rewind to beginning of file
             import base64
-            figdata_png = base64.b64encode(figfile.buf)
+            figdata_png = base64.b64encode(figfile.getvalue())
             return figdata_png
 
 The relevant syntax in an HTML template is
@@ -2179,9 +2188,9 @@ example:
 
 .. code-block:: python
 
-        figfile = StringIO()
+        figfile = BytesIO()
         plt.savefig(figfile, format='svg')
-        figdata_svg = figfile.buf
+        figdata_svg = figfile.getvalue()
 
 The ``figdata_svg`` string contains XML code text can almost
 be directly embedded in
@@ -2200,7 +2209,7 @@ The removal is done with a little string manipulation:
 
 .. code-block:: python
 
-        figdata_svg = '<svg' + figfile.buf.split('<svg')[1]
+        figdata_svg = '<svg' + figfile.getvalue().split('<svg')[1]
 
 Now, ``figdata_svg`` can be directly inserted in HTML code without
 any surrounding tags (because it is perfectly valid HTML code in itself).
@@ -2217,10 +2226,10 @@ that returns both a PNG and an SVG plot:
 
         def compute_png_svg(A, b, w, T, resolution=500):
             ...
-            figfile = StringIO()
+            figfile = BytesIO()
             plt.savefig(figfile, format='svg')
             figfile.seek(0)
-            figdata_svg = '<svg' + figfile.buf.split('<svg')[1]
+            figdata_svg = '<svg' + figfile.getvalue().split('<svg')[1]
             figdata_svg = unicode(figdata_svg,'utf-8')
             return figdata_png, figdata_svg
 
@@ -2596,32 +2605,32 @@ making a plot of :math:`g` og :math:`G` for :math:`x\in [0,7\sigma]`.
             plt.figure()  # needed to avoid adding curves in plot
             plt.plot(x, y)
             plt.title('a=%g, h=%g, A=%g' % (a, h, A))
-            # Make Matplotlib write to StringIO file object and grab
+            # Make Matplotlib write to BytesIO file object and grab
             # return the object's string
-            from StringIO import StringIO
-            figfile = StringIO()
+            from io import BytesIO
+            figfile = BytesIO()
             plt.savefig(figfile, format='png')
             figfile.seek(0)  # rewind to beginning of file
             import base64
-            figdata_density_png = base64.b64encode(figfile.buf)
-            figfile = StringIO()
+            figdata_density_png = base64.b64encode(figfile.getvalue())
+            figfile = BytesIO()
             plt.savefig(figfile, format='svg')
             figfile.seek(0)
-            figdata_density_svg = '<svg' + figfile.buf.split('<svg')[1]
+            figdata_density_svg = '<svg' + figfile.getvalue().split('<svg')[1]
             figdata_density_svg = unicode(figdata_density_svg,'utf-8')
         
             y = gamma_cumulative(x, a, h, A)
             plt.figure()
             plt.plot(x, y)
             plt.grid(True)
-            figfile = StringIO()
+            figfile = BytesIO()
             plt.savefig(figfile, format='png')
             figfile.seek(0)
-            figdata_cumulative_png = base64.b64encode(figfile.buf)
-            figfile = StringIO()
+            figdata_cumulative_png = base64.b64encode(figfile.getvalue())
+            figfile = BytesIO()
             plt.savefig(figfile, format='svg')
             figfile.seek(0)
-            figdata_cumulative_svg = '<svg' + figfile.buf.split('<svg')[1]
+            figdata_cumulative_svg = '<svg' + figfile.getvalue().split('<svg')[1]
             figdata_cumulative_svg = unicode(figdata_cumulative_svg,'utf-8')
             return figdata_density_png, figdata_cumulative_png, \ 
                    figdata_density_svg, figdata_cumulative_svg, \ 

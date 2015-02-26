@@ -437,7 +437,7 @@
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Authors:</th><td class="field-body">Hans Petter Langtangen, Anders E. Johansen</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Date:</th><td class="field-body">Jan 14, 2015</td>
+<tr class="field-even field"><th class="field-name">Date:</th><td class="field-body">Feb 26, 2015</td>
 </tr>
 </tbody>
 </table>
@@ -1836,8 +1836,8 @@ and error message) in the input form.</p>
 
 
 <span class="nt">&lt;link</span> <span class="na">href=</span>
-&quot;http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css&quot;
-rel=&quot;stylesheet&quot;&gt;
+<span class="s">&quot;http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css&quot;</span>
+<span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span><span class="nt">&gt;</span>
 
 <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/x-mathjax-config&quot;</span><span class="nt">&gt;</span>
 <span class="nx">MathJax</span><span class="p">.</span><span class="nx">Hub</span><span class="p">.</span><span class="nx">Config</span><span class="p">({</span>
@@ -1848,7 +1848,7 @@ rel=&quot;stylesheet&quot;&gt;
 <span class="p">});</span>
 <span class="nt">&lt;/script&gt;</span>
 <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span>
-&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;&gt;
+<span class="s">&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;</span><span class="nt">&gt;</span>
 <span class="nt">&lt;/script&gt;</span>
 <span class="c">&lt;!--</span>
 <span class="c">&lt;nav class=&quot;navbar navbar-default&quot; role=&quot;navigation&quot;&gt;</span>
@@ -1916,8 +1916,8 @@ added to demonstrate the Bootstrap fonts.</p>
 <p>It is easy to switch to other Bootstrap styles, e.g., those in the
 &#8220;Bootswatch family&#8221;: &#8220;<a class="reference external" href="http:bootswatch.com">http:bootswatch.com</a>&#8221;:</p>
 <div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;link</span> <span class="na">href=</span>
-&quot;http://netdna.bootstrapcdn.com/bootswatch/3.1.1/X/bootstrap.min.css&quot;
-rel=&quot;stylesheet&quot;&gt;
+<span class="s">&quot;http://netdna.bootstrapcdn.com/bootswatch/3.1.1/X/bootstrap.min.css&quot;</span>
+<span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span><span class="nt">&gt;</span>
 </pre></div>
 </div>
 <p>where <tt class="docutils literal"><span class="pre">X</span></tt> can be <tt class="docutils literal"><span class="pre">journal</span></tt>, <tt class="docutils literal"><span class="pre">cosmo</span></tt>, <tt class="docutils literal"><span class="pre">flatly</span></tt>, and other legal
@@ -1951,7 +1951,7 @@ this extension is done by <tt class="docutils literal"><span class="pre">sudo</s
 <span class="p">});</span>
 <span class="nt">&lt;/script&gt;</span>
 <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span>
-&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;&gt;
+<span class="s">&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;</span><span class="nt">&gt;</span>
 <span class="nt">&lt;/script&gt;</span>
 {% endblock %}
 
@@ -2198,16 +2198,24 @@ and Python. The relevant code is found in the <tt class="docutils literal"><span
 of the <tt class="docutils literal"><span class="pre">vib2</span></tt> app.</p>
 <span class="target" id="index-23"></span><span class="target" id="index-24"></span><span class="target" id="index-25"></span><span class="target" id="index-26"></span><div class="section" id="png-plots">
 <span id="index-27"></span><h4>PNG plots<a class="headerlink" href="#png-plots" title="Permalink to this headline">¶</a></h4>
-<p>Python has the <tt class="docutils literal"><span class="pre">StringIO</span></tt> object that is a string buffer with the
-look and behavior of a file. The idea is to let Matplotlib write to
-a <tt class="docutils literal"><span class="pre">StringIO</span></tt> object and afterwards extract the string from this object:</p>
+<p>Python has the <tt class="docutils literal"><span class="pre">io.StringIO</span></tt> object for writing text to a
+string buffer with the same syntax as used for writing text to
+files. For binary streams, such as PNG files, one can use
+a similar object, <tt class="docutils literal"><span class="pre">io.BytesIO</span></tt>, to hold the stream (i.e., the plot file)
+in memory. The idea is to let Matplotlib write to
+a <tt class="docutils literal"><span class="pre">io.BytesIO</span></tt> object and afterwards extract the
+series of bytes in the plot file from this object and embed it in
+the HTML file directly. This approach avoids storing plots in separate
+files, at the cost of bigger HTML files.</p>
+<p>The first step is to let Matplotlib write the PNG data to
+the <tt class="docutils literal"><span class="pre">BytesIO</span></tt> buffer:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plot</span>
-<span class="kn">from</span> <span class="nn">StringIO</span> <span class="kn">import</span> <span class="n">StringIO</span>
+<span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
 <span class="c"># run plt.plot, plt.title, etc.</span>
-<span class="n">figfile</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span>
+<span class="n">figfile</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">figfile</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s">&#39;png&#39;</span><span class="p">)</span>
 <span class="n">figfile</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c"># rewind to beginning of file</span>
-<span class="n">figdata_png</span> <span class="o">=</span> <span class="n">figfile</span><span class="o">.</span><span class="n">buf</span>  <span class="c"># extract string</span>
+<span class="n">figdata_png</span> <span class="o">=</span> <span class="n">figfile</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>  <span class="c"># extract string (stream of bytes)</span>
 </pre></div>
 </div>
 <p>Before the PNG data can be embedded in HTML we need to convert the
@@ -2230,14 +2238,14 @@ data to base64 format:</p>
     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">&#39;A=</span><span class="si">%g</span><span class="s">, b=</span><span class="si">%g</span><span class="s">, w=</span><span class="si">%g</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">w</span><span class="p">))</span>
 
-    <span class="c"># Make Matplotlib write to StringIO file object and grab</span>
+    <span class="c"># Make Matplotlib write to BytesIO file object and grab</span>
     <span class="c"># return the object&#39;s string</span>
-    <span class="kn">from</span> <span class="nn">StringIO</span> <span class="kn">import</span> <span class="n">StringIO</span>
-    <span class="n">figfile</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span>
+    <span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
+    <span class="n">figfile</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">()</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">figfile</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s">&#39;png&#39;</span><span class="p">)</span>
     <span class="n">figfile</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c"># rewind to beginning of file</span>
     <span class="kn">import</span> <span class="nn">base64</span>
-    <span class="n">figdata_png</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">figfile</span><span class="o">.</span><span class="n">buf</span><span class="p">)</span>
+    <span class="n">figdata_png</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">figfile</span><span class="o">.</span><span class="n">getvalue</span><span class="p">())</span>
     <span class="k">return</span> <span class="n">figdata_png</span>
 </pre></div>
 </div>
@@ -2253,9 +2261,9 @@ data to base64 format:</p>
 by XML code with the figure data in SVG format.
 Plot strings in the SVG format are created very similarly to the PNG
 example:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">figfile</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">figfile</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">figfile</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s">&#39;svg&#39;</span><span class="p">)</span>
-<span class="n">figdata_svg</span> <span class="o">=</span> <span class="n">figfile</span><span class="o">.</span><span class="n">buf</span>
+<span class="n">figdata_svg</span> <span class="o">=</span> <span class="n">figfile</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>The <tt class="docutils literal"><span class="pre">figdata_svg</span></tt> string contains XML code text can almost
@@ -2270,7 +2278,7 @@ the <tt class="docutils literal"><span class="pre">svg</span></tt> tag that we w
 </pre></div>
 </div>
 <p>The removal is done with a little string manipulation:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">figdata_svg</span> <span class="o">=</span> <span class="s">&#39;&lt;svg&#39;</span> <span class="o">+</span> <span class="n">figfile</span><span class="o">.</span><span class="n">buf</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;&lt;svg&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">figdata_svg</span> <span class="o">=</span> <span class="s">&#39;&lt;svg&#39;</span> <span class="o">+</span> <span class="n">figfile</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;&lt;svg&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>Now, <tt class="docutils literal"><span class="pre">figdata_svg</span></tt> can be directly inserted in HTML code without
@@ -2283,10 +2291,10 @@ lead to an encoding exception.</p>
 that returns both a PNG and an SVG plot:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">compute_png_svg</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
     <span class="o">...</span>
-    <span class="n">figfile</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span>
+    <span class="n">figfile</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">()</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">figfile</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s">&#39;svg&#39;</span><span class="p">)</span>
     <span class="n">figfile</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-    <span class="n">figdata_svg</span> <span class="o">=</span> <span class="s">&#39;&lt;svg&#39;</span> <span class="o">+</span> <span class="n">figfile</span><span class="o">.</span><span class="n">buf</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;&lt;svg&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">figdata_svg</span> <span class="o">=</span> <span class="s">&#39;&lt;svg&#39;</span> <span class="o">+</span> <span class="n">figfile</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;&lt;svg&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">figdata_svg</span> <span class="o">=</span> <span class="nb">unicode</span><span class="p">(</span><span class="n">figdata_svg</span><span class="p">,</span><span class="s">&#39;utf-8&#39;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">figdata_png</span><span class="p">,</span> <span class="n">figdata_svg</span>
 </pre></div>
@@ -2599,32 +2607,32 @@ making a plot of <span class="math">\(g\)</span> og <span class="math">\(G\)</sp
     <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>  <span class="c"># needed to avoid adding curves in plot</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">&#39;a=</span><span class="si">%g</span><span class="s">, h=</span><span class="si">%g</span><span class="s">, A=</span><span class="si">%g</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">A</span><span class="p">))</span>
-    <span class="c"># Make Matplotlib write to StringIO file object and grab</span>
+    <span class="c"># Make Matplotlib write to BytesIO file object and grab</span>
     <span class="c"># return the object&#39;s string</span>
-    <span class="kn">from</span> <span class="nn">StringIO</span> <span class="kn">import</span> <span class="n">StringIO</span>
-    <span class="n">figfile</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span>
+    <span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
+    <span class="n">figfile</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">()</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">figfile</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s">&#39;png&#39;</span><span class="p">)</span>
     <span class="n">figfile</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c"># rewind to beginning of file</span>
     <span class="kn">import</span> <span class="nn">base64</span>
-    <span class="n">figdata_density_png</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">figfile</span><span class="o">.</span><span class="n">buf</span><span class="p">)</span>
-    <span class="n">figfile</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span>
+    <span class="n">figdata_density_png</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">figfile</span><span class="o">.</span><span class="n">getvalue</span><span class="p">())</span>
+    <span class="n">figfile</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">()</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">figfile</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s">&#39;svg&#39;</span><span class="p">)</span>
     <span class="n">figfile</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-    <span class="n">figdata_density_svg</span> <span class="o">=</span> <span class="s">&#39;&lt;svg&#39;</span> <span class="o">+</span> <span class="n">figfile</span><span class="o">.</span><span class="n">buf</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;&lt;svg&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">figdata_density_svg</span> <span class="o">=</span> <span class="s">&#39;&lt;svg&#39;</span> <span class="o">+</span> <span class="n">figfile</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;&lt;svg&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">figdata_density_svg</span> <span class="o">=</span> <span class="nb">unicode</span><span class="p">(</span><span class="n">figdata_density_svg</span><span class="p">,</span><span class="s">&#39;utf-8&#39;</span><span class="p">)</span>
 
     <span class="n">y</span> <span class="o">=</span> <span class="n">gamma_cumulative</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
-    <span class="n">figfile</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span>
+    <span class="n">figfile</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">()</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">figfile</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s">&#39;png&#39;</span><span class="p">)</span>
     <span class="n">figfile</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-    <span class="n">figdata_cumulative_png</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">figfile</span><span class="o">.</span><span class="n">buf</span><span class="p">)</span>
-    <span class="n">figfile</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span>
+    <span class="n">figdata_cumulative_png</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">figfile</span><span class="o">.</span><span class="n">getvalue</span><span class="p">())</span>
+    <span class="n">figfile</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">()</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">figfile</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s">&#39;svg&#39;</span><span class="p">)</span>
     <span class="n">figfile</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-    <span class="n">figdata_cumulative_svg</span> <span class="o">=</span> <span class="s">&#39;&lt;svg&#39;</span> <span class="o">+</span> <span class="n">figfile</span><span class="o">.</span><span class="n">buf</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;&lt;svg&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">figdata_cumulative_svg</span> <span class="o">=</span> <span class="s">&#39;&lt;svg&#39;</span> <span class="o">+</span> <span class="n">figfile</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;&lt;svg&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">figdata_cumulative_svg</span> <span class="o">=</span> <span class="nb">unicode</span><span class="p">(</span><span class="n">figdata_cumulative_svg</span><span class="p">,</span><span class="s">&#39;utf-8&#39;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">figdata_density_png</span><span class="p">,</span> <span class="n">figdata_cumulative_png</span><span class="p">,</span> \
            <span class="n">figdata_density_svg</span><span class="p">,</span> <span class="n">figdata_cumulative_svg</span><span class="p">,</span> \
@@ -3080,7 +3088,7 @@ in the <tt class="docutils literal"><span class="pre">vib1</span></tt> app:</p>
 <span class="p">});</span>
 <span class="nt">&lt;/script&gt;</span>
 <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span>
-&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;&gt;
+<span class="s">&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;</span><span class="nt">&gt;</span>
 <span class="nt">&lt;/script&gt;</span>
 
 {% if user.is_anonymous() %}
@@ -4125,7 +4133,7 @@ common exercises at the very end</li>
       <!-- footer -->
       <footer>
           &copy; Copyright 2015, H. P. Langtangen and A. E. Johansen.
-        Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.
+        Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
       </footer>
       <!-- /footer -->
 

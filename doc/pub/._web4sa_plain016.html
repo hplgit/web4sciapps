@@ -591,32 +591,32 @@ making a plot of \( g \) og \( G \) for \( x\in [0,7\sigma] \).
     plt<span style="color: #666666">.</span>figure()  <span style="color: #408080; font-style: italic"># needed to avoid adding curves in plot</span>
     plt<span style="color: #666666">.</span>plot(x, y)
     plt<span style="color: #666666">.</span>title(<span style="color: #BA2121">&#39;a=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">, h=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">, A=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (a, h, A))
-    <span style="color: #408080; font-style: italic"># Make Matplotlib write to StringIO file object and grab</span>
+    <span style="color: #408080; font-style: italic"># Make Matplotlib write to BytesIO file object and grab</span>
     <span style="color: #408080; font-style: italic"># return the object&#39;s string</span>
-    <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">StringIO</span> <span style="color: #008000; font-weight: bold">import</span> StringIO
-    figfile <span style="color: #666666">=</span> StringIO()
+    <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">io</span> <span style="color: #008000; font-weight: bold">import</span> BytesIO
+    figfile <span style="color: #666666">=</span> BytesIO()
     plt<span style="color: #666666">.</span>savefig(figfile, format<span style="color: #666666">=</span><span style="color: #BA2121">&#39;png&#39;</span>)
     figfile<span style="color: #666666">.</span>seek(<span style="color: #666666">0</span>)  <span style="color: #408080; font-style: italic"># rewind to beginning of file</span>
     <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">base64</span>
-    figdata_density_png <span style="color: #666666">=</span> base64<span style="color: #666666">.</span>b64encode(figfile<span style="color: #666666">.</span>buf)
-    figfile <span style="color: #666666">=</span> StringIO()
+    figdata_density_png <span style="color: #666666">=</span> base64<span style="color: #666666">.</span>b64encode(figfile<span style="color: #666666">.</span>getvalue())
+    figfile <span style="color: #666666">=</span> BytesIO()
     plt<span style="color: #666666">.</span>savefig(figfile, format<span style="color: #666666">=</span><span style="color: #BA2121">&#39;svg&#39;</span>)
     figfile<span style="color: #666666">.</span>seek(<span style="color: #666666">0</span>)
-    figdata_density_svg <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;&lt;svg&#39;</span> <span style="color: #666666">+</span> figfile<span style="color: #666666">.</span>buf<span style="color: #666666">.</span>split(<span style="color: #BA2121">&#39;&lt;svg&#39;</span>)[<span style="color: #666666">1</span>]
+    figdata_density_svg <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;&lt;svg&#39;</span> <span style="color: #666666">+</span> figfile<span style="color: #666666">.</span>getvalue()<span style="color: #666666">.</span>split(<span style="color: #BA2121">&#39;&lt;svg&#39;</span>)[<span style="color: #666666">1</span>]
     figdata_density_svg <span style="color: #666666">=</span> <span style="color: #008000">unicode</span>(figdata_density_svg,<span style="color: #BA2121">&#39;utf-8&#39;</span>)
 
     y <span style="color: #666666">=</span> gamma_cumulative(x, a, h, A)
     plt<span style="color: #666666">.</span>figure()
     plt<span style="color: #666666">.</span>plot(x, y)
     plt<span style="color: #666666">.</span>grid(<span style="color: #008000">True</span>)
-    figfile <span style="color: #666666">=</span> StringIO()
+    figfile <span style="color: #666666">=</span> BytesIO()
     plt<span style="color: #666666">.</span>savefig(figfile, format<span style="color: #666666">=</span><span style="color: #BA2121">&#39;png&#39;</span>)
     figfile<span style="color: #666666">.</span>seek(<span style="color: #666666">0</span>)
-    figdata_cumulative_png <span style="color: #666666">=</span> base64<span style="color: #666666">.</span>b64encode(figfile<span style="color: #666666">.</span>buf)
-    figfile <span style="color: #666666">=</span> StringIO()
+    figdata_cumulative_png <span style="color: #666666">=</span> base64<span style="color: #666666">.</span>b64encode(figfile<span style="color: #666666">.</span>getvalue())
+    figfile <span style="color: #666666">=</span> BytesIO()
     plt<span style="color: #666666">.</span>savefig(figfile, format<span style="color: #666666">=</span><span style="color: #BA2121">&#39;svg&#39;</span>)
     figfile<span style="color: #666666">.</span>seek(<span style="color: #666666">0</span>)
-    figdata_cumulative_svg <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;&lt;svg&#39;</span> <span style="color: #666666">+</span> figfile<span style="color: #666666">.</span>buf<span style="color: #666666">.</span>split(<span style="color: #BA2121">&#39;&lt;svg&#39;</span>)[<span style="color: #666666">1</span>]
+    figdata_cumulative_svg <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;&lt;svg&#39;</span> <span style="color: #666666">+</span> figfile<span style="color: #666666">.</span>getvalue()<span style="color: #666666">.</span>split(<span style="color: #BA2121">&#39;&lt;svg&#39;</span>)[<span style="color: #666666">1</span>]
     figdata_cumulative_svg <span style="color: #666666">=</span> <span style="color: #008000">unicode</span>(figdata_cumulative_svg,<span style="color: #BA2121">&#39;utf-8&#39;</span>)
     <span style="color: #008000; font-weight: bold">return</span> figdata_density_png, figdata_cumulative_png, \ 
            figdata_density_svg, figdata_cumulative_svg, \ 
