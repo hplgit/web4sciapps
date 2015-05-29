@@ -6,6 +6,8 @@ DATE: today
 # #else
 # Use vagrant template only and therefore comment out TITLE
 #TITLE: Using ${TOPIC} for Scientific Web Applications
+## Need DATE for html template (authors are hardcoded in the template)
+DATE: today
 # #endif
 
 TOC: on

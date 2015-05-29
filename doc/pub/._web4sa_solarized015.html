@@ -398,7 +398,7 @@ that returns both a PNG and an SVG plot:
     plt.savefig(figfile, format='svg')
     figfile.seek(0)
     figdata_svg = '&lt;svg' + figfile.getvalue().split('&lt;svg')[1]
-    figdata_svg = unicode(figdata_svg,'utf-8')
+    figdata_svg = unicode(figdata_svg, 'utf-8')
     return figdata_png, figdata_svg
 </code></pre>
 <!-- end verbatim block -->

@@ -213,7 +213,13 @@ new one.
 <!-- --- begin hint in exercise --- -->
 
 <p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_3_1" style="font-size: 80%;"></a>
 <b>Hint 1.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_3_1">
+
+<p>
 Performing <code>eval</code> on the user's input requires that names like
 <code>sin</code>, <code>exp</code>, and <code>pi</code> are defined. The simplest approach is to
 do a
@@ -263,15 +269,31 @@ namespace<span style="color: #666666">.</span>update({<span style="color: #BA212
 formula <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(formula, namespace)
 </pre></div>
 <p>
+</div></p>
+</div>
+</p>
+
+<p>
 <!-- --- end hint in exercise --- -->
 
 <p>
 <!-- --- begin hint in exercise --- -->
 
 <p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_3_2" style="font-size: 80%;"></a>
 <b>Hint 2.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_3_2">
+
+<p>
 You should add tests when evaluating and using the strings from input
 as these may have wrong syntax.
+
+<p>
+</div></p>
+</div>
+</p>
 
 <p>
 <!-- --- end hint in exercise --- -->
@@ -404,7 +426,13 @@ The resulting plot is displayed below.
 <!-- --- begin hint in exercise --- -->
 
 <p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_4_1" style="font-size: 80%;"></a>
 <b>Hint.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_4_1">
+
+<p>
 The series expansion is obtained by <code>formula.series(x, x0, N)</code>,
 but the output contains an <code>O()</code> term which makes it impossible to
 convert the expression to a Python function via <code>sympy.lambify</code>.
@@ -432,6 +460,11 @@ because then the terms start with the lowest order (and not the highest
 order as is the case when <code>removeO()</code> is used).
 
 <p>
+</div></p>
+</div>
+</p>
+
+<p>
 <!-- --- end hint in exercise --- -->
 
 <p>
@@ -455,7 +488,13 @@ Write the compute function:
 <!-- --- begin hint in exercise --- -->
 
 <p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_4_2" style="font-size: 80%;"></a>
 <b>Hint 1.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_4_2">
+
+<p>
 Converting the string <code>formula</code> to a valid <code>sympy</code> expression is
 challenging. First, create a local variable for a <code>sympy</code> symbol
 with the content of
@@ -472,13 +511,24 @@ to point to the same <code>sympy</code> symbol. Relevant code is
      (independent_variable, independent_variable))
 </pre></div>
 <p>
+</div></p>
+</div>
+</p>
+
+<p>
 <!-- --- end hint in exercise --- -->
 
 <p>
 <!-- --- begin hint in exercise --- -->
 
 <p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_4_3" style="font-size: 80%;"></a>
 <b>Hint 2.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_4_3">
+
+<p>
 Evaluating <code>formula</code> in the namespace of <code>sympy</code> (so that all the <code>sin</code>,
 <code>exp</code>, <code>pi</code>, and similar symbols are defined properly as <code>sympy</code>
 objects) needs a merge of the <code>sympy</code> namespace and the variable for
@@ -497,13 +547,24 @@ formula <span style="color: #666666">=</span> <span style="color: #008000">eval<
 Turning <code>x0</code> into a valid <code>sympy</code> expression is easier: <code>x0 = eval(x0, sp.__dict__)</code>.
 
 <p>
+</div></p>
+</div>
+</p>
+
+<p>
 <!-- --- end hint in exercise --- -->
 
 <p>
 <!-- --- begin hint in exercise --- -->
 
 <p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_4_4" style="font-size: 80%;"></a>
 <b>Hint 3.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_4_4">
+
+<p>
 Note that in the web interface, the minimum and maximum values on the axis
 can be mathematical expressions such as <code>2*pi</code>. This means that these
 quantities must be strings that are evaluated in the <code>numpy</code> namespace, e.g.,
@@ -515,13 +576,24 @@ quantities must be strings that are evaluated in the <code>numpy</code> namespac
 xmin <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(xmin, np<span style="color: #666666">.</span>__dict__)
 </pre></div>
 <p>
+</div></p>
+</div>
+</p>
+
+<p>
 <!-- --- end hint in exercise --- -->
 
 <p>
 <!-- --- begin hint in exercise --- -->
 
 <p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_4_5" style="font-size: 80%;"></a>
 <b>Hint 4.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_4_5">
+
+<p>
 Getting the legends right when plotting multiple curves in the same
 plot is a bit tricky. One solution is to have a global variable <code>legends</code>
 that is initialized to <code>[]</code> and do the following inside the compute function:
@@ -545,16 +617,32 @@ Here, <code>f</code> is the Python function for computing the <code>numpy</code>
 of the expression in <code>formula</code>.
 
 <p>
+</div></p>
+</div>
+</p>
+
+<p>
 <!-- --- end hint in exercise --- -->
 
 <p>
 <!-- --- begin hint in exercise --- -->
 
 <p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_4_6" style="font-size: 80%;"></a>
 <b>Hint 5.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_4_6">
+
+<p>
 Use the test block in the file to call the compute function several
 times with different values of the <code>erase</code> parameter to test that
 the erase functionality is correct.
+
+<p>
+</div></p>
+</div>
+</p>
 
 <p>
 <!-- --- end hint in exercise --- -->
@@ -574,8 +662,12 @@ Filename: <code>Taylor_approx.tar.gz</code>.
 
 <ul>
  <li> <a href="https://www.djangoproject.com/" target="_self">Django webpage</a></li>
- <li> <a href="https://code.djangoproject.com/wiki/Tutorials" target="_self">Web tutorials</a></li>
+ <li> <a href="https://code.djangoproject.com/wiki/Tutorials" target="_self">List of Web tutorials</a></li>
  <li> <a href="http://www.youtube.com/playlist?list=PL385A53B00B8B158E" target="_self">YouTube videos</a></li>
+ <li> <a href="http://www.effectivedjango.com/tutorial/" target="_self">Effective Django Tutorial</a></li>
+ <li> <a href="http://lightbird.net/dbe2/" target="_self">Django by Example</a> (blog, questionnaire, etc.)</li>
+ <li> <a href="http://www.blopig.com/blog/2013/09/django-for-scientific-applications/" target="_self">Django for Scientific Applications</a></li>
+ <li> <a href="http://www.datacommunitydc.org/blog/2013/12/a-tutorial-for-deploying-a-django-application-that-uses-numpy-and-scipy-to-google-compute-engine-using-apache2-and-modwsgi" target="_self">A Tutorial for Deploying a Django Application that Uses Numpy and Scipy to Google Compute Engine Using Apache2 and modwsgi</a></li>
 </ul>
 
 <h1 id="___sec29">Remaining </h1>
@@ -605,7 +697,7 @@ Filename: <code>Taylor_approx.tar.gz</code>.
  <div class="row Footer">
   <div class="span12">
   &copy 2013; Hans Petter Langtangen and Anders E. Johansen.
-  Last update: .
+  Last update: May 29, 2015.
   </div>
  </div>
 </div>

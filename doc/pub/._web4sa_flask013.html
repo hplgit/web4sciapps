@@ -358,7 +358,7 @@ that returns both a PNG and an SVG plot:
     plt<span style="color: #666666">.</span>savefig(figfile, format<span style="color: #666666">=</span><span style="color: #BA2121">&#39;svg&#39;</span>)
     figfile<span style="color: #666666">.</span>seek(<span style="color: #666666">0</span>)
     figdata_svg <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;&lt;svg&#39;</span> <span style="color: #666666">+</span> figfile<span style="color: #666666">.</span>getvalue()<span style="color: #666666">.</span>split(<span style="color: #BA2121">&#39;&lt;svg&#39;</span>)[<span style="color: #666666">1</span>]
-    figdata_svg <span style="color: #666666">=</span> <span style="color: #008000">unicode</span>(figdata_svg,<span style="color: #BA2121">&#39;utf-8&#39;</span>)
+    figdata_svg <span style="color: #666666">=</span> <span style="color: #008000">unicode</span>(figdata_svg, <span style="color: #BA2121">&#39;utf-8&#39;</span>)
     <span style="color: #008000; font-weight: bold">return</span> figdata_png, figdata_svg
 </pre></div>
 <p>
@@ -426,7 +426,7 @@ svg <span style="color: #666666">=</span> <span style="color: #008000">False</sp
  <div class="row Footer">
   <div class="span12">
   &copy 2013; Hans Petter Langtangen and Anders E. Johansen.
-  Last update: .
+  Last update: May 29, 2015.
   </div>
  </div>
 </div>

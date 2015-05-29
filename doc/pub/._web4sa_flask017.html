@@ -280,7 +280,13 @@ new one.
 <!-- --- begin hint in exercise --- -->
 
 <p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_3_1" style="font-size: 80%;"></a>
 <b>Hint 1.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_3_1">
+
+<p>
 You may use the <code>vib1</code> app from the section <a href="._web4sa_flask006.html#wf:vib1:flask:app">Programming the Flask application</a>
 with the <code>view_errcheck.html</code> template as starting point.
 Preferably, let plots be created as strings, as explained for the <code>vib2</code>
@@ -297,13 +303,24 @@ With the Yes/No selection, it is possible either plot individual curves
 or compare curves in the same plot.
 
 <p>
+</div></p>
+</div>
+</p>
+
+<p>
 <!-- --- end hint in exercise --- -->
 
 <p>
 <!-- --- begin hint in exercise --- -->
 
 <p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_3_2" style="font-size: 80%;"></a>
 <b>Hint 2.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_3_2">
+
+<p>
 Performing <code>eval</code> on the user's input requires that names like
 <code>sin</code>, <code>exp</code>, and <code>pi</code> are defined. The simplest approach is to
 do a
@@ -353,15 +370,31 @@ namespace<span style="color: #666666">.</span>update({<span style="color: #BA212
 formula <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(formula, namespace)
 </pre></div>
 <p>
+</div></p>
+</div>
+</p>
+
+<p>
 <!-- --- end hint in exercise --- -->
 
 <p>
 <!-- --- begin hint in exercise --- -->
 
 <p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_3_3" style="font-size: 80%;"></a>
 <b>Hint 3.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_3_3">
+
+<p>
 You should add tests when evaluating and using the strings from input
 as these may have wrong syntax.
+
+<p>
+</div></p>
+</div>
+</p>
 
 <p>
 <!-- --- end hint in exercise --- -->
@@ -494,7 +527,13 @@ The resulting plot is displayed below.
 <!-- --- begin hint in exercise --- -->
 
 <p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_4_1" style="font-size: 80%;"></a>
 <b>Hint.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_4_1">
+
+<p>
 The series expansion is obtained by <code>formula.series(x, x0, N)</code>,
 but the output contains an <code>O()</code> term which makes it impossible to
 convert the expression to a Python function via <code>sympy.lambify</code>.
@@ -522,6 +561,11 @@ because then the terms start with the lowest order (and not the highest
 order as is the case when <code>removeO()</code> is used).
 
 <p>
+</div></p>
+</div>
+</p>
+
+<p>
 <!-- --- end hint in exercise --- -->
 
 <p>
@@ -545,7 +589,13 @@ Write the compute function:
 <!-- --- begin hint in exercise --- -->
 
 <p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_4_2" style="font-size: 80%;"></a>
 <b>Hint 1.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_4_2">
+
+<p>
 Converting the string <code>formula</code> to a valid <code>sympy</code> expression is
 challenging. First, create a local variable for a <code>sympy</code> symbol
 with the content of
@@ -562,13 +612,24 @@ to point to the same <code>sympy</code> symbol. Relevant code is
      (independent_variable, independent_variable))
 </pre></div>
 <p>
+</div></p>
+</div>
+</p>
+
+<p>
 <!-- --- end hint in exercise --- -->
 
 <p>
 <!-- --- begin hint in exercise --- -->
 
 <p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_4_3" style="font-size: 80%;"></a>
 <b>Hint 2.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_4_3">
+
+<p>
 Evaluating <code>formula</code> in the namespace of <code>sympy</code> (so that all the <code>sin</code>,
 <code>exp</code>, <code>pi</code>, and similar symbols are defined properly as <code>sympy</code>
 objects) needs a merge of the <code>sympy</code> namespace and the variable for
@@ -587,13 +648,24 @@ formula <span style="color: #666666">=</span> <span style="color: #008000">eval<
 Turning <code>x0</code> into a valid <code>sympy</code> expression is easier: <code>x0 = eval(x0, sp.__dict__)</code>.
 
 <p>
+</div></p>
+</div>
+</p>
+
+<p>
 <!-- --- end hint in exercise --- -->
 
 <p>
 <!-- --- begin hint in exercise --- -->
 
 <p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_4_4" style="font-size: 80%;"></a>
 <b>Hint 3.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_4_4">
+
+<p>
 Note that in the web interface, the minimum and maximum values on the axis
 can be mathematical expressions such as <code>2*pi</code>. This means that these
 quantities must be strings that are evaluated in the <code>numpy</code> namespace, e.g.,
@@ -605,13 +677,24 @@ quantities must be strings that are evaluated in the <code>numpy</code> namespac
 xmin <span style="color: #666666">=</span> <span style="color: #008000">eval</span>(xmin, np<span style="color: #666666">.</span>__dict__)
 </pre></div>
 <p>
+</div></p>
+</div>
+</p>
+
+<p>
 <!-- --- end hint in exercise --- -->
 
 <p>
 <!-- --- begin hint in exercise --- -->
 
 <p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_4_5" style="font-size: 80%;"></a>
 <b>Hint 4.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_4_5">
+
+<p>
 Getting the legends right when plotting multiple curves in the same
 plot is a bit tricky. One solution is to have a global variable <code>legends</code>
 that is initialized to <code>[]</code> and do the following inside the compute function:
@@ -635,16 +718,32 @@ Here, <code>f</code> is the Python function for computing the <code>numpy</code>
 of the expression in <code>formula</code>.
 
 <p>
+</div></p>
+</div>
+</p>
+
+<p>
 <!-- --- end hint in exercise --- -->
 
 <p>
 <!-- --- begin hint in exercise --- -->
 
 <p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_4_6" style="font-size: 80%;"></a>
 <b>Hint 5.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_4_6">
+
+<p>
 Use the test block in the file to call the compute function several
 times with different values of the <code>erase</code> parameter to test that
 the erase functionality is correct.
+
+<p>
+</div></p>
+</div>
+</p>
 
 <p>
 <!-- --- end hint in exercise --- -->
@@ -728,10 +827,20 @@ Filename: <code>generate_flask.py</code>.
 
 <ul>
  <li> <a href="http://flask.pocoo.org/" target="_self">Flask website</a></li>
- <li> <a href="http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world" target="_self">The Flask Mega-Tutorial</a> by Miguel Grinberg</li>
+ <li> <a href="http://flask.pocoo.org/docs/0.10/tutorial/" target="_self">Flask Quick Start</a></li>
+ <li> <a href="http://flask.pocoo.org/docs/0.10/tutorial/" target="_self">Flask tutorial</a></li>
+ <li> <a href="http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world" target="_self">The Flask Mega-Tutorial</a> by M. Grinberg</li>
  <li> <a href="http://wtforms.simplecodes.com/docs/0.6/index.html" target="_self">WTForms Documentation</a></li>
  <li> <a href="http://jinja.pocoo.org/docs/" target="_self">The Jinja2 templating language</a></li>
  <li> <a href="http://werkzeug.pocoo.org/" target="_self">The Werkzeug library</a></li>
+ <li> <a href="http://code.tutsplus.com/tutorials/an-introduction-to-pythons-flask-framework--net-28822" target="_self">An Introduction to Python's Flask Framework</a> by L. Polepeddi</li>
+ <li> <a href="https://realpython.com/blog/python/introduction-to-flask-part-1-setting-up-a-static-site/" target="_self">Discover Flask, Part I - Setting up a Static Site</a></li>
+ <li> Flaskr: A Minimal Blog Application: <a href="https://github.com/mitsuhiko/flask/tree/master/examples/flaskr/" target="_self">Code</a>, <a href="https://stormpath.com/blog/build-a-flask-app-in-30-minutes/" target="_self">Explanation</a></li>
+ <li> <a href="http://peterhudec.github.io/authomatic/examples/flask-simple.html" target="_self">Flask Login with Facebook, Twitter, and OpenID</a></li>
+ <li> <a href="http://blog.shea.io/lightweight-python-apps-with-flask-twitter-bootstrap-and-heroku/" target="_self">Lightweight Python Apps with Flask, Bootstrap, and Heroku</a> by R. Shea</li>
+ <li> <a href="https://www.digitalocean.com/community/tutorials/how-to-structure-large-flask-applications" target="_self">How to Structure Large Flask Applications</a></li>
+ <li> <a href="https://exploreflask.com/index.html" target="_self">Explore Flask</a> by R. Picard (online book)</li>
+ <li> <a href="http://www.datacommunitydc.org/blog/2014/02/flask-mega-meta-tutorial-data-scientists" target="_self">Flask Mega Tutorial for Data Scientists</a></li>
 </ul>
 
 <h1 id="___sec61">Remaining </h1>
@@ -761,7 +870,7 @@ Filename: <code>generate_flask.py</code>.
  <div class="row Footer">
   <div class="span12">
   &copy 2013; Hans Petter Langtangen and Anders E. Johansen.
-  Last update: .
+  Last update: May 29, 2015.
   </div>
  </div>
 </div>
