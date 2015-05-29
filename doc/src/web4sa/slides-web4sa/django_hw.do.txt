@@ -1,0 +1,449 @@
+!split
+======= Making a Django application =======
+
+idx{Django!installation}
+
+We recommend to
+download and istall the latest official version of Django from
+URL: "http://www.djangoproject.com/download/". Pack out the tarfile, go
+to the directory, and run `setup.py`:
+
+!bc sys
+Terminal> tar xvzf Django-1.5-tar.gz
+Terminal> cd Django-1.5
+Terminal> sudo python setup.py install
+!ec
+The version in this example, 1.5, may be different at the time you
+follow these instructions.
+
+
+===== Setting up a Django project =====
+
+idx{Django!making a project}
+
+Django applies two concepts: *project* and *application* (or *app*).
+The app is the program we want to run through a web interface. The
+project is a Python package containing common settings and
+configurations for a collection of apps. This means that before we can
+make a Django app, we must to establish a Django project.
+
+A Django project for managing a set of Django apps is
+created by the command
+
+!bc sys
+Terminal> django-admin.py startproject django_project
+!ec
+The result in this example
+is a directory `django_project` whose content can be explored
+by some `ls` and `cd` commands:
+
+!bc sys
+Terminal> ls django_project
+manage.py django_project
+Terminal> cd django_project/django_project
+Terminal> ls
+__init__.py settings.py urls.py wsgi.py
+!ec
+The meaning of the generated files is briefly listed below.
+
+   * The outer `django_project/` directory is just a container for your project. Its name does not matter to Django.
+
+   * `manage.py` is a command-line utility that lets you interact with this Django project in various ways. You will typically run `manage.py` to launch a Django application.
+
+   * The inner `django_project/` directory is a Python package for the Django project. Its name is used in import statements in Python code (e.g., `import django_project.settings`).
+
+   * `django_project/__init__.py` is an empty file that just tells Python that this directory should be considered a Python package.
+
+   * `django_project/settings.py` contains the settings and configurations for this Django project.
+
+   * `django_project/urls.py` maps URLs to specific functions and thereby defines that actions that various URLs imply.
+
+   * `django_project/wsgi.py` is not needed in our examples.
+
+Django comes with a web server for developing and debugging applications.
+The server is started by running
+
+!bc sys
+Terminal> python manage.py runserver
+Validating models...
+
+0 errors found
+March 34, 201x - 01:09:24
+Django version 1.5, using settings 'django_project.settings'
+Development server is running at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+!ec
+The output from starting the server tells that the server runs on the
+URL `http://127.0.0.1:8000/`.
+Load this URL into your browser to see a welcome message from Django,
+meaning that the server is working.
+
+Despite the fact that our introductory
+web applications do not need a database, you
+have to register a database with any Django project. To this end,
+open the `django_project/settings.py` file in a text editor,
+locate the `DATABASES` dictionary and type in the following
+code:
+
+!bc pycod
+import os
+
+def relative2absolute_path(relative_path):
+    """Return the absolute path correspodning to relative_path."""
+    dir_of_this_file = os.path.dirname(os.path.abspath(__file__))
+    return dir_of_this_file + '/' + relative_path
+
+DATABASES = {
+   'default' : {
+      'ENGINE': 'django.db.backends.sqlite3',
+      'NAME': relative2absolute_path('../database.db')
+   }
+}
+!ec
+The `settings.py` file needs absolute paths to files, while it is
+more convenient for us to specify relative paths. Therefore,
+we made a function that figures out the absolute path to the `settings.py`
+file and then combines this absolute path with the relative path.
+The location and name of the database file can be chosen as desired.
+Note that one should *not* use `os.path.join` to create paths as Django
+always applies the forward slash between directories, also on Windows.
+
+
+===== Setting up a Django application =====
+
+idx{Django!making an application}
+
+The next step is to create a Django app for our scientific hello
+world program. We can place the app in any directory, but here we
+utilize the following organization.
+As neighbor to `django_project` we have
+a directory `apps` containing our various scientific applications.
+Under `apps` we create a directory `django_apps` with
+our different versions of Django applications.
+The directory `py_apps` contains the
+original `hw.py` program in the subdirectory `orig`,
+while split of this
+program according to the MVC pattern appears in the `mvc` directory.
+
+The directory `django_apps/hw1` is our first attempt to write
+a Django-based web interface for the `hw.py` program.
+The directory structure is laid out by
+!bc sys
+Terminal> cd ..
+Terminal> mkdir apps
+Terminal> cd apps
+Terminal> mkdir py_apps
+Terminal> cd py
+Terminal> mkdir orig mvc
+Terminal> cd ../..
+Terminal> mkdir django_apps
+Terminal> cd django_apps
+!ec
+The file `hw.py` is moved to `orig` while `mvc` contains
+the MVC refactored version with the files `model.py`, `view.py`, `compute.py`,
+and `controller.py`.
+
+The `hw1` directory, containing our first Django application, must be
+made with
+!bc sys
+Terminal> python ../../django_project/manage.py startapp hw1
+!ec
+The command creates a directory `hw1` with four empty files:
+
+!bc sys
+Terminal> cd hw1
+Terminal> ls
+__init__.py models.py tests.py views.py
+!ec
+The `__init__.py` file will remain empty to just indicate that the
+Django application is a Python package. The other files need to be
+filled with the right content, which happens in the next section.
+
+At this point,
+we need to register some information about our application in the
+`django_project/settings.py` and `django_project/urls.py` files.
+
+__Step 1: Add the app.__ Locate the `INSTALLED_APPS`
+tuple in `settings.py` and add your Django application as a Python package:
+
+!bc pycod
+INSTALLED_APPS = (
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    ...
+    'hw1',
+)
+!ec
+Unfortunately, Django will not be able to find the package `hw1`
+unless we register the parent directory in `sys.path`:
+
+!bc pycod
+import sys
+sys.path.insert(0, relative2absolute_path('../../apps/django_apps'))
+!ec
+Note here that the relative path is given with respect to the
+location of the `settings.py` script.
+
+__Step 2: Add a template directory.__
+Make a subdirectory `templates` under `hw1`,
+
+!bc sys
+Terminal> mkdir templates
+!ec
+and add the absolute path of this directory to the `TEMPLATE_DIRS` tuple:
+
+!bc pycod
+TEMPLATE_DIRS = (
+    relative2absolute_path('../../apps/django_apps/hw1/templates'),
+)
+!ec
+The `templates` directory will hold templates for the HTML code applied
+in the web interfaces. The trailing comma is important as this is
+a tuple with only one element.
+
+__Step 3: Define the URL.__ We need to connect the Django app with
+an URL. Our app will be associated with a Python function `index`
+in the `views` module within the `hw1` package.
+Say we want the corresponding URL to
+be named `hw1` relative to the server URL.
+This information is registered in the `django_project/urls.py` file
+by the syntax
+
+!bc pycod
+urlpatterns = patterns('',
+    url(r'^hw1/', 'django_apps.hw1.views.index'),
+!ec
+The first argument to the `url` function is a regular expression for
+the URL and the second argument is the name of the function to call,
+using Python's syntax for a function `index` in a module `views` in
+a package `hw1`.
+The function name `index` resembles the `index.html` main page associated
+with an URL, but any other name than `index` can be used.
+
+!split
+===== Programming the Django application =====
+
+## Define Mako variable for path to source code
+<%
+app_path = src_path + 'django_apps/hw1'
+%>
+
+The Django application is about filling the files `views.py` and `models.py`
+with content. The mathematical computations are performed in `compute.py`
+so we copy this file from the `mvc` directory to the `hw1` directory
+for convenience (we could alternatively add `../mvc` to `sys.path` such that
+`import compute` would work from the `hw1` directory).
+
+=== The user interaction ===
+
+The web application offers a text field where the user can
+write the value of `r`, see Figure ref{wf:hw1:django:fig:input}.
+After clicking on the *equals* button,
+the mathematics is performed and a new page as
+seen in Figure ref{wf:hw1:django:fig:result} appears.
+
+FIGURE: [fig-web4sa/hw1_django_input, width=600] The input page. label{wf:hw1:django:fig:input}
+
+FIGURE: [fig-web4sa/hw1_django_output, width=600] The result page. label{wf:hw1:django:fig:result}
+
+idx{Django!input forms}
+idx{Django!`models.py`}
+
+=== The model ===
+
+The `models.py` file contains the model, which consists
+of the data we need in the application, stored in Django's data types.
+Our data consists of one number, called `r`, and `models.py` then
+look like
+
+@@@CODE ${app_path}/models.py
+The `Input` class lists variables representing data as static class
+attributes. The `django.db.models` module contains various classes
+for different types of data, here we use `FloatField` to represent
+a floating-point number.
+The `InputForm` class has a the shown generic form across applications
+if we by convention apply the name `Input` for the class holding the data.
+
+idx{Django!`index` function}
+idx{Django!`views.py`}
+
+=== The view ===
+
+The `views.py` file contains a function `index` which defines
+the actions we want to perform when invoking
+the URL ( here `http://127.0.0.1:8000/hw1/`).
+In addition, `views.py` has the `present_output` function from
+the `view.py` file in the `mvc` directory.
+
+@@@CODE ${app_path}/views.py
+
+The `index` function deserves some explanation. It must take one
+argument, usually called `request`. There are two modes in the function. Either
+the user has provided input on the web page, which means that
+`request.method` equals `'POST'`, or we show a new web page
+with which the user is supposed to interact.
+
+idx{Django!HTML templates}
+
+=== Making the input page ===
+
+The input consists of a web form with
+one field where we can fill in our `r` variable. This page
+is realized by the two central statements
+
+!bc pycod
+# Make info needed in the web form
+form = InputForm()
+# Make HTML code
+render_to_response('hw1.html',
+    {'form': form}, context_instance=RequestContext(request))
+!ec
+The `hw1.html` file resides in the `templates` subdirectory and contains
+a template for the HTML code:
+
+@@@CODE ${app_path}/templates/hw1.html
+This is a *template file* because it contains instructions like
+`{% csrf_token %}` and variables like `{{ form.r }}`. Django will
+replace the former by some appropriate HTML statements, while the
+latter simply extracts the numerical value of the variable `r` in
+our form (specified in the `Input` class in `models.py`).
+Typically, this `hw1.html` file
+results in the HTML code
+
+!bc htmlpro
+<form method="post" action="">
+<div style='display:none'>
+<input type='hidden' name='csrfmiddlewaretoken'
+value='oPWMuuy1gLlXm9GvUZINv49eVUYnux5Q' /></div>
+    Hello, World! The sine of <input type="text" name="r" id="id_r" />
+    <input type="submit" value="equals" />
+</form>
+!ec
+
+=== Making the results page ===
+
+When then user has filled in a value in the text field on the input
+page, the `index` function is called again and `request.method` equals
+`'POST'`. A new form object is made, this time with user info (`request.POST`).
+We can check that the form is valid and if so, proceed with
+computations followed by presenting the results in a
+new web page (see Figure ref{wf:hw1:django:fig:result}):
+
+!bc pycod
+def index(request):
+    if request.method == 'POST':
+        form = InputForm(request.POST)
+        if form.is_valid():
+            form = form.save(commit=False)
+            return present_output(form)
+
+def present_output(form):
+    r = form.r
+    s = compute(r)
+    return HttpResponse('Hello, World! sin(%s)=%s' % (r, s))
+!ec
+The numerical value of `r` as given by the user is available as `form.r`.
+Instead of using a template for the output page, which is natural to
+do in more advanced cases, we here illustrate the possibility to
+send raw HTML to the output page by returning an `HttpResponse`
+object initialized by a string containing the desired HTML code.
+
+Launch this application by filling in the address `http://127.0.0.1:8000/hw1/`
+in your web browser. Make sure the Django development server is running,
+and if not, restart it by
+
+!bc sys
+Terminal> python ../../../django_project/manage.py runserver
+!ec
+Fill
+in some number on the input page and view the output.
+To show how easy it is to change the application, invoke the `views.py`
+file in an editor and add some color to the output HTML code from
+the `present_output` function:
+
+!bc pycod
+    return HttpResponse("""
+<font color='blue'>Hello</font>, World!
+sin(%s)=%s
+"""% (r, s))
+!ec
+Go back to the input page, provide a new number, and observe how
+the "Hello" word now has a blue color.
+
+
+===== Equipping the input page with output results =====
+
+## Define Mako variable for path to source code
+<%
+app_path = src_path + 'django_apps/hw2'
+%>
+
+Instead of making a separate output page with the result, we can
+simply add the sine value to the input page. This makes the user
+feel that she interacts with the same page, as when operating a calculator.
+The output page should then look as shown in Figure ref{wf:hw2:django:fig:result}.
+
+FIGURE: [fig-web4sa/hw2_django_output, width=600] The modified result page. label{wf:hw2:django:fig:result}
+
+We need to make a new Django application, now called
+"`hw2`" : "${github_path}/${app_path}".
+Instead of running the standard
+`manage.py startapp hw2` command,
+we can simply copy the `hw1`
+directory to `hw2`. We need, of course, to add information about this
+new application in `settings.py` and `urls.py`.
+In the former file we must have
+
+!bc pycod
+TEMPLATE_DIRS = (
+    relative2absolute_path('../../apps/django_apps/hw1/templates'),
+    relative2absolute_path('../../apps/django_apps/hw2/templates'),
+)
+
+INSTALLED_APPS = (
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.sites',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    # Uncomment the next line to enable the admin:
+    # 'django.contrib.admin',
+    # Uncomment the next line to enable admin documentation:
+    # 'django.contrib.admindocs',
+    'hw1',
+    'hw2',
+)
+!ec
+In `urls.py` we add the URL `hw2` which is to call our `index` function
+in the `views.py` file of the `hw2` app:
+
+!bc pycod
+urlpatterns = patterns('',
+    url(r'^hw1/', 'django_apps.hw1.views.index'),
+    url(r'^hw2/', 'django_apps.hw2.views.index'),
+!ec
+
+The `views.py` file changes a bit since we shall generate almost the same
+web page on input and output. This makes the `present_output` function
+unnatural, and everything is done within the `index` function:
+
+@@@CODE ${app_path}/views.py  fromto: def index@
+
+Note that the output variable `s` is computed within the `index`
+function and defaults to `None`. The template file `hw2.html`
+looks like
+
+@@@CODE ${app_path}/templates/hw2.html
+The difference from `hw1.html` is that we right after the *equals*
+button write out the value of `s`. However, we make a test that
+the value is only written if it is computed, here recognized by
+being a non-empty string. The `s` in the template file
+is substituted by the value of the object
+corresponding to the key `'s'` in the
+dictionary we pass to the `render_to_response`. As seen,
+we pass a string where `s` is formatted with five digits if `s`
+is a float, i.e., if `s` is computed. Otherwise, `s` has the
+default value `None` and we send an empty string to the template.
+The template language allows tests using Python syntax, but the
+if-block must be explicitly ended by `{% endif %}`.

@@ -1,0 +1,27 @@
+TITLE: Using Web Frameworks for Scientific Applications
+AUTHOR: Hans Petter Langtangen at Center for Biomedical Computing, Simula Research Laboratory & Department of Informatics, University of Oslo
+AUTHOR: Anders E. Johansen at Center for Biomedical Computing, Simula Research Laboratory
+DATE: today
+
+!split
+TOC: on
+
+# #include "slides-websa/intro.do.txt"
+
+# #if TOPIC in ('Flask+Django', 'Flask')
+# #include "slides-websa/flask_hw.do.txt"
+# #endif
+
+# #if TOPIC in ('Flask+Django', 'Django')
+# #include "slides-websa/django_hw.do.txt"
+# #endif
+
+# #if TOPIC in ('Flask+Django', 'Flask')
+# #include "slides-websa/flask_vib.do.txt"
+# #endif
+
+# #if TOPIC in ('Flask+Django', 'Django')
+# #include "slides-websa/django_vib.do.txt"
+# #endif
+
+# #include "slides-websa/links.do.txt"

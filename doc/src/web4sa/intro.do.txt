@@ -200,8 +200,8 @@ app_path = src_path + 'py_apps/hw_orig'
 %>
 
 We shall start with the simplest possible application,
-a "scientific hello world program", where the
-task is to read a number and write out "Hello, World!" followed by
+a ``scientific hello world program'', where the
+task is to read a number and write out ``Hello, World!'' followed by
 the sine of the number. This application has one input variable and
 a line of text as output.
 
@@ -274,4 +274,4 @@ Hello, World! sin(1.2)=0.932039
 The next step is to create a web interface to our scientific hello world
 program such that we can fill in the number `r` in a text field, click a
 *Compute* button and get back a new web page with the output text
-shown above: "Hello, World! sin(r)=s".
+shown above: ``Hello, World! sin(r)=s''.

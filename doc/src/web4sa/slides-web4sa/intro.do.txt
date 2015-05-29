@@ -1,0 +1,186 @@
+!split
+======= Web frameworks =======
+
+idx{web frameworks}
+
+Goal:
+
+o generate a web page with input data to your application,
+ o run the application to perform mathematical computations, and
+ o generate a web page with the results of the computations.
+
+Technologies:
+
+* CGI script
+ * Web frameworks: Django, Flask, web2py, Bottle, ...
+
+Here:
+
+# #if TOPIC == 'Flask+Django'
+ * Intro to "Flask": "http://flask.pocoo.org/" (first) and  "Django": "https://www.djangoproject.com/"
+# #elif TOPIC == 'Flask'
+ * Intro to "Flask": "http://flask.pocoo.org/"
+# #elif TOPIC == 'Django'
+ * Intro to "Django": "https://www.djangoproject.com/"
+# #endif
+ * Focus: how to use web frameworks for *scientific applications*
+
+!split
+===== Required background knowledge =====
+# #if TOPIC == 'Flask+Django'
+ * Python packages and modules, classes, decorators
+# #elif TOPIC == 'Flask'
+ * Python modules, decorators
+# #elif TOPIC == 'Django'
+ * Python packages and modules, classes
+# #endif
+
+<%
+github_path = 'https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa'
+app_path = 'src-web4sa/apps/'
+%>
+
+!split
+===== The code associated with these slides is on the web =====
+
+All the files associated with this document are available in a
+"GitHub repository": "https://github.com/hplgit/web4sciapps/".
+The relevant files for the web applications are located
+in a subtree "`doc/src/web4sa/src-web4sa/apps`": "${github_path}/${app_path}"
+of this repository.
+
+!split
+===== The MVC pattern for organizing the software =====
+
+idx{MVC pattern}
+
+ * MVC = Model-View-Controller
+ * Goal: separate the user's interaction with an application from the inner
+   workings of the application
+ * Scientific application: separate the math from the user interface
+   and visualization
+ * See the "Wikipedia definition of the MVC pattern": "http://en.wikipedia.org/wiki/MVC_Pattern"
+ * Different web frameworks interpret MCV differently...
+
+The classical MVC pattern introduces
+
+ * the model to hold the data
+ * the view to display the data
+ * the controller to move the data by gluing the model and the view.
+
+We add for scientific applications
+
+ * the *compute* component to perform mathematical computations
+
+!split
+===== The MVC pattern for scientific applications =====
+
+ * The model contains the data (often only the input data) of the application,
+ * The view controls the user interface that handles input and output data,
+   and also calls to functionality that computes the output given the input.
+
+Implementation:
+ * Model: a Python class with static attributes holding the data
+ * View: Python code processing the model's data, calling the
+   compute component, and specifying HTML
+   templates for the design of the web pages
+# #if TOPIC == 'Django'
+ * Django has files with names `models.py` and `views.py` so the
+   model and view concepts are very explicit
+   The controller functionality in Django lies both in the `views.py` file and
+   in configuration files (`settings.py` and `urls.py`). The view component consists of the `views.py` file and HTML templates
+# #elif TOPIC == 'Flask'
+ * Flask does not force any MVC pattern on the programmer, but
+   the code can easily be split into
+   model, view, controller, and compute components
+# #elif TOPIC == 'Flask+Django'
+ * Django has files with names `models.py` and `views.py` so the
+   model and view concepts are very explicit
+   The controller functionality in Django lies both in the `views.py` file and
+   in configuration files (`settings.py` and `urls.py`). The view component consists of the `views.py` file and HTML templates
+ * Flask does not force any MVC pattern on the programmer, but
+   the code can easily be split into
+   model, view, controller, and compute components
+# #endif
+
+Let's learn from examples!
+
+!split
+===== A very simple application =====
+
+## Define Mako variable for path to source code
+<%
+#src_path = '../../../src/apps/'
+src_path = 'src-web4sa/apps/'
+app_path = src_path + 'py_apps/hw_orig'
+%>
+
+ * Start: ``scientific hello world program''
+ * Read a number, write ``Hello, World!'', and the sine of the number
+
+Plain Python version:
+
+@@@CODE ${app_path}/hw.py
+
+Execution:
+
+!bc sys
+Terminal> python hw.py 1.2
+Hello, World! sin(1.2)=0.932039
+!ec
+
+Web version: read `r` from a web page, compute the sine,
+and write out a new web page
+
+!split
+===== Application of the MVC pattern =====
+label{wf:hw:mvc}
+
+## Define Mako variable for path to source code
+<%
+app_path = src_path + 'py_apps/hw_mvc'
+%>
+
+ * Goal: *refactor* our program to fit the MVC pattern
+   (with a compute component)
+ * Method: create four modules: `model`, `view`,
+   `compute`, and `controller`.
+ * `compute` contains `compute(r)` that performs
+   the mathematics and returns the value `s = sin(r)`
+ * `model` holds the input data, here `r`
+ * `view` contains `get_input` for reading input data
+   and `present_output` for presenting the output
+   (given input, it calls `compute` and
+   generates the output)
+ * `controller` calls the view to initialize
+   the model's data from the command line and then calls the view
+   to present the output
+
+!split
+===== The model module contains the input data =====
+
+@@@CODE ${app_path}/model.py
+
+!split
+===== The view module holds the communication with the user =====
+
+@@@CODE ${app_path}/view.py
+
+!split
+===== The mathematics is encapsulated in the compute component =====
+
+@@@CODE ${app_path}/compute.py
+
+!split
+===== The controler glues the model and the view =====
+
+@@@CODE ${app_path}/controller.py
+
+Let us try our refactored code:
+
+!bc sys
+Terminal> python controller.py 1.2
+Hello, World! sin(1.2)=0.932039
+!ec
+
+Next step: make a web interface

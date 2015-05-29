@@ -1,0 +1,231 @@
+
+!split
+======= Making a Flask application =======
+
+idx{Flask!installation}
+
+Installation:
+
+!bc sys
+Terminal> sudo pip install --upgrade Flask
+Terminal> sudo pip install --upgrade Flask-WTF
+!ec
+
+!split
+===== The user interaction: input and output web page =====
+
+FIGURE: [fig-web4sa/hw1_flask_input, width=600] The input page. label{wf:hw1:flask:fig:input}
+
+FIGURE: [fig-web4sa/hw1_flask_output, width=600] The output page. label{wf:hw1:flask:fig:result}
+
+## Define Mako variable for path to source code
+<%
+app_path = src_path + 'flask_apps/hw1'
+%>
+
+!split
+===== The Python code =====
+
+idx{Flask!input forms}
+
+No need for the MVC pattern for flask, so let's try something
+simple:
+
+@@@CODE ${app_path}/controller.py
+
+!split
+===== Dissection of the simple Flask app =====
+
+Need to factor the running text into
+
+-----------------------------------------------------------------------------
+
+The web application is the `app` object of class `Flask`, and initialized
+as shown. The model is a special Flask class derived from `Form`
+where the input variable in the app is listed as a
+static class attribute and initialized
+by a special form field object from the `wtforms` package.
+Such form field objects correspond to HTML forms in the input page.
+For the `r` variable we apply `FloatField` since it is a floating-point
+variable. A default validator, here checking that the user supplies
+a real number, is automatically included, but we add another validator,
+`InputRequired`, to force the user to provide input before clicking on
+the *equals* button.
+
+The view part of this Python code consists of
+a URL and a corresponding function to call when the URL is invoked.
+The function name is here chosen to be `index` (inspired by the standard
+`index.html` page that is the main page of a web app). The
+decorator `@app.route('/hw1', ...)` maps the URL
+`http://127.0.0.1:5000/hw1` to a call to `index`.
+The `methods` argument must be as shown to allow the user to communicate
+with the web page.
+
+idx{Flask!`index` function}
+
+The `index` function first makes a form object based on the data in
+the model, here class `InputForm`. Then there are two possibilities:
+either the user has provided data in the HTML form or the user is
+to be offered an input form. In the former case, `request.method`
+equals `'POST'` and we can extract the numerical value of `r`
+from the `form` object, using `form.r.data`, call up our mathematical
+computations, and make a web page with the result.
+In the latter case, we make an input page as displayed in
+Figure ref{wf:hw1:flask:fig:input}.
+
+idx{Flask!HTML templates}
+
+=== The template files ===
+
+Making a web page with Flask is conveniently done by an HTML
+template. Since the output page is simplest we display the
+`view_output.html` template first:
+
+@@@CODE ${app_path}/templates/view_output.html
+
+Keyword arguments sent to `render_template` are available in the
+HTML template. Here we have `form` and `s`.
+With the `form` object we extract the value of
+`r` in the HTML code by `{{ form.r.data }}`. Similarly, the value of `s`
+is simply `{{ s }}`.
+
+The HTML template for the input page is slightly more complicated
+as we need to use an HTML form:
+
+@@@CODE ${app_path}/templates/view_input.html
+
+
+=== Testing the application ===
+
+We collect the files associated with a Flask application (often called
+just *app*) in a directory,
+here called "`hw1`": "${github_path}/${app_path}".
+All you have to do in order to run this web application is to find
+this directory and run
+
+!bc sys
+Terminal> python controller.py
+ * Running on http://127.0.0.1:5000/
+ * Restarting with reloader
+!ec
+Open a new window or tab in your browser and type in the URL
+`http://127.0.0.1:5000/hw1`.
+
+===== Equipping the input page with output results =====
+
+## Define Mako variable for path to source code
+<%
+app_path = src_path + 'flask_apps/hw2'
+%>
+
+Our application made two distinct pages for grabbing input from the
+user and presenting the result. It is often more natural to add
+the result to the input page. This is particularly the case in the present
+web application, which is a kind of calculator. Figure ref{wf:hw2:flask:fig:result} shows what the user sees after clicking the *equals* button.
+
+FIGURE: [fig-web4sa/hw2_flask_output, width=600] The modified result page. label{wf:hw2:flask:fig:result}
+
+To let the user stay within the same page, we create a new directory
+"`hw2`": "${github_path}/${app_path}"
+for this modified Flask app and copy the files from the previous
+`hw1` directory.  The idea now is to make use of just one
+template, in `templates/view.html`:
+
+@@@CODE ${app_path}/templates/view.html
+
+The form is identical to what we used in `view_input.html` in
+the `hw1` directory, and the only
+new thing is the output of `s` below the form.
+
+The template language supports some programming with Python objects
+inside `{%` and `%}` tags.
+Specifically in this file, we can test on the value of `s`:
+if it is `None`, we know that the computations are not performed and
+`s` should not appear on the page, otherwise `s` holds the sine
+value and we can write it out. Note that, contrary to plain Python,
+the template language does not rely on indentation of blocks and
+therefore needs an explicit end statement `{% endif %}` to finish
+the if-test.
+The generated HTML code from this template file reads
+
+!bc htmlpro
+<form method=post action="">
+  Hello, World! The sine of
+  <input id="r" name="r" type="text" value="1.2">
+  <input type=submit value=equals>
+
+0.932039085967
+
+</form>
+!ec
+
+The `index` function of our modified application
+needs adjustments since we use the same
+template for the input and the output page:
+
+@@@CODE ${app_path}/controller.py fromto: # View@if __name
+It is seen that if the user has given data, `s` is a `float`, otherwise
+`s` is `None`. You are encouraged to test the app by running
+
+!bc sys
+Terminal> python controller.py
+!ec
+and loading `http://127.0.0.1:5000/hw2` into your browser.
+A nice little exercise is to control the formatting of the result `s`.
+To this end, you can simply transform `s` to a string: `s = '%.5f' % s` before
+sending it to `render_template`.
+
+===== Splitting the app into model, view, and controller files =====
+label{wf:hw3:flask}
+
+## Define Mako variable for path to source code
+<%
+app_path = src_path + 'flask_apps/hw3'
+%>
+
+idx{Flask!MVC pattern}
+
+In our previous two Flask apps we have had the view displayed for the
+user in a separate template file, and the computations as always in
+`compute.py`, but everything else was placed in one file `controller.py`.
+For illustration of the MVC concept we
+may split the `controller.py` into two files: `model.py` and
+`controller.py`. The view is in `templates/view.html`.
+These new files are located in a
+directory
+"`hw3_flask`": "${github_path}/${app_path}"
+The contents
+in the files reflect the splitting introduced in the original
+scientific hello world program in Section ref{wf:hw:mvc}.
+The `model.py` file now consists of the input form class:
+
+@@@CODE ${app_path}/model.py
+The file `templates/view.html` is as before, while `controller.py` contains
+
+@@@CODE ${app_path}/controller.py
+
+The statements are indentical to those in the `hw2` app, only
+the organization of the statement in files differ.
+
+
+!split
+===== Troubleshooting =====
+
+idx{Flask!troubleshooting}
+
+=== Address already in use ===
+
+You can easily kill the Flask application and restart it, but sometimes
+you will get an error that the address is already in use.
+To recover from this problem, run the `lsof` program to see which program
+that applies the 5000 port (Flask runs its server on `http://127.0.0.1:5000`,
+which means that it uses the 5000 port). Find the PID of the program
+that occupies the port and force abortion of that program:
+
+!bc sys
+Terminal> lsof -i :5000
+COMMAND   PID USER   FD   TYPE  DEVICE SIZE/OFF NODE NAME
+python  48824  hpl    3u  IPv4 1128848      0t0  TCP ...
+Terminal> kill -9 48824
+!ec
+You are now ready to restart a Flask application.

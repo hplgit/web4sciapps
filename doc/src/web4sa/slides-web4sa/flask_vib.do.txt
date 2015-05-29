@@ -1,0 +1,1148 @@
+
+!split
+======= Handling multiple input variables in Flask =======
+label{wf:vib:flask}
+
+The scientific hello world example shows how to work with one input
+variable and one output variable. We can easily derive an extensible
+recipe for apps with a collection of input variables and some
+associated HTML code as result. Multiple input variables are listed
+in the `InputForm` class using different types for different forms
+(text field, float field, integer field, check box field for boolean
+values, etc.).  The value of these variables will be available in a
+`form` object for computation. It is then a matter of setting
+up a template code where the various variables if the `form` object
+are formatted in HTML code as desired.
+
+Our sample web application
+addresses the task of plotting the function $u(t)=Ae^{-bt}\sin (wt)$ for
+$t\in [0,T]$. The web application must have fields for the numbers $A$,
+$b$, $w$, and $T$, and a *Compute* button, as shown in Figure
+ref{wf:vib1:flask:fig:input}. Filling in values, say $0.1$ for $b$ and
+$20$ for $T$, results in what we see in Figure ref{wf:vib1:flask:fig:result},
+i.e., a plot of $u(t)$ is added after the input fields and the *Compute*
+button.
+
+FIGURE: [fig-web4sa/vib1_flask_input, width=500] The input page. label{wf:vib1:flask:fig:input}
+
+FIGURE: [fig-web4sa/vib1_flask_output, width=700] The result page. label{wf:vib1:flask:fig:result}
+
+We shall make a series of different versions of this app:
+
+ o `vib1` for the basic set-up and illustration of tailoring the HTML code.
+ o `vib2` for custom validation of input, governed by the programmer,
+   and inlined graphics in the HTML code.
+ o `gen` for automatic generation of the Flask app (!).
+ o `login` for storing computed results in user accounts.
+
+===== Programming the Flask application =====
+label{wf:vib1:flask:app}
+
+## Define Mako variable for path to source code
+<%
+app_path = src_path + 'flask_apps/vib1'
+%>
+
+The forthcoming text explains the necessary steps to realize a
+Flask app that behaves as depicted in Figures ref{wf:vib1:flask:fig:input}
+and ref{wf:vib1:flask:fig:result}. We start with the
+`compute.py` module since it contains only the computation of $u(t)$
+and the making of the plot, without any interaction with Flask.
+
+The files associated with this app are found in the "`vib1`":
+"${github_path}/${app_path}" directory.
+
+=== The compute part ===
+
+More specifically, inside `compute.py`, we have a function for
+evaluating $u(t)$ and a `compute` function for making the plot. The
+return value of the latter is the name of the plot file, which should
+get a unique name every time the `compute` function is called such
+that the browser cannot reuse an already cached image when displaying
+the plot. Flask
+applications must have all extra files (CSS, images, etc.) in a
+subdirectory `static`.
+
+@@@CODE ${app_path}/compute.py
+
+idx{Flask!input forms}
+
+!bwarning Avoid file writing
+It is in general not a good idea to write plots to file or let a
+web app write to file. If this app is deployed at some web site and
+multiple users are running the app, the `os.remove` statements may remove
+plots created by all other users. However, the app is useful as a
+graphical user interface run locally on a machine.
+Later, we shall avoid writing plot files and instead
+store plots in strings and embed the strings
+in the `img` tag in the HTML code.
+!ewarning
+
+We organize the model, view, and controller as three separate
+files, as illustrated in
+Section ref{wf:hw3:flask}. This more complicated app involves
+more code and especially the model will soon be handy to isolate in its own
+file.
+
+=== The model ===
+
+Our first version of `model.py` reads
+
+@@@CODE ${app_path}/model.py
+
+As seen, the field classes can take a `label` argument for a longer
+description, here also including the units in which the variable is
+measured. It is also possible to add a `description` argument with
+some help message. Furthermore, we include a `default` value, which
+will appear in the text field such that the user does not need to
+fill in all values.
+
+idx{Flask!`index` function}
+
+
+=== The view ===
+
+The view component will of course make use of templates, and we shall experiment
+with different templates. Therefore, we allow a command-line argument
+to this Flask app for choosing which template we want. The rest of
+the `controller.py` file follows much the same set up as for the scientific
+hello world app:
+
+@@@CODE ${app_path}/controller.py
+
+=== The HTML template ===
+
+The details governing how the web page really looks like lie in the
+template file. Since we have several fields and want them nicely
+align in a tabular fashion, we place the field name, text areas,
+and labels inside an HTML table in our first attempt to write a
+template, `view_plain.html`:
+
+@@@CODE ${app_path}/templates/view_plain.html
+Observe how easy it is to iterate over the `form` object and grab data
+for each field: `field.name` is the name of the variable in the
+`InputForm` class, `field.label` is the full name with units as given
+through the `label` keyword when constructing the field object, and
+writing the field object itself generates the text area for
+input (i.e., the HTML input form). The control statements we can
+use in the template are part of the "Jinja2": "http://jinja.pocoo.org/docs/"
+templating language. For now, the if-test, for-loop and
+output of values (`{{ object }}`) are enough to generate the HTML
+code we want.
+
+Recall that the objects we need in the template, like `result` and `form`
+in the present case, are transferred to the template via keyword
+arguments to the `render_template` function. We can easily pass on
+any object in our application to the template. Debugging of the template
+is done by viewing the HTML source of the web page in the browser.
+
+You are encouraged to go to the `vib` directory,
+run `python controller.py`, and load
+
+!bc
+`http://127.0.0.1:5000/vib1`
+!ec
+into your web browser for testing.
+
+## Note that this split at the subsection level gives a bit strange
+## toc in sphinx: the subsection headings become the highest level
+## in the parts and enters the toc as section headings...
+
+!split
+===== Implementing error checking in the template =====
+
+idx{Flask!error checking}
+
+What happens if the user gives wrong input, for instance the letters `asd`
+instead of a number? Actually nothing! The `FloatField` object
+checks that the input is compatible with a real number in the
+`form.validate()` call, but returns just `False` if this is not
+the case. Looking at the code in `controller.py`,
+
+!bc pycod
+def index():
+    form = InputForm(request.form)
+    if request.method == 'POST' and form.validate():
+        result = compute(form.A.data, form.b.data,
+                         form.w.data, form.T.data)
+    else:
+        result = None
+!ec
+we realize that wrong input implies `result = None` and no computations
+and no plot! Fortunately, each field object gets an attribute `error`
+with information on errors that occur on input. We can write out
+this information on the web page, as exemplified in the template
+`view_errcheck.html`:
+
+@@@CODE ${app_path}/templates/view_errcheck.html
+Two things are worth noticing here:
+
+ o We can control the width of the text field where the
+   user writes the numbers, here set to 12 characters.
+ o We can make an extra column in the HTML table with a list
+   of possible errors for each field object.
+
+Let us test the error handling of the `A` field by
+writing `asd` instead of a number. This input
+triggers an error, whose message is written in red to the right of the label,
+see Figure ref{wf:vib1:flask:fig:error1}.
+
+FIGURE: [fig-web4sa/vib1_flask_error1, width=500] Error message because of wrong input. label{wf:vib1:flask:fig:error1}
+
+It is possible to use the additional HTML5 fields for input in a Flask
+context. Instead of explaining how here, we recommend to use the
+"Parampool": "https://github.com/hplgit/parampool"
+package to automatically generate Flask files with HTML5 fields.
+
+!split
+===== Using style sheets =====
+
+idx{Flask!CSS style sheets}
+
+Web developers make heavy use of CSS style sheets to control the look
+and feel of web pages. Templates can utilize style sheets as any other
+standard HTML code. Here is a very simple example where we introduce
+a class `name` for the HTML table's column with the field name and set the
+foreground color of the text in this column to blue.
+The style sheet is called `basic.css` and *must* reside in the
+`static` subdirectory of the Flask application directory. The content
+of `basic.css` is just the line
+
+@@@CODE ${app_path}/static/basic.css
+The `view_css.html` file using this style sheet features a `link` tag
+to the style sheet in the HTML header, and the column containing
+the field name has
+the HTML tag `<td class="name">` to trigger the specification in
+the style sheet:
+
+@@@CODE ${app_path}/templates/view_css.html fromto: @\{% if field\.errors
+Just run `python controller.py view_css` to see that the names
+of the variables to set in the web page are blue.
+
+!split
+===== Using LaTeX mathematics =====
+
+idx{Flask!LaTeX mathematics}
+
+Scientific applications frequently have many input data that are
+defined through mathematics and where the typesetting on the
+web page should be as close as possible to the typesetting where
+the mathematics is documented. In the present example we would like
+to typeset $A$, $b$, $w$, and $T$ with italic font as done
+in LaTeX. Fortunately, native LaTeX typesetting is available in
+HTML through the tool "MathJax": "http://www.mathjax.org/".
+Our template `view_tex.html` enables MathJax. Formulas are written
+with standard LaTeX inside `\(` and `\)`, while equations are surrounded
+by `$$`. Here we use formulas only:
+
+@@@CODE ${app_path}/templates/view_tex.html fromto: @\{% if field\.errors
+Figure ref{wf:vib1:flask:fig:latex} displays how the
+LaTeX rendering looks like in the browser.
+
+FIGURE: [fig-web4sa/vib1_flask_latex, width=650] LaTeX typesetting of mathematical symbols. label{wf:vib1:flask:fig:latex}
+
+!split
+===== Rearranging the elements in the HTML template =====
+
+Now we want to place the plot to the right of the input forms in
+the web page, see Figure ref{wf:vib1:flask:fig:sidebyside}. This can
+be accomplished by having an outer table with two rows. The first
+row contains the table with the input forms in the first column and
+the plot in the second column, while the second row features the
+*Compute* button in the first column.
+
+FIGURE: [fig-web4sa/vib1_flask_table2, width=700] New design with input and output side by side. label{wf:vib1:flask:fig:sidebyside}
+
+The enabling template file is `view_table.html`:
+
+@@@CODE ${app_path}/templates/view_table.html
+
+!split
+===== Bootstrap HTML style =====
+
+The "Bootstrap": "http://getbootstrap.com/" framework for creating web pages
+has been very popular in recent years, both because of the design and
+the automatic support for responsive pages on all sorts of devices.
+Bootstrap can easily be used in combination with Flask. The template file
+`view_bootstrap.html` is identical to the former `view_table.html`,
+except that we load the Bootstrap CSS file and include in comments
+how to add the typical navigation bar found in many Bootstrap-based
+web pages. Moreover, we use the grid layout functionality of Bootstrap
+to control the placement of elements (name, input field, label,
+and error message) in the input form.
+
+The template looks like
+
+@@@CODE ${app_path}/templates/view_bootstrap.html
+The input fields and fonts now get the typical Bootstrap look and feel:
+
+FIGURE: [fig-web4sa/vib1_flask_bootstrap, width=800 frac=0.9]
+
+The only special feature in this template is the need to pass a CSS
+class `form-control` to the field object in the part that defines
+the input field. We also use the standard `input-group-addon` style
+in the name part of the Bootstrap form. A heading *Damped sine wave* was
+added to demonstrate the Bootstrap fonts.
+
+It is easy to switch to other Bootstrap styles, e.g., those in the
+"Bootswatch family": "http:bootswatch.com":
+
+!bc htmlcod
+<link href=
+"http://netdna.bootstrapcdn.com/bootswatch/3.1.1/X/bootstrap.min.css"
+rel="stylesheet">
+!ec
+where `X` can be `journal`, `cosmo`, `flatly`, and other legal
+Bootswatch styles. The journal style looks like this:
+
+FIGURE: [fig-web4sa/vib1_flask_bootswatch_journal, width=800 frac=0.9]
+
+While `view_bootstrap.html` makes use of plain Bootstrap HTML code, there is
+also a higher-level framework, called "Flask-Bootstrap": "http://pythonhosted.org/Flask-Bootstrap/" that combines Flask and Bootstrap. Installation of
+this extension is done by `sudo pip install flask-bootstrap`.
+
+After `app = Flask(__name__)` we need to do
+
+!bc pycod
+from flask_bootstrap import Bootstrap
+Bootstrap(app)
+!ec
+
+The template employs new keywords `extends` and `block`:
+
+@@@CODE ${app_path}/templates/view_flask_bootstrap.html
+It is important to have the MathJax script declaration and all styles within
+`{% block styles %}`.
+
+It seems easier to apply plain Bootstrap HTML code than the
+functionality in the Flask-Bootstrap layer.
+
+!split
+===== Custom validation =====
+label{wf:vib1:flask:validation}
+
+## Define Mako variable for path to source code
+<%
+app_path = src_path + 'flask_apps/vib2'
+%>
+
+idx{Flask!input validation}
+
+
+The `FloatField` objects can check that the input is compatible with
+a number, but what if we want to control that $A>0$, $b>0$, and
+$T$ is not greater than 30 periods (otherwise the plot gets cluttered)?
+We can write functions for checking appropriate conditions and
+supply the function to the list of validator functions in the call to
+the `FloatField` constructor or other field constructors. The extra
+code is a part of the `model.py` and the presented extensions appear
+in the directory "`vib2`": "${github_path}/${app_path}".
+
+=== Using Flask validators ===
+
+The simplest approach to validation is to use existing functionality
+in the web framework. Checking that $A>0$ can be done by
+the `NumberRange` validator which checks that the value is inside
+a prescribed interval:
+
+!bc pycod
+from wtforms import Form, FloatField, validators
+
+class InputForm(Form):
+    A = FloatField(
+        label='amplitude (m)', default=1.0,
+        validators=[validators.NumberRange(0, 1E+20)])
+!ec
+
+=== Tailored validation ===
+
+We can also easily provide our own more tailored validators.
+As an example, let us explain how we can check that $T$ is less than 30 periods.
+One period is $2\pi /w$ so we need to check if $T> 30\cdot 2\pi/w$
+and raise an exception in that case.
+A validation function takes two arguments: the whole `form` and the
+specific `field` to test:
+
+@@@CODE ${app_path}/model.py fromto: def check_T@def check_interval
+The appropriate exception is of type `validators.ValidationError`.
+Observe that through `form` we have in fact access to all the input
+data so we can easily use the value of $w$ when checking the validity
+of the value of $T$. The `check_T` function is easy to
+add to the list of validator functions in the call to the `FloatField`
+constructor for `T`:
+
+!bc pycod
+class InputForm(Form):
+    ...
+    T = FloatField(
+        label='time interval', default=6*pi,
+        validators=[validators.InputRequired(), check_T])
+!ec
+The validator
+objects are tested one by one as they appear in the list, and if
+one fails, the others are not invoked.
+We therefore add `check_T` after the check of input such that we know we
+have a value for all data when we run the computations and test
+in `check_T`.
+
+=== Tailored validation of intervals ===
+
+Although there is already a `NumberRange` validator for checking
+whether a value is inside an interval, we can write our own
+version with some improved functionality for open intervals where
+the maximum or minimum value can be infinite.
+The infinite value can on input be represented by `None`.
+A general such function may take the form
+
+@@@CODE ${app_path}/model.py fromto: def check_interval@def interval
+
+idx{`functools`}
+
+The problem is that `check_interval` takes four arguments, not only
+the `form` and `field` arguments that a validator function in the
+Flask framework can accept.
+The way out of this difficulty is to use a Python tool `functools.partial`
+which allows us to call a function with some of the arguments set beforehand.
+Here, we want to create a new function that calls `check_interval`
+with some prescribed values of `min_value` and `max_value`.
+This function looks like it does not have these arguments, only
+`form` and `field`. The following function produces this function, which we
+can use as a valid Flask validator function:
+
+!bc pycod
+import functools
+
+def interval(min_value=None, max_value=None):
+    return functools.partial(
+        check_interval, min_value=min_value, max_value=max_value)
+!ec
+We can now in any field constructor just add
+`interval(a, b)` as a validator function, here checking that $b\in [0,\infty)$:
+
+!bc pycod
+class InputForm(Form):
+    ...
+    b = FloatField(
+        label='damping factor (kg/s)', default=0,
+        validators=[validators.InputRequired(), interval(0,None)])
+!ec
+
+=== Demo ===
+
+Let us test our tailored error checking. Run `python controller.py`
+in the `vib2` directory and fill in $-1.0$ in the $b$ field.
+Pressing *Compute* invokes our `interval(0,None)` function, which
+is nothing but a call to `check_interval` with the
+arguments `field`, `form`, `0`, and `None`.
+Inside this function,
+the test `if field.data < min_value` becomes true, `failure`
+is set, and the exception is raised. The message in the exception
+is available in the `field.errors` attribute so our template
+will write it out in red, see Figure ref{wf:vib2:flask:fig:error1}.
+The template used in `vib2` is basically the same as `view_tex.html`
+in `vib1`, i.e., it feaures LaTeX mathematics and checking of
+`field.errors`.
+
+FIGURE: [fig-web4sa/vib2_flask_error1, width=500] Triggering of a user-defined error check. label{wf:vib2:flask:fig:error1}
+
+Finally, we mention a detail in the `controller.py` file in the `vib2`
+app: instead of sending `form.var.data` to the `compute` function we
+may automatically generate a set of local variables such that the
+application of data from the web page, here in the `compute` call, looks nicer:
+
+@@@CODE ${app_path}/controller.py fromto: def index@
+The idea is just to run `exec` on a declaration of a local variable
+with name `field.name` for each field in the form. This trick is often
+neat if web variables are buried in objects (`form.T.data`) and you want these
+variables in your
+code to look like they do in mathematical writing (`T` for $T$).
+
+
+!split
+===== Avoiding plot files =====
+label{wf:vib2:flask:nofiles}
+
+Files with plots are easy to deal with as long as they are in the
+`static` subdirectory of the Flask application directory. However,
+as already pointed out, the previous `vib1` app, which writes plot
+files, is not suited for multiple simultaneous users since every
+user will destroy *all* existing plot files before making a new
+one. Therefore, we need a robust solution for multiple users of
+the app.
+
+The idea is to not write plot files, but instead return the plot
+as a string and embed that string directly in the HTML code.
+This is relatively straightforward with Matplotlib
+and Python. The relevant code is found in the `compute.py` file
+of the `vib2` app.
+
+idx{inline PNG image in HTML}
+idx{`BytesIO` objects}
+idx{file-like string objects (`BytesIO`)}
+idx{strings as files (`BytesIO`)}
+idx{base64 encoding of PNG images}
+
+=== PNG plots ===
+
+Python has the `io.StringIO` object for writing text to a
+string buffer with the same syntax as used for writing text to
+files. For binary streams, such as PNG files, one can use
+a similar object, `io.BytesIO`, to hold the stream (i.e., the plot file)
+in memory. The idea is to let Matplotlib write to
+a `io.BytesIO` object and afterwards extract the
+series of bytes in the plot file from this object and embed it in
+the HTML file directly. This approach avoids storing plots in separate
+files, at the cost of bigger HTML files.
+
+The first step is to let Matplotlib write the PNG data to
+the `BytesIO` buffer:
+
+!bc pycod
+import matplotlib.pyplot as plot
+from io import BytesIO
+# run plt.plot, plt.title, etc.
+figfile = BytesIO()
+plt.savefig(figfile, format='png')
+figfile.seek(0)  # rewind to beginning of file
+figdata_png = figfile.getvalue()  # extract string (stream of bytes)
+!ec
+Before the PNG data can be embedded in HTML we need to convert the
+data to base64 format:
+
+!bc pycod
+import base64
+figdata_png = base64.b64encode(figdata_png)
+!ec
+Now we can embed the PNG data in HTML by
+
+!bc pycod
+<img src="data:image/png;base64,PLOTSTR" width="500">
+!ec
+where `PLOTSTR` is the content of the string `figdata_png`.
+
+The complete `compute.py` function takes the form
+
+@@@CODE ${app_path}/compute.py fromto: def compute\(@def compute_png
+
+The relevant syntax in an HTML template is
+
+!bc htmlcod
+<img src="data:image/png;base64,{{ results }}" width="500">
+!ec
+if `results` holds the returned object from the `compute` function above.
+
+idx{inline SVG figure in HTML}
+
+=== SVG plots ===
+
+Inline figures in HTML, instead of using files, are most often realized
+by XML code with the figure data in SVG format.
+Plot strings in the SVG format are created very similarly to the PNG
+example:
+
+!bc pycod
+figfile = BytesIO()
+plt.savefig(figfile, format='svg')
+figdata_svg = figfile.getvalue()
+!ec
+The `figdata_svg` string contains XML code text can almost
+be directly embedded in
+HTML5. However, the beginning of the text contains information before
+the `svg` tag that we want to remove:
+
+!bc dat
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Created with matplotlib (http://matplotlib.sourceforge.net/) -->
+<svg height="441pt" version="1.1" viewBox="0 0 585 441" ...
+!ec
+The removal is done with a little string manipulation:
+
+!bc pycod
+figdata_svg = '<svg' + figfile.getvalue().split('<svg')[1]
+!ec
+Now, `figdata_svg` can be directly inserted in HTML code without
+any surrounding tags (because it is perfectly valid HTML code in itself).
+
+The SVG code generated by Matplotlib may contain UTF-8 characters
+so it is necessary to make a unicode string out of the text:
+`unicode(figdata_svg, 'utf-8')`, otherwise the HTML template will
+lead to an encoding exception.
+
+We have made an alternative compute function `compute_png_svg`
+that returns both a PNG and an SVG plot:
+
+!bc pycod
+def compute_png_svg(A, b, w, T, resolution=500):
+    ...
+    figfile = BytesIO()
+    plt.savefig(figfile, format='svg')
+    figfile.seek(0)
+    figdata_svg = '<svg' + figfile.getvalue().split('<svg')[1]
+    figdata_svg = unicode(figdata_svg, 'utf-8')
+    return figdata_png, figdata_svg
+!ec
+
+idx{`safe`, as in `object|safe`}
+
+The relevant syntax for inserting an SVG plot in the HTML template is now
+
+!bc htmlcod
+{{ result[1]|safe }}
+!ec
+The use of `safe` is essential here.
+
+!bnotice Important: use `safe` for verbatim HTML code:
+Special HTML characters like `<`, `>`,
+`&`, `"`, and `'` are escaped in a template string like `{{ str }}`
+(i.e., `&` is replaced by `&amp;` `<` is replaced by `&lt;`, etc.).
+We need to avoid this manipulation of the string content
+because `result[1]` contains
+XML code where the mentioned characters are essential part of the syntax.
+Writing `{{str|safe}}` ensures that the contents of the string `str`
+are not altered before being embedded in the HTML text.
+!enotice
+
+An alternative template, `view_svg.html` applies the SVG plot instead
+of the PNG plot. We use the command-line argument `svg` for indicating
+that we want an SVG instead of a PNG plot:
+
+@@@CODE ${app_path}/controller.py fromto: # SVG@app = Flask
+
+
+!split
+===== Autogenerating the code =====
+label{wf:autogen:flask}
+
+## Define Mako variable for path to source code
+<%
+app_path = src_path + 'flask_apps/gen'
+%>
+
+idx{`getattr`} idx{`setattr`} idx{`hasattr`}
+
+We shall now present generic `model.py` and `controller.py`
+files that work with *any* `compute` function (!). This example will
+demonstrate some advanced, powerful features of Python. The source code
+is found in the "`gen`": "${github_path}/${app_path}"
+directory.
+
+=== Inspecting function signatures ===
+
+The basic idea is that the Python module `inspect` can be used to
+retrieve the names of the arguments and the default values of
+keyword arguments of *any* given `compute` function. Say we have some
+
+!bc pycod
+def mycompute(A, m=0, s=1, w=1, x_range=[-3,3]):
+    ...
+    return result
+!ec
+Running
+
+!bc pycod
+import inspect
+arg_names = inspect.getargspec(mycompute).args
+defaults  = inspect.getargspec(mycompute).defaults
+!ec
+leads to
+
+!bc pycod
+arg_names = ['A', 'm', 's', 'w', 'x_range']
+defaults = (0, 1, 1, [-3, 3])
+!ec
+We have all the argument names in `arg_names` and
+`defaults[i]` is the default value of keyword argument
+`arg_names[j]`, where `j = len(arg_names) - len(defaults) + i`.
+
+=== Generating the model ===
+
+Knowing the name `name` of some argument in the `compute`
+function, we can make the corresponding class attribute
+in the `InputForm` class by
+
+!bc pycod
+setattr(InputForm, name, FloatForm())
+!ec
+For name equal to `'A'` this is the same as hardcoding
+
+!bc pycod
+class InputForm:
+    A = FloatForm()
+!ec
+Assuming that all arguments in `compute` are floats, we could
+do
+
+!bc pycod
+class InputForm:
+    pass  # Empty class
+
+arg_names = inspect.getargspec(mycompute).args
+for name in arg_names:
+    setattr(InputForm, name, FloatForm())
+!ec
+However, we can do better than this: for
+keyword arguments the type of the default value can be used to
+select the appropriate form class. The complete `model.py` file
+then goes as follows:
+
+@@@CODE ${app_path}/model.py
+(The `compute_gamma` function imported from `compute` is the
+only application-specific statement in this code and will be explained later.)
+
+=== Generating the view ===
+
+The call to `compute` in the `controller.py` file must also be expressed
+in a general way such that the call handles any type and number of
+parameters. This can be done in two ways, using either positional
+or keyword arguments.
+
+The technique with positional arguments
+is explained first. It consists of collecting all parameters in
+a list or tuple, called `args`, and then calling `compute(*args)`
+(which is equivalent to `compute(args[0], args[1], ..., args[n])`
+if `n` is `len(args)-1`). The elements of `args` are the values of the
+form variables. We know the name of a form variable as a string
+`name` (from `arg_names`), and if `form` is the form object,
+the construction `getattr(form, name).data` extracts the value
+that the user provided (`getattr(obj, attr)` gets the attribute, with name
+available as a string in `attr`, in the object `obj`).
+For exampe, if `name` is `'A'`, `getattr(form, name).data` is the same as
+`form.A.data`.
+Collecting all form variables, placing them in a list,
+and calling `compute` are done with
+
+!bc pycod
+arg_names = inspect.getargspec(compute).args
+args = [getattr(form, name).data for name in arg_names]
+result = compute(*args)
+!ec
+Our `InputForm` class guarantees that all arguments in `compute`
+are present in the form, but to be absolutely safe we can
+test if `name` is present in the `form` object:
+
+!bc pycod
+args = [getattr(form, name).data for name in arg_names
+        if hasattr(form, name)]
+!ec
+
+A potential problem with the `args` list is that the values might
+be in wrong order. It appears, fortunately, that the order we
+assign attributes to the form class is preserved when iterating over
+the form. Nevertheless, using keyword arguments instead of positional
+arguments provides a completely safe solution to calling `compute`
+with the correct arguments. Keyword arguments are placed in a
+dictionary `kwargs` and `compute` is called as `compute(**kwargs)`.
+The generic solution is
+
+!bc pycod
+kwargs = {name: getattr(form, name).data for name in arg_names
+          if hasattr(form, name)}
+result = compute(**kwargs)
+!ec
+The `compute(**kwargs)` call is equivalent to `compute(A=1, b=3, w=0.5)`
+in case `kwargs = {'w'=0.5, 'A':1, 'b':3}` (recall that the order of
+the keys in a Python dictionary is undetermined).
+
+=== Generating the template ===
+
+It remains to generate the right HTML template. The HTML code depends
+on what the returned `result` object from `compute` contains. Only a
+human who has read the `compute` code knows the details of the returned
+result. Therefore, we leave it to a human to provide the part
+of the HTML template that renders the result. The file `templates/view_results.html` contains this human-provided code, while `templates/view.html`
+is a completely generic template for the forms:
+
+@@@CODE ${app_path}/templates/view.html
+At the end of this code, an HTML text `result` (string) is to be
+inserted.  This text is typically generated by calling Flask's
+`render_template` function, which uses `templates/view_results.html`
+to turn the return object `result` from the compute function into the
+desired HTML code:
+
+!bc pycod
+def index():
+    ...
+    if result:
+        result = render_template('view_results.html', result=result)
+        # result is now rendered HTML text
+    return render_template('view.html', form=form, result=result)
+!ec
+
+!bnotice
+A perhaps simpler alternative would be to have a generic
+`view_forms.html` file and a user-specific
+`view_results.html` and explicitly combining them into a new
+file. This requires file writing by the app, which one normally
+wants to avoid. Especially if the web app gets multiple users,
+the file writing may lead to corrupt files.
+!enotice
+
+The complete, generic form of the `index` function becomes
+
+@@@CODE ${app_path}/controller.py fromto: def index@
+
+=== Application ===
+
+Let us apply the files above to plot the gamma probability density function
+
+!bt
+\[ g(x; a, h, A) = \frac{|h|}{\Gamma(a)A}\left(\frac{x}{A}\right)^{ah-1}
+e^{-\left(\frac{x}{A}\right)^h},
+\]
+!et
+and its cumulative density
+
+!bt
+\[ G(x; a, h, A) = \int_0^x g(\tau; a, h, A)d\tau,\]
+!et
+computed by numerically the Trapezoidal rule, for instance.
+We also want to compute and display
+the mean value $A\Gamma(a + 1/h)/\Gamma(a)$ and
+standard deviation
+
+!bt
+\[ \sigma = \frac{A}{\Gamma(a)}\sqrt{\Gamma(a + 2/h)\Gamma(a) - \Gamma(a+1/h)^2}.\]
+!et
+Here, $\Gamma(a)$ is the gamma function, which can be computed
+by `math.gamma(a)` in Python.
+Below is a `compute.py` file with the
+relevant implementations of $g(x;a,h,A)$ (`gamma_density`),
+$G(x; a, h, A)$ (`gamma_cumulative`), and a function `compute_gamma` for
+making a plot of $g$ og $G$ for $x\in [0,7\sigma]$.
+
+@@@CODE ${app_path}/compute.py fromto: def gamma_density@
+The `compute_gamma` function returns a tuple of six values.
+We want output as displayed in Figure ref{wf:gen:flask:fig:gamma}.
+
+FIGURE: [fig-web4sa/gen_flask_gamma, width=700] Design of a web page illustrating the gamma probability functions. label{wf:gen:flask:fig:gamma}
+
+The design is realized in the file `view_results.html` shown below.
+
+@@@CODE ${app_path}/templates/view_results.html
+
+To create the web application, we just perform the following steps:
+
+ o copy the generic `controller.py` and `model.py` files to a new directory
+ o write the compute function in a file `compute.py`
+ o edit `controller.py` and `model.py` to use the right name of the
+   compute function (`from compute import name as compute`)
+ o add an appropriate `templates/view_forms.html` file that visualizes
+   the returned value `results` from the compute function
+
+
+!split
+===== User login and storage of computed results =====
+label{wf:flask:login}
+
+## Define Mako variable for path to source code
+<%
+app_path = src_path + 'flask_apps/login'
+%>
+
+idx{Flask!login}
+idx{Flask!database}
+
+We now want to make an app where the computed results can be stored in
+a database. To this end, each user must create an account and login to
+this account for archiving results and for browsing previous runs of
+the application. More files are needed for this purpose, compared to
+the previous apps, and the files are located in the "`login`":
+"${github_path}/${app_path}" directory.
+
+=== Required additional software ===
+
+Three more packages are needed for this more advanced application:
+
+ * "Flask-Login": "https://flask-login.readthedocs.org/en/latest/"
+ * "Flask-SQLAlchemy": "http://flask.pocoo.org/docs/0.10/patterns/sqlalchemy/"
+ * "Flask-Mail": "http://packages.python.org/Flask-Mail"
+
+Installation is done by
+
+!bc sys
+sudo pip install --upgrade flask-login
+sudo pip install --upgrade flask-sqlalchemy
+sudo pip install --upgrade flask-mail
+!ec
+
+=== The compute part ===
+
+The `compute.py` file contains the `compute`
+function from the `vib2` app in Section ref{wf:vib2:flask:nofiles}.
+
+There is quite much Flask code required for user accounts and login.
+The files here were generated by the Parampool package and then
+edited and specialized to the present application. In general,
+it is not recommended to hack further on the example given here,
+but rather utilize Parampool to generate web apps with user accounts
+and login.
+
+=== The interfaces of the app ===
+
+The first page after starting the app (`python controller.py`)
+shows input fields for the numerical parameters, but there are also
+links to the right for registering a new user or logging in to an
+existing account:
+
+FIGURE: [fig-web4sa/login_main, width=700 frac=1.0]
+
+Clicking on *Register* brings up a registration page:
+
+FIGURE: [fig-web4sa/login_register, width=700 frac=1.0]
+
+Already registered users can just log in:
+
+FIGURE: [fig-web4sa/login_login, width=700 frac=1.0]
+
+Then the fields with input parameters are shown again. After pressing
+*Compute* we are left with a combination of input and results, plus
+a field where the user can write a comment about this simulation:
+
+FIGURE: [fig-web4sa/login_results, width=700 frac=1.0]
+
+All simulations (input data, results, and comment) are stored in
+a database. Clicking on *Previous simulation* brings us to an
+overview of what is in the database:
+
+FIGURE: [fig-web4sa/login_old, width=500 frac=0.7]
+
+Here, one can browse previous results, remove entries, or erase the
+whole database.
+
+
+=== The source code ===
+
+Rather than explaining everything about the source code
+in detail, we primarily list
+the various code files below. A starting point is the central `controller.py`
+file, which is now quite lengthy and involves four different
+URLs (the input page, the login page, the registration page, and the
+previous results page).
+
+@@@CODE ${app_path}/controller.py
+
+# We need to copy the app code since it contains the password to
+# an existing gmail account.
+
+Creation of the `app` object is put in a separate file `app.py`:
+
+!bc pycod
+import os
+from flask import Flask
+
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///sqlite.db'
+app.secret_key = os.urandom(24)
+
+# Email settings
+import base64
+app.config.update(
+        MAIL_SERVER='smtp.gmail.com',
+        MAIL_PORT=587,
+        MAIL_USE_TLS=True,
+        MAIL_USERNAME = 'cbcwebsolvermail@gmail.com',
+        MAIL_PASSWORD = base64.decodestring('WGlmZmljdox0UFch'),
+        MAIL_DEFAULT_SENDER = 'Some name <name@gmail.com>'
+        )
+!ec
+
+The forms for the compute function and for the login is
+stored in a file called `forms.py`:
+
+@@@CODE ${app_path}/forms.py
+
+Database-related code for the SQLAlchemy database is collected in
+`db_models.py`:
+
+@@@CODE ${app_path}/db_models.py
+
+Finally, we need views. For the results of the computation we have
+a `view.html` file that is very similar to `view_table.html`
+in the `vib1` app:
+
+@@@CODE ${app_path}/templates/view.html
+
+The `login.html` template for the login page takes the form
+
+@@@CODE ${app_path}/templates/login.html
+
+The page for registering a new user has a simple template `reg.html`:
+
+@@@CODE ${app_path}/templates/reg.html
+
+The final file is `old.html` for retrieving old simulations:
+
+@@@CODE ${app_path}/templates/old.html
+
+!bwarning
+ * Sending email from the app does not work.
+ * Storing comments does not work.
+!ewarning
+
+[hpl: Check if an autogenerated app from `_generate_app.py` can send
+mail and store comments. Need a `compute` function that returns
+full HTML text then.]
+
+
+=== Resources ===
+
+Working with a database in Flask is described here:
+
+ * URL: "http://pythonhosted.org/Flask-SQLAlchemy/quickstart.html",
+ * URL: "http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-iv-database",
+ * "The Flask login extension": "https://flask-login.readthedocs.org/en/latest/"
+
+
+# #ifdef OLD
+!split
+===== Project: Using Bootstrap styles =====
+label{wf:vib1:flask:bootstrap}
+
+## Define Mako variable for path to source code
+<%
+app_path = src_path + 'flask_apps/vib6'
+%>
+
+idx{Flask!bootstrap style}
+
+The design and layout of the graphical web interface is completely
+governed by template file. So far, we have used only basic HTML
+elements in this file. With CSS it is possible to improve the
+design, but why not adopt popular frameworks that offer an attractive
+look-and-feel and much nice functionality such as responsive pages
+across a wide range of devices? The "Bootstrap": "http://getbootstrap.com/"
+framework is free and open software that gives developers a kick start
+with respect to web page design and functionality.
+Many designs are built on Bootstrap: "Bootswatch": "http:bootswatch.com",
+"Start Bootstrap": "http://startbootstrap.com/",
+"Bootstrap Zero": "http://bootstrapzero.com/", and "PrepBootstrap":
+"http://www.prepbootstrap.com/".
+
+It would obviously be advantageous to create Flask templates that
+can utilize the Bootstrap technology. A package "Flask-Bootstrap":
+"http://pythonhosted.org/Flask-Bootstrap/"
+is already supporting this idea.
+
+!bnotice Project
+  * Test out the Flask-Bootstrap package by redoing a selection
+    of the previous examples with the Bootstrap design and functionality.
+  * How easy is it to take advantage of various Bootstrap designs,
+    say the Bootswatch themes, in a template based on Flask-Bootstrap?
+  * Make a new GUI[^app] with different types of input fields and see how
+    the design looks like in Bootstrap-based themes:
+     * one selection from a list (radio buttons, drop-down list)
+     * multiple selections from a list (check buttons)
+     * one-line text field
+     * multi-line text field
+     * floating-point number
+     * integer
+!enotice
+
+
+[^app]: The compute function can be very simple, e.g., just returning some HTML
+typesetting of the arguments. This subexercise is for test purposes
+only.
+
+# http://pythonhosted.org/Flask-Bootstrap/basic-usage.html
+
+#Not yet written. Must be based on
+#URL: "http://pythonhosted.org/Flask-Bootstrap/basic-usage.html".
+
+
+!split
+======= Further work =======
+
+ * Uploading of files: Just one button for a data file where we
+   compute mean and variance, see the average function but drop
+   the array argument.
+ * Log in and users. use a simple "compute" function to generate
+   code, just a textarea (string) that can be stored (diary).
+   This requires databases. Can generate a vib example via parampool to
+   display some more realistic code.
+ * Drawing in HTML5
+# #endif
+
+
+!split
+===== Uploading of files =====
+label{wf:flask:upload}
+
+## Define Mako variable for path to source code
+<%
+app_path = src_path + 'flask_apps/upload'
+%>
+
+idx{Flask!uploading of files}
+idx{Flask!file upload}
+
+=== Overview of the application ===
+
+Many user interfaces need the user to provide data files. A minimalistic
+application is to have a button for uploading a single file.
+As example we use a file with a series of numbers, and the application's
+purpose is to compute the mean and standard deviation of the numbers.
+The first user interface just has the *Choose File* and *Compute* buttons:
+
+FIGURE: [fig-web4sa/upload1, width=550 frac=0.7]
+
+Clicking on *Choose File* brings up a file browser where the user can
+choose the file to uploaded to the application. Say this is a file
+`testfile.dat`. The interface now looks like
+
+FIGURE: [fig-web4sa/upload2, width=550 frac=0.7]
+
+Pressing thereafter *Compute* leads to storage of
+`testfile.dat` on the server in a subdirectory `uploads` and
+computation of basic statistics of the numbers in the file.
+The resulting output looks like
+
+FIGURE: [fig-web4sa/upload3, width=550 frac=0.7]
+
+The text ``No file chosen'' is automatically displayed by the
+widget object used for file upload and indicates that a new
+file can be chosen. Below we shall present all parts of the code
+needed to create this interactive application.
+
+=== The model class ===
+
+The widget `FieldField` is used for an input field with a *Choose File*
+button:
+
+@@@CODE ${app_path}/model.py
+
+=== The controller file ===
+
+The controller file needs some special code to specify a directory
+to store uploaded files. We also include some code to check that
+the file has a name with the right extension.
+
+@@@CODE ${app_path}/controller.py fromto: # Relative path of@# Path to the web
+
+The `index` function must have code for saving the file, and as usual,
+calling the compute function and rendering a new page:
+
+@@@CODE ${app_path}/controller.py fromto: def index@if __name
+
+=== The compute function ===
+
+We assume that the uploaded file is available in the `uploads`
+subdirectory, so the compute function needs to open this file, read
+the numbers, and compute statistics. The file reading and computations
+are easily done by `numpy` functions. The results are presented in
+an HTML table.
+
+@@@CODE ${app_path}/compute.py
+
+=== The HTML template ===
+
+Although the present minimalistic application only needs a very simple
+HTML template, we reuse a quite generic template known from previous examples,
+where the input variables are listed to the left and the output of the
+compute function is presented to the right. Such a template looks like
+
+@@@CODE ${app_path}/templates/view.html
+
+The complete set of files is found in the "`upload`":
+"${github_path}/${app_path}" directory.
