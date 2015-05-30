@@ -25,7 +25,15 @@
  * "How to Structure Large Flask Applications": "https://www.digitalocean.com/community/tutorials/how-to-structure-large-flask-applications"
  * "Explore Flask": "https://exploreflask.com/index.html" by R. Picard (online book)
  * "Flask Mega Tutorial for Data Scientists": "http://www.datacommunitydc.org/blog/2014/02/flask-mega-meta-tutorial-data-scientists"
+ * "Quick Flask++ tutorial": "http://maximebf.com/blog/2012/10/building-websites-in-python-with-flask/#.UxV4jHVdXn4"
+ * "Flask-Bootstrap": "https://github.com/mbr/flask-bootstrap" with "documentation": "http://pythonhosted.org/Flask-Bootstrap/", "basic usage": "http://pythonhosted.org/Flask-Bootstrap/basic-usage.html" and "example": "https://github.com/mbr/flask-bootstrap/blob/master/sample_application/__init__.py"
+ * "Skulpt: Interactive Python in the browser": "http://www.skulpt.org/" (but no support for `numpy`, `scipy`, or `matplotlib`)
 
+# #if INTERESTING_BUT_NOT_RELEVANT
+ * "A complete modern Python project with virtualenv, testing, setup.py, etc.": "https://github.com/splaice/py-bootstrap"
+ * "Python for computer games": "http://inventwithpython.com/"
+ * "Flask and Boostrap intro": "http://pythonthusiast.pythonblogs.com/230_pythonthusiast/archive/1309_building_in_openshift_part_iv__application_layout_and_templating_using_bootstrap_3_and_jinja_2.html" ("sample app": "http://bio-ekowibowo.rhcloud.com/" has sign in functionality and bootstrap layout explained "here": "http://pythonthusiast.pythonblogs.com/230_pythonthusiast/archive/1317_building_python_flask_application_in_openshiftheroku_replacement_part_vii__adding_sign_in_form_using_bootstrap_3_and_login_feature_using_flask-login.html")
+# #endif
 # #endif
 
 # #if TOPIC in ('Flask+Django', 'Django')
