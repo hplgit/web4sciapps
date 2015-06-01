@@ -7,7 +7,7 @@ Automatically generated HTML file from DocOnce source
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Using Web Frameworks for Scientific Applications">
-<meta name="keywords" content="web frameworks,MVC pattern,Flask installation,Flask input forms,Flask HTML templates,Flask MVC pattern,Flask troubleshooting,Django installation,Django making a project,Django making an application,Django input forms,Django HTML templates,Flask input forms,Flask error checking,Flask CSS style sheets,Flask LaTeX mathematics,Flask input validation,inline PNG image in HTML,base64 encoding of PNG images,inline SVG figure in HTML,Flask login,Flask database,Flask uploading of files,Flask file upload,Django input forms,Django input validation">
+<meta name="keywords" content="web frameworks,MVC pattern,Flask installation,Flask input forms,Flask HTML templates,Flask MVC pattern,Flask troubleshooting,Django installation,Django making a project,Django making an application,Django input forms,Django HTML templates,Flask input forms,Flask error checking,Flask CSS style sheets,Flask LaTeX mathematics,Flask input validation,inline PNG image in HTML,base64 encoding of PNG images,inline SVG figure in HTML,Flask Bokeh plotting,Bokeh plotting,Flask login,Flask database,Flask uploading of files,Flask file upload,Django input forms,Django input validation">
 
 <title>Using Web Frameworks for Scientific Applications</title>
 
@@ -135,46 +135,50 @@ div { text-align: justify; text-justify: inter-word; }
                'wf:vib2:flask:nofiles'),
               (' PNG plots ', 3, None, '___sec42'),
               (' SVG plots ', 3, None, '___sec43'),
+              (' Plotting with the Bokeh library ',
+               2,
+               'wf:bokeh:flask',
+               'wf:bokeh:flask'),
               (' Autogenerating the code ',
                2,
                'wf:autogen:flask',
                'wf:autogen:flask'),
-              (' Inspecting function signatures ', 3, None, '___sec45'),
-              (' Generating the model ', 3, None, '___sec46'),
-              (' Generating the view ', 3, None, '___sec47'),
-              (' Generating the template ', 3, None, '___sec48'),
-              (' Application ', 3, None, '___sec49'),
+              (' Inspecting function signatures ', 3, None, '___sec46'),
+              (' Generating the model ', 3, None, '___sec47'),
+              (' Generating the view ', 3, None, '___sec48'),
+              (' Generating the template ', 3, None, '___sec49'),
+              (' Application ', 3, None, '___sec50'),
               (' User login and storage of computed results ',
                2,
                'wf:flask:login',
                'wf:flask:login'),
-              (' Required additional software ', 3, None, '___sec51'),
-              (' The compute part ', 3, None, '___sec52'),
-              (' The interfaces of the app ', 3, None, '___sec53'),
-              (' The source code ', 3, None, '___sec54'),
-              (' Resources ', 3, None, '___sec55'),
+              (' Required additional software ', 3, None, '___sec52'),
+              (' The compute part ', 3, None, '___sec53'),
+              (' The interfaces of the app ', 3, None, '___sec54'),
+              (' The source code ', 3, None, '___sec55'),
+              (' Resources ', 3, None, '___sec56'),
               (' Uploading of files ',
                2,
                'wf:flask:upload',
                'wf:flask:upload'),
-              (' Overview of the application ', 3, None, '___sec57'),
-              (' The model class ', 3, None, '___sec58'),
-              (' The controller file ', 3, None, '___sec59'),
-              (' The compute function ', 3, None, '___sec60'),
-              (' The HTML template ', 3, None, '___sec61'),
+              (' Overview of the application ', 3, None, '___sec58'),
+              (' The model class ', 3, None, '___sec59'),
+              (' The controller file ', 3, None, '___sec60'),
+              (' The compute function ', 3, None, '___sec61'),
+              (' The HTML template ', 3, None, '___sec62'),
               (' Handling multiple input variables in Django ',
                1,
                'wf:vib:django',
                'wf:vib:django'),
-              (' Programming the Django application ', 2, None, '___sec63'),
-              (' Adding the app to a project ', 3, None, '___sec64'),
-              (' The compute part ', 3, None, '___sec65'),
-              (' The model ', 3, None, '___sec66'),
-              (' The view ', 3, None, '___sec67'),
-              (' Custom validation ', 2, None, '___sec68'),
-              (' Customizing widgets ', 2, None, '___sec69'),
-              (' Resources ', 2, None, '___sec70'),
-              (' Exercises ', 1, None, '___sec71'),
+              (' Programming the Django application ', 2, None, '___sec64'),
+              (' Adding the app to a project ', 3, None, '___sec65'),
+              (' The compute part ', 3, None, '___sec66'),
+              (' The model ', 3, None, '___sec67'),
+              (' The view ', 3, None, '___sec68'),
+              (' Custom validation ', 2, None, '___sec69'),
+              (' Customizing widgets ', 2, None, '___sec70'),
+              (' Resources ', 2, None, '___sec71'),
+              (' Exercises ', 1, None, '___sec72'),
               (' Exercise 1: Add two numbers ',
                2,
                'wf:exer:add2',
@@ -202,11 +206,11 @@ div { text-align: justify; text-justify: inter-word; }
               (' Exercise 7: Auto-generate code from function signature ',
                2,
                None,
-               '___sec78'),
-              (' Resources ', 1, None, '___sec79'),
-              (' Flask resources ', 2, None, '___sec80'),
-              (' Django resources ', 2, None, '___sec81'),
-              (' Remaining ', 1, None, '___sec82')]}
+               '___sec79'),
+              (' Resources ', 1, None, '___sec80'),
+              (' Flask resources ', 2, None, '___sec81'),
+              (' Django resources ', 2, None, '___sec82'),
+              (' Remaining ', 1, None, '___sec83')]}
 end of tocinfo -->
 
 <body>
@@ -251,7 +255,7 @@ MathJax.Hub.Config({
 <center>[1] <b>Center for Biomedical Computing, Simula Research Laboratory</b></center>
 <center>[2] <b>Department of Informatics, University of Oslo</b></center>
 <p>
-<center><h4>May 29, 2015</h4></center> <!-- date -->
+<center><h4>Jun 1, 2015</h4></center> <!-- date -->
 
 <h2>Table of contents</h2>
 
@@ -279,26 +283,27 @@ MathJax.Hub.Config({
 &nbsp; &nbsp; &nbsp; <a href="#___sec35"> Bootstrap HTML style </a><br>
 &nbsp; &nbsp; &nbsp; <a href="#wf:vib1:flask:validation"> Custom validation </a><br>
 &nbsp; &nbsp; &nbsp; <a href="#wf:vib2:flask:nofiles"> Avoiding plot files </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#wf:bokeh:flask"> Plotting with the Bokeh library </a><br>
 &nbsp; &nbsp; &nbsp; <a href="#wf:autogen:flask"> Autogenerating the code </a><br>
 &nbsp; &nbsp; &nbsp; <a href="#wf:flask:login"> User login and storage of computed results </a><br>
 &nbsp; &nbsp; &nbsp; <a href="#wf:flask:upload"> Uploading of files </a><br>
 <a href="#wf:vib:django"> Handling multiple input variables in Django </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec63"> Programming the Django application </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec68"> Custom validation </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec69"> Customizing widgets </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec70"> Resources </a><br>
-<a href="#___sec71"> Exercises </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec64"> Programming the Django application </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec69"> Custom validation </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec70"> Customizing widgets </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec71"> Resources </a><br>
+<a href="#___sec72"> Exercises </a><br>
 &nbsp; &nbsp; &nbsp; <a href="#wf:exer:add2"> Exercise 1: Add two numbers </a><br>
 &nbsp; &nbsp; &nbsp; <a href="#wf:exer:upload"> Exercise 2: Upload data file and visualize curves </a><br>
 &nbsp; &nbsp; &nbsp; <a href="#wf:exer:formula"> Exercise 3: Plot a user-specified formula </a><br>
 &nbsp; &nbsp; &nbsp; <a href="#wf:exer:Taylor"> Exercise 4: Visualize Taylor polynomial approximations </a><br>
 &nbsp; &nbsp; &nbsp; <a href="#wf:exer:gen:demo"> Exercise 5: Extend the <code>gen</code> app </a><br>
 &nbsp; &nbsp; &nbsp; <a href="#wf:exer:gen:lists"> Exercise 6: Equip the <code>gen</code> app with more data types </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec78"> Exercise 7: Auto-generate code from function signature </a><br>
-<a href="#___sec79"> Resources </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec80"> Flask resources </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec81"> Django resources </a><br>
-<a href="#___sec82"> Remaining </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec79"> Exercise 7: Auto-generate code from function signature </a><br>
+<a href="#___sec80"> Resources </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec81"> Flask resources </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec82"> Django resources </a><br>
+<a href="#___sec83"> Remaining </a><br>
 </p>
 
 <h1 id="___sec0">Web frameworks </h1>
@@ -1606,9 +1611,9 @@ def damped_vibrations(t, A, b, w):
 def compute(A, b, w, T, resolution=500):
     &quot;&quot;&quot;Return filename of plot of the damped_vibration function.&quot;&quot;&quot;
     t = linspace(0, T, resolution+1)
-    y = damped_vibrations(t, A, b, w)
+    u = damped_vibrations(t, A, b, w)
     plt.figure()  # needed to avoid adding curves in plot
-    plt.plot(t, y)
+    plt.plot(t, u)
     plt.title('A=%g, b=%g, w=%g' % (A, b, w))
     if not os.path.isdir('static'):
         os.mkdir('static')
@@ -2545,9 +2550,9 @@ The complete <code>compute.py</code> function takes the form
 <pre><code>def compute(A, b, w, T, resolution=500):
     &quot;&quot;&quot;Return filename of plot of the damped_vibration function.&quot;&quot;&quot;
     t = linspace(0, T, resolution+1)
-    y = damped_vibrations(t, A, b, w)
+    u = damped_vibrations(t, A, b, w)
     plt.figure()  # needed to avoid adding curves in plot
-    plt.plot(t, y)
+    plt.plot(t, u)
     plt.title('A=%g, b=%g, w=%g' % (A, b, w))
 
     # Make Matplotlib write to BytesIO file object and grab
@@ -2682,6 +2687,165 @@ else:
 </code></pre>
 <!-- end verbatim block -->
 
+<h2 id="wf:bokeh:flask">Plotting with the Bokeh library</h2>
+
+<p>
+As an alternative to using Matplotlib for plotting, we can utilize
+the <a href="http://bokeh.pydata.org/en/latest/" target="_self">Bokeh</a> tool, which is
+particularly developed for graphics in web browsers.
+One problem is that Bokeh writes its HTML code to file, while we
+want a string. There are <a href="https://jaredfields83.wordpress.com/2014/07/03/plotting-python-an-exercise-in-using-and-extending-bokeh/" target="_self">methods</a> to overcome
+this problem, but we use a very simple solution, namely reading the
+generated file and returning its text.
+
+<p>
+The <a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/vib3" target="_self"><tt>vib3</tt></a> app is similar to the
+previously described <code>vib1</code> and <code>vib2</code> app, except that we make one plot with
+Bokeh. Only the <code>compute.py</code>, <code>controller.py</code>, and the <code>view.html</code> files
+are different. First, we need to run Bokeh in the compute function.
+We load the resulting file and use a regular expression to extract
+the text in the <code>head</code> and <code>body</code> tags in the generated HTML code
+in the file. The head and body strings are returned as results.
+The <code>compute.py</code> file takes the form
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>from numpy import exp, cos, linspace
+import bokeh.plotting as plt
+import os, re
+
+def damped_vibrations(t, A, b, w):
+    return A*exp(-b*t)*cos(w*t)
+
+def compute(A, b, w, T, resolution=500):
+    &quot;&quot;&quot;Return filename of plot of the damped_vibration function.&quot;&quot;&quot;
+    t = linspace(0, T, resolution+1)
+    u = damped_vibrations(t, A, b, w)
+
+    # output to static HTML file
+    outname = 'tmp.html'
+    plt.output_file(outname, title=&quot;Damped vibrations&quot;)
+
+    # create a new plot with a title and axis labels
+    TOOLS = &quot;pan,wheel_zoom,box_zoom,reset,save,box_select,lasso_select&quot;
+    p = plt.figure(title=&quot;simple line example&quot;, tools=TOOLS,
+                   x_axis_label='t', y_axis_label='y')
+
+    # add a line renderer with legend and line thickness
+    p.line(t, u, legend=&quot;u(t)&quot;, line_width=2)
+
+    # show the results
+    #plt.show(p)
+    plt.save(p)
+    with  open(outname, 'r') as f:
+        text = f.read()
+    # Grab head and body
+    m = re.search('&lt;head&gt;(.+)&lt;/head&gt;.+&lt;body&gt;(.+)&lt;/body&gt;', text,
+                  flags=re.DOTALL)
+    if m:
+        head = m.group(1)
+        body = m.group(2)
+    else:
+        raise ValueError('Could not parse the bokeh output in tmp.html')
+    #os.remove(outname)
+    return head, body
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+The <code>controller.py</code> file is basically the same as before (but simpler
+than in the <code>vib2</code> app since we do not deal with PNG and/or SVG plots):
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>from model import InputForm
+from flask import Flask, render_template, request
+from compute import compute
+
+app = Flask(__name__)
+
+@app.route('/vib3', methods=['GET', 'POST'])
+def index():
+    form = InputForm(request.form)
+    if request.method == 'POST' and form.validate():
+        for field in form:
+            # Make local variable (name field.name)
+            exec('%s = %s' % (field.name, field.data))
+        result = compute(A, b, w, T)
+    else:
+        result = None
+
+    return render_template('view.html', form=form,
+                           result=result)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Finally, we need to insert the generated Bokeh head, available as
+<code>result[0]</code>, inside <code>head</code> tags and  the generated Bokeh body,
+available as <code>result[1]</code>, inside the body at the place where we
+previously put the results. The complete <code>view.html</code> file now
+becomes
+
+<p>
+<!-- begin verbatim block  htmlpro-->
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+   &lt;head&gt;
+    {{ result[0]|safe }}
+&lt;/head&gt;
+&lt;body&gt;
+&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: &quot;AMS&quot;  },
+     extensions: [&quot;AMSmath.js&quot;, &quot;AMSsymbols.js&quot;, &quot;autobold.js&quot;]
+  }
+});
+&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=
+&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;&gt;
+&lt;/script&gt;
+
+This web page visualizes the function \(
+u(t) = Ae^{-bt}\sin (w t), \hbox{ for } t\in [0,T]
+\).
+
+&lt;form method=post action=&quot;&quot;&gt;
+&lt;table&gt;
+  {% for field in form %}
+    &lt;tr&gt;
+    &lt;td class=&quot;name&quot;&gt;\( {{ field.name }} \) &amp;nbsp;&amp;nbsp;&lt;/td&gt;
+    &lt;td&gt;{{ field(size=12) }}&lt;/td&gt;
+    &lt;td&gt;{{ field.label }}&lt;/td&gt;
+    {% if field.errors %}
+      &lt;td&gt;&lt;ul class=errors&gt;
+      {% for error in field.errors %}
+        &lt;li&gt;&lt;font color=&quot;red&quot;&gt;{{ error }}&lt;/font&gt;&lt;/li&gt;
+      {% endfor %}&lt;/ul&gt;&lt;/td&gt;
+    {% endif %}
+    &lt;/tr&gt;
+  {% endfor %}
+&lt;/table&gt;
+&lt;p&gt;&lt;input type=&quot;submit&quot; value=&quot;Compute&quot;&gt;&lt;/form&gt;&lt;/p&gt;
+
+&lt;p&gt;
+{% if result != None %}
+{{ result[1]|safe }}
+{% endif %}
+&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+A feature of Bokeh plots is that one can zoom and pan, among other
+things. There is a toolbar at the top.
+
 <p>
 <!-- !split -->
 
@@ -2694,7 +2858,7 @@ demonstrate some advanced, powerful features of Python. The source code
 is found in the <a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/gen" target="_self"><tt>gen</tt></a>
 directory.
 
-<h3 id="___sec45">Inspecting function signatures </h3>
+<h3 id="___sec46">Inspecting function signatures </h3>
 
 <p>
 The basic idea is that the Python module <code>inspect</code> can be used to
@@ -2729,7 +2893,7 @@ We have all the argument names in <code>arg_names</code> and
 <code>defaults[i]</code> is the default value of keyword argument
 <code>arg_names[j]</code>, where <code>j = len(arg_names) - len(defaults) + i</code>.
 
-<h3 id="___sec46">Generating the model </h3>
+<h3 id="___sec47">Generating the model </h3>
 
 <p>
 Knowing the name <code>name</code> of some argument in the <code>compute</code>
@@ -2817,7 +2981,7 @@ if __name__ == '__main__':
 (The <code>compute_gamma</code> function imported from <code>compute</code> is the
 only application-specific statement in this code and will be explained later.)
 
-<h3 id="___sec47">Generating the view </h3>
+<h3 id="___sec48">Generating the view </h3>
 
 <p>
 The call to <code>compute</code> in the <code>controller.py</code> file must also be expressed
@@ -2880,7 +3044,7 @@ The <code>compute(**kwargs)</code> call is equivalent to <code>compute(A=1, b=3,
 in case <code>kwargs = {'w'=0.5, 'A':1, 'b':3}</code> (recall that the order of
 the keys in a Python dictionary is undetermined).
 
-<h3 id="___sec48">Generating the template </h3>
+<h3 id="___sec49">Generating the template </h3>
 
 <p>
 It remains to generate the right HTML template. The HTML code depends
@@ -2966,7 +3130,7 @@ if __name__ == '__main__':
 </code></pre>
 <!-- end verbatim block -->
 
-<h3 id="___sec49">Application </h3>
+<h3 id="___sec50">Application </h3>
 
 <p>
 Let us apply the files above to plot the gamma probability density function
@@ -3111,7 +3275,7 @@ this account for archiving results and for browsing previous runs of
 the application. More files are needed for this purpose, compared to
 the previous apps, and the files are located in the <a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/login" target="_self"><tt>login</tt></a> directory.
 
-<h3 id="___sec51">Required additional software </h3>
+<h3 id="___sec52">Required additional software </h3>
 
 <p>
 Three more packages are needed for this more advanced application:
@@ -3132,7 +3296,7 @@ sudo pip install --upgrade flask-mail
 </code></pre>
 <!-- end verbatim block -->
 
-<h3 id="___sec52">The compute part </h3>
+<h3 id="___sec53">The compute part </h3>
 
 <p>
 The <code>compute.py</code> file contains the <code>compute</code>
@@ -3146,7 +3310,7 @@ it is not recommended to hack further on the example given here,
 but rather utilize Parampool to generate web apps with user accounts
 and login.
 
-<h3 id="___sec53">The interfaces of the app </h3>
+<h3 id="___sec54">The interfaces of the app </h3>
 
 <p>
 The first page after starting the app (<code>python controller.py</code>)
@@ -3189,7 +3353,7 @@ overview of what is in the database:
 Here, one can browse previous results, remove entries, or erase the
 whole database.
 
-<h3 id="___sec54">The source code </h3>
+<h3 id="___sec55">The source code </h3>
 
 <p>
 Rather than explaining everything about the source code
@@ -3782,7 +3946,7 @@ MathJax.Hub.Config({
 <font color="red">(<b>hpl 1</b>: Check if an autogenerated app from <code>_generate_app.py</code> can send mail and store comments. Need a <code>compute</code> function that returns full HTML text then.)</font>
 <!-- end inline comment -->
 
-<h3 id="___sec55">Resources </h3>
+<h3 id="___sec56">Resources </h3>
 
 <p>
 Working with a database in Flask is described here:
@@ -3797,7 +3961,7 @@ Working with a database in Flask is described here:
 
 <h2 id="wf:flask:upload">Uploading of files</h2>
 
-<h3 id="___sec57">Overview of the application </h3>
+<h3 id="___sec58">Overview of the application </h3>
 
 <p>
 Many user interfaces need the user to provide data files. A minimalistic
@@ -3832,7 +3996,7 @@ widget object used for file upload and indicates that a new
 file can be chosen. Below we shall present all parts of the code
 needed to create this interactive application.
 
-<h3 id="___sec58">The model class </h3>
+<h3 id="___sec59">The model class </h3>
 
 <p>
 The widget <code>FieldField</code> is used for an input field with a <em>Choose File</em>
@@ -3848,7 +4012,7 @@ class Average(wtf.Form):
 </code></pre>
 <!-- end verbatim block -->
 
-<h3 id="___sec59">The controller file </h3>
+<h3 id="___sec60">The controller file </h3>
 
 <p>
 The controller file needs some special code to specify a directory
@@ -3904,7 +4068,7 @@ calling the compute function and rendering a new page:
 </code></pre>
 <!-- end verbatim block -->
 
-<h3 id="___sec60">The compute function </h3>
+<h3 id="___sec61">The compute function </h3>
 
 <p>
 We assume that the uploaded file is available in the <code>uploads</code>
@@ -3930,7 +4094,7 @@ Data from file &lt;tt&gt;%s&lt;/tt&gt;:
 </code></pre>
 <!-- end verbatim block -->
 
-<h3 id="___sec61">The HTML template </h3>
+<h3 id="___sec62">The HTML template </h3>
 
 <p>
 Although the present minimalistic application only needs a very simple
@@ -4006,9 +4170,9 @@ the resulting plot,
 cf. Figures <a href="#wf:vib1:flask:fig:input">7</a>
 and <a href="#wf:vib1:flask:fig:result">8</a>.
 
-<h2 id="___sec63">Programming the Django application </h2>
+<h2 id="___sec64">Programming the Django application </h2>
 
-<h3 id="___sec64">Adding the app to a project </h3>
+<h3 id="___sec65">Adding the app to a project </h3>
 
 <p>
 Any Django app needs a project, but here we reuse the project
@@ -4034,13 +4198,15 @@ These steps ensure that Django can find our application as a module/package,
 that Django can find our templates associated with this application,
 and that the URL address applies the name <code>vib1</code> to reach the application.
 
-<h3 id="___sec65">The compute part </h3>
+<h3 id="___sec66">The compute part </h3>
 
 <p>
 The computations in our application are put in a file <code>compute.py</code>
 and explained in detail in the section <a href="#wf:vib1:flask:app">Programming the Flask application</a>.
+We can equally well utilize the Bokeh library for plotting using
+the code shown in the section <a href="#wf:bokeh:flask">Plotting with the Bokeh library</a>.
 
-<h3 id="___sec66">The model </h3>
+<h3 id="___sec67">The model </h3>
 
 <p>
 We can now write <code>models.py</code> and the <code>Input</code> class that defines
@@ -4077,7 +4243,7 @@ We also provide a default
 value such that all fields have a value when the user sees
 the page.
 
-<h3 id="___sec67">The view </h3>
+<h3 id="___sec68">The view </h3>
 
 <p>
 The <code>views.py</code> file looks as follows:
@@ -4153,7 +4319,7 @@ The template for rendering the page is listed next.
 The tricky part is the syntax for displaying <em>static content</em>, such as
 the plot file made in the <code>compute</code> function.
 
-<h2 id="___sec68">Custom validation </h2>
+<h2 id="___sec69">Custom validation </h2>
 
 <p>
 Django has a series of methods available for user-provided validation
@@ -4262,7 +4428,7 @@ We refer to the vast Django documentation for many other ways of
 validating forms. The reader is encouraged to run the <code>vib2</code>
 application and test out the validations we have implemented.
 
-<h2 id="___sec69">Customizing widgets </h2>
+<h2 id="___sec70">Customizing widgets </h2>
 
 <p>
 One will occasionally have full control of the layout of the individual
@@ -4302,7 +4468,7 @@ dictionary.
 <p>
 <!-- !split -->
 
-<h2 id="___sec70">Resources </h2>
+<h2 id="___sec71">Resources </h2>
 
 <p>
 Below are some resources for accounts and login with Django as well as
@@ -4318,7 +4484,7 @@ utilization of Bootstrap styles in the views.
 
 <!-- !split -->
 
-<h1 id="___sec71">Exercises </h1>
+<h1 id="___sec72">Exercises </h1>
 
 <p>
 <!-- --- begin exercise --- -->
@@ -4820,7 +4986,7 @@ Filename: <code>gen_ext.tar.gz</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="___sec78">Exercise 7: Auto-generate code from function signature </h2>
+<h2 id="___sec79">Exercise 7: Auto-generate code from function signature </h2>
 
 <p>
 Given a <code>compute</code> with a set of positional and keyword
@@ -4843,9 +5009,9 @@ Filename: <code>generate_flask.py</code>.
 <p>
 <!-- --- end exercise --- -->
 
-<h1 id="___sec79">Resources </h1>
+<h1 id="___sec80">Resources </h1>
 
-<h2 id="___sec80">Flask resources </h2>
+<h2 id="___sec81">Flask resources </h2>
 
 <ul>
  <li> <a href="http://flask.pocoo.org/" target="_self">Flask website</a></li>
@@ -4863,9 +5029,12 @@ Filename: <code>generate_flask.py</code>.
  <li> <a href="https://www.digitalocean.com/community/tutorials/how-to-structure-large-flask-applications" target="_self">How to Structure Large Flask Applications</a></li>
  <li> <a href="https://exploreflask.com/index.html" target="_self">Explore Flask</a> by R. Picard (online book)</li>
  <li> <a href="http://www.datacommunitydc.org/blog/2014/02/flask-mega-meta-tutorial-data-scientists" target="_self">Flask Mega Tutorial for Data Scientists</a></li>
+ <li> <a href="http://maximebf.com/blog/2012/10/building-websites-in-python-with-flask/#.UxV4jHVdXn4" target="_self">Quick Flask++ tutorial</a></li>
+ <li> <a href="https://github.com/mbr/flask-bootstrap" target="_self">Flask-Bootstrap</a> with <a href="http://pythonhosted.org/Flask-Bootstrap/" target="_self">documentation</a>, <a href="http://pythonhosted.org/Flask-Bootstrap/basic-usage.html" target="_self">basic usage</a> and <a href="https://github.com/mbr/flask-bootstrap/blob/master/sample_application/__init__.py" target="_self">example</a></li>
+ <li> <a href="http://www.skulpt.org/" target="_self">Skulpt: Interactive Python in the browser</a> (but no support for <code>numpy</code>, <code>scipy</code>, or <code>matplotlib</code>)</li>
 </ul>
 
-<h2 id="___sec81">Django resources </h2>
+<h2 id="___sec82">Django resources </h2>
 
 <ul>
  <li> <a href="https://www.djangoproject.com/" target="_self">Django webpage</a></li>
@@ -4877,7 +5046,7 @@ Filename: <code>generate_flask.py</code>.
  <li> <a href="http://www.datacommunitydc.org/blog/2013/12/a-tutorial-for-deploying-a-django-application-that-uses-numpy-and-scipy-to-google-compute-engine-using-apache2-and-modwsgi" target="_self">A Tutorial for Deploying a Django Application that Uses Numpy and Scipy to Google Compute Engine Using Apache2 and modwsgi</a></li>
 </ul>
 
-<h1 id="___sec82">Remaining </h1>
+<h1 id="___sec83">Remaining </h1>
 
 <ul>
  <li> apply (generated apps) to simviz (make py simviz too and describe that)</li>

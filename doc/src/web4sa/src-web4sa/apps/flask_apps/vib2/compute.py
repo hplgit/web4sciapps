@@ -1,6 +1,6 @@
 from numpy import exp, cos, linspace
 import matplotlib.pyplot as plt
-import os, time, glob
+import os
 
 def damped_vibrations(t, A, b, w):
     return A*exp(-b*t)*cos(w*t)
@@ -8,9 +8,9 @@ def damped_vibrations(t, A, b, w):
 def compute(A, b, w, T, resolution=500):
     """Return filename of plot of the damped_vibration function."""
     t = linspace(0, T, resolution+1)
-    y = damped_vibrations(t, A, b, w)
+    u = damped_vibrations(t, A, b, w)
     plt.figure()  # needed to avoid adding curves in plot
-    plt.plot(t, y)
+    plt.plot(t, u)
     plt.title('A=%g, b=%g, w=%g' % (A, b, w))
 
     # Make Matplotlib write to BytesIO file object and grab
@@ -26,9 +26,9 @@ def compute(A, b, w, T, resolution=500):
 def compute_png_svg(A, b, w, T, resolution=500):
     """Return filename of plot of the damped_vibration function."""
     t = linspace(0, T, resolution+1)
-    y = damped_vibrations(t, A, b, w)
+    u = damped_vibrations(t, A, b, w)
     plt.figure()  # needed to avoid adding curves in plot
-    plt.plot(t, y)
+    plt.plot(t, u)
     plt.title('A=%g, b=%g, w=%g' % (A, b, w))
 
     # Make Matplotlib write to BytesIO file object and grab

@@ -29,7 +29,7 @@
  * "Flask-Bootstrap": "https://github.com/mbr/flask-bootstrap" with "documentation": "http://pythonhosted.org/Flask-Bootstrap/", "basic usage": "http://pythonhosted.org/Flask-Bootstrap/basic-usage.html" and "example": "https://github.com/mbr/flask-bootstrap/blob/master/sample_application/__init__.py"
  * "Skulpt: Interactive Python in the browser": "http://www.skulpt.org/" (but no support for `numpy`, `scipy`, or `matplotlib`)
 
-# #if INTERESTING_BUT_NOT_RELEVANT
+# #ifdef INTERESTING_BUT_NOT_RELEVANT
  * "A complete modern Python project with virtualenv, testing, setup.py, etc.": "https://github.com/splaice/py-bootstrap"
  * "Python for computer games": "http://inventwithpython.com/"
  * "Flask and Boostrap intro": "http://pythonthusiast.pythonblogs.com/230_pythonthusiast/archive/1309_building_in_openshift_part_iv__application_layout_and_templating_using_bootstrap_3_and_jinja_2.html" ("sample app": "http://bio-ekowibowo.rhcloud.com/" has sign in functionality and bootstrap layout explained "here": "http://pythonthusiast.pythonblogs.com/230_pythonthusiast/archive/1317_building_python_flask_application_in_openshiftheroku_replacement_part_vii__adding_sign_in_form_using_bootstrap_3_and_login_feature_using_flask-login.html")

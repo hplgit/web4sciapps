@@ -57,6 +57,8 @@ The computations in our application are put in a file `compute.py`
 @@@CODE ${app_path}/compute.py
 # #else
 and explained in detail in Section ref{wf:vib1:flask:app}.
+We can equally well utilize the Bokeh library for plotting using
+the code shown in Section ref{wf:bokeh:flask}.
 # #endif
 
 idx{Django!input forms}

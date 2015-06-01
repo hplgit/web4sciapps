@@ -7,7 +7,7 @@ Automatically generated HTML file from DocOnce source
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Using Web Frameworks for Scientific Applications">
-<meta name="keywords" content="web frameworks,MVC pattern,Flask installation,Flask input forms,Flask HTML templates,Flask MVC pattern,Flask troubleshooting,Django installation,Django making a project,Django making an application,Django input forms,Django HTML templates,Flask input forms,Flask error checking,Flask CSS style sheets,Flask LaTeX mathematics,Flask input validation,inline PNG image in HTML,base64 encoding of PNG images,inline SVG figure in HTML,Flask login,Flask database,Flask uploading of files,Flask file upload,Django input forms,Django input validation">
+<meta name="keywords" content="web frameworks,MVC pattern,Flask installation,Flask input forms,Flask HTML templates,Flask MVC pattern,Flask troubleshooting,Django installation,Django making a project,Django making an application,Django input forms,Django HTML templates,Flask input forms,Flask error checking,Flask CSS style sheets,Flask LaTeX mathematics,Flask input validation,inline PNG image in HTML,base64 encoding of PNG images,inline SVG figure in HTML,Flask Bokeh plotting,Bokeh plotting,Flask login,Flask database,Flask uploading of files,Flask file upload,Django input forms,Django input validation">
 
 <title>Using Web Frameworks for Scientific Applications</title>
 
@@ -135,46 +135,50 @@ div { text-align: justify; text-justify: inter-word; }
                'wf:vib2:flask:nofiles'),
               (' PNG plots ', 3, None, '___sec42'),
               (' SVG plots ', 3, None, '___sec43'),
+              (' Plotting with the Bokeh library ',
+               2,
+               'wf:bokeh:flask',
+               'wf:bokeh:flask'),
               (' Autogenerating the code ',
                2,
                'wf:autogen:flask',
                'wf:autogen:flask'),
-              (' Inspecting function signatures ', 3, None, '___sec45'),
-              (' Generating the model ', 3, None, '___sec46'),
-              (' Generating the view ', 3, None, '___sec47'),
-              (' Generating the template ', 3, None, '___sec48'),
-              (' Application ', 3, None, '___sec49'),
+              (' Inspecting function signatures ', 3, None, '___sec46'),
+              (' Generating the model ', 3, None, '___sec47'),
+              (' Generating the view ', 3, None, '___sec48'),
+              (' Generating the template ', 3, None, '___sec49'),
+              (' Application ', 3, None, '___sec50'),
               (' User login and storage of computed results ',
                2,
                'wf:flask:login',
                'wf:flask:login'),
-              (' Required additional software ', 3, None, '___sec51'),
-              (' The compute part ', 3, None, '___sec52'),
-              (' The interfaces of the app ', 3, None, '___sec53'),
-              (' The source code ', 3, None, '___sec54'),
-              (' Resources ', 3, None, '___sec55'),
+              (' Required additional software ', 3, None, '___sec52'),
+              (' The compute part ', 3, None, '___sec53'),
+              (' The interfaces of the app ', 3, None, '___sec54'),
+              (' The source code ', 3, None, '___sec55'),
+              (' Resources ', 3, None, '___sec56'),
               (' Uploading of files ',
                2,
                'wf:flask:upload',
                'wf:flask:upload'),
-              (' Overview of the application ', 3, None, '___sec57'),
-              (' The model class ', 3, None, '___sec58'),
-              (' The controller file ', 3, None, '___sec59'),
-              (' The compute function ', 3, None, '___sec60'),
-              (' The HTML template ', 3, None, '___sec61'),
+              (' Overview of the application ', 3, None, '___sec58'),
+              (' The model class ', 3, None, '___sec59'),
+              (' The controller file ', 3, None, '___sec60'),
+              (' The compute function ', 3, None, '___sec61'),
+              (' The HTML template ', 3, None, '___sec62'),
               (' Handling multiple input variables in Django ',
                1,
                'wf:vib:django',
                'wf:vib:django'),
-              (' Programming the Django application ', 2, None, '___sec63'),
-              (' Adding the app to a project ', 3, None, '___sec64'),
-              (' The compute part ', 3, None, '___sec65'),
-              (' The model ', 3, None, '___sec66'),
-              (' The view ', 3, None, '___sec67'),
-              (' Custom validation ', 2, None, '___sec68'),
-              (' Customizing widgets ', 2, None, '___sec69'),
-              (' Resources ', 2, None, '___sec70'),
-              (' Exercises ', 1, None, '___sec71'),
+              (' Programming the Django application ', 2, None, '___sec64'),
+              (' Adding the app to a project ', 3, None, '___sec65'),
+              (' The compute part ', 3, None, '___sec66'),
+              (' The model ', 3, None, '___sec67'),
+              (' The view ', 3, None, '___sec68'),
+              (' Custom validation ', 2, None, '___sec69'),
+              (' Customizing widgets ', 2, None, '___sec70'),
+              (' Resources ', 2, None, '___sec71'),
+              (' Exercises ', 1, None, '___sec72'),
               (' Exercise 1: Add two numbers ',
                2,
                'wf:exer:add2',
@@ -202,11 +206,11 @@ div { text-align: justify; text-justify: inter-word; }
               (' Exercise 7: Auto-generate code from function signature ',
                2,
                None,
-               '___sec78'),
-              (' Resources ', 1, None, '___sec79'),
-              (' Flask resources ', 2, None, '___sec80'),
-              (' Django resources ', 2, None, '___sec81'),
-              (' Remaining ', 1, None, '___sec82')]}
+               '___sec79'),
+              (' Resources ', 1, None, '___sec80'),
+              (' Flask resources ', 2, None, '___sec81'),
+              (' Django resources ', 2, None, '___sec82'),
+              (' Remaining ', 1, None, '___sec83')]}
 end of tocinfo -->
 
 <body>
@@ -241,7 +245,7 @@ MathJax.Hub.Config({
 <p>
 <!-- !split -->
 
-<h1 id="___sec71">Exercises </h1>
+<h1 id="___sec72">Exercises </h1>
 
 <p>
 <!-- --- begin exercise --- -->
@@ -743,7 +747,7 @@ Filename: <code>gen_ext.tar.gz</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="___sec78">Exercise 7: Auto-generate code from function signature </h2>
+<h2 id="___sec79">Exercise 7: Auto-generate code from function signature </h2>
 
 <p>
 Given a <code>compute</code> with a set of positional and keyword
@@ -766,9 +770,9 @@ Filename: <code>generate_flask.py</code>.
 <p>
 <!-- --- end exercise --- -->
 
-<h1 id="___sec79">Resources </h1>
+<h1 id="___sec80">Resources </h1>
 
-<h2 id="___sec80">Flask resources </h2>
+<h2 id="___sec81">Flask resources </h2>
 
 <ul>
  <li> <a href="http://flask.pocoo.org/" target="_self">Flask website</a></li>
@@ -786,9 +790,12 @@ Filename: <code>generate_flask.py</code>.
  <li> <a href="https://www.digitalocean.com/community/tutorials/how-to-structure-large-flask-applications" target="_self">How to Structure Large Flask Applications</a></li>
  <li> <a href="https://exploreflask.com/index.html" target="_self">Explore Flask</a> by R. Picard (online book)</li>
  <li> <a href="http://www.datacommunitydc.org/blog/2014/02/flask-mega-meta-tutorial-data-scientists" target="_self">Flask Mega Tutorial for Data Scientists</a></li>
+ <li> <a href="http://maximebf.com/blog/2012/10/building-websites-in-python-with-flask/#.UxV4jHVdXn4" target="_self">Quick Flask++ tutorial</a></li>
+ <li> <a href="https://github.com/mbr/flask-bootstrap" target="_self">Flask-Bootstrap</a> with <a href="http://pythonhosted.org/Flask-Bootstrap/" target="_self">documentation</a>, <a href="http://pythonhosted.org/Flask-Bootstrap/basic-usage.html" target="_self">basic usage</a> and <a href="https://github.com/mbr/flask-bootstrap/blob/master/sample_application/__init__.py" target="_self">example</a></li>
+ <li> <a href="http://www.skulpt.org/" target="_self">Skulpt: Interactive Python in the browser</a> (but no support for <code>numpy</code>, <code>scipy</code>, or <code>matplotlib</code>)</li>
 </ul>
 
-<h2 id="___sec81">Django resources </h2>
+<h2 id="___sec82">Django resources </h2>
 
 <ul>
  <li> <a href="https://www.djangoproject.com/" target="_self">Django webpage</a></li>
@@ -800,7 +807,7 @@ Filename: <code>generate_flask.py</code>.
  <li> <a href="http://www.datacommunitydc.org/blog/2013/12/a-tutorial-for-deploying-a-django-application-that-uses-numpy-and-scipy-to-google-compute-engine-using-apache2-and-modwsgi" target="_self">A Tutorial for Deploying a Django Application that Uses Numpy and Scipy to Google Compute Engine Using Apache2 and modwsgi</a></li>
 </ul>
 
-<h1 id="___sec82">Remaining </h1>
+<h1 id="___sec83">Remaining </h1>
 
 <ul>
  <li> apply (generated apps) to simviz (make py simviz too and describe that)</li>

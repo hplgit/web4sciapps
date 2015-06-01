@@ -611,6 +611,52 @@ that we want an SVG instead of a PNG plot:
 @@@CODE ${app_path}/controller.py fromto: # SVG@app = Flask
 
 
+===== Plotting with the Bokeh library =====
+label{wf:bokeh:flask}
+
+## Define Mako variable for path to source code
+<%
+app_path = src_path + 'flask_apps/vib3'
+%>
+
+idx{Flask!Bokeh plotting}
+idx{Bokeh plotting}
+
+As an alternative to using Matplotlib for plotting, we can utilize
+the "Bokeh": "http://bokeh.pydata.org/en/latest/" tool, which is
+particularly developed for graphics in web browsers.
+One problem is that Bokeh writes its HTML code to file, while we
+want a string. There are "methods": "https://jaredfields83.wordpress.com/2014/07/03/plotting-python-an-exercise-in-using-and-extending-bokeh/" to overcome
+this problem, but we use a very simple solution, namely reading the
+generated file and returning its text.
+
+The "`vib3`": "${github_path}/${app_path}" app is similar to the
+previously described `vib1` and `vib2` app, except that we make one plot with
+Bokeh. Only the `compute.py`, `controller.py`, and the `view.html` files
+are different. First, we need to run Bokeh in the compute function.
+We load the resulting file and use a regular expression to extract
+the text in the `head` and `body` tags in the generated HTML code
+in the file. The head and body strings are returned as results.
+The `compute.py` file takes the form
+
+@@@CODE ${app_path}/compute.py fromto: from numpy@if __name
+
+The `controller.py` file is basically the same as before (but simpler
+than in the `vib2` app since we do not deal with PNG and/or SVG plots):
+
+@@@CODE ${app_path}/controller.py
+
+Finally, we need to insert the generated Bokeh head, available as
+`result[0]`, inside `head` tags and  the generated Bokeh body,
+available as `result[1]`, inside the body at the place where we
+previously put the results. The complete `view.html` file now
+becomes
+
+@@@CODE ${app_path}/templates/view.html
+
+A feature of Bokeh plots is that one can zoom and pan, among other
+things. There is a toolbar at the top.
+
 !split
 ===== Autogenerating the code =====
 label{wf:autogen:flask}

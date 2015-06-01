@@ -7,7 +7,7 @@ Automatically generated HTML file from DocOnce source
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Using Web Frameworks for Scientific Applications">
-<meta name="keywords" content="web frameworks,MVC pattern,Flask installation,Flask input forms,Flask HTML templates,Flask MVC pattern,Flask troubleshooting,Django installation,Django making a project,Django making an application,Django input forms,Django HTML templates,Flask input forms,Flask error checking,Flask CSS style sheets,Flask LaTeX mathematics,Flask input validation,inline PNG image in HTML,base64 encoding of PNG images,inline SVG figure in HTML,Flask login,Flask database,Flask uploading of files,Flask file upload,Django input forms,Django input validation">
+<meta name="keywords" content="web frameworks,MVC pattern,Flask installation,Flask input forms,Flask HTML templates,Flask MVC pattern,Flask troubleshooting,Django installation,Django making a project,Django making an application,Django input forms,Django HTML templates,Flask input forms,Flask error checking,Flask CSS style sheets,Flask LaTeX mathematics,Flask input validation,inline PNG image in HTML,base64 encoding of PNG images,inline SVG figure in HTML,Flask Bokeh plotting,Bokeh plotting,Flask login,Flask database,Flask uploading of files,Flask file upload,Django input forms,Django input validation">
 
 <title>Using Web Frameworks for Scientific Applications</title>
 
@@ -135,46 +135,50 @@ div { text-align: justify; text-justify: inter-word; }
                'wf:vib2:flask:nofiles'),
               (' PNG plots ', 3, None, '___sec42'),
               (' SVG plots ', 3, None, '___sec43'),
+              (' Plotting with the Bokeh library ',
+               2,
+               'wf:bokeh:flask',
+               'wf:bokeh:flask'),
               (' Autogenerating the code ',
                2,
                'wf:autogen:flask',
                'wf:autogen:flask'),
-              (' Inspecting function signatures ', 3, None, '___sec45'),
-              (' Generating the model ', 3, None, '___sec46'),
-              (' Generating the view ', 3, None, '___sec47'),
-              (' Generating the template ', 3, None, '___sec48'),
-              (' Application ', 3, None, '___sec49'),
+              (' Inspecting function signatures ', 3, None, '___sec46'),
+              (' Generating the model ', 3, None, '___sec47'),
+              (' Generating the view ', 3, None, '___sec48'),
+              (' Generating the template ', 3, None, '___sec49'),
+              (' Application ', 3, None, '___sec50'),
               (' User login and storage of computed results ',
                2,
                'wf:flask:login',
                'wf:flask:login'),
-              (' Required additional software ', 3, None, '___sec51'),
-              (' The compute part ', 3, None, '___sec52'),
-              (' The interfaces of the app ', 3, None, '___sec53'),
-              (' The source code ', 3, None, '___sec54'),
-              (' Resources ', 3, None, '___sec55'),
+              (' Required additional software ', 3, None, '___sec52'),
+              (' The compute part ', 3, None, '___sec53'),
+              (' The interfaces of the app ', 3, None, '___sec54'),
+              (' The source code ', 3, None, '___sec55'),
+              (' Resources ', 3, None, '___sec56'),
               (' Uploading of files ',
                2,
                'wf:flask:upload',
                'wf:flask:upload'),
-              (' Overview of the application ', 3, None, '___sec57'),
-              (' The model class ', 3, None, '___sec58'),
-              (' The controller file ', 3, None, '___sec59'),
-              (' The compute function ', 3, None, '___sec60'),
-              (' The HTML template ', 3, None, '___sec61'),
+              (' Overview of the application ', 3, None, '___sec58'),
+              (' The model class ', 3, None, '___sec59'),
+              (' The controller file ', 3, None, '___sec60'),
+              (' The compute function ', 3, None, '___sec61'),
+              (' The HTML template ', 3, None, '___sec62'),
               (' Handling multiple input variables in Django ',
                1,
                'wf:vib:django',
                'wf:vib:django'),
-              (' Programming the Django application ', 2, None, '___sec63'),
-              (' Adding the app to a project ', 3, None, '___sec64'),
-              (' The compute part ', 3, None, '___sec65'),
-              (' The model ', 3, None, '___sec66'),
-              (' The view ', 3, None, '___sec67'),
-              (' Custom validation ', 2, None, '___sec68'),
-              (' Customizing widgets ', 2, None, '___sec69'),
-              (' Resources ', 2, None, '___sec70'),
-              (' Exercises ', 1, None, '___sec71'),
+              (' Programming the Django application ', 2, None, '___sec64'),
+              (' Adding the app to a project ', 3, None, '___sec65'),
+              (' The compute part ', 3, None, '___sec66'),
+              (' The model ', 3, None, '___sec67'),
+              (' The view ', 3, None, '___sec68'),
+              (' Custom validation ', 2, None, '___sec69'),
+              (' Customizing widgets ', 2, None, '___sec70'),
+              (' Resources ', 2, None, '___sec71'),
+              (' Exercises ', 1, None, '___sec72'),
               (' Exercise 1: Add two numbers ',
                2,
                'wf:exer:add2',
@@ -202,11 +206,11 @@ div { text-align: justify; text-justify: inter-word; }
               (' Exercise 7: Auto-generate code from function signature ',
                2,
                None,
-               '___sec78'),
-              (' Resources ', 1, None, '___sec79'),
-              (' Flask resources ', 2, None, '___sec80'),
-              (' Django resources ', 2, None, '___sec81'),
-              (' Remaining ', 1, None, '___sec82')]}
+               '___sec79'),
+              (' Resources ', 1, None, '___sec80'),
+              (' Flask resources ', 2, None, '___sec81'),
+              (' Django resources ', 2, None, '___sec82'),
+              (' Remaining ', 1, None, '___sec83')]}
 end of tocinfo -->
 
 <body>
@@ -327,9 +331,9 @@ def damped_vibrations(t, A, b, w):
 def compute(A, b, w, T, resolution=500):
     &quot;&quot;&quot;Return filename of plot of the damped_vibration function.&quot;&quot;&quot;
     t = linspace(0, T, resolution+1)
-    y = damped_vibrations(t, A, b, w)
+    u = damped_vibrations(t, A, b, w)
     plt.figure()  # needed to avoid adding curves in plot
-    plt.plot(t, y)
+    plt.plot(t, u)
     plt.title('A=%g, b=%g, w=%g' % (A, b, w))
     if not os.path.isdir('static'):
         os.mkdir('static')

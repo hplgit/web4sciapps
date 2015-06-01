@@ -7,7 +7,7 @@ Automatically generated HTML file from DocOnce source
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Using Web Frameworks for Scientific Applications">
-<meta name="keywords" content="web frameworks,MVC pattern,Flask installation,Flask input forms,Flask HTML templates,Flask MVC pattern,Flask troubleshooting,Django installation,Django making a project,Django making an application,Django input forms,Django HTML templates,Flask input forms,Flask error checking,Flask CSS style sheets,Flask LaTeX mathematics,Flask input validation,inline PNG image in HTML,base64 encoding of PNG images,inline SVG figure in HTML,Flask login,Flask database,Flask uploading of files,Flask file upload,Django input forms,Django input validation">
+<meta name="keywords" content="web frameworks,MVC pattern,Flask installation,Flask input forms,Flask HTML templates,Flask MVC pattern,Flask troubleshooting,Django installation,Django making a project,Django making an application,Django input forms,Django HTML templates,Flask input forms,Flask error checking,Flask CSS style sheets,Flask LaTeX mathematics,Flask input validation,inline PNG image in HTML,base64 encoding of PNG images,inline SVG figure in HTML,Flask Bokeh plotting,Bokeh plotting,Flask login,Flask database,Flask uploading of files,Flask file upload,Django input forms,Django input validation">
 
 <title>Using Web Frameworks for Scientific Applications</title>
 
@@ -135,46 +135,50 @@ div { text-align: justify; text-justify: inter-word; }
                'wf:vib2:flask:nofiles'),
               (' PNG plots ', 3, None, '___sec42'),
               (' SVG plots ', 3, None, '___sec43'),
+              (' Plotting with the Bokeh library ',
+               2,
+               'wf:bokeh:flask',
+               'wf:bokeh:flask'),
               (' Autogenerating the code ',
                2,
                'wf:autogen:flask',
                'wf:autogen:flask'),
-              (' Inspecting function signatures ', 3, None, '___sec45'),
-              (' Generating the model ', 3, None, '___sec46'),
-              (' Generating the view ', 3, None, '___sec47'),
-              (' Generating the template ', 3, None, '___sec48'),
-              (' Application ', 3, None, '___sec49'),
+              (' Inspecting function signatures ', 3, None, '___sec46'),
+              (' Generating the model ', 3, None, '___sec47'),
+              (' Generating the view ', 3, None, '___sec48'),
+              (' Generating the template ', 3, None, '___sec49'),
+              (' Application ', 3, None, '___sec50'),
               (' User login and storage of computed results ',
                2,
                'wf:flask:login',
                'wf:flask:login'),
-              (' Required additional software ', 3, None, '___sec51'),
-              (' The compute part ', 3, None, '___sec52'),
-              (' The interfaces of the app ', 3, None, '___sec53'),
-              (' The source code ', 3, None, '___sec54'),
-              (' Resources ', 3, None, '___sec55'),
+              (' Required additional software ', 3, None, '___sec52'),
+              (' The compute part ', 3, None, '___sec53'),
+              (' The interfaces of the app ', 3, None, '___sec54'),
+              (' The source code ', 3, None, '___sec55'),
+              (' Resources ', 3, None, '___sec56'),
               (' Uploading of files ',
                2,
                'wf:flask:upload',
                'wf:flask:upload'),
-              (' Overview of the application ', 3, None, '___sec57'),
-              (' The model class ', 3, None, '___sec58'),
-              (' The controller file ', 3, None, '___sec59'),
-              (' The compute function ', 3, None, '___sec60'),
-              (' The HTML template ', 3, None, '___sec61'),
+              (' Overview of the application ', 3, None, '___sec58'),
+              (' The model class ', 3, None, '___sec59'),
+              (' The controller file ', 3, None, '___sec60'),
+              (' The compute function ', 3, None, '___sec61'),
+              (' The HTML template ', 3, None, '___sec62'),
               (' Handling multiple input variables in Django ',
                1,
                'wf:vib:django',
                'wf:vib:django'),
-              (' Programming the Django application ', 2, None, '___sec63'),
-              (' Adding the app to a project ', 3, None, '___sec64'),
-              (' The compute part ', 3, None, '___sec65'),
-              (' The model ', 3, None, '___sec66'),
-              (' The view ', 3, None, '___sec67'),
-              (' Custom validation ', 2, None, '___sec68'),
-              (' Customizing widgets ', 2, None, '___sec69'),
-              (' Resources ', 2, None, '___sec70'),
-              (' Exercises ', 1, None, '___sec71'),
+              (' Programming the Django application ', 2, None, '___sec64'),
+              (' Adding the app to a project ', 3, None, '___sec65'),
+              (' The compute part ', 3, None, '___sec66'),
+              (' The model ', 3, None, '___sec67'),
+              (' The view ', 3, None, '___sec68'),
+              (' Custom validation ', 2, None, '___sec69'),
+              (' Customizing widgets ', 2, None, '___sec70'),
+              (' Resources ', 2, None, '___sec71'),
+              (' Exercises ', 1, None, '___sec72'),
               (' Exercise 1: Add two numbers ',
                2,
                'wf:exer:add2',
@@ -202,11 +206,11 @@ div { text-align: justify; text-justify: inter-word; }
               (' Exercise 7: Auto-generate code from function signature ',
                2,
                None,
-               '___sec78'),
-              (' Resources ', 1, None, '___sec79'),
-              (' Flask resources ', 2, None, '___sec80'),
-              (' Django resources ', 2, None, '___sec81'),
-              (' Remaining ', 1, None, '___sec82')]}
+               '___sec79'),
+              (' Resources ', 1, None, '___sec80'),
+              (' Flask resources ', 2, None, '___sec81'),
+              (' Django resources ', 2, None, '___sec82'),
+              (' Remaining ', 1, None, '___sec83')]}
 end of tocinfo -->
 
 <body>
@@ -314,9 +318,9 @@ The complete <code>compute.py</code> function takes the form
 <pre><code>def compute(A, b, w, T, resolution=500):
     &quot;&quot;&quot;Return filename of plot of the damped_vibration function.&quot;&quot;&quot;
     t = linspace(0, T, resolution+1)
-    y = damped_vibrations(t, A, b, w)
+    u = damped_vibrations(t, A, b, w)
     plt.figure()  # needed to avoid adding curves in plot
-    plt.plot(t, y)
+    plt.plot(t, u)
     plt.title('A=%g, b=%g, w=%g' % (A, b, w))
 
     # Make Matplotlib write to BytesIO file object and grab
@@ -450,6 +454,165 @@ else:
     template = 'view.html'
 </code></pre>
 <!-- end verbatim block -->
+
+<h2 id="wf:bokeh:flask">Plotting with the Bokeh library</h2>
+
+<p>
+As an alternative to using Matplotlib for plotting, we can utilize
+the <a href="http://bokeh.pydata.org/en/latest/" target="_self">Bokeh</a> tool, which is
+particularly developed for graphics in web browsers.
+One problem is that Bokeh writes its HTML code to file, while we
+want a string. There are <a href="https://jaredfields83.wordpress.com/2014/07/03/plotting-python-an-exercise-in-using-and-extending-bokeh/" target="_self">methods</a> to overcome
+this problem, but we use a very simple solution, namely reading the
+generated file and returning its text.
+
+<p>
+The <a href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/flask_apps/vib3" target="_self"><tt>vib3</tt></a> app is similar to the
+previously described <code>vib1</code> and <code>vib2</code> app, except that we make one plot with
+Bokeh. Only the <code>compute.py</code>, <code>controller.py</code>, and the <code>view.html</code> files
+are different. First, we need to run Bokeh in the compute function.
+We load the resulting file and use a regular expression to extract
+the text in the <code>head</code> and <code>body</code> tags in the generated HTML code
+in the file. The head and body strings are returned as results.
+The <code>compute.py</code> file takes the form
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>from numpy import exp, cos, linspace
+import bokeh.plotting as plt
+import os, re
+
+def damped_vibrations(t, A, b, w):
+    return A*exp(-b*t)*cos(w*t)
+
+def compute(A, b, w, T, resolution=500):
+    &quot;&quot;&quot;Return filename of plot of the damped_vibration function.&quot;&quot;&quot;
+    t = linspace(0, T, resolution+1)
+    u = damped_vibrations(t, A, b, w)
+
+    # output to static HTML file
+    outname = 'tmp.html'
+    plt.output_file(outname, title=&quot;Damped vibrations&quot;)
+
+    # create a new plot with a title and axis labels
+    TOOLS = &quot;pan,wheel_zoom,box_zoom,reset,save,box_select,lasso_select&quot;
+    p = plt.figure(title=&quot;simple line example&quot;, tools=TOOLS,
+                   x_axis_label='t', y_axis_label='y')
+
+    # add a line renderer with legend and line thickness
+    p.line(t, u, legend=&quot;u(t)&quot;, line_width=2)
+
+    # show the results
+    #plt.show(p)
+    plt.save(p)
+    with  open(outname, 'r') as f:
+        text = f.read()
+    # Grab head and body
+    m = re.search('&lt;head&gt;(.+)&lt;/head&gt;.+&lt;body&gt;(.+)&lt;/body&gt;', text,
+                  flags=re.DOTALL)
+    if m:
+        head = m.group(1)
+        body = m.group(2)
+    else:
+        raise ValueError('Could not parse the bokeh output in tmp.html')
+    #os.remove(outname)
+    return head, body
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+The <code>controller.py</code> file is basically the same as before (but simpler
+than in the <code>vib2</code> app since we do not deal with PNG and/or SVG plots):
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>from model import InputForm
+from flask import Flask, render_template, request
+from compute import compute
+
+app = Flask(__name__)
+
+@app.route('/vib3', methods=['GET', 'POST'])
+def index():
+    form = InputForm(request.form)
+    if request.method == 'POST' and form.validate():
+        for field in form:
+            # Make local variable (name field.name)
+            exec('%s = %s' % (field.name, field.data))
+        result = compute(A, b, w, T)
+    else:
+        result = None
+
+    return render_template('view.html', form=form,
+                           result=result)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Finally, we need to insert the generated Bokeh head, available as
+<code>result[0]</code>, inside <code>head</code> tags and  the generated Bokeh body,
+available as <code>result[1]</code>, inside the body at the place where we
+previously put the results. The complete <code>view.html</code> file now
+becomes
+
+<p>
+<!-- begin verbatim block  htmlpro-->
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+   &lt;head&gt;
+    {{ result[0]|safe }}
+&lt;/head&gt;
+&lt;body&gt;
+&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: &quot;AMS&quot;  },
+     extensions: [&quot;AMSmath.js&quot;, &quot;AMSsymbols.js&quot;, &quot;autobold.js&quot;]
+  }
+});
+&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=
+&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;&gt;
+&lt;/script&gt;
+
+This web page visualizes the function \(
+u(t) = Ae^{-bt}\sin (w t), \hbox{ for } t\in [0,T]
+\).
+
+&lt;form method=post action=&quot;&quot;&gt;
+&lt;table&gt;
+  {% for field in form %}
+    &lt;tr&gt;
+    &lt;td class=&quot;name&quot;&gt;\( {{ field.name }} \) &amp;nbsp;&amp;nbsp;&lt;/td&gt;
+    &lt;td&gt;{{ field(size=12) }}&lt;/td&gt;
+    &lt;td&gt;{{ field.label }}&lt;/td&gt;
+    {% if field.errors %}
+      &lt;td&gt;&lt;ul class=errors&gt;
+      {% for error in field.errors %}
+        &lt;li&gt;&lt;font color=&quot;red&quot;&gt;{{ error }}&lt;/font&gt;&lt;/li&gt;
+      {% endfor %}&lt;/ul&gt;&lt;/td&gt;
+    {% endif %}
+    &lt;/tr&gt;
+  {% endfor %}
+&lt;/table&gt;
+&lt;p&gt;&lt;input type=&quot;submit&quot; value=&quot;Compute&quot;&gt;&lt;/form&gt;&lt;/p&gt;
+
+&lt;p&gt;
+{% if result != None %}
+{{ result[1]|safe }}
+{% endif %}
+&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+A feature of Bokeh plots is that one can zoom and pan, among other
+things. There is a toolbar at the top.
 
 <p>
 <p>
