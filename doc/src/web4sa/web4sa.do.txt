@@ -34,13 +34,3 @@ TOC: on
 
 # #include "exercises.do.txt"
 # #include "links.do.txt"
-
-
-======= Remaining =======
-
- * apply (generated apps) to simviz (make py simviz too and describe that)
- * store data in database
- * discuss list values read as text and use of eval, perhaps exercise
- * avoid Flask or Django in exercises, just do not specify and have
-   common exercises at the very end
- * app: username, TextAreaField, store in database and retrieve for admin
