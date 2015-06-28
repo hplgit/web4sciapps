@@ -610,6 +610,29 @@ that we want an SVG instead of a PNG plot:
 
 @@@CODE ${app_path}/controller.py fromto: # SVG@app = Flask
 
+idx{mpld3 plotting}
+
+=== Using mpld3 ===
+
+The "mpld3": "http://mpld3.github.io" library can convert Matplotlib
+plots to HTML code that can be directly embedded in a web page. Here
+is a basic example:
+
+!bc pycod
+# Plot array y vs x
+import matplotlib.pyplot as plt, mpld3
+fig, ax = plt.subplots()
+ax.plot(x, y)
+html_text = mpld3.fig_to_html(fig)
+!ec
+The string `html_text` contains all the HTML code that is needed to
+display the plot.
+
+The great advantage of the `mpld3` library is that it contains
+capabilities for creating custom interactive plots through combining
+Matplotlib with JavaScript, see the "mpld3 Example Gallery":
+"http://mpld3.github.io/examples/index.html#example-gallery".
+
 
 ===== Plotting with the Bokeh library =====
 label{wf:bokeh:flask}
