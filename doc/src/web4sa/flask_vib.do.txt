@@ -648,37 +648,42 @@ idx{Bokeh plotting}
 As an alternative to using Matplotlib for plotting, we can utilize
 the "Bokeh": "http://bokeh.pydata.org/en/latest/" tool, which is
 particularly developed for graphics in web browsers.
-One problem is that Bokeh writes its HTML code to file, while we
-want a string. There are "methods": "https://jaredfields83.wordpress.com/2014/07/03/plotting-python-an-exercise-in-using-and-extending-bokeh/" to overcome
-this problem, but we use a very simple solution, namely reading the
-generated file and returning its text.
-
 The "`vib3`": "${github_path}/${app_path}" app is similar to the
 previously described `vib1` and `vib2` app, except that we make one plot with
-Bokeh. Only the `compute.py`, `controller.py`, and the `view.html` files
-are different. First, we need to run Bokeh in the compute function.
-We load the resulting file and use a regular expression to extract
-the text in the `head` and `body` tags in the generated HTML code
-in the file. The head and body strings are returned as results.
-The `compute.py` file takes the form
+Bokeh. Only the `compute.py` and `view.html` files
+are different. Obviously, we need to run Bokeh in the compute function.
+Normally, Bokeh stores the HTML code for the plot in a file
+with a specified name. We can load the text in this file and
+extract the relevant HTML code for a plot. However, it is easier to
+use "Bokeh tools": "http://bokeh.pydata.org/en/latest/docs/user_guide/embed.html" for returning the HTML code elements directly.
+The steps are exemplified in the `compute.py` file:
 
 @@@CODE ${app_path}/compute.py fromto: from numpy@if __name
+The key data returned from `compute` consists of a text for loading Bokeh
+tools in the `head` part of the HTML document (common for all plots in
+the file) and for the plot itself there is a `script` tag and a `div` tag. The
+`script` tag can be placed anywhere, while the `div` tag must be placed
+exactly where we want to have the plot. In case of multiple plots,
+there will be a common `script` tag and one `div` tag for each plot.
+
+We need to insert the three elements return from `compute`,
+available in the tuple `result`, into the `view.html` file.
+The link and scripts for Bokeh tools in `result[0]` is inserted
+in the `head` part, while the script and div tags for the plot
+is inserted where we want to have to plot.
+The complete `view.html` file looks like this:
+
+@@@CODE ${app_path}/templates/view.html
+A feature of Bokeh plots is that one can zoom, pan, and save
+to PNG file, among other
+things. There is a toolbar at the top for such actions.
 
 The `controller.py` file is basically the same as before (but simpler
 than in the `vib2` app since we do not deal with PNG and/or SVG plots):
 
 @@@CODE ${app_path}/controller.py
 
-Finally, we need to insert the generated Bokeh head, available as
-`result[0]`, inside `head` tags and  the generated Bokeh body,
-available as `result[1]`, inside the body at the place where we
-previously put the results. The complete `view.html` file now
-becomes
 
-@@@CODE ${app_path}/templates/view.html
-
-A feature of Bokeh plots is that one can zoom and pan, among other
-things. There is a toolbar at the top.
 
 !split
 ===== Autogenerating the code =====
