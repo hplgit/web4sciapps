@@ -202,9 +202,13 @@ div { text-align: justify; text-justify: inter-word; }
                2,
                None,
                '___sec80'),
-              ('Resources', 1, None, '___sec81'),
-              ('Flask resources', 2, None, '___sec82'),
-              ('Django resources', 2, None, '___sec83')]}
+              ('Project 8: Interactive function exploration',
+               2,
+               'wf:exer:bokeh_UI',
+               'wf:exer:bokeh_UI'),
+              ('Resources', 1, None, '___sec82'),
+              ('Flask resources', 2, None, '___sec83'),
+              ('Django resources', 2, None, '___sec84')]}
 end of tocinfo -->
 
 <body>
@@ -250,7 +254,7 @@ MathJax.Hub.Config({
 <center>[2] <b>Department of Informatics, University of Oslo</b></center>
 <br>
 <p>
-<center><h4>Aug 18, 2015</h4></center> <!-- date -->
+<center><h4>Aug 19, 2015</h4></center> <!-- date -->
 <br>
 
 <h2>Table of contents</h2>
@@ -296,9 +300,10 @@ MathJax.Hub.Config({
 &nbsp; &nbsp; &nbsp; <a href="#wf:exer:gen:demo"> Exercise 5: Extend the <code>gen</code> app </a><br>
 &nbsp; &nbsp; &nbsp; <a href="#wf:exer:gen:lists"> Exercise 6: Equip the <code>gen</code> app with more data types </a><br>
 &nbsp; &nbsp; &nbsp; <a href="#___sec80"> Exercise 7: Auto-generate code from function signature </a><br>
-<a href="#___sec81"> Resources </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec82"> Flask resources </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec83"> Django resources </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#wf:exer:bokeh_UI"> Project 8: Interactive function exploration </a><br>
+<a href="#___sec82"> Resources </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec83"> Flask resources </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec84"> Django resources </a><br>
 </p>
 
 <h1 id="___sec0">Web frameworks </h1>
@@ -2865,6 +2870,11 @@ if __name__ == '__main__':
 <!-- end verbatim block -->
 
 <p>
+Finally, we remark that Bokeh plays very well with Flask.
+<a href="#wf:exer:bokeh_UI">Project 8: Interactive function exploration</a> suggests a web app that combines
+Bokeh with Flask in a very interactive way.
+
+<p>
 <!-- !split -->
 
 <h2 id="wf:autogen:flask">Autogenerating the code</h2>
@@ -5027,9 +5037,82 @@ Filename: <code>generate_flask.py</code>.
 <p>
 <!-- --- end exercise --- -->
 
-<h1 id="___sec81">Resources </h1>
+<p>
+<!-- --- begin exercise --- -->
 
-<h2 id="___sec82">Flask resources </h2>
+<h2 id="wf:exer:bokeh_UI">Project 8: Interactive function exploration</h2>
+
+<p>
+The <a href="http://bokeh.pydata.org/en/latest/" target="_self">Bokeh</a> Python library works
+very well with Flask. The purpose of this exercise is to make a web app
+where one can explore how parameters in a function influence
+the function's shape. Given some function \( f(x;p_0,p_1,\ldots,p_n) \),
+where \( x \) is the independent variable and \( p_0,p_1,\ldots,p_n \) are
+parameters, we want to create a user interface with a plot field
+and text fields or
+sliders for \( p_0,p_1,\ldots,p_n \) such that altering any parameter
+immediately updates the graph of the \( f \) as a function of \( x \).
+The Bokeh web side contains a <a href="http://bokeh.pydata.org/en/latest/docs/server_gallery/sliders_server.html" target="_self">demo</a>: for the specific function
+
+$$ f(x;x_0,A,\phi,\omega)= x_0 + A\sin(\omega (x + \phi)).$$
+
+However, this project is about accepting any function
+\( f(x;p_0,p_1,\ldots,p_n) \) and creating tailored Flask/Bokeh code of the type
+in the demo. The user must specify a Python function for \( f \):
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def f(x, p):
+    x_0, A, phi, omega = p
+    return x_0 + A*sin(omega*(x - phi))
+</code></pre>
+<!-- end verbatim block -->
+where <code>p</code> is a list of parameter values. In addition, the user must
+provide info about each parameter: the name, a range or a number,
+and if range, a default value. Here is an example:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>p_info = [
+    ('offset', [-2, 2], 0),
+    ('amplitude', [0, 5], 2.5),
+    ('phase', 0),
+    ('frequency', [1, 10], 1)]
+</code></pre>
+<!-- end verbatim block -->
+Parameters with an interval range get a slider for setting the value,
+while parameters with only a number, as for <code>phase</code> in this example,
+get a text field where the user can alter the number.
+
+<p>
+The user must also provide a suitable range for the \( x \) axis.
+As test case beyond the example above, try a Gaussian function
+with this input from the user:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>import numpy as np
+
+def gaussian(x, p):
+    mu, sigma = p
+    return 1./(sigma*np.sqrt(2*np.pi))*\ 
+           np.exp(-0.5*(x - mu)**2/sigma**2)
+
+p_info = [
+    ('mean', [-2, 2], 0),
+    ('standard deviation', [0.1, 4], 1)]
+
+x_axis = [-10, 10]
+</code></pre>
+<!-- end verbatim block -->
+Filename: <code>expore_func.tar.gz</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<h1 id="___sec82">Resources </h1>
+
+<h2 id="___sec83">Flask resources </h2>
 
 <ul>
  <li> <a href="http://flask.pocoo.org/" target="_self">Flask website</a></li>
@@ -5052,7 +5135,7 @@ Filename: <code>generate_flask.py</code>.
  <li> <a href="http://www.skulpt.org/" target="_self">Skulpt: Interactive Python in the browser</a> (but no support for <code>numpy</code>, <code>scipy</code>, or <code>matplotlib</code>)</li>
 </ul>
 
-<h2 id="___sec83">Django resources </h2>
+<h2 id="___sec84">Django resources </h2>
 
 <ul>
  <li> <a href="https://www.djangoproject.com/" target="_self">Django webpage</a></li>

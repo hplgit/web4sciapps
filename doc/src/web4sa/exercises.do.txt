@@ -383,4 +383,65 @@ from the `compute` function is to be rendered.
 Test the code generator on the `compute` function in the `vib1`
 application to check that the generated
 `model.py` and `controller.py` files are correct.
+
+===== Project: Interactive function exploration =====
+label{wf:exer:bokeh_UI}
+file=expore_func.tar.gz
+
+The "Bokeh": "http://bokeh.pydata.org/en/latest/" Python library works
+very well with Flask. The purpose of this exercise is to make a web app
+where one can explore how parameters in a function influence
+the function's shape. Given some function $f(x;p_0,p_1,\ldots,p_n)$,
+where $x$ is the independent variable and $p_0,p_1,\ldots,p_n$ are
+parameters, we want to create a user interface with a plot field
+and text fields or
+sliders for $p_0,p_1,\ldots,p_n$ such that altering any parameter
+immediately updates the graph of the $f$ as a function of $x$.
+The Bokeh web side contains a "demo": "http://bokeh.pydata.org/en/latest/docs/server_gallery/sliders_server.html": for the specific function
+
+!bt
+\[ f(x;x_0,A,\phi,\omega)= x_0 + A\sin(\omega (x + \phi)).\]
+!et
+However, this project is about accepting any function
+$f(x;p_0,p_1,\ldots,p_n)$ and creating tailored Flask/Bokeh code of the type
+in the demo. The user must specify a Python function for $f$:
+
+!bc pycod
+def f(x, p):
+    x_0, A, phi, omega = p
+    return x_0 + A*sin(omega*(x - phi))
+!ec
+where `p` is a list of parameter values. In addition, the user must
+provide info about each parameter: the name, a range or a number,
+and if range, a default value. Here is an example:
+
+!bc pycod
+p_info = [
+    ('offset', [-2, 2], 0),
+    ('amplitude', [0, 5], 2.5),
+    ('phase', 0),
+    ('frequency', [1, 10], 1)]
+!ec
+Parameters with an interval range get a slider for setting the value,
+while parameters with only a number, as for `phase` in this example,
+get a text field where the user can alter the number.
+
+The user must also provide a suitable range for the $x$ axis.
+As test case beyond the example above, try a Gaussian function
+with this input from the user:
+
+!bc pycod
+import numpy as np
+
+def gaussian(x, p):
+    mu, sigma = p
+    return 1./(sigma*np.sqrt(2*np.pi))*\
+           np.exp(-0.5*(x - mu)**2/sigma**2)
+
+p_info = [
+    ('mean', [-2, 2], 0),
+    ('standard deviation', [0.1, 4], 1)]
+
+x_axis = [-10, 10]
+!ec
 # #endif

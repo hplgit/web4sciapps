@@ -683,7 +683,9 @@ than in the `vib2` app since we do not deal with PNG and/or SVG plots):
 
 @@@CODE ${app_path}/controller.py
 
-
+Finally, we remark that Bokeh plays very well with Flask.
+Project ref{wf:exer:bokeh_UI} suggests a web app that combines
+Bokeh with Flask in a very interactive way.
 
 !split
 ===== Autogenerating the code =====

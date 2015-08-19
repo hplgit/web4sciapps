@@ -41,7 +41,7 @@ h1, h2, h3, h4, h5, h6 {
      <!-- navigation toc: --> <li><a href="._web4sa_flask004.html#___sec4" style="font-size: 80%;">Making a Flask application</a></li>
      <!-- navigation toc: --> <li><a href="._web4sa_flask006.html#wf:vib:flask" style="font-size: 80%;">Handling multiple input variables in Flask</a></li>
      <!-- navigation toc: --> <li><a href="#___sec54" style="font-size: 80%;">Exercises</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec62" style="font-size: 80%;">Flask resources</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec63" style="font-size: 80%;">Flask resources</a></li>
 
     </ul>
    </div>
@@ -168,7 +168,11 @@ h1, h2, h3, h4, h5, h6 {
                2,
                None,
                '___sec61'),
-              ('Flask resources', 1, None, '___sec62')]}
+              ('Project 8: Interactive function exploration',
+               2,
+               'wf:exer:bokeh_UI',
+               'wf:exer:bokeh_UI'),
+              ('Flask resources', 1, None, '___sec63')]}
 end of tocinfo -->
 
 
@@ -820,7 +824,83 @@ Filename: <code>generate_flask.py</code>.
 <p>
 <!-- --- end exercise --- -->
 
-<h1 id="___sec62">Flask resources </h1>
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="wf:exer:bokeh_UI">Project 8: Interactive function exploration</h2>
+
+<p>
+The <a href="http://bokeh.pydata.org/en/latest/" target="_self">Bokeh</a> Python library works
+very well with Flask. The purpose of this exercise is to make a web app
+where one can explore how parameters in a function influence
+the function's shape. Given some function \( f(x;p_0,p_1,\ldots,p_n) \),
+where \( x \) is the independent variable and \( p_0,p_1,\ldots,p_n \) are
+parameters, we want to create a user interface with a plot field
+and text fields or
+sliders for \( p_0,p_1,\ldots,p_n \) such that altering any parameter
+immediately updates the graph of the \( f \) as a function of \( x \).
+The Bokeh web side contains a <a href="http://bokeh.pydata.org/en/latest/docs/server_gallery/sliders_server.html" target="_self">demo</a>: for the specific function
+
+$$ f(x;x_0,A,\phi,\omega)= x_0 + A\sin(\omega (x + \phi)).$$
+
+However, this project is about accepting any function
+\( f(x;p_0,p_1,\ldots,p_n) \) and creating tailored Flask/Bokeh code of the type
+in the demo. The user must specify a Python function for \( f \):
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x, p):
+    x_0, A, phi, omega <span style="color: #666666">=</span> p
+    <span style="color: #008000; font-weight: bold">return</span> x_0 <span style="color: #666666">+</span> A<span style="color: #666666">*</span>sin(omega<span style="color: #666666">*</span>(x <span style="color: #666666">-</span> phi))
+</pre></div>
+<p>
+where <code>p</code> is a list of parameter values. In addition, the user must
+provide info about each parameter: the name, a range or a number,
+and if range, a default value. Here is an example:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">p_info <span style="color: #666666">=</span> [
+    (<span style="color: #BA2121">&#39;offset&#39;</span>, [<span style="color: #666666">-2</span>, <span style="color: #666666">2</span>], <span style="color: #666666">0</span>),
+    (<span style="color: #BA2121">&#39;amplitude&#39;</span>, [<span style="color: #666666">0</span>, <span style="color: #666666">5</span>], <span style="color: #666666">2.5</span>),
+    (<span style="color: #BA2121">&#39;phase&#39;</span>, <span style="color: #666666">0</span>),
+    (<span style="color: #BA2121">&#39;frequency&#39;</span>, [<span style="color: #666666">1</span>, <span style="color: #666666">10</span>], <span style="color: #666666">1</span>)]
+</pre></div>
+<p>
+Parameters with an interval range get a slider for setting the value,
+while parameters with only a number, as for <code>phase</code> in this example,
+get a text field where the user can alter the number.
+
+<p>
+The user must also provide a suitable range for the \( x \) axis.
+As test case beyond the example above, try a Gaussian function
+with this input from the user:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">gaussian</span>(x, p):
+    mu, sigma <span style="color: #666666">=</span> p
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">1./</span>(sigma<span style="color: #666666">*</span>np<span style="color: #666666">.</span>sqrt(<span style="color: #666666">2*</span>np<span style="color: #666666">.</span>pi))<span style="color: #666666">*</span>\ 
+           np<span style="color: #666666">.</span>exp(<span style="color: #666666">-0.5*</span>(x <span style="color: #666666">-</span> mu)<span style="color: #666666">**2/</span>sigma<span style="color: #666666">**2</span>)
+
+p_info <span style="color: #666666">=</span> [
+    (<span style="color: #BA2121">&#39;mean&#39;</span>, [<span style="color: #666666">-2</span>, <span style="color: #666666">2</span>], <span style="color: #666666">0</span>),
+    (<span style="color: #BA2121">&#39;standard deviation&#39;</span>, [<span style="color: #666666">0.1</span>, <span style="color: #666666">4</span>], <span style="color: #666666">1</span>)]
+
+x_axis <span style="color: #666666">=</span> [<span style="color: #666666">-10</span>, <span style="color: #666666">10</span>]
+</pre></div>
+<p>
+Filename: <code>expore_func.tar.gz</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<h1 id="___sec63">Flask resources </h1>
 
 <ul>
  <li> <a href="http://flask.pocoo.org/" target="_self">Flask website</a></li>
@@ -859,7 +939,7 @@ Filename: <code>generate_flask.py</code>.
  <div class="row Footer">
   <div class="span12">
   &copy 2013; Hans Petter Langtangen and Anders E. Johansen.
-  Last update: Aug 18, 2015.
+  Last update: Aug 19, 2015.
   </div>
  </div>
 </div>
