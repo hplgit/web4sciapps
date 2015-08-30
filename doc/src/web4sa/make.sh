@@ -32,7 +32,7 @@ system doconce split_html ${name}_django
 
 system doconce format sphinx $name -DTOPIC=Flask+Django
 system doconce split_rst $name
-system doconce sphinx_dir author='H. P. Langtangen and A. E. Johansen' $name theme=basicstrap
+system doconce sphinx_dir copyright='H. P. Langtangen and A. E. Johansen' $name theme=basicstrap
 system python automake_sphinx.py
 cd sphinx-rootdir
 sh make_themes.sh cbc basicstrap redcloud
