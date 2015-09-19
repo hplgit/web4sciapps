@@ -687,6 +687,16 @@ Finally, we remark that Bokeh plays very well with Flask.
 Project ref{wf:exer:bokeh_UI} suggests a web app that combines
 Bokeh with Flask in a very interactive way.
 
+idx{highcharts}
+idx{`pandas_highcharts`}
+
+=== Pandas highcharts plotting library ===
+
+The "pandas-highcharts": "https://pypi.python.org/pypi/pandas-highcharts/"
+package is another strong alternative to Bokeh for interative
+plotting in web pages. It is a stable and widely used code.
+
+
 !split
 ===== Autogenerating the code =====
 label{wf:autogen:flask}

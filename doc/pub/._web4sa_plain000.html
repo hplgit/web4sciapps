@@ -7,7 +7,7 @@ Automatically generated HTML file from DocOnce source
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Using Web Frameworks for Scientific Applications">
-<meta name="keywords" content="web frameworks,MVC pattern,Flask installation,Flask input forms,Flask HTML templates,Flask MVC pattern,Flask troubleshooting,Django installation,Django making a project,Django making an application,Django input forms,Django HTML templates,Flask input forms,Flask error checking,Flask CSS style sheets,Flask LaTeX mathematics,Flask input validation,inline PNG image in HTML,base64 encoding of PNG images,inline SVG figure in HTML,mpld3 plotting,Flask Bokeh plotting,Bokeh plotting,Flask login,Flask database,Flask uploading of files,Flask file upload,Django input forms,Django input validation">
+<meta name="keywords" content="web frameworks,MVC pattern,Flask installation,Flask input forms,Flask HTML templates,Flask MVC pattern,Flask troubleshooting,Django installation,Django making a project,Django making an application,Django input forms,Django HTML templates,Flask input forms,Flask error checking,Flask CSS style sheets,Flask LaTeX mathematics,Flask input validation,inline PNG image in HTML,base64 encoding of PNG images,inline SVG figure in HTML,mpld3 plotting,Flask Bokeh plotting,Bokeh plotting,highcharts,Flask login,Flask database,Flask uploading of files,Flask file upload,Django input forms,Django input validation">
 
 <title>Using Web Frameworks for Scientific Applications</title>
 
@@ -142,43 +142,44 @@ div { text-align: justify; text-justify: inter-word; }
                2,
                'wf:bokeh:flask',
                'wf:bokeh:flask'),
+              ('Pandas highcharts plotting library', 3, None, '___sec46'),
               ('Autogenerating the code',
                2,
                'wf:autogen:flask',
                'wf:autogen:flask'),
-              ('Inspecting function signatures', 3, None, '___sec47'),
-              ('Generating the model', 3, None, '___sec48'),
-              ('Generating the view', 3, None, '___sec49'),
-              ('Generating the template', 3, None, '___sec50'),
-              ('Application', 3, None, '___sec51'),
+              ('Inspecting function signatures', 3, None, '___sec48'),
+              ('Generating the model', 3, None, '___sec49'),
+              ('Generating the view', 3, None, '___sec50'),
+              ('Generating the template', 3, None, '___sec51'),
+              ('Application', 3, None, '___sec52'),
               ('User login and storage of computed results',
                2,
                'wf:flask:login',
                'wf:flask:login'),
-              ('Required additional software', 3, None, '___sec53'),
-              ('The compute part', 3, None, '___sec54'),
-              ('The interfaces of the app', 3, None, '___sec55'),
-              ('The source code', 3, None, '___sec56'),
-              ('Resources', 3, None, '___sec57'),
+              ('Required additional software', 3, None, '___sec54'),
+              ('The compute part', 3, None, '___sec55'),
+              ('The interfaces of the app', 3, None, '___sec56'),
+              ('The source code', 3, None, '___sec57'),
+              ('Resources', 3, None, '___sec58'),
               ('Uploading of files', 2, 'wf:flask:upload', 'wf:flask:upload'),
-              ('Overview of the application', 3, None, '___sec59'),
-              ('The model class', 3, None, '___sec60'),
-              ('The controller file', 3, None, '___sec61'),
-              ('The compute function', 3, None, '___sec62'),
-              ('The HTML template', 3, None, '___sec63'),
+              ('Overview of the application', 3, None, '___sec60'),
+              ('The model class', 3, None, '___sec61'),
+              ('The controller file', 3, None, '___sec62'),
+              ('The compute function', 3, None, '___sec63'),
+              ('The HTML template', 3, None, '___sec64'),
               ('Handling multiple input variables in Django',
                1,
                'wf:vib:django',
                'wf:vib:django'),
-              ('Programming the Django application', 2, None, '___sec65'),
-              ('Adding the app to a project', 3, None, '___sec66'),
-              ('The compute part', 3, None, '___sec67'),
-              ('The model', 3, None, '___sec68'),
-              ('The view', 3, None, '___sec69'),
-              ('Custom validation', 2, None, '___sec70'),
-              ('Customizing widgets', 2, None, '___sec71'),
-              ('Resources', 2, None, '___sec72'),
-              ('Exercises', 1, None, '___sec73'),
+              ('Programming the Django application', 2, None, '___sec66'),
+              ('Adding the app to a project', 3, None, '___sec67'),
+              ('The compute part', 3, None, '___sec68'),
+              ('The model', 3, None, '___sec69'),
+              ('The view', 3, None, '___sec70'),
+              ('Custom validation', 2, None, '___sec71'),
+              ('Customizing widgets', 2, None, '___sec72'),
+              ('Resources', 2, None, '___sec73'),
+              ('Exercises', 1, None, '___sec74'),
               ('Exercise 1: Add two numbers',
                2,
                'wf:exer:add2',
@@ -206,14 +207,14 @@ div { text-align: justify; text-justify: inter-word; }
               ('Exercise 7: Auto-generate code from function signature',
                2,
                None,
-               '___sec80'),
+               '___sec81'),
               ('Project 8: Interactive function exploration',
                2,
                'wf:exer:bokeh_UI',
                'wf:exer:bokeh_UI'),
-              ('Resources', 1, None, '___sec82'),
-              ('Flask resources', 2, None, '___sec83'),
-              ('Django resources', 2, None, '___sec84')]}
+              ('Resources', 1, None, '___sec83'),
+              ('Flask resources', 2, None, '___sec84'),
+              ('Django resources', 2, None, '___sec85')]}
 end of tocinfo -->
 
 <body>
@@ -270,7 +271,7 @@ MathJax.Hub.Config({
 <center>[2] <b>Department of Informatics, University of Oslo</b></center>
 <br>
 <p>
-<center><h4>Aug 19, 2015</h4></center> <!-- date -->
+<center><h4>Sep 18, 2015</h4></center> <!-- date -->
 <br>
 
 <h2>Table of contents</h2>
@@ -304,22 +305,22 @@ MathJax.Hub.Config({
 &nbsp; &nbsp; &nbsp; <a href="._web4sa_plain017.html#wf:flask:login"> User login and storage of computed results </a><br>
 &nbsp; &nbsp; &nbsp; <a href="._web4sa_plain018.html#wf:flask:upload"> Uploading of files </a><br>
 <a href="._web4sa_plain019.html#wf:vib:django"> Handling multiple input variables in Django </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain019.html#___sec65"> Programming the Django application </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain019.html#___sec70"> Custom validation </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain019.html#___sec71"> Customizing widgets </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain020.html#___sec72"> Resources </a><br>
-<a href="._web4sa_plain021.html#___sec73"> Exercises </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain019.html#___sec66"> Programming the Django application </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain019.html#___sec71"> Custom validation </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain019.html#___sec72"> Customizing widgets </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain020.html#___sec73"> Resources </a><br>
+<a href="._web4sa_plain021.html#___sec74"> Exercises </a><br>
 &nbsp; &nbsp; &nbsp; <a href="._web4sa_plain021.html#wf:exer:add2"> Exercise 1: Add two numbers </a><br>
 &nbsp; &nbsp; &nbsp; <a href="._web4sa_plain021.html#wf:exer:upload"> Exercise 2: Upload data file and visualize curves </a><br>
 &nbsp; &nbsp; &nbsp; <a href="._web4sa_plain021.html#wf:exer:formula"> Exercise 3: Plot a user-specified formula </a><br>
 &nbsp; &nbsp; &nbsp; <a href="._web4sa_plain021.html#wf:exer:Taylor"> Exercise 4: Visualize Taylor polynomial approximations </a><br>
 &nbsp; &nbsp; &nbsp; <a href="._web4sa_plain021.html#wf:exer:gen:demo"> Exercise 5: Extend the <code>gen</code> app </a><br>
 &nbsp; &nbsp; &nbsp; <a href="._web4sa_plain021.html#wf:exer:gen:lists"> Exercise 6: Equip the <code>gen</code> app with more data types </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain021.html#___sec80"> Exercise 7: Auto-generate code from function signature </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain021.html#___sec81"> Exercise 7: Auto-generate code from function signature </a><br>
 &nbsp; &nbsp; &nbsp; <a href="._web4sa_plain021.html#wf:exer:bokeh_UI"> Project 8: Interactive function exploration </a><br>
-<a href="._web4sa_plain021.html#___sec82"> Resources </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain021.html#___sec83"> Flask resources </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain021.html#___sec84"> Django resources </a><br>
+<a href="._web4sa_plain021.html#___sec83"> Resources </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain021.html#___sec84"> Flask resources </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._web4sa_plain021.html#___sec85"> Django resources </a><br>
 </p>
 
 <h1 id="___sec0">Web frameworks </h1>
