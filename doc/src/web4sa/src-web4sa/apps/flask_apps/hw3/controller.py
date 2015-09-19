@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 from compute import compute
-
+from model import InputForm
+    
 app = Flask(__name__)
 
 @app.route('/hw3', methods=['GET', 'POST'])
