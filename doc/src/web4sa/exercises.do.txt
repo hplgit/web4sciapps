@@ -177,14 +177,13 @@ function for the series expansion such that it can be plotted.
 A similar `sp.lambdify` call on the original formula is also necessary
 to plot that one.
 
-However, the challenge is that the formula is
-available only as a string, and it may contain an independent variable
-whose name is also only available through a string from the web interface.
-That is, we may give formulas like `exp(-t)` if `t` is chosen as
-independent variable.
-Also, the expression does not contain function names prefixed with `sympy` or
-`sp`, just plain names like `sin`, `cos`, `exp`, etc.
-An example on `formula` is `cos(pi*x) + log(x)`.
+However, the challenge is that the formula is available only as a
+string, and it may contain an independent variable whose name is also
+only available through a string from the web interface.  That is, we
+may give formulas like `exp(-t)` if `t` is chosen as independent
+variable.  Also, the expression does not contain function names
+prefixed with `sympy` or `sp`, just plain names like `sin`, `cos`,
+`exp`, etc.  An example on `formula` is `cos(pi*x) + log(x)`.
 
 !bsubex
 Write a function
@@ -348,6 +347,50 @@ of the $x$ axis in the plots in terms of the number of standard
 deviations (default may be 7).  Observe how the web interface
 automatically adds the new argument and how the plots adapt!
 
+===== Exercise: Make a web app with multiple apps =====
+label{wf:exer:addmul}
+file=addmul.tar.gz
+
+The purpose of this exercise is to look into web apps with
+multipe submit buttons. More precisely, we want a web app
+that can perform two actions: add $a+b$ and multiply $pq$.
+There should be two parts of the open web page:
+
+ o Two fields for $a$ and $b$ and an `Add` button. Clicking on `Add`
+   brings up a new line below add: `Sum: 3` if $a+b=3$.
+ o Two fields for $p$ and $q$ and a `Multiply` button. Clicking on `Multiply`
+   brings up a new line below add: `Product: 5` if $pq=5$.
+
+That is, the web app actually features two apps in the page.
+
+!bhint
+Make two input form classes, say `AddForm` and `MulForm` in `model.py`.
+Since it suffices to fill in either $a$ and $b$ or $p$ and $q$, all
+fields cannot be required.
+Let the controller process both classes and collect the two forms
+and two results in a `form` dictionary and a `result` dictionary
+that is passed on the to the `view.html` file.
+!ehint
+
+!bhint
+To detect which ``subapp'' (add or multply) that was used, one can
+give a name to the submit button and in the controller check which
+of the submit buttons that was pressed (and then perform the associated
+computation and update of results). In `view.html`:
+
+!bc htmlcod
+<input type="submit" name="btn" value="Add"></form>
+...
+<input type="submit" name="btn" value="Multiply"></form>
+!ec
+In `controller.py`:
+
+!bc pycod
+if request.method == 'POST' and f.validate() and \
+       request.form['btn'] == 'Multiply':
+    result['mul'] = mul(f.p.data, f.q.data)
+!ec
+!ehint
 
 ===== Exercise: Equip the `gen` app with more data types =====
 label{wf:exer:gen:lists}

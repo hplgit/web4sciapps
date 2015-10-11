@@ -1,0 +1,382 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Web frameworks &mdash; Using Web Frameworks for Scientific Applications</title>
+    
+    <link rel="stylesheet" href="_static/cloud.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/jquery.cookie.js"></script>
+    <script type="text/javascript" src="_static/cloud.js"></script>
+
+        <script src="http://sagecell.sagemath.org/static/jquery.min.js"></script>
+        <script src="http://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+
+        <script>sagecell.makeSagecell({inputLocation: ".sage"});</script>
+
+        <style type="text/css">
+                .sagecell .CodeMirror-scroll {
+                        overflow-y: hidden;
+                        overflow-x: auto;
+                }
+                .sagecell .CodeMirror {
+                        height: auto;
+                }
+        </style>
+
+    
+    <link rel="top" title="Using Web Frameworks for Scientific Applications" href="index.html" />
+    <link rel="next" title="Making a Flask application" href="._web4sa002.html" />
+    <link rel="prev" title="Using Web Frameworks for Scientific Applications" href="._web4sa000.html" />
+ 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body role="document">
+    <div class="relbar-top">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="._web4sa002.html" title="Making a Flask application"
+             accesskey="N">next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="._web4sa000.html" title="Using Web Frameworks for Scientific Applications"
+             accesskey="P">previous</a> &nbsp; &nbsp;</li>
+    <li><a href="index.html">Using Web Frameworks for Scientific Applications</a> &raquo;</li>
+ 
+      </ul>
+    </div>
+    </div>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="web-frameworks">
+<h1>Web frameworks<a class="headerlink" href="#web-frameworks" title="Permalink to this headline">¶</a></h1>
+<p id="index-0">Computational scientists may want to offer their applications through
+a web interface, thereby making a <em>web application</em>.
+Basically, this means that users can set input data
+to the application on a web page, then click on some <em>Compute</em> button,
+and back comes a new web page with the results of the computations.
+The web interface can either be used as a GUI locally on the
+scientist&#8217;s computer, or the interface can be depolyed to
+a server and made available to the whole world.</p>
+<p>Web applications of the mentioned type can be created from scratch
+using CGI scripts in (e.g.) Python, but the code quickly gets longer
+and more involved as the complexity of the web interface
+grows. Nowadays, most web applications are created with the aid of
+<em>web frameworks</em>, which are software packages that simplify the
+programming tasks of offering services through the Internet. The
+downside of web frameworks is that there is a significant amount of
+steps and details to learn before your first simple demo application
+works.  The upside is that advanced applications are within reach,
+without an overwhelming amount of programming, as soon as you have
+understood the basic demos.</p>
+<p>We shall explore two web frameworks: the very popular <a class="reference external" href="https://www.djangoproject.com/">Django framework</a> and the more high-level and easy-to-use framework
+<a class="reference external" href="http://flask.pocoo.org/">Flask</a>. Our introductory examples were also
+implemented in the <a class="reference external" href="http://www.web2py.com/">web2py</a> framework, but according
+to our experience, Flask and Django are easier to explain to scientists.
+The primary advantage of Django
+over other web frameworks is the rich set of documentation and
+examples. Googling for &#8220;Django tutorials&#8221; gives lots of hits including
+a  list of <a class="reference external" href="https://code.djangoproject.com/wiki/Tutorials">web tutorials</a>
+and a list of <a class="reference external" href="http://www.youtube.com/playlist?list=PL385A53B00B8B158E">YouTube videos</a>. There is also an electronic <a class="reference external" href="http://www.djangobook.com/en/2.0/">Django book</a>. At the time of this writing, the Flask documentation is not comparable. The two most important resources are the</p>
+<blockquote>
+<div><a class="reference external" href="http://flask.pocoo.org/">official web site</a> and the <a class="reference external" href="http://wtforms.simplecodes.com/docs/0.6/index.html">WTForms Documentation</a>. There is, unfortunately, hardly any examples on how Django or Flask can be used to enable typical scientific applications for the web, and that is why we have developed some targeted examples on this topic.</div></blockquote>
+<p>A basic question is, of course, whether you should apply Flask or
+Django for your web project. Googling for <em>flask vs django</em> gives a
+lot of diverging opinions. The authors&#8217; viewpoint is that Flask is
+much easier to get started with than Django. You can grow your
+application to a really big one with both frameworks, but some
+advanced features is easier in one framework than in the other.</p>
+<p>The problem for a computational scientist who wants to enable
+mathematical calculations through the web is that most of
+the introductory examples on utilizing a particular
+web framework address web applications
+of very different nature, e.g., blogs and polls. Therefore, we have made an
+alternative introduction which explains, in the simplest possible way,
+how web frameworks can be used to</p>
+<ol class="arabic simple">
+<li>generate a web page with input data to your application,</li>
+<li>run the application to perform mathematical computations, and</li>
+<li>generate a web page with the results of the computations.</li>
+</ol>
+<p>To work with Django, you need to know about Python packages and modules
+as well as Python classes. With Flask it is enough to be familiar with
+functions and modules, though knowledge of classes and a bit of
+decorators might be an advantage.</p>
+<p>All the files associated with this document are available in a
+<a class="reference external" href="https://github.com/hplgit/web4sciapps/">GitHub repository</a>.
+The relevant files for the web applications are located
+in a subtree <a class="reference external" href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/">doc/src/web4sa/src-web4sa/apps</a>
+of this repository.</p>
+<div class="section" id="the-mvc-pattern">
+<h2>The MVC pattern<a class="headerlink" href="#the-mvc-pattern" title="Permalink to this headline">¶</a></h2>
+<p id="index-1">The MVC pattern stands for Model-View-Controller and is a way of
+separating the user&#8217;s interaction with an application from the inner
+workings of the application. In a scientific application this
+usually means separating mathematical computations from the
+user interface and visualization of results.
+The <a class="reference external" href="http://en.wikipedia.org/wiki/MVC_Pattern">Wikipedia definition of the MVC pattern</a> gives a very high-level
+explanation of what the model, view, and controller do and mentions
+the fact that different web frameworks interpret the three components
+differently. Any web application works with a set of data and needs
+a user interface for the communication of data between the user and
+some data processing software. The classical
+MVC pattern introduces</p>
+<blockquote>
+<div><ul class="simple">
+<li>the model to hold the data</li>
+<li>the view to display the data</li>
+<li>the controller to move the data by gluing the model and the view.</li>
+</ul>
+</div></blockquote>
+<p>For applications performing mathematical computations we find it
+convenient to explicitly introduce a fourth component that we call
+<em>compute</em> where the mathematical computations are encapsulated.  With
+the MVC pattern and the compute component we have a clear separation
+between data (model), the way data is presented (view), the
+computations (compute), and the way these components communicate
+(controller). In a small program such a separation may look as
+overkill, but it pays off in more complicated applications. More
+importantly, the concepts of the MVC pattern are widely used in web
+frameworks and their documentation so one should really adapt to the
+MVC way of thinking.</p>
+<p>Web frameworks often have their own way of interpreting the
+model, view, and controller parts of the MVC pattern.
+In particular, most frameworks often divide the view into two parts:
+one software component and one HTML template. The latter takes care
+of the look and feel of the web page while the former often takes
+the role of being the controller too.
+For our scientific applications
+we shall employ an interpretation of the MVC pattern
+which is compatible with what we need later on:</p>
+<blockquote>
+<div><ul class="simple">
+<li>the model contains the data (often only the input data) of the application,</li>
+<li>the view controls the user interface that handles input and output data,
+and also calls to functionality that computes the output given the input.</li>
+</ul>
+</div></blockquote>
+<p>The model will be a Python class with static attributes holding the data.
+The view consists of Python code processing the model&#8217;s data, calling the
+compute component, and specifying HTML
+templates for the design of the web pages.</p>
+<p>Flask does not force any MVC pattern on the programmer, but
+the code needed to build web applications can easily be split into
+model, view, controller, and compute components, as will be shown later.
+Django, on the other hand, automatically generates application files with names
+<code class="docutils literal"><span class="pre">views.py</span></code> and <code class="docutils literal"><span class="pre">models.py</span></code> so it is
+necessary to have some idea what Django means by these terms.
+The controller functionality in Django lies both in the <code class="docutils literal"><span class="pre">views.py</span></code> file and
+in the configuration
+files (<code class="docutils literal"><span class="pre">settings.py</span></code> and <code class="docutils literal"><span class="pre">urls.py</span></code>). The view component of the application
+consists both of the <code class="docutils literal"><span class="pre">views.py</span></code> file and template files used to create
+the HTML code in the web pages.</p>
+<p>Forthcoming examples will illustrate how a scientific application is
+split to meet the requirements of the MVC software design pattern.</p>
+</div>
+<div class="section" id="a-very-simple-application">
+<h2>A very simple application<a class="headerlink" href="#a-very-simple-application" title="Permalink to this headline">¶</a></h2>
+<p>We shall start with the simplest possible application,
+a &#8220;scientific hello world program&#8221;, where the
+task is to read a number and write out &#8220;Hello, World!&#8221; followed by
+the sine of the number. This application has one input variable and
+a line of text as output.</p>
+<p>Our first implementation reads the input from the command
+line and writes the results to the terminal window:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
+<span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">math</span>
+<span class="n">r</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&#39;Hello, World! sin(</span><span class="si">%g</span><span class="s">)=</span><span class="si">%g</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In the terminal we can exemplify the program</p>
+<div class="highlight-text"><div class="highlight"><pre>Terminal&gt; python hw.py 1.2
+Hello, World! sin(1.2)=0.932039
+</pre></div>
+</div>
+<p>The task of the web version of this program is to read the <code class="docutils literal"><span class="pre">r</span></code>
+variable from a web page, compute the sine,
+and write out a new web page with the resulting text.</p>
+</div>
+<div class="section" id="application-of-the-mvc-pattern">
+<span id="wf-hw-mvc"></span><h2>Application of the MVC pattern<a class="headerlink" href="#application-of-the-mvc-pattern" title="Permalink to this headline">¶</a></h2>
+<p>Before thinking of a web application, we first <em>refactor</em> our program
+such that it fits with the classical MVC pattern and a compute component.
+The refactoring does not change the functionality of the code, it
+just distributes the original statements in functions and modules.
+Here we create four modules: <code class="docutils literal"><span class="pre">model</span></code>, <code class="docutils literal"><span class="pre">view</span></code>,
+<code class="docutils literal"><span class="pre">compute</span></code>, and <code class="docutils literal"><span class="pre">controller</span></code>.</p>
+<blockquote>
+<div><ul class="simple">
+<li>The <code class="docutils literal"><span class="pre">compute</span></code> module contains a function <code class="docutils literal"><span class="pre">compute(r)</span></code> that performs
+the mathematics and returns the value <code class="docutils literal"><span class="pre">s</span></code>, which equals <code class="docutils literal"><span class="pre">sin(r)</span></code>.</li>
+<li>The <code class="docutils literal"><span class="pre">model</span></code> module holds the input data, here <code class="docutils literal"><span class="pre">r</span></code>.</li>
+<li>The <code class="docutils literal"><span class="pre">view</span></code> module has two functions, one for reading input data,
+<code class="docutils literal"><span class="pre">get_input</span></code>,
+and one for presenting the output, <code class="docutils literal"><span class="pre">present_output</span></code>.
+The latter takes the input, calls <code class="docutils literal"><span class="pre">compute</span></code> functionalty, and
+generates the output.</li>
+<li>The <code class="docutils literal"><span class="pre">controller</span></code> module calls the view to initialize
+the model&#8217;s data from the command line. Thereafter, the
+view is called to present the output.</li>
+</ul>
+</div></blockquote>
+<p>The <code class="docutils literal"><span class="pre">model.py</span></code> file contains the <code class="docutils literal"><span class="pre">r</span></code> variable, which must
+be declared with a default value in order to create the data object:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">r</span> <span class="o">=</span> <span class="mf">0.0</span>    <span class="c"># input</span>
+<span class="n">s</span> <span class="o">=</span> <span class="bp">None</span>   <span class="c"># output</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">view.py</span></code> file is restricted to the communication with the user and reads</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">compute</span>
+
+<span class="c"># Input: float r</span>
+<span class="c"># Output: &quot;Hello, World! sin(r)=...&quot;</span>
+
+<span class="k">def</span> <span class="nf">get_input</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Get input data from the command line.&quot;&quot;&quot;</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">r</span>
+
+<span class="k">def</span> <span class="nf">present_output</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Write results to terminal window.&quot;&quot;&quot;</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">compute</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">&#39;Hello, World! sin(</span><span class="si">%g</span><span class="s">)=</span><span class="si">%g</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The mathematics is encapsulated in <code class="docutils literal"><span class="pre">compute.py</span></code>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">math</span>
+
+<span class="k">def</span> <span class="nf">compute</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Finally, <code class="docutils literal"><span class="pre">controller.py</span></code> glues the model and the view:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">model</span><span class="o">,</span> <span class="nn">view</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">r</span> <span class="o">=</span> <span class="n">view</span><span class="o">.</span><span class="n">get_input</span><span class="p">()</span>
+<span class="n">view</span><span class="o">.</span><span class="n">present_output</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">r</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let us try our refactored code:</p>
+<div class="highlight-text"><div class="highlight"><pre>Terminal&gt; python controller.py 1.2
+Hello, World! sin(1.2)=0.932039
+</pre></div>
+</div>
+<p>The next step is to create a web interface to our scientific hello world
+program such that we can fill in the number <code class="docutils literal"><span class="pre">r</span></code> in a text field, click a
+<em>Compute</em> button and get back a new web page with the output text
+shown above: &#8220;Hello, World! sin(r)=s&#8221;.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="sphinxlocaltoc">
+    <h3><a href="index.html">Page contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Web frameworks</a><ul>
+<li><a class="reference internal" href="#the-mvc-pattern">The MVC pattern</a></li>
+<li><a class="reference internal" href="#a-very-simple-application">A very simple application</a></li>
+<li><a class="reference internal" href="#application-of-the-mvc-pattern">Application of the MVC pattern</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div class="sphinxprev">
+    <h4>Previous page</h4>
+    <p class="topless"><a href="._web4sa000.html"
+                          title="Previous page">&larr; Using Web Frameworks for Scientific Applications</a></p>
+  </div>
+  <div class="sphinxnext">
+    <h4>Next page</h4>
+    <p class="topless"><a href="._web4sa002.html"
+                          title="Next page">&rarr; Making a Flask application</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/._web4sa001.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="relbar-bottom">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="._web4sa002.html" title="Making a Flask application"
+             >next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="._web4sa000.html" title="Using Web Frameworks for Scientific Applications"
+             >previous</a> &nbsp; &nbsp;</li>
+    <li><a href="index.html">Using Web Frameworks for Scientific Applications</a> &raquo;</li>
+ 
+      </ul>
+    </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &copy; Copyright H. P. Langtangen and A. E. Johansen.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4a0+.
+    </div>
+    <!-- cloud_sptheme 1.4 -->
+  </body>
+</html>

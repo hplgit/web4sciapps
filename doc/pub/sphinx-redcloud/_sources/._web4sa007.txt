@@ -1,0 +1,60 @@
+.. !split
+
+Resources  (3)
+==============
+
+Flask resources
+---------------
+
+ * `Flask website <http://flask.pocoo.org/>`__
+
+ * `Flask Quick Start <http://flask.pocoo.org/docs/0.10/tutorial/>`__
+
+ * `Flask tutorial <http://flask.pocoo.org/docs/0.10/tutorial/>`__
+
+ * `The Flask Mega-Tutorial <http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world>`__ by M. Grinberg
+
+ * `WTForms Documentation <http://wtforms.simplecodes.com/docs/0.6/index.html>`__
+
+ * `The Jinja2 templating language <http://jinja.pocoo.org/docs/>`__
+
+ * `The Werkzeug library <http://werkzeug.pocoo.org/>`__
+
+ * `An Introduction to Python's Flask Framework <http://code.tutsplus.com/tutorials/an-introduction-to-pythons-flask-framework--net-28822>`__ by L. Polepeddi
+
+ * `Discover Flask, Part I - Setting up a Static Site <https://realpython.com/blog/python/introduction-to-flask-part-1-setting-up-a-static-site/>`__
+
+ * Flaskr: A Minimal Blog Application: `Code <https://github.com/mitsuhiko/flask/tree/master/examples/flaskr/>`__, `Explanation <https://stormpath.com/blog/build-a-flask-app-in-30-minutes/>`__
+
+ * `Flask Login with Facebook, Twitter, and OpenID <http://peterhudec.github.io/authomatic/examples/flask-simple.html>`__
+
+ * `Lightweight Python Apps with Flask, Bootstrap, and Heroku <http://blog.shea.io/lightweight-python-apps-with-flask-twitter-bootstrap-and-heroku/>`__ by R. Shea
+
+ * `How to Structure Large Flask Applications <https://www.digitalocean.com/community/tutorials/how-to-structure-large-flask-applications>`__
+
+ * `Explore Flask <https://exploreflask.com/index.html>`__ by R. Picard (online book)
+
+ * `Flask Mega Tutorial for Data Scientists <http://www.datacommunitydc.org/blog/2014/02/flask-mega-meta-tutorial-data-scientists>`__
+
+ * `Quick Flask++ tutorial <http://maximebf.com/blog/2012/10/building-websites-in-python-with-flask/#.UxV4jHVdXn4>`__
+
+ * `Flask-Bootstrap <https://github.com/mbr/flask-bootstrap>`__ with `documentation <http://pythonhosted.org/Flask-Bootstrap/>`__, `basic usage <http://pythonhosted.org/Flask-Bootstrap/basic-usage.html>`__ and `example <https://github.com/mbr/flask-bootstrap/blob/master/sample_application/__init__.py>`__
+
+ * `Skulpt: Interactive Python in the browser <http://www.skulpt.org/>`__ (but no support for ``numpy``, ``scipy``, or ``matplotlib``)
+
+Django resources
+----------------
+
+ * `Django webpage <https://www.djangoproject.com/>`__
+
+ * `List of Web tutorials <https://code.djangoproject.com/wiki/Tutorials>`__
+
+ * `YouTube videos <http://www.youtube.com/playlist?list=PL385A53B00B8B158E>`__
+
+ * `Effective Django Tutorial <http://www.effectivedjango.com/tutorial/>`__
+
+ * `Django by Example <http://lightbird.net/dbe2/>`__ (blog, questionnaire, etc.)
+
+ * `Django for Scientific Applications <http://www.blopig.com/blog/2013/09/django-for-scientific-applications/>`__
+
+ * `A Tutorial for Deploying a Django Application that Uses Numpy and Scipy to Google Compute Engine Using Apache2 and modwsgi <http://www.datacommunitydc.org/blog/2013/12/a-tutorial-for-deploying-a-django-application-that-uses-numpy-and-scipy-to-google-compute-engine-using-apache2-and-modwsgi>`__

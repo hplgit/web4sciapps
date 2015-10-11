@@ -3,12 +3,12 @@ from flask import Flask, render_template, request
 from compute import compute
 import sys
 
+app = Flask(__name__)
+
 try:
     template_name = sys.argv[1]
 except IndexError:
     template_name = 'view_plain'
-
-app = Flask(__name__)
 
 if template_name == 'view_flask_bootstrap':
     from flask_bootstrap import Bootstrap

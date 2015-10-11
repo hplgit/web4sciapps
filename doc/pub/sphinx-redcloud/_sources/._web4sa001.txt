@@ -1,0 +1,258 @@
+.. !split
+
+Web frameworks
+==============
+
+.. index:: web frameworks
+
+Computational scientists may want to offer their applications through
+a web interface, thereby making a *web application*.
+Basically, this means that users can set input data
+to the application on a web page, then click on some *Compute* button,
+and back comes a new web page with the results of the computations.
+The web interface can either be used as a GUI locally on the
+scientist's computer, or the interface can be depolyed to
+a server and made available to the whole world.
+
+Web applications of the mentioned type can be created from scratch
+using CGI scripts in (e.g.) Python, but the code quickly gets longer
+and more involved as the complexity of the web interface
+grows. Nowadays, most web applications are created with the aid of
+*web frameworks*, which are software packages that simplify the
+programming tasks of offering services through the Internet. The
+downside of web frameworks is that there is a significant amount of
+steps and details to learn before your first simple demo application
+works.  The upside is that advanced applications are within reach,
+without an overwhelming amount of programming, as soon as you have
+understood the basic demos.
+
+We shall explore two web frameworks: the very popular `Django framework <https://www.djangoproject.com/>`__ and the more high-level and easy-to-use framework
+`Flask <http://flask.pocoo.org/>`__. Our introductory examples were also
+implemented in the `web2py <http://www.web2py.com/>`__ framework, but according
+to our experience, Flask and Django are easier to explain to scientists.
+The primary advantage of Django
+over other web frameworks is the rich set of documentation and
+examples. Googling for "Django tutorials" gives lots of hits including
+a  list of `web tutorials <https://code.djangoproject.com/wiki/Tutorials>`__
+and a list of `YouTube videos <http://www.youtube.com/playlist?list=PL385A53B00B8B158E>`__. There is also an electronic `Django book <http://www.djangobook.com/en/2.0/>`__. At the time of this writing, the Flask documentation is not comparable. The two most important resources are the
+ `official web site <http://flask.pocoo.org/>`__ and the `WTForms Documentation <http://wtforms.simplecodes.com/docs/0.6/index.html>`__. There is, unfortunately, hardly any examples on how Django or Flask can be used to enable typical scientific applications for the web, and that is why we have developed some targeted examples on this topic.
+
+A basic question is, of course, whether you should apply Flask or
+Django for your web project. Googling for *flask vs django* gives a
+lot of diverging opinions. The authors' viewpoint is that Flask is
+much easier to get started with than Django. You can grow your
+application to a really big one with both frameworks, but some
+advanced features is easier in one framework than in the other.
+
+The problem for a computational scientist who wants to enable
+mathematical calculations through the web is that most of
+the introductory examples on utilizing a particular
+web framework address web applications
+of very different nature, e.g., blogs and polls. Therefore, we have made an
+alternative introduction which explains, in the simplest possible way,
+how web frameworks can be used to
+
+1. generate a web page with input data to your application,
+
+2. run the application to perform mathematical computations, and
+
+3. generate a web page with the results of the computations.
+
+To work with Django, you need to know about Python packages and modules
+as well as Python classes. With Flask it is enough to be familiar with
+functions and modules, though knowledge of classes and a bit of
+decorators might be an advantage.
+
+All the files associated with this document are available in a
+`GitHub repository <https://github.com/hplgit/web4sciapps/>`__.
+The relevant files for the web applications are located
+in a subtree `doc/src/web4sa/src-web4sa/apps <https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/>`__
+of this repository.
+
+The MVC pattern
+---------------
+
+.. index:: MVC pattern
+
+The MVC pattern stands for Model-View-Controller and is a way of
+separating the user's interaction with an application from the inner
+workings of the application. In a scientific application this
+usually means separating mathematical computations from the
+user interface and visualization of results.
+The `Wikipedia definition of the MVC pattern <http://en.wikipedia.org/wiki/MVC_Pattern>`__ gives a very high-level
+explanation of what the model, view, and controller do and mentions
+the fact that different web frameworks interpret the three components
+differently. Any web application works with a set of data and needs
+a user interface for the communication of data between the user and
+some data processing software. The classical
+MVC pattern introduces
+
+ * the model to hold the data
+
+ * the view to display the data
+
+ * the controller to move the data by gluing the model and the view.
+
+For applications performing mathematical computations we find it
+convenient to explicitly introduce a fourth component that we call
+*compute* where the mathematical computations are encapsulated.  With
+the MVC pattern and the compute component we have a clear separation
+between data (model), the way data is presented (view), the
+computations (compute), and the way these components communicate
+(controller). In a small program such a separation may look as
+overkill, but it pays off in more complicated applications. More
+importantly, the concepts of the MVC pattern are widely used in web
+frameworks and their documentation so one should really adapt to the
+MVC way of thinking.
+
+Web frameworks often have their own way of interpreting the
+model, view, and controller parts of the MVC pattern.
+In particular, most frameworks often divide the view into two parts:
+one software component and one HTML template. The latter takes care
+of the look and feel of the web page while the former often takes
+the role of being the controller too.
+For our scientific applications
+we shall employ an interpretation of the MVC pattern
+which is compatible with what we need later on:
+
+ * the model contains the data (often only the input data) of the application,
+
+ * the view controls the user interface that handles input and output data,
+   and also calls to functionality that computes the output given the input.
+
+The model will be a Python class with static attributes holding the data.
+The view consists of Python code processing the model's data, calling the
+compute component, and specifying HTML
+templates for the design of the web pages.
+
+Flask does not force any MVC pattern on the programmer, but
+the code needed to build web applications can easily be split into
+model, view, controller, and compute components, as will be shown later.
+Django, on the other hand, automatically generates application files with names
+``views.py`` and ``models.py`` so it is
+necessary to have some idea what Django means by these terms.
+The controller functionality in Django lies both in the ``views.py`` file and
+in the configuration
+files (``settings.py`` and ``urls.py``). The view component of the application
+consists both of the ``views.py`` file and template files used to create
+the HTML code in the web pages.
+
+Forthcoming examples will illustrate how a scientific application is
+split to meet the requirements of the MVC software design pattern.
+
+A very simple application
+-------------------------
+
+We shall start with the simplest possible application,
+a "scientific hello world program", where the
+task is to read a number and write out "Hello, World!" followed by
+the sine of the number. This application has one input variable and
+a line of text as output.
+
+Our first implementation reads the input from the command
+line and writes the results to the terminal window:
+
+.. code-block:: python
+
+        #!/usr/bin/env python
+        import sys, math
+        r = float(sys.argv[1])
+        s = math.sin(r)
+        print 'Hello, World! sin(%g)=%g' % (r, s)
+
+In the terminal we can exemplify the program
+
+.. code-block:: text
+
+        Terminal> python hw.py 1.2
+        Hello, World! sin(1.2)=0.932039
+
+The task of the web version of this program is to read the ``r``
+variable from a web page, compute the sine,
+and write out a new web page with the resulting text.
+
+.. _wf:hw:mvc:
+
+Application of the MVC pattern
+------------------------------
+
+Before thinking of a web application, we first *refactor* our program
+such that it fits with the classical MVC pattern and a compute component.
+The refactoring does not change the functionality of the code, it
+just distributes the original statements in functions and modules.
+Here we create four modules: ``model``, ``view``,
+``compute``, and ``controller``.
+
+ * The ``compute`` module contains a function ``compute(r)`` that performs
+   the mathematics and returns the value ``s``, which equals ``sin(r)``.
+
+ * The ``model`` module holds the input data, here ``r``.
+
+ * The ``view`` module has two functions, one for reading input data,
+   ``get_input``,
+   and one for presenting the output, ``present_output``.
+   The latter takes the input, calls ``compute`` functionalty, and
+   generates the output.
+
+ * The ``controller`` module calls the view to initialize
+   the model's data from the command line. Thereafter, the
+   view is called to present the output.
+
+The ``model.py`` file contains the ``r`` variable, which must
+be declared with a default value in order to create the data object:
+
+.. code-block:: python
+
+        r = 0.0    # input
+        s = None   # output
+
+The ``view.py`` file is restricted to the communication with the user and reads
+
+.. code-block:: python
+
+        import sys
+        import compute
+        
+        # Input: float r
+        # Output: "Hello, World! sin(r)=..."
+        
+        def get_input():
+            """Get input data from the command line."""
+            r = float(sys.argv[1])
+            return r
+        
+        def present_output(r):
+            """Write results to terminal window."""
+            s = compute.compute(r)
+            print 'Hello, World! sin(%g)=%g' % (r, s)
+
+The mathematics is encapsulated in ``compute.py``:
+
+.. code-block:: python
+
+        import math
+        
+        def compute(r):
+            return math.sin(r)
+
+Finally, ``controller.py`` glues the model and the view:
+
+.. code-block:: python
+
+        import model, view
+        
+        model.r = view.get_input()
+        view.present_output(model.r)
+
+Let us try our refactored code:
+
+.. code-block:: text
+
+        Terminal> python controller.py 1.2
+        Hello, World! sin(1.2)=0.932039
+
+The next step is to create a web interface to our scientific hello world
+program such that we can fill in the number ``r`` in a text field, click a
+*Compute* button and get back a new web page with the output text
+shown above: "Hello, World! sin(r)=s".
+

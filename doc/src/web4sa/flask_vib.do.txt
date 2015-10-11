@@ -32,8 +32,10 @@ We shall make a series of different versions of this app:
  o `vib1` for the basic set-up and illustration of tailoring the HTML code.
  o `vib2` for custom validation of input, governed by the programmer,
    and inlined graphics in the HTML code.
+ o `vib3` for interactive Bokeh plots.
  o `gen` for automatic generation of the Flask app (!).
  o `login` for storing computed results in user accounts.
+ o `upload` for uploading files to a web app.
 
 ===== Programming the Flask application =====
 label{wf:vib1:flask:app}
@@ -108,7 +110,28 @@ to this Flask app for choosing which template we want. The rest of
 the `controller.py` file follows much the same set up as for the scientific
 hello world app:
 
-@@@CODE ${app_path}/controller.py
+!bc pypro
+from model import InputForm
+from flask import Flask, render_template, request
+from compute import compute
+
+app = Flask(__name__)
+
+@app.route('/vib1', methods=['GET', 'POST'])
+def index():
+    form = InputForm(request.form)
+    if request.method == 'POST' and form.validate():
+        result = compute(form.A.data, form.b.data,
+                         form.w.data, form.T.data)
+    else:
+        result = None
+
+    return render_template('view.html', form=form, result=result)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+!ec
+
 
 === The HTML template ===
 
@@ -136,7 +159,7 @@ arguments to the `render_template` function. We can easily pass on
 any object in our application to the template. Debugging of the template
 is done by viewing the HTML source of the web page in the browser.
 
-You are encouraged to go to the `vib` directory,
+You are encouraged to go to the `vib1` directory,
 run `python controller.py`, and load
 
 !bc
@@ -307,6 +330,11 @@ After `app = Flask(__name__)` we need to do
 from flask_bootstrap import Bootstrap
 Bootstrap(app)
 !ec
+We introduce a command-line argument to control whether we want the
+plain view or the Bootstrap view. The complete `controller.py` file
+then looks like
+
+@@@CODE ${app_path}/controller.py
 
 The template employs new keywords `extends` and `block`:
 

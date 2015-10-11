@@ -59,26 +59,24 @@ in detail below.
 
 === Dissection ===
 
-The web application is the `app` object of class `Flask`, and initialized
-as shown. The model is a special Flask class derived from `Form`
-where the input variable in the app is listed as a
-static class attribute and initialized
-by a special form field object from the `wtforms` package.
-Such form field objects correspond to HTML forms in the input page.
-For the `r` variable we apply `FloatField` since it is a floating-point
-variable. A default validator, here checking that the user supplies
-a real number, is automatically included, but we add another validator,
-`InputRequired`, to force the user to provide input before clicking on
-the *equals* button.
+The web application is the `app` object of class `Flask`, and
+initialized as shown. The model is a special Flask class derived from
+`Form` where the input variable in the app is listed as a static class
+attribute and initialized by a special form field object from the
+`wtforms` package.  Such form field objects correspond to HTML forms
+in the input page.  For the `r` variable we apply `FloatField` since
+it is a floating-point variable. A default validator, here checking
+that the user supplies a real number, is automatically included, but
+we add another validator, `InputRequired`, to force the user to
+provide input before clicking on the *equals* button.
 
-The view part of this Python code consists of
-a URL and a corresponding function to call when the URL is invoked.
-The function name is here chosen to be `index` (inspired by the standard
-`index.html` page that is the main page of a web app). The
-decorator `@app.route('/hw1', ...)` maps the URL
-`http://127.0.0.1:5000/hw1` to a call to `index`.
-The `methods` argument must be as shown to allow the user to communicate
-with the web page.
+The view part of this Python code consists of a URL and a
+corresponding function to call when the URL is invoked.  The function
+name is here chosen to be `index` (inspired by the standard
+`index.html` page that is the main page of a web app). The decorator
+`@app.route('/hw1', ...)` maps the URL `http://127.0.0.1:5000/hw1` to
+a call to `index`.  The `methods` argument must be as shown to allow
+the user to communicate with the web page.
 
 idx{Flask!`index` function}
 
@@ -103,7 +101,7 @@ template. Since the output page is simplest we display the
 @@@CODE ${app_path}/templates/view_output.html
 
 Keyword arguments sent to `render_template` are available in the
-HTML template. Here we have `form` and `s`.
+HTML template. Here we have the keyword arguments `form` and `s`.
 With the `form` object we extract the value of
 `r` in the HTML code by `{{ form.r.data }}`. Similarly, the value of `s`
 is simply `{{ s }}`.
