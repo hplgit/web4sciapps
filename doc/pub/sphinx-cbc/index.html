@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Using Web Frameworks for Scientific Applications &mdash; Using Web Frameworks for Scientific Applications</title>
+    <title>Using Web Frameworks for Scientific Applications</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -46,7 +46,15 @@
     <link rel="top" title="Using Web Frameworks for Scientific Applications" href="#" />
     <link rel="next" title="Using Web Frameworks for Scientific Applications" href="._web4sa000.html" />
  
-  </head>
+  
+       <style type="text/css">
+         div.admonition {
+           background-color: whiteSmoke;
+           border: 1px solid #bababa;
+         }
+       </style>
+      </head>
+    
   <body role="document">
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -73,109 +81,43 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="._web4sa000.html">Using Web Frameworks for Scientific Applications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="._web4sa001.html">Web frameworks</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="._web4sa001.html#the-mvc-pattern">The MVC pattern</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._web4sa001.html#a-very-simple-application">A very simple application</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._web4sa001.html#application-of-the-mvc-pattern">Application of the MVC pattern</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa001.html#other-frameworks">Other frameworks</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="._web4sa002.html">Making a Flask application</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="._web4sa002.html#programming-the-flask-application-1">Programming the Flask application  (1)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._web4sa002.html#the-user-interaction-1">The user interaction  (1)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._web4sa002.html#the-python-code">The Python code</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._web4sa002.html#dissection">Dissection</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._web4sa002.html#the-template-files">The template files</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._web4sa002.html#testing-the-application">Testing the application</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="._web4sa002.html#equipping-the-input-page-with-output-results-1">Equipping the input page with output results  (1)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa002.html#programming-the-flask-application-1">Programming the Flask application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa002.html#equipping-the-input-page-with-output-results-1">Equipping the input page with output results</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._web4sa002.html#splitting-the-app-into-model-view-and-controller-files">Splitting the app into model, view, and controller files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._web4sa002.html#troubleshooting">Troubleshooting</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._web4sa002.html#address-already-in-use">Address already in use</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa002.html#troubleshooting">Troubleshooting</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="._web4sa003.html">Making a Django application</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="._web4sa003.html#setting-up-a-django-project">Setting up a Django project</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._web4sa003.html#setting-up-a-django-application">Setting up a Django application</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._web4sa003.html#programming-the-django-application-1">Programming the Django application  (1)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._web4sa003.html#the-user-interaction-2">The user interaction  (2)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._web4sa003.html#the-model-1">The model  (1)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._web4sa003.html#the-view-1">The view  (1)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._web4sa003.html#making-the-input-page">Making the input page</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._web4sa003.html#making-the-results-page">Making the results page</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="._web4sa003.html#equipping-the-input-page-with-output-results-2">Equipping the input page with output results  (2)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa003.html#programming-the-django-application-1">Programming the Django application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa003.html#equipping-the-input-page-with-output-results-2">Equipping the input page with output results</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="._web4sa004.html">Handling multiple input variables in Flask</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="._web4sa004.html#programming-the-flask-application-2">Programming the Flask application  (2)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._web4sa004.html#the-compute-part-1">The compute part  (1)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._web4sa004.html#the-model-2">The model  (2)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._web4sa004.html#the-view-2">The view  (2)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._web4sa004.html#the-html-template-1">The HTML template  (1)</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa004.html#programming-the-flask-application-2">Programming the Flask application</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._web4sa004.html#implementing-error-checking-in-the-template">Implementing error checking in the template</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._web4sa004.html#using-style-sheets">Using style sheets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._web4sa004.html#using-latex-mathematics">Using LaTeX mathematics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._web4sa004.html#rearranging-the-elements-in-the-html-template">Rearranging the elements in the HTML template</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._web4sa004.html#bootstrap-html-style">Bootstrap HTML style</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._web4sa004.html#custom-validation-1">Custom validation  (1)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._web4sa004.html#using-flask-validators">Using Flask validators</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._web4sa004.html#tailored-validation">Tailored validation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._web4sa004.html#tailored-validation-of-intervals">Tailored validation of intervals</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._web4sa004.html#demo">Demo</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="._web4sa004.html#avoiding-plot-files">Avoiding plot files</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._web4sa004.html#png-plots">PNG plots</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._web4sa004.html#svg-plots">SVG plots</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._web4sa004.html#using-mpld3">Using mpld3</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="._web4sa004.html#plotting-with-the-bokeh-library">Plotting with the Bokeh library</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._web4sa004.html#pandas-highcharts-plotting-library">Pandas highcharts plotting library</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="._web4sa004.html#autogenerating-the-code">Autogenerating the code</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._web4sa004.html#inspecting-function-signatures">Inspecting function signatures</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._web4sa004.html#generating-the-model">Generating the model</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._web4sa004.html#generating-the-view">Generating the view</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._web4sa004.html#generating-the-template">Generating the template</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._web4sa004.html#application">Application</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="._web4sa004.html#user-login-and-storage-of-computed-results">User login and storage of computed results</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._web4sa004.html#required-additional-software">Required additional software</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._web4sa004.html#the-compute-part-2">The compute part  (2)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._web4sa004.html#the-interfaces-of-the-app">The interfaces of the app</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._web4sa004.html#the-source-code">The source code</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._web4sa004.html#resources-1">Resources  (1)</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="._web4sa004.html#uploading-of-files">Uploading of files</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._web4sa004.html#overview-of-the-application">Overview of the application</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._web4sa004.html#the-model-class">The model class</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._web4sa004.html#the-controller-file">The controller file</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._web4sa004.html#the-compute-function">The compute function</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._web4sa004.html#the-html-template-2">The HTML template  (2)</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa004.html#custom-validation-1">Custom validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa004.html#avoiding-plot-files">Avoiding plot files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa004.html#plotting-with-the-bokeh-library">Plotting with the Bokeh library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa004.html#autogenerating-the-code">Autogenerating the code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa004.html#user-login-and-storage-of-computed-results">User login and storage of computed results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa004.html#uploading-of-files">Uploading of files</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="._web4sa005.html">Handling multiple input variables in Django</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="._web4sa005.html#programming-the-django-application-2">Programming the Django application  (2)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._web4sa005.html#adding-the-app-to-a-project">Adding the app to a project</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._web4sa005.html#the-compute-part-3">The compute part  (3)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._web4sa005.html#the-model-3">The model  (3)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._web4sa005.html#the-view-3">The view  (3)</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="._web4sa005.html#custom-validation-2">Custom validation  (2)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa005.html#programming-the-django-application-2">Programming the Django application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa005.html#custom-validation-2">Custom validation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._web4sa005.html#customizing-widgets">Customizing widgets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._web4sa005.html#resources-2">Resources  (2)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa005.html#resources-2">Resources</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="._web4sa006.html">Exercises</a><ul>
@@ -184,12 +126,13 @@
 <li class="toctree-l2"><a class="reference internal" href="._web4sa006.html#exercise-3-plot-a-user-specified-formula">Exercise 3: Plot a user-specified formula</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._web4sa006.html#exercise-4-visualize-taylor-polynomial-approximations">Exercise 4: Visualize Taylor polynomial approximations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._web4sa006.html#exercise-5-extend-the-gen-app">Exercise 5: Extend the <code class="docutils literal"><span class="pre">gen</span></code> app</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._web4sa006.html#exercise-6-equip-the-gen-app-with-more-data-types">Exercise 6: Equip the <code class="docutils literal"><span class="pre">gen</span></code> app with more data types</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._web4sa006.html#exercise-7-auto-generate-code-from-function-signature">Exercise 7: Auto-generate code from function signature</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._web4sa006.html#project-8-interactive-function-exploration">Project 8: Interactive function exploration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa006.html#exercise-6-make-a-web-app-with-multiple-apps">Exercise 6: Make a web app with multiple apps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa006.html#exercise-7-equip-the-gen-app-with-more-data-types">Exercise 7: Equip the <code class="docutils literal"><span class="pre">gen</span></code> app with more data types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa006.html#exercise-8-auto-generate-code-from-function-signature">Exercise 8: Auto-generate code from function signature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._web4sa006.html#project-9-interactive-function-exploration">Project 9: Interactive function exploration</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="._web4sa007.html">Resources  (3)</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="._web4sa007.html">Resources</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="._web4sa007.html#flask-resources">Flask resources</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._web4sa007.html#django-resources">Django resources</a></li>
 </ul>
@@ -265,7 +208,7 @@
     <a href="http://cbc.simula.no"><img src="_static/cbc_banner.png" width="100%"><a>
     <br />
     <br />
-      &copy;H. P. Langtangen and A. E. Johansen.
+      &copy;2015, Anders E. Johansen, Hans Petter Langtangen. Released under CC Attribution 4.0 license.
   </div>
 </div>
 

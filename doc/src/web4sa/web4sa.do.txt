@@ -1,7 +1,7 @@
 # #if TOPIC == 'Flask+Django'
 TITLE: Using Web Frameworks for Scientific Applications
-AUTHOR: Hans Petter Langtangen at Center for Biomedical Computing, Simula Research Laboratory & Department of Informatics, University of Oslo
-AUTHOR: Anders E. Johansen at Center for Biomedical Computing, Simula Research Laboratory
+AUTHOR: Hans Petter Langtangen {copyright|CC BY} at Center for Biomedical Computing, Simula Research Laboratory & Department of Informatics, University of Oslo
+AUTHOR: Anders E. Johansen {copyright|CC BY} at Center for Biomedical Computing, Simula Research Laboratory
 DATE: today
 # #else
 # Use vagrant template only and therefore comment out TITLE

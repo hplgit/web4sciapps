@@ -27,9 +27,7 @@ without an overwhelming amount of programming, as soon as you have
 understood the basic demos.
 
 We shall explore two web frameworks: the very popular `Django framework <https://www.djangoproject.com/>`__ and the more high-level and easy-to-use framework
-`Flask <http://flask.pocoo.org/>`__. Our introductory examples were also
-implemented in the `web2py <http://www.web2py.com/>`__ framework, but according
-to our experience, Flask and Django are easier to explain to scientists.
+`Flask <http://flask.pocoo.org/>`__.
 The primary advantage of Django
 over other web frameworks is the rich set of documentation and
 examples. Googling for "Django tutorials" gives lots of hits including
@@ -68,6 +66,19 @@ All the files associated with this document are available in a
 The relevant files for the web applications are located
 in a subtree `doc/src/web4sa/src-web4sa/apps <https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/>`__
 of this repository.
+
+Other frameworks
+~~~~~~~~~~~~~~~~
+
+Our introductory examples were also implemented in the `web2py <http://www.web2py.com/>`__ framework, but according to our experience,
+Flask and Django are easier to explain to scientists.  A framework
+quite similar to Flask is `Bottle <http://bottlepy.org/docs/dev/index.html>`__. An even simpler framework
+is `CherryPy <http://www.cherrypy.org/>`__, which has an interesting
+extension `Spyre <https://github.com/adamhajari/spyre>`__ for easy
+visualization of data. Once you know the basics of Flask, CherryPy is
+easy to pick up by reading its `tutorial <http://docs.cherrypy.org/en/latest/tutorials.html#tutorials>`__.  (There
+are some comments on the Internet about increased stability of Flask
+apps if they are `run on a CherryPy server <http://flask.pocoo.org/snippets/24/>`__.)
 
 The MVC pattern
 ---------------

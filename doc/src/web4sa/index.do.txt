@@ -14,9 +14,9 @@ sphinx_styles = ', '.join(['"%s style": "%s/index.html"' % (n[7:], n)
 
 #======= Tutorials on web frameworks for scientific applications =======
 
- * "Flask and Django tutorial in one big HTML file": "${name}_plain_all.html"
- * "Flask and Django tutorial in HTML": "${name}_solarized.html"
  * "Flask tutorial in HTML": "${name}_flask.html"
  * "Django tutorial in HTML": "${name}_django.html"
- * Flask and Django tutorial in Sphinx: ${sphinx_styles}
+ * "Flask and Django tutorial in HTML": "${name}_solarized.html"
+ * "Flask and Django tutorial in one big HTML file": "${name}_plain_all.html"
+ * "Flask and Django tutorial in Sphinx": "sphinx-cbc/index.html"
  * "Flask and Django tutorial in LaTeX/PDF": "${name}.pdf"

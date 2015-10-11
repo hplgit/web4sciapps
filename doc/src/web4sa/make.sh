@@ -32,12 +32,15 @@ system doconce split_html ${name}_django
 
 system doconce format sphinx $name -DTOPIC=Flask+Django
 system doconce split_rst $name
-system doconce sphinx_dir copyright='H. P. Langtangen and A. E. Johansen' $name theme=basicstrap
+system doconce sphinx_dir $name theme=cbc
 system python automake_sphinx.py
-cd sphinx-rootdir
-sh make_themes.sh cbc basicstrap redcloud
-cd ..
-mv sphinx-rootdir/sphinx-* .
+mv sphinx-rootdir/_build/html sphinx-cbc
+#cd sphinx-rootdir
+# Note: make_themes.sh does not fix headings with numbers (1), (2) etc
+# such as automake_sphinx.py does
+#sh make_themes.sh cbc basicstrap redcloud
+#cd ..
+#mv sphinx-rootdir/sphinx-* .
 
 
 system doconce format pdflatex $name -DTOPIC=Flask+Django

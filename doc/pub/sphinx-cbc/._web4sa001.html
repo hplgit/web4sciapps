@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Web frameworks &mdash; Using Web Frameworks for Scientific Applications</title>
+    <title>Web frameworks</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -47,7 +47,15 @@
     <link rel="next" title="Making a Flask application" href="._web4sa002.html" />
     <link rel="prev" title="Using Web Frameworks for Scientific Applications" href="._web4sa000.html" />
  
-  </head>
+  
+       <style type="text/css">
+         div.admonition {
+           background-color: whiteSmoke;
+           border: 1px solid #bababa;
+         }
+       </style>
+      </head>
+    
   <body role="document">
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -92,9 +100,7 @@ works.  The upside is that advanced applications are within reach,
 without an overwhelming amount of programming, as soon as you have
 understood the basic demos.</p>
 <p>We shall explore two web frameworks: the very popular <a class="reference external" href="https://www.djangoproject.com/">Django framework</a> and the more high-level and easy-to-use framework
-<a class="reference external" href="http://flask.pocoo.org/">Flask</a>. Our introductory examples were also
-implemented in the <a class="reference external" href="http://www.web2py.com/">web2py</a> framework, but according
-to our experience, Flask and Django are easier to explain to scientists.
+<a class="reference external" href="http://flask.pocoo.org/">Flask</a>.
 The primary advantage of Django
 over other web frameworks is the rich set of documentation and
 examples. Googling for &#8220;Django tutorials&#8221; gives lots of hits including
@@ -129,8 +135,19 @@ decorators might be an advantage.</p>
 The relevant files for the web applications are located
 in a subtree <a class="reference external" href="https://github.com/hplgit/web4sciapps/tree/master/doc/src/web4sa/src-web4sa/apps/">doc/src/web4sa/src-web4sa/apps</a>
 of this repository.</p>
+<div class="section" id="other-frameworks">
+<h2>Other frameworks<a class="headerlink" href="#other-frameworks" title="Permalink to this headline">¶</a></h2>
+<p>Our introductory examples were also implemented in the <a class="reference external" href="http://www.web2py.com/">web2py</a> framework, but according to our experience,
+Flask and Django are easier to explain to scientists.  A framework
+quite similar to Flask is <a class="reference external" href="http://bottlepy.org/docs/dev/index.html">Bottle</a>. An even simpler framework
+is <a class="reference external" href="http://www.cherrypy.org/">CherryPy</a>, which has an interesting
+extension <a class="reference external" href="https://github.com/adamhajari/spyre">Spyre</a> for easy
+visualization of data. Once you know the basics of Flask, CherryPy is
+easy to pick up by reading its <a class="reference external" href="http://docs.cherrypy.org/en/latest/tutorials.html#tutorials">tutorial</a>.  (There
+are some comments on the Internet about increased stability of Flask
+apps if they are <a class="reference external" href="http://flask.pocoo.org/snippets/24/">run on a CherryPy server</a>.)</p>
 <div class="section" id="the-mvc-pattern">
-<h2>The MVC pattern<a class="headerlink" href="#the-mvc-pattern" title="Permalink to this headline">¶</a></h2>
+<h3>The MVC pattern<a class="headerlink" href="#the-mvc-pattern" title="Permalink to this headline">¶</a></h3>
 <p id="index-1">The MVC pattern stands for Model-View-Controller and is a way of
 separating the user&#8217;s interaction with an application from the inner
 workings of the application. In a scientific application this
@@ -196,7 +213,7 @@ the HTML code in the web pages.</p>
 split to meet the requirements of the MVC software design pattern.</p>
 </div>
 <div class="section" id="a-very-simple-application">
-<h2>A very simple application<a class="headerlink" href="#a-very-simple-application" title="Permalink to this headline">¶</a></h2>
+<h3>A very simple application<a class="headerlink" href="#a-very-simple-application" title="Permalink to this headline">¶</a></h3>
 <p>We shall start with the simplest possible application,
 a &#8220;scientific hello world program&#8221;, where the
 task is to read a number and write out &#8220;Hello, World!&#8221; followed by
@@ -221,7 +238,7 @@ variable from a web page, compute the sine,
 and write out a new web page with the resulting text.</p>
 </div>
 <div class="section" id="application-of-the-mvc-pattern">
-<span id="wf-hw-mvc"></span><h2>Application of the MVC pattern<a class="headerlink" href="#application-of-the-mvc-pattern" title="Permalink to this headline">¶</a></h2>
+<span id="wf-hw-mvc"></span><h3>Application of the MVC pattern<a class="headerlink" href="#application-of-the-mvc-pattern" title="Permalink to this headline">¶</a></h3>
 <p>Before thinking of a web application, we first <em>refactor</em> our program
 such that it fits with the classical MVC pattern and a compute component.
 The refactoring does not change the functionality of the code, it
@@ -292,6 +309,7 @@ program such that we can fill in the number <code class="docutils literal"><span
 shown above: &#8220;Hello, World! sin(r)=s&#8221;.</p>
 </div>
 </div>
+</div>
 
 
           </div>
@@ -307,9 +325,12 @@ shown above: &#8220;Hello, World! sin(r)=s&#8221;.</p>
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Web frameworks</a><ul>
+<li><a class="reference internal" href="#other-frameworks">Other frameworks</a><ul>
 <li><a class="reference internal" href="#the-mvc-pattern">The MVC pattern</a></li>
 <li><a class="reference internal" href="#a-very-simple-application">A very simple application</a></li>
 <li><a class="reference internal" href="#application-of-the-mvc-pattern">Application of the MVC pattern</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -364,7 +385,7 @@ shown above: &#8220;Hello, World! sin(r)=s&#8221;.</p>
     <a href="http://cbc.simula.no"><img src="_static/cbc_banner.png" width="100%"><a>
     <br />
     <br />
-      &copy;H. P. Langtangen and A. E. Johansen.
+      &copy;2015, Anders E. Johansen, Hans Petter Langtangen. Released under CC Attribution 4.0 license.
   </div>
 </div>
 
