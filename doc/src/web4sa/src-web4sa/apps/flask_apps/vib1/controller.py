@@ -22,6 +22,12 @@ def index():
                          form.w.data, form.T.data)
     else:
         result = None
+    print form, dir(form)
+    #print form.keys()
+    for f in form:
+        print f.id
+        print f.name
+        print f.label
 
     return render_template(template_name + '.html',
                            form=form, result=result)
